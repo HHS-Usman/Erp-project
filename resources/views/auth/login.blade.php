@@ -1,8 +1,9 @@
 @extends('layouts.app')
-
+<?php
+use App\Helpers\CommonHelper;
+?>
 @section('content')
 <div class="container">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -11,6 +12,17 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        <div class="row mb-3">
+                            <label for="yourUsername" class="col-md-4 form-label">Branch</label>
+                            <div class="col-md-6">
+                            <select class="form-control"  name="branch_id" required>
+                                <option value="">Select Branch</option>
+                                @foreach(CommonHelper::getBranch() as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
