@@ -93,10 +93,12 @@
                 <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data1', data1)">Data 1</a>
                   <div class="dropdown-submenu dropdown-item">
                       <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                      aria-expanded="false">data 7</a>
+                      aria-expanded="false">Organization Setup</a>
                       <ul class="dropdown-menu">
                       <li><a class="dropdown-item" tabindex="-1" href="{{ route('division.index') }}" >division</a></li>
                       <li><a class="dropdown-item" tabindex="-1" href="{{ route('department.index') }}" >Department</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('subdepartment.index') }}" >Sub Department</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('function.index') }}" >Function</a></li>
                       <li class="dropdown-submenu dropdown-item">
                           <a class="test dropdown-toggle" tabindex="-1" href="#">Another dropdown </span></a>
                           <ul class="dropdown-menu ">

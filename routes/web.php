@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SubdepartmentController;
+use App\Http\Controllers\FundtionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('division',DivisionController::class);
 Route::resource('department',DepartmentController::class);
+Route::resource('subdepartment',SubdepartmentController::class);
+Route::resource('function',FundtionController::class);
