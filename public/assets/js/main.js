@@ -9,206 +9,196 @@
  
  
  //end new tab dynamically....
+ var mydata = document.getElementById("maincontainer");
+ var mydata2 = document.getElementById("dash");
  let tabCount = 1;
 
- const data1 = `
-    this is Data 1
-    <footer id="footer" class="footer">
-      <div class="copyright col-4">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-      </div>
-      <div class="copyright col-4">
-        version here
-      </div>
-      <div class="credits col-4">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </footer><!-- End Footer -->
- `;
+ const data1 = mydata.innerHTML;
+ const data2 = mydata2.innerHTML;
+//  const data1 = `
+//     this is Data 1
+//     <footer id="footer" class="footer">
+//       <div class="copyright col-4">
+//         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//       </div>
+//       <div class="copyright col-4">
+//         version here
+//       </div>
+//       <div class="credits col-4">
+//         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//       </div>
+//     </footer><!-- End Footer -->
+//  `;
  
- const data2 = `
-     This is Data 2
-     <footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
- `;
- const data3 = `
-     This is Data 3
-     <footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-     
- `;
- const data4 = `
-     This is Data 4
-     <footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
- `;
- const data5 = `
- This is Data 5
- <footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data6 = `
- This is Data 6
- <footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data7 = `
-This is Data 7
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data8 = `
-This is Data 8
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data9 = `
-This is Data 9
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data10 = `
-This is Data 10
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data11 = `
-This is Data 11
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data12 = `
-This is Data 12
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data13 = `
-This is Data 13
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
-const data14 = `
-This is Data 14
-<footer id="footer" class="footer">
-       <div class="copyright col-4">
-         &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-       </div>
-       <div class="copyright col-4">
-         version here
-       </div>
-       <div class="credits col-4">
-         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-       </div>
-     </footer><!-- End Footer -->
-`;
+//  const data2 = `
+//      This is Data 2
+//      <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+//  `;
+//  const data4 = `
+//      This is Data 4
+//      <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+//  `;
+const data3 = 'this is me data 3'
+//  const data5 = `
+//  This is Data 5
+//  <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data6 = `
+//  This is Data 6
+//  <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data7 = `
+// This is Data 7
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data8 = `
+// This is Data 8
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data9 = `
+// This is Data 9
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data10 = `
+// This is Data 10
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data11 = `
+// This is Data 11
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data12 = `
+// This is Data 12
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data13 = `
+// This is Data 13
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
+// const data14 = `
+// This is Data 14
+// <footer id="footer" class="footer">
+//        <div class="copyright col-4">
+//          &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+//        </div>
+//        <div class="copyright col-4">
+//          version here
+//        </div>
+//        <div class="credits col-4">
+//          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+//        </div>
+//      </footer><!-- End Footer -->
+// `;
 const footeritem = document.getElementById("footer")
  // Function to add a new tab dynamically
  function addTab(tabTitle, tabContent) {
