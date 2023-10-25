@@ -19,7 +19,7 @@
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('submanagement.create') }}"> Create</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('submanagement.index') }}"> Manage Sub Management</a></li>
                   </ol>
                   </nav>
               </div>

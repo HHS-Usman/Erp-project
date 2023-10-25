@@ -2,9 +2,7 @@
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
-        <div class="pagetitle">
-            <h1>Add Leave Reason</h1>
-           
+        <div class="pagetitle">           
         </div>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,11 +16,11 @@
         @endif
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            <h2>Leave Reason</h2>
+            <h2>Leaving Reason</h2>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('leavereson.create') }}"> Create</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('leavereson.index') }}"> Manage Leaving Reason </a></li>
                 </ol>
                 </nav>
             <br><br><br>

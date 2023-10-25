@@ -6,7 +6,8 @@
             <h1>Add Function</h1>
             <nav>
             <ol style="color:white;">
-                <li class="breadcrumb-item">Navigation path</li>
+                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item">Manage Function</li>
             </ol>
             </nav>
         </div>

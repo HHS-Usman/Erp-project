@@ -8,7 +8,7 @@
                                 <nav>
                                 <ol class="breadcrumb" style="color:white;">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('division.index') }}">VIew</a></li>
+                                    <li class="breadcrumb-item"><a>Create</a></li>
                                 </ol>
                                 </nav>
                             </div>

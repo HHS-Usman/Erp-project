@@ -15,11 +15,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Group</h1>
+                  <h1>Grand</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('grand.create') }}"> Create</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('grand.index') }}"> Manage Grand</a></li>
                   </ol>
                   </nav>
               </div>

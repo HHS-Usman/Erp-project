@@ -3,13 +3,8 @@
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
         <div class="pagetitle">
-            <h1>Add Division</h1>
-            <nav>
-            <ol style="color:white;">
-                <li class="breadcrumb-item">Home</li>
-                <li class="breadcrumb-item">Create</li>
-            </ol>
-            </nav>
+            <h1>Add Leave Reason</h1>
+           
         </div>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -23,10 +18,15 @@
         @endif
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            <h2>Employee History</h2>
-            <h4>Navigation path</h4>
+            <h2>Leave Reason</h2>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('leavereson.create') }}"> Create</a></li>
+                </ol>
+                </nav>
             <br><br><br>
-            <form action="{{ route('subdepartment.store') }}" method="POST">        
+            <form action="{{ route('leavereson.store') }}" method="POST">        
       @csrf
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">

@@ -19,7 +19,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('costcenter.index') }}">View</a></li>
+                    <li class="breadcrumb-item active"><a>Create</a></li>
                 </ol>
             </nav>
             <br><br><br>

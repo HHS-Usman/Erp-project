@@ -15,11 +15,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Group</h1>
+                  <h1>Sub Leaving Reason</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('group.create') }}"> Create</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('leavereson.create') }}"> Create</a></li>
                   </ol>
                   </nav>
               </div>
@@ -32,8 +32,9 @@
     
     <div class="filter">
       <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between  align-items-center">
           <!-- Dropdown Menu -->
+          
           <!-- Search Bar -->
         </div>
       </div>
@@ -60,26 +61,7 @@
       </table>
     </div>
     <!-- End Recent Sales -->
-    <div style="width: 100%;">
-      <button class="buttonstyle" style="position: relative; left: 80%; bottom: 1vh;" type="button" id="buttooo12"
-        aria-haspopup="true" aria-expanded="false">
-        Record per Page
-      </button>
-    </div>
-    <div>
-      <button class="buttonstyle" type="button" id="butto1" aria-haspopup="true" aria-expanded="false">
-        Showing 163 Entries
-      </button>
-      <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo133"
-        aria-haspopup="true" aria-expanded="false">
-        Previous
-      </button>
-      <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo13"
-        aria-haspopup="true" aria-expanded="false">
-        Next
-      </button>
-
-    </div>
+    {{ $leaveresons->links() }}
   </div>
 
 

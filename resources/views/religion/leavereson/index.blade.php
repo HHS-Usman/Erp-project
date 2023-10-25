@@ -15,11 +15,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Employee</h1>
+                  <h1>Leaving Reason</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a> Manage Employees</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('leavereson.index') }}"> Manage Leaving Reason</a></li>
                   </ol>
                   </nav>
               </div>
@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($employes as $function)
+        @foreach ($leaveresons as $function)
           <tr>
             <td>{{ $function->id }}</td>
             <td>{{ $function->name }}</td> 

@@ -19,7 +19,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('religion.index') }}"> View</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('religion.create') }}"> Create</a></li>
                 </ol>
                 </nav>
             <br><br><br>

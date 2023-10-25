@@ -19,7 +19,7 @@
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('department.create') }}"> Create</a></li>
+                      <li class="breadcrumb-item active"><a> Manage Department</a></li>
                   </ol>
                   </nav>
               </div>
