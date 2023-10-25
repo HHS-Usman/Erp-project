@@ -9,6 +9,9 @@ use App\Http\Controllers\MangementlevelController;
 use App\Http\Controllers\SubmanagementlevelController;
 use App\Http\Controllers\GazetedholidayController;
 use App\Http\Controllers\EmpController;
+use App\Http\Controllers\CostcenterController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ReligionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +44,6 @@ Route::resource('management',MangementlevelController::class);
 Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);
 Route::resource('employees',EmpController::class);
+Route::resource('costcenter',CostcenterController::class);
+Route::resource('language',LanguageController::class);
+Route::resource('religion',ReligionController::class);

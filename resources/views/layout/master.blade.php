@@ -142,8 +142,35 @@
                           <a class href="/view"></a>
                           </ul>
                       </li>   
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Gazeted Holiday</a></li>
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Designation</a></li>
+                      <li class="dropdown-submenu dropdown-item">
+                        <a class="test dropdown-toggle" tabindex="-1" href="#"> Gazeted Holidays</span></a>
+                        <ul class="dropdown-menu ">
+                        <li><a class="dropdown-item" href="{{ route('gazetedholiday.create')}}">Create</a></li>
+                        <li><a class="dropdown-item" href="{{ route('gazetedholiday.index')}}">View</a></li>
+                        <a class href="/view"></a>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu dropdown-item">
+                      <a class="test dropdown-toggle" tabindex="-1" href="#"> Cost Center </span></a>
+                      <ul class="dropdown-menu ">
+                      <li><a class="dropdown-item" href="{{ route('costcenter.create')}}">Create</a></li>
+                      <li><a class="dropdown-item" href="{{ route('costcenter.index')}}">View</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown-submenu dropdown-item">
+                      <a class="test dropdown-toggle" tabindex="-1" href="#">Languages</span></a>
+                      <ul class="dropdown-menu ">
+                      <li><a class="dropdown-item" href="{{ route('language.create')}}">Create</a></li>
+                      <li><a class="dropdown-item" href="{{ route('language.index')}}">View</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown-submenu dropdown-item">
+                      <a class="test dropdown-toggle" tabindex="-1" href="#">Religion</span></a>
+                      <ul class="dropdown-menu ">
+                      <li><a class="dropdown-item" href="{{ route('religion.create')}}">Create</a></li>
+                      <li><a class="dropdown-item" href="{{ route('religion.index')}}">View</a></li>
+                      </ul>
+                    </li>
                       <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Group</a></li>
                       <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Grand</a></li>
                       <li><a class="dropdown-item" tabindex="-1" href="{{ route('employees.index') }}" >Employee Catagory</a></li>
