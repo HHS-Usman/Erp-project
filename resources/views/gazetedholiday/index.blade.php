@@ -15,11 +15,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Function</h1>
+                  <h1>Gazeted Holiday</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('management.create') }}"> Create</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('gazetedholiday.create') }}"> Create</a></li>
                   </ol>
                   </nav>
               </div>
@@ -37,7 +37,6 @@
           <!-- Search Bar -->
         </div>
       </div>
-      
     </div>
 
     <div class="card-body">
@@ -50,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($fundtions as $function)
+        @foreach ($gazetedholidays as $function)
           <tr>
             <td>{{ $function->id }}</td>
             <td>{{ $function->name }}</td> 

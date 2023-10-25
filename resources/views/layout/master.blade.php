@@ -95,14 +95,65 @@
                       <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                       aria-expanded="false">Organization Setup</a>
                       <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('division.index') }}" >division</a></li>
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('department.index') }}" >Department</a></li>
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('subdepartment.index') }}" >Sub Department</a></li>
-                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('function.index') }}" >Function</a></li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> DIVISION </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('division.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('division.index')}}">View</a></li>
+                          <a class href="/view"></a>
+                          </ul>
+                      </li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> DEPARTMENT </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('department.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('department.index')}}">View</a></li>
+                          <a class href="/view"></a>
+                          </ul>
+                      </li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> SUB DEPARTMENT </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('subdepartment.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('subdepartment.index')}}">View</a></li>
+                          </ul>
+                      </li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> FUNCTION </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('function.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('function.index')}}">View</a></li>
+                          <a class href="/view"></a>
+                          </ul>
+                      </li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> MANAGEMENT </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('management.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('management.index')}}">View</a></li>
+                          <a class href="/view"></a>
+                          </ul>
+                      </li>
+                      <li class="dropdown-submenu dropdown-item">
+                          <a class="test dropdown-toggle" tabindex="-1" href="#"> Sub Management </span></a>
+                          <ul class="dropdown-menu ">
+                          <li><a class="dropdown-item" href="{{ route('submanagement.create')}}">Create</a></li>
+                          <li><a class="dropdown-item" href="{{ route('submanagement.index')}}">View</a></li>
+                          <a class href="/view"></a>
+                          </ul>
+                      </li>   
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Gazeted Holiday</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Designation</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Group</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Grand</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('employees.index') }}" >Employee Catagory</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Leave Reason</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Sub Leave Reason</a></li>
+                      <li><a class="dropdown-item" tabindex="-1" href="{{ route('gazetedholiday.index') }}" >Week of Days</a></li>
                       <li class="dropdown-submenu dropdown-item">
                           <a class="test dropdown-toggle" tabindex="-1" href="#">Another dropdown </span></a>
                           <ul class="dropdown-menu ">
-                          <li><a class="dropdown-item" href="#" onclick="addTab('Data2', data2)" >data2</a></li>
+                          <li><a class="dropdown-item" href="{{ route('division.create')}}">data2</a></li>
                           <li><a class="dropdown-item" href="#">3rd level dropdown</a></li>
                           <a class href="/view"></a>
                           </ul>

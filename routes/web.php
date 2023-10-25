@@ -5,6 +5,10 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SubdepartmentController;
 use App\Http\Controllers\FundtionController;
+use App\Http\Controllers\MangementlevelController;
+use App\Http\Controllers\SubmanagementlevelController;
+use App\Http\Controllers\GazetedholidayController;
+use App\Http\Controllers\EmpController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +37,7 @@ Route::resource('division',DivisionController::class);
 Route::resource('department',DepartmentController::class);
 Route::resource('subdepartment',SubdepartmentController::class);
 Route::resource('function',FundtionController::class);
+Route::resource('management',MangementlevelController::class);
+Route::resource('submanagement',SubmanagementlevelController::class);
+Route::resource('gazetedholiday',GazetedholidayController::class);
+Route::resource('employees',EmpController::class);

@@ -15,7 +15,7 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Function</h1>
+                  <h1>Management</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
@@ -50,7 +50,7 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($fundtions as $function)
+        @foreach ($managementlevels as $function)
           <tr>
             <td>{{ $function->id }}</td>
             <td>{{ $function->name }}</td> 
