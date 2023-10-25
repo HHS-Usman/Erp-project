@@ -38,7 +38,7 @@
           <tr>
           <th>ID</th>
           <th>Name</th>
-          <th width="280px">Action</th>
+          <th width="280px" style="color: black;">Action</th>
           </tr>
         </thead>
         <tbody>

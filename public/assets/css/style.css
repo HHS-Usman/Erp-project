@@ -319,13 +319,23 @@ h6 {
   visibility: visible;
   opacity: 1;
 }
-
+#container{
+  width: auto;
+  max-height: 600px;
+  
+  padding: auto;
+  margin: auto;
+  border: solid black 2px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
 /* Dropdown menus */
 .dropdown-menu {
-  border-radius: 4px;
+  /* border-radius: 4px;
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
   animation-name: dropdown-animate;
@@ -334,7 +344,7 @@ h6 {
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   border: 0;
-  box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
+  box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2); */
 }
 
 .dropdown-menu .dropdown-header,
@@ -1066,6 +1076,7 @@ h6 {
 
 .dashboard .filter .dropdown-item {
   padding: 8px 15px;
+  overflow-y: auto;
 }
 
 /* Info Cards */
