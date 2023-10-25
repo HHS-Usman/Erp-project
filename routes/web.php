@@ -12,6 +12,13 @@ use App\Http\Controllers\EmpController;
 use App\Http\Controllers\CostcenterController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GrandController;
+use App\Http\Controllers\LeavereasonController;
+use App\Http\Controllers\SubleavingreasonController;
+use App\Http\Controllers\WeekoffdayController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,3 +54,9 @@ Route::resource('employees',EmpController::class);
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);
+Route::resource('designation',DesignationController::class);
+Route::resource('group',GroupController::class);
+Route::resource('grand',GrandController::class);
+Route::resource('leavereson',LeavereasonController::class);
+Route::resource('subleavingreason',SubleavingreasonController::class);
+Route::resource('weekoffday',WeekoffdayController::class);
