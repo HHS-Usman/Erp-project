@@ -108,7 +108,7 @@
               <div class="dropdown-menu">
                 <div class="dropdown-submenu dropdown-item">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                  aria-expanded="false">Organization Setup</a>
+                    aria-expanded="false">Organization Setup</a>
                         <ul id="container" class="dropdown-menu">
                               <li><a class="dropdown-item" href="{{ route('division.create')}}">Create Division</a></li>
                               <li><a class="dropdown-item" href="{{ route('division.index')}}">Manage Division</a></li>
@@ -165,8 +165,46 @@
                               <li><a class="dropdown-item" href="{{ route('weekoffday.index')}}">Manage Week Off days</a></li>
                           
                         </ul>
-              </div>
-                <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data1', data1)">Data 1</a>
+                </div>
+                <div class="dropdown-submenu dropdown-item">
+                  <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">General Setup</a>
+                        <ul id="container" class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{{ route('paymentterm.create')}}">Create Payment Term</a></li>
+                              <li><a class="dropdown-item" href="{{ route('paymentterm.index')}}">Manage Payment Term</a></li>
+
+                              <li><a class="dropdown-item" href="{{ route('modeofpayment.create')}}">Create Mode Of Payment</a></li>
+                              <li><a class="dropdown-item" href="{{ route('modeofpayment.index')}}">Manage Mode Of Payment</a></li>
+                         
+                              <li><a class="dropdown-item" href="{{ route('email.create')}}">Create Email</a></li>
+                              <li><a class="dropdown-item" href="{{ route('email.index')}}">Manage Email</a></li>
+                             
+                              <li><a class="dropdown-item" href="{{ route('usergroup.create')}}">Create User Group</a></li>
+                              <li><a class="dropdown-item" href="{{ route('usergroup.index')}}">Manage User Group</a></li>
+
+                              <li><a class="dropdown-item" href="{{ route('process.create')}}">Create Process</a></li>
+                              <li><a class="dropdown-item" href="{{ route('process.index')}}">Manage Process</a></li>
+                              
+                         
+                              <li><a class="dropdown-item" href="{{ route('cast.create')}}">Create Cast</a></li>
+                              <li><a class="dropdown-item" href="{{ route('cast.index')}}">Manage Cast</a></li>
+                                
+                        
+                              <li><a class="dropdown-item" href="{{ route('country.create')}}">Create Country</a></li>
+                              <li><a class="dropdown-item" href="{{ route('country.index')}}">Manage Country</a></li>
+
+                              <li><a class="dropdown-item" href="{{ route('citizenship.create')}}">Create Citizenship</a></li>
+                              <li><a class="dropdown-item" href="{{ route('citizenship.index')}}">Manage Citizenship</a></li>
+                           
+                              <li><a class="dropdown-item" href="{{ route('nationality.create')}}">Create Nationality</a></li>
+                              <li><a class="dropdown-item" href="{{ route('nationality.index')}}">Manage Nationality</a></li>
+                            
+                              <li><a class="dropdown-item" href="{{ route('city.create')}}">Create City</a></li>
+                              <li><a class="dropdown-item" href="{{ route('city.index')}}">Manage City</a></li>
+                            
+                          
+                        </ul>
+                </div>
                       
               </div>
             </div>

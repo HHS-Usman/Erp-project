@@ -10,11 +10,11 @@ class SubdepartmentController extends Controller
     public function index()
     {  
         $subdepartments = Subdepartment::latest()->paginate(3);
-        return view('subdepartment.index',compact('subdepartments'))->with(request()->input('page'));
+        return view('organizationsetup.subdepartment.index',compact('subdepartments'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('subdepartment.create');
+        return view('organizationsetup.subdepartment.create');
     }
 
     /**

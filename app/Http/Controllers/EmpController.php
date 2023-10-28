@@ -15,7 +15,7 @@ class EmpController extends Controller
     public function index()
     {
         $employes = Employee::latest()->paginate(3);
-        return view('employe.index',compact('employes'))->with(request()->input('page'));
+        return view('organizationsetup.employe.index',compact('employes'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +25,7 @@ class EmpController extends Controller
      */
     public function create()
     {
-        return view('employe.create');
+        return view('organizationsetup.employe.create');
     }
 
     /**

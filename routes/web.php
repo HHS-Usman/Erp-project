@@ -18,7 +18,16 @@ use App\Http\Controllers\GrandController;
 use App\Http\Controllers\LeavereasonController;
 use App\Http\Controllers\SubleavingreasonController;
 use App\Http\Controllers\WeekoffdayController;
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ModeofpaymentController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\UsergroupController;
+use App\Http\Controllers\ProcessController;
+use App\Http\Controllers\CastController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CitizenshipController;
+use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\CityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +52,7 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
 Route::resource('division',DivisionController::class);
 Route::resource('department',DepartmentController::class);
 Route::resource('subdepartment',SubdepartmentController::class);
@@ -60,3 +70,15 @@ Route::resource('grand',GrandController::class);
 Route::resource('leavereson',LeavereasonController::class);
 Route::resource('subleavingreason',SubleavingreasonController::class);
 Route::resource('weekoffday',WeekoffdayController::class);
+Route::resource('paymentterm',PaymentController::class);
+Route::resource('modeofpayment',ModeofpaymentController::class);
+Route::resource('email',EmailController::class);
+Route::resource('usergroup',UsergroupController::class);
+Route::resource('process',ProcessController::class);
+Route::resource('cast',CastController::class);
+Route::resource('country',CountryController::class);
+Route::resource('citizenship',CitizenshipController::class);
+Route::resource('nationality',NationalityController::class);
+Route::resource('city',CityController::class);
+
+});

@@ -10,11 +10,11 @@ class ReligionController extends Controller
     public function index()
     {  
          $religions = Religion::latest()->paginate(15);
-        return view('religion.index',compact('religions'))->with(request()->input('page'));
+        return view('organizationsetup.religion.index',compact('religions'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('religion.create');
+        return view('organizationsetup.religion.create');
     }
 
     /**

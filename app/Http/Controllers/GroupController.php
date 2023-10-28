@@ -15,7 +15,7 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::latest()->paginate(3);
-        return view('group.index',compact('groups'))->with(request()->input('page'));
+        return view('organizationsetup.group.index',compact('groups'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +25,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        return view('organizationsetup.group.create');
     }
 
     /**

@@ -15,7 +15,7 @@ class DesignationController extends Controller
     public function index()
     {
         $designations = Designation::latest()->paginate(3);
-        return view('designation.index',compact('designations'))->with(request()->input('page'));
+        return view('organizationsetup.designation.index',compact('designations'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DesignationController extends Controller
      */
     public function create()
     {
-        return view('designation.create');
+        return view('organizationsetup.designation.create');
     }
 
     /**

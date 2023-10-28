@@ -10,11 +10,11 @@ class MangementlevelController extends Controller
     public function index()
     {  
          $managementlevels = Managementlevel::latest()->paginate(15);
-        return view('managementlevel.index',compact('managementlevels'))->with(request()->input('page'));
+        return view('organizationsetup.managementlevel.index',compact('managementlevels'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('managementlevel.create');
+        return view('organizationsetup.managementlevel.create');
     }
 
     /**

@@ -15,7 +15,7 @@ class LeavereasonController extends Controller
     public function index()
     {
         $leaveresons = Leavereason::latest()->paginate(3);
-        return view('leavereson.index',compact('leaveresons'))->with(request()->input('page'));
+        return view('organizationsetup.leavereson.index',compact('leaveresons'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +25,7 @@ class LeavereasonController extends Controller
      */
     public function create()
     {
-        return view('leavereson.create');
+        return view('organizationsetup.leavereson.create');
     }
 
     /**

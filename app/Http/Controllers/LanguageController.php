@@ -10,11 +10,11 @@ class LanguageController extends Controller
     public function index()
     {  
          $languages = Language::latest()->paginate(15);
-        return view('language.index',compact('languages'))->with(request()->input('page'));
+        return view('organizationsetup.language.index',compact('languages'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('language.create');
+        return view('organizationsetup.language.create');
     }
 
     /**

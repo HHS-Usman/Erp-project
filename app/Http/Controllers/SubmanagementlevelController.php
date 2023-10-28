@@ -10,11 +10,11 @@ class SubmanagementlevelController extends Controller
     public function index()
     {  
          $submanagementlevels = Submanagementlevel::latest()->paginate(15);
-        return view('submanagementlevel.index',compact('submanagementlevels'))->with(request()->input('page'));
+        return view('organizationsetup.submanagementlevel.index',compact('submanagementlevels'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('submanagementlevel.create');
+        return view('organizationsetup.submanagementlevel.create');
     }
 
     /**

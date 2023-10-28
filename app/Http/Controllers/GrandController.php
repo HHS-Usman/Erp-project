@@ -15,7 +15,7 @@ class GrandController extends Controller
     public function index()
     {
         $grands = Grand::latest()->paginate(3);
-        return view('grand.index',compact('grands'))->with(request()->input('page'));
+        return view('organizationsetup.grand.index',compact('grands'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +25,7 @@ class GrandController extends Controller
      */
     public function create()
     {
-        return view('grand.create');
+        return view('organizationsetup.grand.create');
     }
 
     /**

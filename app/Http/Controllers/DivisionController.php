@@ -10,11 +10,11 @@ class DivisionController extends Controller
     public function index()
     {  
         $divisions = Division::latest()->paginate(3);
-        return view('division.index',compact('divisions'))->with(request()->input('page'));
+        return view('organizationsetup.division.index',compact('divisions'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('division.create');
+        return view('organizationsetup.division.create');
     }
 
     /**

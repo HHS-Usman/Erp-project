@@ -10,11 +10,11 @@ class DepartmentController extends Controller
     public function index()
     {  
         $departments = Department::latest()->paginate(3);
-        return view('department.index',compact('departments'))->with(request()->input('page'));
+        return view('organizationsetup.department.index',compact('departments'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('department.create');
+        return view('organizationsetup.department.create');
     }
 
     /**

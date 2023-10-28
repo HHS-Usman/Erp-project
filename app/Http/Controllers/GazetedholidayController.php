@@ -10,11 +10,11 @@ class GazetedholidayController extends Controller
         public function index()
         {  
              $gazetedholidays = Gazetedholiday::latest()->paginate(15);
-            return view('gazetedholiday.index',compact('gazetedholidays'))->with(request()->input('page'));
+            return view('organizationsetup.gazetedholiday.index',compact('gazetedholidays'))->with(request()->input('page'));
         }
         public function create()
         {
-            return view('gazetedholiday.create');
+            return view('organizationsetup.gazetedholiday.create');
         }
     
         /**

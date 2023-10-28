@@ -10,11 +10,11 @@ class SubleavingreasonController extends Controller
     public function index()
     {  
          $subleavingreasons = Subleavingreason::latest()->paginate(15);
-        return view('subleavingreason.index',compact('subleavingreasons'))->with(request()->input('page'));
+        return view('organizationsetup.subleavingreason.index',compact('subleavingreasons'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('subleavingreason.create');
+        return view('organizationsetup.subleavingreason.create');
     }
 
     /**

@@ -15,11 +15,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Department</h1>
+                  <h1>Mode Of Payment</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a> Manage Department</a></li>
+                      <li class="breadcrumb-item active"><a> View</a></li>
                   </ol>
                   </nav>
               </div>
@@ -28,7 +28,7 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif      
-  <div class="card recent-sales overflow-auto">
+  <div class="card  recent-sales overflow-auto">
     
     <div class="filter">
       <div class="container-fluid">
@@ -37,7 +37,6 @@
           <!-- Search Bar -->
         </div>
       </div>
-      
     </div>
 
     <div class="card-body">
@@ -50,15 +49,16 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($departments as $department)
+        @foreach ($modeofpayments as $function)
           <tr>
-            <td>{{ $department->id }}</td>
-            <td>{{ $department->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
+            <td>{{ $function->id }}</td>
+            <td>{{ $function->name }}</td> 
+            <td><span class="fa-success">Action</span></td>
           </tr>
         @endforeach  
         </tbody>
       </table>
+      {{ $modeofpayments->links() }}
     </div>
     <!-- End Recent Sales -->
     <div style="width: 100%;">
@@ -68,9 +68,9 @@
       </button>
     </div>
     <div>
-      <button class="buttonstyle" type="button" id="butto1" aria-haspopup="true" aria-expanded="false">
-        Showing 163 Entries
-      </button>
+      {{-- <button class="buttonstyle" type="button" id="butto1" aria-haspopup="true" aria-expanded="false">
+        
+      </button> --}}
       <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo133"
         aria-haspopup="true" aria-expanded="false">
         Previous

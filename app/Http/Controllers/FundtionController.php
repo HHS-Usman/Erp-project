@@ -10,11 +10,11 @@ class FundtionController extends Controller
     public function index()
     {  
         $fundtions = Fundtion::latest()->paginate(3);
-        return view('function.index',compact('fundtions'))->with(request()->input('page'));
+        return view('organizationsetup.function.index',compact('fundtions'))->with(request()->input('page'));
     }
     public function create()
     {
-        return view('function.create');
+        return view('organizationsetup.function.create');
     }
 
     /**

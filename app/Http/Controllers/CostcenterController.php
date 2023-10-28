@@ -11,11 +11,11 @@ class CostcenterController extends Controller
     public function index()
         {  
              $costcenters = Costcenter::latest()->paginate(15);
-            return view('costcenter.index',compact('costcenters'))->with(request()->input('page'));
+            return view('organizationsetup.costcenter.index',compact('costcenters'))->with(request()->input('page'));
         }
         public function create()
         {
-            return view('costcenter.create');
+            return view('organizationsetup.costcenter.create');
         }
     
         /**
