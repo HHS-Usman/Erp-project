@@ -389,11 +389,12 @@ h6 {
     content: "";
     width: 13px;
     height: 13px;
+    float: right;
     background: #fff;
     position: absolute;
     top: -7px;
     right: 20px;
-    transform: rotate(45deg);
+    transform: rotate(4deg);
     border-top: 1px solid #eaedf1;
     border-left: 1px solid #eaedf1;
   }

@@ -205,7 +205,30 @@
                           
                         </ul>
                 </div>
-                      
+                <div class="dropdown-submenu dropdown-item">
+                  <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Employee</a>
+                        <ul id="container" class="dropdown-menu">
+                              <li><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
+                              <li><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
+
+                              <li><a class="dropdown-item" href="{{ route('employeerule.create')}}">Create Employee rule</a></li>
+                              <li><a class="dropdown-item" href="{{ route('employeerule.index')}}">Manage Employee rule</a></li>
+                         
+                              <li><a class="dropdown-item" href="{{ route('skilllevel.create')}}">Create Skill level</a></li>
+                              <li><a class="dropdown-item" href="{{ route('skilllevel.index')}}">Manage Skill level</a></li>
+                             
+                              <li><a class="dropdown-item" href="{{ route('employeejobstatus.create')}}">Create Employee job Status</a></li>
+                              <li><a class="dropdown-item" href="{{ route('employeejobstatus.index')}}">Manage Employee job Status</a></li>
+
+                              <li><a class="dropdown-item" href="{{ route('qualification.create')}}">Create Qualification</a></li>
+                              <li><a class="dropdown-item" href="{{ route('qualification.index')}}">Manage Qualification</a></li>
+                              
+                         
+                              <li><a class="dropdown-item" href="{{ route('qualificationlevel.create')}}">Create Qualification Levels</a></li>
+                              <li><a class="dropdown-item" href="{{ route('qualificationlevel.index')}}">Manage Qualification Levels</a></li>  
+                        </ul>
+                </div>      
               </div>
             </div>
             <div class="nav-item dropdown">

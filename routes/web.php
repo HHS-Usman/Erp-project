@@ -28,6 +28,12 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CitizenshipController;
 use App\Http\Controllers\NationalityController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\Employee\EmployeeflagController;
+use App\Http\Controllers\Employee\EmployeeruleController;
+use App\Http\Controllers\Employee\SkilllevelController;
+use App\Http\Controllers\Employee\QualificationlevelController;
+use App\Http\Controllers\Employee\QualificationController;
+use App\Http\Controllers\Employee\EmployeejobstatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,5 +86,12 @@ Route::resource('country',CountryController::class);
 Route::resource('citizenship',CitizenshipController::class);
 Route::resource('nationality',NationalityController::class);
 Route::resource('city',CityController::class);
+Route::resource('employeeflag',EmployeeflagController::class);
+Route::resource('employeerule',EmployeeruleController::class);
+Route::resource('skilllevel',SkilllevelController::class);
+Route::resource('employeejobstatus',EmployeejobstatusController::class);
+Route::resource('qualification',QualificationController::class);
+Route::resource('qualificationlevel',QualificationlevelController::class);
+
 
 });
