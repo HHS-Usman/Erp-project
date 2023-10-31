@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    QUALIFICATION
+  Create Qualification
 @endsection    
 @section('content')
 <div id="maincontainer">

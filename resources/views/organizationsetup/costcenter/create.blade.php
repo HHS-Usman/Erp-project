@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+    Create Cost Center
+@end-section
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
