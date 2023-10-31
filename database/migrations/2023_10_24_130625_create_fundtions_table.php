@@ -15,7 +15,10 @@ class CreateFundtionsTable extends Migration
     {
         Schema::create('fundtions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('function');
+            $table->string('function_code');
+            $table->string('detail');
+            $table->string('status', 10);
             $table->timestamps();
         });
     }

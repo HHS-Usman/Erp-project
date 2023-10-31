@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+ Manage Grade
+@endsection
 @section('content')
 <div id="maincontainer">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -15,11 +18,11 @@
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
-                  <h1>Grand</h1>
+                  <h1>Grade</h1>
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('grand.index') }}"> Manage Grand</a></li>
+                      <li class="breadcrumb-item active"><a href="{{ route('group.index') }}"> Manage Grade</a></li>
                   </ol>
                   </nav>
               </div>
@@ -32,7 +35,7 @@
     
     <div class="filter">
       <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center" >
           <!-- Dropdown Menu -->
           <!-- Search Bar -->
         </div>
@@ -41,19 +44,23 @@
 
     <div class="card-body">
       <table class="table table-borderless datatable">
-        <thead>
-          <tr>
-          <th>ID</th>
-          <th>Name</th>
+        <tr>
+          <th>S.No</th>
+          <th>Grade</th>
+          <th>Grade Code</th>
+          <th>Detail</th>
           <th width="280px">Action</th>
           </tr>
         </thead>
         <tbody>
-        @foreach ($grands as $function)
+        @foreach ($grands as $group)
           <tr>
-            <td>{{ $function->id }}</td>
-            <td>{{ $function->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
+            <td>{{ $group->id }}</td>
+            <td>{{ $group->grade }}</td>
+            <td>{{ $group->grade_code }}</td>
+            <td>{{ $group->detail }}</td>
+            <td><a class="btn btn-primary" href="">Edit</a>
+              <a class="btn btn-success" href="">Action</a></td>
           </tr>
         @endforeach  
         </tbody>

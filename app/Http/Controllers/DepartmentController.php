@@ -27,11 +27,16 @@ class DepartmentController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
-            'detail'=>'required'
+            'department'=>'required',
+            'department_code'=>'required',
         ]);
         //create a new product in database
-        Department::create($request->all());
+        Department::create([
+            'department' => request()->get('department'),
+            'department_code' => request()->get('department_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE',
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('department.index')->with('success','department made  successfully ');

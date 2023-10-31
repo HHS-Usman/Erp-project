@@ -291,7 +291,7 @@ h6 {
 # Back to top button
 --------------------------------------------------------------*/
 .back-to-top {
-  position: fixed;
+  position: absolute;
   visibility: hidden;
   opacity: 0;
   right: 15px;
@@ -325,7 +325,7 @@ h6 {
   
   padding: auto;
   margin: auto;
-  border: solid black 2px;
+  border: solid hwb(0 85% 13%) 2px;
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
@@ -346,6 +346,10 @@ h6 {
   border: 0;
   box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2); */
 }
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
 
 .dropdown-menu .dropdown-header,
 .dropdown-menu .dropdown-footer {
@@ -355,7 +359,7 @@ h6 {
 }
 
 .dropdown-menu .dropdown-footer a {
-  color: #444444;
+  color: #ece8e8;
   text-decoration: underline;
 }
 
@@ -394,7 +398,7 @@ h6 {
     position: absolute;
     top: -7px;
     right: 20px;
-    transform: rotate(4deg);
+    transform: rotate(-45deg);
     border-top: 1px solid #eaedf1;
     border-left: 1px solid #eaedf1;
   }
@@ -850,7 +854,7 @@ h6 {
   font-size: 18px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #444444;
+  color: #f1ecec;
 }
 
 .header-nav .profile .dropdown-header span {
@@ -1040,6 +1044,7 @@ h6 {
  */
 /*--------------------------------------------------------------
 # Dashboard
+
 --------------------------------------------------------------*/
 /* Filter dropdown */
 .dashboard .filter {
@@ -1058,7 +1063,7 @@ h6 {
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {
-  color: #4154f1;
+  color: hsl(240, 27%, 96%);
 }
 
 .dashboard .filter .dropdown-header {
@@ -1070,7 +1075,7 @@ h6 {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #aab7cf;
+  color: #c9d0dc;
   margin-bottom: 0;
   padding: 0;
 }

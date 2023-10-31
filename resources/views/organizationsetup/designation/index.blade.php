@@ -43,20 +43,27 @@
       <table class="table table-borderless datatable">
         <thead>
           <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th width="280px">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        @foreach ($designations as $function)
-          <tr>
-            <td>{{ $function->id }}</td>
-            <td>{{ $function->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
-          </tr>
-        @endforeach  
-        </tbody>
+            <thead>
+              <tr>
+              <th>S.No</th>
+              <th>Designation</th>
+              <th>Designation Code</th>
+              <th>Detail</th>
+              <th width="280px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach ($designations as $designation)
+              <tr>
+                <td>{{ $designation->id }}</td>
+                <td>{{ $designation->designation_code }}</td>
+                <td>{{ $designation->designation }}</td>
+                <td>{{ $designation->detail }}</td>
+                <td><a class="btn btn-primary" href="">Edit</a></td>
+                <td><a class="btn btn-success" href="">Action</a></td>
+              </tr>
+            @endforeach    
+            </tbody>
       </table>
     </div>
     <!-- End Recent Sales -->

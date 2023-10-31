@@ -27,10 +27,17 @@ class FundtionController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'function'=>'required',
+            'function_code'=>'required',
+            'detail'=>'required',
         ]);
         //create a new product in database
-        Fundtion::create($request->all());
+        Fundtion::create([
+            'function' => request()->get('function'),
+            'function_code' => request()->get('function_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE', 
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('function.index')->with('success','function made  successfully ');

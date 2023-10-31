@@ -105,11 +105,11 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa fa-cogs" aria-hidden="true" style="color: black;"></i>&nbsp;SETUP
               </a>
-              <div class="dropdown-menu">
-                <div class="dropdown-submenu dropdown-item">
+              <div class="dropdown-menu" style="hover">
+                <div class="dropdown-submenu dropdown-item dropright ">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Organization Setup</a>
-                        <ul id="container" class="dropdown-menu">
+                        <ul id="container" class="dropdown-menu" style="{display: block;}">
                               <li><a class="dropdown-item" href="{{ route('division.create')}}">Create Division</a></li>
                               <li><a class="dropdown-item" href="{{ route('division.index')}}">Manage Division</a></li>
 
@@ -166,7 +166,7 @@
                           
                         </ul>
                 </div>
-                <div class="dropdown-submenu dropdown-item">
+                <div class="dropdown-submenu dropdown-item dropright">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">General Setup</a>
                         <ul id="container" class="dropdown-menu">
@@ -205,7 +205,7 @@
                           
                         </ul>
                 </div>
-                <div class="dropdown-submenu dropdown-item">
+                <div class="dropdown-submenu dropdown-item dropright">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Employee</a>
                         <ul id="container" class="dropdown-menu">
@@ -624,7 +624,7 @@
     <div style="background-color: lightgray;opacity: 0.9;">
       <ul class="nav nav-tabs" id="myTabs">
         <li class="nav-item">
-          <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
+          <a class="nav-link active" data-bs-toggle="tab">@yield('page-tab')</a>
         </li>
       </ul>
     </div>
@@ -636,9 +636,12 @@
     </div>
   </div>
   <!-- content of sidebar -->
-  <div id="check"  class="main-content">
-  @yield('content')
-  </div>
+ 
+    <section id="main" class="main" style="padding-top: 0vh;">
+        @yield('content')
+    </section>
+      
+ 
   <!-- start from here all code which i have copy it  -->
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -675,6 +678,6 @@
       margin-top: -1px;
     }
 </style>
+  
 </body>
-
 </html>

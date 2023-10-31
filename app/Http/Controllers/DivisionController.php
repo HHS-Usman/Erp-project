@@ -27,11 +27,17 @@ class DivisionController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'division'=>'required',
+            'division_code'=>'required',
             'detail'=>'required'
         ]);
         //create a new product in database
-        Division::create($request->all());
+        Division::create([
+            'division' => request()->get('division'),
+            'division_code' => request()->get('division_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE',
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('division.index')->with('success','division made  successfully ');

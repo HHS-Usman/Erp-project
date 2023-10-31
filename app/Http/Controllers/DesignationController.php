@@ -38,10 +38,17 @@ class DesignationController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'designation'=>'required',
+            'designation_code'=>'required',
+            'detail'=>'required',
         ]);
         //create a new product in database
-        Designation::create($request->all());
+        Designation::create([
+            'designation' => request()->get('designation'),
+            'designation_code' => request()->get('designation_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE', 
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('designation.index')->with('success','Designation made  successfully ');
     }

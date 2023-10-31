@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+    Manage function
+@endsection
 @section('content')
 <div id="maincontainer">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -14,7 +17,7 @@
   <!-- Recent Sales -->
     
             <section id="main" class="main" style="padding-top: 0vh;">
-              <div class="pagetitle">
+              <div class="form-container">
                   <h1>Function</h1>
                   <nav>
                   <ol class="breadcrumb">
@@ -44,8 +47,10 @@
       <table class="table table-borderless datatable">
         <thead>
           <tr>
-          <th>ID</th>
-          <th>Name</th>
+          <th>S.No</th>
+          <th>Function</th>
+          <th>Function Code</th>
+          <th>Detail</th>
           <th width="280px">Action</th>
           </tr>
         </thead>
@@ -53,8 +58,11 @@
         @foreach ($fundtions as $function)
           <tr>
             <td>{{ $function->id }}</td>
-            <td>{{ $function->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
+            <td>{{ $function->function }}</td>
+            <td>{{ $function->function_code }}</td>
+            <td>{{ $function->detail }}</td>
+            <td><a class="btn btn-primary" href="">Edit</a></td>
+            <td><a class="btn btn-success">Action</a></td>
           </tr>
         @endforeach  
         </tbody>

@@ -38,10 +38,18 @@ class LeavereasonController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'leavingreason'=>'required',
+            'leavingreason_code'=>'required',
+            'detail'=>'required',
+
         ]);
         //create a new product in database
-        Leavereason::create($request->all());
+        Leavereason::create([
+            'leavingreason' => request()->get('leavingreason'),
+            'leavingreason_code' => request()->get('leavingreason_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE', 
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('leavereson.index')->with('success','leave Reason made  successfully ');
     }

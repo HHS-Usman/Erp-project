@@ -1,16 +1,11 @@
 @extends('layout.master')
+@section('page-tab')
+    Create Grade
+@endsection    
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
-        <div class="pagetitle">
-            <h1>Add Grand</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('grand.create') }}"> Create</a></li>
-            </ol>
-            </nav>
-        </div>
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -21,22 +16,36 @@
                 </ul>
             </div>
         @endif
-        <div class="form-container">
-            <link rel="stylesheet" href="/as/style.css">
-            <h2>Grand</h2>
-            <h4>Navigation path</h4>
+        <section id="main" class="main" style="padding-top: 0vh;">
+            <div class="pagetitle">
+                <h1>Create Grade</h1>
+                <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active"><a> Create Grade</a></li>
+                </ol>
+                </nav>
+            </div>
             <br><br><br>
             <form action="{{ route('grand.store') }}" method="POST">        
       @csrf
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <strong>Grade</strong>
+                    <input type="text" name="grade" id="grade" class="form-control" placeholder="Grade">
+                </div>
+                <div class="form-group">
+                    <strong>Grade Code</strong>
+                    <input type="text" name="grade_code" id="grade_code" class="form-control" placeholder="Grade Code">
+                </div>
+                <div class="form-group">
+                    <strong>Details</strong>
+                    <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
      </form>

@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+ Manage Group
+@endsection
 @section('content')
 <div id="maincontainer">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -41,19 +44,23 @@
 
     <div class="card-body">
       <table class="table table-borderless datatable">
-        <thead>
-          <tr>
-          <th>ID</th>
-          <th>Name</th>
+        <tr>
+          <th>S.No</th>
+          <th>Function</th>
+          <th>Function Code</th>
+          <th>Detail</th>
           <th width="280px">Action</th>
           </tr>
         </thead>
         <tbody>
-        @foreach ($groups as $function)
+        @foreach ($groups as $group)
           <tr>
-            <td>{{ $function->id }}</td>
-            <td>{{ $function->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
+            <td>{{ $group->id }}</td>
+            <td>{{ $group->group }}</td>
+            <td>{{ $group->group_code }}</td>
+            <td>{{ $group->detail }}</td>
+            <td><a class="btn btn-primary" href="">Edit</a>
+              <a class="btn btn-success">Action</a></td>
           </tr>
         @endforeach  
         </tbody>

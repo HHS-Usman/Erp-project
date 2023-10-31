@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+    Create Department
+@endsection
 @section('content')
 <div id="maincontainer">
   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -12,7 +15,7 @@
   <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet"> --}}
   <!-- Recent Sales -->
-    
+    <br><br>
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
                   <h1>Department</h1>
@@ -44,32 +47,36 @@
       <table class="table table-borderless datatable">
         <thead>
           <tr>
-          <th>ID</th>
-          <th>Name</th>
+          <th>S.No</th>
+          <th>Department</th>
+          <th>Department Code</th>
+          <th>Detail</th>
           <th width="280px">Action</th>
           </tr>
         </thead>
         <tbody>
         @foreach ($departments as $department)
           <tr>
-            <td>{{ $department->id }}</td>
-            <td>{{ $department->name }}</td> 
-            <td><span class="badge bg-succes">Action</span></td>
+            <td>{{ $department->department }}</td>
+            <td>{{ $department->department_code }}</td>
+            <td>{{ $department->detail }}</td>
+            <td><a class="btn btn-primary" href="">Edit</a></td>
+            <td><span class="btn btn-success">Action</span></td>
           </tr>
         @endforeach  
         </tbody>
       </table>
     </div>
     <!-- End Recent Sales -->
-    <div style="width: 100%;">
+    {{-- <div style="width: 100%;">
       <button class="buttonstyle" style="position: relative; left: 80%; bottom: 1vh;" type="button" id="buttooo12"
         aria-haspopup="true" aria-expanded="false">
         
       </button>
-    </div>
+    </div> --}}
     <div>
       <button class="buttonstyle" type="button" id="butto1" aria-haspopup="true" aria-expanded="false">
-       {{ $departments->links() }}
+       {{ $departments->links() }}aaadadad
       </button>
       <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo133"
         aria-haspopup="true" aria-expanded="false">

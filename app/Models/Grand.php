@@ -9,6 +9,6 @@ class Grand extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'id',
     ];
 }

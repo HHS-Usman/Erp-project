@@ -38,10 +38,18 @@ class GrandController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'grade'=>'required',
+            'grade_code'=>'required',
+            'detail'=>'required',
+
         ]);
         //create a new product in database
-        Grand::create($request->all());
+        Grand::create([ 
+        'grade' => request()->get('grade'),
+        'grade_code' => request()->get('grade_code'),
+        'detail' => request()->get('detail'),
+        'status' => 'DEACTIVE', 
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('grand.index')->with('success','Grand made  successfully ');
     }

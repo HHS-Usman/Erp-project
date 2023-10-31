@@ -38,10 +38,17 @@ class GroupController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'group'=>'required',
+            'group_code'=>'required',
+            'detail'=>'required',
         ]);
         //create a new product in database
-        Group::create($request->all());
+        Group::create([
+        'group' => request()->get('group'),
+        'group_code' => request()->get('group_code'),
+        'detail' => request()->get('detail'),
+        'status' => 'DEACTIVE', 
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('group.index')->with('success','Group made  successfully ');
     }

@@ -1,6 +1,10 @@
 @extends('layout.master')
+@section('page-tab')
+    Manage Division
+@endsection    
 @section('content')
 <div id="maincontainer">
+    <br><br>
     <section id="main" class="main" style="padding-top: 0vh;">
                                 <div class="pagetitle">
                                     <h1>Division</h1>
@@ -18,15 +22,17 @@
             @endif
             <table class="table table-bordered">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
+                    <th>S.No</th>
+                    <th>Division</th>
+                    <th>Division Code</th>
                     <th>Details</th>
                     <th width="280px">Action</th>
                 </tr>
                 @foreach ($divisions as $division)
                 <tr>
                     <td>{{ $division->id }}</td>
-                    <td>{{ $division->name }}</td>
+                    <td>{{ $division->division }}</td>
+                    <td>{{ $division->division_code }}</td>
                     <td>{{ $division->detail }}</td>
                     <td>
                         <form action="" method="POST">

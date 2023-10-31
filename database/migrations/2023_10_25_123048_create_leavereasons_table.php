@@ -15,7 +15,10 @@ class CreateLeavereasonsTable extends Migration
     {
         Schema::create('leavereasons', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('leavingreason');
+            $table->string('leavingreason_code');
+            $table->string('detail');
+            $table->string('status');
             $table->timestamps();
         });
     }

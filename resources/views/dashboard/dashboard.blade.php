@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="maincontainer">
-              <div class="tab-content">
+            <div class="tab-content">
                <div class="tab-pane fade show active" id="home">
                 <!-- start main container -->
                 <!-- ======= Sidebar ======= -->
@@ -693,10 +693,11 @@
                             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                             </div>
                         </footer><!-- End Footer -->
-                        </main>
+                 
                     
                 <!-- End #main -->
                  
              </div>
+            </div> 
     </div>
 @endsection            

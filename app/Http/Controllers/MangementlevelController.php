@@ -27,10 +27,17 @@ class MangementlevelController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'managementlevel'=>'required',
+            'managementlevel_code'=>'required',
+            'detail'=>'required',
         ]);
         //create a new product in database
-        Managementlevel::create($request->all());
+        Managementlevel::create([
+            'managementlevel' => request()->get('managementlevel'),
+            'managementlevel_code' => request()->get('managementlevel_code'),
+            'detail' => request()->get('detail'),
+            'status' => 'DEACTIVE', 
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('management.index')->with('success','Manage successfully');
