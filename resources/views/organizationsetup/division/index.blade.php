@@ -19,7 +19,13 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
-            <table class="table table-bordered">
+            <div class="col-md-2 col-lg-2 col-sm-12" style="float: right; padding-bottom:10px"> 
+                <input type="search" name="search"  class="form-control" placeholder="search">
+              </div>
+                <div class="row justify-content-center" style="border: 1px solid rgb(122, 122, 122); width:100%;padding:10px">
+                  <div class="col-xs-8 col-sm-8 col-md-10">
+                    <div class="card-body">
+                        <table class="table table-borderless datatable">
                 <tr>
                     <th>S.No</th>
                     <th>Division</th>
@@ -35,17 +41,21 @@
                     <td>{{ $division->detail }}</td>
                     <td>
                         <form action="" method="POST">
-                            <a class="btn btn-info" href="">Show</a>
+                       
                             <a class="btn btn-primary" href="">Edit</a>
 
-                            
-                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
+            </tbody>
             </table>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center" style=" margin: auto;
+    width: 50%;">
+      <button type="button" class="btn btn-warning">Previous</button>
+      <button type="button" class="btn btn-warning">Next</button>
+    </div>
             {{ $divisions->links() }}    
-    </section>
-        
+    </section>  
 @endsection
