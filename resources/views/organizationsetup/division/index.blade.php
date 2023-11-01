@@ -52,10 +52,10 @@
             </table>
                   </div>
                   <div class="d-flex justify-content-between align-items-center" style=" margin: auto;
-    width: 50%;">
+        width: 50%;">
       <button type="button" class="btn btn-warning">Previous</button>
       <button type="button" class="btn btn-warning">Next</button>
-    </div>
+     </div>
             {{ $divisions->links() }}    
     </section>  
 @endsection
