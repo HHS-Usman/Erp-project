@@ -3,7 +3,7 @@
     Create City
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -22,7 +22,7 @@
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> View</a></li>
+                    <li class="breadcrumb-item active"><a> Manage</a></li>
                 </ol>
                 </nav>
             </div>
@@ -42,7 +42,6 @@
         </div>
      </form>
         </div>
-  </section>
-</div>      
+  </section>  
 
 @endsection    

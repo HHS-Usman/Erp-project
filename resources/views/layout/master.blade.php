@@ -242,7 +242,7 @@
                 <div class="dropdown-submenu dropdown-item dropright">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Employee</a>
-                        <ul id="" class="dropdown-menu dropdown-content">
+                    <ul id="container" class="dropdown-menu dropdown-content">
                               <li><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
                               <li><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
 
@@ -671,9 +671,55 @@
   </div>
   <!-- content of sidebar -->
  
-    <section id="main" class="main" style="padding-top: 0vh;">
-        @yield('content')
-    </section>
+  <div id="maincontainer">
+    <div class="tab-content">
+       <div class="tab-pane fade show active" id="home">
+        <!-- start main container -->
+        <!-- ======= Sidebar ======= -->
+            <div id="maincontainersidebar" style="position:absolute; left:0px; z-index: -1;">
+                <div class="sidebarleft">
+                    <aside>
+                    <span>Abc L</span>
+                    </aside>
+                    <div class="toggleinput">
+                    <button style="border: 1px solid white;background-color: rgb(245, 249, 250);border-radius: 10px;"
+                        onclick="toggleSidebar()"><i id="right_toggle" class="fa-solid fa-toggle-on"
+                        style="color: orange;border: none;font-size: 2rem;border:1px solid rgb(245, 249, 250)"></i></button>
+                    </div>
+                </div>
+                <div class="sidebarright">
+                    <aside id="asidecontent">
+                    <SPan>ABC R</SPan>
+                    </aside>
+                    <div class="toggleinputright">
+                    <button style="border: 1px solid white;background-color: rgb(245, 249, 250);border-radius: 10px;"
+                        onclick="toggleSidebarright()"><i id="right_toggle" class="fa-solid fa-toggle-on"
+                        style="color: orange;border: none;font-size: 2rem;border:1px solid rgb(245, 249, 250)"></i></button>
+                    </div>
+                </div>
+            </div>
+                <!-- ======= Main section  ======= -->
+                @yield('content')
+                <!-- ======= End  Main Section ======= -->
+                <!-- ======= Footer ======= -->
+                <footer id="footer" class="footer">
+                    <div class="copyright col-4">
+                    &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="copyright col-4">
+                    version here
+                    </div>
+                    <div class="credits col-4">
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </footer><!-- End Footer -->
+         
+            
+        <!-- End #main -->
+         
+     </div>
+    </div> 
+  </div>>
       
  
   <!-- start from here all code which i have copy it  -->

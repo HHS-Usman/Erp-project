@@ -3,7 +3,7 @@
 Create Function
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle">
         <h1>Add Function</h1>
@@ -57,6 +57,5 @@ Create Function
             </form>
         </div>
   </section>
-</div>      
 
 @endsection    

@@ -3,9 +3,8 @@
     Create Cast
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -16,7 +15,7 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
+        
             <div class="pagetitle">
                 <h1>Add Cast</h1>
                 <nav>
@@ -43,6 +42,6 @@
      </form>
         </div>
   </section>
-</div>      
+  
 
 @endsection    

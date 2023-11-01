@@ -3,7 +3,7 @@
     Create Employee Flag
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -16,13 +16,13 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
+        
             <div class="pagetitle">
-                <h1>Payment Term</h1>
+                <h1>Employee Flag</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> View</a></li>
+                    <li class="breadcrumb-item active"><a> Manage </a></li>
                 </ol>
                 </nav>
             </div>
@@ -43,17 +43,5 @@
      </form>
         </div>
   </section>
-  <footer id="footer" class="footer justify-content-center">
-    <div class="copyright col-4">
-    &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="copyright col-4">
-    version here
-    </div>
-    <div class="credits col-4">
-    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-</footer><!-- End Footer -->
-</div>      
-
+ 
 @endsection    

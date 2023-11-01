@@ -3,7 +3,7 @@
   Create Skill Level
 @endsection    
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -18,11 +18,11 @@
         @endif
         <section id="main" class="main" style="padding-top: 0vh;">
             <div class="pagetitle">
-                <h1>Manage Skill Level</h1>
+                <h1>Create Skill Level</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Manage Skill Level</a></li>
+                    <li class="breadcrumb-item active"><a> Create Skill Level</a></li>
                 </ol>
                 </nav>
             </div>
@@ -43,6 +43,6 @@
      </form>
         </div>
   </section>
-</div>      
+
 
 @endsection    

@@ -3,7 +3,7 @@
     Create Nationality
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -16,7 +16,7 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
+        
             <div class="pagetitle">
                 <h1>Add Nationality</h1>
                 <nav>
@@ -43,6 +43,5 @@
      </form>
         </div>
   </section>
-</div>      
 
 @endsection    

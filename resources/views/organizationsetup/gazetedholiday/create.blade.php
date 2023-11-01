@@ -3,7 +3,7 @@
     Create Gazeted Holiday
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         <div class="pagetitle">
             <h1>Add Gazeted Holiday</h1>
@@ -41,7 +41,6 @@
         </div>
      </form>
         </div>
-  </section>
-</div>      
+  </section>      
 
 @endsection    

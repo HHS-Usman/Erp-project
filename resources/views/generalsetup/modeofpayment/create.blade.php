@@ -3,7 +3,7 @@
     Create Mode Of Payment
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -16,8 +16,8 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
-            <div class="pagetitle">
+        
+        <div class="pagetitle">
                 <h1>Add Mode Of Payment</h1>
                 <nav>
                 <ol class="breadcrumb">
@@ -42,7 +42,6 @@
         </div>
      </form>
         </div>
-  </section>
-</div>      
+  </section>  
 
 @endsection    

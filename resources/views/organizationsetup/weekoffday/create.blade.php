@@ -3,8 +3,7 @@
     Create Week Off Day
 @endsection
 @section('content')
-<div id="maincontainer">
-    
+
   <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle">
         <h1>Add Week off Day</h1>
@@ -44,6 +43,5 @@
      </form>
         </div>
   </section>
-</div>      
 
 @endsection    

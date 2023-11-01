@@ -3,8 +3,7 @@
     Create Employee Rule
 @endsection
 @section('content')
-<div id="maincontainer">
-  <section id="main" class="main" style="padding-top: 0vh;">
+<section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -16,7 +15,7 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
+        
             <div class="pagetitle">
                 <h1>Manage Employee Rule</h1>
                 <nav>
@@ -43,6 +42,6 @@
      </form>
         </div>
   </section>
-</div>      
+      
 
 @endsection    

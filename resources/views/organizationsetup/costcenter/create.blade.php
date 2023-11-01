@@ -3,7 +3,7 @@
     Create Cost Center
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -42,6 +42,6 @@
      </form>
         </div>
   </section>
-</div>      
+  
 
 @endsection    

@@ -3,7 +3,7 @@
     Leave Reason
 @endsection
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle">
         <h1>Add Leave Reason </h1>
@@ -42,7 +42,6 @@
         </div>
      </form>
         </div>
-  </section>
-</div>      
+  </section>  
 
 @endsection    

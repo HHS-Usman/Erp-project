@@ -1,20 +1,20 @@
 @extends('layout.master')
 @section('page-tab')
     Manage Citizenship
-@end-section
+@endsection
 @section('content')
-<div id="maincontainer">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+<section id="main" class="main" style="padding-top: 0vh;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link href="/asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/asset/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/asset/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="/asset/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
-  <!-- Recent Sales -->
+    <link href="/asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/asset/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/asset/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/asset/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Recent Sales -->
     
             <section id="main" class="main" style="padding-top: 0vh;">
               <div class="pagetitle">
@@ -101,5 +101,5 @@
 
   <!-- Template Main JS File -->
   <script src="/asset/js/main.js"></script>
-</div>  
+</section>  
 @endsection

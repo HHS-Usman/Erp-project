@@ -3,7 +3,7 @@
     Create Grade
 @endsection    
 @section('content')
-<div id="maincontainer">
+
   <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -50,7 +50,6 @@
         </div>
      </form>
         </div>
-  </section>
-</div>      
+  </section>    
 
 @endsection    
