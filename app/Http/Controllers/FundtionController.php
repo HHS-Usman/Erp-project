@@ -28,8 +28,7 @@ class FundtionController extends Controller
         // validate the input
         $request->validate([
             'function'=>'required',
-            'function_code'=>'required',
-            'detail'=>'required',
+            
         ]);
         //create a new product in database
         Fundtion::create([

@@ -39,8 +39,7 @@ class DesignationController extends Controller
         // validate the input
         $request->validate([
             'designation'=>'required',
-            'designation_code'=>'required',
-            'detail'=>'required',
+            
         ]);
         //create a new product in database
         Designation::create([
