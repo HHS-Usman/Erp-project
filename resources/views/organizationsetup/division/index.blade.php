@@ -25,7 +25,7 @@
                 <div class="row justify-content-center" style="border: 1px solid rgb(122, 122, 122); width:100%;padding:10px">
                   <div class="col-xs-8 col-sm-8 col-md-10">
                     <div class="card-body">
-                        <table class="table table-borderless datatable">
+                        <table class="table table-borderless">
                 <tr>
                     <th>S.No</th>
                     <th>Division</th>

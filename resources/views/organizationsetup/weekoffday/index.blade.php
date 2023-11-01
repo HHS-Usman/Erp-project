@@ -31,12 +31,12 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif      
-  <div class="card overflow-auto">
-    
-   
+            <div class="row justify-content-center" style="border: 1px solid rgb(122, 122, 122); width:100%;padding:10px">
+              <div class="col-xs-8 col-sm-8 col-md-10">
+                <div class="card-body">
 
-    <div class="card-body">
-      <table class="table table-borderless datatable">
+  <div class="card-body">
+      <table class="table ">
         <thead>
           <tr>
           <th>ID</th>
@@ -57,7 +57,11 @@
       {{ $weekoffdays->links() }} 
     </div>
     <!-- End Recent Sales -->
-    
+    <div class="d-flex justify-content-between align-items-center" style=" margin: auto;
+    width: 50%;">
+      <button type="button" class="btn btn-warning">Previous</button>
+      <button type="button" class="btn btn-warning">Next</button>
+    </div>
     </div>
   </div>
 

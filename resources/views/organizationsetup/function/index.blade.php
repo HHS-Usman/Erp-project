@@ -15,10 +15,9 @@
   <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
   <!-- Recent Sales -->
-    
+  <section id="main" class="main" style="padding-top: 0vh;">
             
-              <div class="form-container">
-                  <h1>Function</h1>
+              <div class="form-container" style="margin-left: 10px">
                   <nav>
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
@@ -31,20 +30,14 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif      
-  <div class="card recent-sales overflow-auto">
-    
-    <div class="filter">
-      <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center">
-          <!-- Dropdown Menu -->
-          <!-- Search Bar -->
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="card-body">
-      <table class="table table-borderless datatable">
+            <div class="col-md-2 col-lg-2 col-sm-12" style="float: right; padding-bottom:10px"> 
+              <input type="search" name="search"  class="form-control" placeholder="search">
+            </div>
+              <div class="row justify-content-center" style="border: 1px solid rgb(122, 122, 122); width:100%;padding:10px">
+                <div class="col-xs-8 col-sm-8 col-md-10">
+                  <div class="card-body">
+                
+      <table class="table">
         <thead>
           <tr>
           <th>S.No</th>
@@ -68,25 +61,11 @@
         </tbody>
       </table>
     </div>
-    <!-- End Recent Sales -->
-    <div style="width: 100%;">
-      <button class="buttonstyle" style="position: relative; left: 80%; bottom: 1vh;" type="button" id="buttooo12"
-        aria-haspopup="true" aria-expanded="false">
-        Record per Page
-      </button>
+    <div class="d-flex justify-content-between align-items-center" style=" margin: auto;
+    width: 50%;">
+      <button type="button" class="btn btn-warning">Previous</button>
+      <button type="button" class="btn btn-warning">Next</button>
     </div>
-    <div>
-      <button class="buttonstyle" type="button" id="butto1" aria-haspopup="true" aria-expanded="false">
-        Showing 163 Entries
-      </button>
-      <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo133"
-        aria-haspopup="true" aria-expanded="false">
-        Previous
-      </button>
-      <button class="buttonstyle" style="position: relative; left: 60%;" type="button" id="buttooo13"
-        aria-haspopup="true" aria-expanded="false">
-        Next
-      </button>
 
     </div>
   </div>
