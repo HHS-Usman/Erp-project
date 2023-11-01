@@ -3,9 +3,7 @@
     Create Department
 @endsection    
 @section('content')
-
   <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -16,7 +14,6 @@
                 </ul>
             </div>
         @endif
-        
             <div class="pagetitle">
                 <h1>Create Department</h1>
                 <nav>
