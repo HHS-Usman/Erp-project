@@ -39,8 +39,7 @@ class GroupController extends Controller
         // validate the input
         $request->validate([
             'group'=>'required',
-            'group_code'=>'required',
-            'detail'=>'required',
+            
         ]);
         //create a new product in database
         Group::create([

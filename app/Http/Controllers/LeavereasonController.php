@@ -39,8 +39,7 @@ class LeavereasonController extends Controller
         // validate the input
         $request->validate([
             'leavingreason'=>'required',
-            'leavingreason_code'=>'required',
-            'detail'=>'required',
+            
 
         ]);
         //create a new product in database

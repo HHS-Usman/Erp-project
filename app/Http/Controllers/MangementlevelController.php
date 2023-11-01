@@ -28,8 +28,7 @@ class MangementlevelController extends Controller
         // validate the input
         $request->validate([
             'managementlevel'=>'required',
-            'managementlevel_code'=>'required',
-            'detail'=>'required',
+            
         ]);
         //create a new product in database
         Managementlevel::create([

@@ -39,8 +39,7 @@ class GrandController extends Controller
          // validate the input
          $request->validate([
             'grade'=>'required',
-            'grade_code'=>'required',
-            'detail'=>'required',
+            
 
         ]);
         //create a new product in database

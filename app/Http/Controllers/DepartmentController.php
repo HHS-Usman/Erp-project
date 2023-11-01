@@ -28,7 +28,7 @@ class DepartmentController extends Controller
         // validate the input
         $request->validate([
             'department'=>'required',
-            'department_code'=>'required',
+            
         ]);
         //create a new product in database
         Department::create([
