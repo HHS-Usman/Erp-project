@@ -78,6 +78,40 @@
       opacity: 0.9;
   }
   </style>   --}}
+  <style>
+  .dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropright {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content li {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content li:hover {background-color: hsl(0, 33%, 98%);}
+  
+  .dropright:hover .dropdown-content {display: block;}
+  </style>
 </head>
 
 <body>
@@ -109,7 +143,7 @@
                 <div class="dropdown-submenu dropdown-item dropright ">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Organization Setup</a>
-                        <ul id="container" class="dropdown-menu" style="{display: block;}">
+                        <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
                               <li><a class="dropdown-item" href="{{ route('division.create')}}">Create Division</a></li>
                               <li><a class="dropdown-item" href="{{ route('division.index')}}">Manage Division</a></li>
 
@@ -169,7 +203,7 @@
                 <div class="dropdown-submenu dropdown-item dropright">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">General Setup</a>
-                        <ul id="container" class="dropdown-menu">
+                        <ul id="container" class="dropdown-menu dropdown-content">
                               <li><a class="dropdown-item" href="{{ route('paymentterm.create')}}">Create Payment Term</a></li>
                               <li><a class="dropdown-item" href="{{ route('paymentterm.index')}}">Manage Payment Term</a></li>
 
@@ -208,7 +242,7 @@
                 <div class="dropdown-submenu dropdown-item dropright">
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Employee</a>
-                        <ul id="container" class="dropdown-menu">
+                        <ul id="" class="dropdown-menu dropdown-content">
                               <li><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
                               <li><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
 
