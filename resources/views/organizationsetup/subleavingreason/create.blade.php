@@ -1,12 +1,21 @@
 @extends('layout.master')
 @section('page-tab')
     Create Sub Leaving Reason
-@end-section
+@endsection
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
-        <div class="pagetitle">           
-        </div>
+    <div class="pagetitle">
+        <h1>Add Leave Reason </h1>
+        <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('subleavingreason.create') }}">Create </a></li>
+        </ol>
+        </nav>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xs-6 col-sm-6 col-md-6">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -19,14 +28,6 @@
         @endif
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            <h2>Sub Leaving Reason</h2>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('subleavingreason.index') }}"> View </a></li>
-                </ol>
-                </nav>
-            <br><br><br>
             <form action="{{ route('subleavingreason.store') }}" method="POST">        
       @csrf
         <div class="row">

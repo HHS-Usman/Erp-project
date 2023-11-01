@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
     Create Cost Center
-@end-section
+@endsection
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
@@ -28,8 +28,8 @@
             <br><br><br>
             <form action="{{ route('costcenter.store') }}" method="POST">        
       @csrf
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Name:</strong>
                     <input type="text" name="name" class="form-control" placeholder="Name">

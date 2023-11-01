@@ -5,6 +5,15 @@
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
+    <div class="pagetitle">
+        <h1>Add Designation </h1>
+        <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('designation.create') }}">Create </a></li>
+        </ol>
+        </nav>
+    </div>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -18,13 +27,7 @@
         <br><br>
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            <h1>Manage Designation</h1>
-            <nav>
-            <ol style="color:white;">
-                <li class="breadcrumb-item">Home</li>
-                <li class="breadcrumb-item">Manage Designation</li>
-            </ol>
-            </nav>
+    
             <form action="{{ route('designation.store') }}" method="POST">           
               @csrf
                 <div class="row justify-content-center">

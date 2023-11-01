@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
     Create Country
-@end-section
+@endsection
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
@@ -18,7 +18,7 @@
         @endif
         <section id="main" class="main" style="padding-top: 0vh;">
             <div class="pagetitle">
-                <h1>Country</h1>
+                <h1>Add Country</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>

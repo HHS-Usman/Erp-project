@@ -1,19 +1,19 @@
 @extends('layout.master')
 @section('page-tab')
     Create Sub Department
-@end-section
+@endsection
 @section('content')
 <div id="maincontainer">
   <section id="main" class="main" style="padding-top: 0vh;">
-        <div class="pagetitle">
-            <h1>Add Division</h1>
-            <nav>
-            <ol style="color:white;">
-                <li class="breadcrumb-item">Home</li>
-                <li class="breadcrumb-item">Create</li>
-            </ol>
-            </nav>
-        </div>
+    <div class="pagetitle">
+        <h1>Add Sub Department</h1>
+        <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ route('subdepartment.create') }}"> Create</a></li>
+        </ol>
+        </nav>
+    </div>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -26,13 +26,10 @@
         @endif
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            <h2>Employee History</h2>
-            <h4>Navigation path</h4>
-            <br><br><br>
             <form action="{{ route('subdepartment.store') }}" method="POST">        
       @csrf
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Name:</strong>
                     <input type="text" name="name" class="form-control" placeholder="Name">
