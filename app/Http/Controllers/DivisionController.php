@@ -9,7 +9,7 @@ class DivisionController extends Controller
 {
     public function index()
     {  
-        $divisions = Division::latest()->paginate(3);
+        $divisions = Division::latest()->paginate();
         return view('organizationsetup.division.index',compact('divisions'))->with(request()->input('page'));
     }
     public function create()

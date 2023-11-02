@@ -4,9 +4,14 @@
     Manage Division
 @endsection    
 @section('content')
+{{-- <style>
+  #footer{
+    background-color:rgb(246, 249, 249)
+  }
+</style> --}}
 
-    <section id="main" class="main" style="padding-top: 0vh;" >
-        
+      <section id="main" class="main" style="padding-top: 0vh;" >
+      
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -27,7 +32,7 @@
         <link href="/asset/vendor/quill/quill.bubble.css" rel="stylesheet">
         <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
-            <div class="container-fluid" >
+            <div class="container-fluid" style="background-color: rgb(243, 251, 253)" >
                 <div class="pagetitle">
                     <h1>Designation </h1>
                     <nav>
@@ -67,7 +72,7 @@
                   <th scope="row">{{ $division->id }}</a></th>
                   <td>{{ $division->division }}</td>
                   <td><a  class="datatable-sorter">{{ $division->division_code }}</a></td>
-                  <td>$64</td>
+                  <td>{{ $division ->detail }}</td>
                   <td><form action="" method="POST">
                     <a class="btn btn-info" href="">Show</a>
                     <a class="btn btn-primary" href="">Edit</a>
@@ -76,34 +81,7 @@
                 </form></td>
                 </tr>
                 @endforeach 
-                <tr>
-                  <th scope="row"><a href="#">#2147</a></th>
-                  <td>Bridie Kessler</td>
-                  <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                  <td>$47</td>
-                  <td><span class="badge bg-succes">Action</span></td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2049</a></th>
-                  <td>Ashleigh Langosh</td>
-                  <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                  <td>$147</td>
-                  <td><span class="badge bg-succes">Action</span></td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2644</a></th>
-                  <td>Angus Grady</td>
-                  <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                  <td>{{ $division->detail }}</td>
-                  <td><span class="badge bg-succes">Action</span></td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#">#2644</a></th>
-                  <td>Raheem Lehner</td>
-                  <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                  <td>$165</td>
-                  <td><span class="badge bg-succes">Action</span></td>
-                </tr>
+                
               </tbody>
             </table>
           </div>
@@ -127,6 +105,7 @@
             </button>
       
           </div>
+
           <!-- End Recent Sales -->
          
             {{ $divisions->links() }} 

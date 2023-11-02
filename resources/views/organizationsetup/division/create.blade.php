@@ -31,19 +31,19 @@
         <div class="row justify-content-center">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Division</strong>
-                    <input type="text" name="division" id="division" class="form-control" placeholder="Division">
-                </div>
-                <div class="form-group">
                     <strong>Division Code</strong>
                     <input type="text" name="division_code" id="division_code" class="form-control" placeholder="Division Code">
+                </div>
+                <div class="form-group">
+                    <strong>Division</strong>
+                    <input type="text" name="division" id="division" class="form-control" placeholder="Division" required>
                 </div>
                 <div class="form-group">
                     <strong>Details</strong>
                     <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
                       Active
                     </label>
                   </div>
