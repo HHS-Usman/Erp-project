@@ -16,7 +16,6 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
             <div class="pagetitle">
                 <h1>Create Division</h1>
                 <nav>
@@ -43,6 +42,11 @@
                     <strong>Details</strong>
                     <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                      Active
+                    </label>
+                  </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -50,6 +54,10 @@
         </div>
      </form>
         </div>
+        <br><br><br>
+        <br>
+        <br>
+        
   </section> 
 
 @endsection    

@@ -18,9 +18,7 @@
         @endif
         <div class="form-container">
             <link rel="stylesheet" href="/as/style.css">
-            
-            <h1>Create Management Level </h1>
-            <nav>
+            <nav style="margin-left: 20px">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Home</li>
                 <li class="breadcrumb-item">Create</li>

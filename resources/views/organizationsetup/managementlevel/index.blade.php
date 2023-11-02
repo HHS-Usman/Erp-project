@@ -59,7 +59,6 @@
                 <td>{{ $managementlevel->managementlevel_code }}</td>
                 <td>{{ $managementlevel->detail }}</td>
                 <td><a class="btn btn-primary" href="">Edit</a>
-                  <a class="btn btn-success" href="">Action</a></td>
               </tr>
             @endforeach  
             </tbody>
