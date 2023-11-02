@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Leave Reason
+    Create Leaving Reason
 @endsection
 @section('content')
 
@@ -32,8 +32,8 @@
       <div class="row justify-content-center">
         <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <strong>Leaving Reason</strong>
+                    <input type="text" name="leavingreason" id="leavingreason" class="form-control" placeholder="Leaving Reason">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

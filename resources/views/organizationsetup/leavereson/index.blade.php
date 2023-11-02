@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('page-tab')
+    Manage Leaving Reason
+@endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -45,7 +48,7 @@
         @foreach ($leaveresons as $function)
           <tr>
             <td>{{ $function->id }}</td>
-            <td>{{ $function->name }}</td> 
+            <td>{{ $function->leavingreason }}</td> 
             <td><span class="badge bg-succes">Action</span></td>
           </tr>
         @endforeach  

@@ -691,7 +691,7 @@
                     <aside id="asidecontent">
                     <SPan>ABC R</SPan>
                     </aside>
-                    <div class="toggleinputright">
+                    <div class="toggleinputright justify-content-end">
                     <button style="border: 1px solid white;background-color: rgb(245, 249, 250);border-radius: 10px;"
                         onclick="toggleSidebarright()"><i id="right_toggle" class="fa-solid fa-toggle-on"
                         style="color: orange;border: none;font-size: 2rem;border:1px solid rgb(245, 249, 250)"></i></button>
@@ -704,13 +704,13 @@
                 <!-- ======= Footer ======= -->
                 <footer id="footer" class="footer">
                     <div class="copyright col-4">
-                    &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+                    &copy; Copyright By <strong><span>HHS-Softwares</span></strong>. All Rights Reserved
                     </div>
                     <div class="copyright col-4">
-                    version here
+                    version 2.0
                     </div>
                     <div class="credits col-4">
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <a href="#">Helping Hand Softwares</a>
                     </div>
                 </footer><!-- End Footer -->
          

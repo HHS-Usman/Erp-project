@@ -36,7 +36,7 @@
   border: none;
 }
 .table th {
-      background-color: #f3f3f3;
+      background-color: hsl(0, 2%, 72%);
       text-align: left;
       padding: 10px;
      
@@ -1366,7 +1366,9 @@ border-radius: 0;
 .contact .php-email-form textarea:focus {
 border-color: #4154f1;
 }
-
+.tab-content{
+  background-color: lightblue !important;
+}
 .contact .php-email-form input {
 padding: 10px 15px;
 }

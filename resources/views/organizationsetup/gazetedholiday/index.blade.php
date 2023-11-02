@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
     Manage Gazeted Holiday
-@end-section
+@endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"

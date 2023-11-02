@@ -217,6 +217,12 @@ aside {
 
   width: 100%; /* Adjust the width as needed */
 }
+.dataTable-input {
+  border: 1px solid black;
+}
+.dataTable-selector{
+  border: 1px solid black;
+}
 :root {
   scroll-behavior: smooth;
 }
@@ -224,7 +230,7 @@ aside {
   height: 100vh;
   transform: scale(0.8);
   transform-origin: 0 0;
-  width: 120%;
+  width: 125%;
   position: absolute;
   top: 92px;
   z-index: -1;
@@ -277,7 +283,7 @@ h6 {
 --------------------------------------------------------------*/
 .pagetitle {
   margin-bottom: 10px;
-  padding-left: 30px;
+  padding-left: 20px;
 }
 
 .pagetitle h1 {
