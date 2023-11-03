@@ -28,13 +28,14 @@ class DivisionController extends Controller
         // validate the input
         $request->validate([
             'division'=>'required',
-            
+            'is_active' => 'boolean',
         ]);
         //create a new product in database
         Division::create([
             'division' => request()->get('division'),
             'division_code' => request()->get('division_code'),
             'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active'),
             'status' => 'DEACTIVE',
         ]);
 

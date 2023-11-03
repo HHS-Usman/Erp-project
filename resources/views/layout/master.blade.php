@@ -710,7 +710,7 @@
                     version 2.0
                     </div>
                     <div class="credits col-4">
-                    Designed by <a href="#">Helping Hand Softwares</a>
+                    Designed by <strong><a href="#"><span>Helping Hand Softwares</span></strong></a>
                     </div>
                 </footer><!-- End Footer -->
          

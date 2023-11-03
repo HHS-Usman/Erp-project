@@ -4,12 +4,12 @@
     Manage Division
 @endsection    
 @section('content')
-{{-- <style>
+ <style>
   #footer{
-    background-color:rgb(246, 249, 249)
+    background-color: rgb(243, 251, 253)
   }
-</style> --}}
-
+</style>
+<div class="container-fluid" style="background-color: rgb(243, 251, 253)" >
       <section id="main" class="main" style="padding-top: 0vh;" >
       
             @if ($errors->any())
@@ -32,8 +32,8 @@
         <link href="/asset/vendor/quill/quill.bubble.css" rel="stylesheet">
         <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
-            <div class="container-fluid" style="background-color: rgb(243, 251, 253)" >
-                <div class="pagetitle">
+           
+                <div class="pagetitle" >
                     <h1>Designation </h1>
                     <nav>
                     <ol class="breadcrumb">
@@ -43,7 +43,7 @@
                     </nav>
                 </div>
             </div>
-
+           
                   <button class="button" style="position: relative; left: 80%;" type="button" id="buttooo" aria-haspopup="true" aria-expanded="false">
                     Record per Page
                   </button>
@@ -56,7 +56,7 @@
             </ul> --}}
       
           <div class="card-body" >
-            <table class="table table-borderless datatable" style="border: 1px solid black">
+            <table class="table table-borderless datatable justify-content-center" style="border: 1px solid black">
               <thead>
                 <tr>
                   <th scope="col">S.No</th>
@@ -104,8 +104,8 @@
               Next
             </button>
       
+          
           </div>
-
           <!-- End Recent Sales -->
          
             {{ $divisions->links() }} 
@@ -121,7 +121,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
             <!-- Template Main JS File -->
-            <script src="/asset/js/main.js"></script>   
+            <script src="/asset/js/main.js"></script> 
+            <br><br><br><br><br>    
     </section>
- 
+  
 @endsection
