@@ -733,7 +733,17 @@
   <script src="/assets/vendor/php-email-form/validate.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/asset/vendor/chart.js/chart.umd.js"></script>
+  <script src="/asset/vendor/echarts/echarts.min.js"></script>
+  <script src="/asset/vendor/quill/quill.min.js"></script>
+  <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/asset/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   <script>

@@ -28,7 +28,7 @@ class CostcenterController extends Controller
         {
             // validate the input
             $request->validate([
-                'name'=>'required',
+                'costcenter'=>'required',
             ]);
             //create a new product in database
             Costcenter::create($request->all());
