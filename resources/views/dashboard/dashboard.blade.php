@@ -1,5 +1,7 @@
 @extends('layout.master')
-
+@section('page-tab')
+   Home
+@endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle">
