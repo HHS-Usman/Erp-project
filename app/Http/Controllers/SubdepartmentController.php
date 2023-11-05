@@ -9,7 +9,7 @@ class SubdepartmentController extends Controller
 {
     public function index()
     {  
-        $subdepartments = Subdepartment::latest()->paginate(3);
+        $subdepartments = Subdepartment::latest()->paginate();
         return view('organizationsetup.subdepartment.index',compact('subdepartments'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class SubdepartmentController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'subdepartment' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Subdepartment::create($request->all());
+        subdepartment::create([
+            'subdepartment' => request()->get('subdepartment'),
+            'subdepartment_code' => request()->get('subdepartment_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('subdepartment.index')->with('success','subdepartment made  successfully ');

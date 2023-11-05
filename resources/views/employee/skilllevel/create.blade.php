@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-  Create Skill Level
+    Create Skill Level
 @endsection    
 @section('content')
 
@@ -16,8 +16,7 @@
                 </ul>
             </div>
         @endif
-        <section id="main" class="main" style="padding-top: 0vh;">
-            <div class="pagetitle">
+            <div class="pagetitle" style="margin-left: 20px;">
                 <h1>Create Skill Level</h1>
                 <nav>
                 <ol class="breadcrumb">
@@ -28,21 +27,38 @@
             </div>
             <br><br><br>
             <form action="{{ route('skilllevel.store') }}" method="POST">        
-      @csrf
-        <div class="row justify-content-center">
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                @csrf
+                    <div class="row justify-content-center">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <strong>Skill Level Code</strong>
+                                <input type="text" name="skilllevel_code" id="skilllevel_code" class="form-control" placeholder="Skill Level Code">
+                            </div>
+                            <div class="form-group">
+                                <strong>Skill Level<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="skilllevel" id="skilllevel" class="form-control" placeholder="Skill Level" required>
+                            </div>
+                            <div class="form-group">
+                                <strong>Details</strong>
+                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                                Active
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+            </form>
         </div>
-     </form>
-        </div>
-  </section>
-
+        <br><br><br>
+        <br>
+        <br>
+        <div><br> </div>
+        
+  </section> 
 
 @endsection    

@@ -9,7 +9,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {  
-        $departments = Department::latest()->paginate(3);
+        $departments = Department::latest()->paginate();
         return view('organizationsetup.department.index',compact('departments'))->with(request()->input('page'));
     }
     public function create()
@@ -28,6 +28,7 @@ class DepartmentController extends Controller
         // validate the input
         $request->validate([
             'department'=>'required',
+            'is_active' => 'integer|in:0,1'
             
         ]);
         //create a new product in database
@@ -35,7 +36,7 @@ class DepartmentController extends Controller
             'department' => request()->get('department'),
             'department_code' => request()->get('department_code'),
             'detail' => request()->get('detail'),
-            'status' => 'DEACTIVE',
+            'is_active' => request()->get('is_active', 0),
         ]);
 
         //redirect the user and send friendly message

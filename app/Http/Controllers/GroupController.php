@@ -14,7 +14,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::latest()->paginate(3);
+        $groups = Group::latest()->paginate();
         return view('organizationsetup.group.index',compact('groups'))->with(request()->input('page'));
     }
 
@@ -39,14 +39,14 @@ class GroupController extends Controller
         // validate the input
         $request->validate([
             'group'=>'required',
-            
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
         Group::create([
         'group' => request()->get('group'),
         'group_code' => request()->get('group_code'),
         'detail' => request()->get('detail'),
-        'status' => 'DEACTIVE', 
+        'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
         return redirect()->route('group.index')->with('success','Group made  successfully ');

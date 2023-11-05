@@ -9,7 +9,7 @@ class SubmanagementlevelController extends Controller
 {
     public function index()
     {  
-         $submanagementlevels = Submanagementlevel::latest()->paginate(15);
+         $submanagementlevels = Submanagementlevel::latest()->paginate();
         return view('organizationsetup.submanagementlevel.index',compact('submanagementlevels'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class SubmanagementlevelController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'submanagementlevel' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Submanagementlevel::create($request->all());
+        Submanagementlevel::create([
+            'submanagementlevel' => request()->get('submanagementlevel'),
+            'submanagementlevel_code' => request()->get('submanagementlevel_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('submanagement.index')->with('success','Record inserted  successfully');

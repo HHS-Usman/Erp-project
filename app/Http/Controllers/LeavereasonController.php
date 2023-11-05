@@ -14,7 +14,7 @@ class LeavereasonController extends Controller
      */
     public function index()
     {
-        $leaveresons = Leavereason::latest()->paginate(3);
+        $leaveresons = Leavereason::latest()->paginate();
         return view('organizationsetup.leavereson.index',compact('leaveresons'))->with(request()->input('page'));
     }
 
@@ -39,7 +39,7 @@ class LeavereasonController extends Controller
         // validate the input
         $request->validate([
             'leavingreason'=>'required',
-            
+            'is_active' => 'integer|in:0,1'
 
         ]);
         //create a new product in database
@@ -47,7 +47,7 @@ class LeavereasonController extends Controller
             'leavingreason' => request()->get('leavingreason'),
             'leavingreason_code' => request()->get('leavingreason_code'),
             'detail' => request()->get('detail'),
-            'status' => 'DEACTIVE', 
+            'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
         return redirect()->route('leavereson.index')->with('success','leave Reason made  successfully ');

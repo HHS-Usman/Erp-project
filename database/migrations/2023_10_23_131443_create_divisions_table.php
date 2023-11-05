@@ -22,8 +22,9 @@ class CreateDivisionsTable extends Migration
             $table->string('status', 10)->nullable();
             $table->timestamps();
         });
-    }
 
+    }
+    
     /**
      * Reverse the migrations.
      *

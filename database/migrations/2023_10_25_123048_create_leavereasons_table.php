@@ -16,9 +16,9 @@ class CreateLeavereasonsTable extends Migration
         Schema::create('leavereasons', function (Blueprint $table) {
             $table->id();
             $table->string('leavingreason');
-            $table->string('leavingreason_code');
-            $table->string('detail');
-            $table->string('status');
+            $table->string('leavingreason_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

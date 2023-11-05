@@ -15,7 +15,10 @@ class CreateSubleavingreasonsTable extends Migration
     {
         Schema::create('subleavingreasons', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('subleavingreason');
+            $table->string('subleavingreason_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

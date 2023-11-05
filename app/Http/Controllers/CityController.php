@@ -9,7 +9,7 @@ class CityController extends Controller
 {
     public function index()
     {
-        $cities = City::latest()->paginate(15);
+        $cities = City::latest()->paginate();
         return view('generalsetup.city.index',compact('cities'))->with(request()->input('page'));
     }
     
@@ -28,10 +28,17 @@ class CityController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'city'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        City::create($request->all());
+        City::create([
+            'city' => request()->get('city'),
+            'city_code' => request()->get('city_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('city.index')->with('success','Manage successfully');

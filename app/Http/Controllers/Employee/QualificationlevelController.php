@@ -15,7 +15,7 @@ class QualificationlevelController extends Controller
      */
     public function index()
     {
-        $qualificationlevels = Qualificationlevel::latest()->paginate(3);
+        $qualificationlevels = Qualificationlevel::latest()->paginate();
         return view('employee.qualificationlevel.index',compact('qualificationlevels'))->with(request()->input('page'));
     }
 
@@ -39,10 +39,17 @@ class QualificationlevelController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'qualificationlevel'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Qualificationlevel::create($request->all());
+        Qualificationlevel::create([
+            'qualificationlevel' => request()->get('qualificationlevel'),
+            'qualificationlevel_code' => request()->get('qualificationlevel_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('qualificationlevel.index')->with('success','Record Created successfully  successfully ');
     }

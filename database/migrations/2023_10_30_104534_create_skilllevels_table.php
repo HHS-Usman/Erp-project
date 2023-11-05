@@ -15,7 +15,10 @@ class CreateSkilllevelsTable extends Migration
     {
         Schema::create('skilllevels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('skilllevel');
+            $table->string('skilllevel_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

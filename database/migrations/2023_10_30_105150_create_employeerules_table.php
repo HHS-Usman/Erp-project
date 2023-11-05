@@ -15,7 +15,10 @@ class CreateEmployeerulesTable extends Migration
     {
         Schema::create('employeerules', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('employeerule');
+            $table->string('employeerule_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

@@ -15,7 +15,10 @@ class CreateGazetedholidaysTable extends Migration
     {
         Schema::create('gazetedholidays', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('gazetedholiday');
+            $table->string('gazetedholiday_code')->nullable();
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

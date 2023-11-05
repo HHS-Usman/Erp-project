@@ -15,7 +15,10 @@ class CreateCitizenshipsTable extends Migration
     {
         Schema::create('citizenships', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('citizenship');
+            $table->string('citizenship_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

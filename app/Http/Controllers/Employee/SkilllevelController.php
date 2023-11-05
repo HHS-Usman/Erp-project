@@ -10,7 +10,7 @@ class SkilllevelController extends Controller
 {
     public function index()
     {
-        $skilllevels = Skilllevel::latest()->paginate(3);
+        $skilllevels = Skilllevel::latest()->paginate();
         return view('employee.skilllevel.index',compact('skilllevels'))->with(request()->input('page'));
     }
 
@@ -34,10 +34,17 @@ class SkilllevelController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'skilllevel'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Skilllevel::create($request->all());
+        Skilllevel::create([
+            'skilllevel' => request()->get('skilllevel'),
+            'skilllevel_code' => request()->get('skilllevel_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('skilllevel.index')->with('success','Record Created successfully ');
     }

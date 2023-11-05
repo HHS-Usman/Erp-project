@@ -1,19 +1,11 @@
 @extends('layout.master')
 @section('page-tab')
     Create Employee
-@endsection
+@endsection    
 @section('content')
 
-  <section id="main" class="main " style="padding-top: 0vh;">
-        <div class="pagetitle">
-            <h1>Add Employee Catagory</h1>
-            <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('employees.create') }}"> Create</a></li>
-            </ol>
-            </nav>
-        </div>
+  <section id="main" class="main" style="padding-top: 0vh;">
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -24,23 +16,49 @@
                 </ul>
             </div>
         @endif
-        <div class="form-container">
-            <link rel="stylesheet" href="/as/style.css">
+            <div class="pagetitle" style="margin-left: 20px;">
+                <h1>Create Employee</h1>
+                <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active"><a> Create Employee</a></li>
+                </ol>
+                </nav>
+            </div>
+            <br><br><br>
             <form action="{{ route('employees.store') }}" method="POST">        
-      @csrf
-      <div class="row justify-content-center">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                @csrf
+                    <div class="row justify-content-center">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <strong>Employee Code</strong>
+                                <input type="text" name="employee_code" id="employee_code" class="form-control" placeholder="Employee Code">
+                            </div>
+                            <div class="form-group">
+                                <strong>Employee<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="employee" id="employee" class="form-control" placeholder="Employee" required>
+                            </div>
+                            <div class="form-group">
+                                <strong>Details</strong>
+                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                                Active
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+            </form>
         </div>
-     </form>
-        </div>
+        <br><br><br>
+        <br>
+        <br>
+        <div><br> </div>
+        
   </section> 
 
 @endsection    

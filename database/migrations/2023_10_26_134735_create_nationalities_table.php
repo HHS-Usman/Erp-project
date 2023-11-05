@@ -15,7 +15,10 @@ class CreateNationalitiesTable extends Migration
     {
         Schema::create('nationalities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nationality');
+            $table->string('nationality_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

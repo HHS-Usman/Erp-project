@@ -10,7 +10,7 @@ class CountryController extends Controller
   
     public function index()
     {
-        $countries = Country::latest()->paginate(15);
+        $countries = Country::latest()->paginate();
         return view('generalsetup.country.index',compact('countries'))->with(request()->input('page'));
     }
     
@@ -29,10 +29,17 @@ class CountryController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'country'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Country::create($request->all());
+        Country::create([
+            'country' => request()->get('country'),
+            'country_code' => request()->get('country_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('country.index')->with('success','Manage successfully');

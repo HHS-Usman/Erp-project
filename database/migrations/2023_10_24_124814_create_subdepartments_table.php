@@ -15,7 +15,10 @@ class CreateSubdepartmentsTable extends Migration
     {
         Schema::create('subdepartments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('subdepartment');
+            $table->string('subdepartment_code')->nullable();
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

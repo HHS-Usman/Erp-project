@@ -9,7 +9,7 @@ class PaymentController extends Controller
 {
     public function index()
     {  
-         $paymentterms = Paymentterm::latest()->paginate(15);
+         $paymentterms = Paymentterm::latest()->paginate();
         return view('generalsetup.paymentterm.index',compact('paymentterms'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class PaymentController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'paymentterm' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Paymentterm::create($request->all());
+        Paymentterm::create([ 
+            'paymentterm' => request()->get('paymentterm'),
+            'paymentterm_code' => request()->get('paymentterm_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('paymentterm.index')->with('success','Manage successfully');

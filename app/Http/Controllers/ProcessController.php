@@ -9,7 +9,7 @@ class ProcessController extends Controller
 {
     public function index()
     {
-        $processes = Process::latest()->paginate(15);
+        $processes = Process::latest()->paginate();
         return view('generalsetup.process.index',compact('processes'))->with(request()->input('page'));
     }
     
@@ -28,10 +28,16 @@ class ProcessController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'process' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Process::create($request->all());
+        Process::create([
+            'process' => request()->get('process'),
+            'process_code' => request()->get('process_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('process.index')->with('success','Manage successfully');

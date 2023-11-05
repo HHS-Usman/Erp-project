@@ -120,6 +120,14 @@
 
                 <!-- Template Main JS File -->
                 <script src="/asset/js/main.js"></script> 
+                <script>
+                    $(document).ready(function() {
+                        $('.dataTable-top').DataTable({
+                            "dom": '"dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>' // Custom layout without the search box
+                        });
+                    });
+
+                </script>
                 <br><br>
              
     </section>

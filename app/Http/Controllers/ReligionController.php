@@ -9,7 +9,7 @@ class ReligionController extends Controller
 {
     public function index()
     {  
-         $religions = Religion::latest()->paginate(15);
+         $religions = Religion::latest()->paginate();
         return view('organizationsetup.religion.index',compact('religions'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class ReligionController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'religion' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Religion::create($request->all());
+        Religion::create([
+            'religion' => request()->get('religion'),
+            'religion_code' => request()->get('religion_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('religion.index')->with('success','Record inserted  successfully');

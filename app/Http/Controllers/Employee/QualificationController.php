@@ -15,7 +15,7 @@ class QualificationController extends Controller
      */
     public function index()
     {
-        $qualifications = Qualification::latest()->paginate(3);
+        $qualifications = Qualification::latest()->paginate();
         return view('employee.qualification.index',compact('qualifications'))->with(request()->input('page'));
     }
 
@@ -39,10 +39,17 @@ class QualificationController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'qualification'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Qualification::create($request->all());
+        Qualification::create([
+            'qualification' => request()->get('qualification'),
+            'qualification_code' => request()->get('qualification_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('qualification.index')->with('success','Record Created successfully  successfully ');
     }

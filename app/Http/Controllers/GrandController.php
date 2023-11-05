@@ -14,7 +14,7 @@ class GrandController extends Controller
      */
     public function index()
     {
-        $grands = Grand::latest()->paginate(3);
+        $grands = Grand::latest()->paginate();
         return view('organizationsetup.grand.index',compact('grands'))->with(request()->input('page'));
     }
 
@@ -39,7 +39,7 @@ class GrandController extends Controller
          // validate the input
          $request->validate([
             'grade'=>'required',
-            
+            'is_active' => 'integer|in:0,1'
 
         ]);
         //create a new product in database
@@ -47,7 +47,7 @@ class GrandController extends Controller
         'grade' => request()->get('grade'),
         'grade_code' => request()->get('grade_code'),
         'detail' => request()->get('detail'),
-        'status' => 'DEACTIVE', 
+        'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
         return redirect()->route('grand.index')->with('success','Grand made  successfully ');
