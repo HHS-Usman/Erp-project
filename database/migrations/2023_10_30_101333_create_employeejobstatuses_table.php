@@ -15,7 +15,10 @@ class CreateEmployeejobstatusesTable extends Migration
     {
         Schema::create('employeejobstatuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('employeejobstatus');
+            $table->string('employeejobstatus_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

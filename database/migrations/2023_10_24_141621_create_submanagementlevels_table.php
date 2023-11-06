@@ -15,7 +15,10 @@ class CreateSubmanagementlevelsTable extends Migration
     {
         Schema::create('submanagementlevels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('submanagementlevel');
+            $table->string('submanagementlevel_code')->nullable();
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

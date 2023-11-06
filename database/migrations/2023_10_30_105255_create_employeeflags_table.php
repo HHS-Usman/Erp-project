@@ -15,7 +15,10 @@ class CreateEmployeeflagsTable extends Migration
     {
         Schema::create('employeeflags', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('employeeflag');
+            $table->string('employeeflag_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

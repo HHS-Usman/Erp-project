@@ -15,7 +15,10 @@ class CreateCostcentersTable extends Migration
     {
         Schema::create('costcenters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('costcenter_code')->nullable();
+            $table->string('costcenter');
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

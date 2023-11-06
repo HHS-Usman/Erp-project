@@ -15,7 +15,10 @@ class CreateCastsTable extends Migration
     {
         Schema::create('casts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('cast');
+            $table->string('cast_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

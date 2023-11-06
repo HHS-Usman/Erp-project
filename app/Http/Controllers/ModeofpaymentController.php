@@ -9,7 +9,7 @@ class ModeofpaymentController extends Controller
 {
     public function index()
     {  
-         $modeofpayments = Modeofpayment::latest()->paginate(15);
+         $modeofpayments = Modeofpayment::latest()->paginate();
         return view('generalsetup.modeofpayment.index',compact('modeofpayments'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,17 @@ class ModeofpaymentController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'modeofpayment' =>'required',
+            'is_active' => 'integer|in:0,1'
+
         ]);
         //create a new product in database
-        Modeofpayment::create($request->all());
+        Modeofpayment::create([
+            'modeofpayment' => request()->get('modeofpayment'),
+            'modeofpayment_code' => request()->get('modeofpayment_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('modeofpayment.index')->with('success','Manage successfully');

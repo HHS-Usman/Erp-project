@@ -10,7 +10,7 @@ class EmployeeruleController extends Controller
 {
     public function index()
     {
-        $employeerules = Employeerule::latest()->paginate(3);
+        $employeerules = Employeerule::latest()->paginate();
         return view('employee.employeerule.index',compact('employeerules'))->with(request()->input('page'));
     }
 
@@ -34,10 +34,17 @@ class EmployeeruleController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'employeerule'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Employeerule::create($request->all());
+        Employeerule::create([
+            'employeerule' => request()->get('employeerule'),
+            'employeerule_code' => request()->get('employeerule_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('employeerule.index')->with('success','Record Created successfully ');
     }

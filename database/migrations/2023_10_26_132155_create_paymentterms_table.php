@@ -15,7 +15,10 @@ class CreatePaymenttermsTable extends Migration
     {
         Schema::create('paymentterms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('paymentterm');
+            $table->string('paymentterm_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

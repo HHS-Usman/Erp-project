@@ -9,7 +9,7 @@ class MangementlevelController extends Controller
 {
     public function index()
     {  
-         $managementlevels = Managementlevel::latest()->paginate(15);
+         $managementlevels = Managementlevel::latest()->paginate();
         return view('organizationsetup.managementlevel.index',compact('managementlevels'))->with(request()->input('page'));
     }
     public function create()
@@ -28,14 +28,15 @@ class MangementlevelController extends Controller
         // validate the input
         $request->validate([
             'managementlevel'=>'required',
-            
+            'is_active' => 'integer|in:0,1'
+
         ]);
         //create a new product in database
-        Managementlevel::create([
+        managementlevel::create([
             'managementlevel' => request()->get('managementlevel'),
             'managementlevel_code' => request()->get('managementlevel_code'),
             'detail' => request()->get('detail'),
-            'status' => 'DEACTIVE', 
+            'is_active' => request()->get('is_active', 0),
         ]);
 
         //redirect the user and send friendly message

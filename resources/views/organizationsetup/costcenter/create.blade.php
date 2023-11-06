@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
     Create Cost Center
-@endsection
+@endsection    
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
@@ -16,24 +16,38 @@
                 </ul>
             </div>
         @endif
-        <div class="form-container">
-            <link rel="stylesheet" href="/as/style.css">
-            <h2>Cost Center</h2>
-            <nav>
+            <div class="pagetitle" style="margin-left: 30px;">
+                <h1>Create Cost center </h1>
+                <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a>Create</a></li>
+                    <li class="breadcrumb-item active"><a> Create Cost Center </a></li>
                 </ol>
-            </nav>
+                </nav>
+            </div>
             <br><br><br>
             <form action="{{ route('costcenter.store') }}" method="POST">        
       @csrf
-      <div class="row justify-content-center">
-        <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="row justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <strong>Costcenter<span style="color:#DC3545">*</span></strong>
+                    <input type="text" name="costcenter" id="costcenter" class="form-control" placeholder="Costcenter" required>
                 </div>
+                <div class="form-group">
+                    <strong>Costcenter Code</strong>
+                    <input type="text" name="costcenter_code" id="costcenter_code" class="form-control" placeholder="Costcenter Code">
+                </div>
+                
+                <div class="form-group">
+                    <strong>Details</strong>
+                    <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                      Active
+                    </label>
+                  </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -41,7 +55,11 @@
         </div>
      </form>
         </div>
-  </section>
-  
+        <br><br><br>
+        <br>
+        <br>
+        <div><br> </div>
+        
+  </section> 
 
 @endsection    

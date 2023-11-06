@@ -10,7 +10,7 @@ class CostcenterController extends Controller
 {
     public function index()
         {  
-             $costcenters = Costcenter::latest()->paginate(15);
+             $costcenters = Costcenter::latest()->paginate();
             return view('organizationsetup.costcenter.index',compact('costcenters'))->with(request()->input('page'));
         }
         public function create()
@@ -28,10 +28,17 @@ class CostcenterController extends Controller
         {
             // validate the input
             $request->validate([
-                'name'=>'required',
-            ]);
-            //create a new product in database
-            Costcenter::create($request->all());
+                'costcenter'=>'required',
+                'is_active' => 'integer|in:0,1'
+            
+        ]);
+        //create a new product in database
+        Costcenter::create([
+            'costcenter' => request()->get('costcenter'),
+            'costcenter_code' => request()->get('costcenter_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
     
             //redirect the user and send friendly message
             return redirect()->route('costcenter.index')->with('success','Record inserted  successfully');

@@ -15,7 +15,7 @@ class EmployeejobstatusController extends Controller
      */
     public function index()
     {
-        $employeejobs = Employeejobstatus::latest()->paginate(3);
+        $employeejobs = Employeejobstatus::latest()->paginate();
         return view('employee.employeejobstatus.index',compact('employeejobs'))->with(request()->input('page'));
     }
 
@@ -39,10 +39,17 @@ class EmployeejobstatusController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'employeejobstatus'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Employeejobstatus::create($request->all());
+        Employeejobstatus::create([
+            'employeejobstatus' => request()->get('employeejobstatus'),
+            'employeejobstatus_code' => request()->get('employeejobstatus_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('employeejobstatus.index')->with('success','Record Created successfully  successfully ');
     }

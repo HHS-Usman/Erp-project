@@ -1,85 +1,136 @@
 @extends('layout.master')
 @section('page-tab')
- Manage Grade
-@endsection
+    Manage Grade
+@endsection    
 @section('content')
-<section id="main" class="main" style="padding-top: 0vh;">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 
 
-  <link href="/asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/asset/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/asset/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="/asset/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="/asset/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/asset/vendor/simple-datatables/style.css" rel="stylesheet">
-  <!-- Recent Sales -->
-              <div class="pagetitle">
-                  <h1>Grade</h1>
-                  <nav>
-                  <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                      <li class="breadcrumb-item active"><a href="{{ route('group.index') }}"> Manage Grade</a></li>
-                  </ol>
-                  </nav>
+  
+    <section id="main" class="main" style="padding-top: 0vh;">
+        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+            
+      <div class="pagetitle" style="margin-left: 20px;">
+          <h1>Manage Grade</h1>
+          <nav>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item active"><a> Manage Grade</a></li>
+          </ol>
+          </nav>
+      </div>
+                  
+                    
+      <div style="background-color: lightgray;opacity: 0.9; height='20px'; ">
+        <ul class="nav nav-tabs" id="myTabs">
+          <li class="nav-item">
+            <a class="nav-link " data-bs-toggle="tab"></a>
+          </li>
+        </ul>
+      </div>
+      <div style=" left:0px; top:170px;z-index: -1; width: 100%;">
+        <div class="tab-content" id="myTabContent">
+          
+                          
+                          <!-- Tab content will be dynamically added here -->
+                        </div>
+                      </div>
+                    
+                      
+                                                  
+                {{-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+          
+
+                </ul> --}}
+                
+                 
+              
+              <div class="row justify-content-center" >
+                <div class="card-body">  
+                  <table class="table table-border datatable " style="border: 1px solid black">
+                    <thead>
+                      <tr >
+                        <th scope="col">S.no</th>
+                        <th scope="col">Grade_id</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Grade Code</th>
+                        <th scope="col">Detail</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($grands as $grade =>$item )
+                      <tr>
+                        <th >{{ $grade + 1 }}</a></th>
+                        <th >{{ $item->id }}</a></th>
+                        <td>{{ $item->grade }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->grade_code }}</td>
+                        <td>{{ $item ->detail }}</td>
+                        <td>@if($item->is_active)
+                                <p>Active</p>
+                            @else
+                                <p>INActive</p>
+                            @endif
+                        </td>
+                        <td><form action="" method="POST">
+                          <a class="btn btn-info" href="">Show</a>
+                          <a class="btn btn-primary" href="">Edit</a>
+                          
+                          <button  class="btn btn-danger">Delete</button>
+                      </form></td>
+                      </tr>
+                      @endforeach 
+                      
+                    </tbody>
+                  </table>
+                </div>  
               </div>
-              @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif      
-            <div class="row justify-content-center" style="border: 1px solid rgb(122, 122, 122); width:100%;padding:10px">
-              <div class="col-xs-8 col-sm-8 col-md-10">
-                <div class="card-body">
+              
+                
+              
+          
+              
+           
+              <!-- End Recent Sales -->
+            
+                {{ $grands->links() }} 
+                <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
+                <script src="/asset/vendor/chart.js/chart.umd.js"></script>
+                <script src="/asset/vendor/echarts/echarts.min.js"></script>
+                <script src="/asset/vendor/quill/quill.min.js"></script>
+                <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
+                <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
+                <script src="/asset/vendor/php-email-form/validate.js"></script>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <div class="card-body">
-      <table class="table ">
-        <tr>
-          <th>S.No</th>
-          <th>Grade</th>
-          <th>Grade Code</th>
-          <th>Detail</th>
-          <th width="280px">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        @foreach ($grands as $group)
-          <tr>
-            <td>{{ $group->id }}</td>
-            <td>{{ $group->grade }}</td>
-            <td>{{ $group->grade_code }}</td>
-            <td>{{ $group->detail }}</td>
-            <td><a class="btn btn-primary" href="">Edit</a>
-              <a class="btn btn-success" href="">Action</a></td>
-          </tr>
-        @endforeach  
-        </tbody>
-      </table>
-    </div>
-    <div class="d-flex justify-content-between align-items-center" style=" margin: auto;
-    width: 50%;">
-      <button type="button" class="btn btn-warning">Previous</button>
-      <button type="button" class="btn btn-warning">Next</button>
-    </div>
+                <!-- Template Main JS File -->
+                <script src="/asset/js/main.js"></script> 
+                <script>
+                    $(document).ready(function() {
+                        $('.dataTable').DataTable({
+                            "dom": '"dom": '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>' // Custom layout without the search box
+                        });
+                    });
 
-    </div>
-  </div>
-
-
-  <!-- Vendor JS Files -->
-  <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="/asset/vendor/chart.js/chart.umd.js"></script>
-  <script src="/asset/vendor/echarts/echarts.min.js"></script>
-  <script src="/asset/vendor/quill/quill.min.js"></script>
-  <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
-  <script src="/asset/vendor/php-email-form/validate.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="/asset/js/main.js"></script>
-</section>  
+                </script>
+                <br><br>
+             
+    </section>
+   
+   
 @endsection

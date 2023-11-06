@@ -9,7 +9,7 @@ class SubleavingreasonController extends Controller
 {
     public function index()
     {  
-         $subleavingreasons = Subleavingreason::latest()->paginate(15);
+         $subleavingreasons = Subleavingreason::latest()->paginate();
         return view('organizationsetup.subleavingreason.index',compact('subleavingreasons'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class SubleavingreasonController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'subleavingreason' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Subleavingreason::create($request->all());
+        Subleavingreason::create([
+            'subleavingreason' => request()->get('subleavingreason'),
+            'subleavingreason_code' => request()->get('subleavingreason_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('subleavingreason.index')->with('success','Record inserted  successfully');

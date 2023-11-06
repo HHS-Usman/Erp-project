@@ -9,7 +9,7 @@ class UsergroupController extends Controller
 {
     public function index()
     {  
-         $usergroups = Usergroup::latest()->paginate(15);
+         $usergroups = Usergroup::latest()->paginate();
         return view('generalsetup.usergroup.index',compact('usergroups'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class UsergroupController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'usergroup' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Usergroup::create($request->all());
+        Usergroup::create([
+            'usergroup' => request()->get('usergroup'),
+            'usergroup_code' => request()->get('usergroup_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('usergroup.index')->with('success','Manage successfully');

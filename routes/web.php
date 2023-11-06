@@ -34,6 +34,8 @@ use App\Http\Controllers\Employee\SkilllevelController;
 use App\Http\Controllers\Employee\QualificationlevelController;
 use App\Http\Controllers\Employee\QualificationController;
 use App\Http\Controllers\Employee\EmployeejobstatusController;
+use App\Http\Controllers\CalendarController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +94,6 @@ Route::resource('skilllevel',SkilllevelController::class);
 Route::resource('employeejobstatus',EmployeejobstatusController::class);
 Route::resource('qualification',QualificationController::class);
 Route::resource('qualificationlevel',QualificationlevelController::class);
-
+Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('calender');
 
 });

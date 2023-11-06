@@ -9,7 +9,7 @@ class LanguageController extends Controller
 {
     public function index()
     {  
-         $languages = Language::latest()->paginate(15);
+         $languages = Language::latest()->paginate();
         return view('organizationsetup.language.index',compact('languages'))->with(request()->input('page'));
     }
     public function create()
@@ -27,10 +27,16 @@ class LanguageController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'language'=>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Language::create($request->all());
+        Language::create([
+        'language' => request()->get('language'),
+        'language_code' => request()->get('language_code'),
+        'detail' => request()->get('detail'),
+        'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('language.index')->with('success','Record inserted  successfully');

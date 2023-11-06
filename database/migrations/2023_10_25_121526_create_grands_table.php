@@ -16,9 +16,9 @@ class CreateGrandsTable extends Migration
         Schema::create('grands', function (Blueprint $table) {
             $table->id();
             $table->string('grade');
-            $table->string('grade_code');
-            $table->string('detail');
-            $table->string('status');
+            $table->string('grade_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

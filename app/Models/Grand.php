@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Grand extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $guarded = [
         'id',
     ];
 }

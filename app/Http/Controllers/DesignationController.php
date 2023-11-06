@@ -14,7 +14,7 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        $designations = Designation::latest()->paginate(3);
+        $designations = Designation::latest()->paginate();
         return view('organizationsetup.designation.index',compact('designations'))->with(request()->input('page'));
     }
 
@@ -39,14 +39,14 @@ class DesignationController extends Controller
         // validate the input
         $request->validate([
             'designation'=>'required',
-            
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
         Designation::create([
             'designation' => request()->get('designation'),
             'designation_code' => request()->get('designation_code'),
             'detail' => request()->get('detail'),
-            'status' => 'DEACTIVE', 
+            'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
         return redirect()->route('designation.index')->with('success','Designation made  successfully ');

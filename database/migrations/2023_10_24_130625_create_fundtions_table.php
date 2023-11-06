@@ -16,9 +16,9 @@ class CreateFundtionsTable extends Migration
         Schema::create('fundtions', function (Blueprint $table) {
             $table->id();
             $table->string('function');
-            $table->string('function_code');
-            $table->string('detail');
-            $table->string('status', 10);
+            $table->string('function_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

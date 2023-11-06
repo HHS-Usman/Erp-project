@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
-    <div class="pagetitle">
+    <div class="pagetitle" style="margin-left: 20px;">
         <h1>Dashboard</h1>
         <nav>
         <ol class="breadcrumb">

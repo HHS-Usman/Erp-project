@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Paymentterm extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
+    protected $guarded = [
+        'id',
     ];
 }

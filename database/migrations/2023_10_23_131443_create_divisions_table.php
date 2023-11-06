@@ -18,12 +18,13 @@ class CreateDivisionsTable extends Migration
             $table->string('division');
             $table->string('division_code')->nullable();
             $table->text('detail')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->string('status', 10);
+            $table->boolean('is_active')->default(true)->nullable();
+            $table->string('status', 10)->nullable();
             $table->timestamps();
         });
-    }
 
+    }
+    
     /**
      * Reverse the migrations.
      *

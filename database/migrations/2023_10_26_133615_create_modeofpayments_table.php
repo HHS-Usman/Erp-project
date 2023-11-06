@@ -15,7 +15,10 @@ class CreateModeofpaymentsTable extends Migration
     {
         Schema::create('modeofpayments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('modeofpayment');
+            $table->string('modeofpayment_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

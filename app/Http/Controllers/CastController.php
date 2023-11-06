@@ -9,7 +9,7 @@ class CastController extends Controller
 {
     public function index()
     {
-        $casts = Cast::latest()->paginate(15);
+        $casts = Cast::latest()->paginate();
         return view('generalsetup.cast.index',compact('casts'))->with(request()->input('page'));
     }
     
@@ -28,10 +28,17 @@ class CastController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'cast'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Cast::create($request->all());
+        Cast::create([
+            'cast' => request()->get('cast'),
+            'cast_code' => request()->get('cast_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('cast.index')->with('success','Manage successfully');

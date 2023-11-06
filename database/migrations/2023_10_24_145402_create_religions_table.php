@@ -15,7 +15,10 @@ class CreateReligionsTable extends Migration
     {
         Schema::create('religions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('religion_code')->nullable();
+            $table->string('religion');
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

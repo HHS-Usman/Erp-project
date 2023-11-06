@@ -9,7 +9,7 @@ class NationalityController extends Controller
 {
     public function index()
     {
-        $nationalities = Nationality::latest()->paginate(15);
+        $nationalities = Nationality::latest()->paginate();
         return view('generalsetup.nationality.index',compact('nationalities'))->with(request()->input('page'));
     }
     
@@ -28,10 +28,16 @@ class NationalityController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'nationality' =>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Nationality::create($request->all());
+        Nationality::create([
+            'nationality' => request()->get('nationality'),
+            'nationality_code' => request()->get('nationality_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('nationality.index')->with('success','Manage successfully');

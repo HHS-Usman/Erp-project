@@ -14,7 +14,7 @@ class EmpController extends Controller
      */
     public function index()
     {
-        $employes = Employee::latest()->paginate(3);
+        $employes = Employee::latest()->paginate();
         return view('organizationsetup.employe.index',compact('employes'))->with(request()->input('page'));
     }
 
@@ -38,10 +38,16 @@ class EmpController extends Controller
     {
         // validate the input
         $request->validate([
-            'name'=>'required',
+            'employee'=>'required',
+            'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Employee::create($request->all());
+        Employee::create([
+            'employee' => request()->get('employee'),
+            'employee_code' => request()->get('employee_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+        ]);
 
         //redirect the user and send friendly message
         return redirect()->route('employees.index')->with('success','Employee Created  successfully ');

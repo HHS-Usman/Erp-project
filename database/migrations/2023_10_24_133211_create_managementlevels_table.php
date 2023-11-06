@@ -16,9 +16,9 @@ class CreateManagementlevelsTable extends Migration
         Schema::create('managementlevels', function (Blueprint $table) {
             $table->id();
             $table->string('managementlevel');
-            $table->string('managementlevel_code');
-            $table->string('detail');
-            $table->string('status');
+            $table->string('managementlevel_code')->nullable();
+            $table->text('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

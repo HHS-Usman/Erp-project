@@ -15,7 +15,7 @@ class EmployeeflagController extends Controller
      */
     public function index()
     {
-        $employeeflags = Employeeflag::latest()->paginate(3);
+        $employeeflags = Employeeflag::latest()->paginate();
         return view('employee.employeeflag.index',compact('employeeflags'))->with(request()->input('page'));
     }
 
@@ -39,10 +39,17 @@ class EmployeeflagController extends Controller
     {
          // validate the input
          $request->validate([
-            'name'=>'required',
+            'employeeflag'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
         ]);
         //create a new product in database
-        Employeeflag::create($request->all());
+        Employeeflag::create([
+            'employeeflag' => request()->get('employeeflag'),
+            'employeeflag_code' => request()->get('employeeflag_code'),
+            'detail' => request()->get('detail', ),
+            'is_active' => request()->get('is_active', 0),
+        ]);
         //redirect the user and send friendly message
         return redirect()->route('employeeflag.index')->with('success','Record Created successfully ');
     }

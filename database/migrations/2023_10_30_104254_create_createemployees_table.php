@@ -15,7 +15,10 @@ class CreateCreateemployeesTable extends Migration
     {
         Schema::create('createemployees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('weekoffday');
+            $table->string('weekoffday_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }
