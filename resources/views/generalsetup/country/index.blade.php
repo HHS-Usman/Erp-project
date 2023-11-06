@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $countries + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->countries }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->countries_code }}</td>
+                        <td>{{ $item->country }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->country_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

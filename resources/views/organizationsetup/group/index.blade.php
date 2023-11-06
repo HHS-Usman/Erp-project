@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $group + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$group }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$group_code }}</td>
+                        <td>{{ $item->group }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->group_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

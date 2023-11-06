@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $grade + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$grade }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$grade_code }}</td>
+                        <td>{{ $item->grade }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->grade_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

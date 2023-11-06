@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $weekoffday + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$weekoffday }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$weekoffday_code }}</td>
+                        <td>{{ $item->weekoffday }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->weekoffday_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

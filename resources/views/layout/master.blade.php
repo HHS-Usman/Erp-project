@@ -773,6 +773,22 @@
       margin-top: -1px;
     }
 </style>
-  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const myTable = new simpleDatatables.DataTable("#myTable", {
+          paging: true,
+          perPage: 10, // Set your desired number of items per page
+          // Add other DataTable options as needed
+      });
+
+      // Link the top and bottom pagination containers
+      myTable.on("datatable.sort", () => {
+          const topPagination = document.querySelector("#topPagination");
+          const bottomPagination = document.querySelector("#bottomPagination");
+          bottomPagination.innerHTML = topPagination.innerHTML;
+      });
+  });
+
+</script>
 </body>
 </html>

@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $submanagementlevel + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$submanagementlevel }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$submanagementlevel_code }}</td>
+                        <td>{{ $item->submanagementlevel }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->submanagementlevel_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

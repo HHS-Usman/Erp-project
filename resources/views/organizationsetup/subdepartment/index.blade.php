@@ -76,7 +76,7 @@
                       <tr>
                         <th >{{ $subdepartment + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$subdepartment }}</td>
+                        <td>{{ $item->subdepartment }}</td>
                         <td><a  class="datatable-sorter"></a>{{ $item->subdepartment_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
