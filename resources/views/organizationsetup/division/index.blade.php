@@ -80,11 +80,12 @@
                         <td>{{ $item->division }}</td>
                         <td><a  class="datatable-sorter"></a>{{ $item->division_code }}</td>
                         <td>{{ $item ->detail }}</td>
-                        <td><form action="" method="POST">
-                          <a>Active</a>
-              
-                          
-                      </form></td>
+                        <td>@if($item->is_active)
+                                <p>Active</p>
+                            @else
+                                <p>INActive</p>
+                            @endif
+                        </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
                           <a class="btn btn-primary" href="">Edit</a>

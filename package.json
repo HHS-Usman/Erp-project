@@ -23,5 +23,9 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "tailwindcss": "^3.1.0"
+    },
+    "dependencies": {
+        "@fullcalendar/daygrid": "^6.1.9",
+        "fullcalendar": "^6.1.9"
     }
 }

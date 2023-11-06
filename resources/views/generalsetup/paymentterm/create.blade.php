@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Payment Term Code</strong>
-                                <input type="text" name="paymentterm _code" id="paymentterm _code" class="form-control" placeholder="Payment Term Code">
+                                <input type="text" name="paymentterm_code" id="paymentterm_code" class="form-control" placeholder="Payment Term Code">
                             </div>
                             <div class="form-group">
                                 <strong>Payment Term<span style="color:#DC3545">*</span></strong>

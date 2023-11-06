@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Mode Of Payment Code</strong>
-                                <input type="text" name="modeofpayment _code" id="modeofpayment _code" class="form-control" placeholder="Mode Of Payment Code">
+                                <input type="text" name="modeofpayment_code" id="modeofpayment_code" class="form-control" placeholder="Mode Of Payment Code">
                             </div>
                             <div class="form-group">
                                 <strong>Mode Of Payment<span style="color:#DC3545">*</span></strong>

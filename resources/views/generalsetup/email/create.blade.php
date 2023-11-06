@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Email Code</strong>
-                                <input type="text" name="email _code" id="email _code" class="form-control" placeholder="Email Code">
+                                <input type="text" name="email_code" id="email_code" class="form-control" placeholder="Email Code">
                             </div>
                             <div class="form-group">
                                 <strong>Email<span style="color:#DC3545">*</span></strong>

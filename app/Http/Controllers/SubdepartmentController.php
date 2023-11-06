@@ -31,7 +31,7 @@ class SubdepartmentController extends Controller
             'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        subdepartment::create([
+        Subdepartment::create([
             'subdepartment' => request()->get('subdepartment'),
             'subdepartment_code' => request()->get('subdepartment_code'),
             'detail' => request()->get('detail'),

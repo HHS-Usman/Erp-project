@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Details</strong>
-                    <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                    <input type="type" name="detail" id="detail" class="form-control" placeholder="Detail">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>

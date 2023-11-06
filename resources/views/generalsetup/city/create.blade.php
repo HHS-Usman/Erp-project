@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>City Code</strong>
-                                <input type="text" name="city _code" id="city _code" class="form-control" placeholder="City Code">
+                                <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City Code">
                             </div>
                             <div class="form-group">
                                 <strong>City<span style="color:#DC3545">*</span></strong>

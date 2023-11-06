@@ -77,7 +77,7 @@
                         <th >{{ $subdepartment + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
                         <td>{{ $item->$subdepartment }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$subdepartment_code }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->subdepartment_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>
@@ -90,10 +90,11 @@
                           <a class="btn btn-primary" href="">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
-                      </form></td>
+                          </form>
+                        </td>
                       </tr>
                       @endforeach 
-                      
+                      <br><br><br><br><br>br
                     </tbody>
                   </table>
                 </div>  

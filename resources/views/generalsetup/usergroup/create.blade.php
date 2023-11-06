@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>User Group Code</strong>
-                                <input type="text" name="usergroup _code" id="usergroup _code" class="form-control" placeholder="User Group Code">
+                                <input type="text" name="usergroup_code" id="usergroup_code" class="form-control" placeholder="User Group Code">
                             </div>
                             <div class="form-group">
                                 <strong>User Group<span style="color:#DC3545">*</span></strong>

@@ -13,6 +13,11 @@
   <link href="/assets/img/favicon.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Include FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
+
+  <!-- Include FullCalendar JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js"></script>
   <!--end cdn for tabs data -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -743,7 +748,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  
+  @stack('scripts')
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   <script>

@@ -63,7 +63,7 @@
                     <thead>
                       <tr >
                         <th scope="col">S.no</th>
-                        <th scope="col">Cast_id</th>
+                        <th scope="col">Country_id</th>
                         <th scope="col">Country</th>
                         <th scope="col">Country Code</th>
                         <th scope="col">Detail</th>
@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $countries + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->$countries }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->$countries_code }}</td>
+                        <td>{{ $item->countries }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->countries_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

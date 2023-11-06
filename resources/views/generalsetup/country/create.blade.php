@@ -32,7 +32,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Country Code</strong>
-                                <input type="text" name="country _code" id="country _code" class="form-control" placeholder="Country Code">
+                                <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country Code">
                             </div>
                             <div class="form-group">
                                 <strong>Country<span style="color:#DC3545">*</span></strong>
