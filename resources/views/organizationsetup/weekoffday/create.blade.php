@@ -26,39 +26,119 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('weekoffday.store') }}" method="POST">        
-                @csrf
-                    <div class="row justify-content-center">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
-                                <strong>Week Off Day Code</strong>
-                                <input type="text" name="weekoffday_code" id="weekoffday_code" class="form-control" placeholder="Week Off Day Code">
-                            </div>
-                            <div class="form-group">
-                                <strong>Week Off Day<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="weekoffday" id="weekoffday" class="form-control" placeholder="Week Off Day" required>
-                            </div>
-                            <div class="form-group">
-                                <strong>Details</strong>
-                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                                Active
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-            </form>
-        </div>
+            <div class="d-flex justify-content-center">
+                <table class="table table-bordered col-4" style="border: 1px solid black">
+                  <thead>
+                    <tr>
+                        <th colspan="2">Regular weekly basis</th>
+                        <th colspan="4">Monthly Week Wise</th>
+                    </tr>
+                    <tr>
+                      <th scope="col" >Days</th>
+                      <th scope="col">Selection</th>
+                      <th scope="col">1st Week</th>
+                      <th scope="col">2nd Week</th>
+                      <th scope="col">3rd Week</th>
+                      <th scope="col">4th Week</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    <tr>
+                      <td>Sunday</td>
+                      <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                    </tr>
+                    <tr>
+                      <td>Monday</td>
+                      <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      </tr>
+                      <tr>
+                        <td>Wednesday</td>
+                        <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      </tr>
+                      <tr>
+                        <td>Thursday</td>
+                        <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      </tr>
+                      <tr>
+                        <td>Friday</td>
+                        <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      </tr>
+                      <tr>
+                        <td>Saturday</td>
+                        <th><input type="checkbox" name="checkbox1" id="checkbox1"></th>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                        <td><input type="checkbox" name="checkbox1" id="checkbox1"></td>
+                      </tr>  
+                  </tbody>
+                  
+                </table>
+                
+                <div class="" style="">
+                    <ul style="list-style:none; width:100%;height:auto; border:1px solid rgb(144, 78, 78)">
+                        <li style="margin:20px"><button type="button" class="btn btn-primary p-3 px-5" >Regular weekly basis</button></li>
+                        <li style="margin:20px"><button type="button" class="btn btn-primary p-3 px-5" style="padding:0px 25px 0px 25px">Monthly Week Wise</button></li>
+                        <li style="margin:20px"><button type="button" class="btn btn-primary p-3 px-5" style="padding:0px 25px 0px 25px">Monthly Day  Wise</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="container">
+                    <div class="calendar"></div>
+                   
+                </div>
+                <script>
+                    $('.calendar').calendar({
+                        startFromSunday: true,
+                    });
+                </script>
+            </div>
+        
         <br><br><br>
         <br>
         <br>
         <div><br> </div>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <!-- Project Files -->
+        <link rel="stylesheet" href="/as/jquery.bootstrap.year.calendar.css">
+        <script src="/as/jquery.bootstrap.year.calendar.js"></script>
   </section> 
 
 @endsection    
