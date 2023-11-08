@@ -26,7 +26,7 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('grand.store') }}" method="POST">        
+            <form action="{{ route('grade.store') }}" method="POST">        
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">

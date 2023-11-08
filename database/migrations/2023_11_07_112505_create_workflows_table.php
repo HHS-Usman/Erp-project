@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGrandsTable extends Migration
+class CreateWorkflowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateGrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('grands', function (Blueprint $table) {
+        Schema::create('workflows', function (Blueprint $table) {
             $table->id();
-            $table->string('grade');
-            $table->string('grade_code')->nullable();
+            $table->string('workflow');
+            $table->string('workflow_code')->nullable();
             $table->string('detail')->nullable();
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateGrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grands');
+        Schema::dropIfExists('workflows');
     }
 }

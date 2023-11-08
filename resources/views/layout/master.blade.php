@@ -149,59 +149,61 @@
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Organization Setup</a>
                         <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
-                              <li><a class="dropdown-item" href="{{ route('division.create')}}">Create Division</a></li>
-                              <li><a class="dropdown-item" href="{{ route('division.index')}}">Manage Division</a></li>
-
-                              <li><a class="dropdown-item" href="{{ route('department.create')}}">Create Deparrtment</a></li>
-                              <li><a class="dropdown-item" href="{{ route('department.index')}}">Manage Department</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('division.create')}}">Create Division</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('division.index')}}">Manage Division</a></li>
+          
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('department.create')}}">Create Deparrtment</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('department.index')}}">Manage Department</a></li>
                          
-                              <li><a class="dropdown-item" href="{{ route('subdepartment.create')}}">Create Sub Department</a></li>
-                              <li><a class="dropdown-item" href="{{ route('subdepartment.index')}}">Manage Sub Department</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('subdepartment.create')}}">Create Sub Department Level</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('subdepartment.index')}}">Manage Sub Department Level</a></li>
                              
-                              <li><a class="dropdown-item" href="{{ route('function.create')}}">Create Function</a></li>
-                              <li><a class="dropdown-item" href="{{ route('function.index')}}">Manage Function</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('function.create')}}">Create Function</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('function.index')}}">Manage Function</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('management.create')}}">Create Management</a></li>
-                              <li><a class="dropdown-item" href="{{ route('management.index')}}">Manage Management</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('management.create')}}">Create Management Level</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('management.index')}}">Manage Management Level</a></li>
                               
                          
-                              <li><a class="dropdown-item" href="{{ route('submanagement.create')}}">Create Sub Management</a></li>
-                              <li><a class="dropdown-item" href="{{ route('submanagement.index')}}">Manage Sub Management</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('submanagement.create')}}">Create Sub Management</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('submanagement.index')}}">Manage Sub Management</a></li>
                                 
                         
-                              <li><a class="dropdown-item" href="{{ route('gazetedholiday.create')}}">Create Gazeted Holidays</a></li>
-                              <li><a class="dropdown-item" href="{{ route('gazetedholiday.index')}}">Manage Gazeted Holidays</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('gazetedholiday.create')}}">Create Gazeted Holidays</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('gazetedholiday.index')}}">Manage Gazeted Holidays</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('costcenter.create')}}">Create Cost Center</a></li>
-                              <li><a class="dropdown-item" href="{{ route('costcenter.index')}}">Manage Cost Center</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('costcenter.create')}}">Create Cost Center</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('costcenter.index')}}">Manage Cost Center</a></li>
                            
-                              <li><a class="dropdown-item" href="{{ route('language.create')}}">Create Language</a></li>
-                              <li><a class="dropdown-item" href="{{ route('language.index')}}">Manage Language</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('language.create')}}">Create Language</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('language.index')}}">Manage Language</a></li>
                             
-                              <li><a class="dropdown-item" href="{{ route('religion.create')}}">Create Religion</a></li>
-                              <li><a class="dropdown-item" href="{{ route('religion.index')}}">Manage Religion</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('religion.create')}}">Create Religion</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('religion.index')}}">Manage Religion</a></li>
                             
                           
-                              <li><a class="dropdown-item" href="{{ route('employees.create')}}">Create Employees</a></li>
-                              <li><a class="dropdown-item" href="{{ route('employees.index')}}">Manage Employees</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.create')}}">Create Employees</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.index')}}">Manage Employees</a></li>
                             
                         
-                              <li><a class="dropdown-item" href="{{ route('designation.create')}}">Create Designation</a></li>
-                              <li><a class="dropdown-item" href="{{ route('designation.index')}}">Manage Designation</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('designation.create')}}">Create Designation</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('designation.index')}}">Manage Designation</a></li>
                         
-                              <li><a class="dropdown-item" href="{{ route('group.create')}}">Create Group</a></li>
-                              <li><a class="dropdown-item" href="{{ route('group.index')}}">Manage Group</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('group.create')}}">Create Group</a></li>
+                              <li class="p-0" ><a class="dropdown-item" href="{{ route('group.index')}}">Manage Group</a></li>
                             
-                              <li><a class="dropdown-item" href="{{ route('grand.create')}}">Create Grand</a></li>
-                              <li><a class="dropdown-item" href="{{ route('grand.index')}}">Manage Grand</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('grade.create')}}">Create Grade</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('grade.index')}}">Manage Grade</a></li>
                             
-                              <li><a class="dropdown-item" href="{{ route('leavereson.create')}}">Create Leaving Reason</a></li>
-                              <li><a class="dropdown-item" href="{{ route('leavereson.index')}}">Manage Leaving Reason</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('leavereson.create')}}">Create Leaving Reason</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('leavereson.index')}}">Manage Leaving Reason</a></li>
                           
-                              <li><a class="dropdown-item" href="{{ route('subleavingreason.create')}}">Create Sub Leaving Reason</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('subleavingreason.create')}}">Create Sub Leaving Reason</a></li>
                              
-                              <li><a class="dropdown-item" href="{{ route('weekoffday.create')}}">Create Week Off days</a></li>
-                              <li><a class="dropdown-item" href="{{ route('weekoffday.index')}}">Manage Week Off days</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('weekoffday.create')}}">Create Week Off days</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('weekoffday.index')}}">Manage Week Off days</a></li>
+
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index')}}">Division Uploader</a></li>
                           
                         </ul>
                 </div>
@@ -209,37 +211,40 @@
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">General Setup</a>
                         <ul id="container" class="dropdown-menu dropdown-content">
-                              <li><a class="dropdown-item" href="{{ route('paymentterm.create')}}">Create Payment Term</a></li>
-                              <li><a class="dropdown-item" href="{{ route('paymentterm.index')}}">Manage Payment Term</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('paymentterm.create')}}">Create Payment Term</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('paymentterm.index')}}">Manage Payment Term</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('modeofpayment.create')}}">Create Mode Of Payment</a></li>
-                              <li><a class="dropdown-item" href="{{ route('modeofpayment.index')}}">Manage Mode Of Payment</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('modeofpayment.create')}}">Create Mode Of Payment</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('modeofpayment.index')}}">Manage Mode Of Payment</a></li>
                          
-                              <li><a class="dropdown-item" href="{{ route('email.create')}}">Create Email</a></li>
-                              <li><a class="dropdown-item" href="{{ route('email.index')}}">Manage Email</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('email.create')}}">Create Email</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('email.index')}}">Manage Email</a></li>
                              
-                              <li><a class="dropdown-item" href="{{ route('usergroup.create')}}">Create User Group</a></li>
-                              <li><a class="dropdown-item" href="{{ route('usergroup.index')}}">Manage User Group</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('usergroup.create')}}">Create User Group</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('usergroup.index')}}">Manage User Group</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('process.create')}}">Create Process</a></li>
-                              <li><a class="dropdown-item" href="{{ route('process.index')}}">Manage Process</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('workflowgroup.create')}}">Create Workflow Group</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('workflowgroup.index')}}">Manage Workflow Group</a></li>
+
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('process.create')}}">Create Process</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('process.index')}}">Manage Process</a></li>
                               
                          
-                              <li><a class="dropdown-item" href="{{ route('cast.create')}}">Create Cast</a></li>
-                              <li><a class="dropdown-item" href="{{ route('cast.index')}}">Manage Cast</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('cast.create')}}">Create Cast</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index')}}">Manage Cast</a></li>
                                 
                         
-                              <li><a class="dropdown-item" href="{{ route('country.create')}}">Create Country</a></li>
-                              <li><a class="dropdown-item" href="{{ route('country.index')}}">Manage Country</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('country.create')}}">Create Country</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('country.index')}}">Manage Country</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('citizenship.create')}}">Create Citizenship</a></li>
-                              <li><a class="dropdown-item" href="{{ route('citizenship.index')}}">Manage Citizenship</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('citizenship.create')}}">Create Citizenship</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('citizenship.index')}}">Manage Citizenship</a></li>
                            
-                              <li><a class="dropdown-item" href="{{ route('nationality.create')}}">Create Nationality</a></li>
-                              <li><a class="dropdown-item" href="{{ route('nationality.index')}}">Manage Nationality</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('nationality.create')}}">Create Nationality</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('nationality.index')}}">Manage Nationality</a></li>
                             
-                              <li><a class="dropdown-item" href="{{ route('city.create')}}">Create City</a></li>
-                              <li><a class="dropdown-item" href="{{ route('city.index')}}">Manage City</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('city.create')}}">Create City</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('city.index')}}">Manage City</a></li>
                             
                           
                         </ul>
@@ -248,24 +253,24 @@
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Employee</a>
                     <ul id="container" class="dropdown-menu dropdown-content">
-                              <li><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
-                              <li><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('employeerule.create')}}">Create Employee rule</a></li>
-                              <li><a class="dropdown-item" href="{{ route('employeerule.index')}}">Manage Employee rule</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeerule.create')}}">Create Employee rule</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeerule.index')}}">Manage Employee rule</a></li>
                          
-                              <li><a class="dropdown-item" href="{{ route('skilllevel.create')}}">Create Skill level</a></li>
-                              <li><a class="dropdown-item" href="{{ route('skilllevel.index')}}">Manage Skill level</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('skilllevel.create')}}">Create Skill level</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('skilllevel.index')}}">Manage Skill level</a></li>
                              
-                              <li><a class="dropdown-item" href="{{ route('employeejobstatus.create')}}">Create Employee job Status</a></li>
-                              <li><a class="dropdown-item" href="{{ route('employeejobstatus.index')}}">Manage Employee job Status</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeejobstatus.create')}}">Create Employee job Status</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employeejobstatus.index')}}">Manage Employee job Status</a></li>
 
-                              <li><a class="dropdown-item" href="{{ route('qualification.create')}}">Create Qualification</a></li>
-                              <li><a class="dropdown-item" href="{{ route('qualification.index')}}">Manage Qualification</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('qualification.create')}}">Create Qualification</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('qualification.index')}}">Manage Qualification</a></li>
                               
                          
-                              <li><a class="dropdown-item" href="{{ route('qualificationlevel.create')}}">Create Qualification Levels</a></li>
-                              <li><a class="dropdown-item" href="{{ route('qualificationlevel.index')}}">Manage Qualification Levels</a></li>  
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('qualificationlevel.create')}}">Create Qualification Level</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('qualificationlevel.index')}}">Manage Qualification Level</a></li>  
                         </ul>
                 </div>      
               </div>

@@ -72,7 +72,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($grands as $grade =>$item )
+                      @foreach ($grades as $grade =>$item )
                       <tr>
                         <th >{{ $grade + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
@@ -106,7 +106,7 @@
            
               <!-- End Recent Sales -->
             
-                {{ $grands->links() }} 
+                {{ $grades->links() }} 
                 <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/asset/vendor/chart.js/chart.umd.js"></script>
                 <script src="/asset/vendor/echarts/echarts.min.js"></script>

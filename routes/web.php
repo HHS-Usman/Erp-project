@@ -14,7 +14,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\GrandController;
+use App\Http\Controllers\GradController;
 use App\Http\Controllers\LeavereasonController;
 use App\Http\Controllers\SubleavingreasonController;
 use App\Http\Controllers\WeekoffdayController;
@@ -35,6 +35,11 @@ use App\Http\Controllers\Employee\QualificationlevelController;
 use App\Http\Controllers\Employee\QualificationController;
 use App\Http\Controllers\Employee\EmployeejobstatusController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\DivisionuploadController;
+use App\Http\Controllers\WorkflowController;
+use App\Http\Controllers\DivuploadController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +79,7 @@ Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);
 Route::resource('designation',DesignationController::class);
 Route::resource('group',GroupController::class);
-Route::resource('grand',GrandController::class);
+Route::resource('grade',GradController::class);
 Route::resource('leavereson',LeavereasonController::class);
 Route::resource('subleavingreason',SubleavingreasonController::class);
 Route::resource('weekoffday',WeekoffdayController::class);
@@ -94,6 +99,9 @@ Route::resource('skilllevel',SkilllevelController::class);
 Route::resource('employeejobstatus',EmployeejobstatusController::class);
 Route::resource('qualification',QualificationController::class);
 Route::resource('qualificationlevel',QualificationlevelController::class);
+Route::resource('workflowgroup',WorkflowController::class);
+Route::resource('divupload',DivuploadController::class);
+// Route::resource('uplaoder',DivisionuploadController::class);
+// Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('calender');
-
 });

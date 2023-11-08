@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Division;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use PDO;
+use PhpParser\Node\Stmt\Return_;
 
-class DivisionController extends Controller
+class DivuploadController extends Controller
 {
     public function index()
     {  
-        $divisions = Division::latest()->paginate();
-        return view('organizationsetup.division.index',compact('divisions'))->with(request()->input('page'));
+        Return view('organizationsetup.division.uploader');    
     }
     public function create()
     {
-        return view('organizationsetup.division.create');
-    }
-    public function uploader(){
-        return view('organizationsetup.division.uploader');
+       
     }
     /**
      * Store a newly created resource in storage.
@@ -28,21 +24,7 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        // validate the input
-        $request->validate([
-            'division'=>'required',
-            'is_active' => 'integer|in:0,1'
-        ]);
-        //create a new product in database
-        Division::create([
-            'division' => request()->get('division'),
-            'division_code' => request()->get('division_code'),
-            'detail' => request()->get('detail'),
-            'is_active' => request()->get('is_active', 0),
-        ]);
-
-        //redirect the user and send friendly message
-        return redirect()->route('division.index')->with('success','division made  successfully ');
+       
     }
 
     /**

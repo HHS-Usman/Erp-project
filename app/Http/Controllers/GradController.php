@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Grand;
+use App\Models\Grade;
 
-class GrandController extends Controller
+class GradController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class GrandController extends Controller
      */
     public function index()
     {
-        $grands = Grand::latest()->paginate();
-        return view('organizationsetup.grand.index',compact('grands'))->with(request()->input('page'));
+        $grades = Grade::latest()->paginate();
+        return view('organizationsetup.grade.index',compact('grades'))->with(request()->input('page'));
     }
 
     /**
@@ -25,7 +26,7 @@ class GrandController extends Controller
      */
     public function create()
     {
-        return view('organizationsetup.grand.create');
+        return view('organizationsetup.grade.create');
     }
 
     /**
@@ -42,15 +43,15 @@ class GrandController extends Controller
             'is_active' => 'integer|in:0,1'
 
         ]);
-        //create a new product in database
-        Grand::create([ 
-        'grade' => request()->get('grade'),
-        'grade_code' => request()->get('grade_code'),
-        'detail' => request()->get('detail'),
-        'is_active' => request()->get('is_active', 0),
-        ]);
-        //redirect the user and send friendly message
-        return redirect()->route('grand.index')->with('success','Grand made  successfully ');
+         //create a new product in database
+         Grade::create([ 
+            'grade' => request()->get('grade'),
+            'grade_code' => request()->get('grade_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            //redirect the user and send friendly message
+            return redirect()->route('grade.index')->with('success','Grade made  successfully ');
     }
 
     /**

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Workflow;
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use Symfony\Component\Console\Input\Input;
 
-class EmpController extends Controller
+class WorkflowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,10 @@ class EmpController extends Controller
      */
     public function index()
     {
-        $employes = Employee::latest()->paginate();
-        return view('organizationsetup.employe.index',compact('employes'))->with(request()->input('page'));
+        $workflows = Workflow::latest()->paginate();
+        return view('generalsetup.Workflowgroup.index',compact('workflows'))->with(request()->Input('page'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +27,7 @@ class EmpController extends Controller
      */
     public function create()
     {
-        return view('organizationsetup.employe.create');
+        return view('generalsetup.Workflowgroup.create');
     }
 
     /**
@@ -37,19 +40,19 @@ class EmpController extends Controller
     {
         // validate the input
         $request->validate([
-            'employee'=>'required',
+            'workflow'=>'required',
             'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Employee::create([
-            'employee' => request()->get('employee'),
-            'employee_code' => request()->get('employee_code'),
+        Workflow::create([
+            'workflow' => request()->get('workflow'),
+            'workflow_code' => request()->get('workflow_code'),
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
 
         //redirect the user and send friendly message
-        return redirect()->route('employees.index')->with('success','Employee Created  successfully ');
+        return redirect()->route('workflowgroup.index')->with('success','Employee Created  successfully ');
     }
 
     /**
