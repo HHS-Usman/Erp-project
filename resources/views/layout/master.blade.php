@@ -48,7 +48,7 @@
   <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="/as/jquery.bootstrap.year.calendar.css">
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -59,7 +59,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <!-- Project Files -->
-    <link rel="stylesheet" href="/as/jquery.bootstrap.year.calendar.css">
+    
     <script src="/as/jquery.bootstrap.year.calendar.js"></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
