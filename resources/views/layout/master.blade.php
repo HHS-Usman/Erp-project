@@ -213,7 +213,7 @@
                               <li class="p-0"><a class="dropdown-item" href="{{ route('weekoffday.create')}}">Create Week Off days</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('weekoffday.index')}}">Manage Week Off days</a></li>
 
-                              <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index')}}">Division Uploader</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index')}}"> Uploader</a></li>
                           
                         </ul>
                 </div>

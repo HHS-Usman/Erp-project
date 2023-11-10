@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Uploader Division
+    Uploader organization Setup
 @endsection    
 @section('content')
 
@@ -116,7 +116,7 @@
                             @csrf
                             <div class="file-upload ">
                                 <div>
-                                    <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('divisionupload') }}" download>Download</a>
                                 </div>
                                 <div class="select-dropdown">
                                     <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -179,7 +179,7 @@
                             @csrf
                             <div class="file-upload ">
                                 <div>
-                                    <a id="downloaddata" href="{{ asset('division/Department%20Template%20Uploader.xlsx') }}" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('download') }}" download>Download</a>
                                 </div>
                                 <div class="select-dropdown">
                                     <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -241,7 +241,7 @@
                             @csrf
                             <div class="file-upload ">
                                 <div>
-                                    <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('functionupload') }}" download>Download</a>
                                 </div>
                                 <div class="select-dropdown">
                                     <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -304,8 +304,8 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
-                                 </div>
+                                    <a id="downloaddata" href="{{ route('managelevelupload') }}" download>Download</a>
+                                     </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
                                          <option selected>None</option>
@@ -367,7 +367,7 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('designateupload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -429,7 +429,7 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('groupupload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -492,7 +492,7 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('gradpload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -555,7 +555,8 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    
+                                    <a id="downloaddata" href="{{ route('leavingreasonuoload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -616,8 +617,8 @@
                              </div>
                              @csrf
                              <div class="file-upload ">
-                                 <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                 <div>religionupoload
+                                    <a id="downloaddata" href="{{ route('languageupoload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -680,7 +681,7 @@
                              @csrf
                              <div class="file-upload ">
                                  <div>
-                                     <a id="downloaddata" href="./Department Template Uploader.xlsx" download>Download</a>
+                                    <a id="downloaddata" href="{{ route('religionupoload') }}" download>Download</a>
                                  </div>
                                  <div class="select-dropdown">
                                      <select id="selectiondata" class="form-select" aria-label="Default select example">
@@ -736,6 +737,26 @@
         <div><br> </div>
         {{-- this is script for checkbox check is checked one only at a time --}}
         <script>
+            // function is for downloadfile
+            function downloadfile(){
+                const filetype = document.getElementById('selectiondata').value;
+                let content, fileName;
+                if (fileType === 'csv') {
+                content = 'CSV file content here'; // Replace with your CSV content.
+                fileName = 'file.csv';
+            } else if (fileType === 'xlsx') {
+                content = 'Excel (XLSX) file content here'; // Replace with your Excel content.
+                fileName = 'file.xlsx';
+            } else {
+                alert('Please select a file type.');
+                return;
+            }
+            const blob = new Blob([content], { type: 'application/octet-stream' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            }
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach((checkbox) => {
                 checkbox.addEventListener('change', () => {
