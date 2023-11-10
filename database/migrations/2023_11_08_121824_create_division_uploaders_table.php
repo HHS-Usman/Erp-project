@@ -15,6 +15,9 @@ class CreateDivisionUploadersTable extends Migration
     {
         Schema::create('division_uploaders', function (Blueprint $table) {
             $table->id();
+            $table->string('filename');
+            $table->string('mime_type');
+            $table->binary('file_contents');
             $table->timestamps();
         });
     }

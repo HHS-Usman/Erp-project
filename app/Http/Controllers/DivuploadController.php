@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\Log;
+use App\Models\DivisionUploader;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class DivuploadController extends Controller
 {
@@ -73,7 +77,7 @@ class DivuploadController extends Controller
          $path = public_path('file/Religion_Templete_Uploader.xlsx');
          return response()->download($path);
       }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -82,9 +86,24 @@ class DivuploadController extends Controller
      */
     public function store(Request $request)
     {
-       
-    }
+   
+      if($request->key == 'Department')
+      {
+          if ($request->file('file')) {
+             
+              $file = Excel::toArray([], $request->file('file'));
+              $html ='';
+        
+              dd($file);
+      }
+  }
 
+      if($request->key == '')
+      {
+
+      }
+    }
+      
     /**
      * Display the specified resource.
      *

@@ -168,7 +168,6 @@
             {{-- this is second conatiner --}}
             <div class="col-sm-12 col-lg-4 main-container-uploader">
                 <!-- Main div -->
-                <form action="">
                     <div class="inner-container">
                         <!-- Inner main div -->
                         <div class="division-uploader">
@@ -176,16 +175,15 @@
                             <div>
                                 <h5>Upload Department</h5>
                             </div>
-                            @csrf
                             <div class="file-upload ">
                                 <div>
-                                    <a id="downloaddata" href="{{ route('download') }}" download>Download</a>
+                                    <a id="downloaddata" id="downloadLink" href="{{ route('deparmentuploader') }}" id="downloadButton" download>Download</a>
                                 </div>
-                                <div class="select-dropdown">
-                                    <select id="selectiondata" class="form-select" aria-label="Default select example">
+                                <div class="select-dropdown" id="downloadOption" name="download_option">
+                                    <select id="selectiondata" name="format" id="format" class="form-select" aria-label="Default select example">
                                         <option selected>None</option>
-                                        <option value="1">Csv</option>
-                                        <option value="2">Excel</option>
+                                        <option value="csv">Csv</option>
+                                        <option value="excel">Excel</option>
                                     </select>
                                 </div>
                             </div>
@@ -215,10 +213,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <form action="{{ route('fileuploade') }}"  method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="key" value="Department" id="Department">
                             <div id="fileupload">
-                                <input style="padding: 5px; font-size: 0.8rem;" type="file" class="form-control file-input"
+                                <input style="padding: 5px; font-size: 0.8rem;" name="file" type="file" class="form-control file-input"
                                     id="inputGroupFile"
-                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"  >
                             </div>
                         </div>
                     </div>
@@ -278,7 +279,7 @@
                                 </div>
                             </div>
                             <div id="fileupload">
-                                <input style="padding: 5px; font-size: 0.8rem;" type="file" class="form-control file-input"
+                                <input style="padding: 5px; font-size: 0.8rem;" type="file" name="file" class="form-control file-input"
                                     id="inputGroupFile"
                                     accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                             </div>
@@ -737,26 +738,6 @@
         <div><br> </div>
         {{-- this is script for checkbox check is checked one only at a time --}}
         <script>
-            // function is for downloadfile
-            function downloadfile(){
-                const filetype = document.getElementById('selectiondata').value;
-                let content, fileName;
-                if (fileType === 'csv') {
-                content = 'CSV file content here'; // Replace with your CSV content.
-                fileName = 'file.csv';
-            } else if (fileType === 'xlsx') {
-                content = 'Excel (XLSX) file content here'; // Replace with your Excel content.
-                fileName = 'file.xlsx';
-            } else {
-                alert('Please select a file type.');
-                return;
-            }
-            const blob = new Blob([content], { type: 'application/octet-stream' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = fileName;
-            link.click();
-            }
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach((checkbox) => {
                 checkbox.addEventListener('change', () => {

@@ -104,7 +104,7 @@ Route::resource('divupload',DivuploadController::class);
 // Route::resource('uplaoder',DivisionuploadController::class);
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
-Route::get('departmentupload',[DivuploadController::class ,'departmentupload'])->name('download');
+Route::get('deparmentuploader',[DivuploadController::class ,'departmentupload'])->name('deparmentuploader');
 Route::get('functionupload',[DivuploadController::class ,'functionuploader'])->name('functionupload');
 Route::get('divisionupload',[DivuploadController::class ,'divisionuploader'])->name('divisionupload');
 Route::get('managelevelupload',[DivuploadController::class ,'manageleveluploader'])->name('managelevelupload');
@@ -114,6 +114,7 @@ Route::get('groupupload',[DivuploadController::class ,'groupuploader'])->name('g
 Route::get('leavingreasonuoload',[DivuploadController::class ,'leavingreasonuoloader'])->name('leavingreasonuoload');
 Route::get('languageupoload',[DivuploadController::class ,'languageupoloader'])->name('languageupoload');
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
+Route::get('/download', 'DivuploadController@DivuploadController')->name('download');
+Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
+Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
 });
-// groupuploader
-// Route::get('download','App\Http\Controllers\DivuploadController@download');

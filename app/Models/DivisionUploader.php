@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 class DivisionUploader extends Model
 {
     use HasFactory;
+    protected $fillable = ['filename', 'mime_type', 'file_contents'];
 }
