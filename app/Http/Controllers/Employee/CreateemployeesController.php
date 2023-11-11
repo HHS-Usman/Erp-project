@@ -7,5 +7,6 @@ use Illuminate\Http\Request;
 
 class CreateemployeesController extends Controller
 {
-    //
+    // this is our creayeemploye controller
+    
 }
