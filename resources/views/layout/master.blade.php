@@ -191,11 +191,6 @@
                               <li class="p-0"><a class="dropdown-item" href="{{ route('religion.create')}}">Create Religion</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('religion.index')}}">Manage Religion</a></li>
                             
-                          
-                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.create')}}">Create Employees</a></li>
-                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.index')}}">Manage Employees</a></li>
-                            
-                        
                               <li class="p-0"><a class="dropdown-item" href="{{ route('designation.create')}}">Create Designation</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('designation.index')}}">Manage Designation</a></li>
                         
@@ -239,7 +234,6 @@
                               <li class="p-0"><a class="dropdown-item" href="{{ route('process.create')}}">Create Process</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('process.index')}}">Manage Process</a></li>
                               
-                         
                               <li class="p-0"><a class="dropdown-item" href="{{ route('cast.create')}}">Create Cast</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index')}}">Manage Cast</a></li>
                                 
@@ -263,6 +257,10 @@
                   <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Employee</a>
                     <ul id="container" class="dropdown-menu dropdown-content">
+
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.create')}}">Create Employees</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('employees.index')}}">Manage Employees</a></li>
+                    
                               <li class="p-0"><a class="dropdown-item" href="{{ route('employeeflag.create')}}">Create Employee Flag</a></li>
                               <li class="p-0"><a class="dropdown-item" href="{{ route('employeeflag.index')}}">Manage Employee Flag</a></li>
 

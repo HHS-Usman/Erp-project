@@ -105,7 +105,6 @@
                {{-- this is card 1 --}}
             <div class="col-sm-12 col-lg-4 main-container-uploader">
                 <!-- Main div -->
-                <form action="">
                     <div class="inner-container">
                         <!-- Inner main div -->
                         <div class="division-uploader">
@@ -113,7 +112,6 @@
                             <div>
                                 <h5>Upload Division</h5>
                             </div>
-                            @csrf
                             <div class="file-upload ">
                                 <div>
                                     <a id="downloaddata" href="{{ route('divisionupload') }}" download>Download</a>
@@ -152,17 +150,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="fileupload">
-                                <input style="padding: 5px; font-size: 0.8rem;" type="file" class="form-control file-input"
-                                    id="inputGroupFile"
-                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            <form action="{{ route('fileuploade') }}"  method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="key" value="Division" id="Division">
+                                <div id="fileupload">
+                                    <input style="padding: 5px; font-size: 0.8rem;" name="file" type="file" class="form-control file-input"
+                                        id="inputGroupFile"
+                                        accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"  >
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="upload-button">
-                        <input type="submit" value="Upload" class="btn btn-warning" style="position: relative; left: 40%;">
-                    </div>
-                </form>
+                        <div class="upload-button">
+                            <input type="submit" value="Upload" class="btn btn-warning" style="position: relative; left: 40%;">
+                        </div>
+                    </form>
             </div>
 
             {{-- this is second conatiner --}}
@@ -180,7 +181,7 @@
                                     <a id="downloaddata" id="downloadLink" href="{{ route('deparmentuploader') }}" id="downloadButton" download>Download</a>
                                 </div>
                                 <div class="select-dropdown" id="downloadOption" name="download_option">
-                                    <select id="selectiondata" name="format" id="format" class="form-select" aria-label="Default select example">
+                                    <select id="selectiondata" id="fileTypeDropdown" name="format" id="format" class="form-select" aria-label="Default select example">
                                         <option selected>None</option>
                                         <option value="csv">Csv</option>
                                         <option value="excel">Excel</option>

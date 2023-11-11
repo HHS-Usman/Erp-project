@@ -12,7 +12,9 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "league/csv": "^9.11",
+        "maatwebsite/excel": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

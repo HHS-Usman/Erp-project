@@ -8,7 +8,10 @@ use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Log;
 use App\Models\DivisionUploader;
 use Maatwebsite\Excel\Facades\Excel;
-
+use League\Csv\Reader;
+use App\Models\Department;
+use App\Models\Division;
+use Dflydev\DotAccessData\Data;
 
 class DivuploadController extends Controller
 {
@@ -87,21 +90,50 @@ class DivuploadController extends Controller
     public function store(Request $request)
     {
    
-      if($request->key == 'Department')
-      {
-          if ($request->file('file')) {
-             
-              $file = Excel::toArray([], $request->file('file'));
-              $html ='';
-        
-              dd($file);
+         if($request->key == 'Department')
+         {
+            if ($request->hasFile('file')) 
+            {
+               $file = $request->file('file');
+               $filePath = $file->store('csv_imports');
+               $csv = Reader::createFromPath(storage_path('app/'.$filePath), 'r');
+               $csv->setHeaderOffset(0);
+               $data = $csv->getRecords();
+            foreach($data as $value)
+            {
+               $department  = new Department;
+               $department->department = $value['Department'];
+               $department->department_code = $value['Deparmet Code'];
+               $department->detail = $value['Detail'];
+               $department->is_active = $value['Active '];
+               $department->save();
+            }
+            
+         }
       }
-  }
 
-      if($request->key == '')
+      if($request->key == 'Division')
       {
-
+      
+         if($request->hasFile('file')){
+            $file = $request->file('file');
+            $filePath = $file->store('csv_imports');
+            $csv = Reader::createFromPath(storage_path('app/'.$filePath), 'r');
+            $csv->setHeaderOffset(0);
+            $data = $csv->getRecords();
+            dd($data);
+            foreach($data as $value)
+            {
+               $division = new Division;
+               $division->division = $value['Division'];
+               $division->division_code = $value['Division Code'];
+               $division->detail = $value['Detail'];
+               $division->is_active = $value['Active '];
+               $division->save();
+            }
+         }
       }
+      return redirect()->route('divupload.index');
     }
       
     /**
