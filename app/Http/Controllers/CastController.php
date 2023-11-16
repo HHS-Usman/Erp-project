@@ -26,6 +26,7 @@ class CastController extends Controller
      */
     public function store(Request $request)
     {
+        
         // validate the input
         $request->validate([
             'cast'=>'required',

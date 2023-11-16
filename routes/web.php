@@ -105,13 +105,42 @@ Route::resource('divupload',DivuploadController::class);
 // Route::resource('uplaoder',DivisionuploadController::class);
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
+
+// for excel download file
 Route::get('deparmentuploader',[DivuploadController::class ,'departmentupload'])->name('deparmentuploader');
+// for csv download router
+Route::get('deparmentuploadercsv',[DivuploadController::class ,'departmentuploadcsv'])->name('deparmentuploadercsv');
+
+// for excel download file
 Route::get('functionupload',[DivuploadController::class ,'functionuploader'])->name('functionupload');
+// for csv download file
+Route::get('functionuploadcsv',[DivuploadController::class ,'functionuploadercsv'])->name('functionuploadcsv');
+
+// for excel download file
 Route::get('divisionupload',[DivuploadController::class ,'divisionuploader'])->name('divisionupload');
+// for csv download file
+Route::get('divisionuploadcsv',[DivuploadController::class ,'divisionuploadercsv'])->name('divisionuploadcsv');
+
+// for excel download file
 Route::get('managelevelupload',[DivuploadController::class ,'manageleveluploader'])->name('managelevelupload');
+// for csv download file
+Route::get('manageleveluploadcsv',[DivuploadController::class ,'manageleveluploadercsv'])->name('manageleveluploadcsv');
+
+// for excel download file
 Route::get('designateupload',[DivuploadController::class ,'designationuploader'])->name('designateupload');
+// for csv download file
+Route::get('designateuploadcsv',[DivuploadController::class ,'designationuploadercsv'])->name('designateuploadcsv');
+
+// for excel download file
 Route::get('gradpload',[DivuploadController::class ,'gradpuploader'])->name('gradpload');
+// for csv download file
+Route::get('gradploadcsv',[DivuploadController::class ,'gradpuploadercsv'])->name('gradploadcsv');
+
+// for excel download file
 Route::get('groupupload',[DivuploadController::class ,'groupuploader'])->name('groupupload');
+// for csv download file
+Route::get('groupuploadcsv',[DivuploadController::class ,'groupuploadercsv'])->name('groupuploadcsv');
+
 Route::get('leavingreasonuoload',[DivuploadController::class ,'leavingreasonuoloader'])->name('leavingreasonuoload');
 Route::get('languageupoload',[DivuploadController::class ,'languageupoloader'])->name('languageupoload');
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
