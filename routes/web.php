@@ -141,9 +141,21 @@ Route::get('groupupload',[DivuploadController::class ,'groupuploader'])->name('g
 // for csv download file
 Route::get('groupuploadcsv',[DivuploadController::class ,'groupuploadercsv'])->name('groupuploadcsv');
 
+// for excel download file
 Route::get('leavingreasonuoload',[DivuploadController::class ,'leavingreasonuoloader'])->name('leavingreasonuoload');
+// for csv download file
+Route::get('leavingreasonuoloadcsv',[DivuploadController::class ,'leavingreasonuoloadercsv'])->name('leavingreasonuoloadcsv');
+
+// for excel download file
 Route::get('languageupoload',[DivuploadController::class ,'languageupoloader'])->name('languageupoload');
+// for csv download file
+Route::get('languageupoloadcsv',[DivuploadController::class ,'languageupoloadercsv'])->name('languageupoloadcsv');
+
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
+Route::get('religionupoloadcsv',[DivuploadController::class ,'religionupoloadercsv'])->name('religionupoloadcsv');
+
+
+
 Route::get('/download', 'DivuploadController@DivuploadController')->name('download');
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
 Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
