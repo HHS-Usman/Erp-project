@@ -6,7 +6,7 @@
  * @author Piotr Zatorski
  */
 (function ($) {
-
+    
     var methods = {
         init: function (options) {
 
@@ -222,6 +222,8 @@
         minDayMessage: 'You can not choose day from past',
         boostrapVersion: 4,
         startFromSunday: false,
+        selectable: true,
+        selectableHelper: true,
         cols: 12,
         colsSm: 6,
         colsMd: 4,
@@ -294,7 +296,7 @@
             '</div>' +
             '</div>' +
             '<div class="jqyc-months mt-4">' +
-            '<div class="jqyc-month jqyc-jan" data-month="1" data-year="' + year + '"></div>' +
+            '<div class="jqyc-month jqyc-jan"  data-month="1" data-year="' + year + '"></div>' +
             '<div class="jqyc-month jqyc-feb" data-month="2" data-year="' + year + '"></div>' +
             '<div class="jqyc-month jqyc-mar" data-month="3" data-year="' + year + '"></div>' +
             '<div class="jqyc-month jqyc-apr" data-month="4" data-year="' + year + '"></div>' +
@@ -311,7 +313,7 @@
             var tableSkeleton = '<table class="table table-sm jqyc-table">' +
                 '<thead>' +
                 '<tr class="jqyc-tr jqyc-thead-tr">' +
-                '<th class="jqyc-th" scope="col">' + settings.l10n.su + '</th>' +
+                '<th class="jqyc-th" id="sunday" scope="col">' + settings.l10n.su + '</th>' +
                 '<th class="jqyc-th" scope="col">' + settings.l10n.mn + '</th>' +
                 '<th class="jqyc-th" scope="col">' + settings.l10n.tu + '</th>' +
                 '<th class="jqyc-th" scope="col">' + settings.l10n.we + '</th>' +
@@ -344,7 +346,7 @@
         var results = jqycGetMonthHTMLStringWithData(firstDayOfCurrentYear, 1, year, 31);
         var monthHTMLString = results.monthHTMLString;
         if (settings.showHeaders) {
-            $html.find('.jqyc-jan').append('<h5 class="jqyc-header">' + settings.l10n.jan + '</h5>');
+            $html.find('.jqyc-jan').append('<h5 id="january" class="jqyc-header">' + settings.l10n.jan + '</h5>');
         }
         $html.find('.jqyc-jan').append(tableSkeleton).find('tbody').append(monthHTMLString);
         var results = jqycGetMonthHTMLStringWithData(results.firstDayOfPreviousMonth, 2, year, daysOfFeb)
@@ -466,6 +468,7 @@
         var monthHTMLString = '';
         var d = 1;
         var i = 1;
+        
         while (d <= days) {
 
             if (i % 7 == 1) {
@@ -475,10 +478,20 @@
                 d--;
                 monthHTMLString = monthHTMLString + '<td class="jqyc-empty-td jqyc-td"></td>';
             } else {
+
+                var selectedDate = new Date(year, month - 1, d); // Month is 0-based, so subtract 1
+                // Get the day of the week (0 for Sunday, 1 for Monday, and so on)
+                var dayOfWeek = selectedDate.getDay();
+                // Array of day names
+                var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                // Return the day name
+               
                 monthHTMLString = monthHTMLString +
-                    '<td class="jqyc-not-empty-td jqyc-td jqyc-day-' + d
-                    + ' jqyc-day-of-' + month + '-month" data-month="' + month
-                    + '" data-day-of-month="' + d + '" data-year="' + year + '">' + d + ' </td>';
+                '<td  class="jqyc-not-empty-td jqyc-td jqyc-day-' + d +
+                month + '-month" data-month="' + month +
+                '" data-day-of-month="' + d + '" data-day-name="'+daysOfWeek[dayOfWeek]+'"data-year="' + year +
+                '" onclick="myFunction(this)">' + d + '</td>';
+            
             }
             if (i % 7 == 0) {
                 monthHTMLString = monthHTMLString + '</tr>'
@@ -614,7 +627,179 @@
             }
         }
     }
+    
+
+}(jQuery))
+function removeBy(instance)
+{
+
+}
+
+function removed(id,newclass) {
+    $('#rm' + id).remove();
+    $('.' + newclass).removeClass('selected');
+    console.log('.'+ newclass);
+    var dateElement = $('.selected[data-selected="' + id + '"]');
+    dateElement.toggleClass('selected unselected');
+    counter--;
+  
+}
 
 
-}(jQuery));
+var counter = 1;
+var number = 1;
+// function myFunction(value) {
+//     if (value.classList.contains('selected')) {
+//         value.classList.remove('selected');
+//     }
+
+//     var classes = Array.from(value.classList);
+//     console.log(classes[2]);
+//     console.log(value);
+
+//     var dayOfMonth = value.dataset.dayOfMonth;
+//     var monthName = value.dataset.month;
+//     var dayName = $(value).data('dayName');
+//     var yearName = value.dataset.year;
+
+//     // Fetch country data from the server
+//     fetch('/get-countries')
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             // Assuming data is an array of country objects with 'id' and 'country' properties
+//             var countrySelect = '<select  name="dates[' + counter + '][country]" id="country' + counter + '">';
+
+//             // Add an option to manually type and select a country
+//             countrySelect += '<option value="0">Type and Select</option>';
+
+//             data.forEach(country => {
+//                 countrySelect += '<option value="' + country.id + '">' + country.country + '</option>';
+//             });
+//             countrySelect += '</select>';
+
+//             var html = `<tr id="rm${counter}">
+//                 <td scope="col">${counter}</td>
+//                 <td scope="col"><input name="dates[${counter}][year]" value="${yearName}" type="text" id="month"></td>
+//                 <td scope="col"><input name="dates[${counter}][month]" value="${monthName}" type="text" id="month"></td>
+//                 <td scope="col"><input name="dates[${counter}][date]" value="${dayOfMonth}" type="text" id="date"></td>
+//                 <td scope="col"><input name="dates[${counter}][day]" value="${dayName}" type="text" id="day"></td>
+//                 <td scope="col">${countrySelect}</td>
+//                 <td scope="col">dgdsdfsfsd</td>
+//                 <td scope="col">sddfffs</td>
+//                 <td scope="col">Group</td>
+//                 <td scope="col"><button type="button" class="class btn btn-danger" onclick="removed(${counter},'${classes[2]}')">X</button></td>
+//             </tr>`;
+
+//             value.classList.toggle('selected');
+//             $(html).data('selected', counter).toggleClass('selected unselected');
+
+//             // Example: Store selected dates in an array
+//             var selectedDates = Array.from(document.getElementsByClassName('selected')).map(function (el) {
+//                 return el.dataset.dayOfMonth;
+//             });
+
+//             var monthdata = document.getElementById("test");
+//             var datedata = document.getElementById("test1");
+//             var daydata = document.getElementById("test2");
+//             var daysunday = document.getElementById("sunday");
+//             var dateinformation = document.getElementById("dayinfo");
+//             $('#my_test').append(html);
+//             counter++;
+//         })
+//         .catch(error => {
+//             console.error('Error fetching data:', error);
+//         });
+// }
+function myFunction(value) {
+    if (value.classList.contains('selected')) {
+        value.classList.remove('selected');
+    }
+
+    var classes = Array.from(value.classList);
+    console.log(classes[2]);
+    console.log(value);
+
+    var dayOfMonth = value.dataset.dayOfMonth;
+    var monthName = value.dataset.month;
+    var dayName = $(value).data('dayName');
+    var yearName = value.dataset.year;
+
+    // Define an array of endpoint URLs
+    var endpoints = ['/get-countries', '/get-religion', '/get-group'];
+
+    // Use Promise.all to fetch data from multiple endpoints simultaneously
+    Promise.all(endpoints.map(endpoint => fetch(endpoint)))
+        .then(responses => Promise.all(responses.map(response => response.json())))
+        .then(dataArray => {
+            // Assuming dataArray contains data from each endpoint
+            var countryData = dataArray[0];
+            var religionData = dataArray[1];
+            var groupData = dataArray[2];
+
+            // Use the fetched data to build your HTML
+            var countrySelect = '<select name="dates[' + counter + '][country]" id="country' + counter + '">';
+            countrySelect += '<option value="0">Type and Select</option>';
+            countryData.forEach(country => {
+                countrySelect += '<option value="' + country.id + '">' + country.country + '</option>';
+            });
+            countrySelect += '</select>';
+
+            var religionSelect = '<select name="religion[' + counter + '][religion]" id="religion' + counter + '">';
+            religionSelect += '<option value="0">Type and Select</option>';
+            religionData.forEach(religion => {
+                religionSelect += '<option value="' + religion.id + '">' + religion.religion + '</option>';
+            });
+            religionSelect += '</select>';
+
+            var groupSelect = '<select name="group[' + counter + '][group]" id="group' + counter + '">';
+            groupSelect += '<option value="0">Type and Select</option>';
+            groupData.forEach(group => {
+                groupSelect += '<option value="' + group.id + '">' + group.group + '</option>';
+            });
+            groupSelect += '</select>';
+            // Use otherData and anotherData as needed
+
+            var html = `<tr id="rm${counter}">
+                <td scope="col">${counter}</td>
+                <td scope="col"><input name="dates[${counter}][year]" value="${yearName}" type="text" id="month"></td>
+                <td scope="col"><input name="dates[${counter}][month]" value="${monthName}" type="text" id="month"></td>
+                <td scope="col"><input name="dates[${counter}][date]" value="${dayOfMonth}" type="text" id="date"></td>
+                <td scope="col"><input name="dates[${counter}][day]" value="${dayName}" type="text" id="day"></td>
+                <td scope="col">${countrySelect}</td>
+                <td scope="col">state</td>
+                <td scope="col">${religionSelect}</td>
+                <td scope="col">${groupSelect}</td>
+                <td scope="col"><button type="button" class="class btn btn-danger" onclick="removed(${counter},'${classes[2]}')">X</button></td>
+            </tr>`;
+
+            value.classList.toggle('selected');
+            $(html).data('selected', counter).toggleClass('selected unselected');
+
+            // Example: Store selected dates in an array
+            var selectedDates = Array.from(document.getElementsByClassName('selected')).map(function (el) {
+                return el.dataset.dayOfMonth;
+            });
+
+            var monthdata = document.getElementById("test");
+            var datedata = document.getElementById("test1");
+            var daydata = document.getElementById("test2");
+            var daysunday = document.getElementById("sunday");
+            var dateinformation = document.getElementById("dayinfo");
+            $('#my_test').append(html);
+            counter++;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+
+
+
+
 

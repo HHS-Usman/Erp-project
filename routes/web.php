@@ -38,6 +38,10 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DivisionuploadController;
 use App\Http\Controllers\WorkflowController;
 use App\Http\Controllers\DivuploadController;
+use App\Http\Controllers\MonthlydaywiseController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\StateController;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -94,6 +98,7 @@ Route::resource('country',CountryController::class);
 Route::resource('citizenship',CitizenshipController::class);
 Route::resource('nationality',NationalityController::class);
 Route::resource('city',CityController::class);
+Route::resource('state',StateController::class);
 Route::resource('employeeflag',EmployeeflagController::class);
 Route::resource('employeerule',EmployeeruleController::class);
 Route::resource('skilllevel',SkilllevelController::class);
@@ -102,6 +107,14 @@ Route::resource('qualification',QualificationController::class);
 Route::resource('qualificationlevel',QualificationlevelController::class);
 Route::resource('workflowgroup',WorkflowController::class);
 Route::resource('divupload',DivuploadController::class);
+Route::resource('event',EventController::class);
+Route::resource('monthlydaywise',MonthlydaywiseController::class);
+// for fetch record of DB in JS file
+Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);
+Route::get('/get-religion', [MonthlydaywiseController::class, 'getReligion']);
+Route::get('/get-group', [MonthlydaywiseController::class, 'getGroup']);
+Route::get('/get-state', [MonthlydaywiseController::class, 'getState']);
+
 // Route::resource('uplaoder',DivisionuploadController::class);
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
