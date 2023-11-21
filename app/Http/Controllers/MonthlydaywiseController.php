@@ -55,6 +55,7 @@ class MonthlydaywiseController extends Controller
                 'country' => $date['country'] ?? null,
                 'religion' => $date['religion'] ?? null,
                 'group' => $date['group'] ?? null,
+                'state' => $date['state'] ?? null,
                 // Add more columns as needed
             ]);
         }

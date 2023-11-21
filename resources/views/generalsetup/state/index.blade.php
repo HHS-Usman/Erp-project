@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Manage City
+    Manage State
 @endsection    
 @section('content')
  
@@ -20,17 +20,17 @@
         @endif
             
       <div class="pagetitle" style="margin-left: 20px;">
-          <h1>Manage City</h1>
+          <h1>Manage State</h1>
           <nav>
           <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active"><a> Manage City</a></li>
+              <li class="breadcrumb-item active"><a> Manage State</a></li>
           </ol>
           </nav>
       </div>
                   
                     
-      <div style="background-color: lightgray;opacity: 0.9; height='20px'; ">
+      <div style="background-color: lightgray;opaState: 0.9; height='20px'; ">
         <ul class="nav nav-tabs" id="myTabs">
           <li class="nav-item">
             <a class="nav-link " data-bs-toggle="tab"></a>
@@ -63,21 +63,21 @@
                     <thead>
                       <tr >
                         <th scope="col">S.no</th>
-                        <th scope="col">City_id</th>
-                        <th scope="col">City</th>
-                        <th scope="col">City Code</th>
+                        <th scope="col">State_id</th>
+                        <th scope="col">State</th>
+                        <th scope="col">State Code</th>
                         <th scope="col">Detail</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($cities as $city =>$item )
+                      @foreach ($states as $state =>$item )
                       <tr>
-                        <th >{{ $city + 1 }}</a></th>
+                        <th >{{ $state + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->city }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->city_code }}</td>
+                        <td>{{ $item->state }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->state_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

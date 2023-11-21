@@ -22,6 +22,7 @@ class CreateMonthlydaywisesTable extends Migration
             $table->string('country')->nullable();
             $table->string('religion')->nullable();
             $table->string('group')->nullable();
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }

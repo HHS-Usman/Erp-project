@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create City
+    Create State
 @endsection    
 @section('content')
 
@@ -17,26 +17,26 @@
             </div>
         @endif
             <div class="pagetitle" style="margin-left: 20px;">
-                <h1>Create City</h1>
+                <h1>Create State</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create City</a></li>
+                    <li class="breadcrumb-item active"><a> Create State</a></li>
                 </ol>
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('city.store') }}" method="POST">        
+            <form action="{{ route('state.store') }}" method="POST">        
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <strong>City Code</strong>
-                                <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City Code">
+                                <strong>State Code</strong>
+                                <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State Code">
                             </div>
                             <div class="form-group">
-                                <strong>City<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="city" id="city" class="form-control" placeholder="City" required>
+                                <strong>State<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="state" id="state" class="form-control" placeholder="State" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

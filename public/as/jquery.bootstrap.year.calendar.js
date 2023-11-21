@@ -730,7 +730,7 @@ function myFunction(value) {
     var yearName = value.dataset.year;
 
     // Define an array of endpoint URLs
-    var endpoints = ['/get-countries', '/get-religion', '/get-group'];
+    var endpoints = ['/get-countries', '/get-religion', '/get-group', '/get-state' ];
 
     // Use Promise.all to fetch data from multiple endpoints simultaneously
     Promise.all(endpoints.map(endpoint => fetch(endpoint)))
@@ -740,6 +740,7 @@ function myFunction(value) {
             var countryData = dataArray[0];
             var religionData = dataArray[1];
             var groupData = dataArray[2];
+            var stateData = dataArray[3];
 
             // Use the fetched data to build your HTML
             var countrySelect = '<select name="dates[' + counter + '][country]" id="country' + counter + '">';
@@ -762,6 +763,13 @@ function myFunction(value) {
                 groupSelect += '<option value="' + group.id + '">' + group.group + '</option>';
             });
             groupSelect += '</select>';
+
+            var stateSelect = '<select name="dates[' + counter + '][state]" id="state' + counter + '">';
+            stateSelect += '<option value="0">Type and Select</option>';
+            stateData.forEach(state => {
+                stateSelect += '<option value="' + state.id + '">' + state.state + '</option>';
+            });
+            stateSelect += '</select>';
             // Use otherData and anotherData as needed
 
             var html = `<tr id="rm${counter}">
@@ -771,7 +779,7 @@ function myFunction(value) {
                 <td scope="col"><input name="dates[${counter}][date]" value="${dayOfMonth}" type="text" id="date"></td>
                 <td scope="col"><input name="dates[${counter}][day]" value="${dayName}" type="text" id="day"></td>
                 <td scope="col">${countrySelect}</td>
-                <td scope="col">state</td>
+                <td scope="col">${stateSelect}</td>
                 <td scope="col">${religionSelect}</td>
                 <td scope="col">${groupSelect}</td>
                 <td scope="col"><button type="button" class="class btn btn-danger" onclick="removed(${counter},'${classes[2]}')">X</button></td>
