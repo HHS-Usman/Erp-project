@@ -13,6 +13,10 @@
   <link href="/assets/img/favicon.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <!-- Include FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
 
@@ -77,6 +81,8 @@
   {{-- </style> --}}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   {{-- <style>
     .list-group {
       max-height: 600px; /* Set a maximum height for the list */
@@ -355,7 +361,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">4</span>
+              <span class="badge bg-danger badge-number">4</span>
             </a><!-- End Notification Icon -->
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
               <li class="dropdown-header">
@@ -420,10 +426,41 @@
 
           <li class="nav-item dropdown">
 
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-chat-left-text"></i>
-              <span class="badge bg-success badge-number">3</span>
-            </a><!-- End Messages Icon -->
+            <a class="nav-link nav-icon " href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text "></i>
+              
+              <span class="badge bg-success badge-number ">3</span>
+              
+              <style>
+                .tooltip {
+                  position: relative;
+                  display: inline-block;
+                  border-bottom: 1px dotted black;
+                }
+                
+                 .tooltiptext {
+                  visibility: hidden;
+                  width: 120px;
+                  background-color: black;
+                  color: #fff;
+                  text-align: center;
+                  border-radius: 6px;
+                  padding: 5px 0;
+                  
+                  /* Position the tooltip */
+                  position: absolute;
+                  z-index: 1;
+                  top: 100%;
+                  left: 50%;
+                  margin-left: -60px;
+                }
+                
+                .tooltip:hover .tooltiptext {
+                  visibility: visible;
+                }
+              </style>  
+            </a>
+            <!-- End Messages Icon -->
 
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
               <li class="dropdown-header">
@@ -486,7 +523,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <span class="bi bi-shield"></span>
-              <span class="badge bg-primary badge-number">3</span>
+              <span class="badge badge-number" style="background-color: orange;">3</span>
             </a>
             
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
@@ -551,7 +588,36 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-journal-bookmark"></i>
-              <span class="badge bg-success badge-number">3</span>
+              <span class="badge badge-number" style="background-color: #30D5C8;">3</span>
+              <span class="tooltiptext">Tooltip text</span>
+              <style>
+                .tooltip {
+                  position: relative;
+                  display: inline-block;
+                  border-bottom: 1px dotted black;
+                }
+                
+                .tooltip .tooltiptext {
+                  
+                  width: 120px;
+                  background-color: black;
+                  color: #fff;
+                  text-align: center;
+                  border-radius: 6px;
+                  padding: 5px 0;
+                  
+                  /* Position the tooltip */
+                  position: absolute;
+                  z-index: 1;
+                  top: 100%;
+                  left: 50%;
+                  margin-left: -60px;
+                }
+                
+                .tooltip:hover .tooltiptext {
+                  visibility: visible;
+                }
+                </style>                          
             </a>
             
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">

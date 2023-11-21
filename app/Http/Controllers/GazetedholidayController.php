@@ -26,18 +26,23 @@ class GazetedholidayController extends Controller
         public function store(Request $request)
         {
             // validate the input
-            $request->validate([
-                'gazetedholiday'=>'required',
-                'is_active' => 'integer|in:0,1'
-            ]);
-            //create a new product in database
-            Gazetedholiday::create([
-                'gazetedholiday' => request()->get('gazetedholiday'),
-                'gazetedholiday_code' => request()->get('gazetedholiday_code'),
-                'detail' => request()->get('detail'),
-                'is_active' => request()->get('is_active', 0),
-            ]);
+            $dates = $request->input('dates');
+
+            if (!is_array($dates)) {
+                // Handle the case where $dates is not an array
+                // You can log or return an error response
+            }
     
+            foreach ($dates as $date) {
+                Monthlydaywise::create([
+                    'year' => $date['year'] ?? null,
+                    'month' => $date['month'] ?? null,
+                    'date' => $date['date'] ?? null, // Check if 'date' is the correct key
+                    'day' => $date['day'] ?? null,
+                    'event' => $date['event'] ?? null,
+                    
+                ]);
+            }
             //redirect the user and send friendly message
             return redirect()->route('gazetedholiday.index')->with('success','Record inserted  successfully');
         }

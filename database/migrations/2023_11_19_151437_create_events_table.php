@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGazetedholidaysTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateGazetedholidaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('gazetedholidays', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('year')->nullable();
-            $table->string('month')->nullable();
-            $table->string('date')->nullable();
-            $table->string('day')->nullable();
+            $table->string('event');
+            $table->string('event_code')->nullable();
+            $table->string('detail')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateGazetedholidaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gazetedholidays');
+        Schema::dropIfExists('events');
     }
 }
