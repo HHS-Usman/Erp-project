@@ -198,7 +198,7 @@
                     
                     </table>
                   </div>
-                  
+                  <button type="submit"> btn daba</button>
                  </form> 
                 </div>  
               </div>  
@@ -393,7 +393,7 @@
                   $(document).ready(function () {
                       $('#submitButton').on('click', function () {
                           // Check if form1 is enabled before submitting
-                          if ($('#myDiv').hasClass('disabled-div')) {
+                          if ($('#myDiv').hasClass('!disabled-div')) {
                               $('#form2').submit();
                           } else {
                               $('#form1').submit();
