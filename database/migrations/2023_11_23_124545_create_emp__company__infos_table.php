@@ -38,7 +38,7 @@ class CreateEmpCompanyInfosTable extends Migration
             $table->string('leaving_reason')->nullable();
             $table->string('leaving_date')->nullable();
             $table->string('approval_level')->nullable();
-            $table->string('additionale_approval')->nullable();
+            $table->string('additional_approval')->nullable();
             $table->string('approver')->nullable();
             $table->string('user_group')->nullable();
             $table->string('worklflow_group')->nullable();

@@ -14,7 +14,16 @@ use App\Models\Qualificationlevel;
 use App\Models\Skill;
 use App\Models\Skilllevel;
 use App\Models\Area;
-
+use App\Models\Designation;
+use App\Models\Division;
+use App\Models\Department;
+use App\Models\Grade;
+use App\Models\Group;
+use App\Models\Fundtion;
+use App\Models\Managementlevel;
+use App\Models\Submanagementlevel;
+use App\Models\Employeejobstatus;
+use Illuminate\Support\Facades\DB;
 class EmpController extends Controller
 {
     /**
@@ -44,8 +53,8 @@ class EmpController extends Controller
         $skills = Skill::all();
         $skilllevels = Skilllevel::all();
         $areas = Area::all();
-        
-        return view('organizationsetup.employe.create', compact('countries', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 'areas'));
+        $nextId = DB::table('employees')->max('id') + 1;
+        return view('organizationsetup.employe.create', compact('countries', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 'areas', 'nextId'));
     }
  
     /**
@@ -58,6 +67,7 @@ class EmpController extends Controller
     {
         // validate the input
         $request->validate([
+            'employee_code' => 'nullable',
             'employee_name'=>'required',
             'cnic'=>'required',
             'mobile_no'=>'required',
@@ -65,7 +75,7 @@ class EmpController extends Controller
             'emp_status' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        $yourModel = Employee::create([
+        Employee::create([
             'employee_code' => request()->get('employee_code'),
             'employee_name' => request()->get('employee_name'),
             'father_name' => request()->get('father_name'),
@@ -95,10 +105,9 @@ class EmpController extends Controller
             'skilllevel' => request()->get('skilllevel'),
             'emp_status' => request()->get('is_active', 0),
         ]);
-        
-        $nextId = DB::getPdo()->lastInsertId() + 1;
+
         //redirect the user and send friendly message
-        return redirect()->route('employees.index')->with('nextId', $nextId)->with('success', 'Employee created successfully');
+        return redirect()->route('employees.index')->with('success','Employee Created  successfully ');
     }
 
     /**

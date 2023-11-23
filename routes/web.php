@@ -41,6 +41,7 @@ use App\Http\Controllers\DivuploadController;
 use App\Http\Controllers\MonthlydaywiseController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\Emp_Company_Info_Controller;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -94,6 +95,7 @@ Route::resource('email',EmailController::class);
 Route::resource('usergroup',UsergroupController::class);
 Route::resource('process',ProcessController::class);
 Route::resource('cast',CastController::class);
+Route::resource('company_info',Emp_Company_Info_Controller::class);
 Route::resource('country',CountryController::class);
 Route::resource('citizenship',CitizenshipController::class);
 Route::resource('nationality',NationalityController::class);

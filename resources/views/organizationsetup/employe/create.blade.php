@@ -117,21 +117,25 @@
                 <form class="w-100" action="{{ route('employees.store') }}" method="POST">
                   @csrf
                   <div class="container d-flex justify-content-center align-items-center">
+                    
                       <div class="form-group">
                         <label for="Employee">Employee Code</label>
-                        <input type="text" class="form-control" name="employee_code" id="employee_code" placeholder="Employee Code" required/>
+                        <input type="text" name="employee_code" value="{{ $nextId }}" readonly>
+
+                        
                       </div>
                       <div class="form-group">
                         <label for="Employee">Employee Code</label>
-                        <input type="text" name="last_inserted_id" value="{{ $lastInsertedId }}" readonly>
+                        <input type="text" class="form-control" name="employee_code" id="employee_code" placeholder="Employee Code" required/>
+                        
                       </div>
                       <div class="form-group">
                         <label for="options">Employee GL Mapping</label>
                         <select id="gender" name="gender"  class="options">
                           <option class="options">None</option>
-                          <option class="options" value="option1"></option>
-                          <option class="options" value="option2"></option>
-                          <option class="options" value="option3"></option>
+                          <option class="options" value="option1">1</option>
+                          <option class="options" value="option2">2</option>
+                          <option class="options" value="option3">3</option>
                         </select>
                       </div>
                   </div>
@@ -356,7 +360,7 @@
             </div>
     
             <div class="tab" id="tab2">
-              <h4><b> Employee : </b></h4>
+              <h4><b> Company Information : </b></h4>
               <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
                 <form class="w-100" action="{{ route('employees.store') }}" method="POST">
                   @csrf
