@@ -44,6 +44,7 @@ class EmpController extends Controller
         $skills = Skill::all();
         $skilllevels = Skilllevel::all();
         $areas = Area::all();
+        
         return view('organizationsetup.employe.create', compact('countries', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 'areas'));
     }
  
@@ -64,7 +65,8 @@ class EmpController extends Controller
             'emp_status' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Employee::create([
+        $yourModel = Employee::create([
+            'employee_code' => request()->get('employee_code'),
             'employee_name' => request()->get('employee_name'),
             'father_name' => request()->get('father_name'),
             'cnic' => request()->get('cnic'),
@@ -93,9 +95,10 @@ class EmpController extends Controller
             'skilllevel' => request()->get('skilllevel'),
             'emp_status' => request()->get('is_active', 0),
         ]);
-
+        
+        $nextId = DB::getPdo()->lastInsertId() + 1;
         //redirect the user and send friendly message
-        return redirect()->route('employees.index')->with('success','Employee Created  successfully ');
+        return redirect()->route('employees.index')->with('nextId', $nextId)->with('success', 'Employee created successfully');
     }
 
     /**

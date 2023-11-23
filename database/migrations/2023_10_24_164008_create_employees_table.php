@@ -15,6 +15,8 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('employee_code')->nullable();
             $table->string('employee_name');
             $table->string('father_name')->nullable();
             $table->string('cnic');
@@ -42,6 +44,7 @@ class CreateEmployeesTable extends Migration
             $table->string('skill')->nullable();
             $table->string('skilllevel')->nullable();
             $table->boolean('emp_status')->default(true)->nullable();
+            
             $table->timestamps();
         });
     }
