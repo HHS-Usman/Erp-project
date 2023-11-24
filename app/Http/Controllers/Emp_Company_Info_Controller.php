@@ -12,7 +12,7 @@ class Emp_Company_Info_Controller extends Controller
            
             //create a new product in database
             Emp_Company_Info::create([
-                'designation' => request()->get('designation')->nullable(),
+                'designation' => request()->get('designation'),
                 'branch' => request()->get('branch'),
                 'division' => request()->get('division'),
                 'department' => request()->get('department'),
@@ -39,7 +39,7 @@ class Emp_Company_Info_Controller extends Controller
                 'approver' => request()->get('approver'),
                 'user_group' => request()->get('user_group'),
                 'workflow_group' => request()->get('workflow_group'),
-                'emp_status' => request()->get('is_active', 0),
+                
             ]);
             //redirect the user and send friendly message
             return redirect()->route('employees.create')->with('success','Employee Created  successfully ');

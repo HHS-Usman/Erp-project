@@ -17,12 +17,23 @@ use App\Models\Area;
 use App\Models\Designation;
 use App\Models\Division;
 use App\Models\Department;
+use App\Models\Subdepartment;
 use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Fundtion;
 use App\Models\Managementlevel;
 use App\Models\Submanagementlevel;
 use App\Models\Employeejobstatus;
+use App\Models\Leavereason;
+use App\Models\Branch;
+use App\Models\Bank;
+use App\Models\Overtime_type;
+use App\Models\Additional_approval;
+use App\Models\Approval_level;
+use App\Models\Workflow;
+
+use App\Models\Costcenter;
+
 use Illuminate\Support\Facades\DB;
 class EmpController extends Controller
 {
@@ -53,8 +64,29 @@ class EmpController extends Controller
         $skills = Skill::all();
         $skilllevels = Skilllevel::all();
         $areas = Area::all();
+        $designations = Designation::all();
+        $branchs = Branch::all();
+        $divisions = Division::all();
+        $departments = Department::all();
+        $subdepartments = Subdepartment::all();
+        $grades = Grade::all();
+        $groups = Group::all();
+        $managementlevels = Managementlevel::all();
+        $submanagementlevels = Submanagementlevel::all();
+        $employeejobstatus = Employeejobstatus::all();
+        $employee = Employee::all();
+        $leavereasons = Leavereason::all();
+        $costcenters = Costcenter::all();
+        $banks = Bank::all();
+        $overtimes = Overtime_type::all();
+        $workflows = Workflow::all();
+        $add_approvals = Additional_approval::all();
+        $approvals = Approval_level::all();
         $nextId = DB::table('employees')->max('id') + 1;
-        return view('organizationsetup.employe.create', compact('countries', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 'areas', 'nextId'));
+        return view('organizationsetup.employe.create',
+        compact('countries','costcenters', 'employee', 'leavereasons','employeejobstatus', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 
+        'areas', 'designations', 'divisions', 'departments', 'subdepartments', 'grades', 'groups', 'managementlevels', 'submanagementlevels',
+        'add_approvals','approvals','workflows','banks', 'branchs', 'nextId'));
     }
  
     /**
