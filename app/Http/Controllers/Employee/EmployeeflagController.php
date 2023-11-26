@@ -73,7 +73,9 @@ class EmployeeflagController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $employeflg = Employeeflag::find($id);
+        return view('employee.employeeflag.update',compact('employeflg'));
     }
 
     /**
@@ -85,7 +87,15 @@ class EmployeeflagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          $request->validate([
+            'employeeflag'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $employeflg =Employeeflag::find($id);
+        $employeflg->update($request->all());
+        return redirect()->route('employeeflag.index')->with('success','Employee-Flag successfully ');
+        
     }
 
     /**

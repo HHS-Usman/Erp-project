@@ -76,8 +76,8 @@
                       <tr>
                         <th >{{ $langugage + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->langugage }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->langugage_code }}</td>
+                        <td>{{ $item->language }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->language_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>
@@ -87,8 +87,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
-                          
+                          <a class="btn btn-primary" href="{{route('language.edit',$item->id)}}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>
                       </tr>

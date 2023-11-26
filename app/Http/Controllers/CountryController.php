@@ -61,9 +61,9 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Country $country)
     {
-        //
+        return view('generalsetup.country.update',compact('country'));
     }
 
     /**
@@ -71,9 +71,19 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Country $country)
     {
-         //validate the input
+          // validate the input
+          $request->validate([
+            'country'=>'required',
+            'country_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $country->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('country.index')->with('success','Country Updated successfully');
     }
 
     /**

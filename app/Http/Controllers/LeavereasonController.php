@@ -17,7 +17,6 @@ class LeavereasonController extends Controller
         $leaveresons = Leavereason::latest()->paginate();
         return view('organizationsetup.leavereson.index',compact('leaveresons'))->with(request()->input('page'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -27,7 +26,6 @@ class LeavereasonController extends Controller
     {
         return view('organizationsetup.leavereson.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -36,6 +34,7 @@ class LeavereasonController extends Controller
      */
     public function store(Request $request)
     {
+        
         // validate the input
         $request->validate([
             'leavingreason'=>'required',
@@ -50,7 +49,7 @@ class LeavereasonController extends Controller
             'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
-        return redirect()->route('leavereson.index')->with('success','leave Reason made  successfully ');
+        return redirect()->route('leavereson.index')->with('success','leave Reason Inserted  successfully ');
     }
 
     /**
@@ -70,8 +69,9 @@ class LeavereasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Leavereason $leavereson)
     {
+        return view('organizationsetup.leavereson.update',compact('leavereson'));
         //
     }
 
@@ -82,11 +82,20 @@ class LeavereasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Leavereason $leavereson)
     {
-        //
-    }
+         // validate the input
+         $request->validate([
+            'leavingreason'=>'required',
+            'leavingreason_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
 
+        ]);
+        $leavereson->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('leavereson.index')->with('success','leaveReason made  successfully ');
+    }
     /**
      * Remove the specified resource from storage.
      *

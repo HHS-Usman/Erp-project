@@ -58,9 +58,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Paymentterm $paymentterm)
     {
-        //
+        return view('generalsetup.paymentterm.update',compact('paymentterm'));
     }
 
     /**
@@ -68,9 +68,18 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Paymentterm $paymentterm)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'paymentterm' =>'required',
+            'paymentterm_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $paymentterm->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('paymentterm.index')->with('success','Payment Term Updated successfully');
     }
 
     /**

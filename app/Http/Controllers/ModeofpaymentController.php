@@ -59,9 +59,9 @@ class ModeofpaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Modeofpayment $modeofpayment)
     {
-        //
+        return view('generalsetup.modeofpayment.update',compact('modeofpayment'));
     }
 
     /**
@@ -69,9 +69,19 @@ class ModeofpaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Modeofpayment $modeofpayment)
     {
-         //validate the input
+         // validate the input
+        $request->validate([
+            'modeofpayment' =>'required',
+            'modeofpayment_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+        $modeofpayment->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('modeofpayment.index')->with('success','Updated Mode of Payment successfully');
     }
 
     /**

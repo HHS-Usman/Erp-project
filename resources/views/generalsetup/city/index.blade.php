@@ -51,12 +51,7 @@
                   <li class="dropdown-header text-start">
                     <h6>Filter</h6>
                   </li>
-          
-
                 </ul> --}}
-                
-                 
-              
               <div class="row justify-content-center" >
                 <div class="card-body">  
                   <table class="table table-border datatable " style="border: 1px solid black">
@@ -87,8 +82,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
-                          
+                          <a class="btn btn-primary" href="{{route('city.edit',$item->id)}}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>
                       </tr>

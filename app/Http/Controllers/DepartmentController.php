@@ -59,9 +59,9 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Department $department)
     {
-        //
+        return view('organizationsetup.department.update',compact('department'));
     }
 
     /**
@@ -69,9 +69,19 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Department $department)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'department'=>'required',
+            'department_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $department->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('department.index')->with('success','department update successfully ');
     }
 
     /**

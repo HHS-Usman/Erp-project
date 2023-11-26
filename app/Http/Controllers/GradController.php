@@ -71,9 +71,9 @@ class GradController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Grade $grade)
     {
-        //
+        return view('organizationsetup.grade.update',compact('grade'));
     }
 
     /**
@@ -83,9 +83,18 @@ class GradController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Grade $grade)
     {
-        //
+         // validate the input
+         $request->validate([
+            'grade'=>'required',
+            'grade_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+        $grade->update($request->all());
+        return redirect()->route('grade.index')->with('success','Grade updated  successfully ');
     }
 
     /**

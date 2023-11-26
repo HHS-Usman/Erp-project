@@ -88,7 +88,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
+                          <a class="btn btn-primary" href="{{route('qualification.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

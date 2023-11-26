@@ -59,9 +59,9 @@ class MangementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Managementlevel $management)
     {
-        //
+        return view('organizationsetup.managementlevel.update',compact('management'));
     }
 
     /**
@@ -69,9 +69,18 @@ class MangementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Managementlevel $management)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'managementlevel'=>'required',
+            'managementlevel_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $management->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('management.index')->with('success','Management Updated updated successfully');
     }
 
     /**

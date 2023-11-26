@@ -58,9 +58,9 @@ class SubmanagementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Submanagementlevel $submanagement)
     {
-        //
+        return view('organizationsetup.submanagementlevel.update',compact('submanagement'));
     }
 
     /**
@@ -68,9 +68,18 @@ class SubmanagementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Submanagementlevel $submanagement)
     {
-         //validate the input
+         // validate the input
+         $request->validate([
+            'submanagementlevel' =>'required',
+            'submanagementlevel_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $submanagement->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('submanagement.index')->with('success','Record Updated  successfully');
     }
 
     /**

@@ -60,9 +60,9 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(City $city)
     {
-        //
+        return view('generalsetup.city.update',compact('city'));
     }
 
     /**
@@ -70,9 +70,19 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,City $city)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'city'=>'required',
+            'city_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $city->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('city.index')->with('success','City Update successfully');
     }
 
     /**

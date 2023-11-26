@@ -73,7 +73,8 @@ class QualificationlevelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $qualificationlevel = Qualificationlevel::find($id);
+        return view('employee.qualificationlevel.update',compact('qualificationlevel'));
     }
 
     /**
@@ -85,7 +86,14 @@ class QualificationlevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'qualificationlevel'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $qualificationlevel = Qualificationlevel::find($id);
+        $qualificationlevel->update($request->all());
+        return redirect()->route('qualificationlevel.index')->with('success','Qualification level Updated successfully ');
     }
 
     /**

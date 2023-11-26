@@ -59,9 +59,9 @@ class NationalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Nationality $nationality)
     {
-        //
+        return view('generalsetup.nationality.update',compact('nationality'));
     }
 
     /**
@@ -69,9 +69,18 @@ class NationalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Nationality $nationality)
     {
-         //validate the input
+         // validate the input
+         $request->validate([
+            'nationality' =>'required',
+            'nationality_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $nationality->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('nationality.index')->with('success','Nationality updated successfully');
     }
 
     /**

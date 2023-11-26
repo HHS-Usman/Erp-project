@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Division
+    Update Division
 @endsection    
 @section('content')
 
@@ -21,7 +21,7 @@
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Division</a></li>
+                    <li class="breadcrumb-item active"><a> Create Update</a></li>
                 </ol>
                 </nav>
             </div>

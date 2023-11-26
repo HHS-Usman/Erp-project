@@ -58,9 +58,9 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Language $language)
     {
-        //
+        return view('organizationsetup.language.update',compact('language'));
     }
 
     /**
@@ -68,9 +68,18 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Language $language)
     {
-         //validate the input
+         // validate the input
+        $request->validate([
+            'language'=>'required',
+            'language_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $language->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('language.index')->with('success','Record Updated  successfully');
     }
 
     /**
