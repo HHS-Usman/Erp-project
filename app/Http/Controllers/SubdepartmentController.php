@@ -58,9 +58,9 @@ class SubdepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Subdepartment $subdepartment)
     {
-        //
+        return view('organizationsetup.subdepartment.update',compact('subdepartment'));
     }
 
     /**
@@ -68,9 +68,18 @@ class SubdepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Subdepartment $subdepartment)
     {
-         //validate the input
+        // validate the input
+        $request->validate([
+            'subdepartment' =>'required',
+            'subdepartment_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $subdepartment->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('subdepartment.index')->with('success','subdepartment updated successfully ');
     }
 
     /**

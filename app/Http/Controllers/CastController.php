@@ -61,9 +61,9 @@ class CastController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Cast $cast)
     {
-        //
+        return view('generalsetup.cast.update',compact('cast'));
     }
 
     /**
@@ -71,9 +71,19 @@ class CastController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Cast $cast)
     {
-         //validate the input
+         // validate the input
+         $request->validate([
+            'cast'=>'required',
+            'cast_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $cast->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('cast.index')->with('success','Cast Updated successfully');
     }
 
     /**

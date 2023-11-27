@@ -69,9 +69,9 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Group $group)
     {
-        //
+        return view('organizationsetup.group.update',compact('group'));
     }
 
     /**
@@ -81,9 +81,18 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Group $group)
     {
-        //
+         // validate the input
+         $request->validate([
+            'group'=>'required',
+            'group_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $group->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('group.index')->with('success','Group Updated  successfully ');
     }
 
     /**

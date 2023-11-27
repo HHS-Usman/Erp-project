@@ -52,15 +52,14 @@ class ReligionController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Religion $religion)
     {
-        //
+        return view('organizationsetup.religion.update',compact('religion'));
     }
 
     /**
@@ -68,9 +67,17 @@ class ReligionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Religion $religion)
     {
-         //validate the input
+        $request->validate([
+            'religion' =>'required',
+            'religion_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $religion->update($request->all());
+         return redirect()->route('religion.index')->with('success','Updated inserted  successfully');
+ 
     }
 
     /**

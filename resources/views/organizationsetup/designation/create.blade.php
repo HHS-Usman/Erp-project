@@ -26,17 +26,17 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('department.store') }}" method="POST">        
+            <form action="{{ route('designation.store') }}" method="POST">        
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Designation Code</strong>
-                                <input type="text" name="department_code" id="department_code" class="form-control" placeholder="Designation Code">
+                                <input type="text" name="designation_code" id="designation_code" class="form-control" placeholder="Designation Code">
                             </div>
                             <div class="form-group">
                                 <strong>Designation<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="department" id="department" class="form-control" placeholder="Designation" required>
+                                <input type="text" name="designation" id="designation" class="form-control" placeholder="Designation" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

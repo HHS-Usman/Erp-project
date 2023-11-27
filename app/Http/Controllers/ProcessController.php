@@ -38,7 +38,6 @@ class ProcessController extends Controller
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-
         //redirect the user and send friendly message
         return redirect()->route('process.index')->with('success','Manage successfully');
     }
@@ -59,9 +58,9 @@ class ProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Process $process)
     {
-        //
+        return view('generalsetup.process.update',compact('process'));
     }
 
     /**
@@ -69,9 +68,18 @@ class ProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Process $process)
     {
-         //validate the input
+        // validate the input
+        $request->validate([
+            'process' =>'required',
+            'process_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $process->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('process.index')->with('success','Process Updated successfully');
     }
 
     /**

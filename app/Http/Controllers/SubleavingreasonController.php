@@ -58,9 +58,9 @@ class SubleavingreasonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Subleavingreason $subleavingreason)
     {
-        //
+        return view('organizationsetup.subleavingreason.update',compact('subleavingreason'));
     }
 
     /**
@@ -68,9 +68,18 @@ class SubleavingreasonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Subleavingreason $subleavingreason)
     {
-         //validate the input
+         // validate the input
+        $request->validate([
+            'subleavingreason' =>'required',
+            'subleavingreason_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $subleavingreason->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('subleavingreason.index')->with('success','Record Updated  successfully');
     }
 
     /**

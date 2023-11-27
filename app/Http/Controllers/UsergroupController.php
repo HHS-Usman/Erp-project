@@ -58,9 +58,9 @@ class UsergroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Usergroup $usergroup)
     {
-        //
+        return view('generalsetup.usergroup.update',compact('usergroup'));
     }
 
     /**
@@ -68,9 +68,18 @@ class UsergroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Usergroup $usergroup)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'usergroup' =>'required',
+            'usergroup_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $usergroup->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('usergroup.index')->with('success','User Group Updated successfully');
     }
 
     /**

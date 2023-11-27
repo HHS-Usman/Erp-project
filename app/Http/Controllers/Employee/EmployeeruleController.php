@@ -11,7 +11,7 @@ class EmployeeruleController extends Controller
     public function index()
     {
         $employeerules = Employeerule::latest()->paginate();
-        return view('employee.employeerule.index',compact('employeerules'))->with(request()->input('page'));
+        return view('employee.employeerule.index', compact('employeerules'))->with(request()->input('page'));
     }
 
     /**
@@ -32,21 +32,21 @@ class EmployeeruleController extends Controller
      */
     public function store(Request $request)
     {
-         // validate the input
-         $request->validate([
-            'employeerule'=>'required',
+        // validate the input
+        $request->validate([
+            'employeerule' => 'required',
             'is_active' => 'integer|in:0,1'
-            
+
         ]);
         //create a new product in database
         Employeerule::create([
             'employeerule' => request()->get('employeerule'),
             'employeerule_code' => request()->get('employeerule_code'),
-            'detail' => request()->get('detail', ),
+            'detail' => request()->get('detail',),
             'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
-        return redirect()->route('employeerule.index')->with('success','Record Created successfully ');
+        return redirect()->route('employeerule.index')->with('success', 'Record Created successfully ');
     }
 
     /**
@@ -68,7 +68,8 @@ class EmployeeruleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employeerule = Employeerule::find($id);
+        return view('employee.employeerule.update', compact('employeerule'));
     }
 
     /**
@@ -80,7 +81,10 @@ class EmployeeruleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employeerule = Employeerule::find($id);
+        // Update fields based on $request data
+        $employeerule->update($request->all());
+        return redirect()->route('employeerule.index')->with('success', 'Employeerule updated successfully');
     }
 
     /**

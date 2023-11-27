@@ -69,9 +69,10 @@ class DesignationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Designation $designation)
     {
-        //
+       
+        return view('organizationsetup.designation.update',compact('designation'));
     }
 
     /**
@@ -81,9 +82,17 @@ class DesignationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Designation $designation)
     {
-        //
+        $request->validate([
+            'designation'=>'required',
+            'designation_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $designation->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('designation.index')->with('success','Designation Updated Data  successfully ');       
     }
 
     /**

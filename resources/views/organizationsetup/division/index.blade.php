@@ -4,11 +4,7 @@
     Manage Division
 @endsection    
 @section('content')
- 
-
-  
     <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -19,7 +15,6 @@
                 </ul>
             </div>
         @endif
-            
       <div class="pagetitle" style="margin-left: 20px;">
           <h1>Manage Division</h1>
           <nav>
@@ -28,9 +23,7 @@
               <li class="breadcrumb-item active"><a> Manage Division</a></li>
           </ol>
           </nav>
-      </div>
-                  
-                    
+      </div>       
       <div style="background-color: lightgray;opacity: 0.9; height='20px'; ">
         <ul class="nav nav-tabs" id="myTabs">
           <li class="nav-item">
@@ -40,14 +33,11 @@
       </div>
       <div style=" left:0px; top:170px;z-index: -1; width: 100%;">
         <div class="tab-content" id="myTabContent">
-          
-                          
                           <!-- Tab content will be dynamically added here -->
                         </div>
                       </div>
                     
-                      
-                                                  
+                                    
                 {{-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                   <li class="dropdown-header text-start">
                     <h6>Filter</h6>
@@ -88,7 +78,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
+                          <a class="btn btn-primary" href="{{route('division.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

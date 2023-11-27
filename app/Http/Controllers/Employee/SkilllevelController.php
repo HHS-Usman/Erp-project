@@ -68,9 +68,9 @@ class SkilllevelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $skilllevel = Skilllevel::find($id);
+        return view('employee.skilllevel.update',compact('skilllevel'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,7 +80,15 @@ class SkilllevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // validate the input
+         $request->validate([
+            'skilllevel'=>'required',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $skilllevel = Skilllevel::find($id);
+        $skilllevel->update($request->all());
+        return redirect()->route('skilllevel.index')->with('success','Skill Level Updated successfully ');
+
     }
 
     /**

@@ -61,9 +61,9 @@ class DivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Division $division)
     {
-        //
+        return view('organizationsetup.division.update',compact('division'));
     }
 
     /**
@@ -71,9 +71,19 @@ class DivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Division $division )
     {
-         //validate the input
+         // validate the input
+         $request->validate([
+            'division'=>'required',
+            'division_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        //create a new product in database
+        $division->update($request->all());
+   
+        return redirect()->route('division.index')->with('success','division made  successfully ');
     }
 
     /**

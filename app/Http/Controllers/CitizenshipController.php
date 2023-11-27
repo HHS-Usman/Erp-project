@@ -61,9 +61,9 @@ class CitizenshipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Citizenship $citizenship)
     {
-        //
+        return view('generalsetup.citizenship.update',compact('citizenship'));
     }
 
     /**
@@ -71,9 +71,19 @@ class CitizenshipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Citizenship $citizenship)
     {
-         //validate the input
+          // validate the input
+        $request->validate([
+            'citizenship'=>'required',
+            'citizenship_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $citizenship->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('citizenship.index')->with('success','Updated citizenship successfully');
     }
 
     /**

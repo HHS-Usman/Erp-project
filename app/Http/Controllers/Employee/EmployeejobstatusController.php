@@ -73,7 +73,8 @@ class EmployeejobstatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employeejob = Employeejobstatus::find($id);
+        return view('employee.employeejobstatus.update',compact('employeejob'));
     }
 
     /**
@@ -85,7 +86,15 @@ class EmployeejobstatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          // validate the input
+          $request->validate([
+            'employeejobstatus'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+        $employeejob = Employeejobstatus::find($id);
+        $employeejob->update($request->all());
+        return redirect()->route('employeejobstatus.index')->with('success','Employee Job status Updated  successfully ');
     }
 
     /**

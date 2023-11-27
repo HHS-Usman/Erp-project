@@ -3,11 +3,8 @@
     Manage Grade
 @endsection    
 @section('content')
- 
 
-  
     <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -87,7 +84,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
+                          <a class="btn btn-primary" href="{{route('grade.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

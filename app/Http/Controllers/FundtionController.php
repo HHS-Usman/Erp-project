@@ -50,7 +50,7 @@ class FundtionController extends Controller
      */
     public function show()
     {
-        //
+        
     }
 
     /**
@@ -58,9 +58,10 @@ class FundtionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Fundtion $function)
     {
-        //
+        return view('organizationsetup.function.update',compact('function'));
+
     }
 
     /**
@@ -68,9 +69,18 @@ class FundtionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Fundtion $function)
     {
-         //validate the input
+        // validate the input
+        $request->validate([
+            'function'=>'required',
+            'function_code' => 'nullable',
+            'detail' => 'nullable',
+            'is_active' => 'integer|in:0,1'
+        ]);
+        $function->update($request->all());
+        //redirect the user and send friendly message
+        return redirect()->route('function.index')->with('success','function update successfully ');
     }
 
     /**
