@@ -31,6 +31,9 @@ use App\Models\Overtime_type;
 use App\Models\Additional_approval;
 use App\Models\Approval_level;
 use App\Models\Workflow;
+use App\Models\Emp_Company_info;
+use App\Models\Emp_document;
+use App\Models\Emp_Payroll;
 
 use App\Models\Costcenter;
 
@@ -44,8 +47,11 @@ class EmpController extends Controller
      */
     public function index()
     {
+        $payrolls = Emp_Payroll::all();
+        $documents = Emp_document::all();
+        $companies = Emp_Company_info::all();
         $employes = Employee::latest()->paginate();
-        return view('organizationsetup.employe.index',compact('employes'))->with(request()->input('page'));
+        return view('organizationsetup.employe.index',compact('employes', 'companies', 'documents', 'payrolls'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.

@@ -122,7 +122,7 @@
                         <label for="Employee">Employee Code</label>
                         <input type="text" name="employee_code" value="{{ $nextId }}" readonly>
 
-                        
+                         
                       </div>
                       <div class="form-group">
                         <label for="Employee">Employee Code</label>
@@ -170,7 +170,7 @@
                   <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
                           <label for="DateOfBirth">Date Of Birth</label>
-                          <input type="text" class="form-control" name="dob" id="dob" placeholder="DateOfBirth" />
+                          <input type="date" class="form-control" name="dob" id="dob" placeholder="DateOfBirth" />
                         </div>
                     <div class="form-group">
                       <label for="place of birth ">Place of Birth</label>
@@ -298,13 +298,7 @@
                   </div>
                   <h4>Employe Other Information:</h4>
                   <div class="container d-flex justify-content-center align-items-center">
-                    <div class="form-group">
-                      <label for="options">Select an Country</label>
-                      <select id="options" name="options">
-                        <option class="options">None</option>
-                        
-                      </select>
-                    </div>
+                    
                     <div class="form-group">
                       <label for="options">Qualification</label>
                       <select id="qualification" name="qualification" style="width: 100%; padding: 7px;" >
@@ -367,27 +361,31 @@
     
             <div class="tab" id="tab2">
               <h4><b> Company Information : </b></h4>
-              <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
+               {{-- <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
                 <form class="w-100" id="form2" action="{{ route('company_info.store') }}" method="POST">
                   @csrf
-                      
-                  <div class="container d-flex justify-content-center align-items-center">
-                    <div class="form-group">
-                      
-                      <label for="designation">Designation</label>
-                      <select  name="designation" id="designation"  class="options">
-                          <option class="options">None</option>
-                        @foreach($designations as $item)
-                          <option value="{{ $item->id }}">{{ $item->designation }}</option>
-                        @endforeach
-                      </select>
-                    </div>
+  
+                   <div class="container d-flex justify-content-center align-items-center">
+                     <div class="form-group">
+                        <label for="options">Designation</label>
+                        <select id="designation" name="designation"  class="options">
+                            <option class="options">None</option>
+                            @foreach($designations as $item)
+                            <option class="options" value="{{ $item->id }}">{{ $item->designation }}</option>
+                          @endforeach
+                        </select>
+                      </div> 
+                      <div class="form-group">
+                        <label for="Employee">Employee Name*</label>
+                        <input type="text" class="form-control" name="employee_name" id="employee_name" placeholder="Employee Name" required/>
+                      </div>
+                   
                     <div class="form-group">   
                       <label for="branch">branch</label>
                       <select  name="branch" id="branch"  class="options">
                           <option class="options">None</option>
                         @foreach($branchs as $item)
-                          <option value="{{ $item->id }}">{{ $item->branch }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->branch }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -396,7 +394,7 @@
                       <select  name="division" id="division"  class="options">
                           <option class="options">None</option>
                         @foreach($divisions as $item)
-                          <option value="{{ $item->id }}">{{ $item->division }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->division }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -407,7 +405,7 @@
                       <select  name="department" id="department"  class="options">
                           <option class="options">None</option>
                         @foreach($departments as $item)
-                          <option value="{{ $item->id }}">{{ $item->department }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->department }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -416,7 +414,7 @@
                       <select  name="subdepartment" id="subdepartment"  class="options">
                           <option class="options">None</option>
                         @foreach($subdepartments as $item)
-                          <option value="{{ $item->id }}">{{ $item->subdepartment }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->subdepartment }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -425,7 +423,7 @@
                       <select  name="employeegrade" id="employeegrade"  class="options">
                           <option class="options">None</option>
                         @foreach($grades as $item)
-                          <option value="{{ $item->id }}">{{ $item->grade }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->grade }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -436,7 +434,7 @@
                       <select  name="group" id="group"  class="options">
                           <option class="options">None</option>
                         @foreach($groups as $item)
-                          <option value="{{ $item->id }}">{{ $item->group }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->group }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -445,7 +443,7 @@
                       <select  name="managementlevel" id="managementlevel"  class="options">
                           <option class="options">None</option>
                         @foreach($managementlevels as $item)
-                          <option value="{{ $item->id }}">{{ $item->managementlevel }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->managementlevel }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -454,7 +452,7 @@
                       <select  name="submanagementlevel" id="submanagementlevel"  class="options">
                           <option class="options">None</option>
                         @foreach($submanagementlevels as $item)
-                          <option value="{{ $item->id }}">{{ $item->submanagementlevel }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->submanagementlevel }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -465,7 +463,7 @@
                       <select  name="employeejobstatus" id="employeejobstatus"  class="options">
                           <option class="options">None</option>
                         @foreach($employeejobstatus as $item)
-                          <option value="{{ $item->id }}">{{ $item->employeejobstatus }}</option>
+                          <option class="options" value="{{ $item->id }}">{{ $item->employeejobstatus }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -583,13 +581,241 @@
                      
                   </div>
                 
-              </div>
+              </div>  --}}
+               <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
+                <form class="w-100 row" id="form2" action="{{ route('company_info.store') }}" method="POST">
+                  @csrf
+                  <div class="container d-flex justify-content-center align-items-center">
+                    
+                      <div class="form-group">
+                        <label for="options">Designation</label>
+                        <select id="designation" name="designation"  class="options">
+                            <option class="options">None</option>
+                            @foreach($designations as $item)
+                            <option class="options" value="{{ $item->id }}">{{ $item->designation }}</option>
+                          @endforeach
+                        </select>
+                      </div> 
+                      <div class="form-group">   
+                        <label for="branch">branch</label>
+                        <select  name="branch" id="branch"  class="options">
+                            <option class="options">None</option>
+                          @foreach($branchs as $item)
+                            <option class="options" value="{{ $item->id }}">{{ $item->branch }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group">   
+                        <label for="division">division</label>
+                        <select  name="division" id="division"  class="options">
+                            <option class="options">None</option>
+                          @foreach($divisions as $item)
+                            <option class="options" value="{{ $item->id }}">{{ $item->division }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">   
+                      <label for="department">Department</label>
+                      <select  name="department" id="department"  class="options">
+                          <option class="options">None</option>
+                        @foreach($departments as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->department }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">   
+                      <label for="subdepartment">Subdepartment</label>
+                      <select  name="subdepartment" id="subdepartment"  class="options">
+                          <option class="options">None</option>
+                        @foreach($subdepartments as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->subdepartment }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">   
+                      <label for="grade">Grade</label>
+                      <select  name="employeegrade" id="employeegrade"  class="options">
+                          <option class="options">None</option>
+                        @foreach($grades as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->grade }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">   
+                      <label for="group">Group</label>
+                      <select  name="group" id="group"  class="options">
+                          <option class="options">None</option>
+                        @foreach($groups as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->group }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">   
+                      <label for="managementlevel">Management Level</label>
+                      <select  name="managementlevel" id="managementlevel"  class="options">
+                          <option class="options">None</option>
+                        @foreach($managementlevels as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->managementlevel }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">   
+                      <label for="submanagementlevel">Submanagement Level</label>
+                      <select  name="submanagementlevel" id="submanagementlevel"  class="options">
+                          <option class="options">None</option>
+                        @foreach($submanagementlevels as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->submanagementlevel }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                      <label for="options">Employee Job Status</label>
+                      <select  name="employeejobstatus" id="employeejobstatus"  class="options">
+                          <option class="options">None</option>
+                        @foreach($employeejobstatus as $item)
+                          <option class="options" value="{{ $item->id }}">{{ $item->employeejobstatus }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="appointment">Appointment Date</label>
+                      <input type="date" class="form-control" name="appointment_date" id="appointment_date" placeholder="Appointment Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="joining">Joining Date</label>
+                      <input type="date" class="form-control" name="joining_date" id="joining_date" placeholder="Joining Date" />
+                    </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    
+                    <div class="form-group">
+                      <label for="confirmation">Confirmation Date</label>
+                      <input type="date" class="form-control" name="confirmation_date" id="confirmation_date" placeholder="Confirmation Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="retirement">Retirement Date</label>
+                      <input type="date" class="form-control" name="retirement_date" id="retirement_date" placeholder="Retirement Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="contract_start">Contract Start Date</label>
+                      <input type="date" class="form-control" name="contract_start_date" id="contract_start_date" placeholder="contract_start Date"/>
+                    </div>
+                  </div>
+                  
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                      <label for="contract_end">Contract End Date</label>
+                      <input type="date" class="form-control" name="contract_end_date" id="contract_end_date" placeholder="Contract End Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="resign">Resign Date</label>
+                      <input type="date" class="form-control" name="resign_date" id="resign_date" placeholder="Resign Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="resign">Resign Acceptance Date</label>
+                      <input type="date" class="form-control" name="resign_acceptance_date" id="resign_acceptance_date" placeholder="Resign Date"/>
+                    </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group ">
+                      <label for="options">Leaving Reason</label>
+                      <select id="leaving_reason" name="leaving_reason"  class="options">
+                          <option class="options">None</option>
+                        @foreach($leavereasons as $item)
+                          <option value="{{ $item->id }}">{{ $item->leavingreason }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="leaving">Leaving Date</label>
+                      <input type="date" class="form-control" name="leaving_date" id="leaving_date" placeholder="Leaving_Date"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="options">Approval_level </label>
+                      <select  name="approval_level" id="approval_level"  class="options">
+                          <option class="options">None</option>
+                         @foreach($approvals as $item)
+                          <option value="{{ $item->id }}">{{ $item->approval_level }}</option>
+                        @endforeach 
+                      </select>
+                    </div> 
+                    
+                    
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                      <label for="options">additional_approval </label>
+                      <select  name="additional_approval" id="additional_approval"  class="options">
+                          <option class="options">None</option>
+                         @foreach($add_approvals as $item)
+                          <option value="{{ $item->id }}">{{ $item->additional_approval }}</option>
+                        @endforeach 
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="options">approver </label>
+                      <select  name="approver" id="approver"  class="options">
+                          <option class="options">None</option>
+                        @foreach($employee as $item)
+                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                      <label for="options">user_group </label>
+                      <select  name="user_group" id="user_group"  class="options">
+                          <option class="options">None</option>
+                         @foreach($groups as $item)
+                          <option value="{{ $item->id }}">{{ $item->group }}</option>
+                        @endforeach 
+                      </select>
+                    </div>
+                    <div class="form-group" rows="4" cols="130">
+                      <label for="options">workflow_group </label>
+                      <select  name="workflow_group" id="workflow_group" rows="4" cols="130" class="options">
+                          <option class="options">None</option>
+                         @foreach($workflows as $item)
+                          <option value="{{ $item->id }}">{{ $item->workflow_group }}</option>
+                        @endforeach 
+                      </select>
+                    </div>
+                  </div>
+                  {{-- <h4>Emergency Information:</h4> --}}
+                  <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                      {{-- <label for="Emergency Number">Emergency Contact Person</label> --}}
+                      {{-- <textarea type="text" class="form-control" name=""  id="" rows="4" cols="130" placeholder="" readonly></textarea> --}}
+                    </div>
+                  </div>
+                  
+                </form>      
+                    <div class="container d-flex justify-content-center align-items-center">
+                      <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+                      <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit2()">Submit</button>
+                      <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+                    </div>
+                  <script>
+                    function submit1() 
+                    {
+                      var form1 = document.getElementById('form1');
+                      form1.submit();          
+                    }
+                  </script>
+              </div>  
             </div>
     
             <div class="tab" id="tab3">
               <h4><b> Payroll/Overtime : </b></h4>
               <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
-                <form class="w-100" id="form3" action="{{ route('emp_payroll.store') }}" method="POST">
+                <form class="w-100 row" id="form3" action="{{ route('emp_payroll.store') }}" method="POST">
                   @csrf
                       
                   <div class="container d-flex justify-content-center align-items-center">
@@ -613,9 +839,11 @@
                       </select>
                     </div>
                     <div class="form-group">   
-                      <label for="bank_ac_no">Bank Ac/No </label>
-                        <input type="text" class="form-control" name="bank_ac_no" id="bank_ac_no" placeholder="Bank Acount Number" />
+                      <label for="eobi_no">EOBI NO : </label>
+                        
+                        <input type="text" class="form-control" name="eobi_no" id="eobi_no" placeholder="eobi_no" />
                     </div>
+                    <input type="checkbox" name="eobi_num"  id="eobi_num" />
                   </div>
                   <div class="container d-flex justify-content-center align-items-center">
                     <div class="form-group">   
@@ -628,32 +856,32 @@
                       </select>
                     </div>
                     <div class="form-group">   
-                      <label for="eobi_no">EOBI NO : </label>
-                        <input type="checkbox" name="eobi_no"  id="eobi_no" />
-                        <input type="text" class="form-control" name="eobi_num" id="eobi_num" placeholder="eobi_no" />
+                      <label for="bank_ac_no">Bank Ac/No </label>
+                        <input type="text" class="form-control" name="bank_ac_no" id="bank_ac_no" placeholder="Bank Acount Number" />
                     </div>
                     <div class="form-group">   
                       <label for="pf_no">PF NO : </label>
                         
-                        <input type="text" class="form-control" name="pf_num" id="pf_num" placeholder="pf_no" />
+                        <input type="text" class="form-control" name="pf_no" id="pf_no" placeholder="pf_no" />
                     </div>
-                    <input type="checkbox"  name="pf_no"  id="pf_no" />                   
+                    <input type="checkbox"  name="pf_num"  id="pf_num" />                   
                   </div>
                   <div class="container d-flex justify-content-center align-items-center">
-                      <div class="form-group">   
-                        <label for="gratuity_no">Gratuity NO : </label>
-                          
-                          <input type="text" class="form-control" name="gratuity_num" id="gratuity_num" placeholder="gratuity_no" />
-                      </div>
-                      <input type="checkbox" class="justify-content-start" name="gratuity_no"  id="gratuity_no" />
-                      <div class="form-group">
-                        <label for="pfstart">Pf Start Date</label>
-                        <input type="date" class="form-control" name="pfstart_date" id="pfstart_date" placeholder="PF Start Date"/>
-                      </div>
+                      
+                    <div class="form-group">
+                      <label for="pfstart">Pf Start Date</label>
+                      <input type="date" class="form-control" name="pfstart_date" id="pfstart_date" placeholder="PF Start Date"/>
+                    </div>
                     <div class="form-group">   
                       <label for="gratuitystart">Gratuity Start Date</label>
                       <input type="date" class="form-control" name="gratuitystart_date" id="gratuitystart_date" placeholder="Gratuity Start Date"/>
                     </div>
+                    <div class="form-group">   
+                      <label for="gratuity_no">Gratuity NO : </label>
+                        
+                        <input type="text" class="form-control" name="gratuity_no" id="gratuity_no" placeholder="gratuity_no" />
+                    </div>
+                    <input type="checkbox" class="justify-content-start" name="gratuity_num"  id="gratuity_num" />
                   </div>
                   <div class="container d-flex justify-content-center align-items-center">
                  
@@ -701,10 +929,15 @@
                       <label for="offday_rate"> Off Day Rate : </label>
                       <input type="text" class="form-control" name="offday_rate" id="offday_rate" />
                     </div>
+                    
                   </div>
+                  <div class="container d-flex justify-content-center align-items-center">
+                    {{-- <textarea type="text" class="form-control" name=""  id="" rows="4" cols="130" placeholder="" readonly></textarea> --}}
+                  </div>  
                 </form>   
                   <div class="container d-flex justify-content-center align-items-center">
                     <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
+                    {{-- <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit2()">Submit</button> --}}
                     <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit3()">Submit</button>
                     <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" id="sbumit3" style="margin: 5px;" onclick="showTab(4)">Next</button>
     
@@ -718,32 +951,32 @@
               <h4><b> Document & History : </b></h4>
               <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
                 <div class="container d-flex justify-content-center align-items-center">
-                  <form class="w-100" id="form4" action="{{ route('emp_document.store') }}" method="POST">
-                  @csrf
-                      
-                  <div class="container d-flex justify-content-center align-items-center">
-                    <div class="form-group">
-                      
-                      <label for="document_name">Document Name</label>
-                        <input type="text" class="form-control" name="document_name" id="document_name" placeholder="Bank Acount Number" />
-                    </div>
-                    <div class="form-group">   
-                      <div id="fileupload">
-                        <input style="padding: 5px; font-size: 0.8rem;" name="file" type="file"  class="form-control file-input" id="inputGroupFile" required>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="container d-flex justify-content-center align-items-center">
-                    
-                    <div class="form-group">   
-                      <label for="document_expiredate">Document Expired Date</label>
-                      <input type="date" class="form-control" name="document_expiredate" id="document_expiredate" placeholder="Document Expired date" />
-                    </div>
-                    <div class="form-group">   
-                      <label for="document_remark">Document Remarks : </label>
-                      <textarea type="text" class="form-control" name="document_remark"  id="document_remark" rows="4" cols="130" placeholder="Remarks" ></textarea>
-                    </div>
-                  </div>  
+                  <form class="w-100" id="form4" action="{{ route('emp_document.store') }}" method="POST"  enctype="multipart/form-data">
+                    @csrf       
+                      <div class="container d-flex justify-content-center align-items-center">
+                        <div class="form-group">
+                          
+                          <label for="document_name">Document Name</label>
+                            <input type="text" class="form-control" name="document_name" id="document_name" placeholder="Bank Acount Number" />
+                        </div>
+                        <div class="form-group">   
+                         <div id="fileupload">
+                            <label for="document_name">Document Type</label>
+                            <input style="padding: 5px; font-size: 0.8rem;" name="file" type="file"  class="form-control file-input" id="file" >
+                        </div> 
+                        </div>
+                      </div>
+                      <div class="container d-flex justify-content-center align-items-center">
+                        
+                        <div class="form-group">   
+                          <label for="document_expiredate">Document Expired Date</label>
+                          <input type="date" class="form-control" name="document_expiredate" id="document_expiredate" placeholder="Document Expired date" />
+                        </div>
+                        <div class="form-group">   
+                          <label for="document_remark">Document Remarks : </label>
+                          <textarea type="text" class="form-control" name="document_remark"  id="document_remark" rows="4" cols="130" placeholder="Remarks" ></textarea>
+                        </div>
+                      </div>  
                   </form> 
                   <div class="row justify-content-center" >
                     <div class="card-body">  
@@ -814,7 +1047,7 @@
                 </div>  
                   <div class="container d-flex justify-content-center align-items-center">
                     <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="nextTab(3)">Previous</button>
-                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submitform()">Submit</button>       
+                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit4()">Submit</button>       
                   </div>
                 
               </div>
@@ -842,7 +1075,7 @@
             showTab(currentTab);
           }
     
-          function submitForm() {
+          function submit4() {
             var form1 = document.getElementById('form1');
             var form2 = document.getElementById('form2');
             var form3 = document.getElementById('form3');

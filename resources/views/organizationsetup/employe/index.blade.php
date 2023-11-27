@@ -65,10 +65,18 @@
                       <tr >
                         <th scope="col">S.no</th>
                         <th scope="col">Emp_id</th>
-                        <th scope="col">Employee</th>
-                        <th scope="col">Employee Code</th>
-                        <th scope="col">Detail</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Employee code</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">CNIC</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">User Role</th>
+                        <th scope="col">Function</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Employee Category</th>
+                        <th scope="col">Job Status</th>
+                        <th scope="col">Emp Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -76,11 +84,29 @@
                       @foreach ($employes as $employee =>$item )
                       <tr>
                         <th >{{ $employee + 1 }}</a></th>
-                        <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->employee }}</td>
+                        <th ><a>{{ $item->id }}</a></th>
                         <td><a  class="datatable-sorter"></a>{{ $item->employee_code }}</td>
-                        <td>{{ $item ->detail }}</td>
-                        <td>@if($item->is_active)
+                        <td>{{ $item->employee_name }}</td>
+                        <td>{{ $item ->cnic }}</td>
+                        <td>
+                        @foreach($companies as $employee =>$item )
+                        {{ $item->department  }}
+                        @endforeach
+                        </td>
+                        <td>
+                        @foreach($companies as $employee =>$item )
+                        {{ $item->division  }}
+                        @endforeach
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                        <td>{{ $item ->city }}</td>
+                        <td></td>
+                        <td></td>
+                      
+                        <td>@if($item->emp_status == 0)
                                 <p>Active</p>
                             @else
                                 <p>INActive</p>
