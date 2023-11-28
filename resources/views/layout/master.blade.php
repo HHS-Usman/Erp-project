@@ -287,6 +287,17 @@
                               <li class="p-0"><a class="dropdown-item" href="{{ route('qualificationlevel.index')}}">Manage Qualification Level</a></li>  
                         </ul>
                 </div>      
+                <div class="dropdown-submenu dropdown-item dropright">
+                  <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Sales Person</a>
+                    <ul id="container" class="dropdown-menu dropdown-content">
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('salepersontype.create')}}">Create Person Type </a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('salepersontype.index')}}">Manage Person Type</a></li>
+
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('salesperson.create')}}">Create sale Person</a></li>
+                              <li class="p-0"><a class="dropdown-item" href="{{ route('salesperson.index')}}">Manage Sale Person</a></li>
+                        </ul>
+                </div>      
               </div>
             </div>
             <div class="nav-item dropdown">

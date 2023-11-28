@@ -71,10 +71,10 @@ class ReligionController extends Controller
     {
         $religion = Religion::findOrFail($id);
         $religion->update([
-            'religion' => $request->input('religion'),
-            'religion_code'      => $request->input('religion_code'),
-            'detail'        => $request->input('detail'),
-            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            'religion'=>$request->input('religion'),
+            'religion_code'=>$request->input('religion_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0, 
         ]);
          return redirect()->route('religion.index')->with('success','Updated inserted  successfully');
     }
