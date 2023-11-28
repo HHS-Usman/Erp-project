@@ -838,7 +838,7 @@
             e.preventDefault();
         
         });
-        myfunction();
+        
         });
   </script>
   <style>

@@ -80,7 +80,7 @@ class DepartmentController extends Controller
         ]);
         $department->update($request->all());
         //redirect the user and send friendly message
-        return redirect()->route('department.index')->with('success','department update successfully ');
+        return redirect()->route('department.index')->with('success','department update successfully');
     }
 
     /**

@@ -181,6 +181,7 @@ class DivuploadController extends Controller
          ]);
          $file = $request->file('file');
          $extension = $file->getClientOriginalExtension();
+         
          $valuegetting = $request->input('filedatainfor');
          if ($extension === 'csv') {
             // Check if the selected file type matches the expected type
