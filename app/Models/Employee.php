@@ -11,4 +11,18 @@ class Employee extends Model
     protected $guarded = [
         'id',
     ];
+    public function payroll()
+    {
+        return $this->hasOne(Emp_Payroll::class);
+    }
+
+    public function companyInfo()
+    {
+        return $this->hasOne(Emp_Company_Info::class);
+    }
+
+    public function document()
+    {
+        return $this->hasOne(Emp_document::class);
+    }
 }

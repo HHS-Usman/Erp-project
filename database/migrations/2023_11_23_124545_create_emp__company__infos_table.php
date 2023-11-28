@@ -15,6 +15,8 @@ class CreateEmpCompanyInfosTable extends Migration
     {
         Schema::create('emp__company__infos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->string('designation')->nullable();
             $table->string('branch')->nullable();
             $table->string('division')->nullable();

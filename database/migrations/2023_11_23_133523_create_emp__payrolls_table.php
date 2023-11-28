@@ -15,6 +15,8 @@ class CreateEmpPayrollsTable extends Migration
     {
         Schema::create('emp__payrolls', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->string('costcenter')->nullable();
             $table->string('bankname')->nullable();
             $table->string('bank_ac_no')->nullable();

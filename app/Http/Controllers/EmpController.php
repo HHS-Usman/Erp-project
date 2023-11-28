@@ -86,11 +86,12 @@ class EmpController extends Controller
         $banks = Bank::all();
         $overtimes = Overtime_type::all();
         $workflows = Workflow::all();
+        $employes = new Employee();
         $add_approvals = Additional_approval::all();
         $approvals = Approval_level::all();
         $nextId = DB::table('employees')->max('id') + 1;
         return view('organizationsetup.employe.create',
-        compact('countries','costcenters', 'employee', 'leavereasons','employeejobstatus', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 
+        compact('countries','costcenters', 'employee', 'employes', 'leavereasons','employeejobstatus', 'states', 'cities', 'nationalities', 'citizenships', 'qualifications', 'qualificationlevels', 'skills', 'skilllevels', 
         'areas', 'designations', 'divisions', 'departments', 'subdepartments', 'grades', 'groups', 'managementlevels', 'submanagementlevels',
         'add_approvals','approvals','workflows','banks', 'branchs', 'nextId'));
     }
@@ -113,7 +114,7 @@ class EmpController extends Controller
             'emp_status' => 'integer|in:0,1'
         ]);
         //create a new product in database
-        Employee::create([
+        $employes = Employee::create([
             'employee_code' => request()->get('employee_code'),
             'employee_name' => request()->get('employee_name'),
             'father_name' => request()->get('father_name'),
@@ -143,10 +144,26 @@ class EmpController extends Controller
             'skilllevel' => request()->get('skilllevel'),
             'emp_status' => request()->get('is_active', 0),
         ]);
+        $employes->payroll()->create($request->input('payroll'));
+        $employes->companyInfo()->create($request->get('company_info'));
 
-        //redirect the user and send friendly message
-        return redirect()->route('employees.index')->with('success','Employee Created  successfully ');
-    }
+    // Handle document upload
+     if ($request->hasFile('document')) {
+         $file = $request->file('document');
+         $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
+         $file->move('./uploads/', $fileName);
+
+         $employes->document()->create([
+             'document_name' => $request->get('document_name'),
+             'document_type' => $fileName,
+             'document_expiredate' => $request->get('document_expiredate'),
+             'document_remark' => $request->get('document_remark'),
+         ]);
+     }
+
+    return redirect()->route('employees.index',compact('employes'))->with('success', 'Employee created successfully!');
+}
+
 
     /**
      * Display the specified resource.
@@ -193,3 +210,27 @@ class EmpController extends Controller
         //
     }
 }
+// public function update(Request $request, $id)
+// {
+//     // Validate and update data in the employees, payrolls, company_infos, and documents tables
+//     $employee = Employee::find($id);
+//     $employee->update($request->input());
+//     $employee->payroll->update($request->input('payroll'));
+//     $employee->companyInfo->update($request->input('company_info'));
+
+//     // Handle document upload
+//     if ($request->hasFile('document')) {
+//         $file = $request->file('document');
+//         $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
+//         $file->move('./uploads/', $fileName);
+
+//         $employee->document->update([
+//             'document_name' => $request->input('document_name'),
+//             'document_type' => $fileName,
+//             'document_expiredate' => $request->input('document_expiredate'),
+//             'document_remark' => $request->input('document_remark'),
+//         ]);
+//     }
+
+//     return redirect()->route('employees.show', $id)->with('success', 'Employee details updated successfully!');
+// }

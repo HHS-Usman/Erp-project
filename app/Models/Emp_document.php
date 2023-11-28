@@ -11,4 +11,8 @@ class Emp_document extends Model
     protected $guarded = [
         'id',
     ];
+    public function Employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

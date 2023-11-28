@@ -37,7 +37,8 @@ class Emp_Payroll_Controller extends Controller
             'workingday_ratefactor' => request()->get('workingday_ratefactor'),
             'offday_rate' => request()->get('offday_rate'),
             
-        ]);  
+        ]);
+          
         return redirect()->route('employees.create')->with('success','Employee Created  successfully '); 
     }
 }
