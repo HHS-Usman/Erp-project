@@ -12,4 +12,8 @@ Emp_Payroll extends Model
     protected $guarded = [
         'id',
     ];
+    public function Employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
