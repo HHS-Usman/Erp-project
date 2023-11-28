@@ -68,16 +68,15 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Paymentterm $paymentterm)
+    public function update(Request $request,$id)
     {
-          // validate the input
-        $request->validate([
-            'paymentterm' =>'required',
-            'paymentterm_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $paymentterm = Paymentterm::findOrFail($id);
+        $paymentterm->update([
+            'paymentterm' => $request->input('paymentterm'),
+            'paymentterm_code'      => $request->input('paymentterm_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        $paymentterm->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('paymentterm.index')->with('success','Payment Term Updated successfully');
     }

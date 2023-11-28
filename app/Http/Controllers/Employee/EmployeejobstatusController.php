@@ -86,14 +86,13 @@ class EmployeejobstatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-          // validate the input
-          $request->validate([
-            'employeejobstatus'=>'required',
-            'is_active' => 'integer|in:0,1'
-            
+         $employeejob = Employeejobstatus::findorfail($id);
+         $employeejob ->update([
+            'employeejobstatus'=>$request->input('employeejobstatus'),
+            'employeejobstatus_code'=>$request->input('employeejobstatus_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $employeejob = Employeejobstatus::find($id);
-        $employeejob->update($request->all());
         return redirect()->route('employeejobstatus.index')->with('success','Employee Job status Updated  successfully ');
     }
 

@@ -69,17 +69,15 @@ class NationalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Nationality $nationality)
+    public function update(Request $request,$id)
     {
-         // validate the input
-         $request->validate([
-            'nationality' =>'required',
-            'nationality_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $nationality = Nationality::findorfail($id);
+        $nationality ->update([
+            'nationality'=>$request->input('nationality'),
+            'nationality_code'=>$request->input('nationality_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $nationality->update($request->all());
-        //redirect the user and send friendly message
         return redirect()->route('nationality.index')->with('success','Nationality updated successfully');
     }
 

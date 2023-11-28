@@ -71,15 +71,14 @@ class CitizenshipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Citizenship $citizenship)
+    public function update(Request $request,$id)
     {
-          // validate the input
-        $request->validate([
-            'citizenship'=>'required',
-            'citizenship_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-            
+        $citizenship = Citizenship::findorfail($id);
+        $citizenship ->update([
+            'citizenship'=>$request->input('citizenship'),
+            'citizenship_code'=>$request->input('citizenship_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
         $citizenship->update($request->all());
         //redirect the user and send friendly message

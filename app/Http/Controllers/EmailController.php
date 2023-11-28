@@ -68,8 +68,15 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Email $email)
+    public function update(Request $request,$id)
     {
+        $email = Email::findOrFail($id);
+        $email->update([
+            'email' => $request->input('email'),
+            'email_code'      => $request->input('email_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+        ]);
          // validate the input
         $request->validate([
             'email'=>'required',
@@ -77,7 +84,6 @@ class EmailController extends Controller
             'detail' =>'nullable',
             'is_active' => 'integer|in:0,1'
         ]);
-        $email->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('email.index')->with('success','Updated Email successfully');
     }

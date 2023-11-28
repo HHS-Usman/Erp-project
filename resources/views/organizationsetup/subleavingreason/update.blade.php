@@ -3,9 +3,7 @@
    Update Sub Leaving Reason
 @endsection    
 @section('content')
-
   <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -44,8 +42,9 @@
                                 <input type="text" name="detail" id="detail" value="{{$subleavingreason->detail}}"  class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                                Active
+                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$subleavingreason->is_active ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_active">
+                                    Active
                                 </label>
                             </div>
                         </div>

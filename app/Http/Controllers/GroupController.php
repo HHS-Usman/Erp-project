@@ -81,16 +81,15 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, $id)
     {
-         // validate the input
-         $request->validate([
-            'group'=>'required',
-            'group_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $group = Group::findOrFail($id);
+        $group->update([
+            'group' => $request->input('group'),
+            'group_code'=>$request->input('group_code'),
+            'detail'=> $request->input('detail'),
+            'is_active'=> $request->has('is_active') ? 1 : 0, 
         ]);
-        $group->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('group.index')->with('success','Group Updated  successfully ');
     }

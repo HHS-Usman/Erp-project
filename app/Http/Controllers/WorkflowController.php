@@ -84,16 +84,15 @@ class WorkflowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Workflow $workflowgroup)
+    public function update(Request $request,$id)
     {
-        // validate the input
-        $request->validate([
-            'workflow'=>'required',
-            'workflow_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $usergroup = Workflow::findOrFail($id);
+        $usergroup->update([
+            'workflow'=>$request->input('workflow'),
+            'workflow_code'=>$request->input('workflow'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0, 
         ]);
-        $workflowgroup->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('workflowgroup.index')->with('success','Workflow Group  successfully ');
     }

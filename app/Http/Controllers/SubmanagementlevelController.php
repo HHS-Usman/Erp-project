@@ -68,14 +68,14 @@ class SubmanagementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Submanagementlevel $submanagement)
+    public function update(Request $request,$id)
     {
-         // validate the input
-         $request->validate([
-            'submanagementlevel' =>'required',
-            'submanagementlevel_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $submanagement = Submanagementlevel::findOrFail($id);
+        $submanagement->update([
+            'submanagementlevel' => $request->input('submanagementlevel'),
+            'submanagementlevel_code'      => $request->input('submanagementlevel_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $submanagement->update($request->all());
         //redirect the user and send friendly message

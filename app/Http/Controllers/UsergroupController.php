@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\modeofpayment;
 use App\Models\Usergroup;
 use Illuminate\Http\Request;
 
@@ -68,17 +69,15 @@ class UsergroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Usergroup $usergroup)
+    public function update(Request $request,$id)
     {
-          // validate the input
-        $request->validate([
-            'usergroup' =>'required',
-            'usergroup_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $usergroup = Usergroup::findOrFail($id);
+        $usergroup->update([
+            'usergroup'=>$request->input('usergroup'),
+            'usergroup_code'=>$request->input('usergroup_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0, 
         ]);
-        $usergroup->update($request->all());
-        //redirect the user and send friendly message
         return redirect()->route('usergroup.index')->with('success','User Group Updated successfully');
     }
 

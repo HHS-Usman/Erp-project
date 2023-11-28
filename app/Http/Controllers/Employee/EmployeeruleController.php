@@ -81,9 +81,13 @@ class EmployeeruleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employeerule = Employeerule::find($id);
-        // Update fields based on $request data
-        $employeerule->update($request->all());
+       $employeerule = Employeerule::findorfail($id);
+       $employeerule ->update([
+            'employeerule'=>$request->input('employeerule'),
+            'employeerule_code'=>$request->input('employeerule_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
+        ]);
         return redirect()->route('employeerule.index')->with('success', 'Employeerule updated successfully');
     }
 

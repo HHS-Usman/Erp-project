@@ -34,13 +34,14 @@ class DivisionController extends Controller
             'is_active' => 'integer|in:0,1'
         ]);
         //create a new product in database
+        // dd(request()->get('is_active',0));
         Division::create([
             'division' => request()->get('division'),
             'division_code' => request()->get('division_code'),
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-
+        ;
         //redirect the user and send friendly message
         return redirect()->route('division.index')->with('success','division made  successfully ');
     }
@@ -71,18 +72,15 @@ class DivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Division $division )
+    public function update(Request $request,$id )
     {
-         // validate the input
-         $request->validate([
-            'division'=>'required',
-            'division_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $division = Division::findOrFail($id);
+        $division->update([
+            'division_code' => $request->input('division_code'),
+            'division'      => $request->input('division'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        //create a new product in database
-        $division->update($request->all());
-   
         return redirect()->route('division.index')->with('success','division made  successfully ');
     }
 

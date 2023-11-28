@@ -68,14 +68,14 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Language $language)
+    public function update(Request $request, $id)
     {
-         // validate the input
-        $request->validate([
-            'language'=>'required',
-            'language_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $language = Language::findOrFail($id);
+        $language->update([
+            'language' => $request->input('language'),
+            'language_code'      => $request->input('language_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $language->update($request->all());
         //redirect the user and send friendly message

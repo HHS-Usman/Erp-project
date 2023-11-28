@@ -68,16 +68,15 @@ class ProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Process $process)
+    public function update(Request $request, $id)
     {
-        // validate the input
-        $request->validate([
-            'process' =>'required',
-            'process_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $process = Process::findOrFail($id);
+        $process->update([
+            'process'=>$request->input('process'),
+            'process_code'=>$request->input('process_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0, 
         ]);
-        $process->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('process.index')->with('success','Process Updated successfully');
     }

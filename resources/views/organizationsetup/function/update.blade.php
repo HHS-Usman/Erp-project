@@ -44,7 +44,8 @@
                             <input type="text" name="detail" id="detail"  value="{{$function->detail}}" class="form-control" placeholder="Detail">
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                            <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$function->is_active ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_active">
                                 Active
                             </label>
                         </div>
