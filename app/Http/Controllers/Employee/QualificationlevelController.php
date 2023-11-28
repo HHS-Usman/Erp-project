@@ -86,13 +86,13 @@ class QualificationlevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'qualificationlevel'=>'required',
-            'is_active' => 'integer|in:0,1'
-            
+        $qualificationlevel = Qualificationlevel::findorfail($id);
+        $qualificationlevel ->update([
+            'qualificationlevel'=>$request->input('qualificationlevel'),
+            'qualificationlevel_code'=>$request->input('qualificationlevel_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $qualificationlevel = Qualificationlevel::find($id);
-        $qualificationlevel->update($request->all());
         return redirect()->route('qualificationlevel.index')->with('success','Qualification level Updated successfully ');
     }
 

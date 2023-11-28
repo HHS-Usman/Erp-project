@@ -25,6 +25,7 @@ class SubleavingreasonController extends Controller
      */
     public function store(Request $request)
     {
+        
         // validate the input
         $request->validate([
             'subleavingreason' =>'required',
@@ -68,16 +69,15 @@ class SubleavingreasonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Subleavingreason $subleavingreason)
+    public function update(Request $request,$id)
     {
-         // validate the input
-        $request->validate([
-            'subleavingreason' =>'required',
-            'subleavingreason_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $subleavingreason = Subleavingreason::findOrFail($id);
+        $subleavingreason->update([
+            'subleavingreason' => $request->input('subleavingreason'),
+            'subleavingreason_code'=>$request->input('subleavingreason_code'),
+            'detail'=> $request->input('detail'),
+            'is_active'=> $request->has('is_active') ? 1 : 0, 
         ]);
-        $subleavingreason->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('subleavingreason.index')->with('success','Record Updated  successfully');
     }

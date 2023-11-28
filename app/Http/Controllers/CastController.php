@@ -71,17 +71,15 @@ class CastController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Cast $cast)
-    {
-         // validate the input
-         $request->validate([
-            'cast'=>'required',
-            'cast_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-            
+    public function update(Request $request,$id)
+    { 
+        $cast = Cast::findorfail($id);
+        $cast->update([
+            'cast'=>$request->input('cast'),
+            'cast_code'=>$request->input('cast_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $cast->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('cast.index')->with('success','Cast Updated successfully');
     }

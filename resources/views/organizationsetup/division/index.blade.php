@@ -73,7 +73,7 @@
                         <td>@if($item->is_active)
                                 <p>Active</p>
                             @else
-                                <p>INActive</p>
+                                <p>Inactive</p>
                             @endif
                         </td>
                         <td><form action="" method="POST">

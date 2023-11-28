@@ -3,9 +3,7 @@
     Manage Languages
 @endsection    
 @section('content')
- 
 
-  
     <section id="main" class="main" style="padding-top: 0vh;">
         
         @if ($errors->any())
@@ -28,8 +26,7 @@
           </ol>
           </nav>
       </div>
-                  
-                    
+        
       <div style="background-color: lightgray;opacity: 0.9; height='20px'; ">
         <ul class="nav nav-tabs" id="myTabs">
           <li class="nav-item">
@@ -39,8 +36,7 @@
       </div>
       <div style=" left:0px; top:170px;z-index: -1; width: 100%;">
         <div class="tab-content" id="myTabContent">
-          
-                          
+ 
                           <!-- Tab content will be dynamically added here -->
                         </div>
                       </div>

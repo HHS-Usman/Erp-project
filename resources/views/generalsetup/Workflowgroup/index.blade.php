@@ -78,9 +78,9 @@
                         <td><a  class="datatable-sorter"></a>{{ $item->workflow_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
-                                <p>1</p>
+                                <p>Active</p>
                             @else
-                                <p>0</p>
+                                <p>Inactive</p>
                             @endif
                         </td>
                         <td><form action="" method="POST">

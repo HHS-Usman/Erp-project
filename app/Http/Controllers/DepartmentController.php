@@ -69,15 +69,14 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Department $department)
+    public function update(Request $request, $id)
     {
-          // validate the input
-        $request->validate([
-            'department'=>'required',
-            'department_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-            
+        $department = Department::findOrFail($id);
+        $department->update([
+            'department' => $request->input('department'),
+            'department_code'      => $request->input('department_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $department->update($request->all());
         //redirect the user and send friendly message

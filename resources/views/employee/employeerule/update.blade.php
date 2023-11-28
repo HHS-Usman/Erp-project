@@ -44,8 +44,9 @@
                                 <input type="text" name="detail" value="{{$employeerule->detail}}" id="detail" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                                Active
+                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$employeerule->is_active ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_active">
+                                    Active
                                 </label>
                             </div>
                         </div>

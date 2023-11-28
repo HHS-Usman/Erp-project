@@ -69,14 +69,14 @@ class MangementlevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Managementlevel $management)
+    public function update(Request $request,$id)
     {
-          // validate the input
-        $request->validate([
-            'managementlevel'=>'required',
-            'managementlevel_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $management = Managementlevel::findOrFail($id);
+        $management->update([
+            'managementlevel' => $request->input('managementlevel'),
+            'managementlevel_code'      => $request->input('managementlevel_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $management->update($request->all());
         //redirect the user and send friendly message

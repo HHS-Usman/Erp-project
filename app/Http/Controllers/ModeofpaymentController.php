@@ -69,17 +69,15 @@ class ModeofpaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Modeofpayment $modeofpayment)
+    public function update(Request $request,$id)
     {
-         // validate the input
-        $request->validate([
-            'modeofpayment' =>'required',
-            'modeofpayment_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-
+        $modeofpayment = Modeofpayment::findOrFail($id);
+        $modeofpayment->update([
+            'modeofpayment'=>$request->input('modeofpayment'),
+            'modeofpayment_code'=>$request->input('modeofpayment_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0, 
         ]);
-        $modeofpayment->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('modeofpayment.index')->with('success','Updated Mode of Payment successfully');
     }

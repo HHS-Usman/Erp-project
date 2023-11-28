@@ -80,13 +80,13 @@ class SkilllevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // validate the input
-         $request->validate([
-            'skilllevel'=>'required',
-            'is_active' => 'integer|in:0,1'
+        $skilllevel = Skilllevel::findorfail($id);
+        $skilllevel ->update([
+            'skilllevel'=>$request->input('skilllevel'),
+            'skilllevel_code'=>$request->input('skilllevel_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $skilllevel = Skilllevel::find($id);
-        $skilllevel->update($request->all());
         return redirect()->route('skilllevel.index')->with('success','Skill Level Updated successfully ');
 
     }

@@ -87,15 +87,14 @@ class EmployeeflagController extends Controller
      */
     public function update(Request $request, $id)
     {
-          $request->validate([
-            'employeeflag'=>'required',
-            'is_active' => 'integer|in:0,1'
-            
+        $employeflg = Employeeflag::findorfail($id);
+        $employeflg ->update([
+            'employeeflag'=>$request->input('employeeflag'),
+            'employeeflag_code'=>$request->input('employeeflag_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $employeflg =Employeeflag::find($id);
-        $employeflg->update($request->all());
-        return redirect()->route('employeeflag.index')->with('success','Employee-Flag successfully ');
-        
+        return redirect()->route('employeeflag.index')->with('success','Employee-Flag successfully');
     }
 
     /**

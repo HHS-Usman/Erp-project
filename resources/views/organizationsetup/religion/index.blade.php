@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Manage Management Level
+    Manage Religion
 @endsection    
 @section('content')
  
@@ -20,11 +20,11 @@
         @endif
             
       <div class="pagetitle" style="margin-left: 20px;">
-          <h1>Manage Management Level</h1>
+          <h1>Manage Religion</h1>
           <nav>
           <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active"><a> Manage Management Level</a></li>
+              <li class="breadcrumb-item active"><a> Manage Religion</a></li>
           </ol>
           </nav>
       </div>
@@ -64,8 +64,8 @@
                       <tr >
                         <th scope="col">S.no</th>
                         <th scope="col">Rel_id</th>
-                        <th scope="col">Management Level</th>
-                        <th scope="col">Management Level Code</th>
+                        <th scope="col">Religion</th>
+                        <th scope="col">Religion Code</th>
                         <th scope="col">Detail</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -87,7 +87,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="{{route('designation.edit',$item->id)}}">Edit</a>
+                          <a class="btn btn-primary" href="{{route('religion.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

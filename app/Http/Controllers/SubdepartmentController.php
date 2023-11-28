@@ -68,16 +68,15 @@ class SubdepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Subdepartment $subdepartment)
+    public function update(Request $request, $id)
     {
-        // validate the input
-        $request->validate([
-            'subdepartment' =>'required',
-            'subdepartment_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $subdepartment = Subdepartment::findOrFail($id);
+        $subdepartment->update([
+            'subdepartment_code' => $request->input('subdepartment_code'),
+            'subdepartment'      => $request->input('subdepartment'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        $subdepartment->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('subdepartment.index')->with('success','subdepartment updated successfully ');
     }

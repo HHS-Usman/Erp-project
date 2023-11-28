@@ -69,14 +69,14 @@ class FundtionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Fundtion $function)
+    public function update(Request $request,$id)
     {
-        // validate the input
-        $request->validate([
-            'function'=>'required',
-            'function_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $function = Fundtion::findOrFail($id);
+        $function->update([
+            'function' => $request->input('function'),
+            'function_code'      => $request->input('function_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $function->update($request->all());
         //redirect the user and send friendly message

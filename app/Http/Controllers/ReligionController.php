@@ -67,19 +67,17 @@ class ReligionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Religion $religion)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'religion' =>'required',
-            'religion_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $religion = Religion::findOrFail($id);
+        $religion->update([
+            'religion' => $request->input('religion'),
+            'religion_code'      => $request->input('religion_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        $religion->update($request->all());
          return redirect()->route('religion.index')->with('success','Updated inserted  successfully');
- 
     }
-
     /**
      * Remove the specified resource from storage.
      *

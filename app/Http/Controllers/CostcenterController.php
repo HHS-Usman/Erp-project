@@ -70,16 +70,14 @@ class CostcenterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Costcenter $costcenter)
+    public function update(Request $request, $id)
     {
-        
-        // validate the input
-        $request->validate([
-            'costcenter' => 'required',
-            'costcenter_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-
+        $costcenter = Costcenter::findOrFail($id);
+        $costcenter->update([
+            'costcenter' => $request->input('costcenter'),
+            'costcenter_code'      => $request->input('costcenter_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
         $costcenter->update($request->all());
         //redirect the user and send friendly message

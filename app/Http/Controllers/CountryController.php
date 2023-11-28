@@ -71,17 +71,15 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Country $country)
+    public function update(Request $request,$id)
     {
-          // validate the input
-          $request->validate([
-            'country'=>'required',
-            'country_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
-            
+        $country = Country::findorfail($id);
+        $country->update([
+            'country'=>$request->input('country'),
+            'country_code'=>$request->input('country_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
         ]);
-        $country->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('country.index')->with('success','Country Updated successfully');
     }

@@ -82,15 +82,15 @@ class DesignationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Designation $designation)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'designation'=>'required',
-            'designation_code' => 'nullable',
-            'detail' => 'nullable',
-            'is_active' => 'integer|in:0,1'
+        $designation = Designation::findOrFail($id);
+        $designation->update([
+            'designation' => $request->input('designation'),
+            'designation_code'      => $request->input('designation_code'),
+            'detail'        => $request->input('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        $designation->update($request->all());
         //redirect the user and send friendly message
         return redirect()->route('designation.index')->with('success','Designation Updated Data  successfully ');       
     }

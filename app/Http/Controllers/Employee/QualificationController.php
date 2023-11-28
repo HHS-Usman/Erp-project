@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Qualification;
+use App\Models\Qualificationlevel;
 use Illuminate\Http\Request;
 
 class QualificationController extends Controller
@@ -86,14 +87,13 @@ class QualificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $request->validate([
-            'qualification'=>'required',
-            'is_active' => 'integer|in:0,1'
-            
-        ]);
-        $qualification = Qualification::find($id);
-        $qualification->update($request->all());
+        $qualification = Qualification::findorfail($id);
+        $qualification ->update([
+           'qualification'=>$request->input('qualification'),
+           'qualification_code'=>$request->input('qualification_code'),
+           'detail'=>$request->input('detail'),
+           'is_active'=>$request->has('is_active') ? 1 : 0,
+       ]);
         return redirect()->route('qualification.index')->with('success','Qualification Updated  successfully ');
     }
 

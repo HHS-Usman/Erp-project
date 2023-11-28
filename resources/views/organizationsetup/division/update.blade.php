@@ -44,10 +44,11 @@
                     <input type="type" name="detail" id="detail" value="{{ $division->detail}}" class="form-control" placeholder="Detail">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                      Active
+                    <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{ $division->is_active ? 'checked' : '' }}>
+                    <label class="form-check-label" for="is_active">
+                        Active
                     </label>
-                  </div>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
