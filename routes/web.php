@@ -44,8 +44,9 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\Emp_Company_Info_Controller;
 use App\Http\Controllers\Emp_Payroll_Controller;
 use App\Http\Controllers\Emp_Document_Controller;
-
-
+use App\Http\Controllers\SalepersontypeController;
+use App\Http\Controllers\SalespersonController;
+use App\Models\Saleperson;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -115,6 +116,8 @@ Route::resource('qualificationlevel',QualificationlevelController::class);
 Route::resource('workflowgroup',WorkflowController::class);
 Route::resource('divupload',DivuploadController::class);
 Route::resource('event',EventController::class);
+Route::resource('salesperson',SalespersonController::class);
+Route::resource('salepersontype',SalepersontypeController::class);
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
 // for fetch record of DB in JS file
 Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);

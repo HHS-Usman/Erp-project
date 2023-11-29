@@ -3,9 +3,7 @@
     Update Qualification Level
 @endsection    
 @section('content')
-
   <section id="main" class="main" style="padding-top: 0vh;">
-        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
