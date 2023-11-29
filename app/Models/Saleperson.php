@@ -11,4 +11,11 @@ class Saleperson extends Model
     protected $guarded = [
         'id',
     ];
+    protected $fillable = [
+        'saleperson_code',
+        'persontype',
+        'employee',
+        'detail',
+        'is_active',
+    ];
 }

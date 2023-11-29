@@ -70,9 +70,10 @@ class SalepersontypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salespersontype $persontype)
+    public function edit($id)
     {
-        return view('salesperson.salespersontype.update',compact('persontype'));
+        $salespersontype = Salespersontype::findOrFail($id);
+        return view('salesperson.salespersontype.update',compact('salespersontype'));
     }
 
     /**
@@ -82,16 +83,15 @@ class SalepersontypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Salespersontype $salepersontype)
     {
-        $persontype = Salespersontype::findOrFail($id);
-        $persontype->update([
-            'persontype'=>$request->input('persontype'),
-            'persontype_code'=>$request->input('persontype_code'),
-            'detail'=>$request->input('detail'),
-            'is_active'=>$request->has('is_active') ? 1 : 0, 
+        $salepersontype->update([
+            'persontype' => $request->input('persontype'),
+            'persontype_code' => $request->input('persontype_code'),
+            'detail' => $request->input('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
         ]);
-         return redirect()->route('salespersontype.index')->with('success','Updated Sales Person  successfully');
+         return redirect()->route('salepersontype.index')->with('success','Updated Sales_Person_Type  successfully');
     }
 
     /**

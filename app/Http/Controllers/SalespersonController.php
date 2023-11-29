@@ -7,6 +7,7 @@ use App\Models\Saleperson;
 use Illuminate\Http\Request;
 use App\Models\Salespersontype;
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class SalespersonController extends Controller
 {
@@ -20,7 +21,6 @@ class SalespersonController extends Controller
         $saleperson=Saleperson::latest()->paginate();
         return view('salesperson.saleperson.index',compact('saleperson'))->with(request()->input('page'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -75,10 +75,11 @@ class SalespersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   $spt = Salespersontype::all();
+        $emp = Employee::all();
+        $saleperson = Saleperson::findOrFail($id);
+        return view('salesperson.saleperson.update',compact('saleperson','spt','emp'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -86,9 +87,20 @@ class SalespersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Saleperson $saleperson)
+   {
+
+      DB::enableQueryLog();
+       $saleperson->update([
+            'saleperson_code' => $request->input('saleperson_code'),
+            'persontype' => $request->input('persontype'),
+            'employee' => $request->input('employee'),
+            'detail' => $request->input('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
+        ]);
+        dd(DB::getQueryLog());
+        dd($saleperson->toSql(), $saleperson->getBindings());
+        return redirect()->route('salesperson.index')->with('success','Updated Sale Person successfully');
     }
 
     /**

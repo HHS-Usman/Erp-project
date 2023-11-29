@@ -15,7 +15,6 @@
         </nav>
     </div>
       <head>
-      
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -48,7 +47,6 @@
             margin-top: 10px;
           }
           .dropdown {
-           
           }
           #options,
           .options {
@@ -61,11 +59,6 @@
             justify-content: start;
             align-items: center;
           }
-          /* .btn {
-            background-color: rgb(250, 219, 42);
-            font-size: 1rem;
-          } */
-    
           .tab-link {
             border-radius: 5px;
             background-color: rgb(250, 219, 42);
@@ -74,15 +67,12 @@
             padding: 10px;
             border: 1px solid #fffbfb;
           }
-    
           .form-group {
             margin-bottom: 15px;
           }
-    
           .form-group label {
             margin-bottom: 5px;
           }
-    
           .form-group input {
             width: 100%;
             padding: 8px;
@@ -93,7 +83,6 @@
             .form-container {
               flex-direction: row;
             }
-    
             .form-group {
               flex: 1;
               margin-right: 15px;
@@ -117,17 +106,13 @@
                 <form class="w-100" id="form1" action="{{ route('employees.update') }}" method="POST">
                   @csrf
                   <div class="container d-flex justify-content-center align-items-center">
-                    
                       <div class="form-group">
                         <label for="Employee">Employee Code</label>
                         <input type="text" name="employee_code" value="{{ $nextId }}" readonly>
-
-                         
                       </div>
                       <div class="form-group">
                         <label for="Employee">Employee Code</label>
                         <input type="text" class="form-control" name="employee_code" id="employee_code" placeholder="Employee Code" required/>
-                        
                       </div>
                       <div class="form-group">
                         <label for="options">Employee GL Mapping</label>
