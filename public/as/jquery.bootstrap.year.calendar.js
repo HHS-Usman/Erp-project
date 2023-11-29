@@ -715,11 +715,14 @@ var number = 1;
 //             console.error('Error fetching data:', error);
 //         });
 // }
+document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />');
+document.write('<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>');
+document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>');
 function myFunction(value) {
     if (value.classList.contains('selected')) {
         value.classList.remove('selected');
     }
-
+   
     var classes = Array.from(value.classList);
     console.log(classes[2]);
     console.log(value);
@@ -731,7 +734,7 @@ function myFunction(value) {
 
     // Define an array of endpoint URLs
     var endpoints = ['/get-countries', '/get-religion', '/get-group', '/get-state' ];
-
+    
     // Use Promise.all to fetch data from multiple endpoints simultaneously
     Promise.all(endpoints.map(endpoint => fetch(endpoint)))
         .then(responses => Promise.all(responses.map(response => response.json())))
@@ -742,7 +745,10 @@ function myFunction(value) {
             var groupData = dataArray[2];
             var stateData = dataArray[3];
 
+            
             // Use the fetched data to build your HTML
+            
+           
             var countrySelect = '<select name="dates[' + counter + '][country]" id="country' + counter + '">';
             countrySelect += '<option value="0">Type and Select</option>';
             countryData.forEach(country => {
