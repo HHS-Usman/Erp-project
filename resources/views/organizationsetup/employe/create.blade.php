@@ -110,7 +110,7 @@
             <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(4)">Document/Job History</button></div>
           </div>
           <div class="container">
-            <form class="w-100" id="multitab-form" action="{{ route('employees.store') }}"  method="POST">
+            <form class="w-100" id="multitab-form" action="{{ route('employees.store') }}" enctype="multipart/form-data" method="POST">
               @csrf
               <div class="tab" id="tab1">
                 <h4><b> Employee : </b></h4>
@@ -229,8 +229,8 @@
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
-                        <label for="for address">Address</label>
-                        <textarea id="address" name="address" rows="4" cols="130" placeholder="Address...."></textarea>
+                        <label for="Emergency Number">Address</label>
+                        <textarea type="text" class="form-control" name="address"  id="address" rows="4" cols="130" placeholder="Address" ></textarea>
                       </div>
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
@@ -345,15 +345,9 @@
                         
                       <div class="container d-flex justify-content-center align-items-center">
                         <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit1()">Submit</button>
-                        <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Next</button>
+                        <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Next</button>
                       </div>
-                    <script>
-                      function submit1() 
-                      {
-                        var form1 = document.getElementById('form1');
-                        form1.submit();          
-                      }
-                    </script>
+                    
                 </div>  
               </div>
       
@@ -795,9 +789,9 @@
                     
                       
                       <div class="container d-flex justify-content-center align-items-center">
-                        <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+                        <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
                         <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-                        <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+                        <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
                       </div>
                     <script>
                       function submit1() 
@@ -877,7 +871,7 @@
                           
                           <input type="text" class="form-control" name="payroll[gratuity_no]" id="gratuity_no" placeholder="gratuity_no" />
                       </div>
-                      <input type="checkbox" class="justify-content-start" name="gratuity_num"  id="gratuity_num" />
+                      <input type="checkbox" class="justify-content-start" name="payroll[gratuity_num0]"  id="gratuity_num" />
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
                   
@@ -892,38 +886,38 @@
                       </div>
                       <div class="form-group">
                       <label for="holiday_rate_type">Holiday Rate Type : </label>
-                          <input type="text" class="form-control" name="holiday_rate_type"  id="holiday_rate_type" placeholder="holiday rate type" />
+                          <input type="text" class="form-control" name="payroll[holiday_rate_type]"  id="holiday_rate_type" placeholder="holiday rate type" />
                       </div>
                       <div class="form-group">
                         <label for="shifthours">Shift Hours : </label>
-                          <input type="text" class="form-control" name="shifthours"  id="shifthours" placeholder="shifthours" />
+                          <input type="text" class="form-control" name="payroll[shifthours]"  id="shifthours" placeholder="shifthours" />
                       </div>
                     </div>
                     
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
                         <label for="gazettedholiday_rate_type">Gazetted Holiday Rate Type : </label>
-                        <input type="text" class="form-control" name="gazettedholiday_rate_type"  id="gazettedholiday_rate_type" placeholder="gazettedholiday rate type" />
+                        <input type="text" class="form-control" name="payroll[gazettedholiday_rate_type]"  id="gazettedholiday_rate_type" placeholder="gazettedholiday rate type" />
                       </div>
                       <div class="form-group">
                         <label for="ratefactor"> Rate Factor : </label>
-                        <input type="text" class="form-control" name="ratefactor" id="ratefactor" />
+                        <input type="text" class="form-control" name="payroll[ratefactor]" id="ratefactor" />
                       </div>
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
                         <label for="offday_ratefactor"> Off Day Rate Factor : </label>
-                        <input type="text" class="form-control" name="offday_ratefactor" id="offday_ratefactor" />
+                        <input type="text" class="form-control" name="payroll[offday_ratefactor]" id="offday_ratefactor" />
                       </div>
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
                         <label for="workingday_ratefactor">Working Day Rate Factor : </label>
-                        <input type="text" class="form-control" name="workingday_ratefactor" id="workingday_ratefactor" />
+                        <input type="text" class="form-control" name="payroll[workingday_ratefactor]" id="workingday_ratefactor" />
                       </div>
                       <div class="form-group">
                         <label for="offday_rate"> Off Day Rate : </label>
-                        <input type="text" class="form-control" name="offday_rate" id="offday_rate" />
+                        <input type="text" class="form-control" name="payroll[offday_rate]" id="offday_rate" />
                       </div>
                       
                     </div>
@@ -934,7 +928,7 @@
                     <div class="container d-flex justify-content-center align-items-center">
                       <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
                       {{-- <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit2()">Submit</button> --}}
-                      <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit1()">Submit</button>
+                      <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit3()">Submit</button>
                       <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" id="sbumit3" style="margin: 5px;" onclick="showTab(4)">Next</button>
       
                       
@@ -957,7 +951,7 @@
                           <div class="form-group">   
                           <div id="fileupload">
                               <label for="document_name">Document Type</label>
-                              <input style="padding: 5px; font-size: 0.8rem;" name="file" type="file"  class="form-control file-input" id="file" >
+                              <input style="padding: 5px; font-size: 0.8rem;" name="document" type="file"  class="form-control file-input" id="file" >
                           </div> 
                           </div>
                         </div>
@@ -1042,7 +1036,7 @@
                   </div>  
                     <div class="container d-flex justify-content-center align-items-center">
                       <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="nextTab(3)">Previous</button>
-                      <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit1()">Submit</button>       
+                      <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit4()">Submit</button>       
                     </div>
                   
                 </div>

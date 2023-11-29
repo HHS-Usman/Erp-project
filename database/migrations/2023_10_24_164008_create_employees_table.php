@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_code')->nullable();
             $table->string('employee_name');
             $table->string('father_name')->nullable();
+            $table->string('email');
             $table->string('cnic');
             $table->string('mobile_no');
             $table->string('family_code')->nullable();
