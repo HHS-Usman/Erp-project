@@ -87,24 +87,17 @@
                         <th ><a>{{ $item->id }}</a></th>
                         <td><a  class="datatable-sorter"></a>{{ $item->employee_code }}</td>
                         <td>{{ $item->employee_name }}</td>
-                        <td>{{ $item ->cnic }}</td>
+                        <td>{{ $item ->cnic }}</td>  
+                        <td>{{ $item->companyInfo->department ?? 'N/A' }}</td>
                         <td>
-                        @foreach($companies as $employee =>$item )
-                        {{ $item->department  }}
-                        @endforeach
-                        </td>
-                        <td>
-                        @foreach($companies as $employee =>$item )
-                        {{ $item->division  }}
-                        @endforeach
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                          {{ $item->companyInfo->designation ?? 'N/A' }}</td>
+                        <td>{{ $item->companyInfo->employeeinfo ?? 'N/A' }}</td>
+                        <td>{{ $item->companyInfo->function ?? 'N/A'  }}</td>
+                        <td>{{ $item->companyInfo->group ?? 'N/A'  }}</td>
                         
                         <td>{{ $item ->city }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $item->companyInfo->employeecategory ?? 'N/A'  }}</td>
+                        <td>{{ $item->companyInfo->employeejobstatus ?? 'N/A'  }}</td>
                       
                         <td>@if($item->emp_status == 0)
                                 <p>Active</p>
@@ -114,7 +107,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
+                          <a class="btn btn-primary" href="{{route('employees.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

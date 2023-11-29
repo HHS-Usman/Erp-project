@@ -1,12 +1,12 @@
 @extends('layout.master')
 @section('page-tab')
-    Edit Employee
+    Create Employee
 @endsection    
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Edit Employee</h1>
+        <h1>Create Employee</h1>
         <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
@@ -1059,7 +1059,10 @@
             currentTab = next;
             showTab(currentTab);
           }
-    
+          function submitForm() {
+                // You can add any final validation logic here before submitting the form
+                document.getElementById("multitab-form").submit();
+            }
           function submit4() {
             var form1 = document.getElementById('form1');
             var form2 = document.getElementById('form2');
