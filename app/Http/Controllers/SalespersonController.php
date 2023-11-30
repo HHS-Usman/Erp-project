@@ -7,7 +7,9 @@ use App\Models\Saleperson;
 use Illuminate\Http\Request;
 use App\Models\Salespersontype;
 use App\Models\Employee;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SalespersonController extends Controller
 {
@@ -75,10 +77,11 @@ class SalespersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $spt = Salespersontype::all();
+    {   
+        $spt = Salespersontype::all();
         $emp = Employee::all();
         $saleperson = Saleperson::findOrFail($id);
-        return view('salesperson.saleperson.update',compact('saleperson','spt','emp'));
+        return view('salesperson.saleperson.update',compact('emp','spt','saleperson'));
     }
     /**
      * Update the specified resource in storage.
@@ -88,21 +91,25 @@ class SalespersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Saleperson $saleperson)
-   {
+{
+    $request->validate([
+        'saleperson_code' => 'required',
+        'persontype' => 'required',
+        'employee' => 'required',
+        'detail' => 'nullable', // Use 'nullable' to make the field optional
+        'is_active' => 'integer|in:0,1',
+    ]);
+    $saleperson->update([
+        'saleperson_code' => $request->input('saleperson_code'),
+        'persontype' => $request->input('persontype'),
+        'employee' => $request->input('employee'),
+        'detail' => $request->input('detail', null),
+        'is_active' => $request->input('is_active', 0),
+    ]);
 
-      DB::enableQueryLog();
-       $saleperson->update([
-            'saleperson_code' => $request->input('saleperson_code'),
-            'persontype' => $request->input('persontype'),
-            'employee' => $request->input('employee'),
-            'detail' => $request->input('detail'),
-            'is_active' => $request->has('is_active') ? 1 : 0,
-        ]);
-        dd(DB::getQueryLog());
-        dd($saleperson->toSql(), $saleperson->getBindings());
-        return redirect()->route('salesperson.index')->with('success','Updated Sale Person successfully');
-    }
-
+    // Redirect the user and send a friendly message
+    return redirect()->route('salesperson.index')->with('success', 'Updated successfully');
+}
     /**
      * Remove the specified resource from storage.
      *

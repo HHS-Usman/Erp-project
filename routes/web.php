@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountcategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DepartmentController;
@@ -119,6 +120,7 @@ Route::resource('qualificationlevel',QualificationlevelController::class);
 Route::resource('workflowgroup',WorkflowController::class);
 Route::resource('divupload',DivuploadController::class);
 Route::resource('event',EventController::class);
+Route::resource('accountcategory',AccountcategoryController::class);
 Route::resource('coamainheaderlevel',CoaheadlevelController::class);
 Route::resource('coa',CoaController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);

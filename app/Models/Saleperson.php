@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Saleperson extends Model
 {
     use HasFactory;
-    protected $guarded = [
-        'id',
-    ];
+    protected $guarded = ['id'];
+    
     protected $fillable = [
         'saleperson_code',
         'persontype',
