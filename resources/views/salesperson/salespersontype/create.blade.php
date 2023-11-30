@@ -25,7 +25,7 @@
                 </ol>
                 </nav>
             </div>
-            <br><br><br>
+            <br><br><br>$saleperson
             <form action="{{ route('salepersontype.store') }}" method="POST">        
       @csrf
         <div class="row justify-content-center">

@@ -26,29 +26,29 @@
             </nav>
         </div>
         <br><br><br>
-        <form action="{{ route('salepersontype.update', $persontype) }}" method="POST">
+        <form action="{{ route('salepersontype.update', ['salepersontype' => $salespersontype]) }}" method="POST">
             @csrf
-            @method('PUT')
+             @method('PUT')
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Person Type Code</strong>
                         <input type="text" name="persontype_code" id="persontype_code" class="form-control"
-                            value="{{ $persontype->persontype_code }}" placeholder="Sale Person Type Code">
+                            value="{{$salespersontype->persontype_code }}" placeholder="Sale Person Type Code">
                     </div>
                     <div class="form-group">
                         <strong>Person Type<span style="color:#DC3545">*</span></strong>
-                        <input type="text" name="persontype" value="{{ $persontype->persontype }}" id="persontype"
+                        <input type="text" name="persontype" value="{{$salespersontype->persontype }}" id="persontype"
                             class="form-control" placeholder="Person Type" required>
                     </div>
                     <div class="form-group">
                         <strong>Details</strong>
-                        <input type="type" name="detail" value="{{ $persontype->detail }}" id="detail"
+                        <input type="type" name="detail" value="{{$salespersontype->detail }}" id="detail"
                             class="form-control" placeholder="Detail">
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active"
-                            {{ $persontype->is_active ? 'checked' : '' }}>
+                            {{$salespersontype->is_active ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">
                             Active
                         </label>

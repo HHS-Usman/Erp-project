@@ -38,7 +38,7 @@
                         <select name="persontype" id="persontype">
                             <option value="Select Sale Type">Select Person Type</option>
                             @foreach ($spt as $persontype=>$item)
-                            <option value={{$item->id}}> {{$item->persontype}}
+                            <option value={{$item->id}}> {{$item->persontype}} 
                             </option>
                             @endforeach 
                         </select>
@@ -48,7 +48,7 @@
                         <select name="employee" id="employee">
                             <option value="Select Employee" >Select Employee</option>
                             @foreach ($emp as $employee=>$item)
-                            <option value={{$item->id}}> {{$item->employee_name}}
+                            <option value={{$item->id}}>{{$item->id}} {{$item->employee_name}}
                             </option>
                             @endforeach 
                         </select>

@@ -1,7 +1,7 @@
 
 @extends('layout.master')
 @section('page-tab')
-    Manage Sales Person Type
+    Manage Sales Person 
 @endsection    
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
@@ -16,11 +16,11 @@
             </div>
         @endif
       <div class="pagetitle" style="margin-left: 20px;">
-          <h1>Manage Sale Person Type</h1>
+          <h1>Manage Sale Person </h1>
           <nav>
           <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active"><a> Manage Sale Person Type</a></li>
+              <li class="breadcrumb-item active"><a> Manage Sale Person </a></li>
           </ol>
           </nav>
       </div>       
@@ -80,7 +80,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="{{route('salepersontype.edit',$item->id)}}">Edit</a>
+                          <a class="btn btn-primary" href="{{route('salesperson.edit',$item->id)}}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>
                       </tr>
