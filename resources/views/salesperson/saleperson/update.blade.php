@@ -25,7 +25,7 @@
         </div>
         <br><br><br>
         <form action="{{ route('salesperson.update', $saleperson) }}" method="POST">
-            @csrf
+         @csrf
             @method('PUT')
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Sale Person Type:</strong>
-                        <select name="persontype" id="persontype" >
+                        <select name="persontype" id="persontype" class="form-control" >
                             <option value="Select Sale Type">Select Person Type</option>
                             @foreach ($spt as $item)
                                 <option value="{{ $item->id }}" {{ $saleperson->persontype == $item->id ? 'selected' : '' }}>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Employee:</strong>
-                        <select name="employee" id="employee">
+                        <select name="employee" id="employee" class="form-control">
                             <option value="Select Employee">Select Employee</option>
                             @foreach ($emp as $item)
                                 <option value="{{ $item->id }}" {{ $saleperson->employee == $item->id ? 'selected' : '' }}>

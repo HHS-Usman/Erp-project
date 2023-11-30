@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Sale Person Type:</strong>
-                        <select name="persontype" id="persontype">
+                        <select name="persontype" id="persontype" class="form-control">
                             <option value="Select Sale Type">Select Person Type</option>
                             @foreach ($spt as $persontype=>$item)
                             <option value={{$item->id}}> {{$item->persontype}} 
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Employee: </strong>
-                        <select name="employee" id="employee">
+                        <select name="employee" id="employee" class="form-control">
                             <option value="Select Employee" >Select Employee</option>
                             @foreach ($emp as $employee=>$item)
                             <option value={{$item->id}}>{{$item->id}} {{$item->employee_name}}

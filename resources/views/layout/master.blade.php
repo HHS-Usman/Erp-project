@@ -422,6 +422,8 @@
                                       href="#" role="button" aria-haspopup="true"
                                       aria-expanded="false">Accounts</a>
                                   <ul id="container" class="dropdown-menu dropdown-content">
+                                    <li class="p-0"><a class="dropdown-item"
+                                        href="{{ route('accountcategory.create') }}">Create Account Category</a>
                                       <li class="p-0"><a class="dropdown-item"
                                               href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level </a>
                                       </li>
