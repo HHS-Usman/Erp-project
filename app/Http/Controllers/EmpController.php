@@ -36,7 +36,7 @@ use App\Models\Emp_document;
 use App\Models\Emp_Payroll;
 
 use App\Models\Costcenter;
-
+use File;
 use Illuminate\Support\Facades\DB;
 class EmpController extends Controller
 {
@@ -149,7 +149,13 @@ class EmpController extends Controller
         $employes->companyInfo()->create($request->get('company_info'));
 
     // Handle document upload
+        $request->validate([
+            'document_name' => 'nullable',
+            'document_type'=>'nullable',
+            'document_expiredate'=>'nullable',
+            'document_remark'=>'nullable',
             
+        ]);
          $fileName = 'none';
          if ($request->hasFile('document')) {
              $file = $request->file('document');
@@ -256,8 +262,8 @@ class EmpController extends Controller
             'email'=>'required',
             'emp_status' => 'integer|in:0,1'
         ]);
-        $employee = Employee::find($id);
-        $employee->update([
+        $employed = Employee::find($id);
+        $employed->update([
             'employee_code' => request()->get('employee_code'),
             'employee_name' => request()->get('employee_name'),
             'father_name' => request()->get('father_name'),
@@ -287,8 +293,8 @@ class EmpController extends Controller
             'skilllevel' => request()->get('skilllevel'),
             'emp_status' => request()->get('is_active', 0),
         ]);
-        $employee->payroll->update($request->input('payroll'));
-        $employee->companyInfo->update($request->get('company_info'));
+        $employed->payroll->update($request->input('payroll'));
+        $employed->companyInfo->update($request->get('company_info'));
 
         // Handle document upload
         // $currentFile = $author->document;
@@ -312,28 +318,39 @@ class EmpController extends Controller
         //         'document_remark' => $request->get('document_remark'),
         //     ]);
         // }
-        if ($request->hasFile('document')) {
-            $file = $request->file('document');
-            $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
-            $file->move('./uploads/', $fileName);
-
+        $request->validate([
+            'document_name' => 'nullable',
+            'document_type'=>'nullable',
+            'document_expiredate'=>'nullable',
+            'document_remark'=>'nullable',
+            
+        ]);
+        $currentFile = $employed->document_type;
+        $fileName = null;
+	    	if (request()->hasFile('document')) 
+	    	{
+	    		$file = request()->file('document');
+	    		$fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
+	    		$file->move('./uploads/', $fileName);
+	    	}
+        
+            
             // Update the document in the 'documents' table
-            $employee->document()->update([
+            $employed->document()->update([
                 'document_name' => $request->get('document_name'),
-                'document_type' => $fileName,
+                'document_type' => ($fileName) ? $fileName : $currentFile,
                 'document_expiredate' => $request->get('document_expiredate'),
                 'document_remark' => $request->get('document_remark'),
             ]);
-        } else {
-            // If no new file is provided, only update the other fields
-            $employee->document()->update([
-                'document_name' => $request->get('document_name'),
-                'document_expiredate' => $request->get('document_expiredate'),
-                'document_remark' => $request->get('document_remark'),
-            ]);
-        }
+        if ($fileName) 
+        	File::delete('./uploads/' . $currentFile);
+        
+        $notification = [
+            'message' => 'Record Updated Successfully!',
+            'alert-type' => 'success',
+        ];
 
-        return redirect()->route('employees.index', $id)->with('success', 'Employee details updated successfully!');
+        return redirect()->route('employees.index', $id)->with($notification);
 
     }
 

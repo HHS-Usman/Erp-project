@@ -1,0 +1,13 @@
+arrow towards  right side (drop down0)
+expnad dropdown list are on same styles
+expanded dropdown are close when open another module
+name of forms on tab bar + NAVIGATION PATH ON PAGE +PAGE name
+all crete layouts must be same as for manage layouts (like division layout) 
+creates are same as general setup creates (Payment Term)
+add footer on all pages 
+apply tab
+                                         ----x----
+create and manage single properties of employees module 
+
+
+

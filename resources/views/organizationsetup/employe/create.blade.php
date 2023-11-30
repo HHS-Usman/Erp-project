@@ -926,10 +926,10 @@
                     </div>  
                     
                     <div class="container d-flex justify-content-center align-items-center">
-                      <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
+                      <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
                       {{-- <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit2()">Submit</button> --}}
                       <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit3()">Submit</button>
-                      <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" id="sbumit3" style="margin: 5px;" onclick="showTab(4)">Next</button>
+                      <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit3" style="margin: 5px;" onclick="showTab(4)">Next</button>
       
                       
                     </div>
@@ -1035,7 +1035,7 @@
                     </div>  
                   </div>  
                     <div class="container d-flex justify-content-center align-items-center">
-                      <button type="nextbutton" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="nextTab(3)">Previous</button>
+                      <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="nextTab(3)">Previous</button>
                       <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit4()">Submit</button>       
                     </div>
                   
