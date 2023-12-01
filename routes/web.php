@@ -51,6 +51,8 @@ use App\Http\Controllers\Emp_Document_Controller;
 use App\Http\Controllers\SalepersontypeController;
 use App\Http\Controllers\SalespersonController;
 use App\Models\Saleperson;
+use App\Http\Controllers\Security\UserroleController;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -88,6 +90,8 @@ Route::resource('management',MangementlevelController::class);
 Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);
 Route::resource('employees',EmpController::class);
+Route::resource('userrole',UserroleController::class);
+
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);

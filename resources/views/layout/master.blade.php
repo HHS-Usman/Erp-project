@@ -436,7 +436,19 @@
                                               <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a></li>
                                   </ul>
-                              </div>
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Security</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('userrole.create') }}">Create User Role  </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('userrole.index') }}">Manage User Role </a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="nav-item dropdown">

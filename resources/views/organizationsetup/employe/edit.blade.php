@@ -1,16 +1,16 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Employee
+    Edit Employee
 @endsection    
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Employee</h1>
+        <h1>Edit Employee</h1>
         <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item active"><a> Create Employee</a></li>
+            <li class="breadcrumb-item active"><a> Edit Employee</a></li>
         </ol>
         </nav>
     </div>
