@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Security;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User_role;
+use App\Models\Employee;
 class UserroleController extends Controller
 {
     public function index()
@@ -99,5 +100,11 @@ class UserroleController extends Controller
     public function destroy($id)
     {
         //
-    }   
+    }
+    
+    public function roleaccess()
+    {
+        $employes = Employee::all();
+        return view('security.rollaccess.roll' ,compact('employes'));
+    }
 }
