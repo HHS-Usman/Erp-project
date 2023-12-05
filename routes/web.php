@@ -52,6 +52,8 @@ use App\Http\Controllers\SalepersontypeController;
 use App\Http\Controllers\SalespersonController;
 use App\Models\Saleperson;
 use App\Http\Controllers\Security\UserroleController;
+use App\Http\Controllers\Security\RoleAccessController;
+use App\Http\Controllers\Security\AccesspermitController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -91,6 +93,8 @@ Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);
 Route::resource('employees',EmpController::class);
 Route::resource('userrole',UserroleController::class);
+Route::resource('/roleaccess',RoleAccessController::class);
+Route::resource('permit',AccessPermitController::class);
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);
@@ -136,7 +140,6 @@ Route::get('/get-religion', [MonthlydaywiseController::class, 'getReligion']);
 Route::get('/get-group', [MonthlydaywiseController::class, 'getGroup']);
 Route::get('/get-state', [MonthlydaywiseController::class, 'getState']);
 // rollacces temporary
-Route::get('/roleaccess',[UserroleController::class, 'roleaccess' ]);
 // Route::resource('uplaoder',DivisionuploadController::class);
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
