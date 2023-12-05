@@ -44,7 +44,7 @@
                 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group d-flex">
+                            <div class="form-group">
                                 <label for="options">Employee GL Mapping</label>
                                 <select id="gender" name="gender"  class="select2">
                                   <option class="options">None</option>

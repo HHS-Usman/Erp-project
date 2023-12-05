@@ -78,13 +78,13 @@
                                       <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1"  onchange="toggleUnfreeze()"></td>
                                       <td></td>
                                       <td><input type="checkbox" name="1stweek_sun_01"  id="" class="item"  value="1" onchange="freezer()" ></td>
-                                      <td><input type="checkbox" name="2ndweek_sun_01"  id="2ndweek_sun_01" class="item" value="1">2</td>
-                                      <td><input type="checkbox" name="3rdweek_sun_01"  id="3rdweek_sun_01" class="item" value="1">3</td>
-                                      <td><input type="checkbox" name="4thweek_sun_01"  id="4thweek_sun_01" class="item" value="1">4</td>
+                                      <td><input type="checkbox" name="2ndweek_sun_01"  id="2ndweek_sun_01" class="item" value="1"></td>
+                                      <td><input type="checkbox" name="3rdweek_sun_01"  id="3rdweek_sun_01" class="item" value="1"></td>
+                                      <td><input type="checkbox" name="4thweek_sun_01"  id="4thweek_sun_01" class="item" value="1"></td>
                                       
                                     </tr>
                                     <tr>
-                                      <td>Pages Name</td>
+                                      <td>Tick All</td>
                                       <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
                                       <td></td>
                                       <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item " value="1"></td>
@@ -139,6 +139,7 @@
                                       </tr>  
                                   </tbody>
                             </table>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" >Submit</button>
                     </div>
                     <script>
                         $(document).ready(function () {
