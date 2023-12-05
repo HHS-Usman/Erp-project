@@ -9,10 +9,8 @@ use Auth;
 use Session;
 
 	class CommonHelper{
-
         public static  function getBranch()
 		{
-
 			$Branch= Branch::all();
 			return $Branch ? $Branch : 0;
 		}

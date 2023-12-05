@@ -76,11 +76,10 @@ class SalespersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Saleperson $saleperson)
     {   
         $spt = Salespersontype::all();
         $emp = Employee::all();
-        $saleperson = Saleperson::findOrFail($id);
         return view('salesperson.saleperson.update',compact('emp','spt','saleperson'));
     }
     /**

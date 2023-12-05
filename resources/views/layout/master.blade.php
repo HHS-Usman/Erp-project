@@ -215,38 +215,30 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('management.index') }}">Manage Management Level</a>
                                         </li>
-
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('submanagement.create') }}">Create Sub Management</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('submanagement.index') }}">Manage Sub Management</a>
                                         </li>
-
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('gazetedholiday.create') }}">Create Gazeted
                                                 Holidays</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('gazetedholiday.index') }}">Manage Gazeted Holidays</a>
                                         </li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenter.create') }}">Create Cost Center</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenter.index') }}">Manage Cost Center</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('language.create') }}">Create Language</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('language.index') }}">Manage Language</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('religion.create') }}">Create Religion</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('religion.index') }}">Manage Religion</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('designation.create') }}">Create Designation</a></li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -390,8 +382,6 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('qualification.index') }}">Manage Qualification</a>
                                         </li>
-
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('qualificationlevel.create') }}">Create Qualification
                                                 Level</a></li>
@@ -418,19 +408,35 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                  <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                      href="#" role="button" aria-haspopup="true"
-                                      aria-expanded="false">Accounts</a>
-                                  <ul id="container" class="dropdown-menu dropdown-content">
-                                    <li class="p-0"><a class="dropdown-item"
-                                        href="{{ route('accountcategory.create') }}">Create Account Category</a>
-                                      <li class="p-0"><a class="dropdown-item"
-                                              href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level </a>
-                                      </li>
-                                      <li class="p-0"><a class="dropdown-item"
-                                              href="{{ route('coa.create') }}">Create Coa</a></li>
-                                              <li class="p-0"><a class="dropdown-item"
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Accounts</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('accountcategory.create') }}">Create Account
+                                                Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('accountcategory.index') }}">Manage Account
+                                                Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('account-store.index') }}">Add Chart Account</a>
+                                    </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level
+                                            </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('coa.create') }}">Create Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('coa.index') }}">Manage Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
+                                        </li>
                                       <li class="p-0"><a class="dropdown-item"
                                               href="{{ route('costcenteraccount.create') }}">Create Cost Center</a></li>
                                               <li class="p-0"><a class="dropdown-item"
