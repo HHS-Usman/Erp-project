@@ -13,12 +13,26 @@
     <link href="/assets/img/favicon.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <!-- Include FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Include FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
+
 
     <!-- Include FullCalendar JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js"></script>
@@ -423,6 +437,22 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
                                         </li>
+                                      <li class="p-0"><a class="dropdown-item"
+                                              href="{{ route('costcenteraccount.create') }}">Create Cost Center</a></li>
+                                              <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a></li>
+                                  </ul>
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Security</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('userrole.create') }}">Create User Role  </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('userrole.index') }}">Manage User Role </a></li>
                                     </ul>
                                 </div>
                             </div>
