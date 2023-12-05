@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Coamainheadlevel;
+use App\Models\Parentcoa;
 use Illuminate\Http\Request;
-use App\Models\Accountcategory;
 
-class CoaheadlevelController extends Controller
+class ParentcoaContoller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class CoaheadlevelController extends Controller
      */
     public function index()
     {
-        // $saleperson=Coamainheadlevel::latest()->paginate();
-        // return view('salesperson.saleperson.index',compact('saleperson'))->with(request()->input('page'));
+        
     }
 
     /**
@@ -27,8 +25,7 @@ class CoaheadlevelController extends Controller
      */
     public function create()
     {
-        $accountcategory = Accountcategory::all();
-        return view('Accounts.coamainheadlevel.create',compact('accountcategory'));
+        return view('Accounts.parentcoa.create');
     }
 
     /**
@@ -39,21 +36,20 @@ class CoaheadlevelController extends Controller
      */
     public function store(Request $request)
     {
-        // validate the input
         $request->validate([
-            'headname' => 'required',
-            'account_code'=>'required'
+            'parentcoa' => 'required',
+            'is_active' => 'integer|in:0,1',
         ]);
-        //create a new product in database
-        Coamainheadlevel::create([
-            'headname' => request()->get('headname'),
-            'account_code' => request()->get('account_code'),
-            'transctiontype' => request()->get('transctiontype',),
-            'accountcategory' => request()->get('accountcategory',),
+        Parentcoa::create([
+            'parentcoa_code' => request()->get('parentcoa_code'),
+            'parentcoa' => request()->get('parentcoa'),
+            'detail' => request()->get('detail', null), 
+            'is_active' => request()->get('is_active', 0),
         ]);
         //redirect the user and send friendly message
-        return redirect()->route('coamainheaderlevel.create')->with('success', 'Record inserted  successfully');
+        return redirect()->route('parentcoa.create')->with('success','Manage successfully');
     }
+
     /**
      * Display the specified resource.
      *

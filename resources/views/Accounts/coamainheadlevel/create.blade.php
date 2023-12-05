@@ -24,7 +24,7 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('cast.store') }}" method="POST">        
+            <form action="{{ route('coamainheaderlevel.store') }}" method="POST">        
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <strong>Account Code<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="accounttcode" id="accounttcode" class="form-control" placeholder="Account Code" required>
+                                <input type="text" name="account_code" id="account_code" class="form-control" placeholder="Account Code" required>
                             </div>
                             <div class="form-group">
                                 <strong>Transction Type</strong>
@@ -44,10 +44,15 @@
                                 </select>
                               </div>
                               <div class="form-group">
-                                <strong>Account Category <span>(Optional)</span></strong>                                <select id="transactiontype" name="accountcategory" class="form-control">
-                                  <option class="options" value="Debit">Select of Account Category</option>
+                                <strong>Select Account Category:</strong>
+                                <select name="accountcategory" id="accountcategory" class="form-control">
+                                    <option value="none">Select Account Category</option>
+                                    @foreach ($accountcategory as $actcateg=>$item)
+                                    <option value={{$item->id}}> {{$item->accountcategory}} 
+                                    </option>
+                                    @endforeach 
                                 </select>
-                              </div>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

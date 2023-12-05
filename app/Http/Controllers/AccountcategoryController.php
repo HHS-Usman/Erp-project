@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use App\Models\Accountcategory;
 use Illuminate\Http\Request;
-
 class AccountcategoryController extends Controller
 {
     /**
@@ -47,7 +44,7 @@ class AccountcategoryController extends Controller
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-        // return redirect()->route('accountcategory.index')->with('success','Create successfully');
+        return redirect()->route('accountcategory.index')->with('success','Create successfully');
     }
 
     /**
@@ -67,9 +64,9 @@ class AccountcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Accountcategory $accountcategory)
     {
-        //
+        return view('Accounts.accountcategory.update',compact('accountcategory'));
     }
 
     /**
@@ -81,7 +78,15 @@ class AccountcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $accountcategory = Accountcategory::findorfail($id);
+        $accountcategory->update([
+            'accountcategory'=>$request->input('accountcategory'),
+            'accountcategory_code'=>$request->input('accountcategory_code'),
+            'detail'=>$request->input('detail'),
+            'is_active'=>$request->has('is_active') ? 1 : 0,
+        ]);
+        //redirect the user and send friendly message
+        return redirect()->route('accountcategory.index')->with('success','Account Category Updated successfully');
     }
 
     /**

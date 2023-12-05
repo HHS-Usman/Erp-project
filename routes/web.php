@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountcategoryController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DepartmentController;
@@ -48,8 +49,10 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\Emp_Company_Info_Controller;
 use App\Http\Controllers\Emp_Payroll_Controller;
 use App\Http\Controllers\Emp_Document_Controller;
+use App\Http\Controllers\ParentcoaContoller;
 use App\Http\Controllers\SalepersontypeController;
 use App\Http\Controllers\SalespersonController;
+use App\Models\Parentcoa;
 use App\Models\Saleperson;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,10 +126,12 @@ Route::resource('event',EventController::class);
 Route::resource('accountcategory',AccountcategoryController::class);
 Route::resource('coamainheaderlevel',CoaheadlevelController::class);
 Route::resource('coa',CoaController::class);
+Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);
 Route::resource('salepersontype',SalepersontypeController::class);
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
+Route::post('/account-store', 'AccountController@store')->name('account-store');
 // for fetch record of DB in JS file
 Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);
 Route::get('/get-religion', [MonthlydaywiseController::class, 'getReligion']);
