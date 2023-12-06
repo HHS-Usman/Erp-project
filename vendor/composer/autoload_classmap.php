@@ -133,7 +133,6 @@ return array(
     'App\\Models\\Monthlydaywise' => $baseDir . '/app/Models/Monthlydaywise.php',
     'App\\Models\\Nationality' => $baseDir . '/app/Models/Nationality.php',
     'App\\Models\\Overtime_type' => $baseDir . '/app/Models/Overtime_type.php',
-    'App\\Models\\Parentcoa' => $baseDir . '/app/Models/Parentcoa.php',
     'App\\Models\\Paymentterm' => $baseDir . '/app/Models/Paymentterm.php',
     'App\\Models\\Process' => $baseDir . '/app/Models/Process.php',
     'App\\Models\\Qualification' => $baseDir . '/app/Models/Qualification.php',

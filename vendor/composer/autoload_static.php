@@ -677,7 +677,6 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Monthlydaywise' => __DIR__ . '/../..' . '/app/Models/Monthlydaywise.php',
         'App\\Models\\Nationality' => __DIR__ . '/../..' . '/app/Models/Nationality.php',
         'App\\Models\\Overtime_type' => __DIR__ . '/../..' . '/app/Models/Overtime_type.php',
-        'App\\Models\\Parentcoa' => __DIR__ . '/../..' . '/app/Models/Parentcoa.php',
         'App\\Models\\Paymentterm' => __DIR__ . '/../..' . '/app/Models/Paymentterm.php',
         'App\\Models\\Process' => __DIR__ . '/../..' . '/app/Models/Process.php',
         'App\\Models\\Qualification' => __DIR__ . '/../..' . '/app/Models/Qualification.php',

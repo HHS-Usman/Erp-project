@@ -25,26 +25,51 @@
                 </ol>
                 </nav>
             </div>
-            <br><br><br>
-            {{-- <head>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+            <br>
+            <head>
+                {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     
                 <!-- JS -->
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> --}}
                <style>
                     #selects,
                 .select2 {
-                    width: 100%;
+                    width: 50%;
                     padding: 3px;
                 }
+                .form-group {
+                    margin-bottom: 05px;
+                }
+
+                .form-group label {
+                    margin-bottom: 5px;
+                }
+
+                .form-group  {
+                    
+                   
+                    box-sizing: border-box;
+                }
+
+                @media (min-width: 600px) {
+                    .form-container {
+                    flex-direction: row;
+                    }
+
+                    .form-group {
+                    flex: 1;
+                    margin-right: 15px;
+                    }
+                }
+
                 </style>
-            </head> --}}
+            </head> 
             <form action="" method="">        
                 
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group d-flex">
+                        <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
+                            <div class="form-group">
                                 <label for="options">Employee GL Mapping</label>
                                 <select id="gender" name="gender"  class="select2">
                                   <option class="options">None</option>
@@ -52,32 +77,359 @@
                                   <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
                                 @endforeach
                                 </select>
-                              </div> 
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group d-flex">
-                                <label for="options">Employee GL Mapping</label>
-                                <select id="gender" name="gender"  class="select2">
-                                  <option class="options">None</option>
-                                  @foreach($employes as $item)
-                                  <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                @endforeach
-                                </select>
-                              </div> 
-                        </div>
+                            </div> 
                         
-                            {{-- <table class="table table-bordered" style="border: 1px solid black">
+                            <div class="form-group">
+                                <label for="options">Employee GL Mapping</label>
+                                <select id="br" name="br" class="select2" >
+                                  <option class="options">None</option>
+                                  @foreach($employes as $item)
+                                  <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                @endforeach
+                                </select>
+                            </div> 
+                        </div>
+                        <div class="tab" id="tab1">
+                            
+                                <div class="container d-flex justify-content-center align-items-center">
+                                  <div class="form-group">  
+                                    <h4>Companies/ Units</h4>
+                                  </div>  
+                                  <div class="form-group">  
+                                    <h4>Login ID</h4>
+                                  </div>
+                                  <div class="form-group">  
+                                    <h4>Access</h4>
+                                  </div> 
+                                  <div class="form-group">  
+                                    <h4>Set Password </h4>
+                                  </div> 
+                                  <div class="form-group">  
+                                    <h4>Report Access</h4>
+                                  </div> 
+                                  <div class="form-group">  
+                                    <h4>Back days Entres</h4>
+                                  </div> 
+                                  <div class="form-group">  
+                                    <h4>Post Days Entries</h4>
+                                  </div>  
+                                </div>
+                               
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Company/Unit Name</h6>
+                                  
+                                </div>
+                                <div class="form-group">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Access"
+                                  />
+                                  
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <input type="password" class="form-control" id="input" placeholder="Password" />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="Email" 
+                                    />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Company/Unit Name</h6>
+                                  
+                                </div>
+                                <div class="form-group">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Access"
+                                  />
+                                  
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <input type="password" class="form-control" id="input" placeholder="Password" />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="Email" 
+                                    />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Company/Unit Name</h6>
+                                  
+                                </div>
+                                <div class="form-group">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Access"
+                                  />
+                                  
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <input type="password" class="form-control" id="input" placeholder="Password" />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="input"
+                                      placeholder="Email" 
+                                    />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Select company/Unit Branch</h6>
+                                  
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Select company/Unit Branch</h6>
+                                  
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Select company/Unit Branch</h6>
+                                  
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                  
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                              </div>
+                                                         
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="border: 1px solid  red;">  
+                                <div class="form-group">
+                                    <label for="options">Employee GL Mapping</label>
+                                    <select id="br" name="br" class="select2" >
+                                      <option class="options">None</option>
+                                      @foreach($employes as $item)
+                                        <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
+                                <div class="container d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
+                                        <label for="options">Role Id</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options"></label>
+                                        <select id="br" name="br" class="select2" placeholder="">
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                              <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>    
+
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 text-center">
+                                <button type="submit" class="btn btn-primary">>></button>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="border: 1px solid  red;"> 
+                               
+                                <div class="container d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
+                                        
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options" aria-placeholder="select"></option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                          <option class="options">None</option>
+                                          @foreach($employes as $item)
+                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        {{-- <table class="table  col-xs-6 col-sm-6 col-md-6" style="border: 1px solid black">
                                 
                                   <thead>
-                                    
                                     <tr>
-                                      <th scope="col" ></th>
-                                      <th>Active</th>
-                                      <th></th>
-                                      <th>Add</th>
-                                      <th>View</th>
-                                      <th>Edit</th>
-                                      <th>Delete</th>
+                                      <th colspan="1" >Company Dropdown</th>
+                                      <th colspan="2" >Select role</th>
+                                      
                                     </tr>
                                   </thead>
                                 
@@ -86,70 +438,34 @@
                                     <tr>
                                         <td><h1>Module Name</h1></td>
                                       <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1"  onchange="toggleUnfreeze()"></td>
-                                      <td></td>
-                                      <td><input type="checkbox" name="1stweek_sun_01"  id="" class="item"  value="1" onchange="freezer()" ></td>
-                                      <td><input type="checkbox" name="2ndweek_sun_01"  id="2ndweek_sun_01" class="item" value="1">2</td>
-                                      <td><input type="checkbox" name="3rdweek_sun_01"  id="3rdweek_sun_01" class="item" value="1">3</td>
-                                      <td><input type="checkbox" name="4thweek_sun_01"  id="4thweek_sun_01" class="item" value="1">4</td>
+                                      <td></td>    
                                       
                                     </tr>
                                     <tr>
-                                      <td>Pages Name</td>
-                                      <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
-                                      <td></td>
-                                      <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item " value="1"></td>
-                                      <td><input type="checkbox" name="2ndweek_mon_02" id="selectView" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="3rdweek_mon_02" id="selectEdit" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="4thweek_mon_02" id="selectDelete" class="item" value="1"></td>
+                                      <td>Pages Name</td>   
+                                      <td></td>   </tr>
+                                    <tr>
+                                        <td>Pages Name</td>   
+                                        <td></td>            
                                     </tr>
                                     <tr>
-                                        <td>Pages Name</td>
-                                        <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03"  class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5" value="1"></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Pages Name</td>  
-                                        <td><input type="checkbox" name="sel_wed_04" id="sel_wed_04" class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_wed_04" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_wed_04" id="2ndweek_wed_04" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_wed_04" id="3rdweek_wed_04" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_wed_04" id="4thweek_wed_04" class="item example5" value="1"></td>
-                                      <tr>
-                                        <td>Pages Name</td>
-                                        <td><input type="checkbox" name="sel_thu_05" id="sel_thu_05" class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_thu_05" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_thu_05" id="2ndweek_thu_05" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_thu_05" id="3rdweek_thu_05" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_thu_05" id="4thweek_thu_05" class="item example5" value="1"></td>
-                                        
-                                      </tr>
-                                      <tr>
-                                        <td>Pages Name</td>
-                                        <td><input type="checkbox" name="sel_fri_06" id="sel_fri_06" class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_fri_06" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_fri_06" id="2ndweek_fri_06" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_fri_06" id="3rdweek_fri_06" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_fri_06" id="4thweek_fri_06" class="item example5" value="1"></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Page Name</td>
-                                        <td><input type="checkbox" name="sel_sat_07" id="sel_sat_07" class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_sat_07" id="1stweek_sat_07" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_sat_07" id="2ndweek_sat_07" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_sat_07" id="3rdweek_sat_07" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_sat_07" id="4thweek_sat_07" class="item example5" value="1"></td>
-                                      </tr>  
+                                        <td>Pages Name</td>     
+                                        <td></td>            
+                                    <tr>
+                                        <td>Pages Name</td>   
+                                        <td></td>                
+                                    </tr>
+                                    <tr>
+                                        <td>Pages Name</td>   
+                                        <td></td>            
+                                    </tr>
+                                    <tr>
+                                        <td>Page Name</td>   
+                                        <td></td>            
+                                    </tr>  
                                   </tbody>
-                            </table>
-                    </div>
+                        </table> --}}
+                    {{-- </div> 
                     <script>
                         $(document).ready(function () {
                          $('.select2').select2();

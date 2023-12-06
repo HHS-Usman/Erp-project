@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGivePermitsTable extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateGivePermitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('give__permits', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_name');
-            $table->string('module_name');
+            $table->unsignedBigInteger('module_id');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table->string('page_name');
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateGivePermitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('give__permits');
+        Schema::dropIfExists('pages');
     }
 }
