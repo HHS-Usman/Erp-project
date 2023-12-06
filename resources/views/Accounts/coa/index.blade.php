@@ -3,9 +3,6 @@
     Manage COA
 @endsection
 @section('content')
-
-
-
     <section id="main" class="main" style="padding-top: 0vh;">
 
         @if ($errors->any())
@@ -44,50 +41,47 @@
                 <table class="table table-border datatable " style="border: 1px solid black">
                     <thead>
                         <tr>
-                            <th scope="col">Expander</th>
-                            <th scope="col">System ID</th>
+                            {{-- <th scope="col">Expander</th> --}}
+                            {{-- <th scope="col">System ID</th> --}}
                             <th scope="col">S.No</th>
+                            <th scope="col">Coa_id</th>
                             <th scope="col">Account Code</th>
                             <th scope="col">Ref A/C Code</th>
                             <th scope="col">Account Name</th>
                             <th scope="col">Account Category</th>
                             <th scope="col">Account Type</th>
-                            <th scope="col">System/Manaul</th>
+                            {{-- <th scope="col">System/Manaul</th> --}}
                             <th scope="col">Current Balance</th>
-                            <th scope="col">Currency</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Opening Date</th>
+                            {{-- <th scope="col">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($casts as $cast => $item)
+                        @foreach ($coas as $coa => $item)
                             <tr>
-                                <td>>></td>
-                                <td>333</td>
-                                <td>3</td>
-                                <td>10000</td>
-                                <td>As-001</td>
-                                <td>ASSETS</td>
-                                <td>Aseet</td>
-                                <td>Detail</td>
-                                <td>Debit</td>
-                                <td>Manual</td>
-                                <td>2094982034</td>
-                                <td>PKR</td>
-                                <td>Active</td>
-                                <td>
+                                <td>{{ $coa + 1 }}</td>
+                                <td>{{ $item->id}}</td>
+                                <td>{{ $item->coacode}}</td>
+                                <td>{{ $item->refaccode}}</td>
+                                <td>{{ $item->coaname}}</td>
+                                <td>{{ $item->coacategory}}</td>
+                                <td>{{ $item->accountype}}</td>
+                                <td>{{ $item->openbalance}}</td>
+                                <td>{{ $item->openingdate}}</td>
+                                {{-- <td>
                                     @if ($item->is_active)
                                         <p>Active</p>
                                     @else
                                         <p>INActive</p>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     <a class="btn btn-info" href="">Show</a>
                                     <a class="btn btn-primary" href="">Edit</a>
                                     <button class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

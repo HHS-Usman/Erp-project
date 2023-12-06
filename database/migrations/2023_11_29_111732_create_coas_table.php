@@ -15,12 +15,13 @@ class CreateCoasTable extends Migration
     {
         Schema::create('coas', function (Blueprint $table) {
             $table->id();
-            $table->integer('accountcode')->nullable();
-            $table->string('accountname')->nullable();
-            $table->boolean('operation')->default(true)->require();
+            $table->integer('coacode')->nullable();
+            $table->string('coaname')->nullable();
+            $table->boolean('operation')->default(true);
+            $table->string('refaccode')->nullable();
             $table->integer('parentid')->nullable();
-            $table->string('parentcoa')->nullable();
-            $table->string('accountcategory')->nullable();
+            $table->string('parentcoacode')->nullable();
+            $table->string('coacategory')->nullable();
             $table->string('Level-1')->nullable();
             $table->string('Level-2')->nullable();
             $table->string('Level-3')->nullable();
@@ -28,7 +29,6 @@ class CreateCoasTable extends Migration
             $table->string('Level-5')->nullable();
             $table->string('Level-6')->nullable();
             $table->string('Level-7')->nullable();
-            $table->string('refaccode')->nullable();
             $table->string('accountype')->nullable();
             $table->string('openbalance')->nullable();
             $table->string('openingdate')->nullable();

@@ -29,26 +29,29 @@
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active"
-                            checked>
+                        <input class="form-check-input" type="checkbox" value="1"name="is_active" >
                         Operational
                         </label>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <strong>System ID</strong>
                         <input type="text" name="systemid" id="systemid" class="form-control"
                             placeholder="Account Name">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
-                        <strong>Parent Cost Center</strong>
-                        <select id="parentcoa" name="parentcoa" class="form-control">
-                            <option class="options" value="">Select Parent Cost Center</option>
+                        <strong>Select Parent COA </strong>
+                        <select name="parentcoa" id="parentcoa" class="form-control">
+                            <option >Select Parent COA</option>
+                            @foreach ($costcenter as $costc=>$item)
+                            <option  value={{$item->costcenter_id}} >Account ID {{$item->costcenter_id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
+                            </option>
+                            @endforeach 
                         </select>
                     </div>
                     <div class="form-group">
                         <strong>Cost Center Code</strong>
                         <input type="text" name="costcenter_code" id="costcenter_code" class="form-control"
-                            placeholder="Account Code">
+                            placeholder="Cost Center Code">
                     </div>
                     <div class="form-group">
                         <strong>Cost Center Name</strong>

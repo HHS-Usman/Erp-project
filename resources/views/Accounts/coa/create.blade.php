@@ -29,17 +29,15 @@
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1"name="operation" id="is_active"
-                            checked>
+                        <input class="form-check-input" type="checkbox" value="1" name="operation" id="is_operation">
                         Operational
-                        </label>
                     </div>
                     <div class="form-group">
                         <strong>Select Parent COA </strong>
                         <select name="parentcoa" id="parentcoa" class="form-control">
-                            <option value="Select Sale Type">Select Parent COA</option>
+                            <option >Select Parent COA</option>
                             @foreach ($prentcoa as $pcoa=>$item)
-                            <option value={{$item->id}}>Account ID {{$item->id}} || COA Code || {{$item->accountname}} || parent Name || {{$item->parentcoa}} {{$item->parentid}}
+                            <option  value={{$item->id}} >Account ID {{$item->id}} || coacode {{$item->coacode}} || {{$item->coaname}} || parent Name || {{$item->parentcoa}} {{$item->parentid}}
                             </option>
                             @endforeach 
                         </select>

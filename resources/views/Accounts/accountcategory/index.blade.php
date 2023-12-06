@@ -60,10 +60,10 @@
                     <tbody>
                       @foreach ($accountcategory as $ac =>$item )
                       <tr>
-                        <th >{{ $ac + 1 }}</a></th>
-                        <th >{{ $item->id }}</a></th>
+                        <th>{{ $ac + 1 }}</th>
+                        <th >{{ $item->id }}</th>
                         <td>{{ $item->accountcategory }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->accountcategory_code }}</td>
+                        <td>{{ $item->accountcategory_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>
