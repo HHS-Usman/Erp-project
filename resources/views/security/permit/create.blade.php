@@ -325,17 +325,29 @@
                                                          
                         </div>
                         <div class="d-flex">
-                            <div class="col-xs-6 col-sm-6 col-md-6" style="border: 1px solid  red;">  
-                                <div class="form-group">
-                                    <label for="options">Employee GL Mapping</label>
-                                    <select id="br" name="br" class="select2" >
-                                      <option class="options">None</option>
-                                      @foreach($employes as $item)
-                                        <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                      @endforeach
-                                    </select>
+                            <div class="col-xs-6 col-sm-6 col-md-6  " style="border: 1px solid  red;">  
+                                <div class="container  d-flex justify-content-center align-items-center">
+                                    <div class="form-group">
+                                        <label for="options">Company Selection</label>
+                                        <select id="br" name="br" class="select2" >
+                                        <option class="options">None</option>
+                                        @foreach($employes as $item)
+                                            <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="options">Employee GL Mapping</label>
+                                        <select id="br" name="br" class="select2" >
+                                        <option class="options">None</option>
+                                        @foreach($employes as $item)
+                                            <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="container d-flex justify-content-center align-items-center">
+                                <div class="container  d-flex justify-content-center align-items-center">
                                     <div class="form-group">
                                         <label for="options">Role Id</label>
                                         <select id="br" name="br" class="select2" >
