@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Costcenter;
 use App\Models\Costcenteraccount;
 use Illuminate\Http\Request;
 
@@ -16,9 +15,9 @@ class CostcenteraccountController extends Controller
      */
     public function index()
     {
-        return view('Accounts.costcenter.index');
+        $costcenter = Costcenteraccount::latest()->paginate();
+        return view('Accounts.costcenter.index',compact('costcenter'))->with(request()->input('page'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +37,24 @@ class CostcenteraccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $selectedParentCoa = $request->get('parentcoa');
+        $costcenter = Costcenteraccount::where('costcenter_id', $selectedParentCoa)->value('costcenter_code');
+        // dd($costcenter);
+        $request->validate([
+            'operation' => 'integer|in:0,1',
+        ]);
+        //create a new product in database
+        Costcenteraccount::create([
+            'operation' => request()->get('operation', 0),
+            'costcenter_code' => request()->get('costcenter_code'),
+            'costcentername' => request()->get('costcenter_name'),
+            'parentid' =>  $selectedParentCoa,
+            'parentcode' => $costcenter,
+            'costcentertype' => request()->get('costcentertype'),
+            'costcentermapping' => request()->get('costcentermapping'),
+        ]);
+        //redirect the user and send friendly message
+        return redirect()->route('costcenteraccount.index')->with('success','Manage successfully');
     }
 
     /**

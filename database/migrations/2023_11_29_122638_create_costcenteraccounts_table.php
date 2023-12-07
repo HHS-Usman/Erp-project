@@ -27,7 +27,7 @@ class CreateCostcenteraccountsTable extends Migration
             $table->string('Level-5')->nullable();
             $table->string('Level-6')->nullable();
             $table->string('Level-7')->nullable();
-            $table->integer('costcentertype');
+            $table->integer('costcentertype')->nullable();
             $table->string('costcentermapping');
             $table->boolean('is_active')->default(true)->nullable();
 
