@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Costcenter;
+use App\Models\Costcenteraccount;
 use Illuminate\Http\Request;
 
 class CostcenteraccountController extends Controller
@@ -24,7 +26,8 @@ class CostcenteraccountController extends Controller
      */
     public function create()
     {
-        return view('Accounts.costcenter.create');
+        $costcenter =  Costcenteraccount::where('operation', 0)->get();
+        return view('Accounts.costcenter.create',compact('costcenter'));
     }
 
     /**

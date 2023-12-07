@@ -15,12 +15,12 @@ class CoaController extends Controller
      */
     public function index()
     {
-        
-        return view('Accounts.coa.index');
+        $coas = Coa::latest()->paginate();
+        return view('Accounts.coa.index',compact('coas'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -37,26 +37,27 @@ class CoaController extends Controller
      */
     public function store(Request $request)
     {
+        $selectedParentCoa = $request->get('parentcoa');
+        $coacode = Coa::where('id', $selectedParentCoa)->value('coacode');
         $request->validate([
-            'parentcoa'=>'required',
-            'operation' => 'integer|in:0,1'
-            
+            'operation' => 'integer|in:0,1',
         ]);
         //create a new product in database
         Coa::create([
-            'operation' => request()->get('operation',0),
-            'parentcoa' => request()->get('parentcoa'),
-            'accountcategory' => request()->get('accountcategory'),
-            'accountname' => request()->get('accountname'),
-            'accountcode' => request()->get('accountcode'),
+            'operation' => request()->get('operation', 0),
+            'parentcoacode' => $coacode,
+            'coacategory' => request()->get('accountcategory'),
+            'coaname' => request()->get('accountname'),
+            'coacode' => request()->get('accountcode'),
             'refaccode' => request()->get('refaccode'),
             'accountype' => request()->get('accountype'),
             'openbalance' => request()->get('openbalance'),
             'openingdate' => request()->get('openingdate'),
+            'parentid' => $selectedParentCoa
         ]);
 
         //redirect the user and send friendly message
-        return redirect()->route('coa.create')->with('success','Manage successfully');
+        return redirect()->route('coa.index')->with('success','Manage successfully');
     }
 
     /**
