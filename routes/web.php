@@ -54,10 +54,11 @@ use App\Http\Controllers\SalepersontypeController;
 use App\Http\Controllers\SalespersonController;
 use App\Models\Parentcoa;
 use App\Models\Saleperson;
-use App\Http\Controllers\Security\UserroleController;
+use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleAccessController;
+use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\AccesspermitController;
-
+use App\Http\Controllers\BranchController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -95,8 +96,9 @@ Route::resource('management',MangementlevelController::class);
 Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);
 Route::resource('employees',EmpController::class);
-Route::resource('userrole',UserroleController::class);
+Route::resource('permission',PermissionController::class);
 Route::resource('/roleaccess',RoleAccessController::class);
+Route::resource('role',RoleController::class);
 Route::resource('permit',AccessPermitController::class);
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
@@ -138,6 +140,8 @@ Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);
 Route::resource('salepersontype',SalepersontypeController::class);
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
+Route::resource('permit',AccesspermitController::class);
+Route::get('/branches', 'BranchController@index');
 Route::post('/account-store', 'AccountController@store')->name('account-store');
 // for fetch record of DB in JS file
 Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);

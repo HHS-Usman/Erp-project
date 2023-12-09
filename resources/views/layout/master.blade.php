@@ -154,7 +154,7 @@
 </head>
 
 <body>
-
+    <x-navigation />
     <div
         style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
   transform-origin: 0 0;
@@ -181,14 +181,19 @@
                                 <i class="fa fa fa-cogs" aria-hidden="true" style="color: black;"></i>&nbsp;SETUP
                             </a>
                             <div class="dropdown-menu" style="hover">
+                              
+                                    
+                               
                                 <div class="dropdown-submenu dropdown-item dropright ">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Organization Setup</a>
                                     <ul id="container" class="dropdown-menu dropdown-content"
                                         style="{display: block;}">
+                                        @can('create-orgnization')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
+                                        @endcan
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
 
@@ -273,6 +278,7 @@
 
                                     </ul>
                                 </div>
+                          
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
@@ -448,11 +454,11 @@
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Security</a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
+                                        {{-- <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('permission.create') }}">Create User Role  </a>
+                                        </li> --}}
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('userrole.create') }}">Create User Role  </a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('userrole.index') }}">Manage User Role </a></li>
+                                                href="{{ route('permission.index') }}">Manage User Role </a></li>
                                     </ul>
                                 </div>
                             </div>

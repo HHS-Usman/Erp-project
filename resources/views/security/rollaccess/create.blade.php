@@ -48,8 +48,8 @@
                                 <label for="options">Employee GL Mapping</label>
                                 <select id="gender" name="gender"  class="select2">
                                   <option class="options">None</option>
-                                  @foreach($employes as $item)
-                                  <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                  @foreach($roles as $item)
+                                  <option value="{{ $item->id }}">{{ $item->user_role }}</option>
                                 @endforeach
                                 </select>
                               </div>

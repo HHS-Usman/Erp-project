@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('page-tab')
     Create Permit
-@endsection    
+@endsection
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
-        
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -65,13 +65,13 @@
 
                 </style>
             </head> 
-            <form action="" method="">        
+            <form action="{{ route('userrole.store') }}" method="POST">        
                 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
                             <div class="form-group">
-                                <label for="options">Employee GL Mapping</label>
-                                <select id="gender" name="gender"  class="select2">
+                                <label for="options">Select Employee</label>
+                                <select id="gender" name="employee_name"  class="select2">
                                   <option class="options">None</option>
                                   @foreach($employes as $item)
                                   <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
@@ -80,11 +80,11 @@
                             </div> 
                         
                             <div class="form-group">
-                                <label for="options">Employee GL Mapping</label>
-                                <select id="br" name="br" class="select2" >
+                                <label for="options">Select Role</label>
+                                <select id="br" name="role" class="select2" >
                                   <option class="options">None</option>
-                                  @foreach($employes as $item)
-                                  <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                  @foreach($roles as $item)
+                                  <option value="{{ $item->user_role }}">{{ $item->user_role }}</option>
                                 @endforeach
                                 </select>
                             </div> 
@@ -131,8 +131,65 @@
                                 </div>
                                 <div class="form-group">
                                     <input
+                                    type="checkbox"
+                                    
+                                    id="input"
+                                    name="access"
+                                    placeholder="Access"
+                                  />
+                                  
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <input type="password" name="password" class="form-control" id="input" placeholder="Password" />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="checkbox"
+                                      class="form-control"
+                                      id="input"
+                                      name="report_access"
+                                      placeholder="report_access" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="input"
+                                      name="back_date_entry"
+                                      placeholder="back_date_entry" 
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="input"
+                                      name="post_date_entry"
+                                      placeholder="post_date_entry" 
+                                    />
+                                </div>
+                              </div>
+                              <div class="container d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                  <h6>Company/Unit Name</h6>
+                                  
+                                </div>
+                                <div class="form-group">
+                                  
+                                  <input
                                     type="text"
                                     class="form-control"
+                                    id="input"
+                                    placeholder="Login ID"
+                                  />
+                                </div>
+                                <div class="form-group">
+                                  <input
+                                    type="checkbox"
                                     id="input"
                                     placeholder="Access"
                                   />
@@ -185,62 +242,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Access"
-                                  />
-                                  
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <input type="password" class="form-control" id="input" placeholder="Password" />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="Email" 
-                                    />
-                                </div>
-                              </div>
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Company/Unit Name</h6>
-                                  
-                                </div>
-                                <div class="form-group">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                    <input
-                                    type="text"
-                                    class="form-control"
+                                    type="checkbox"
                                     id="input"
                                     placeholder="Access"
                                   />
@@ -324,9 +326,9 @@
                               </div>
                                                          
                         </div>
-                        <div class="d-flex">
-                            <div class="col-xs-6 col-sm-6 col-md-6  " style="border: 1px solid  red;">  
-                                <div class="container  d-flex justify-content-center align-items-center">
+                        <div class="d-flex container">
+                            <div class="col-xs-5 col-sm-5 col-md-5  " >  
+                                <div class="container  d-flex justify-content-center align-items-center" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="options">Company Selection</label>
                                         <select id="br" name="br" class="select2" >
@@ -338,7 +340,7 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
+                                        <label for="options">Company Selection</label>
                                         <select id="br" name="br" class="select2" >
                                         <option class="options">None</option>
                                         @foreach($employes as $item)
@@ -347,247 +349,161 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="container  d-flex justify-content-center align-items-center">
-                                    <div class="form-group">
-                                        <label for="options">Role Id</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options"></label>
-                                        <select id="br" name="br" class="select2" placeholder="">
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                              <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                          @endforeach
-                                        </select>
-                                    </div>
-                                </div>    
+                                <table class=" table table-bordered " style="border: 1px solid black">
+                                    <thead>
+                                      <tr>
+                                        <th>
+                                            Selection
+                                        </th>
+                                        <th class="justify-content-center">
+                                            Role
+                                        </th>
+                                        <th>
+                                            Module
+                                        </th>
+                                        <th>
+                                            Page
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                  
+                                    <tbody>
+                                      
+                                      
+                                      <tr>
+                                        <td>Tick All<input  type="checkbox" name="tick_all"  id="unfreezeToggle" value="1" ></td>
+                                      </tr>
+                                      <tr>
+                                          <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1" ></td>   
+                                          <td><input type="text" class="form-control" id="purchase01" placeholder="Purchaser"></td>
+                                          <td><input type="text" class="form-control" id="purchaser01" placeholder="Purchaser"></td>    
+                                          <td><input type="text" class="form-control" id="pocreation01" placeholder="PO creation"></td>              
+                                      </tr>
+                                      <tr>
+                                          <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1" ></td>     
+                                          <td><input type="text" class="form-control" id="purchasing01" placeholder="Purchaser"></td>
+                                          <td><input type="text" class="form-control" id="warehouse01" placeholder="warehouse"></td>    
+                                          <td><input type="text" class="form-control" id="grn01" placeholder="GRN"></td>          
+                                      </tr>  
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style=" top: 40%; left:2%; ">
+                                <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
+                            
+                                <div class="" style="margin-top: 2%;">
+                
+                                    <button type="button" class="btn btn-primary" onclick="getData()"><<</button>
 
+                                </div>
                             </div>
-                            <div class="col-xs-1 col-sm-1 col-md-1 text-center">
-                                <button type="submit" class="btn btn-primary">>></button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6" style="border: 1px solid  red;"> 
+                            <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center" > 
                                
-                                <div class="container d-flex justify-content-center align-items-center">
-                                    <div class="form-group">
+                                <table class=" table table-bordered " style="border: 1px solid black;  margin-top:60px; ">
+                                    <thead>
+                                      <tr>
                                         
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options" aria-placeholder="select"></option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="options">Employee GL Mapping</label>
-                                        <select id="br" name="br" class="select2" >
-                                          <option class="options">None</option>
-                                          @foreach($employes as $item)
-                                          <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                </div> 
+                                        <th class="justify-content-center">
+                                            <input type="text" name="role" id="role" placeholder="role" readonly> 
+                                        </th>
+                                        <th>
+                                            <input type="text" name="module" id="module" placeholder="module" readonly>
+                                        </th>
+                                        <th>
+                                            <input type="text" name="page" id="pgname" placeholder="Pg_name" readonly>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                  
+                                    <tbody>
+                                      
+                                      
+                                      <tr>
+                                            
+                                          <td><input type="text" class="form-control" id="purchase" placeholder="Purchaser" readonly></td>
+                                          <td><input type="text" class="form-control" id="purchaser" placeholder="Purchaser" readonly></td>    
+                                          <td><input type="text" class="form-control" id="pocreation" placeholder="PO creation" readonly></td>              
+                                      </tr>
+                                      <tr>
+                                              
+                                          <td><input type="text" class="form-control" id="purchasing" placeholder="Purchaser" readonly></td>
+                                          <td><input type="text" class="form-control" id="warehouse" placeholder="warehouse" readonly></td>    
+                                          <td><input type="text" class="form-control" id="grn" placeholder="GRN" readonly></td>          
+                                      </tr> 
+                                       
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="right:4%">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                        {{-- <table class="table  col-xs-6 col-sm-6 col-md-6" style="border: 1px solid black">
+                        <script>
+                            function sendData() {
                                 
-                                  <thead>
-                                    <tr>
-                                      <th colspan="1" >Company Dropdown</th>
-                                      <th colspan="2" >Select role</th>
-                                      
-                                    </tr>
-                                  </thead>
+                                var input4 = document.getElementById('purchase01').value;
+                                var input5 = document.getElementById('purchaser01').value;
+                                var input6 = document.getElementById('pocreation01').value;
+                                var input7 = document.getElementById('purchasing01').value;
+                                var input8 = document.getElementById('warehouse01').value;
+                                var input9 = document.getElementById('grn01').value;
+
                                 
-                                  <tbody>
-                                    
-                                    <tr>
-                                        <td><h1>Module Name</h1></td>
-                                      <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1"  onchange="toggleUnfreeze()"></td>
-                                      <td></td>    
-                                      
-                                    </tr>
-                                    <tr>
-                                      <td>Pages Name</td>   
-                                      <td></td>   </tr>
-                                    <tr>
-                                        <td>Pages Name</td>   
-                                        <td></td>            
-                                    </tr>
-                                    <tr>
-                                        <td>Pages Name</td>     
-                                        <td></td>            
-                                    <tr>
-                                        <td>Pages Name</td>   
-                                        <td></td>                
-                                    </tr>
-                                    <tr>
-                                        <td>Pages Name</td>   
-                                        <td></td>            
-                                    </tr>
-                                    <tr>
-                                        <td>Page Name</td>   
-                                        <td></td>            
-                                    </tr>  
-                                  </tbody>
-                        </table> --}}
-                    {{-- </div> 
-                    <script>
-                        $(document).ready(function () {
-                         $('.select2').select2();
-                     });  
-                     </script>
-            </form>
-        </div>
-        <br><br><br>
-        <br>
-        
-        <div><br> </div>
-        <script>
-           $(document).ready(function () {
-                // By default, set Freeze All to checked and disable individual items
-               
-                $('.item').prop('disabled', true);
+                                document.getElementById('purchase').value = input4;
+                                document.getElementById('purchaser').value = input5;
+                                document.getElementById('pocreation').value = input6;
+                                document.getElementById('purchasing').value = input7;
+                                document.getElementById('warehouse').value = input8;
+                                document.getElementById('grn').value = input9
+                            }
 
-                // Select All checkbox change event
-                $('#selectAll').change(function () {
-                    $('.example').prop('checked', $(this).prop('checked'));
-                });
+                            function getData() {
+                                
+                                var inputType5 = document.getElementById('purchase').value;
+                                var inputType6 = document.getElementById('purchaser').value;
+                                var inputType7 = document.getElementById('pocreation').value;
+                                var inputType8 = document.getElementById('purchasing').value;
+                                var inputType9 = document.getElementById('warehouse').value;
+                                var inputType10 = document.getElementById('grn').value;
 
-                // Individual item checkbox change event
-                $('.example').change(function () {
-                    if (!$(this).prop('checked')) {
-                        $('#selectAll').prop('checked', false);
-                    }
-                });
+                     
+                                document.getElementById('pgname01').value = inputType4
+                                document.getElementById('purchase01').value = inputType5
+                                document.getElementById('purchaser01').value = inputType6
+                                document.getElementById('pocreation01').value = inputType7
+                                document.getElementById('purchasing01').value = inputType8
+                                document.getElementById('warehouse01').value = inputType9
+                                document.getElementById('grn01').value = inputType10;
+                                document.getElementById('role').value = '';
+                                document.getElementById('module').value = '';
+                                document.getElementById('pgname').value = '';
+                                document.getElementById('purchase').value = '';
+                                document.getElementById('purchaser').value = '';
+                                document.getElementById('pocreation').value = '';
+                                document.getElementById('purchasing').value = '';
+                                document.getElementById('warehouse').value = '';
+                                document.getElementById('grn').value = '';	
+                            }
+                            function toggleDropdown() {
+                                var dropdown = document.getElementById('dropdownOptions');
+                                dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                            }
 
-                // Freeze All checkbox change event
-                $('#selectAdd').change(function () {
-                    $('.example2').prop('checked', $(this).prop('checked'));
-                });
+                            function updateSelectedOptions() {
+                                var selectedOptionsDiv = document.getElementById('selectedOptions');
+                                var selectedOptions = Array.from(document.querySelectorAll('#dropdownOptions input:checked'))
+                                                          .map(checkbox => checkbox.value);
 
-                // Individual item checkbox change event
-                $('.example2').change(function () {
-                    if (!$(this).prop('checked')) {
-                        $('#selectAdd').prop('checked', false);
-                    }
-                });
-                
-                $('#selectView').change(function () {
-                    $('.example3').prop('checked', $(this).prop('checked')); 
-                });
+                                selectedOptionsDiv.textContent = 'Selected Options: ' + selectedOptions.join(', ');
+                            }
 
-                $('.example3').change(function () {
-                    if (!$(this).prop(checked)) {
-                        $('#selectView').prop('checked', false);
-                    }
-                });
+                            // Handle checkbox changes to update selected options
+                            document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+                        </script>
+                       
+                    </div>
+            </form>        
 
-                $('#selectEdit').change(function () {
-                    $('.example4').prop('checked', $(this).prop('checked'));
-                });
-
-                $('.example4').change(function () {
-                    if (!$(this).prop(checked)) {
-                        $('#selectEdit').prop('checked', $this(this).prop('checked'));
-                    }
-                });
-
-                $('#selectDelete').change(function () {
-                    $('.example5').prop('checked', $(this).prop('checked'));
-                });
-
-                $('.example5').change(function () {
-                    if (!$(this).prop(checked)) {
-                        $('#selectDelete').prop('checked', $(this).prop('checked'));
-                    }
-                });
-            });
-            
-            function toggleUnfreeze() {
-                var unfreezeToggle = document.getElementById('unfreezeToggle');
-                var checkboxes = document.getElementsByClassName('item');
-
-                if (unfreezeToggle.checked) {
-                    // Unfreeze all checkboxes
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        checkboxes[i].disabled = false;
-                        checkboxes[i].classList.remove('frozen');
-                    }
-                } else {
-                    // Freeze all checkboxes
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        checkboxes[i].disabled = true;
-                        checkboxes[i].classList.add('frozen');
-                    }
-                }
-            }
-            
-            //  function freezer1() {
-            //      var unfreezeToggle = document.getElementById('freezer');
-            //      var checkboxes = document.getElementsById('item01');
-
-            //      if (unfreezeToggle.checked) {
-            //          // Unfreeze all checkboxes
-            //          for (var i = 0; i < checkboxes.length; i++) {
-            //              checkboxes[i].disabled = false;
-            //              checkboxes[i].classList.remove('frozen');
-            //          }
-            //      } else {
-            //          // Freeze all checkboxes
-            //          for (var i = 0; i < checkboxes.length; i++) {
-            //              checkboxes[i].disabled = true;
-            //              checkboxes[i].classList.add('frozen');
-            //          }
-            //      }
-            //  }
-      </script> --}}
   </section> 
 
 @endsection    

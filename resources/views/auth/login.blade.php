@@ -15,15 +15,23 @@ use App\Helpers\CommonHelper;
                         <div class="row mb-3">
                             <label for="yourUsername" class="col-md-4 form-label">Branch</label>
                             <div class="col-md-6">
-                            <select class="form-control"  name="branch_id" required>
-                                <option value="">Select Branch</option>
-                                @foreach(CommonHelper::getBranch() as $item)
+                            <select class="form-control"  name="branch_id" id="branch_id" required>
+                               
+                            </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <label for="yourUsername" class="col-md-4 form-label">Company</label>
+                            <div class="col-md-6">
+                            <select class="form-control"  name="company_id" id="company_id" required>
+                                <option value="">Select Company</option>
+                                @foreach(CommonHelper::getCompany() as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -78,9 +86,35 @@ use App\Helpers\CommonHelper;
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('company_id').addEventListener('change', function () {
+        // Fetch branches based on the selected company using AJAX
+        var companyId = this.value;
+        fetchBranches(companyId);
+    });
+
+    function fetchBranches(companyId) {
+        // Make an AJAX request to get branches for the selected company
+        fetch(`/api/branches?company_id=${companyId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Update the branches dropdown with the fetched data
+                var branchDropdown = document.getElementById('branch_id');
+                branchDropdown.innerHTML = ''; // Clear existing options
+
+                data.forEach(branch => {
+                    var option = document.createElement('option');
+                    option.value = branch.id;
+                    option.textContent = branch.name;
+                    branchDropdown.appendChild(option);
+                });
+            });
+    }
+</script>
 @endsection
