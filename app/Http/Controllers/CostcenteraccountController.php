@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Costcenter;
 use App\Models\Costcenteraccount;
 use Illuminate\Http\Request;
 
@@ -16,9 +15,9 @@ class CostcenteraccountController extends Controller
      */
     public function index()
     {
-        return view('Accounts.costcenter.index');
+        $costcenter = Costcenteraccount::latest()->paginate();
+        return view('Accounts.costcenter.index',compact('costcenter'))->with(request()->input('page'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +37,42 @@ class CostcenteraccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $selectedParentCoa = $request->get('parentcostcenter');
+        $parentCoa = Costcenteraccount::find($selectedParentCoa);
+        // Determine the level and parent code based on the selected COA
+         if ($parentCoa) {
+            $parentCode = $parentCoa->costcenter_code;
+            // $level = $parentCoa->level + 1;
+        } else {
+            $parentCode = '';
+             //$level = 1; If there is no parent, set the level to 1
+        }
+        // Generate the hierarchical account code based on the parent COA's information and child count
+        $childCount = Costcenteraccount::where('parentid', $selectedParentCoa)->count() + 1;
+        $newAccountCode = $parentCode . '-' . $childCount;
+
+        // Extract levels from the coacode
+        $coaLevels = explode('-', $newAccountCode);
+        $request->validate([
+            'operation' => 'integer|in:0,1',
+        ]);
+        //create a new product in database
+        $coa = new Costcenteraccount([
+            'operation' => request()->get('operation', 0),
+            'costcenter_code' =>  $newAccountCode,
+            'costcentername' => request()->get('costcenter_name'),
+            'parentid' =>  $selectedParentCoa,
+            'parentcode' => $parentCode, 
+            'costcentertype' => request()->get('costcentertype'),
+            'costcentermapping' => request()->get('costcentermapping'),
+        ]);
+         // Assign levels dynamically
+         for ($i = 1; $i <= 7; $i++) {
+            $coa["Level-$i"] = $i <= count($coaLevels) ? $coaLevels[$i - 1] : 0;
+        }
+        $coa->save();    
+        //redirect the user and send friendly message
+        return redirect()->route('costcenteraccount.index')->with('success','Manage successfully');
     }
 
     /**

@@ -24,12 +24,12 @@
             </nav>
         </div>
         <br><br><br>
-        <form action="{{ route('cast.store') }}" method="POST">
+        <form action="{{ route('costcenteraccount.store') }}" method="POST">
             @csrf
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1"name="is_active" >
+                        <input class="form-check-input" type="checkbox" value="1" name="operation" >
                         Operational
                         </label>
                     </div>
@@ -40,10 +40,10 @@
                     </div> --}}
                     <div class="form-group">
                         <strong>Select Parent COA </strong>
-                        <select name="parentcoa" id="parentcoa" class="form-control">
-                            <option >Select Parent COA</option>
+                        <select name="parentcostcenter" id="parentcostcenter" class="form-control">
+                            <option >Select Parent Cost Center </option>
                             @foreach ($costcenter as $costc=>$item)
-                            <option  value={{$item->costcenter_id}} >Account ID {{$item->costcenter_id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
+                            <option  value={{$item->id}} >Account ID {{$item->id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
                             </option>
                             @endforeach 
                         </select>
@@ -60,15 +60,15 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Cost Center Type</strong>
-                        <select id="accountcategory" name="accountcategory" class="form-control">
-                            <option class="options" value="">Detail</option>
-                            <option class="options" value="">Control</option>
+                        <select id="costcentertype" name="costcentertype" class="form-control">
+                            <option class="options" value="1">Detail</option>
+                            <option class="options" value="2">Control</option>
                         </select>
                     </div>
                     <strong>Remarks</strong>
                     <div class="form-group">
                         <strong>Department Cost Center Mapping</strong>
-                        <input type="text" name="openbalance" id="openbalance" class="form-control"
+                        <input type="text" name="costcentermapping" id="openbalance" class="form-control"
                             placeholder="Department Cost Center Mapping">
                     </div>
                     <div class="form-check">

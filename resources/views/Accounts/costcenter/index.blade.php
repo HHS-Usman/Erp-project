@@ -3,11 +3,7 @@
     Manage Cost Center
 @endsection
 @section('content')
-
-
-
     <section id="main" class="main" style="padding-top: 0vh;">
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -18,7 +14,6 @@
                 </ul>
             </div>
         @endif
-
         <div class="pagetitle" style="margin-left: 20px;">
             <h1>Manage  Cost Center</h1>
             <nav>
@@ -45,38 +40,40 @@
                     <thead>
                         <tr>
                             <th scope="col">S.No#</th>
-                            <th scope="col">System ID</th>
+                            {{-- <th scope="col">System ID</th> --}}
                             <th scope="col">Cost Center ID</th>
                             <th scope="col">Cost Center Name</th>
+                            <th scope="col">Cost Center Code</th>
                             <th scope="col">Cost Center Type</th>
                             <th scope="col">Mapped Department</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Transaction Amount</th>
-                            <th scope="col">No of Transaction</th>
+                            {{-- <th scope="col">Transaction Amount</th> --}}
+                            {{-- <th scope="col">No of Transaction</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($casts as $cast => $item)
+                        @foreach ( $costcenter as $costcenters => $item)
                             <tr>
-                                <td>>></td>
-                                <td>333</td>
-                                <td>3</td>
-                                <td>10000</td>
-                                <td>As-001</td>
-                                <td>ASSETS</td>
+                                <td>{{$costcenters + 1 }}</td>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->costcentername}}</td>
+                                <td>{{$item->costcenter_code}}</td>
+                                <td>{{$item->costcentertype}}</td>
+                                <td>{{$item->costcentermapping}}</td>
+                                {{-- <td>ASSETS</td>
                                 <td>Aseet</td>
                                 <td>Detail</td>
                                 <td>Debit</td>
                                 <td>Manual</td>
-                                <td>2094982034</td>
+                                <td>2094982034</td> 
                                 <td>PKR</td>
-                                <td>Active</td>
+                                <td>Active</td> --}}
                                 <td>
                                     @if ($item->is_active)
                                         <p>Active</p>
                                     @else
-                                        <p>INActive</p>
+                                        <p>InActive</p>
                                     @endif
                                 </td>
                                 <td>
@@ -85,7 +82,7 @@
                                     <button class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

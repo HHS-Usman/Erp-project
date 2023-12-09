@@ -14,12 +14,12 @@ class CreateCostcenteraccountsTable extends Migration
     public function up()
     {
         Schema::create('costcenteraccounts', function (Blueprint $table) {
-            $table->id('costcenter_id');
-            $table->integer('costcenter_code');
+            $table->id();
+            $table->string('costcenter_code')->nullable();
             $table->string('costcentername');
             $table->boolean('operation')->default(true);
             $table->integer('parentid');
-            $table->integer('parentcode');
+            $table->string('parentcode');
             $table->string('Level-1')->nullable();
             $table->string('Level-2')->nullable();
             $table->string('Level-3')->nullable();
@@ -27,7 +27,7 @@ class CreateCostcenteraccountsTable extends Migration
             $table->string('Level-5')->nullable();
             $table->string('Level-6')->nullable();
             $table->string('Level-7')->nullable();
-            $table->integer('costcentertype');
+            $table->string('costcentertype')->nullable();
             $table->string('costcentermapping');
             $table->boolean('is_active')->default(true)->nullable();
 
