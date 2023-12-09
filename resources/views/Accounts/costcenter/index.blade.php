@@ -14,7 +14,6 @@
                 </ul>
             </div>
         @endif
-
         <div class="pagetitle" style="margin-left: 20px;">
             <h1>Manage  Cost Center</h1>
             <nav>
@@ -57,7 +56,7 @@
                         @foreach ( $costcenter as $costcenters => $item)
                             <tr>
                                 <td>{{$costcenters + 1 }}</td>
-                                <td>{{$item->costcenter_id}}</td>
+                                <td>{{$item->id}}</td>
                                 <td>{{$item->costcentername}}</td>
                                 <td>{{$item->costcenter_code}}</td>
                                 <td>{{$item->costcentertype}}</td>

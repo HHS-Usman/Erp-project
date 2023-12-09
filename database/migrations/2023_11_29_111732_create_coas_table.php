@@ -15,7 +15,7 @@ class CreateCoasTable extends Migration
     {
         Schema::create('coas', function (Blueprint $table) {
             $table->id();
-            $table->integer('coacode')->nullable();
+            $table->string('coacode')->nullable();
             $table->string('coaname')->nullable();
             $table->boolean('operation')->default(true);
             $table->string('refaccode')->nullable();

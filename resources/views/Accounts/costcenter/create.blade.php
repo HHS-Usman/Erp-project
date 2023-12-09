@@ -40,10 +40,10 @@
                     </div> --}}
                     <div class="form-group">
                         <strong>Select Parent COA </strong>
-                        <select name="parentcoa" id="parentcoa" class="form-control">
-                            <option >Select Parent COA</option>
+                        <select name="parentcostcenter" id="parentcostcenter" class="form-control">
+                            <option >Select Parent Cost Center </option>
                             @foreach ($costcenter as $costc=>$item)
-                            <option  value={{$item->costcenter_id}} >Account ID {{$item->costcenter_id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
+                            <option  value={{$item->id}} >Account ID {{$item->id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
                             </option>
                             @endforeach 
                         </select>
