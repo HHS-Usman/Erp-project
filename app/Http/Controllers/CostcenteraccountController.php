@@ -39,6 +39,8 @@ class CostcenteraccountController extends Controller
     {
         $selectedParentCoa = $request->get('parentcostcenter');
         $parentCoa = Costcenteraccount::find($selectedParentCoa);
+        $maxId = Costcenteraccount::max('id');
+        $nextID = $maxId+1;
         // Determine the level and parent code based on the selected COA
          if ($parentCoa) {
             $parentCode = $parentCoa->costcenter_code;
@@ -72,7 +74,7 @@ class CostcenteraccountController extends Controller
         }
         $coa->save();    
         //redirect the user and send friendly message
-        return redirect()->route('costcenteraccount.index')->with('success','Manage successfully');
+        return redirect()->route('costcenteraccount.index')->with('nextID',  $nextID)->with('success', 'Manage successfully');
     }
 
     /**

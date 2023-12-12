@@ -33,6 +33,11 @@
                         Operational
                     </div>
                     <div class="form-group">
+                        <strong>System ID</strong>
+                        <input disabled type="text" name="systemid" id="systemid" class="form-control"
+                            placeholder="0">
+                    </div>
+                    <div class="form-group">
                         <strong>Select Parent COA </strong>
                         <select name="parentcoa" id="parentcoa" class="form-control">
                             <option >Select Parent COA</option>

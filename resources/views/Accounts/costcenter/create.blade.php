@@ -39,6 +39,10 @@
                             placeholder="Account Name">
                     </div> --}}
                     <div class="form-group">
+                        <label for="systemid">System ID</label>
+                        <input type="text" name="systemid" value="{{ session('nextID') }}" id="systemid" class="form-control"  placeholder="0">
+                    </div>
+                    <div class="form-group">
                         <strong>Select Parent COA </strong>
                         <select name="parentcostcenter" id="parentcostcenter" class="form-control">
                             <option >Select Parent Cost Center </option>
