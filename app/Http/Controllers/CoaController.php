@@ -46,8 +46,6 @@ class CoaController extends Controller
         $parentCoa = Coa::find($selectedParentCoa);
 
         $maxId = DB::table('coas')->max('id');
-        dd($maxId);
-
         // Determine the level and parent code based on the selected COA
         if ($parentCoa) {
             $parentCode = $parentCoa->coacode;
