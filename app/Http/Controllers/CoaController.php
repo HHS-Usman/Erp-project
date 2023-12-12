@@ -20,8 +20,9 @@ class CoaController extends Controller
      */
     public function index()
     {
+        $accountcetegoty = Accountcategory::all();
         $coas = Coa::latest()->paginate();
-    return view('Accounts.coa.index', compact('coas'))->with(request()->input('page'));
+    return view('Accounts.coa.index', compact('coas','accountcetegoty'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
