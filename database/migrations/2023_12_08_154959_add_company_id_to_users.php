@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchesTable extends Migration
+class AddCompanyIdToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('status');
-            $table->date('start_session');
-            $table->date('end_session');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('companyID')->nullable();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropcolomn('companyID');
+        });
     }
 }

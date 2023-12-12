@@ -169,7 +169,6 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'C' => 
         array (
             'Cron\\' => 5,
-            'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -510,10 +509,6 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
-        'Carbon\\Doctrine\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
-        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -553,6 +548,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\CommonHelper' => __DIR__ . '/../..' . '/app/Helpers/CommonHelper.php',
+        'App\\Helpers\\MasterFormsHelper' => __DIR__ . '/../..' . '/app/Helpers/MasterFormsHelper.php',
         'App\\Http\\Controllers\\AccountcategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountcategoryController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -569,6 +565,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\BankController' => __DIR__ . '/../..' . '/app/Http/Controllers/BankController.php',
+        'App\\Http\\Controllers\\BranchController' => __DIR__ . '/../..' . '/app/Http/Controllers/BranchController.php',
         'App\\Http\\Controllers\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarController.php',
         'App\\Http\\Controllers\\CastController' => __DIR__ . '/../..' . '/app/Http/Controllers/CastController.php',
         'App\\Http\\Controllers\\CitizenshipController' => __DIR__ . '/../..' . '/app/Http/Controllers/CitizenshipController.php',
@@ -617,8 +614,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\SalepersontypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SalepersontypeController.php',
         'App\\Http\\Controllers\\SalespersonController' => __DIR__ . '/../..' . '/app/Http/Controllers/SalespersonController.php',
         'App\\Http\\Controllers\\Security\\AccessPermitController' => __DIR__ . '/../..' . '/app/Http/Controllers/Security/AccessPermitController.php',
+        'App\\Http\\Controllers\\Security\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Security/PermissionController.php',
         'App\\Http\\Controllers\\Security\\RoleAccessController' => __DIR__ . '/../..' . '/app/Http/Controllers/Security/RoleAccessController.php',
-        'App\\Http\\Controllers\\Security\\UserroleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Security/UserroleController.php',
         'App\\Http\\Controllers\\StateController' => __DIR__ . '/../..' . '/app/Http/Controllers/StateController.php',
         'App\\Http\\Controllers\\SubdepartmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubdepartmentController.php',
         'App\\Http\\Controllers\\SubleavingreasonController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubleavingreasonController.php',
@@ -647,6 +644,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
         'App\\Models\\Coa' => __DIR__ . '/../..' . '/app/Models/Coa.php',
         'App\\Models\\Coamainheadlevel' => __DIR__ . '/../..' . '/app/Models/Coamainheadlevel.php',
+        'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
         'App\\Models\\Costcenter' => __DIR__ . '/../..' . '/app/Models/Costcenter.php',
         'App\\Models\\Costcenteraccount' => __DIR__ . '/../..' . '/app/Models/Costcenteraccount.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
@@ -707,6 +705,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Rules\\FileOptionMatch' => __DIR__ . '/../..' . '/app/Rules/FileOptionMatch.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
+        'App\\View\\Components\\Navigation' => __DIR__ . '/../..' . '/app/View/Components/Navigation.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -735,13 +734,6 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'Carbon\\CarbonPeriodImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriodImmutable.php',
         'Carbon\\CarbonTimeZone' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonTimeZone.php',
         'Carbon\\Cli\\Invoker' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Cli/Invoker.php',
-        'Carbon\\Doctrine\\CarbonDoctrineType' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonDoctrineType.php',
-        'Carbon\\Doctrine\\CarbonImmutableType' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonImmutableType.php',
-        'Carbon\\Doctrine\\CarbonType' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonType.php',
-        'Carbon\\Doctrine\\CarbonTypeConverter' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/CarbonTypeConverter.php',
-        'Carbon\\Doctrine\\DateTimeDefaultPrecision' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/DateTimeDefaultPrecision.php',
-        'Carbon\\Doctrine\\DateTimeImmutableType' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/DateTimeImmutableType.php',
-        'Carbon\\Doctrine\\DateTimeType' => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine/DateTimeType.php',
         'Carbon\\Exceptions\\BadComparisonUnitException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadComparisonUnitException.php',
         'Carbon\\Exceptions\\BadFluentConstructorException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentConstructorException.php',
         'Carbon\\Exceptions\\BadFluentSetterException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadFluentSetterException.php',

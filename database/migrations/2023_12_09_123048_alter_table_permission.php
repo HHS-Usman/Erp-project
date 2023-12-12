@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGivePermitsTable extends Migration
+class AlterTablePermission extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateGivePermitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('give__permits', function (Blueprint $table) {
-            $table->id();
-            $table->string('employee_name');
-            $table->string('module_name');
-            $table->timestamps();
+               Schema::table('permissions', function (Blueprint $table) {
+            $table->string('main_module')->nullable();
         });
+
     }
 
     /**
@@ -28,6 +26,6 @@ class CreateGivePermitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('give__permits');
+        //
     }
 }
