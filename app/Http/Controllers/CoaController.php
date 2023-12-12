@@ -6,7 +6,10 @@ use App\Models\Accountcategory;
 use App\Models\Parentcoa;
 use App\Http\Controllers\Controller;
 use App\Models\Coa;
+use App\Models\Costcenter;
+use App\Models\Costcenteraccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoaController extends Controller
 {
@@ -18,7 +21,7 @@ class CoaController extends Controller
     public function index()
     {
         $coas = Coa::latest()->paginate();
-        return view('Accounts.coa.index', compact('coas'))->with(request()->input('page'));
+    return view('Accounts.coa.index', compact('coas'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
@@ -41,7 +44,8 @@ class CoaController extends Controller
     {
         $selectedParentCoa = $request->get('parentcoa');
         $parentCoa = Coa::find($selectedParentCoa);
-    
+
+        $maxId = DB::table('coas')->max('id');
         // Determine the level and parent code based on the selected COA
         if ($parentCoa) {
             $parentCode = $parentCoa->coacode;

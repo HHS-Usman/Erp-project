@@ -3,8 +3,11 @@
     Manage COA
 @endsection
 @section('content')
+@php
+    use App\Helpers\FinanceHelper;
+    $m = 2; 
+@endphp
     <section id="main" class="main" style="padding-top: 0vh;">
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -15,13 +18,12 @@
                 </ul>
             </div>
         @endif
-
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Manage COA</h1>
+            <h1>Manage  Cost Center</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Manage COA</a></li>
+                    <li class="breadcrumb-item active"><a> Manage  COA</a></li>
                 </ol>
             </nav>
         </div>
@@ -41,47 +43,92 @@
                 <table class="table table-border datatable " style="border: 1px solid black">
                     <thead>
                         <tr>
-                            {{-- <th scope="col">Expander</th> --}}
+                            <th scope="col">S.No#</th>
                             {{-- <th scope="col">System ID</th> --}}
-                            <th scope="col">S.No</th>
-                            <th scope="col">Coa_id</th>
                             <th scope="col">Account Code</th>
-                            <th scope="col">Ref A/C Code</th>
                             <th scope="col">Account Name</th>
+                            <th scope="col">Ref A/C Code</th>
                             <th scope="col">Account Category</th>
                             <th scope="col">Account Type</th>
-                            {{-- <th scope="col">System/Manaul</th> --}}
-                            <th scope="col">Current Balance</th>
-                            <th scope="col">Opening Date</th>
-                            {{-- <th scope="col">Action</th> --}}
+                            <th scope="col">Transaction Type</th>
+                            <th scope="col">System/Manaul</th>
+                            <th scope="col">Current Balanace</th>
+                            <th scope="col">Currency</th>
+                            {{-- <th scope="col">Status</th> --}}
+                            {{-- <th scope="col">Transaction Amount</th> --}}
+                            {{-- <th scope="col">No of Transaction</th> --}}
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($coas as $coa => $item)
-                            <tr>
-                                <td>{{ $coa + 1 }}</td>
-                                <td>{{ $item->id}}</td>
-                                <td>{{ $item->coacode}}</td>
-                                <td>{{ $item->refaccode}}</td>
-                                <td>{{ $item->coaname}}</td>
-                                <td>{{ $item->coacategory}}</td>
-                                <td>{{ $item->accountype}}</td>
-                                <td>{{ $item->openbalance}}</td>
-                                <td>{{ $item->openingdate}}</td>
-                                {{-- <td>
-                                    @if ($item->is_active)
-                                        <p>Active</p>
-                                    @else
-                                        <p>INActive</p>
-                                    @endif
-                                </td> --}}
-                                <td>
-                                    <a class="btn btn-info" href="">Show</a>
-                                    <a class="btn btn-primary" href="">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <?php $counter = 1;?>
+                        @foreach($coas  as $key => $y)
+														<?php														
+														$array = explode('-',$y->coacode);
+														$level = count($array);
+														$nature = $array[0];
+														?>
+														<tr title="{{$y->id}}" @if($y->type==1)style="background-color:lightblue" @endif
+														@if($y->type==4)style="background-color:lightgray"  @endif
+														id="{{$y->id}}">
+															<td class="text-center"><?php echo $counter++;?></td>
+															<td>{{ '`'.$y->coacode}}</td>
+															<td>
+																@if($level == 1)
+																	<b style="font-size: large;font-weight: bolder">{{ strtoupper($y->coaname)}}</b>
+																@elseif($level == 2)
+																&emsp;&emsp;	{{ $y->coaname}}
+																@elseif($level == 3)
+																&emsp;&emsp;&emsp;&emsp;	{{  $y->coaname}}
+																@elseif($level == 4)
+																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{  $y->coaname}}
+																@elseif($level == 5)
+																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{ $y->coaname}}
+																@elseif($level == 6)
+																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{ $y->coaname}}
+																@elseif($level == 7)
+																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{  $y->coaname}}
+																@endif
+
+
+															</td>
+															<td>
+																@if($nature == 01)
+																	Assets
+																@elseif($nature == 02)
+																Liabilties
+
+																@elseif($nature == 03)
+																Equity
+																@elseif($nature == 04)
+																Expenses
+																@elseif($nature == 05)
+																Revenue
+																@elseif($nature == 06)
+																	Cost Of Sales
+																@endif
+															</td>
+                                                            <td>{{$y->coacategory}}</td>
+                                                            <td>{{$y->accountype}}</td>
+                                                            <td>sfs</td>
+                                                            <td>sdfsd</td>
+                                                            <td>sfdfs</td>
+                                                            <td>asasa</td>
+                                                            {{-- <td>@if($y->is_active)
+                                                                <p>Active</p>
+                                                            @else
+                                                                <p>InActive</p>
+                                                            @endif
+                                                        </td> --}}
+															{{-- <td class="text-right"><?php echo FinanceHelper::ChartOfAccountCurrentBalance($m,$level,$y->code);?></td> --}}
+
+                                                            <td>
+                                                                <a class="btn btn-info" href="">Show</a>
+                                                                <a class="btn btn-primary" href="">Edit</a>                                                                
+                                                                <a class="btn btn-danger" href="">Delete</a>
+                                                            </td>
+														</tr>
+													@endforeach
                     </tbody>
                 </table>
             </div>
