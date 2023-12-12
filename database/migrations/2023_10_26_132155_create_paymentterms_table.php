@@ -15,6 +15,8 @@ class CreatePaymenttermsTable extends Migration
     {
         Schema::create('paymentterms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('paymentterm');
             $table->string('paymentterm_code')->nullable();
             $table->string('detail')->nullable();

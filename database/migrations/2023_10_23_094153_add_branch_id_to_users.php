@@ -15,6 +15,7 @@ class AddBranchIdToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('branchID')->nullable();
+            $table->foreign('branchID')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

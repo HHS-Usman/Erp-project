@@ -114,171 +114,56 @@
                                     <h4>Post Days Entries</h4>
                                   </div>  
                                 </div>
-                               
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Company/Unit Name</h6>
-                                  
-                                </div>
-                                <div class="form-group">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                    <input
-                                    type="checkbox"
-                                    
-                                    id="input"
-                                    name="access"
-                                    placeholder="Access"
-                                  />
-                                  
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <input type="password" name="password" class="form-control" id="input" placeholder="Password" />
+                                @foreach ($companies as $company =>$item )
+                                  <div class="container d-flex justify-content-center align-items-center">
+                                      
+                                      <div class="form-group">    
+                                        <h6>{{ $item->name }}</h6>
+                                      
+                                      </div>
+                                      <div class="form-group">
+                                        
+                                        <input type="text" class="form-control" id="input1" class="input1" placeholder="Login ID" />
+                                      </div>
+                                      <div class="form-group">
+                                          <input type="checkbox" id="freezeCheckbox" name="access" placeholder="Access" />
+                                      </div>
+                                      <div class="form-group">
+                                          <input type="password" name="password" class="form-control" id="input2" class="input2" placeholder="Password" />
+                                      </div>
+                                        <div class="form-group">
+                                          
+                                          <input
+                                            type="checkbox"
+                                            class="form-control"
+                                            id="bit"
+                                            name="report_access"
+                                            placeholder="report_access" 
+                                          />
+                                        </div>
+                                        <div class="form-group">
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            id="input"
+                                            name="back_date_entry"
+                                            placeholder="back_date_entry" 
+                                          />
+                                        </div>
+                                        <div class="form-group">
+                                          
+                                          <input
+                                            type="email"
+                                            class="form-control"
+                                            id="input"
+                                            name="post_date_entry"
+                                            placeholder="post_date_entry" 
+                                          />
+                                      </div>
+                                      
                                   </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="checkbox"
-                                      class="form-control"
-                                      id="input"
-                                      name="report_access"
-                                      placeholder="report_access" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      name="back_date_entry"
-                                      placeholder="back_date_entry" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      id="input"
-                                      name="post_date_entry"
-                                      placeholder="post_date_entry" 
-                                    />
-                                </div>
-                              </div>
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Company/Unit Name</h6>
-                                  
-                                </div>
-                                <div class="form-group">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                  <input
-                                    type="checkbox"
-                                    id="input"
-                                    placeholder="Access"
-                                  />
-                                  
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <input type="password" class="form-control" id="input" placeholder="Password" />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="Email" 
-                                    />
-                                </div>
-                              </div>
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Company/Unit Name</h6>
-                                  
-                                </div>
-                                <div class="form-group">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                                <div class="form-group">
-                                    <input
-                                    type="checkbox"
-                                    id="input"
-                                    placeholder="Access"
-                                  />
-                                  
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <input type="password" class="form-control" id="input" placeholder="Password" />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="" 
-                                    />
-                                  </div>
-                                  <div class="form-group">
-                                    
-                                    <input
-                                      type="email"
-                                      class="form-control"
-                                      id="input"
-                                      placeholder="Email" 
-                                    />
-                                </div>
-                              </div>
+                                @endforeach
+                              
                               <div class="container d-flex justify-content-center align-items-center">
                                 <div class="form-group">
                                   <h6>Select company/Unit Branch</h6>
@@ -404,13 +289,13 @@
                                       <tr>
                                         
                                         <th class="justify-content-center">
-                                            <input type="text" name="role" id="role" placeholder="role" readonly> 
+                                           Role
                                         </th>
                                         <th>
-                                            <input type="text" name="module" id="module" placeholder="module" readonly>
+                                            Module
                                         </th>
                                         <th>
-                                            <input type="text" name="page" id="pgname" placeholder="Pg_name" readonly>
+                                            Page
                                         </th>
                                       </tr>
                                     </thead>
@@ -498,7 +383,105 @@
                             }
 
                             // Handle checkbox changes to update selected options
-                            document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+                           
+
+                            (function () {
+                              var checkbox = document.getElementById('freezeCheckbox');
+                            
+                              var inputIdsToFreeze = ['input1', 'input2'];
+
+                              // Define a function to handle the change event
+                              function handleChange() {
+                                for (var i = 0; i < inputIdsToFreeze.length; i++) {
+                                  var input = document.getElementById(inputIdsToFreeze[i]);
+
+                                  if (input) {
+                                    // Freeze the input by setting the 'disabled' attribute
+                                    input.disabled = checkbox.checked;
+
+                                    // Remove the value if the checkbox is checked
+                                    if (checkbox.checked) {
+                                      input.value = '';
+                                    }
+                                  }
+                                }
+                              }
+
+                              // Attach the change event handler to the checkbox
+                              checkbox.addEventListener('change', handleChange);
+
+                              
+                              // Invoke the change event handler immediately
+                              handleChange();
+                            })();
+                            // (function () {
+                            //   // Assuming you have an array of objects with properties like 'inputId' and 'checkboxId'
+                            //   var items = [
+                            //     { inputId: 'input1', checkboxId: 'freezeCheckbox' },
+                            //     { inputId: 'input2', checkboxId: 'freezeCheckbox' },
+                            //     // Add more items as needed
+                            //   ];
+
+                            //   for (var i = 0; i < items.length; i++) {
+                            //     var checkbox = document.getElementById(items[i].checkboxId);
+
+                            //     // Define a function to handle the change event
+                            //     function handleChange() {
+                            //       var input = document.getElementById(items[i].inputId);
+
+                            //       if (input) {
+                            //         // Freeze the input by setting the 'disabled' attribute
+                            //         input.disabled = checkbox.checked;
+
+                            //         // Remove the value if the checkbox is checked
+                            //         if (checkbox.checked) {
+                            //           input.value = '';
+                            //         }
+                            //       }
+                            //     }
+
+                            //     // Attach the change event handler to the checkbox
+                            //     checkbox.addEventListener('change', handleChange);
+
+                            //     // Invoke the change event handler immediately
+                            //     handleChange();
+                            //   }
+                            // })();
+
+                        //     (function () {
+                        //       var checkbox = document.getElementById('freezeCheckbox');
+                            
+                        //       var inputIdsToFreeze = ['input1', 'input2'];
+                          
+                        //   function handleChange(checkboxId, inputIdsToFreeze) {
+                        //     var checkbox = document.getElementById(checkboxId);
+
+                        //     // Attach the change event handler to the checkbox
+                        //     checkbox.addEventListener('change', function () {
+                        //       for (var i = 0; i < inputIdsToFreeze.length; i++) {
+                        //         var input = document.getElementById(inputIdsToFreeze[i]);
+
+                        //         if (input) {
+                        //           // Freeze the input by setting the 'disabled' attribute
+                        //           input.disabled = checkbox.checked;
+
+                        //           // Remove the value if the checkbox is checked
+                        //           if (checkbox.checked) {
+                        //             input.value = '';
+                        //           }
+                        //         }
+                        //       }
+                        //     });
+
+                        //     // Invoke the change event handler immediately
+                        //     handleChangeState(checkbox);
+                        //   }
+
+                        //   // Call the function for each set of checkboxes and inputs in your foreach loop
+                        //   // Example: handleChange('checkbox1', ['input1', 'input2']);
+                        //   // Example: handleChange('checkbox2', ['input3', 'input4']);
+                        // })();
+
                         </script>
                        
                     </div>

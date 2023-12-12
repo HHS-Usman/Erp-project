@@ -45,7 +45,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group d-flex">
-                                <label for="options">Employee GL Mapping</label>
+                                <label for="options">Role</label>
                                 <select id="gender" name="gender"  class="select2">
                                   <option class="options">None</option>
                                   @foreach($roles as $item)
@@ -77,75 +77,71 @@
                                         <td><h1>Module Name</h1></td>
                                       <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1"  onchange="toggleUnfreeze()"></td>
                                       <td></td>
-                                      <td><input type="checkbox" name="1stweek_sun_01"  id="" class="item"  value="1" onchange="freezer()" ></td>
-                                      <td><input type="checkbox" name="2ndweek_sun_01"  id="2ndweek_sun_01" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="3rdweek_sun_01"  id="3rdweek_sun_01" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="4thweek_sun_01"  id="4thweek_sun_01" class="item" value="1"></td>
+                                      <td><input type="checkbox" name="1stweek_sun_01"  id="freezer" class="item"  value="1" onchange="freeze()" checked></td>
+                                      <td><input type="checkbox" name="2ndweek_sun_01"  id="freezer1" class="item" value="1"  onchange="freeze1()" checked></td>
+                                      <td><input type="checkbox" name="3rdweek_sun_01"  id="freezer2" class="item" value="1"  onchange="freeze2()" checked></td>
+                                      <td><input type="checkbox" name="4thweek_sun_01"  id="freezer3" class="item" value="1"  onchange="freeze3()" checked></td>
                                       
                                     </tr>
                                     <tr>
                                       <td>Tick All</td>
                                       <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
                                       <td></td>
-                                      <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item " value="1"></td>
-                                      <td><input type="checkbox" name="2ndweek_mon_02" id="selectView" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="3rdweek_mon_02" id="selectEdit" class="item" value="1"></td>
-                                      <td><input type="checkbox" name="4thweek_mon_02" id="selectDelete" class="item" value="1"></td>
+                                      <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item not" value="1"></td>
+                                      <td><input type="checkbox" name="2ndweek_mon_02" id="selectView" class="item but" value="1"></td>
+                                      <td><input type="checkbox" name="3rdweek_mon_02" id="selectEdit" class="item why" value="1"></td>
+                                      <td><input type="checkbox" name="4thweek_mon_02" id="selectDelete" class="item the" value="1"></td>
                                     </tr>
                                     <tr>
                                         <td>Pages Name</td>
                                         <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03"  class="item example" value="1"></td>
                                         <td></td>
-                                        <td><input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5" value="1"></td>
+                                        <td><input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2 not" value="1"></td>
+                                        <td><input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3 but" value="1"></td>
+                                        <td><input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4 why" value="1"></td>
+                                        <td><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5 the" value="1"></td>
                                       </tr>
                                       <tr>
                                         <td>Pages Name</td>  
                                         <td><input type="checkbox" name="sel_wed_04" id="sel_wed_04" class="item example" value="1"></td>
                                         <td></td>
-                                        <td><input type="checkbox" name="1stweek_wed_04" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_wed_04" id="2ndweek_wed_04" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_wed_04" id="3rdweek_wed_04" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_wed_04" id="4thweek_wed_04" class="item example5" value="1"></td>
+                                        <td><input type="checkbox" name="1stweek_wed_04" id="item_one" class="item example2 not" value="1"></td>
+                                        <td><input type="checkbox" name="2ndweek_wed_04" id="2ndweek_wed_04" class="item example3 but" value="1"></td>
+                                        <td><input type="checkbox" name="3rdweek_wed_04" id="3rdweek_wed_04" class="item example4 why" value="1"></td>
+                                        <td><input type="checkbox" name="4thweek_wed_04" id="4thweek_wed_04" class="item example5 the" value="1"></td>
                                       <tr>
                                         <td>Pages Name</td>
                                         <td><input type="checkbox" name="sel_thu_05" id="sel_thu_05" class="item example" value="1"></td>
                                         <td></td>
-                                        <td><input type="checkbox" name="1stweek_thu_05" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_thu_05" id="2ndweek_thu_05" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_thu_05" id="3rdweek_thu_05" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_thu_05" id="4thweek_thu_05" class="item example5" value="1"></td>
+                                        <td><input type="checkbox" name="1stweek_thu_05" id="item_one" class="item example2 not" value="1"></td>
+                                        <td><input type="checkbox" name="2ndweek_thu_05" id="2ndweek_thu_05" class="item example3 but" value="1"></td>
+                                        <td><input type="checkbox" name="3rdweek_thu_05" id="3rdweek_thu_05" class="item example4 why" value="1"></td>
+                                        <td><input type="checkbox" name="4thweek_thu_05" id="4thweek_thu_05" class="item example5 the" value="1"></td>
                                         
                                       </tr>
                                       <tr>
                                         <td>Pages Name</td>
                                         <td><input type="checkbox" name="sel_fri_06" id="sel_fri_06" class="item example" value="1"></td>
                                         <td></td>
-                                        <td><input type="checkbox" name="1stweek_fri_06" id="item_one" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_fri_06" id="2ndweek_fri_06" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_fri_06" id="3rdweek_fri_06" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_fri_06" id="4thweek_fri_06" class="item example5" value="1"></td>
+                                        <td><input type="checkbox" name="1stweek_fri_06" id="item_one" class="item example2 not" value="1"></td>
+                                        <td><input type="checkbox" name="2ndweek_fri_06" id="2ndweek_fri_06" class="item example3 but" value="1"></td>
+                                        <td><input type="checkbox" name="3rdweek_fri_06" id="3rdweek_fri_06" class="item example4 why" value="1"></td>
+                                        <td><input type="checkbox" name="4thweek_fri_06" id="4thweek_fri_06" class="item example5 the" value="1"></td>
                                       </tr>
                                       <tr>
                                         <td>Page Name</td>
                                         <td><input type="checkbox" name="sel_sat_07" id="sel_sat_07" class="item example" value="1"></td>
                                         <td></td>
-                                        <td><input type="checkbox" name="1stweek_sat_07" id="1stweek_sat_07" class="item example2" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_sat_07" id="2ndweek_sat_07" class="item example3" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_sat_07" id="3rdweek_sat_07" class="item example4" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_sat_07" id="4thweek_sat_07" class="item example5" value="1"></td>
+                                        <td><input type="checkbox" name="1stweek_sat_07" id="1stweek_sat_07" class="item example2 not" value="1"></td>
+                                        <td><input type="checkbox" name="2ndweek_sat_07" id="2ndweek_sat_07" class="item example3 but" value="1"></td>
+                                        <td><input type="checkbox" name="3rdweek_sat_07" id="3rdweek_sat_07" class="item example4 why" value="1"></td>
+                                        <td><input type="checkbox" name="4thweek_sat_07" id="4thweek_sat_07" class="item example5 the" value="1"></td>
                                       </tr>  
                                   </tbody>
                             </table>
                             <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" >Submit</button>
                     </div>
-                    <script>
-                        $(document).ready(function () {
-                         $('.select2').select2();
-                     });  
-                     </script>
+                   
             </form>
         </div>
         <br><br><br>
@@ -232,24 +228,79 @@
                 }
             }
             
-            //  function freezer1() {
-            //      var unfreezeToggle = document.getElementById('freezer');
-            //      var checkboxes = document.getElementsById('item01');
+              function freeze() {
+                  var unfreezeToggle = document.getElementById('freezer');
+                  var checkboxes = document.getElementsByClassName('not');
 
-            //      if (unfreezeToggle.checked) {
-            //          // Unfreeze all checkboxes
-            //          for (var i = 0; i < checkboxes.length; i++) {
-            //              checkboxes[i].disabled = false;
-            //              checkboxes[i].classList.remove('frozen');
-            //          }
-            //      } else {
-            //          // Freeze all checkboxes
-            //          for (var i = 0; i < checkboxes.length; i++) {
-            //              checkboxes[i].disabled = true;
-            //              checkboxes[i].classList.add('frozen');
-            //          }
-            //      }
-            //  }
+                  if (unfreezeToggle.checked) {
+                     //  Unfreeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = false;
+                          checkboxes[i].classList.remove('frozen');
+                      }
+                  } else {
+                    //   Freeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = true;
+                          checkboxes[i].classList.add('frozen');
+                      }
+                  }
+              }
+              function freeze1() {
+                  var unfreezeToggle = document.getElementById('freezer1');
+                  var checkboxes = document.getElementsByClassName('but');
+
+                  if (unfreezeToggle.checked) {
+                     //  Unfreeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = false;
+                          checkboxes[i].classList.remove('frozen');
+                      }
+                  } else {
+                    //   Freeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = true;
+                          checkboxes[i].classList.add('frozen');
+                      }
+                  }
+              }
+              function freeze2() {
+                  var unfreezeToggle = document.getElementById('freezer2');
+                  var checkboxes = document.getElementsByClassName('why');
+
+                  if (unfreezeToggle.checked) {
+                     //  Unfreeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = false;
+                          checkboxes[i].classList.remove('frozen');
+                      }
+                  } else {
+                    //   Freeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = true;
+                          checkboxes[i].classList.add('frozen');
+                      }
+                  }
+              }
+              function freeze3() {
+                  var unfreezeToggle = document.getElementById('freezer3');
+                  var checkboxes = document.getElementsByClassName('the');
+
+                  if (unfreezeToggle.checked) {
+                     //  Unfreeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = false;
+                          checkboxes[i].classList.remove('frozen');
+                      }
+                  } else {
+                    //   Freeze all checkboxes
+                      for (var i = 0; i < checkboxes.length; i++) {
+                          checkboxes[i].disabled = true;
+                          checkboxes[i].classList.add('frozen');
+                      }
+                  }
+              }
+             
       </script>
   </section> 
 

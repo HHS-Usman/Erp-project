@@ -15,6 +15,8 @@ class CreateEmployeeflagsTable extends Migration
     {
         Schema::create('employeeflags', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('employeeflag');
             $table->string('employeeflag_code')->nullable();
             $table->string('detail')->nullable();

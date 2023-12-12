@@ -2,7 +2,7 @@
     use App\Helpers\MasterFormsHelper;
     $master = new MasterFormsHelper();
 @endphp
-@extends('layouts.master')
+@extends('layout.master')
 @section('title', 'Add User')
 @section('content')
     <section id="multiple-column-form">
@@ -28,9 +28,7 @@
                                         <label>Select Type</label>
                                         <select onchange="get_distributor()" name="user_type" id="user_type"
                                             class="form-control">
-                                            @foreach (MasterFormsHelper::userType() as $key => $userType)
-                                                <option value="{{ $userType->id }}">{{ $userType->type }}</option>
-                                            @endforeach
+                                           
                                         </select>
                                     </div>
                                 </div>
@@ -90,17 +88,17 @@
                                 <div class="col-md-12 form-check sperater">
                                     <strong>Distributor</strong>
                                     <div class="row">
-                                        @foreach ($master->get_all_distributors() as $key => $row)
+                                        
                                             <div class="col-md-3 form-check">
                                                 <div class="form-check padtbh">
-                                                    <input class="form-check-input" value="{{ $row->id }}"
-                                                        type="checkbox" id="distributor{{ $row->id }}"
+                                                    <input class="form-check-input" value=""
+                                                        type="checkbox" id="distributor"
                                                         name="distributor[]">
                                                     <label class="form-check-label"
-                                                        for="distributor{{ $row->id }}">{{ $row->distributor_name }}</label>
+                                                        for="distributor"></label>
                                                 </div>
                                             </div>
-                                        @endforeach
+                            
                                     </div>
                                 </div>
 

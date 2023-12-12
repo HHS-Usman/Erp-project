@@ -15,6 +15,8 @@ class CreateSalespersontypesTable extends Migration
     {
         Schema::create('salespersontypes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('persontype');
             $table->string('persontype_code')->nullable();
             $table->string('detail')->nullable();

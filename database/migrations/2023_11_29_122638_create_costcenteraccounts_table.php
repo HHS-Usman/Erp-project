@@ -15,6 +15,8 @@ class CreateCostcenteraccountsTable extends Migration
     {
         Schema::create('costcenteraccounts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('costcenter_code')->nullable();
             $table->string('costcentername');
             $table->boolean('operation')->default(true);

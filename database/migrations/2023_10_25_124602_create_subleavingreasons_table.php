@@ -15,6 +15,8 @@ class CreateSubleavingreasonsTable extends Migration
     {
         Schema::create('subleavingreasons', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('subleavingreason');
             $table->string('subleavingreason_code')->nullable();
             $table->string('detail')->nullable();

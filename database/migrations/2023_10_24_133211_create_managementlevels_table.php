@@ -15,6 +15,8 @@ class CreateManagementlevelsTable extends Migration
     {
         Schema::create('managementlevels', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('managementlevel');
             $table->string('managementlevel_code')->nullable();
             $table->text('detail')->nullable();

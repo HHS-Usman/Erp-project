@@ -3,7 +3,7 @@
 use App\Helpers\MasterFormsHelper;
 $master = new MasterFormsHelper();
 ?>
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', "SND || Update Designation")
 @section('content')
 

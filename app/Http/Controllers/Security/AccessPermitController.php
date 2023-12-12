@@ -9,7 +9,7 @@ use App\Models\Give_Permit;
 use App\Models\Page;
 use App\Models\Module;
 use App\Models\User_role;
-
+use App\Models\Company;
 class AccessPermitController extends Controller
 {
     public function index()
@@ -23,7 +23,8 @@ class AccessPermitController extends Controller
         $employes = Employee::all();
         $modules = Module::all();
         $pages = Page::all();
-        return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles' ));
+        $companies = Company::all();
+        return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies' ));
     }
     public function store(Request $request)
     {

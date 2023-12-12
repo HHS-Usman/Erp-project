@@ -15,6 +15,8 @@ class CreateQualificationlevelsTable extends Migration
     {
         Schema::create('qualificationlevels', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('qualificationlevel');
             $table->string('qualificationlevel_code')->nullable();
             $table->string('detail')->nullable();

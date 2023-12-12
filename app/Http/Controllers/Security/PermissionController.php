@@ -55,6 +55,7 @@ class PermissionController extends Controller
             DB::rollBack();
             return response()->json(['error' => $th->getMessage()]);
         }
+        
     }
 
     /**

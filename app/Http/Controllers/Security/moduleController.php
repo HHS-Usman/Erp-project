@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Module;
 class moduleController extends Controller
 {
     /**
@@ -24,7 +24,7 @@ class moduleController extends Controller
      */
     public function create()
     {
-        return view('security.module.index');
+        return view('security.module.create');
     }
 
     /**
