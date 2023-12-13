@@ -20,8 +20,9 @@ class CoaController extends Controller
      */
     public function index()
     {
+        $accountcetegoty = Accountcategory::all();
         $coas = Coa::latest()->paginate();
-    return view('Accounts.coa.index', compact('coas'))->with(request()->input('page'));
+    return view('Accounts.coa.index', compact('coas','accountcetegoty'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
@@ -54,7 +55,6 @@ class CoaController extends Controller
             $parentCode = '';
              //$level = 1; If there is no parent, set the level to 1
         }
-    
         // Generate the hierarchical account code based on the parent COA's information and child count
         $childCount = Coa::where('parentid', $selectedParentCoa)->count() + 1;
         $newAccountCode = $parentCode . '-' . $childCount;
