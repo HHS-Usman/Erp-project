@@ -55,7 +55,6 @@ class CoaController extends Controller
             $parentCode = '';
              //$level = 1; If there is no parent, set the level to 1
         }
-    
         // Generate the hierarchical account code based on the parent COA's information and child count
         $childCount = Coa::where('parentid', $selectedParentCoa)->count() + 1;
         $newAccountCode = $parentCode . '-' . $childCount;
