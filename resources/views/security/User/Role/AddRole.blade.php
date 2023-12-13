@@ -28,26 +28,23 @@ $master = new MasterFormsHelper();
                             <div class="col-md-12 form-check sperater2">
                                 <strong>Permissions</strong>
                                 <div class="row padl">
-                                    @foreach ($master->getAllPermissionList() as $mainModule)
+                                    
                                         {{-- @dd($mainModule); --}}
                                         <div class="col-md-12">
                                             <input class="form-check-input" type="checkbox"
-                                                id="{{ $mainModule['main_module'] }}" onclick="checkboxChecked(this)">
-                                            <strong>{{ $mainModule['main_module'] }}</strong>
+                                                id="" onclick="checkboxChecked(this)">
+                                            <strong></strong>
 
 
                                         </div>
-                                        @foreach ($mainModule['permissions'] as $id => $permission)
+                                         {{-- @foreach ($mainModule['permissions'] as $id => $permission) --}}
                                             {{-- @dd($id); --}}
                                                 <div class="col-md-3 form-check padtbh">
-                                                    <input class="form-check-input {{ $mainModule['main_module'] }}"
-                                                        value="{{ $id }}" type="checkbox"
-                                                        id="permissions{{ $id }}" name="permissions[]">
+                                                    <input class="form-check-input" value="" type="checkbox" id="permissions" name="permissions[]">
                                                     <label class="form-check-label"
-                                                        for="permissions{{ $id }}">{{ $permission }}</label>
+                                                        for="permissions"></label>
                                                 </div>
-                                        @endforeach
-                                    @endforeach
+                                       
                                 </div>
                             </div>
                             <div class="col-12">
@@ -124,39 +121,79 @@ $master = new MasterFormsHelper();
                               <th>Delete</th>
                             </tr>
                           </thead>
-                          @foreach ($master->getAllPermissionList() as $mainModule)
+                          
                             <tbody>
+                            {{-- @php
+                                $groupedPermissions = $permissions->groupBy(['module_id', 'page_id']);
+                            @endphp
                             
-                                <tr>
-                                <td><h1>{{ $mainModule['main_module'] }}</h1></td>
-                                <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle{{ $mainModule['main_module'] }}" value="1"  onchange="toggleUnfreeze()"></td>
-                                <td></td>
-                                <td><input type="checkbox" name="1stweek_sun_01"  id="freezer" class="item"  value="1" onchange="freeze()" checked></td>
-                                <td><input type="checkbox" name="2ndweek_sun_01"  id="freezer1" class="item" value="1"  onchange="freeze1()" checked></td>
-                                <td><input type="checkbox" name="3rdweek_sun_01"  id="freezer2" class="item" value="1"  onchange="freeze2()" checked></td>
-                                <td><input type="checkbox" name="4thweek_sun_01"  id="freezer3" class="item" value="1"  onchange="freeze3()" checked></td>
-                                
-                                </tr>
-                                <tr>
-                                <td>Tick All</td>
-                                <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
-                                <td></td>
-                                <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item not" value="1"></td>
-                                <td><input type="checkbox" name="2ndweek_mon_02" id="selectView" class="item but" value="1"></td>
-                                <td><input type="checkbox" name="3rdweek_mon_02" id="selectEdit" class="item why" value="1"></td>
-                                <td><input type="checkbox" name="4thweek_mon_02" id="selectDelete" class="item the" value="1"></td>
-                                </tr>
-                                @foreach ($mainModule['permissions'] as $id => $permission)
+                            @foreach ($groupedPermissions as $modulePageGroup)
+                                @foreach ($modulePageGroup as $data)
                                     <tr>
-                                        <td>{{ $permission }}</td>
-                                        <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03"  class="item example" value="1"></td>
-                                        <td></td>
-                                        <td><input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2 not" value="1"></td>
-                                        <td><input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3 but" value="1"></td>
-                                        <td><input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4 why" value="1"></td>
-                                        <td><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5 the" value="1"></td>
+                                        <td rowspan="4">
+                                            @if (isset($data->module))
+                                                <h1>{{ $data->module->module_name }}</h1>
+                                            @endif
+                                        </td>
+                                        <td><input type="checkbox" name="sel_sun_01" id="unfreezeToggle" value="1" onchange="toggleUnfreeze()"></td>
+                                        <!-- Other cells for the first action -->
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
+                                        <!-- Other cells for the second action -->
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03" class="item example" value="1"></td>
+                                        <!-- Other cells for the third action -->
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @if (isset($data->page))
+                                                {{ $data->page->name }}
+                                            @endif
+                                        </td>
+                                        <!-- Cells for the page details -->
+                                        <td>
+                                            @if (isset($data->page_action_id))
+                                                @if($data->page_action_id == 1)  
+                                                    {{ $data->name }} <input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2 not" value="1">
+                                                @elseif ($data->page_action_id == 2)
+                                                    {{ $data->name }}<input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3 but" value="1">
+                                                @elseif ($data->page_action_id == 3)
+                                                    {{ $data->name }}<input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4 why" value="1">
+                                                @elseif ($data->page_action_id == 4) 
+                                                    {{ $data->name }} <br><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5 the" value="1">
+                                                @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach    
+                            @endforeach --}}
+                            
+                            
+
+
+                            @foreach ($permissions->groupBy('module_id') as $moduleGroup)
+                            @foreach ($moduleGroup->groupBy('page_id') as $pageGroup)
+                                <tr>
+                                    <td rowspan="{{ $pageGroup->count() * 4 }}"> 
+                                        <!-- Display the module name once for all pages in this module -->
+                                        {{ optional($pageGroup->first()->module)->module_name }}
+                                    </td>
+                                </tr>
+                                @foreach ($pageGroup as $data)
+                                    <tr>
+                                        <td>{{ optional($data->page)->name }}</td>
+                                        <td><input type="checkbox" name="add_{{ $data->id }}" value="1">{{ $data->id }}</td>
+                                        <td><input type="checkbox" name="edit_{{ $data->id }}" value="1">{{ $data->id }}</td>
+                                        <td><input type="checkbox" name="view_{{ $data->id }}" value="1">{{ $data->id }}</td>
+                                        <td><input type="checkbox" name="delete_{{ $data->id }}" value="1">{{ $data->id }}</td>
                                     </tr>
                                 @endforeach
+                            @endforeach
+                        @endforeach
+                        
+                             
                                 {{-- <tr>
                                     <td>Pages Name</td>  
                                     <td><input type="checkbox" name="sel_wed_04" id="sel_wed_04" class="item example" value="1"></td>
@@ -194,7 +231,7 @@ $master = new MasterFormsHelper();
                                     <td><input type="checkbox" name="4thweek_sat_07" id="4thweek_sat_07" class="item example5 the" value="1"></td>
                                 </tr>   --}}
                             </tbody>
-                          @endforeach  
+                          
                     </table>
                     <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" >Submit</button>
             </div>
