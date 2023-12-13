@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Security;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\User_role;
 class RoleController extends Controller
 {
     /**
@@ -26,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('security.User.Role.AddRole');
+        $roles = User_role::all();
+        return view('security.User.Role.AddRole', compact('roles'));
     }
 
     /**

@@ -190,10 +190,10 @@
                                         aria-expanded="false">Organization Setup</a>
                                     <ul id="container" class="dropdown-menu dropdown-content"
                                         style="{display: block;}">
-                                        @can('create-orgnization')
+                                        
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
-                                        @endcan
+                                        
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
 

@@ -15,6 +15,8 @@ class CreateUsergroupsTable extends Migration
     {
         Schema::create('usergroups', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('usergroup');
             $table->string('usergroup_code')->nullable();
             $table->string('detail')->nullable();

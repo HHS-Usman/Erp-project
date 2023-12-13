@@ -15,6 +15,8 @@ class CreateEmployeejobstatusesTable extends Migration
     {
         Schema::create('employeejobstatuses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('employeejobstatus');
             $table->string('employeejobstatus_code')->nullable();
             $table->string('detail')->nullable();

@@ -15,6 +15,8 @@ class CreateWeekdaysTable extends Migration
     {
         Schema::create('weekdays', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->boolean('sel_sun_01')->default(true)->nullable();
             $table->boolean('1stweek_sun_01')->default(true)->nullable();
             $table->boolean('2ndweek_sun_01')->default(true)->nullable();

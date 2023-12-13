@@ -15,6 +15,8 @@ class CreateGazetedholidaysTable extends Migration
     {
         Schema::create('gazetedholidays', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('year')->nullable();
             $table->string('month')->nullable();
             $table->string('date')->nullable();

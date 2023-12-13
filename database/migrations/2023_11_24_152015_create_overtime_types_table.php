@@ -15,6 +15,8 @@ class CreateOvertimeTypesTable extends Migration
     {
         Schema::create('overtime_types', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('overtime')->nullable();
             $table->string('document_type')->nullable();
             $table->boolean('is_active')->default(true)->nullable();            

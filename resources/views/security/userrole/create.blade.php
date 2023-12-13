@@ -30,6 +30,7 @@
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
+                            
                             <div class="form-group">
                                 <strong>User Role Code</strong>
                                 <input type="text" name="user_role_code" id="user_role_code" class="form-control" placeholder="User Role Code">

@@ -80,6 +80,11 @@ return array(
     'App\\Http\\Controllers\\Security\\PermissionController' => $baseDir . '/app/Http/Controllers/Security/PermissionController.php',
     'App\\Http\\Controllers\\Security\\RoleAccessController' => $baseDir . '/app/Http/Controllers/Security/RoleAccessController.php',
     'App\\Http\\Controllers\\Security\\RoleController' => $baseDir . '/app/Http/Controllers/Security/RoleController.php',
+<<<<<<< HEAD
+=======
+    'App\\Http\\Controllers\\Security\\UserController' => $baseDir . '/app/Http/Controllers/Security/UserController.php',
+    'App\\Http\\Controllers\\Security\\User_role_controller' => $baseDir . '/app/Http/Controllers/Security/User_role_controller.php',
+>>>>>>> 5889b5bcd81dd92cff08578e5f8b4b42a301cfc7
     'App\\Http\\Controllers\\Security\\moduleController' => $baseDir . '/app/Http/Controllers/Security/moduleController.php',
     'App\\Http\\Controllers\\Security\\pageController' => $baseDir . '/app/Http/Controllers/Security/pageController.php',
     'App\\Http\\Controllers\\StateController' => $baseDir . '/app/Http/Controllers/StateController.php',
@@ -94,6 +99,7 @@ return array(
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+    'App\\Http\\Middleware\\SetBranch' => $baseDir . '/app/Http/Middleware/SetBranch.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
@@ -143,6 +149,7 @@ return array(
     'App\\Models\\Nationality' => $baseDir . '/app/Models/Nationality.php',
     'App\\Models\\Overtime_type' => $baseDir . '/app/Models/Overtime_type.php',
     'App\\Models\\Page' => $baseDir . '/app/Models/Page.php',
+    'App\\Models\\PageAction' => $baseDir . '/app/Models/PageAction.php',
     'App\\Models\\Parentcoa' => $baseDir . '/app/Models/Parentcoa.php',
     'App\\Models\\Paymentterm' => $baseDir . '/app/Models/Paymentterm.php',
     'App\\Models\\Process' => $baseDir . '/app/Models/Process.php',

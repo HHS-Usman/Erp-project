@@ -2,7 +2,7 @@
     use App\Helpers\MasterFormsHelper;
     $master = new MasterFormsHelper();
 @endphp
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Manage Permissions')
 @section('content')
     <section id="multiple-column-form">

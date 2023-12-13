@@ -15,6 +15,8 @@ class CreateModeofpaymentsTable extends Migration
     {
         Schema::create('modeofpayments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('modeofpayment');
             $table->string('modeofpayment_code')->nullable();
             $table->string('detail')->nullable();

@@ -58,6 +58,8 @@ use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleAccessController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\AccesspermitController;
+use App\Http\Controllers\Security\User_role_controller;
+use App\Http\Controllers\Security\Usercontroller;
 use App\Http\Controllers\BranchController;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,6 +94,8 @@ Route::resource('division',DivisionController::class);
 Route::resource('department',DepartmentController::class);
 Route::resource('subdepartment',SubdepartmentController::class);
 Route::resource('function',FundtionController::class);
+Route::resource('userrole',User_role_controller::class);
+Route::resource('users',Usercontroller::class);
 Route::resource('management',MangementlevelController::class);
 Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);

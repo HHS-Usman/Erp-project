@@ -15,6 +15,8 @@ class CreateAdditionalApprovalsTable extends Migration
     {
         Schema::create('additional_approvals', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('add_approval');
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();

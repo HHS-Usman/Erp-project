@@ -15,6 +15,8 @@ class CreateCitizenshipsTable extends Migration
     {
         Schema::create('citizenships', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('citizenship');
             $table->string('citizenship_code')->nullable();
             $table->string('detail')->nullable();

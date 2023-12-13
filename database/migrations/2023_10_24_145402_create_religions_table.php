@@ -15,6 +15,8 @@ class CreateReligionsTable extends Migration
     {
         Schema::create('religions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('religion_code')->nullable();
             $table->string('religion');
             $table->text('detail')->nullable();

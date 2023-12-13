@@ -307,12 +307,12 @@ class MasterFormsHelper
     public static function sidebarModules()
     {
         return [
-            'User-Management',
-            'Execution',
-            'KPO',
-            'Product',
-            'Shop',
-            'TSO',
+            'Organization_Setup',
+            'Generalsetup',
+            'Employee',
+            'Salesperson',
+            'Accounts',
+            'Security',
             'Distributor',
             'Route',
             'Reports',

@@ -13,8 +13,9 @@ class AlterTablePermission extends Migration
      */
     public function up()
     {
-               Schema::table('permissions', function (Blueprint $table) {
-            $table->string('main_module')->nullable();
+                Schema::table('permissions', function (Blueprint $table) {
+                    $table->unsignedBigInteger('page_id');
+                    $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
         });
 
     }
