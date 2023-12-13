@@ -80,11 +80,8 @@ return array(
     'App\\Http\\Controllers\\Security\\PermissionController' => $baseDir . '/app/Http/Controllers/Security/PermissionController.php',
     'App\\Http\\Controllers\\Security\\RoleAccessController' => $baseDir . '/app/Http/Controllers/Security/RoleAccessController.php',
     'App\\Http\\Controllers\\Security\\RoleController' => $baseDir . '/app/Http/Controllers/Security/RoleController.php',
-<<<<<<< HEAD
-=======
     'App\\Http\\Controllers\\Security\\UserController' => $baseDir . '/app/Http/Controllers/Security/UserController.php',
     'App\\Http\\Controllers\\Security\\User_role_controller' => $baseDir . '/app/Http/Controllers/Security/User_role_controller.php',
->>>>>>> 5889b5bcd81dd92cff08578e5f8b4b42a301cfc7
     'App\\Http\\Controllers\\Security\\moduleController' => $baseDir . '/app/Http/Controllers/Security/moduleController.php',
     'App\\Http\\Controllers\\Security\\pageController' => $baseDir . '/app/Http/Controllers/Security/pageController.php',
     'App\\Http\\Controllers\\StateController' => $baseDir . '/app/Http/Controllers/StateController.php',
@@ -2876,6 +2873,7 @@ return array(
     'Mockery\\Matcher\\IsEqual' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/IsEqual.php',
     'Mockery\\Matcher\\IsSame' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/IsSame.php',
     'Mockery\\Matcher\\MatcherAbstract' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/MatcherAbstract.php',
+    'Mockery\\Matcher\\MatcherInterface' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/MatcherInterface.php',
     'Mockery\\Matcher\\MultiArgumentClosure' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/MultiArgumentClosure.php',
     'Mockery\\Matcher\\MustBe' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/MustBe.php',
     'Mockery\\Matcher\\NoArgs' => $vendorDir . '/mockery/mockery/library/Mockery/Matcher/NoArgs.php',
