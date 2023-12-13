@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTablePermission extends Migration
+class CreatePageActionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AlterTablePermission extends Migration
      */
     public function up()
     {
-                Schema::table('permissions', function (Blueprint $table) {
-                    $table->unsignedBigInteger('page_id');
-                    $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+        Schema::create('page_actions', function (Blueprint $table) {
+            $table->id();
+            $table->string('Name');
+            $table->timestamps();
         });
-
     }
 
     /**
@@ -27,6 +27,6 @@ class AlterTablePermission extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('page_actions');
     }
 }
