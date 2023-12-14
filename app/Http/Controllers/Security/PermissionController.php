@@ -49,7 +49,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('security.User.create');
     }
 
     /**

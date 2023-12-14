@@ -52,9 +52,7 @@
                                         <label>Role</label>
                                        <select class="form-control" name="role" id="role">
                                         <option value="">select</option>
-                                        @foreach ( $master->get_all_role() as $key =>$row )
-                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                        @endforeach
+                                       
                                        </select>
                                     </div>
                                 </div>
@@ -62,26 +60,25 @@
                                 <div style="display: none" class="col-md-12 form-check sperater2">
                                     <strong>Permissions</strong>
                                     <div class="row padl">
-                                        @foreach ($master->getAllPermissionList() as $mainModule)
+                                        
                                             {{-- @dd($mainModule); --}}
                                             <div class="col-md-12">
                                                 <input class="form-check-input" type="checkbox"
-                                                    id="{{ $mainModule['main_module'] }}" onclick="checkboxChecked(this)">
-                                                <strong>{{ $mainModule['main_module'] }}</strong>
+                                                    id="" onclick="checkboxChecked(this)">
+                                                <strong></strong>
 
 
                                             </div>
-                                            @foreach ($mainModule['permissions'] as $id => $permission)
+                                            
                                                 {{-- @dd($id); --}}
                                                     <div class="col-md-3 form-check padtbh">
-                                                        <input class="form-check-input {{ $mainModule['main_module'] }}"
-                                                            value="{{ $id }}" type="checkbox"
-                                                            id="permissions{{ $id }}" name="permissions[]">
+                                                        <input class="form-check-input "
+                                                            value="" type="checkbox"
+                                                            id="permissions" name="permissions[]">
                                                         <label class="form-check-label"
-                                                            for="permissions{{ $id }}">{{ $permission }}</label>
+                                                            for="permissions"></label>
                                                     </div>
-                                            @endforeach
-                                        @endforeach
+                                            
                                     </div>
                                 </div>
                                 <hr>
