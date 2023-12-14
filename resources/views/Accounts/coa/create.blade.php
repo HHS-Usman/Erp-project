@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create COA
+    Create Chart of Account
 @endsection
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,11 +15,11 @@
             </div>
         @endif
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Create COA </h1>
+            <h1>Create Chart of Account </h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create COA</a></li>
+                    <li class="breadcrumb-item active"><a> Create Chart of Account</a></li>
                 </ol>
             </nav>
         </div>
@@ -33,18 +33,20 @@
                         Operational
                     </div>
                     <div class="form-group">
-                        <strong>Select Parent COA </strong>
-                        <select name="parentcoa" id="parentcoa" class="form-control">
-                            <option >Select Parent COA</option>
-                            @foreach ($prentcoa as $pcoa=>$item)
-                            <option  value={{$item->id}} >Account ID {{$item->id}} || coacode {{$item->coacode}} || {{$item->coaname}} || parent Name || {{$item->parentcoa}} {{$item->parentid}}
-                            </option>
-                            @endforeach 
+                        <strong>Select Parent COA</strong>
+                        <select name="parentcoa" id="parentcoa" class="form-control" onchange="updateAccountCode()">
+                            <option>Select Parent COA</option>
+                            @foreach ($prentcoa as $item)
+                                <option value="{{ $item->id }}" data-coacode="{{ $item->coacode }}" data-childcount="{{ $item->children_count }}">
+                                    Account ID {{ $item->id }} || coacode {{ $item->coacode }} || {{ $item->coaname }} || parent Name || {{ $item->parentcoa }} {{ $item->parentid }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
+                    
                     <div class="form-group">
                         <strong>Select Account Category </strong>
-                        <select name="accountcategory" id="accountcetegory" class="form-control">
+                        <select name="accountcategory" id="accountcategory" class="form-control">
                             <option value="Select Sale Type">Select Parent COA</option>
                             @foreach ($accountCategory as $ac=>$item)
                             <option value={{$item->id}}>{{$item->accountcategory}}
@@ -59,9 +61,9 @@
                     </div>
                     <div class="form-group">
                         <strong>Account Code</strong>
-                        <input type="text" name="accountcode" id="accountcode" class="form-control"
-                            placeholder="Account Code">
+                        <input type="text" name="accountcode" id="accountcode" class="form-control" placeholder="Account Code" readonly>
                     </div>
+                    
                     <div class="form-group">
                         <strong>Ref A/C Code</strong>
                         <input type="text" name="refaccode" id="refaccode" class="form-control"
@@ -69,10 +71,20 @@
                     </div>
                     <div class="form-group">
                         <strong>Select Account Type </strong>
-                        <select id="accountype" name="accountype" class="form-control">
-                            <option class="options" value="Detail Account">Detail Account</option>
-                            <option class="options" value="Account Group Level">Account Group level</option>
-                            <option class="options" value="Controll Account">Controll Account</option>
+                        <select name="accountype" id="accountype" class="form-control">
+                            <option value="Select Sale Type">Select Account type</option>
+                            @foreach ($accountypes as $at=>$item)
+                            <option value={{$item->id}}>{{$item->typeaccount}}
+                            </option>
+                            @endforeach 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <strong>Select Transaction Type </strong>
+                        <select name="trnasactiontype" id="transactiontype" class="form-control">
+                            <option value="Select Sale Type">Select Transaction Type</option>
+                            <option value="Debit">Debit</option>
+                            <option value="Credit">Credit</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -83,6 +95,11 @@
                     <div class="form-group">
                         <strong>Opening Date</strong>
                         <input type="date" class="form-control" name="openingdate" id="Opening Date" placeholder="Opening Date"/>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                        Active
+                        </label>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -95,6 +112,15 @@
         <br>
         <br>
         <div><br> </div>
+        <script>
+            function updateAccountCode() {
+                var parentCode = $('#parentcoa option:selected').data('coacode');
+                var childCount = $('#parentcoa option:selected').data('childcount') || 0;
+                var newAccountCode = parentCode + '-' + (childCount + 1);
+                $('#accountcode').val(newAccountCode);
+            }
+        </script>
+
 
     </section>
 

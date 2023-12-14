@@ -11,4 +11,8 @@ class Costcenteraccount extends Model
     protected $guarded = [
         'id',
     ];
+    public function children()
+    {
+        return $this->hasMany(Coa::class, 'parentid');
+    }
 }

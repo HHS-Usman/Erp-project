@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Costcenteraccount;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class CostcenteraccountController extends Controller
@@ -15,8 +16,9 @@ class CostcenteraccountController extends Controller
      */
     public function index()
     {
+        $department = Department::all();
         $costcenter = Costcenteraccount::latest()->paginate();
-        return view('Accounts.costcenter.index',compact('costcenter'))->with(request()->input('page'));
+        return view('Accounts.costcenter.index',compact('costcenter','department'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
@@ -25,8 +27,12 @@ class CostcenteraccountController extends Controller
      */
     public function create()
     {
-        $costcenter =  Costcenteraccount::where('operation', 0)->get();
-        return view('Accounts.costcenter.create',compact('costcenter'));
+        $maping = Department::all();
+        $costcenter = Costcenteraccount::where('operation', 0)
+        ->where('parentid', '>', 0) 
+        ->get();
+        $prentcoa = Costcenteraccount::where('operation', 0)->withCount('children')->get();
+        return view('Accounts.costcenter.create', compact('costcenter','maping','prentcoa'));
     }
 
     /**
@@ -63,10 +69,11 @@ class CostcenteraccountController extends Controller
             'operation' => request()->get('operation', 0),
             'costcenter_code' =>  $newAccountCode,
             'costcentername' => request()->get('costcenter_name'),
-            'parentid' =>  $selectedParentCoa,
+            'parentid' =>  is_numeric($selectedParentCoa) ? $selectedParentCoa : null,
             'parentcode' => $parentCode, 
             'costcentertype' => request()->get('costcentertype'),
             'costcentermapping' => request()->get('costcentermapping'),
+            'is_active' => request()->get('is_active', 0),
         ]);
          // Assign levels dynamically
          for ($i = 1; $i <= 7; $i++) {

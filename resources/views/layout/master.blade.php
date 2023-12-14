@@ -13,6 +13,7 @@
     <link href="/assets/img/favicon.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

@@ -32,8 +32,6 @@ class CreateCostcenteraccountsTable extends Migration
             $table->string('costcentertype')->nullable();
             $table->string('costcentermapping');
             $table->boolean('is_active')->default(true)->nullable();
-
-
             $table->timestamps();
         });
     }

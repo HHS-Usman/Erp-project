@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Manage COA
+    Manage Chart of Account
 @endsection
 @section('content')
     @php
@@ -19,11 +19,11 @@
             </div>
         @endif
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Manage Cost Center</h1>
+            <h1>Manage Chart of Account</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Manage COA</a></li>
+                    <li class="breadcrumb-item active"><a> Manage Chart of Account</a></li>
                 </ol>
             </nav>
         </div>
@@ -94,13 +94,17 @@
                                 <td>{{ $y->refaccode }}</td>
                                 
                                 @foreach ($accountcetegoty as $category)
-                                    <td>{{ $category->accountcategory }}</td>
+                                    <td>{{$category->accountcategory}}</td>
                                 @endforeach
-                                <td>2</td>
-                                <td>sfs</td>
-                                <td>sdfsd</td>
-                                <td>sfdfs</td>
-                                <td>asasa</td>
+                               @foreach ( $accountypes as $data )
+                               <td>{{$data->typeaccount}}</td>
+                               @endforeach
+                        
+                               <td>{{$y->Transactiontype}}</td>
+                               <td></td>
+                                <td>{{$y->System_Manual}}</td>
+                                <td></td>
+                                <td></td>
                                 {{-- <td>@if ($y->is_active)
                                                                 <p>Active</p>
                                                             @else

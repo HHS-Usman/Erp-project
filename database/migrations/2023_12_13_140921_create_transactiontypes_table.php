@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccounttypesTable extends Migration
+class CreateTransactiontypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateAccounttypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounttypes', function (Blueprint $table) {
+        Schema::create('transactiontypes', function (Blueprint $table) {
             $table->id();
-            $table->string('typeaccount')->nullable();
-            $table->string('Description');
-            $table->dropColumn('description');
+            $table->integer('Transactiontype_Code');
+            $table->string('Transactiontype');
+            $table->string('Detail');
             $table->timestamps();
-       
-    });
+        });
     }
 
     /**
@@ -30,7 +29,6 @@ class CreateAccounttypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounttypes');
+        Schema::dropIfExists('transactiontypes');
     }
 }
-

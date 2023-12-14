@@ -3,10 +3,10 @@
     Manage Cost Center
 @endsection
 @section('content')
-@php
-    use App\Helpers\FinanceHelper;
-    $m = 1; 
-@endphp
+    @php
+        use App\Helpers\FinanceHelper;
+        $m = 1;
+    @endphp
     <section id="main" class="main" style="padding-top: 0vh;">
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,11 +19,11 @@
             </div>
         @endif
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Manage  Cost Center</h1>
+            <h1>Manage Cost Center</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Manage  Cost Center</a></li>
+                    <li class="breadcrumb-item active"><a> Manage Cost Center</a></li>
                 </ol>
             </nav>
         </div>
@@ -58,86 +58,78 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $counter = 1;?>
-                        @foreach($costcenter  as $key => $y)
-														<?php														
-														$array = explode('-',$y->costcenter_code);
-														$level = count($array);
-														$nature = $array[0];
-														?>
+                        <?php $counter = 1; ?>
+                        @foreach ($costcenter as $key => $y)
+                            <?php
+                            $array = explode('-', $y->costcenter_code);
+                            $level = count($array);
+                            $nature = $array[0];
+                            ?>
+                            <tr title="{{ $y->id }}"
+                                @if ($y->type == 1) style="background-color:lightblue" @endif
+                                @if ($y->type == 4) style="background-color:lightgray" @endif
+                                id="{{ $y->id }}">
+                                <td class="text-center"><?php echo $counter++; ?></td>
+                                <td>{{ '`' . $y->costcenter_code }}</td>
+                                <td>
+                                    @if ($level == 1)
+                                        <b
+                                            style="font-size: large;font-weight: bolder">{{ strtoupper($y->costcentername) }}</b>
+                                    @elseif($level == 2)
+                                        &emsp;&emsp; {{ $y->costcentername }}
+                                    @elseif($level == 3)
+                                        &emsp;&emsp;&emsp;&emsp; {{ $y->costcentername }}
+                                    @elseif($level == 4)
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ $y->costcentername }}
+                                    @elseif($level == 5)
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ $y->costcentername }}
+                                    @elseif($level == 6)
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        {{ $y->costcentername }}
+                                    @elseif($level == 7)
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                        {{ $y->costcentername }}
+                                    @endif
 
-														<tr title="{{$y->id}}" @if($y->type==1)style="background-color:lightblue" @endif
-														@if($y->type==4)style="background-color:lightgray"  @endif
-														id="{{$y->id}}">
-															<td class="text-center"><?php echo $counter++;?></td>
-															<td>{{ '`'.$y->costcenter_code}}</td>
-															<td>
-																@if($level == 1)
-																	<b style="font-size: large;font-weight: bolder">{{ strtoupper($y->costcentername)}}</b>
-																@elseif($level == 2)
-																&emsp;&emsp;	{{ $y->costcentername}}
-																@elseif($level == 3)
-																&emsp;&emsp;&emsp;&emsp;	{{  $y->costcentername}}
-																@elseif($level == 4)
-																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{  $y->costcentername}}
-																@elseif($level == 5)
-																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{ $y->costcentername}}
-																@elseif($level == 6)
-																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{ $y->costcentername}}
-																@elseif($level == 7)
-																&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;	{{  $y->costcentername}}
-																@endif
 
+                                </td>
+                                <td>
+                                    @if ($nature == 01)
+                                        Assets
+                                    @elseif($nature == 02)
+                                        Liabilties
+                                    @elseif($nature == 03)
+                                        Equity
+                                    @elseif($nature == 04)
+                                        Expenses
+                                    @elseif($nature == 05)
+                                        Revenue
+                                    @elseif($nature == 06)
+                                        Cost Of Sales
+                                    @endif
+                                </td>
+                                @foreach ( $department as $dept )
+                                    
+                                @endforeach
+                                <td>{{ $dept->department}}</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @if ($y->is_active)
+                                        <p>Active</p>
+                                    @else
+                                        <p>InActive</p>
+                                    @endif
+                                </td>
+                                {{-- <td class="text-right"><?php echo FinanceHelper::ChartOfAccountCurrentBalance($m, $level, $y->code); ?></td> --}}
 
-															</td>
-															<td>
-																@if($nature == 01)
-																	Assets
-																@elseif($nature == 02)
-																Liabilties
-
-																@elseif($nature == 03)
-																Equity
-																@elseif($nature == 04)
-																Expenses
-																@elseif($nature == 05)
-																Revenue
-																@elseif($nature == 06)
-																	Cost Of Sales
-																@endif
-															</td>
-                                                            <td>{{$y->costcentermapping}}</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td>@if($y->is_active)
-                                                                <p>Active</p>
-                                                            @else
-                                                                <p>InActive</p>
-                                                            @endif
-                                                        </td>
-															{{-- <td class="text-right"><?php echo FinanceHelper::ChartOfAccountCurrentBalance($m,$level,$y->code);?></td> --}}
-
-															<td class="text-center hidden-print">
-																<?php if($y->parentcode == "1-2-2" && $y->type == 2):?>
-																	<span class="badge badge-success" style="background-color: #428bca !important">Link To Client</span>
-																<?php endif?>
-																@if ($y->id!=1 && $y->id!=2 && $y->id!=1 && $y->id!=3 && $y->id!=4 && $y->id!=5 && $y->type!=2)
-																
-																	<button    onclick="showDetailModelOneParamerter('fdc/editChartOfAccountForm/<?php echo $y->id ?>')" class="btn btn-primary btn-xs">Edit</button>
-																
-																@endif
-															</td>
-															<td class="hidden-print text-center">
-																@if ($y->type==0 && $y->id!=1  && $y->id!=2 && $y->id!=1 && $y->id!=3 && $y->id!=4 && $y->id!=5)
-																	
-																	<button onclick="delete_record('{{$y->id}}')" type="button" class="btn btn-danger btn-xs">DELETE</button>
-															
-																@endif
-
-																	
-															</td>
-														</tr>
-													@endforeach
+                                <td>
+                                    <a class="btn btn-info" href="">Show</a>
+                                    <a class="btn btn-primary" href="">Edit</a>
+                                    <a class="btn btn-danger" href="">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
