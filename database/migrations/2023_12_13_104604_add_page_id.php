@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTablePermission extends Migration
+class AddPageId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class AlterTablePermission extends Migration
      */
     public function up()
     {
-                Schema::table('permissions', function (Blueprint $table) {
-                    
-                    $table->unsignedBigInteger('page_action_id');
-                    $table->foreign('page_action_id')->references('id')->on('page_actions')->onDelete('cascade');
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->unsignedBigInteger('page_id');
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
         });
-
     }
 
     /**

@@ -13,6 +13,7 @@ use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
 
+
 /**
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
@@ -153,4 +154,5 @@ class Permission extends Model implements PermissionContract
         /** @var PermissionContract|null */
         return static::getPermissions($params, true)->first();
     }
+   
 }

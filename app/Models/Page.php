@@ -11,14 +11,8 @@ class Page extends Model
     protected $guarded = [
         'id',
     ];
-
-    public function getPageTableName()
+    public function permissions()
     {
-        return $this->name;
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', true);
+        return $this->hasMany(Permissions::class);
     }
 }

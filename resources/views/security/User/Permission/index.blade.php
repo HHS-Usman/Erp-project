@@ -2,7 +2,7 @@
     use App\Helpers\MasterFormsHelper;
     $master = new MasterFormsHelper();
 @endphp
-@extends('layouts.master')
+@extends('layout.master')
 @section('title', 'Manage Permissions')
 @section('content')
     <section id="multiple-column-form">
@@ -16,24 +16,43 @@
                         <form method="post" action="{{ route('permission.store') }}" id="subm" class="form">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Main Module</label>
-                                <select name="main_module[]" id="main_module" class="form-control">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name[]">
+                            </div>
+                            <div class="form-group">
+                                <label for="module_id">Main Module</label>
+                                <select name="module_id[]" id="module_id" class="form-control">
                                     <option value="">Select</option>
-                                    @foreach ($master->sidebarModules() as $module)
-                                        <option value="{{ $module }}">{{ $module }}</option>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}">{{ $module->module_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="page_id">Page</label>
+                                <select name="page_id[]" id="page_id" class="form-control">
+                                    <option value="">Select</option>
+                                    @foreach ($pages as $page)
+                                        <option value="{{ $page->id }}">{{ $page->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name[]">
+                                <label for="page_action_id">Page Action</label>
+                                <select name="page_action_id[]" id="page_action_id" class="form-control">
+                                    <option value="">Select</option>
+                                    @foreach ($pageactions as $pageaction)
+                                        <option value="{{ $pageaction->id }}">{{ $pageaction->Name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div id="addMoreFields">
-
-                            </div>
+                           
+                            <div id="addMoreFields"></div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <button type="button" class="btn btn-secondary" id="addMore">Add More</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -45,15 +64,29 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Name</th> 
                                 <th>Main Module</th>
+                                <th>Page Name</th>
+                                <th>Page Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($permissions as $permission)
                                 <tr>
                                     <td>{{ $permission->name }}</td>
-                                    <td>{{ $permission->main_module }}</td>
+                                    <td>{{ $permission->module->module_name }}</td>
+                                    
+                                        <td>
+                                            
+                                            {{ $permission->page->name }}
+                                        
+                                        </td>    
+                                    
+                                        <td>
+                                                 
+                                            {{ $permission->pageaction->Name }}
+                                         
+                                        </td>    
                                 </tr>
                             @endforeach
                         </tbody>
@@ -73,7 +106,7 @@
                 $('#addMoreFields').append(`
                     <div class="form-group">
                         <label for="name">Main Module</label>
-                        <select name="main_module[]" id="main_module" class="form-control">
+                        <select name="main_module" id="main_module" class="form-control">
                             <option value="">Select</option>
                             @foreach ($master->sidebarModules() as $module)
                                 <option value="{{ $module }}">{{ $module }}</option>

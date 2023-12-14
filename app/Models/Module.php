@@ -12,4 +12,8 @@ class Module extends Model
         'id',
     ];
 
+    public function permissions()
+    {
+        return $this->hasMany(Permissions::class);
+    }
 }
