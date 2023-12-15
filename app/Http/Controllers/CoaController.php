@@ -38,7 +38,6 @@ class CoaController extends Controller
         $accountypes = Accounttype::all();
         $accountCategory = Accountcategory::all();
         $prentcoa = Coa::where('operation', 0)->withCount('children')->get();
-        dd($prentcoa);
         return view('Accounts.coa.create', compact('prentcoa', 'accountCategory', 'accountypes', 'transactiontypes'));
     }
     /**
