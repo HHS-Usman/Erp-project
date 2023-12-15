@@ -93,25 +93,8 @@
 
 
                                 </td>
-                                <td>
-                                    @if ($nature == 01)
-                                        Assets
-                                    @elseif($nature == 02)
-                                        Liabilties
-                                    @elseif($nature == 03)
-                                        Equity
-                                    @elseif($nature == 04)
-                                        Expenses
-                                    @elseif($nature == 05)
-                                        Revenue
-                                    @elseif($nature == 06)
-                                        Cost Of Sales
-                                    @endif
-                                </td>
-                                @foreach ( $department as $dept )
-                                    
-                                @endforeach
-                                <td>{{ $dept->department}}</td>
+                                <td>{{$y->ostcentertype}}</td>
+                                <td>{{$y->costcentermapping}}</td>
                                 <td></td>
                                 <td></td>
                                 <td>

@@ -150,6 +150,7 @@ return array(
     'App\\Models\\PageAction' => $baseDir . '/app/Models/PageAction.php',
     'App\\Models\\Parentcoa' => $baseDir . '/app/Models/Parentcoa.php',
     'App\\Models\\Paymentterm' => $baseDir . '/app/Models/Paymentterm.php',
+    'App\\Models\\Permissions' => $baseDir . '/app/Models/Permissions.php',
     'App\\Models\\Process' => $baseDir . '/app/Models/Process.php',
     'App\\Models\\Qualification' => $baseDir . '/app/Models/Qualification.php',
     'App\\Models\\Qualificationlevel' => $baseDir . '/app/Models/Qualificationlevel.php',

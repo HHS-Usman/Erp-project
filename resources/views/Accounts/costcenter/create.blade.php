@@ -37,13 +37,11 @@
                         <strong>Select Parent Cost Center </strong>
                         <select name="parentcostcenter" id="parentcostcenter" class="form-control"
                             onchange="updateAccountCode()">
-                            <option value=1>Select Parent Cost Center </option>
+                            <option value="02164887664">Select Parent Cost Center </option>
                             @foreach ($costcenter as $item)
-                                <option value="{{ $item->id }}" data-coacode="{{ $item->costcenter_code }}"
-                                    data-childcount="{{ $item->children_count }}">
-                                    Account ID {{ $item->id }} || coacode {{ $item->costcenter_code }} ||
-                                    {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
-                                </option>
+                            <option value="{{ $item->id }}" data-costcenter_code="{{ $item->costcenter_code }}" data-childcount="{{ $item->children_count }}">
+                                Account ID {{ $item->id }} || CostCenter Code {{ $item->costcenter_code }} || {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -55,16 +53,24 @@
                     </div>
                     <script>
                         function updateAccountCode() {
-                            console.log('Updating account code...');
                             var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
-                            var childCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
-                            console.log('Parent Code:', parentCode);
-                            console.log('Child Count:', childCount);
-                            var newAccountCode = parentCode + '-' + (childCount + 1);
+                            var existingChildCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
+                    
+                            // Extract the current child number from the parent code
+                            var currentChildNumber = parentCode.split('-')[1] || 0;
+                    
+                            // Calculate the new child number by incrementing the current one
+                            var newChildNumber = parseInt(currentChildNumber)+0;
+                    
+                            // Create the new cost center code
+                            var newAccountCode = parentCode + '-' + newChildNumber;
+                    
                             console.log('New Account Code:', newAccountCode);
                             $('#costcenter_code').val(newAccountCode);
                         }
                     </script>
+                    
+                    
                     <div class="form-group">
                         <strong>Cost Center Name</strong>
                         <input type="text" name="costcenter_name" id="costcenter_name" class="form-control"

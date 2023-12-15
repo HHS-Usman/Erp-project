@@ -694,6 +694,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\PageAction' => __DIR__ . '/../..' . '/app/Models/PageAction.php',
         'App\\Models\\Parentcoa' => __DIR__ . '/../..' . '/app/Models/Parentcoa.php',
         'App\\Models\\Paymentterm' => __DIR__ . '/../..' . '/app/Models/Paymentterm.php',
+        'App\\Models\\Permissions' => __DIR__ . '/../..' . '/app/Models/Permissions.php',
         'App\\Models\\Process' => __DIR__ . '/../..' . '/app/Models/Process.php',
         'App\\Models\\Qualification' => __DIR__ . '/../..' . '/app/Models/Qualification.php',
         'App\\Models\\Qualificationlevel' => __DIR__ . '/../..' . '/app/Models/Qualificationlevel.php',
