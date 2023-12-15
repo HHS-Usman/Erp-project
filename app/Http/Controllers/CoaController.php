@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Accountcategory;
 use App\Models\Parentcoa;
 use App\Http\Controllers\Controller;
+use App\Models\Accounttype;
 use App\Models\Coa;
 use App\Models\Costcenter;
 use App\Models\Costcenteraccount;
+use App\Models\Transactiontype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,9 +21,10 @@ class CoaController extends Controller
      */
     public function index()
     {
+        $accountypes = Accounttype::all();
         $accountcetegoty = Accountcategory::all();
         $coas = Coa::latest()->paginate();
-    return view('Accounts.coa.index', compact('coas','accountcetegoty'))->with(request()->input('page'));
+        return view('Accounts.coa.index', compact('coas','accountcetegoty','accountypes'))->with(request()->input('page'));
     }
     /**
      * Show the form for creating a new resource.
@@ -31,9 +33,13 @@ class CoaController extends Controller
      */
     public function create()
     {
+        $transactiontypes = Transactiontype::all();
+        // $maxcooade= Coa::latest()->value('coacode');
+        $accountypes = Accounttype::all();
         $accountCategory = Accountcategory::all();
-        $prentcoa =  Coa::where('operation', 0)->get();
-        return view('Accounts.coa.create', compact('prentcoa', 'accountCategory'));
+        $prentcoa = Coa::where('operation', 0)->withCount('children')->get();
+        dd($prentcoa);
+        return view('Accounts.coa.create', compact('prentcoa', 'accountCategory', 'accountypes', 'transactiontypes'));
     }
     /**
      * Store a newly created resource in storage.
@@ -43,10 +49,12 @@ class CoaController extends Controller
      */
     public function store(Request $request)
     {
+       $system_manual = "Manaul";
+       $currentbalance = "";
         $selectedParentCoa = $request->get('parentcoa');
         $parentCoa = Coa::find($selectedParentCoa);
 
-        $maxId = DB::table('coas')->max('id');
+        // $maxId = DB::table('coas')->max('id');
         // Determine the level and parent code based on the selected COA
         if ($parentCoa) {
             $parentCode = $parentCoa->coacode;
@@ -69,8 +77,11 @@ class CoaController extends Controller
             'coaname' => $request->get('accountname'),
             'coacode' => $newAccountCode,
             'refaccode' => $request->get('refaccode'),
+            'System_Manual' => $system_manual, 
             'accountype' => $request->get('accountype'),
             'openbalance' => $request->get('openbalance'),
+            'currentbalance' => $currentbalance,
+            'Transactiontype' =>$request->get('trnasactiontype'),
             'openingdate' => $request->get('openingdate'),
             'parentid' => $selectedParentCoa,
         ]);

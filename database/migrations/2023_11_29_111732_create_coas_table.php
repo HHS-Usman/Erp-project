@@ -32,9 +32,12 @@ class CreateCoasTable extends Migration
             $table->string('Level-6')->nullable();
             $table->string('Level-7')->nullable();
             $table->string('accountype')->nullable();
+            $table->string('System_Manual')->nullable();
+            $table->string('Transactiontype')->nullable();
+            $table->string('currentbalance')->nullable();
             $table->string('openbalance')->nullable();
             $table->string('openingdate')->nullable();
-
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

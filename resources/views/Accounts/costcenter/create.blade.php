@@ -29,39 +29,48 @@
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="operation" >
+                        <input class="form-check-input" type="checkbox" value="1" name="operation">
                         Operational
                         </label>
                     </div>
-                    {{-- <div class="form-group">
-                        <strong>System ID</strong>
-                        <input type="text" name="systemid" id="systemid" class="form-control"
-                            placeholder="Account Name">
-                    </div> --}}
                     <div class="form-group">
-                        <label for="systemid">System ID</label>
-                        <input type="text" name="systemid" value="{{ session('nextID') }}" id="systemid" class="form-control"  placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <strong>Select Parent COA </strong>
-                        <select name="parentcostcenter" id="parentcostcenter" class="form-control">
-                            <option >Select Parent Cost Center </option>
-                            @foreach ($costcenter as $costc=>$item)
-                            <option  value={{$item->id}} >Account ID {{$item->id}} || coacode {{$item->costcenter_code}} || {{$item->costcentername}} || parent Name ||  {{$item->parentid}}
-                            </option>
-                            @endforeach 
+                        <strong>Select Parent Cost Center </strong>
+                        <select name="parentcostcenter" id="parentcostcenter" class="form-control"
+                            onchange="updateAccountCode()">
+                            <option value=1>Select Parent Cost Center </option>
+                            @foreach ($costcenter as $item)
+                                <option value="{{ $item->id }}" data-coacode="{{ $item->costcenter_code }}"
+                                    data-childcount="{{ $item->children_count }}">
+                                    Account ID {{ $item->id }} || coacode {{ $item->costcenter_code }} ||
+                                    {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <strong>Cost Center Code</strong>
                         <input type="text" name="costcenter_code" id="costcenter_code" class="form-control"
                             placeholder="Cost Center Code">
                     </div>
+                    <script>
+                        function updateAccountCode() {
+                            console.log('Updating account code...');
+                            var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
+                            var childCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
+                            console.log('Parent Code:', parentCode);
+                            console.log('Child Count:', childCount);
+                            var newAccountCode = parentCode + '-' + (childCount + 1);
+                            console.log('New Account Code:', newAccountCode);
+                            $('#costcenter_code').val(newAccountCode);
+                        }
+                    </script>
                     <div class="form-group">
                         <strong>Cost Center Name</strong>
                         <input type="text" name="costcenter_name" id="costcenter_name" class="form-control"
                             placeholder="Cost Center Name">
                     </div>
+
                     <div class="form-group">
                         <strong>Select Cost Center Type</strong>
                         <select id="costcentertype" name="costcentertype" class="form-control">
@@ -71,12 +80,19 @@
                     </div>
                     <strong>Remarks</strong>
                     <div class="form-group">
-                        <strong>Department Cost Center Mapping</strong>
-                        <input type="text" name="costcentermapping" id="openbalance" class="form-control"
-                            placeholder="Department Cost Center Mapping">
+                        <strong>Select Cost Center Department Mapping</strong>
+                        <select name="costcentermapping" id="costcentermapping" class="form-control">
+                            <option>Select Cost Department Center Mapping </option>
+                            @foreach ($maping as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->department }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                        <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active"
+                            checked>
                         Active
                         </label>
                     </div>
