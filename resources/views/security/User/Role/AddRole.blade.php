@@ -3,60 +3,14 @@ use App\Helpers\MasterFormsHelper;
 $master = new MasterFormsHelper();
 ?>
 @extends('layout.master')
-@section('title', "SND || Add New Designation")
+@section('page-tab')
+    Create Add Permission
+@endsection
 @section('content')
 
 
 <section id="multiple-column-form">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">ADD NEW USER ROLE</h4>
-                </div>
-                <div class="card-body">
-                    <form id="subm" method="POST" action="{{ route('role.store') }}" class="form">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-3 col-12">
-                                <div class="form-group">
-                                    <label>Role Name<strong>*</strong></label>
-                                    <input name="role_name" value="{{ old('role_name') }}" type="text" class="form-control" placeholder="Role Name"/>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 form-check sperater2">
-                                <strong>Permissions</strong>
-                                <div class="row padl">
-                                    
-                                        {{-- @dd($mainModule); --}}
-                                        <div class="col-md-12">
-                                            <input class="form-check-input" type="checkbox"
-                                                id="" onclick="checkboxChecked(this)">
-                                            <strong></strong>
-
-
-                                        </div>
-                                         {{-- @foreach ($mainModule['permissions'] as $id => $permission) --}}
-                                            {{-- @dd($id); --}}
-                                                <div class="col-md-3 form-check padtbh">
-                                                    <input class="form-check-input" value="" type="checkbox" id="permissions" name="permissions[]">
-                                                    <label class="form-check-label"
-                                                        for="permissions"></label>
-                                                </div>
-                                       
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary mr-1">Create Item</button>
-                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -91,13 +45,13 @@ $master = new MasterFormsHelper();
         }
         </style>
     </head>
-    <form action="" method="">        
-        
+    <form action="{{ route('role.store') }}" method="POST">        
+        @csrf
         <div class="row justify-content-center">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group d-flex">
                     <label for="options"><h4 class="card-title">ADD ROLE</h4></label>
-                    <select id="gender" name="gender"  class="select2">
+                    <select id="gender" name="role_id"  class="select2">
                         <option class="options">None</option>
                         @foreach($roles as $item)
                             <option value="{{ $item->id }}">{{ $item->user_role }}</option>
@@ -151,41 +105,40 @@ $master = new MasterFormsHelper();
                             <tbody>
                             
                                 <tr> 
-                                        <td><h1>{{ $moduleName }}</h1></td>
-                                        <td><input type="checkbox" name="{{ $moduleName }}" id="unfreezeToggle" value="{{ $moduleGroup->first()->module->id }}" onclick="toggleUnfreeze({{ $moduleGroup->first()->module->id }})"></td>
-                                    
+                                    <td><h1>{{ $moduleName }}</h1></td>
+                                    <td><input type="checkbox" name="module_id[]" id="unfreezeToggle" value="{{ $moduleGroup->first()->module->id }}" onclick="toggleUnfreeze({{ $moduleGroup->first()->module->id }})"></td>    
                                     <td></td>
-                                    <td><input type="checkbox" name="1stweek_sun_01" id="freezer" class="item" value="1" onclick="freeze()" checked></td>
-                                    <td><input type="checkbox" name="2ndweek_sun_01" id="freezer1" class="item" value="1" onclick="freeze1()" checked></td>
-                                    <td><input type="checkbox" name="3rdweek_sun_01" id="freezer2" class="item" value="1" onclick="freeze2()" checked></td>
-                                    <td><input type="checkbox" name="4thweek_sun_01" id="freezer3" class="item" value="1" onclick="freeze3()" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer" class="item" value="1" onclick="freeze()" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer1" class="item" value="1" onclick="freeze1()" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer2" class="item" value="1" onclick="freeze2()" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer3" class="item" value="1" onclick="freeze3()" checked></td>
                                 </tr>
                                 <tr>
                                     <td>Tick All</td>
-                                    <td><input type="checkbox" name="sel_mon_02" id="selectAll" class="item" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectAll" class="item" value="1"></td>
                                     <td></td>
-                                    <td><input type="checkbox" name="1stweek_mon_02" id="selectAdd" class="item not" value="1"></td>
-                                    <td><input type="checkbox" name="2ndweek_mon_02" id="selectView" class="item but" value="1"></td>
-                                    <td><input type="checkbox" name="3rdweek_mon_02" id="selectEdit" class="item why" value="1"></td>
-                                    <td><input type="checkbox" name="4thweek_mon_02" id="selectDelete" class="item the" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectAdd" class="item not" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectView" class="item but" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectEdit" class="item why" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectDelete" class="item the" value="1"></td>
                                 </tr>
                                 @foreach ($moduleGroup->groupBy('page.name') as $pageName => $pageGroup)
                                     <tr>
                                         <td>{{ $pageName }}</td>
-                                        <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03" class="item example" value="1"></td>
+                                        <td><input type="checkbox" name="" id="" class="item example" value="1"></td>
                                         <td></td>
                                         @foreach ($pageGroup as $data)
                                             @if ($data->page_action_id == 1)
                                                 <td>
-                                                    <input type="checkbox" name="1stweek_tue_03" id="item_one" class="item example2 not" value="1">
+                                                    <input type="checkbox" name="page_id[]" id="item_one" class="item example2 not" value="{{ $data->id }}">
                                                     {{ $data->name }}
                                                 </td>
                                             @elseif ($data->page_action_id == 2)
-                                                <td><input type="checkbox" name="2ndweek_tue_03" id="2ndweek_tue_03" class="item example3 but" value="1">{{ $data->name }}</td>
+                                                <td><input type="checkbox" name="page_id[]" id="2ndweek_tue_03" class="item example3 but" value="{{ $data->id }}"></td>
                                             @elseif ($data->page_action_id == 3)
-                                                <td><input type="checkbox" name="3rdweek_tue_03" id="3rdweek_tue_03" class="item example4 why" value="1">{{ $data->name }}</td>
+                                                <td><input type="checkbox" name="page_id[]" id="3rdweek_tue_03" class="item example4 why" value="{{ $data->id }}"></td>
                                             @elseif ($data->page_action_id == 4)
-                                                <td><input type="checkbox" name="4thweek_tue_03" id="4thweek_tue_03" class="item example5 the" value="1">{{ $data->name }}</td>
+                                                <td><input type="checkbox" name="page_id[]" id="4thweek_tue_03" class="item example5 the" value="{{ $data->id }}"></td>
                                             @endif
                                         @endforeach
                                     </tr>
