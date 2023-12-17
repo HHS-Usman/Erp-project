@@ -37,7 +37,7 @@
                         <strong>Select Parent Cost Center </strong>
                         <select name="parentcostcenter" id="parentcostcenter" class="form-control"
                             onchange="updateAccountCode()">
-                            <option value="02164887664">Select Parent Cost Center </option>
+                            <option value="1">Select Parent Cost Center </option>
                             @foreach ($costcenter as $item)
                             <option value="{{ $item->id }}" data-costcenter_code="{{ $item->costcenter_code }}" data-childcount="{{ $item->children_count }}">
                                 Account ID {{ $item->id }} || CostCenter Code {{ $item->costcenter_code }} || {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
@@ -48,27 +48,71 @@
 
                     <div class="form-group">
                         <strong>Cost Center Code</strong>
-                        <input type="text" name="costcenter_code" id="costcenter_code" class="form-control"
+                        <input type="text" name="costcenter_code" disabled value="12255" id="costcenter_code" class="form-control"
                             placeholder="Cost Center Code">
                     </div>
                     <script>
-                        function updateAccountCode() {
-                            var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
-                            var existingChildCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
+                        $(document).ready(function () {
+                            // Attach the updateAccountCode function to the change event of the dropdown
+                            $('#parentcostcenter').on('change', function () {
+                                updateAccountCode();
+                            });
                     
-                            // Extract the current child number from the parent code
-                            var currentChildNumber = parentCode.split('-')[1] || 0;
+                            function updateAccountCode() {
+                                var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
+                                var existingChildCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
                     
-                            // Calculate the new child number by incrementing the current one
-                            var newChildNumber = parseInt(currentChildNumber)+0;
+                                // Extract the current child number from the parent code
+                                var currentChildNumber = parseInt(parentCode.split('-')[1]) || 0;
                     
-                            // Create the new cost center code
-                            var newAccountCode = parentCode + '-' + newChildNumber;
+                                // Calculate the new child number by incrementing the current one
+                                var newChildNumber = currentChildNumber + 0;
                     
-                            console.log('New Account Code:', newAccountCode);
-                            $('#costcenter_code').val(newAccountCode);
-                        }
+                                // Create the new cost center code
+                                var newAccountCode = parentCode + '-' + newChildNumber;
+                    
+                                console.log('New Account Code:', newAccountCode);
+                                $('#costcenter_code').val(newAccountCode);
+                            }
+                        });
                     </script>
+           <script>
+            $(document).ready(function () {
+                // Attach the updateAccountCode function to the change event of the dropdown
+                $('#parentcostcenter').on('change', function () {
+                    updateAccountCode();
+                });
+        
+                function updateAccountCode() {
+                    var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
+        
+                    // Get all existing child numbers from the dropdown
+                    var existingChildNumbers = $('#parentcostcenter').find('option[data-costcenter_code^="' + parentCode + '-"]').map(function () {
+                        return parseInt($(this).data('costcenter_code').split('-')[2]) || 0;
+                    }).get();
+        
+                    // Find the next available child number
+                    var newChildNumber = findNextChildNumber(existingChildNumbers);
+        
+                    // Create the new cost center code
+                    var newAccountCode = parentCode + '-' + newChildNumber;
+        
+                    console.log('New Account Code:', newAccountCode);
+                    $('#costcenter_code').val(newAccountCode);
+                }
+        
+                function findNextChildNumber(existingChildNumbers) {
+                    var newChildNumber = 1;
+        
+                    while (existingChildNumbers.includes(newChildNumber)) {
+                        newChildNumber++;
+                    }
+        
+                    return newChildNumber;
+                }
+            });
+        </script>
+        
                     
                     
                     <div class="form-group">

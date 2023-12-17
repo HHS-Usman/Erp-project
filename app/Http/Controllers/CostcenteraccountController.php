@@ -50,14 +50,17 @@ class CostcenteraccountController extends Controller
         // Determine the level and parent code based on the selected COA
          if ($parentCoa) {
             $parentCode = $parentCoa->costcenter_code;
+           
             // $level = $parentCoa->level + 1;
         } else {
-            $parentCode = '';
+            $parentCode = '1';
              //$level = 1; If there is no parent, set the level to 1
         }
         // Generate the hierarchical account code based on the parent COA's information and child count
         $childCount = Costcenteraccount::where('parentid', $selectedParentCoa)->count() + 1;
+    
         $newAccountCode = $parentCode . '-' . $childCount;
+
 
         // Extract levels from the coacode
         $coaLevels = explode('-', $newAccountCode);
@@ -65,6 +68,12 @@ class CostcenteraccountController extends Controller
             'operation' => 'integer|in:0,1',
         ]);
         //create a new product in database
+    //create a new product in database
+        if($selectedParentCoa == "1"){
+                $primaryId = Costcenteraccount::where('id', 1)->value('Level-1');
+                $primaryId = $primaryId.'d';
+                Costcenteraccount::where('id', 1)->update(['Level-1' => $primaryId]);  
+        }
         $coa = new Costcenteraccount([
             'operation' => request()->get('operation', 0),
             'costcenter_code' =>  $newAccountCode,
