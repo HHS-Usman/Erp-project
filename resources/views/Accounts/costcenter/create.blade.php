@@ -2,6 +2,14 @@
 @section('page-tab')
     Create Cost Center
 @endsection
+<?php
+use App\Models\Costcenteraccount;
+$selectedParentCoa = "default";
+if ($selectedParentCoa == "default") {
+    $levelcounts = Costcenteraccount::max('Level-1');
+    $costcentercode = $levelcounts + 1;
+}
+?>
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
         @if ($errors->any())
@@ -37,7 +45,7 @@
                         <strong>Select Parent Cost Center </strong>
                         <select name="parentcostcenter" id="parentcostcenter" class="form-control"
                             onchange="updateAccountCode()">
-                            <option value="1">Select Parent Cost Center </option>
+                            <option value="default">Select Parent Cost Center </option>
                             @foreach ($costcenter as $item)
                             <option value="{{ $item->id }}" data-costcenter_code="{{ $item->costcenter_code }}" data-childcount="{{ $item->children_count }}">
                                 Account ID {{ $item->id }} || CostCenter Code {{ $item->costcenter_code }} || {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
@@ -46,11 +54,10 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <strong>Cost Center Code</strong>
-                        <input type="text" name="costcenter_code" disabled value="12255" id="costcenter_code" class="form-control"
-                            placeholder="Cost Center Code">
-                    </div>
+                   <div class="form-group">
+                    <strong>Cost Center Code</strong>
+                    <input type="text" name="costcenter_code" disabled value="<?php echo $costcentercode; ?>" id="costcenter_code" class="form-control" placeholder="Cost Center Code">
+                </div>
                     <script>
                         $(document).ready(function () {
                             // Attach the updateAccountCode function to the change event of the dropdown
@@ -60,13 +67,14 @@
                     
                             function updateAccountCode() {
                                 var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
-                                var existingChildCount = $('#parentcostcenter').find(':selected').data('childcount') || 0;
                     
-                                // Extract the current child number from the parent code
-                                var currentChildNumber = parseInt(parentCode.split('-')[1]) || 0;
+                                // Get all existing child numbers from the database
+                                var existingChildNumbers = $('#parentcostcenter').find('option[data-costcenter_code^="' + parentCode + '-"]').map(function () {
+                                    return parseInt($(this).data('costcenter_code').split('-').pop()) || 0;
+                                }).get();
                     
-                                // Calculate the new child number by incrementing the current one
-                                var newChildNumber = currentChildNumber + 0;
+                                // Find the next available child number
+                                var newChildNumber = findNextChildNumber(existingChildNumbers);
                     
                                 // Create the new cost center code
                                 var newAccountCode = parentCode + '-' + newChildNumber;
@@ -74,46 +82,19 @@
                                 console.log('New Account Code:', newAccountCode);
                                 $('#costcenter_code').val(newAccountCode);
                             }
+                    
+                            function findNextChildNumber(existingChildNumbers) {
+                                var newChildNumber = 1;
+                    
+                                while (existingChildNumbers.includes(newChildNumber)) {
+                                    newChildNumber++;
+                                }
+                    
+                                return newChildNumber;
+                            }
                         });
                     </script>
-           <script>
-            $(document).ready(function () {
-                // Attach the updateAccountCode function to the change event of the dropdown
-                $('#parentcostcenter').on('change', function () {
-                    updateAccountCode();
-                });
-        
-                function updateAccountCode() {
-                    var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
-        
-                    // Get all existing child numbers from the dropdown
-                    var existingChildNumbers = $('#parentcostcenter').find('option[data-costcenter_code^="' + parentCode + '-"]').map(function () {
-                        return parseInt($(this).data('costcenter_code').split('-')[2]) || 0;
-                    }).get();
-        
-                    // Find the next available child number
-                    var newChildNumber = findNextChildNumber(existingChildNumbers);
-        
-                    // Create the new cost center code
-                    var newAccountCode = parentCode + '-' + newChildNumber;
-        
-                    console.log('New Account Code:', newAccountCode);
-                    $('#costcenter_code').val(newAccountCode);
-                }
-        
-                function findNextChildNumber(existingChildNumbers) {
-                    var newChildNumber = 1;
-        
-                    while (existingChildNumbers.includes(newChildNumber)) {
-                        newChildNumber++;
-                    }
-        
-                    return newChildNumber;
-                }
-            });
-        </script>
-        
-                    
+                            
                     
                     <div class="form-group">
                         <strong>Cost Center Name</strong>
@@ -161,3 +142,4 @@
     </section>
 
 @endsection
+
