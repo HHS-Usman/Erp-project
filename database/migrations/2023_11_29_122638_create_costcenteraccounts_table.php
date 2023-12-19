@@ -19,7 +19,7 @@ class CreateCostcenteraccountsTable extends Migration
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('costcenter_code')->nullable();
             $table->string('costcentername');
-            $table->boolean('operation')->default(true);
+            $table->boolean('operational')->default(true);
             $table->integer('parentid');
             $table->string('parentcode');
             $table->integer('Level-1')->nullable();

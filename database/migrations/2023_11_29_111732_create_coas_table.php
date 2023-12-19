@@ -19,7 +19,7 @@ class CreateCoasTable extends Migration
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('coacode')->nullable();
             $table->string('coaname')->nullable();
-            $table->boolean('operation')->default(true);
+            $table->boolean('operational')->default(true);
             $table->string('refaccode')->nullable();
             $table->integer('parentid')->nullable();
             $table->string('parentcoacode')->nullable();

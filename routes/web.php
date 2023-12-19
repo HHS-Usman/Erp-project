@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\AccountcategoryController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
@@ -62,9 +61,6 @@ use App\Http\Controllers\Security\User_role_controller;
 use App\Http\Controllers\Security\Usercontroller;
 use App\Http\Controllers\BranchController;
 use Illuminate\Support\Facades\Auth;
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,7 +83,6 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
 Route::resource('division',DivisionController::class);
