@@ -15,4 +15,5 @@ class Costcenteraccount extends Model
     {
         return $this->hasMany(Coa::class, 'parentid');
     }
+    
 }
