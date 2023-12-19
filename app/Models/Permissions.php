@@ -22,6 +22,6 @@ class Permissions extends Model
     }
     public function pageaction()
     {
-        return $this->belongsTo(PageAction::class, 'page_action_id');
+        return $this->belongsTo(PageAction::cl.ass, 'page_action_id');
     }
 }

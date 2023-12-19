@@ -10,8 +10,12 @@ use App\Models\Page;
 use App\Models\Module;
 use App\Models\User_role;
 use App\Models\Company;
+use App\Models\Branch;
+use App\Models\role_access;
+
 class AccessPermitController extends Controller
 {
+
     public function index()
     {
         
@@ -24,7 +28,10 @@ class AccessPermitController extends Controller
         $modules = Module::all();
         $pages = Page::all();
         $companies = Company::all();
-        return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies' ));
+        
+        $role_access = role_access::all();
+        $branches = Branch::with('company')->get(); 
+        return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies', 'branches', 'role_access' ));
     }
     public function store(Request $request)
     {
@@ -94,5 +101,33 @@ class AccessPermitController extends Controller
     {
         //
     }
+    public function fetchEmployeeData($role_id)
+    {
+        // $roleAccessRecords = role_access::where('role_id', $role_id)->get();
 
+        // if ($roleAccessRecords->isNotEmpty()) {
+        //     // Adjust the response format based on your needs
+        //     return response()->json([
+        //         'role_access_records' => $roleAccessRecords,
+        //     ]);
+        // } else {
+        //     // Handle the case where no records were found for the specified role_id
+        //     return response()->json([
+        //         'error' => 'No role access records found for the specified role_id.',
+        //     ], 404); // You can customize the HTTP status code accordingly
+        // }
+        $roleAccessRecords = role_access::with(['user_role', 'module', 'page'])->where('role_id', $role_id)->get();
+
+        if ($roleAccessRecords->isNotEmpty()) {
+            // Adjust the response format based on your needs
+            return response()->json([
+                'role_access_records' => $roleAccessRecords,
+            ]);
+        } else {
+            // Handle the case where no records were found for the specified role_id
+            return response()->json([
+                'error' => 'No role access records found for the specified role_id.',
+            ], 404);
+        }    
+    }
 }

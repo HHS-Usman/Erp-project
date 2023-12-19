@@ -136,6 +136,8 @@ Route::resource('qualificationlevel',QualificationlevelController::class);
 Route::resource('workflowgroup',WorkflowController::class);
 Route::resource('divupload',DivuploadController::class);
 Route::resource('event',EventController::class);
+
+Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'fetchEmployeeData']);
 Route::resource('accountcategory',AccountcategoryController::class);
 Route::resource('coamainheaderlevel',CoaheadlevelController::class);
 Route::resource('coa',CoaController::class);

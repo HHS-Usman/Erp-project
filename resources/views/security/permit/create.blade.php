@@ -79,15 +79,7 @@
                                 </select>
                             </div> 
                         
-                            <div class="form-group">
-                                <label for="options">Select Role</label>
-                                <select id="br" name="role" class="select2" >
-                                  <option class="options">None</option>
-                                  @foreach($roles as $item)
-                                  <option value="{{ $item->user_role }}">{{ $item->user_role }}</option>
-                                @endforeach
-                                </select>
-                            </div> 
+                        
                         </div>
                         <div class="tab" id="tab1">
                             
@@ -164,55 +156,209 @@
                                   </div>
                                 @endforeach
                               
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Select company/Unit Branch</h6>
-                                  
-                                </div>
-                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
+                              <div class="container  justify-content-center align-items-center">
+                                @foreach ($branches->groupBy('company.name') as $companyName => $companyGroup)
+                                  <h3>
+                                    {{ $companyName }}
+                                  </h3>
+                                  @foreach ($companyGroup as $data)
+                                    <div class="form-group">
+                                      <label for="options"> {{ $data->name }} </label>
+                                      <input type="email" class="form-control" id="input" name="{{ $data->name }}" placeholder="{{ $data->name }}" />
+                                    </div>
+                                    
+                                  @endforeach  
+                                 
+                                @endforeach()  
+                                
                               </div>
-                              <div class="container d-flex justify-content-center align-items-center">
+                              
+                              <div class="container  justify-content-center" style="margin-top: 10px;">
                                 <div class="form-group">
-                                  <h6>Select company/Unit Branch</h6>
-                                  
+                                    <label for="options">Role Selection</label>
+                                    <select id="roleSelect" class="select2">
+                                        <option class="options">None</option>
+                                        @foreach($roles as $item)
+                                          <option id="roled" value="{{ $item->id }}">{{ $item->user_role }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                              </div>
-                              <div class="container d-flex justify-content-center align-items-center">
-                                <div class="form-group">
-                                  <h6>Select company/Unit Branch</h6>
-                                  
-                                </div>
-                                <div class="form-group col-xs-6 col-sm-6 col-md-6">
-                                  
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="input"
-                                    placeholder="Login ID"
-                                  />
-                                </div>
-                              </div>
-                                                         
+                             </div>                              
                         </div>
-                        <div class="d-flex container">
-                            <div class="col-xs-5 col-sm-5 col-md-5  " >  
+                        
+                         
+                  
+                      <div class="d-flex container">       
+                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">  
+                            <table id="roletable" class="table table-bordered" style="border: 1px solid black">
+                                <thead>
+                                    <tr>
+                                        <th>Role</th>
+                                        <th>Module</th>
+                                        <th>Page</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table rows will be populated dynamically using JavaScript -->
+                                </tbody>
+                            </table>
+                        
+                        </div>
+
+                        <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style="top: 30%; left:2%;">
+                        <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
+                        <div class="" style="margin-top: 2%;">
+                            <button type="button" class="btn btn-primary" onclick="getData()"><<</button>
+                        </div>
+                        </div>
+
+                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
+                          <table id="secondTable" class="table table-bordered" style="border: 1px solid black; ">
+                              <thead>
+                                  <tr>
+                                      <th>Role</th>
+                                      <th>Module</th>
+                                      <th>Page</th>
+                                      
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- Table rows will be populated dynamically using JavaScript -->
+                              </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Fetch data when the page is loaded
+                        fetchRoleData('default_role_id'); // Replace 'default_role_id' with your default role ID
+
+                        // Listen for changes in the dropdown
+                        document.getElementById('roleSelect').addEventListener('change', function() {
+                            var selectedRoleId = this.value;
+                            fetchRoleData(selectedRoleId);
+                        });
+
+                        // Function to fetch role data and update the dropdown and table
+                        function fetchRoleData(roleId) {
+                            // Replace with your API endpoint URL
+                            var apiUrl = '/fetch-employee-data/' + roleId;
+
+                            // Make an AJAX request to fetch data for the selected role ID
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', apiUrl, true);
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                    var data = JSON.parse(xhr.responseText);
+                                    updateDropdownOptions(data.role_access_records);
+                                    updateRoleTable(data.role_access_records);
+                                }
+                            };
+                            xhr.send();
+                        }
+
+                        // Function to update the dropdown options
+                        function updateDropdownOptions(roleAccessRecords) {
+                            var dropdown = document.getElementById('roleSelect');
+                            dropdown.innerHTML = '<option class="options">None</option>';
+
+                            roleAccessRecords.forEach(function(record) {
+                                var option = document.createElement('option');
+                                option.value = record.role_id;
+                                option.text = record.role_name; // Adjust this based on your actual role name property
+                                dropdown.appendChild(option);
+                            });
+                        }
+
+                        // Function to update the role table
+                        function updateRoleTable(roleAccessRecords) {
+                            var tableBody = document.querySelector('#roletable tbody');
+                            tableBody.innerHTML = '';
+
+                            roleAccessRecords.forEach(function(record) {
+                                var row = tableBody.insertRow();
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+
+                                cell1.textContent = record.role ? record.user_role.user_role : ''; // Check if role relationship exists
+                                cell2.textContent = record.module ? record.module.module_name : ''; // Check if module relationship exists
+                                cell3.textContent = record.page ? record.page.name : '';
+                            });
+                        }
+
+                        // Function to send data to the second table
+                        window.sendData = function() {
+                            var roleTableBody = document.querySelector('#roletable tbody');
+                            var secondTableBody = document.querySelector('#secondTable tbody');
+
+                            // Iterate through rows in the role table
+                            for (var i = 0; i < roleTableBody.rows.length; i++) {
+                                var row = roleTableBody.rows[i];
+
+                                // Clone the row
+                                var newRow = secondTableBody.insertRow();
+                                for (var j = 0; j < row.cells.length; j++) {
+                                    var newCell = newRow.insertCell(j);
+                                    newCell.innerHTML = row.cells[j].innerHTML;
+                                }
+
+                                // Add a Remove button to the new row
+                                var removeButtonCell = newRow.insertCell(row.cells.length);
+                                var removeButton = document.createElement('button');
+                                
+                                removeButton.addEventListener('click', function() {
+                                    // Handle the removal when the Remove button is clicked
+                                    secondTableBody.removeChild(newRow);
+                                });
+                                
+                            }
+                        };
+
+                        // Function to handle the removal of rows in the second table
+                        window.getData = function() {
+                            var secondTableBody = document.querySelector('#secondTable tbody');
+                            secondTableBody.innerHTML = ''; // Clear the second table
+                        };
+                    });
+                    (function () {
+                      var checkbox = document.getElementById('freezeCheckbox');
+                    
+                      var inputIdsToFreeze = ['input1', 'input2'];
+
+                      // Define a function to handle the change event
+                      function handleChange() {
+                        for (var i = 0; i < inputIdsToFreeze.length; i++) {
+                          var input = document.getElementById(inputIdsToFreeze[i]);
+
+                          if (input) {
+                            // Freeze the input by setting the 'disabled' attribute
+                            input.disabled = checkbox.checked;
+
+                            // Remove the value if the checkbox is checked
+                            if (checkbox.checked) {
+                              input.value = '';
+                            }
+                          }
+                        }
+                      }
+
+                      // Attach the change event handler to the checkbox
+                      checkbox.addEventListener('change', handleChange);
+
+                      
+                      // Invoke the change event handler immediately
+                      handleChange();
+                    })();
+                </script>
+
+                    {{-- <div class="d-flex container">
+                          <div class="col-xs-5 col-sm-5 col-md-5  " >  
                                 <div class="container  d-flex justify-content-center align-items-center" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="options">Company Selection</label>
@@ -224,54 +370,91 @@
                                         </select>
                                     </div>
                                     
+                                    <!-- Your HTML code -->
                                     <div class="form-group">
-                                        <label for="options">Company Selection</label>
-                                        <select id="br" name="br" class="select2" >
-                                        <option class="options">None</option>
-                                        @foreach($employes as $item)
-                                            <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
+                                      <label for="options">Role Selection</label>
+                                      <select id="roleSelect" class="select2">
+                                          <option class="options">None</option>
+                                          @foreach($roles as $item)
+                                            <option id="roled" value="{{ $item->id }}">{{ $item->user_role }}</option>
                                         @endforeach
-                                        </select>
+                                      </select>
                                     </div>
-                                </div>
-                                <table class=" table table-bordered " style="border: 1px solid black">
-                                    <thead>
-                                      <tr>
-                                        <th>
-                                            Selection
-                                        </th>
-                                        <th class="justify-content-center">
-                                            Role
-                                        </th>
-                                        <th>
-                                            Module
-                                        </th>
-                                        <th>
-                                            Page
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                  
-                                    <tbody>
-                                      
-                                      
-                                      <tr>
-                                        <td>Tick All<input  type="checkbox" name="tick_all"  id="unfreezeToggle" value="1" ></td>
-                                      </tr>
-                                      <tr>
-                                          <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1" ></td>   
-                                          <td><input type="text" class="form-control" id="purchase01" placeholder="Purchaser"></td>
-                                          <td><input type="text" class="form-control" id="purchaser01" placeholder="Purchaser"></td>    
-                                          <td><input type="text" class="form-control" id="pocreation01" placeholder="PO creation"></td>              
-                                      </tr>
-                                      <tr>
-                                          <td><input  type="checkbox" name="sel_sun_01"  id="unfreezeToggle" value="1" ></td>     
-                                          <td><input type="text" class="form-control" id="purchasing01" placeholder="Purchaser"></td>
-                                          <td><input type="text" class="form-control" id="warehouse01" placeholder="warehouse"></td>    
-                                          <td><input type="text" class="form-control" id="grn01" placeholder="GRN"></td>          
-                                      </tr>  
-                                    </tbody>
-                                </table>
+                                </div>  
+                                    <table id="roleTable" class="table table-bordered" style="border: 1px solid black">
+                                      <thead>
+                                          <tr>
+                                              <th>Role</th>
+                                              <th>Module</th>
+                                              <th>Page</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <!-- Table rows will be populated dynamically using JavaScript -->
+                                      </tbody>
+                                    </table>
+
+                                    <script>
+                                      document.addEventListener('DOMContentLoaded', function() {
+                                          // Fetch data when the page is loaded
+                                          fetchRoleData('default_role_id'); // Replace 'default_role_id' with your default role ID
+
+                                          // Listen for changes in the dropdown
+                                          document.getElementById('roleSelect').addEventListener('change', function() {
+                                              var selectedRoleId = this.value;
+                                              fetchRoleData(selectedRoleId);
+                                          });
+
+                                          // Function to fetch role data and update the dropdown and table
+                                          function fetchRoleData(roleId) {
+                                              // Replace with your API endpoint URL
+                                              var apiUrl = '/fetch-employee-data/' + roleId;
+
+                                              // Make an AJAX request to fetch data for the selected role ID
+                                              var xhr = new XMLHttpRequest();
+                                              xhr.open('GET', apiUrl, true);
+                                              xhr.onreadystatechange = function() {
+                                                  if (xhr.readyState == 4 && xhr.status == 200) {
+                                                      var data = JSON.parse(xhr.responseText);
+                                                      updateDropdownOptions(data.role_access_records);
+                                                      updateTable(data.role_access_records);
+                                                  }
+                                              };
+                                              xhr.send();
+                                          }
+
+                                          // Function to update the dropdown options
+                                          function updateDropdownOptions(roleAccessRecords) {
+                                              var dropdown = document.getElementById('roleSelect');
+                                              dropdown.innerHTML = '<option class="options">None</option>';
+
+                                                  roleAccessRecords.forEach(function(record) {
+                                                  var option = document.createElement('option');
+                                                  option.value = record.role_id;
+                                                  option.text = record.role_name; // Adjust this based on your actual role name property
+                                                  dropdown.appendChild(option);
+                                              });
+                                          }
+
+                                          // Function to update the table
+                                          function updateTable(roleAccessRecords) {
+                                              var tableBody = document.querySelector('#roleTable tbody');
+                                              tableBody.innerHTML = '';
+
+                                              roleAccessRecords.forEach(function(record) {
+                                                  var row = tableBody.insertRow();
+                                                  var cell1 = row.insertCell(0);
+                                                  var cell2 = row.insertCell(1);
+                                                  var cell3 = row.insertCell(2);
+
+                                                  cell1.textContent = record.role_id; // Adjust this based on your actual role name property
+                                                  cell2.textContent = record.module_id;
+                                                  cell3.textContent = record.page_id;
+                                              });
+                                          }
+                                      });
+                                    </script>
+
                             </div>
                             <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style=" top: 40%; left:2%; ">
                                 <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
@@ -448,43 +631,43 @@
                             //   }
                             // })();
 
-                        //     (function () {
-                        //       var checkbox = document.getElementById('freezeCheckbox');
+                             (function () {
+                               var checkbox = document.getElementById('freezeCheckbox');
                             
-                        //       var inputIdsToFreeze = ['input1', 'input2'];
+                               var inputIdsToFreeze = ['input1', 'input2'];
                           
-                        //   function handleChange(checkboxId, inputIdsToFreeze) {
-                        //     var checkbox = document.getElementById(checkboxId);
+                           function handleChange(checkboxId, inputIdsToFreeze) {
+                             var checkbox = document.getElementById(checkboxId);
 
-                        //     // Attach the change event handler to the checkbox
-                        //     checkbox.addEventListener('change', function () {
-                        //       for (var i = 0; i < inputIdsToFreeze.length; i++) {
-                        //         var input = document.getElementById(inputIdsToFreeze[i]);
+                             // Attach the change event handler to the checkbox
+                             checkbox.addEventListener('change', function () {
+                               for (var i = 0; i < inputIdsToFreeze.length; i++) {
+                                 var input = document.getElementById(inputIdsToFreeze[i]);
 
-                        //         if (input) {
-                        //           // Freeze the input by setting the 'disabled' attribute
-                        //           input.disabled = checkbox.checked;
+                                 if (input) {
+                                   // Freeze the input by setting the 'disabled' attribute
+                                   input.disabled = checkbox.checked;
 
-                        //           // Remove the value if the checkbox is checked
-                        //           if (checkbox.checked) {
-                        //             input.value = '';
-                        //           }
-                        //         }
-                        //       }
-                        //     });
+                                   // Remove the value if the checkbox is checked
+                                   if (checkbox.checked) {
+                                     input.value = '';
+                                   }
+                                 }
+                               }
+                             });
 
-                        //     // Invoke the change event handler immediately
-                        //     handleChangeState(checkbox);
-                        //   }
+                             // Invoke the change event handler immediately
+                             handleChangeState(checkbox);
+                           }
 
-                        //   // Call the function for each set of checkboxes and inputs in your foreach loop
-                        //   // Example: handleChange('checkbox1', ['input1', 'input2']);
-                        //   // Example: handleChange('checkbox2', ['input3', 'input4']);
-                        // })();
+                           // Call the function for each set of checkboxes and inputs in your foreach loop
+                           // Example: handleChange('checkbox1', ['input1', 'input2']);
+                           // Example: handleChange('checkbox2', ['input3', 'input4']);
+                          })();
 
-                        </script>
+                      </script>
                        
-                    </div>
+                    </div> --}}
             </form>        
 
   </section> 
