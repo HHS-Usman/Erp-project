@@ -642,6 +642,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
+        'App\\Models\\AccessPermit' => __DIR__ . '/../..' . '/app/Models/AccessPermit.php',
         'App\\Models\\Accountcategory' => __DIR__ . '/../..' . '/app/Models/Accountcategory.php',
         'App\\Models\\Accounttype' => __DIR__ . '/../..' . '/app/Models/Accounttype.php',
         'App\\Models\\Additional_approval' => __DIR__ . '/../..' . '/app/Models/Additional_approval.php',

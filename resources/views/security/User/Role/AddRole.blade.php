@@ -1,66 +1,64 @@
-<?php
-use App\Helpers\MasterFormsHelper;
-$master = new MasterFormsHelper();
-?>
 @extends('layout.master')
 @section('page-tab')
-    Create Add Permission
-@endsection
+   Create Role Permission
+@endsection    
 @section('content')
 
-
-<section id="multiple-column-form">
+  <section id="main" class="main" style="padding-top: 0vh;">
+        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+            <div class="pagetitle" style="margin-left: 20px;">
+                <h1>Create Role Permission</h1>
+                <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active"><a> Create Role Permission</a></li>
+                </ol>
+                </nav>
+            </div>
+            <br><br><br>
+            <head>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Role Permission</h1>
-        <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item active"><a> Create Role Permission</a></li>
-        </ol>
-        </nav>
-    </div>
-    <br><br><br>
-    <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+                <!-- JS -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+               <style>
+                    #selects,
+                .select2 {
+                    width: 100%;
+                    padding: 3px;
+                }
+                </style>
+            </head>
 
-        <!-- JS -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-       <style>
-            #selects,
-        .select2 {
-            width: 100%;
-            padding: 3px;
-        }
-        </style>
-    </head>
     <form action="{{ route('role.store') }}" method="POST">        
         @csrf
         <div class="row justify-content-center">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group d-flex">
-                    <label for="options"><h4 class="card-title">ADD ROLE</h4></label>
-                    <select id="gender" name="role_id"  class="select2">
-                        <option class="options">None</option>
-                        @foreach($roles as $item)
-                            <option value="{{ $item->id }}">{{ $item->user_role }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                
+                            <div class="form-group d-flex">
+                                <label for="options"><h4>Role</h4></label>
+                                <div>
+                                    <select id="gender" name="role_id"  class="select2">
+                                  <option class="options">None</option>
+                                  @foreach($roles as $item)
+                                      <option value="{{ $item->id }}">{{ $item->user_role }}</option>
+                                  @endforeach
+                                    </select>
+                                </div>
+                            </div>
                 <table class="table table-bordered" style="border: 1px solid black">         
-                    <thead>
-                        
+                    <thead>    
                         <tr>
                         <th scope="col" ></th>
                         <th>Active</th>
@@ -77,7 +75,7 @@ $master = new MasterFormsHelper();
                                 <td><h1>{{ $moduleName }}</h1></td>
                                 <!-- Add a data-module attribute to store the module ID -->
                                 <td><input type="checkbox" name="sel_sun_01" data-module="{{ $moduleGroup->first()->module->id }}" id="unfreezeToggle" value="1" onclick="toggleUnfreeze(this)"></td>
-                                <td></td>
+                                <td></td>$permissions->module->module_name as moduleName
                                 <td><input type="checkbox" name="1stweek_sun_01" id="freezer" class="item" value="1" onclick="freeze(this)" checked></td>
                                 <td><input type="checkbox" name="2ndweek_sun_01" id="freezer1" class="item" value="1" onclick="freeze1(this)" checked></td>
                                 <td><input type="checkbox" name="3rdweek_sun_01" id="freezer2" class="item" value="1" onclick="freeze2(this)" checked></td>

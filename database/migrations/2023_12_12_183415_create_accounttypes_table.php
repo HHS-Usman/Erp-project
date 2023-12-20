@@ -19,7 +19,14 @@ class CreateAccounttypesTable extends Migration
             $table->string('Description');
             $table->string('description');
             $table->timestamps();
+<<<<<<< HEAD
+
+       
+    });
+
+=======
         });
+>>>>>>> bead283df3b3f2110c26de05f59791b05d481d89
     }
 
     /**
