@@ -14,19 +14,7 @@ class CreateAccessPermitsTable extends Migration
     public function up()
     {
         Schema::create('access_permits', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('emp_id');
-            $table->foreign('emp_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('user_roles')->onDelete('cascade');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->timestamps();
+            
         });
     }
 

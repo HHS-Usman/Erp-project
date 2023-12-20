@@ -12,7 +12,7 @@ class role_access extends Model
     
     public function page()
     {
-        return $this->belongsTo(Page::class, 'page_id');
+        return $this->belongsTo(Permissions::class, 'page_id');
     }
     public function user_role()
     {

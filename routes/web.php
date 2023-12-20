@@ -98,7 +98,7 @@ Route::resource('employees',EmpController::class);
 Route::resource('permission',PermissionController::class);
 Route::resource('/roleaccess',RoleAccessController::class);
 Route::resource('role',RoleController::class);
-Route::resource('permit',AccessPermitController::class);
+Route::resource('AccessPermit',AccessPermitController::class);
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);
