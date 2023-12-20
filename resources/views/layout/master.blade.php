@@ -444,10 +444,7 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
                                         </li>
-                                      <li class="p-0"><a class="dropdown-item"
-                                              href="{{ route('costcenteraccount.create') }}">Create Cost Center</a></li>
-                                              <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a></li>
+                                   
                                   </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">

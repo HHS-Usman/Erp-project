@@ -92,10 +92,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $y->refaccode }}</td>
-                                
-                                @foreach ($accountcetegoty as $category)
-                                    <td>{{$category->accountcategory}}</td>
-                                @endforeach
+                                <td>{{$y->accoutcategory->accountcategory}}</td>
                                @foreach ( $accountypes as $data )
                                <td>{{$data->typeaccount}}</td>
                                @endforeach

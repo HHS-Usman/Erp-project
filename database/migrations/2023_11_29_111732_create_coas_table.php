@@ -1,8 +1,10 @@
 <?php
 
+use Brick\Math\BigInteger;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Reference\Reference;
 
 class CreateCoasTable extends Migration
 {
@@ -15,15 +17,12 @@ class CreateCoasTable extends Migration
     {
         Schema::create('coas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('branch_id')->nullable();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('coacode')->nullable();
             $table->string('coaname')->nullable();
             $table->boolean('operational')->default(true);
             $table->string('refaccode')->nullable();
             $table->integer('parentid')->nullable();
             $table->string('parentcoacode')->nullable();
-            $table->string('coacategory')->nullable();
             $table->string('Level-1')->nullable();
             $table->string('Level-2')->nullable();
             $table->string('Level-3')->nullable();
@@ -39,6 +38,15 @@ class CreateCoasTable extends Migration
             $table->string('openingdate')->nullable();
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('accounttype_id');
+            $table->foreign('accounttype_id')->references('id')->on('accounttypes');
+
+            $table->unsignedBigInteger('accountcategory_id');
+            $table->foreign('accountcategory_id')->references('id')->on('accountcategories')->onDelete('cascade');
+
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

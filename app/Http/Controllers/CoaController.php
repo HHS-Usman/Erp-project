@@ -22,7 +22,7 @@ class CoaController extends Controller
     public function index()
     {
         $accountypes = Accounttype::all();
-        $accountcetegoty = Accountcategory::all();
+        $accountcetegoty = Coa::with('accoutcategory')->get();
         $coas = Coa::latest()->paginate();
         return view('Accounts.coa.index', compact('coas','accountcetegoty','accountypes'))->with(request()->input('page'));
     }
@@ -37,7 +37,7 @@ class CoaController extends Controller
         // $maxcooade= Coa::latest()->value('coacode');
         $accountypes = Accounttype::all();
         $accountCategory = Accountcategory::all();
-        $prentcoa = Coa::where('operation', 0)->withCount('children')->get();
+        $prentcoa = Coa::where('operational', 0)->withCount('children')->get();
         return view('Accounts.coa.create', compact('prentcoa', 'accountCategory', 'accountypes', 'transactiontypes'));
     }
     /**
@@ -70,9 +70,9 @@ class CoaController extends Controller
         $coaLevels = explode('-', $newAccountCode);
         // Create a new record in the database with dynamically assigned levels
         $coa = new Coa([
-            'operation' => $request->get('operation', 0),
+            'operational' => $request->get('operation', 0),
             'parentcoacode' => $parentCode,
-            'coacategory' => $request->get('accountcategory'),
+            'accountcategory_id' => $request->get('accountcategory'),
             'coaname' => $request->get('accountname'),
             'coacode' => $newAccountCode,
             'refaccode' => $request->get('refaccode'),

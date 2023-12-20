@@ -11,4 +11,7 @@ class Accountcategory extends Model
     protected $guarded = [
         'id',
     ];
+    public function chartofaccount(){
+        return $this->hasMany(Coa::class,'id');
+    }
 }

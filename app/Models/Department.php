@@ -11,4 +11,8 @@ class Department extends Model
     protected $guarded = [
         'id',
      ];
+     public function costcenter()
+     {
+         return $this->hasMany(Costcenteraccount::class,'id');
+     }
 }

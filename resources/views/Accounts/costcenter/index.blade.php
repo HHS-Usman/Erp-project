@@ -93,8 +93,11 @@
 
 
                                 </td>
-                                <td>{{$y->ostcentertype}}</td>
-                                <td>{{$y->costcentermapping}}</td>
+                                <td>{{$y->costcentertype}}</td>
+                                <td>
+                                    {{ $y->department->department-> }}
+                                </td>
+                                
                                 <td></td>
                                 <td></td>
                                 <td>
