@@ -17,7 +17,7 @@ class CreateAccounttypesTable extends Migration
             $table->id();
             $table->string('typeaccount')->nullable();
             $table->string('Description');
-            $table->dropColumn('description');
+            $table->string('description');
             $table->timestamps();
 
        

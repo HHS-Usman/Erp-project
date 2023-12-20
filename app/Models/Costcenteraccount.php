@@ -15,5 +15,9 @@ class Costcenteraccount extends Model
     {
         return $this->hasMany(Coa::class, 'parentid');
     }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'depart_id');
+    }
     
 }

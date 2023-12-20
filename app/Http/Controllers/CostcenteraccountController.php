@@ -15,11 +15,10 @@ class CostcenteraccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $department = Department::all();
-        $costcenter = Costcenteraccount::latest()->paginate();
-        return view('Accounts.costcenter.index', compact('costcenter', 'department'))->with(request()->input('page'));
-    }
+{
+    $costcenter = Costcenteraccount::with('department')->get();
+    return view('Accounts.costcenter.index', compact('costcenter'));
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -28,10 +27,10 @@ class CostcenteraccountController extends Controller
     public function create()
     {
         $maping = Department::all();
-        $costcenter = Costcenteraccount::where('operation', 0)
+        $costcenter = Costcenteraccount::where('operational', 0)
         ->where('parentid', '>=', 0)
         ->get();            
-        $prentcoa = Costcenteraccount::where('operation', 0)->withCount('children')->get();
+        $prentcoa = Costcenteraccount::where('operational', 0)->withCount('children')->get();
         return view('Accounts.costcenter.create', compact('costcenter', 'maping', 'prentcoa'));
     }
 
@@ -64,19 +63,20 @@ class CostcenteraccountController extends Controller
         $request->validate([
             'operation' => 'integer|in:0,1',
         ]);
+        $departId = $request->get('costcentermapping');
         //create a new product in database
         //create a new product in database
         if ($selectedParentCoa == "default") {
             $levelcounts = Costcenteraccount::max('Level-1');
             $costcentercode = $levelcounts + 1; 
             $coa = new Costcenteraccount([
-                'operation' => request()->get('operation', 0),
+                'operational' => request()->get('operation', 0),
                 'costcenter_code' => $costcentercode,
                 'costcentername' => request()->get('costcenter_name'),
                 'parentid' =>  0,
                 'parentcode' => 0,
                 'costcentertype' => request()->get('costcentertype'),
-                'costcentermapping' => request()->get('costcentermapping'),
+                'depart_id' => $departId,
                 'is_active' => request()->get('is_active', 0),
                 'Level-1'=>$costcentercode,
                 'Level-2'=>0,
@@ -93,13 +93,13 @@ class CostcenteraccountController extends Controller
             $coa->save();
         } else {
             $coa = new Costcenteraccount([
-                'operation' => request()->get('operation', 0),
+                'operational' => request()->get('operation', 0),
                 'costcenter_code' =>  $newAccountCode,
                 'costcentername' => request()->get('costcenter_name'),
                 'parentid' =>  is_numeric($selectedParentCoa) ? $selectedParentCoa : null,
                 'parentcode' => $parentCode,
                 'costcentertype' => request()->get('costcentertype'),
-                'costcentermapping' => request()->get('costcentermapping'),
+                'depart_id' => $departId,
                 'is_active' => request()->get('is_active', 0),
             ]);
             // Assign levels dynamically

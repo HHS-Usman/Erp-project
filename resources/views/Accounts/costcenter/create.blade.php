@@ -4,8 +4,8 @@
 @endsection
 <?php
 use App\Models\Costcenteraccount;
-$selectedParentCoa = "default";
-if ($selectedParentCoa == "default") {
+$selectedParentCoa = 'default';
+if ($selectedParentCoa == 'default') {
     $levelcounts = Costcenteraccount::max('Level-1');
     $costcentercode = $levelcounts + 1;
 }
@@ -47,55 +47,22 @@ if ($selectedParentCoa == "default") {
                             onchange="updateAccountCode()">
                             <option value="default">Select Parent Cost Center </option>
                             @foreach ($costcenter as $item)
-                            <option value="{{ $item->id }}" data-costcenter_code="{{ $item->costcenter_code }}" data-childcount="{{ $item->children_count }}">
-                                Account ID {{ $item->id }} || CostCenter Code {{ $item->costcenter_code }} || {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
-                            </option>
+                                <option value="{{ $item->id }}" data-costcenter_code="{{ $item->costcenter_code }}"
+                                    data-childcount="{{ $item->children_count }}">
+                                    Account ID {{ $item->id }} || CostCenter Code {{ $item->costcenter_code }} ||
+                                    {{ $item->costcentername }} || parent Name || {{ $item->parentid }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
-                   <div class="form-group">
-                    <strong>Cost Center Code</strong>
-                    <input type="text" name="costcenter_code" disabled value="<?php echo $costcentercode; ?>" id="costcenter_code" class="form-control" placeholder="Cost Center Code">
-                </div>
-                    <script>
-                        $(document).ready(function () {
-                            // Attach the updateAccountCode function to the change event of the dropdown
-                            $('#parentcostcenter').on('change', function () {
-                                updateAccountCode();
-                            });
+                    <div class="form-group">
+                        <strong>Cost Center Code</strong>
+                        <input type="text" name="costcenter_code" disabled value="<?php echo $costcentercode; ?>"
+                            id="costcenter_code" class="form-control" placeholder="Cost Center Code">
+                    </div>
                     
-                            function updateAccountCode() {
-                                var parentCode = $('#parentcostcenter').find(':selected').data('costcenter_code');
-                    
-                                // Get all existing child numbers from the database
-                                var existingChildNumbers = $('#parentcostcenter').find('option[data-costcenter_code^="' + parentCode + '-"]').map(function () {
-                                    return parseInt($(this).data('costcenter_code').split('-').pop()) || 0;
-                                }).get();
-                    
-                                // Find the next available child number
-                                var newChildNumber = findNextChildNumber(existingChildNumbers);
-                    
-                                // Create the new cost center code
-                                var newAccountCode = parentCode + '-' + newChildNumber;
-                    
-                                console.log('New Account Code:', newAccountCode);
-                                $('#costcenter_code').val(newAccountCode);
-                            }
-                    
-                            function findNextChildNumber(existingChildNumbers) {
-                                var newChildNumber = 1;
-                    
-                                while (existingChildNumbers.includes(newChildNumber)) {
-                                    newChildNumber++;
-                                }
-                    
-                                return newChildNumber;
-                            }
-                        });
-                    </script>
-                            
-                    
+
                     <div class="form-group">
                         <strong>Cost Center Name</strong>
                         <input type="text" name="costcenter_name" id="costcenter_name" class="form-control"
@@ -105,8 +72,8 @@ if ($selectedParentCoa == "default") {
                     <div class="form-group">
                         <strong>Select Cost Center Type</strong>
                         <select id="costcentertype" name="costcentertype" class="form-control">
-                            <option class="options" value="1">Detail</option>
-                            <option class="options" value="2">Control</option>
+                            <option class="options" value="Detail">Detail</option>
+                            <option class="options" value="Control">Control</option>
                         </select>
                     </div>
                     <strong>Remarks</strong>
@@ -142,4 +109,3 @@ if ($selectedParentCoa == "default") {
     </section>
 
 @endsection
-

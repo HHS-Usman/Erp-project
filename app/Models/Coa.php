@@ -15,4 +15,7 @@ class Coa extends Model
     {
         return $this->hasMany(Coa::class, 'parentid');
     }
+    public function accoutcategory(){
+        return $this->belongsTo(Accountcategory::class,'accountcategory_id');
+    }
 }

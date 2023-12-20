@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Reference\Reference;
 
 class CreateCostcenteraccountsTable extends Migration
 {
@@ -15,8 +16,6 @@ class CreateCostcenteraccountsTable extends Migration
     {
         Schema::create('costcenteraccounts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('branch_id')->nullable();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('costcenter_code')->nullable();
             $table->string('costcentername');
             $table->boolean('operational')->default(true);
@@ -30,7 +29,9 @@ class CreateCostcenteraccountsTable extends Migration
             $table->integer('Level-6')->nullable();
             $table->integer('Level-7')->nullable();
             $table->string('costcentertype')->nullable();
-            $table->string('costcentermapping');
+            // $table->string('costcentermapping');
+            $table->unsignedBigInteger('depart_id');
+            $table->foreign('depart_id')->references('id')->on('departments');
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
