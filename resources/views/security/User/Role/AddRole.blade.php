@@ -69,35 +69,7 @@
                         <th>Delete</th>
                         </tr>
                     </thead>
-                    {{-- @foreach ($permissions->groupBy('module.module_name') as $moduleName => $moduleGroup)
-                        <tbody>
-                            <tr>
-                                <td><h1>{{ $moduleName }}</h1></td>
-                                <!-- Add a data-module attribute to store the module ID -->
-                                <td><input type="checkbox" name="sel_sun_01" data-module="{{ $moduleGroup->first()->module->id }}" id="unfreezeToggle" value="1" onclick="toggleUnfreeze(this)"></td>
-                                <td></td>$permissions->module->module_name as moduleName
-                                <td><input type="checkbox" name="1stweek_sun_01" id="freezer" class="item" value="1" onclick="freeze(this)" checked></td>
-                                <td><input type="checkbox" name="2ndweek_sun_01" id="freezer1" class="item" value="1" onclick="freeze1(this)" checked></td>
-                                <td><input type="checkbox" name="3rdweek_sun_01" id="freezer2" class="item" value="1" onclick="freeze2(this)" checked></td>
-                                <td><input type="checkbox" name="4thweek_sun_01" id="freezer3" class="item" value="1" onclick="freeze3(this)" checked></td>
-                            </tr>
-                            <!-- ... (other rows) ... -->
-                            @foreach ($moduleGroup->groupBy('page.name') as $pageName => $pageGroup)
-                                <tr>
-                                    <td>{{ $pageName }}</td>
-                                    <td><input type="checkbox" name="sel_tue_03" id="sel_tue_03" class="item example" value="1"></td>
-                                    <td></td>
-                                    @foreach ($pageGroup as $data)
-                                        <td>
-                                            <!-- Add a data-page and data-action attribute to store page and action info -->
-                                            <input type="checkbox" name="1stweek_tue_03" class="item example2 not" value="1" data-page="{{ $data->page->id }}" data-action="{{ $data->page_action_id }}">
-                                            {{ $data->name }}
-                                        </td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    @endforeach --}}
+                   
                         
                         @foreach ($permissions->groupBy('module.module_name') as $moduleName => $moduleGroup)
                             <tbody>

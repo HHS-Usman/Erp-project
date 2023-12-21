@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccessPermit extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $guarded = [
+        'id',
+    ];
 }

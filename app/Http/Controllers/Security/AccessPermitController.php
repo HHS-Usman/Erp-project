@@ -15,6 +15,7 @@ use App\Models\role_access;
 use App\Models\Permissions;
 use App\Models\AccessPermit;
 use Illuminate\Support\Facades\Log;
+use Validator;
 
 class AccessPermitController extends Controller
 {
@@ -38,35 +39,27 @@ class AccessPermitController extends Controller
     }
     public function store(Request $request)
     {
-        $records = $request->input('records', []);
+        $records = $request->input('record', []);
 
-        foreach ($records as $record) {
-        // Check if 'password' key exists in the current $record
-        if (isset($record['password'])) {
-            AccessPermit::create([
-                'emp_id' => $record['emp_id'],
-                'login_id' => $record['login_id'],
-                'access' => $record['access'],
-                'password' => $record['password'],
-                'report_access' => $record['report_access'],
-                'back_date_entry' => $record['back_date_entry'],
-                'post_date_entry' => $record['post_date_entry'],
-                'role_id' => $record['role_id'],
-                'module_id' => $record['module_id'],
-                'page_id' => $record['page_id'],
-                // Add other columns as needed
-            ]);
-        } else {
-            // Handle the case when 'password' key is not present in the current $record
-            // Log an error, set a default value, or skip the record
-            Log::error('Missing "password" key in record: ' . json_encode($record));
-            // You can add additional logic based on your requirements
-        }
-        }
-
-        return redirect()->back()->with('success', 'Multiple records inserted successfully');
-
-    }   
+    foreach ($record as $record) {
+        AccessPermit::create([
+            'emp_id' => $record['emp_id'] ?? null,
+            'login_id' => $record['login_id'] ?? null,
+            'access' => $record['access'] ?? null,
+            'password' => $record['password'] ?? null,
+            'report_access' => $record['report_access'] ?? null,
+            'back_date_entry' => $record['back_date_entry'] ?? null,
+            'post_date_entry' => $record['post_date_entry'] ?? null,
+            'role_id' => $record['role_id'] ?? null,
+            'module_id' => $record['module_id'] ?? null,
+            'page_id' => $record['page_id'] ?? null,
+            // Add other fields as needed
+        ]);
+    }
+    
+        return redirect()->route('accesspermit.create')->with('success', 'Permission created successfully.');
+    } 
+   
     /**
      * Display the specified resource.
      *
