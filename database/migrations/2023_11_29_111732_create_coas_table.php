@@ -39,8 +39,8 @@ class CreateCoasTable extends Migration
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('accounttype_id');
-            $table->foreign('accounttype_id')->references('id')->on('accounttypes');
+            $table->unsignedBigInteger('mainheadlevel_id');
+            $table->foreign('mainheadlevel_id')->references('id')->on('coamainheadlevels')->onDelete('cascade');
 
             $table->unsignedBigInteger('accountcategory_id');
             $table->foreign('accountcategory_id')->references('id')->on('accountcategories')->onDelete('cascade');

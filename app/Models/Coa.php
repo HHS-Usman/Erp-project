@@ -11,11 +11,17 @@ class Coa extends Model
     protected $guarded = [
         'id',
     ];
+    
     public function children()
     {
         return $this->hasMany(Coa::class, 'parentid');
     }
+
     public function accoutcategory(){
         return $this->belongsTo(Accountcategory::class,'accountcategory_id');
+    }
+
+    public function mainheadlevel(){
+        return $this->belongsTo(Coamainheadlevel::class,'mainheadlevel_id');
     }
 }

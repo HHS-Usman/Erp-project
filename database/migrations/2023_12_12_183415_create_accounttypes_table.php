@@ -16,12 +16,12 @@ class CreateAccounttypesTable extends Migration
         Schema::create('accounttypes', function (Blueprint $table) {
             $table->id();
             $table->string('typeaccount')->nullable();
-            $table->string('Description');
-            $table->string('description');
+            $table->string('Code');
+            $table->string('Detail');
             $table->timestamps();
 
-       
-        });
+
+    });
     }
 
     /**
