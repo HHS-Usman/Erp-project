@@ -98,7 +98,7 @@ Route::resource('employees',EmpController::class);
 Route::resource('permission',PermissionController::class);
 Route::resource('/roleaccess',RoleAccessController::class);
 Route::resource('role',RoleController::class);
-Route::resource('AccessPermit',AccessPermitController::class);
+Route::resource('accesspermit',AccessPermitController::class);
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
 Route::resource('religion',ReligionController::class);
@@ -141,7 +141,6 @@ Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);
 Route::resource('salepersontype',SalepersontypeController::class);
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
-Route::resource('permit',AccesspermitController::class);
 Route::get('/branches', 'BranchController@index');
 Route::post('/account-store', 'AccountController@store')->name('account-store');
 // for fetch record of DB in JS file
