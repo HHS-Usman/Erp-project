@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccessPermitsTable extends Migration
+class CreateVoucherentiresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateAccessPermitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('access_permits', function (Blueprint $table) {
-            
+        Schema::create('voucherentires', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,6 +26,6 @@ class CreateAccessPermitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('access_permits');
+        Schema::dropIfExists('voucherentires');
     }
 }

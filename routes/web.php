@@ -60,6 +60,13 @@ use App\Http\Controllers\Security\AccesspermitController;
 use App\Http\Controllers\Security\User_role_controller;
 use App\Http\Controllers\Security\Usercontroller;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\JournalvoucherController;
+use App\Http\Controllers\VoucherentriesController;
+use App\Http\Controllers\VouchertypeController;
+use App\Http\Controllers\YearClosingController;
+use App\Models\Journalvoucher;
+use App\Models\Vouchertype;
+use App\Models\YearClosing;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +142,11 @@ Route::resource('event',EventController::class);
 Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'fetchEmployeeData']);
 Route::resource('accountcategory',AccountcategoryController::class);
 Route::resource('coamainheaderlevel',CoaheadlevelController::class);
+Route::resource('vouchertype',VouchertypeController::class);
+Route::resource('journalvoucher',JournalvoucherController::class);
+Route::resource('voucherentry',VoucherentriesController::class);
+Route::resource('yearclosing',YearClosingController::class);
+
 Route::resource('coa',CoaController::class);
 Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);

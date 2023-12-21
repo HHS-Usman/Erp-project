@@ -444,7 +444,28 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
                                         </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('vouchertype.create') }}">Create Voucher Type</a>
+                                    </li>
+                                    <li class="p-0"><a class="dropdown-item"
+                                        href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
+                                </li>
+                                <li class="p-0"><a class="dropdown-item"
+                                    href="{{ route('journalvoucher.create') }}">Create Journal Voucher</a>
+                            </li>
+                            <li class="p-0"><a class="dropdown-item"
+                                href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
+                        </li>
                                    
+                        <li class="p-0"><a class="dropdown-item"
+                            href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
+                    </li>
+                    <li class="p-0"><a class="dropdown-item"
+                        href="{{ route('yearclosing.create') }}">Create Closing Year</a>
+                </li>
+                <li class="p-0"><a class="dropdown-item"
+                    href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
+            </li>
                                   </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
