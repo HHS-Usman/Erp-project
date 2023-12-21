@@ -11,4 +11,8 @@ class Coamainheadlevel extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function coaaccount(){
+        return $this->hasMany(Coa::class,'id');
+    }
 }
