@@ -12,6 +12,9 @@ use App\Models\User_role;
 use App\Models\Company;
 use App\Models\Branch;
 use App\Models\role_access;
+use App\Models\Permissions;
+use App\Models\AccessPermit;
+use Illuminate\Support\Facades\Log;
 
 class AccessPermitController extends Controller
 {
@@ -35,28 +38,35 @@ class AccessPermitController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'employee_name'=>'required',
-            'role' => 'required'
-        ]);
-        //create a new product in database
-        Give_Permit::create([
-            'employee_name' => request()->get('employee_name'),
-            'role' => request()->get('role'),
-            'company_name' => request()->get('company_name'),
-            'access' => request()->get('access'),
-            'module' => request()->get('module'),
-            'page' => request()->get('page'),
-            'password' => request()->get('password'),
-            'report_access' => request()->get('report_access'),
-            'back_date_entry' => request()->get('back_date_entry'),
-            'post_date_entry' => request()->get('post_date_entry'),
-        ]);
+        $records = $request->input('records', []);
 
-        //redirect the user and send friendly message
-        return redirect()->route('permit.create')->with('success','Manage successfully');
-    }
+        foreach ($records as $record) {
+        // Check if 'password' key exists in the current $record
+        if (isset($record['password'])) {
+            AccessPermit::create([
+                'emp_id' => $record['emp_id'],
+                'login_id' => $record['login_id'],
+                'access' => $record['access'],
+                'password' => $record['password'],
+                'report_access' => $record['report_access'],
+                'back_date_entry' => $record['back_date_entry'],
+                'post_date_entry' => $record['post_date_entry'],
+                'role_id' => $record['role_id'],
+                'module_id' => $record['module_id'],
+                'page_id' => $record['page_id'],
+                // Add other columns as needed
+            ]);
+        } else {
+            // Handle the case when 'password' key is not present in the current $record
+            // Log an error, set a default value, or skip the record
+            Log::error('Missing "password" key in record: ' . json_encode($record));
+            // You can add additional logic based on your requirements
+        }
+        }
 
+        return redirect()->back()->with('success', 'Multiple records inserted successfully');
+
+    }   
     /**
      * Display the specified resource.
      *
@@ -116,7 +126,7 @@ class AccessPermitController extends Controller
         //         'error' => 'No role access records found for the specified role_id.',
         //     ], 404); // You can customize the HTTP status code accordingly
         // }
-        $roleAccessRecords = role_access::with(['user_role', 'module', 'page'])->where('role_id', $role_id)->get();
+        $roleAccessRecords = role_access::with(['user_role', 'module', 'page',])->where('role_id', $role_id)->get();
 
         if ($roleAccessRecords->isNotEmpty()) {
             // Adjust the response format based on your needs

@@ -20,10 +20,8 @@ class CreateAccounttypesTable extends Migration
             $table->string('Detail');
             $table->timestamps();
 
-     
-    });
 
-       
+    });
     }
 
     /**
