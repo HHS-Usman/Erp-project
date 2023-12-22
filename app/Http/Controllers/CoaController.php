@@ -6,6 +6,7 @@ use App\Models\Parentcoa;
 use App\Http\Controllers\Controller;
 use App\Models\Accounttype;
 use App\Models\Coa;
+use App\Models\Coamainheadlevel;
 use App\Models\Costcenter;
 use App\Models\Costcenteraccount;
 use App\Models\Transactiontype;
@@ -33,6 +34,7 @@ class CoaController extends Controller
      */
     public function create()
     {
+        $mainheadlevel = Coamainheadlevel::all();
         $transactiontypes = Transactiontype::all();
         // $maxcooade= Coa::latest()->value('coacode');
         $accountypes = Accounttype::all();

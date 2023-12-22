@@ -61,8 +61,7 @@ if ($selectedParentCoa == 'default') {
                         <input type="text" name="costcenter_code" disabled value="<?php echo $costcentercode; ?>"
                             id="costcenter_code" class="form-control" placeholder="Cost Center Code">
                     </div>
-                    
-
+                
                     <div class="form-group">
                         <strong>Cost Center Name</strong>
                         <input type="text" name="costcenter_name" id="costcenter_name" class="form-control"

@@ -24,4 +24,7 @@ class Coa extends Model
     public function mainheadlevel(){
         return $this->belongsTo(Coamainheadlevel::class,'mainheadlevel_id');
     }
+    public function varchar(){
+        return $this->hasMany(Vouchertype::class,'vouchertype_id');
+    }
 }
