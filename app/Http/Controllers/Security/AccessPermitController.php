@@ -39,20 +39,21 @@ class AccessPermitController extends Controller
     }
     public function store(Request $request)
     {
-        $records = $request->input('record', []);
+        // dd($request->all());
+        // $records = $request->input('record', []);
 
-    foreach ($record as $record) {
+    foreach ($request->emp_id as $key=> $record) {
         AccessPermit::create([
-            'emp_id' => $record['emp_id'] ?? null,
-            'login_id' => $record['login_id'] ?? null,
-            'access' => $record['access'] ?? null,
-            'password' => $record['password'] ?? null,
-            'report_access' => $record['report_access'] ?? null,
-            'back_date_entry' => $record['back_date_entry'] ?? null,
-            'post_date_entry' => $record['post_date_entry'] ?? null,
-            'role_id' => $record['role_id'] ?? null,
-            'module_id' => $record['module_id'] ?? null,
-            'page_id' => $record['page_id'] ?? null,
+            'emp_id' => $request->emp_id[$key],
+            'login_id' => $request->login_id[$key],
+            'access' => $request->access[$key],
+            'password' => $request->password[$key],
+            'report_access' => $request->report_access[$key],
+            'back_date_entry' => $request->back_date_entry[$key],
+            'post_date_entry' => $request->post_date_entry[$key],
+            'role_id' => $request->role_id[$key],
+            'module_id' => $request->module_id[$key],
+            'page_id' => $request->page_id[$key],
             // Add other fields as needed
         ]);
     }

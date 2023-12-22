@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Security;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User_role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\Permissions;
 use App\Models\Module;
 use App\Models\Page;
@@ -61,26 +63,29 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         
-
-        // Example: Storing module data
+        
         $moduleNames = $request->input('module_id', []);
         $pageIds = $request->input('page_id', []);
-
+        
         // Assuming 'role_access' is the model name
         foreach ($pageIds as $pageId) {
             // Perform your logic to store page data here
-
-            // Check if $moduleNames is an array and get the first element
-            $moduleName = is_array($moduleNames) ? reset($moduleNames) : $moduleNames;
-
+        
+            // Check if $moduleNames is not empty and get the first element
+            $moduleName = !empty($moduleNames) ? reset($moduleNames) : null;
+        
             role_access::create([
                 'page_id' => $pageId,
                 'role_id' => $request->get('role_id'),
                 'module_id' => $moduleName,
                 // Add other fields as needed
             ]);
-        }    
-        return redirect()->route('role.create')->with('success','Manage successfully');
+        
+            // Remove the processed module name from the array
+            array_shift($moduleNames);
+        }
+        
+        return redirect()->route('role.create')->with('success', 'Manage successfully');
     }
 
     /**

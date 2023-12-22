@@ -16,6 +16,7 @@ class CreatePageActionsTable extends Migration
         Schema::create('page_actions', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
+            $table->string('detail');
             $table->timestamps();
         });
     }
