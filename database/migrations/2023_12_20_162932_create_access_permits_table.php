@@ -32,7 +32,6 @@ class CreateAccessPermitsTable extends Migration
             $table->unsignedBigInteger('module_id');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->unsignedBigInteger('page_id');
-            $table->foreign('page_id')->references('id')->on('permissions')->onDelete('cascade');
             
             $table->timestamps();
         });

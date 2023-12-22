@@ -72,7 +72,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
                             <div class="form-group">
                                 <label for="options">Select Employee</label>
-                                <select id="gender" name="record[0][emp_id]"  class="select2">
+                                <select id="gender" name="emp_id[]"  class="select2">
                                   <option class="options">None</option>
                                   @foreach($employes as $item)
                                   <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
@@ -116,14 +116,14 @@
                                       </div>
                                       <div class="form-group">
                                         
-                                        <input type="text" class="form-control" id="input1" name="record[1][login_id]" class="input1" placeholder="Login ID" />
+                                        <input type="text" class="form-control" id="input1" name="login_id[]" class="input1" placeholder="Login ID" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="checkbox" id="freezeCheckbox" name="record[2][access]" value="1" placeholder="Access" />
+                                          <input type="checkbox" id="freezeCheckbox" name="access[]" value="1" placeholder="Access" />
                                       </div>
                                       <div class="form-group">
                                         
-                                        <input type="password" name="record[3][password]" class="form-control input2" id="input2" placeholder="Password" />
+                                        <input type="password" name="password[]" class="form-control input2" id="input2" placeholder="Password" />
                                       </div>
                                         <div class="form-group">
                                           
@@ -131,7 +131,7 @@
                                             type="text"
                                             class="form-control"
                                             id="bit"
-                                            name="record[4][report_access]"
+                                            name="report_access[]"
                                             placeholder="report_access" 
                                           />
                                         </div>
@@ -141,7 +141,7 @@
                                             class="form-control"
                                             id="input"
                                             
-                                            name="record[5][back_date_entry]"
+                                            name="back_date_entry[]"
                                             placeholder="back_date_entry" 
                                           />
                                         </div>
@@ -151,7 +151,7 @@
                                             type="email"
                                             class="form-control"
                                             id="input"
-                                            name="record[6][post_date_entry]"
+                                            name="post_date_entry[]"
                                             placeholder="post_date_entry" 
                                           />
                                       </div>
@@ -167,7 +167,7 @@
                                   @foreach ($companyGroup as $data)
                                     <div class="form-group">
                                       <label for="options"> {{ $data->name }} </label>
-                                      <input type="email" class="form-control" id="input" name="{{ $data->name }}" placeholder="{{ $data->name }}" />
+                                      {{-- <input type="email" class="form-control" id="input" name="{{ $data->name }}" placeholder="{{ $data->name }}" /> --}}
                                     </div>
                                     
                                   @endforeach  
@@ -290,8 +290,8 @@
                                 // Clone the row
                                 var newRow = secondTableBody.insertRow();
 
-                                for (var j = 0; j < row.cells.length; j++) {
-                                    var newCell = newRow.insertCell(j);
+                                for (var j = 1; j < row.cells.length; j++) {
+                                    var newCell = newRow.insertCell(j - 1);
                                     newCell.innerHTML = row.cells[j].innerHTML;
 
                                     // Set the name attribute for form elements
@@ -301,13 +301,13 @@
                                         var nameAttribute;
                                         if (i === 0) {
                                             // Assuming the first row is the role row
-                                            nameAttribute = 'record[7][role_id]';
+                                            nameAttribute = 'role_id[]';
                                         } else if (i === 1) {
                                             // Assuming the second row is the module row
-                                            nameAttribute = 'record[8][module_id]';
+                                            nameAttribute = 'module_id[]';
                                         } else if (i === 2) {
                                             // Assuming the third row is the page row
-                                            nameAttribute = 'record[9][page_id]';
+                                            nameAttribute = 'page_id[]';
                                         } else {
                                             // Add additional conditions if needed
                                         }
