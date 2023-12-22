@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Coamainheadlevel;
 use Illuminate\Http\Request;
 use App\Models\Accountcategory;
+use App\Models\Branch;
+use App\Models\Coa;
 
 class CoaheadlevelController extends Controller
 {
@@ -27,8 +29,9 @@ class CoaheadlevelController extends Controller
      */
     public function create()
     {
+        $branch = Branch::all();
         $accountcategory = Accountcategory::all();
-        return view('Accounts.coamainheadlevel.create',compact('accountcategory'));
+        return view('Accounts.coamainheadlevel.create',compact('accountcategory','branch'));
     }
 
     /**
@@ -39,19 +42,28 @@ class CoaheadlevelController extends Controller
      */
     public function store(Request $request)
     {
-        // validate the input
-        $request->validate([
-            'headname' => 'required',
-            'account_code'=>'required'
+        $maxID = Coa::max('id');
+        $maxID = $maxID+1;
+        $coa = new Coa([
+            'operational'=> 0,
+            'coacode'=> $maxID,
+            'coaname'=> request()->get('headname'),
+            'accountcategory_id'=> request()->get('accountcategory'),
+            'branch_id'=> request()->get('branchname'),
+            'operational'=> 'System',
+            'operational'=> 0,
+            'parentid'=> 0,
+            'parentcoacode' => 0,
+            'Level-1' => $maxID,
+            'Level-2'=>0,
+            'Level-3'=>0,
+            'Level-4'=>0,
+            'Level-5'=>0,
+            'Level-6'=>0,
+            'Level-7'=>0,
+           
         ]);
-        //create a new product in database
-        Coamainheadlevel::create([
-            'headname' => request()->get('headname'),
-            'account_code' => request()->get('account_code'),
-            'transctiontype' => request()->get('transctiontype',),
-            'accountcategory' => request()->get('accountcategory',),
-        ]);
-        //redirect the user and send friendly message
+        $coa->save();
         return redirect()->route('coamainheaderlevel.create')->with('success', 'Record inserted  successfully');
     }
     /**

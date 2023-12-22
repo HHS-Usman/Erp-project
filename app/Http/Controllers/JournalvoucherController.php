@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
+use App\Models\Coa;
 use Illuminate\Http\Request;
 
 class JournalvoucherController extends Controller
@@ -24,7 +26,9 @@ class JournalvoucherController extends Controller
      */
     public function create()
     {
-        return view('Accounts.Journalvoucher.create');
+        $branch = Branch::all();
+        $coas = Coa::where('operational',1)->get();
+        return view('Accounts.Journalvoucher.create',compact('branch','coas'));
     }
 
     /**

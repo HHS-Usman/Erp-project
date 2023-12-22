@@ -9,13 +9,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Vouchertype extends Model
 {
     use HasFactory;
-    protected $guarded = [
-        'id',
-    ];
-    public function coadata(){
-        return $this->belongsTo(Coa::class,'coa_id');
+
+    protected $guarded = ['id'];
+
+    public function coadata()
+    {
+        return $this->belongsTo(Coa::class, 'coa_id');
     }
-    public function branchdata(){
-        return $this->belongsTo(Branch::class,'branch_id');
+
+    public function branchdata()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
     }
 }
