@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Accountcategory;
 use App\Models\Branch;
 use App\Models\Coa;
 use App\Models\Vouchertype;
@@ -16,9 +17,11 @@ class VouchertypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('Accounts.vouchertype.index');
-    }
+{
+    $vouchertype = Vouchertype::with('coadata', 'branchdata')->latest()->paginate();
+    return view('Accounts.vouchertype.index', compact('vouchertype'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,8 +57,9 @@ class VouchertypeController extends Controller
             'coa_id'=>request()->get('coadata'), 
             'is_active' => request()->get('is_active', 0),
         ]);
+        
         //redirect the user and send friendly message
-        return redirect()->route('vouchertype.create')->with('success','Manage successfully');
+        return redirect()->route('vouchertype.index')->with('success','Manage successfully');
     }
 
     /**

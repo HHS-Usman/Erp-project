@@ -53,6 +53,16 @@
                                     @endforeach 
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <strong>Select Branch Name:</strong>
+                                <select name="branchname" id="branchname" class="form-control">
+                                    <option value="none">Select Branch Name</option>
+                                    @foreach ($branch as $branches=>$item)
+                                    <option value={{$item->id}}> {{$item->name}} 
+                                    </option>
+                                    @endforeach 
+                                </select>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

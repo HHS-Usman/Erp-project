@@ -49,15 +49,36 @@
                             <th scope="col">Prefix</th>
                             <th scope="col">Voucher Entry Type</th>
                             <th scope="col">Debit Credit</th>
+                            <th scope="col">Branch Name</th>
+                            <th scope="col">CoaName</th>
                             <th scope="col">Status</th>
-                            {{-- <th scope="col">Transaction Amount</th> --}}
-                            {{-- <th scope="col">No of Transaction</th> --}}
                             <th scope="col">Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $counter = 1; ?>
-                     
+                        @foreach ($vouchertype as $vouchertype=>$item)
+                        <tr>
+                            <th>{{ $vouchertype + 1 }}</th>
+                            <th>{{ $item->vouchertype_id }}</th>
+                            <td>{{$item->vouchertitle}}</td>
+                            <td>{{$item->voucherprefix}}</td>
+                            <td>{{$item->vouchertype}}</td>
+                            <td>{{$item->transactiontype}}</td>
+                            <td>{{$item->branchdata->name}}</td>
+                            <td>{{$item->coadata->coaname}}</td>
+                            <td>@if($item->is_active)
+                                <p>Active</p>
+                            @else
+                                <p>InActive</p>
+                            @endif</td>
+                            <td>
+                                <a class="btn btn-info" href="">Show</a>
+                                <a class="btn btn-primary" href="">Edit</a>
+                                <a class="btn btn-danger" href="">Delete</a>
+                            </td>  
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

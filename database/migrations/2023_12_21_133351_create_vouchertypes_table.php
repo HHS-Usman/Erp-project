@@ -14,11 +14,12 @@ class CreateVouchertypesTable extends Migration
     public function up()
     {
         Schema::create('vouchertypes', function (Blueprint $table) {
-            $table->integer("vouchertype_id");
+            $table->bigIncrements("vouchertype_id");
             $table->string('vouchertitle');
             $table->string('voucherprefix');
             $table->string('vouchertype');
             $table->string('transactiontype');
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('branch_id');
             $table->foreign('branch_id')->references('id')->on('branches');
