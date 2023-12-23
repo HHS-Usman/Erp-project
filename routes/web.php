@@ -59,6 +59,7 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\AccesspermitController;
 use App\Http\Controllers\Security\User_role_controller;
 use App\Http\Controllers\Security\Usercontroller;
+use App\Http\Controllers\Product\Productcontroller;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\JournalvoucherController;
 use App\Http\Controllers\VoucherentriesController;
@@ -138,7 +139,7 @@ Route::resource('qualificationlevel',QualificationlevelController::class);
 Route::resource('workflowgroup',WorkflowController::class);
 Route::resource('divupload',DivuploadController::class);
 Route::resource('event',EventController::class);
-
+Route::resource('product',ProductController::class);
 Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'fetchEmployeeData']);
 Route::resource('accountcategory',AccountcategoryController::class);
 Route::resource('coamainheaderlevel',CoaheadlevelController::class);
