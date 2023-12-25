@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Voucherentires extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+    public function coadata()
+    {
+        return $this->belongsTo(Coa::class,'coa_id');
+    }
+
+    public function branchdata()
+    {
+        return $this->belongsTo(Branch::class,'branch_id');
+    }
+    public function jvoucher(){
+        return $this->hasMany(Journalvoucher::class,'voucher_id');
+    }
 }

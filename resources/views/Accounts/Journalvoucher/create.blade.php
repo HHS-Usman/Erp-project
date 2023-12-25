@@ -25,13 +25,14 @@
             </nav>
         </div>
         <br><br><br>
-        <form action="" method="">     
+        <form action="{{ route('journalvoucher.store') }}" method="POST"> 
+            @csrf    
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">   
             <div class="row">
                 <div class="col-md-6">
                     <label for="journalNumber">Journal Voucher (JV) no#</label>
-                    <input type="text" class="form-control" id="journalNumber" name="journalNumber" value="JV-3654" readonly>
+                    <input type="text" class="form-control" disabled id="jsvdata" name="jvdata" value="{{ $jvdata }}" readonly>
                 </div>
     
                 <div class="col-md-6">
@@ -152,11 +153,14 @@
                     document.querySelectorAll('.credit').forEach(function (element) {
                         creditTotal += parseFloat(element.value) || 0;
                     });
-            
+                  
                     // Update total row
-                    document.getElementById('total').textContent = (debitTotal + creditTotal).toFixed(2);
                     document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
                     document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
+
+                    document.getElementById('totalDebit').value = debitTotal.toFixed(2);
+                    document.getElementById('totalCredit').value = creditTotal.toFixed(2);
+                   
                 }
             
                 // Attach event listeners to update totals when values change
@@ -175,9 +179,14 @@
                   </thead>
                   <tbody>
                     <tr>
-                        <td id="total"></td>
+                        <td></td>
                         <td id="debitTotal">0.00</td>
                         <td id="creditTotal">0.00</td>
+                    </tr>
+                    <tr>
+                        <td><input type="hidden" name="totalDebit" id="totalDebit" value="0.00"></td>
+                        <td></td>
+                        <td><input type="hidden" name="totalCredit" id="totalCredit" value="0.00"></td>
                     </tr>
                 </tbody>
                 </table>
@@ -215,7 +224,6 @@
         var pakisatndate = document.getElementById('documentdate');
         pakisatndate.value= formattedDate;
         console.log('Pakistan Standard Time:', formattedDate);
-            </script>
-    </section>
+</script>
 
 @endsection

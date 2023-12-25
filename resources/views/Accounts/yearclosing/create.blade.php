@@ -2,14 +2,6 @@
 @section('page-tab')
     Create Year Closing
 @endsection
-<?php
-use App\Models\Costcenteraccount;
-$selectedParentCoa = 'default';
-if ($selectedParentCoa == 'default') {
-    $levelcounts = Costcenteraccount::max('Level-1');
-    $costcentercode = $levelcounts + 1;
-}
-?>
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
         @if ($errors->any())
@@ -32,19 +24,19 @@ if ($selectedParentCoa == 'default') {
             </nav>
         </div>
         <br><br><br>
-        <form action="{{ route('vouchertype.store') }}" method="POST">
+        <form action="{{ route('yearclosing.store') }}" method="POST">
             @csrf
             <div class="row justify-content-center">
                 <div class="col-xs-6 col-sm-6 col-md-6">
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="date">Date</label>
+                            <strong>Date</strong>
                             <input type="date" class="form-control" id="date" name="date">
                         </div>
                         <div class="col-md-6">
-                            <label for="attachment">Attachment (multiple)</label>
-                            <input type="file" class="form-control-file" id="attachment" name="attachment[]" multiple>
+                            <strong for="attachment">Attachment (multiple)</strong>
+                            <input type="file" class="form-control-file" id="attachment" name="attachment" multiple>
                         </div>
                     </div>
             
@@ -52,31 +44,27 @@ if ($selectedParentCoa == 'default') {
                         <div class="col-md-6">
                             <strong>Select Chart of Account</strong>
                             <select id="chartofaccount" name="chartofaccount" class="form-control">
-                                <option class="options" value="Detail">Asset</option>
+                                @foreach ( $coas as $item )
+                                    <option value={{$item->id}}>{{$item->coaname}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="viewAttachment">View Attachment</label>
-                            <button type="button" class="btn btn-info form-control" onclick="viewAttachment()">View Attachment</button>
+                            <strong>View List</strong>
+                            <ul class="list-group" style="border: 1px solid rgb(29, 27, 27)">
+                                <li class="list-group-item">employe.pdf</li>
+                                <li class="list-group-item">Account.csv</li>
+                                <li class="list-group-item">customer.pdf</li>
+                              </ul>
                         </div>
                     </div>
-            
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            <strong for="description">Description</strong>
+                            <textarea class="form-control" id="description" name="description" ></textarea>
                         </div>
                     </div>
-            
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="attachmentList">Attachment List</label>
-                            <ul id="attachmentList" class="list-group">
-                                <!-- Display attachment list dynamically -->
-                            </ul>
-                        </div>
-                    </div>
-            
+                
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary">Save</button>

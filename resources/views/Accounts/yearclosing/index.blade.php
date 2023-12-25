@@ -52,7 +52,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+                      @foreach ($fyear as $fyear=>$item)
+                          <tr>
+                            <td>{{ $fyear + 1 }}</td>
+                            <td>{{ $item->yclosing_id }}</td>
+                            <td>{{ $item->coas->coaname}}</td>
+                            <td>{{ $item->clsoingyear}}</td>
+                            <td>{{ $item->description}}</td>
+                            <td>
+                                <a class="btn btn-info" href="">Show</a>
+                                <a class="btn btn-primary" href="">Edit</a>
+                                <button  class="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                      @endforeach
                      
                     </tbody>
                 </table>

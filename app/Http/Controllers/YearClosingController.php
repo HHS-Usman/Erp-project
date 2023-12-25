@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coa;
+use App\Models\YearClosing;
 use Illuminate\Http\Request;
 
 class YearClosingController extends Controller
@@ -14,7 +16,8 @@ class YearClosingController extends Controller
      */
     public function index()
     {
-        return view('Accounts.yearclosing.index');
+        $fyear = YearClosing::with('coas')->get();
+        return view('Accounts.yearclosing.index',compact('fyear'));
     }
 
     /**
@@ -24,7 +27,8 @@ class YearClosingController extends Controller
      */
     public function create()
     {
-        return view('Accounts.yearclosing.create');
+        $coas = Coa::where('operational', 1)->get();
+        return view('Accounts.yearclosing.create',compact('coas'));
     }
 
     /**
@@ -35,7 +39,12 @@ class YearClosingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        YearClosing::create([
+            'clsoingyear'=>request()->get('date'),
+            'description'=>request()->get('description'),
+            'coa_id'=>request()->get('chartofaccount'),
+        ]);
+        return redirect()->route('yearclosing.create')->with('success','Manage successfully');
     }
 
     /**
