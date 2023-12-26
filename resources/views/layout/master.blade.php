@@ -15,17 +15,17 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-  <!-- Include FullCalendar CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
+    <!-- Include FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -182,19 +182,19 @@
                                 <i class="fa fa fa-cogs" aria-hidden="true" style="color: black;"></i>&nbsp;SETUP
                             </a>
                             <div class="dropdown-menu" style="hover">
-                              
-                                    
-                               
+
+
+
                                 <div class="dropdown-submenu dropdown-item dropright ">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Organization Setup</a>
                                     <ul id="container" class="dropdown-menu dropdown-content"
                                         style="{display: block;}">
-                                        
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
-                                        
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
 
@@ -279,7 +279,7 @@
 
                                     </ul>
                                 </div>
-                          
+
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
@@ -428,8 +428,8 @@
                                                 Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('account-store.index') }}">Add Chart Account</a>
-                                    </li>
+                                                href="{{ route('account-store.index') }}">Add Chart Account</a>
+                                        </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level
                                             </a>
@@ -445,28 +445,46 @@
                                                 href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('vouchertype.create') }}">Create Voucher Type</a>
+                                                href="{{ route('vouchertype.create') }}">Create Voucher Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('journalvoucher.create') }}">Create Journal Voucher</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
+                                        </li>
+
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('yearclosing.create') }}">Create Closing Year</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('financailyear.create') }}">Create Financial Year</a>
                                     </li>
                                     <li class="p-0"><a class="dropdown-item"
-                                        href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
-                                </li>
-                                <li class="p-0"><a class="dropdown-item"
-                                    href="{{ route('journalvoucher.create') }}">Create Journal Voucher</a>
-                            </li>
-                            <li class="p-0"><a class="dropdown-item"
-                                href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
-                        </li>
-                                   
-                        <li class="p-0"><a class="dropdown-item"
-                            href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
-                    </li>
-                    <li class="p-0"><a class="dropdown-item"
-                        href="{{ route('yearclosing.create') }}">Create Closing Year</a>
-                </li>
-                <li class="p-0"><a class="dropdown-item"
-                    href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
-            </li>
-                                  </ul>
+                                            href="{{ route('financailyear.index') }}">Manage Financial Year</a>
+                                    </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Supplies Setup</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('accountcategory.create') }}">Create Account
+                                                Category
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"

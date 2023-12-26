@@ -30,4 +30,10 @@ class Coa extends Model
     {
         return $this->hasMany(Vouchertype::class, 'vouchertype_id');
     }
+    public function evoucher(){
+        return $this->hasMany(Voucherentires::class,'ventry_id');
+    }
+    public function closingyear(){
+        return $this->hasMany(YearClosing::class,'yclosing_id');
+    }
 }

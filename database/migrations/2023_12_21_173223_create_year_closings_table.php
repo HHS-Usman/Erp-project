@@ -14,7 +14,11 @@ class CreateYearClosingsTable extends Migration
     public function up()
     {
         Schema::create('year_closings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('yclosing_id');
+            $table->string('clsoingyear');
+            $table->string('description');
+            $table->unsignedBigInteger('coa_id');
+            $table->foreign('coa_id')->references('coa_id')->on('coas');
             $table->timestamps();
         });
     }

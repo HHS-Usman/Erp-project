@@ -14,11 +14,14 @@ class Vouchertype extends Model
 
     public function coadata()
     {
-        return $this->belongsTo(Coa::class, 'coa_id');
+        return $this->belongsTo(Coa::class,'coa_id');
     }
 
     public function branchdata()
     {
-        return $this->belongsTo(Branch::class, 'branch_id');
+        return $this->belongsTo(Branch::class,'branch_id');
+    }
+    public function jvoucher(){
+        return $this->hasMany(Journalvoucher::class,'voucher_id');
     }
 }

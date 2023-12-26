@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Branch;
-use App\Models\Coa;
-use App\Models\Company;
-use App\Models\Journalvoucher;
-use App\Models\Vouchertype;
+use App\Models\Financailyear;
 use Illuminate\Http\Request;
 
-class JournalvoucherController extends Controller
+class FinancialyearController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +15,8 @@ class JournalvoucherController extends Controller
      */
     public function index()
     {
-        $jvoucher = Journalvoucher::with('branch')->latest()->paginate();
-        return view('Accounts.Journalvoucher.index',compact('jvoucher'));
+        $financialyear = Financailyear::all();
+        return view('Accounts.financialyear.index',compact('financialyear'));
     }
 
     /**
@@ -30,13 +26,7 @@ class JournalvoucherController extends Controller
      */
     public function create()
     {
-        $voucherprefix = Vouchertype::where('voucherprefix', 'JV')->value('voucherprefix');
-        $vtypeCount = Journalvoucher::where('v_type',1)->count();
-        $jvdata = $voucherprefix .'-'. $vtypeCount+1;
-        $branch = Branch::all();
-        $company = Company::all();
-        $coas = Coa::where('operational', 1)->get();
-        return view('Accounts.Journalvoucher.create', compact('branch', 'coas', 'jvdata','company'));
+        return view('Accounts.financialyear.create');
     }
 
     /**
@@ -47,23 +37,13 @@ class JournalvoucherController extends Controller
      */
     public function store(Request $request)
     {
-        $vtypeCount = Journalvoucher::where('v_type',1)->count();
-        $vtypeCount = $vtypeCount+1;
-        Journalvoucher::create([
-            'v_docNo' => $vtypeCount,
-            'v_type' => 1,
-            'memo' => $request->input('bulkMemo'),
-            'doc_create_date' => $request->input('jvdate'),
-            'debit_total' => $request->input('totalDebit'),
-            'credit_total' => $request->input('totalCredit'),
-            'jvdate' => $request->input('jvdate'),
-            'tvoucher_id' => 1,
-            'branch_id' => $request->input('branch'),
-            'company_id' => 1,
-        ]);
+        Financailyear::create([ 
+            'fiscalyear_title' => request()->get('fiscalyear'),
+            'from_date' => request()->get('fromdate'),
+            'to_date' => request()->get('todate'),
+            ]);
             //redirect the user and send friendly message
-            return redirect()->route('journalvoucher.create')->with('success', 'Journal Voucher made successfully');
-
+            return redirect()->route('financailyear.index')->with('success','Finanacial year made  successfully ');
     }
 
     /**

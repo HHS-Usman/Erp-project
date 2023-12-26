@@ -61,6 +61,7 @@ use App\Http\Controllers\Security\User_role_controller;
 use App\Http\Controllers\Security\Usercontroller;
 use App\Http\Controllers\Product\Productcontroller;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\FinancialyearController;
 use App\Http\Controllers\JournalvoucherController;
 use App\Http\Controllers\VoucherentriesController;
 use App\Http\Controllers\VouchertypeController;
@@ -146,6 +147,7 @@ Route::resource('coamainheaderlevel',CoaheadlevelController::class);
 Route::resource('vouchertype',VouchertypeController::class);
 Route::resource('journalvoucher',JournalvoucherController::class);
 Route::resource('voucherentry',VoucherentriesController::class);
+Route::resource('financailyear',FinancialyearController::class);
 Route::resource('yearclosing',YearClosingController::class);
 
 Route::resource('coa',CoaController::class);

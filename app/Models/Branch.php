@@ -20,4 +20,10 @@ class Branch extends Model
     {
         return $this->hasMany(Vouchertype::class, 'branch_id');
     }
+    public function jvoucher(){
+        return $this->hasMany(Journalvoucher::class,'voucher_id');
+    }
+    public function evoucher(){
+        return $this->hasMany(Voucherentires::class,'ventry_id');
+    }
 }

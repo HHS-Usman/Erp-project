@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
+use App\Models\Coa;
+use App\Models\Company;
+use App\Models\Voucherentires;
+use App\Models\Vouchertype;
 use Illuminate\Http\Request;
 
 class VoucherentriesController extends Controller
@@ -24,7 +29,13 @@ class VoucherentriesController extends Controller
      */
     public function create()
     {
-        return view('Accounts.voucherenteries.create');
+        $voucherprefix = Vouchertype::where('voucherprefix', 'EV')->value('voucherprefix');
+        $vtypeCount = Voucherentires::where('v_type',2)->count();
+        $jvdata = $voucherprefix .'-'. $vtypeCount+1;
+        $branch = Branch::all();
+        $company = Company::all();
+        $coas = Coa::where('operational', 1)->get();
+        return view('Accounts.voucherenteries.create', compact('branch', 'coas', 'jvdata','company'));
     }
 
     /**
@@ -35,7 +46,21 @@ class VoucherentriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vtypeCount = Voucherentires::where('v_type',2)->count();
+        $vtypeCount = $vtypeCount+1;
+        Voucherentires::create([
+            'v_docNo' => $vtypeCount,
+            'v_type' => 2,
+            'memo' => $request->input('bulkMemo'),
+            'doc_create_date' => $request->input('jvdate'),
+            'debit_total' => $request->input('totalDebit'),
+            'credit_total' => $request->input('totalCredit'),
+            'jvdate' => $request->input('jvdate'),
+            'tvoucher_id' => 1,
+            'branch_id' => $request->input('branch'),
+            'company_id' => 1,
+        ]);
+        return redirect()->route('voucherentry.create')->with('success','Manage successfully');
     }
 
     /**

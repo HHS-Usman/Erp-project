@@ -46,19 +46,34 @@
                             <th scope="col">S.No#</th>
                             <th scope="col">System ID</th>
                             <th scope="col">Doc No#</th>
-                            <th scope="col">Doc-Date</th>
-                            <th scope="col">Doc-Creation Date</th>
+                            <th scope="col">JV-Date</th>
                             <th scope="col">Document Amount</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Description</th>
-                            {{-- <th scope="col">Transaction Amount</th> --}}
-                            {{-- <th scope="col">No of Transaction</th> --}}
+                            <th scope="col">Total Debit </th>
+                            <th scope="col">Total Credit</th>
+                            <th scope="col">Branch Name</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                      
-                     
+                        @foreach ($jvoucher as $voucher =>$item )
+                        <tr>
+                          <th>{{ $voucher + 1 }}</th>
+                          <th >{{ $item->voucher_id }}</th>
+                          <td>JV-{{ $item->v_docNo}}</td>
+                          <td>{{ $item->doc_create_date }}</td>
+                          <td></td>
+                          <td>{{ $item ->memo }}</td>
+                          <td>{{ $item ->debit_total }}</td>
+                          <td>{{ $item ->credit_total}}</td>
+                          <td>{{ $item->branch->name}}</td>
+                          <td>
+                            <a class="btn btn-info" href="">Show</a>
+                            <a class="btn btn-primary" href="">Edit</a>
+                            <button  class="btn btn-danger">Delete</button>
+                        </td>
+                        </tr>
+                        @endforeach 
                     </tbody>
                 </table>
             </div>
