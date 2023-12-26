@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use  App\Models\Classification;
 class ClassificationController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class ClassificationController extends Controller
      */
     public function index()
     {
-        return vieW('productsetup.classification.index');
+        $classifications =Classification::latest()->paginate();
+        return vieW('productsetup.classification.index',compact('classifications'))->with(request()->input('page'));
     }
 
     /**
@@ -35,7 +36,19 @@ class ClassificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'classification'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new product in database
+         Classification::create([ 
+            'classification' => request()->get('classification'),
+            'classification_code' => request()->get('classification_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('classification.index')->with('success','Manage successfully');
     }
 
     /**
@@ -57,7 +70,8 @@ class ClassificationController extends Controller
      */
     public function edit($id)
     {
-        return view('productsetup.classification.edit');
+        $classification = Classification::find($id);
+        return view('productsetup.classification.edit',compact('classification'));
     }
 
     /**
@@ -69,7 +83,14 @@ class ClassificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $classification = Classification::findOrFail($id);
+        $classification->update([ 
+            'classification' => request()->get('classification'),
+            'classification_code' => request()->get('classification_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            ]);
+            return redirect()->route('classification.index')->with('success','Manage successfully');
     }
 
     /**

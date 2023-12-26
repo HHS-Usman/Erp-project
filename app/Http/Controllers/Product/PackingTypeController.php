@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Packing_Type;
 class PackingTypeController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class PackingTypeController extends Controller
      */
     public function index()
     {
-        return vieW('productsetup.packingtype.index');
+        $packingtypes =Packing_Type::latest()->paginate();
+        return vieW('productsetup.packingtype.index',compact('packingtypes'))->with(request()->input('page'));
     }
 
     /**
@@ -25,6 +26,7 @@ class PackingTypeController extends Controller
     public function create()
     {
         return vieW('productsetup.packingtype.create');
+
     }
 
     /**
@@ -35,7 +37,19 @@ class PackingTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'packing_type'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new product in database
+         Packing_Type::create([ 
+            'packing_type' => request()->get('packing_type'),
+            'packing_type_code' => request()->get('packing_type_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('packing_type.index')->with('success','Manage successfully');
     }
 
     /**
@@ -69,7 +83,14 @@ class PackingTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Packing_Type = Packing_Type::findOrFail($id);
+        $Packing_Type->update([ 
+            'packing_type' => request()->get('packing_type'),
+            'packing_type_code' => request()->get('packing_type_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            ]);        
+        return redirect()->route('packing_type.index')->with('success','Manage successfully');    
     }
 
     /**

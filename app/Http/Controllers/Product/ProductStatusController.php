@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Product_Status;
 class ProductStatusController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class ProductStatusController extends Controller
      */
     public function index()
     {
-        return view('productsetup.productstatus.index');
+        $productstatuses =Product_Status::latest()->paginate();
+        return view('productsetup.productstatus.index',compact('productstatuses'))->with(request()->input('page'));      
     }
 
     /**
@@ -35,7 +36,19 @@ class ProductStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_status'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new product in database
+         Product_Status::create([ 
+            'product_status' => request()->get('product_status'),
+            'product_status_code' => request()->get('product_status_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('productstatus.index')->with('success','Manage successfully');
     }
 
     /**
@@ -69,7 +82,16 @@ class ProductStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_status = Product_status::findOrFail($id);
+       
+         //create a new product in database
+         $product_status->update([ 
+            'product_status' => request()->get('product_status'),
+            'product_status_code' => request()->get('product_status_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            ]);
+            return redirect()->route('productstatus.index')->with('success','Manage successfully');
     }
 
     /**

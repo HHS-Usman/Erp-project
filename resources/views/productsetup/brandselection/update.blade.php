@@ -26,7 +26,7 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('brandselection.update',$brandselection) }}" method="POST">        
+            <form action="{{ route('brand_selection.update',$brandselection) }}" method="POST">        
                 @csrf
                 @method('PUT')
                     <div class="row justify-content-center">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class Product2ndsubcategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+       return view('product.product1sbctgry.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-       return view('productsetup.product.create');
+        
+       return view('product.product1sbctgry.create');
     }
 
     /**
@@ -57,7 +58,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('productsetup.product.create');
+        
+       return view('product.product1sbctgry.edit', compact());
     }
 
     /**
@@ -72,7 +74,7 @@ class ProductController extends Controller
         //
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

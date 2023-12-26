@@ -198,9 +198,17 @@
                         </div>
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
-                        <div class="form-group  text-end">
+                        <div class="form-group ">
+                          <div class="form-group d-flex">
+                            <div class="form-group d-flex">
+                              <label for="Product">Product Barcode</label>
+                            </div> 
+                            <div> 
+                               <input type="text"  class="form-control" name="Product_code" value=""> 
+                            </div> 
+                           
+                          </div> 
                           
-                          <button type="button" class="btn btn-primary text-end" style="margin: 1px;" >button</button>
                         </div>
                         
                         <div class="form-group">
@@ -215,9 +223,10 @@
                           </div> 
                         </div>   
                     </div> 
+                    
                     <div class="container d-flex justify-content-center align-items-center">
-                      <div class="form-group">
-                        
+                      <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary text-end" style="margin: 1px;" >button</button>
                       </div>
                       
                       <div class="form-group">
@@ -230,16 +239,36 @@
                           </div> 
                          
                         </div> 
+ 
+                      </div>  
+                    </div>
+                    <div class="container d-flex justify-content-center align-items-center">
+                      <div class="form-group d-flex">
+                        <div class="form-group">
+                          <label for="Product">Product UOM</label>
+                        </div>
+                        <div class="form-group">
+                          {{-- country --}}   
+                          <select name="" id="" class="form-select">
+                            <option value="01">1</option>
+                            <option value="02">2</option>  
+                            <option value="03">3</option>  
+                          </select> 
+                          
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
                         <div class="form-group d-flex">
                           <div class="form-group d-flex">
-                            <label for="Product">Max Type</label>
+                            <label for="Product">Min Type</label>
                           </div> 
                           <div> 
                              <input type="text"  class="form-control" name="Product_code" value=""> 
                           </div> 
                          
                         </div> 
-                       
+ 
                       </div>  
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
