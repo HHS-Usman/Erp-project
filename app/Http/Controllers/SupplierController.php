@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Accountcategory;
 use App\Models\Bank;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Province;
+use App\Models\SupplierCategory;
+use App\Models\Suppliertype;
 use Illuminate\Http\Request;
 
-class BankController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +21,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $bank = Bank::all();
-        return view('generalsetup.bank.index',compact('bank'));
+        //
     }
 
     /**
@@ -26,7 +31,13 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('generalsetup.bank.create');
+        $bank = Bank::all();
+        $scategory = SupplierCategory::all();
+        $stype = Suppliertype::all();
+        $province = Province::all();
+        $country = Country::all();
+        $city = City::all();
+        return view('SupplierSetup.supplier.create',compact('province','country','city','stype','scategory','bank'));
     }
 
     /**
@@ -37,17 +48,7 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'Bank'=>'required',
-            'is_active' => 'integer|in:0,1'
-        ]);
-        Bank::create([
-            'Bank'=>request()->get('Bank'),
-            'bank_code'=>request()->get('bankecode'),
-            'detail'=>request()->get('detail'),
-            'is_active' => request()->get('is_active', 0),
-        ]);
-        return redirect()->route('Bank.index')->with('success','Create successfully');
+        //
     }
 
     /**

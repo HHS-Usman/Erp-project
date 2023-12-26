@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bank;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
-class BankController extends Controller
+class ProvinceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $bank = Bank::all();
-        return view('generalsetup.bank.index',compact('bank'));
+        $province = Province::all();
+        return view('generalsetup.province.index',compact('province'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('generalsetup.bank.create');
+        return view('generalsetup.province.create');
     }
 
     /**
@@ -38,16 +38,16 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Bank'=>'required',
+            'province'=>'required',
             'is_active' => 'integer|in:0,1'
         ]);
-        Bank::create([
-            'Bank'=>request()->get('Bank'),
-            'bank_code'=>request()->get('bankecode'),
+        Province::create([
+            'province'=>request()->get('province'),
+            'province_code'=>request()->get('province_code'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-        return redirect()->route('Bank.index')->with('success','Create successfully');
+        return redirect()->route('province.create')->with('success','Create successfully');
     }
 
     /**
