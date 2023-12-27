@@ -49,7 +49,7 @@ class PackingTypeController extends Controller
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
             ]);
-            return redirect()->route('packing_type.index')->with('success','Manage successfully');
+            return redirect()->route('packingtype.index')->with('success','Manage successfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class PackingTypeController extends Controller
             'detail' => request()->get('detail'),
             'is_active'     => $request->has('is_active') ? 1 : 0, 
             ]);        
-        return redirect()->route('packing_type.index')->with('success','Manage successfully');    
+        return redirect()->route('packingtype.index')->with('success','Manage successfully');    
     }
 
     /**

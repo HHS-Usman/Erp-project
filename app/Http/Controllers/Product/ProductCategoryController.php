@@ -40,7 +40,7 @@ class ProductCategoryController extends Controller
         $request->validate([
             'product_category'=>'required',
             'is_active' => 'integer|in:0,1'
-
+            
         ]);
          //create a new product in database
          Product_category::create([ 

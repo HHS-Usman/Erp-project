@@ -182,6 +182,7 @@ Route::resource('productsupplier',ProductSupplierController::class);
 Route::resource('producttype',ProductTypeController::class);
 Route::resource('stocktype',StockTypeController::class);
 Route::resource('uom',UomController::class);
+Route::resource('packingtype',PackingTypeController::class);
 Route::resource('coa',CoaController::class);
 Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);
