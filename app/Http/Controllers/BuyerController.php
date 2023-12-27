@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Accountcategory;
 use App\Models\Bank;
+use App\Models\Buyer;
 use App\Models\BuyerCategory;
+use App\Models\Buyertype;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Province;
@@ -22,7 +24,8 @@ class BuyerController extends Controller
      */
     public function index()
     {
-        //
+        $buyer = Buyer::all();
+        return view('buyersetup.buyer.index',compact('buyer'));
     }
 
     /**
@@ -32,13 +35,14 @@ class BuyerController extends Controller
      */
     public function create()
     {
+        $maxID = Buyer::max('buyer_id')+1;
         $bank = Bank::all();
         $buyercetegory = BuyerCategory::all();
-        $stype = Suppliertype::all();
+        $btype =Buyertype::all();
         $province = Province::all();
         $country = Country::all();
         $city = City::all();
-        return view('buyersetup.buyer.create',compact('province','country','city','stype','buyercetegory','bank'));
+        return view('buyersetup.buyer.create',compact('province','country','city','btype','buyercetegory','bank','maxID'));
     }
 
     /**
@@ -49,7 +53,48 @@ class BuyerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        Buyer::create([
+            'customer_code'=>request()->get('customcode'),
+            'email'=>request()->get('email'),
+            'companyname'=>request()->get('companyname'),
+            'phone_no1'=>request()->get('phoneone'),
+            'phone_no2'=>request()->get('phonetwo'),
+            'address'=>request()->get('adress'),
+            'city'=>request()->get('city'),
+            'cell_no'=>request()->get('cellno'),
+            'province'=>request()->get('province'),
+            'contactperson'=>request()->get('contactperson'),
+            'zipcode'=>request()->get('zipcode'),
+            'contactpersoncell_no'=>request()->get('pcellno'),
+            'country'=>request()->get('country'),
+            'contactperson_email'=>request()->get('contactemail'),
+            'buyertype'=>request()->get('buyertype'),
+            'buyercategory'=>request()->get('buyercategory'),
+            'creditdays'=>request()->get('creditdays'),
+            'creditlimit'=>request()->get('creditlimit'),
+            'buyerdiscount'=>request()->get('buyerdiscount'),
+            'buyeradvance'=>request()->get('buyeradvance'),
+            'suplierlocality'=>request()->get('buyerlocality'),
+            'shiping_addres'=>request()->get('shippingaddress'),
+            'shiping_city'=>request()->get('shippngcity'),
+            'shippingprovince'=>request()->get('shippingprovince'),
+            'shippingcountry'=>request()->get('shippingcountry'),
+            'title'=>request()->get('title'),
+            'contactpersonemail'=>request()->get('contactpersonemail'),
+            'dispnote_invoice'=>request()->get('dinvoice'),
+            'st_registration_no'=>request()->get('registration_st'),
+            'st_invoicenote'=>request()->get('invoinceterm'),
+            'withouttax_perc_age'=>request()->get('Withholding'),
+            'bankname'=>request()->get('bank'),
+            'account_title'=>request()->get('accounttext'),
+            'accountno'=>request()->get('accontno'),
+            'branchcode'=>request()->get('branchcode'),
+            'branchname'=>request()->get('bank'),
+            'openingbalance'=>request()->get('openingbalance'),
+            'dateopening'=>request()->get('openingdate'),
+        ]);
+        return redirect()->route('buyer.index')->with('success','Create successfully');
     }
 
     /**

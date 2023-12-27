@@ -496,6 +496,11 @@
                                             </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('supplier.index') }}">
+                                            Manage Supplier
+                                        </a>
+                                    </li>
+                                        <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('scategory.create') }}">
                                                 Suplier Category
                                             </a>
@@ -524,6 +529,11 @@
                                                     Create Buyer
                                                 </a>
                                             </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyer.index') }}">
+                                                Manage Buyer
+                                            </a>
+                                        </li>
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('buyercategory.create') }}">
                                                    Create Buyer Category
