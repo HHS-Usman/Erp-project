@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Unit_selection;
 class UomController extends Controller
 {
     /**
@@ -12,74 +12,98 @@ class UomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return vieW('productsetup.uom.index');
-    }
+   public function index()
+   {
+       $uoms =Unit_Selection::latest()->paginate();
+       return view('productsetup.uom.index',compact('uoms'));
+       
+   }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return vieW('productsetup.uom.create');
-    }
+   /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function create()
+   {
+       return view('productsetup.uom.create');
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function store(Request $request)
+   {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+       $request->validate([
+           'uom'=>'required',
+           'is_active' => 'integer|in:0,1'
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return vieW('productsetup.uom.edit');
-    }
+       ]);
+        //create a new stock in database
+        Unit_Selection::create([ 
+           'uom' => request()->get('uom'),
+           'uom_code' => request()->get('uom_code'),
+           'detail' => request()->get('detail'),
+           'is_active' => request()->get('is_active', 0),
+           ]);
+           return redirect()->route('uom.index')->with('success','Manage successfully');
+   }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   /**
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+   public function show($id)
+   {
+       //
+   }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+   public function edit($id)
+   {
+       $uom = Unit_Selection::find($id);
+       return view('stocksetup.uom.edit',compact('uom'));
+   }
+
+   /**
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+   public function update(Request $request, $id)
+   {
+       $uom = Unit_Selection::findOrFail($id);
+        //create a new stock in database
+       $uom->update([ 
+           'uom' => request()->get('uom'),
+           'uom_code' => request()->get('uom_code'),
+           'detail' => request()->get('detail'),
+           'is_active'     => $request->has('is_active') ? 1 : 0, 
+           ]);
+       return redirect()->route('uom.index')->with('success','Manage successfully');    
+   }
+
+   /**
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+   public function destroy($id)
+   {
+       //
+   }
 }

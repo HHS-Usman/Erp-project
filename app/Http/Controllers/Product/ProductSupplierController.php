@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Product_supplier;
 class ProductSupplierController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class ProductSupplierController extends Controller
      */
     public function index()
     {
-        return vieW('productsetup.productsupplier.index');
+        $productsuppliers =Product_supplier::latest()->paginate();
+        return vieW('productsetup.productsupplier.index',compact('productsuppliers'));
     }
 
     /**
@@ -24,6 +25,7 @@ class ProductSupplierController extends Controller
      */
     public function create()
     {
+
         return vieW('productsetup.productsupplier.create');
     }
 
@@ -35,7 +37,19 @@ class ProductSupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_supplier'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new product in database
+         Product_Supplier::create([ 
+            'product_supplier' => request()->get('product_supplier'),
+            'product_supplier_code' => request()->get('product_supplier_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('productsupplier.index')->with('success','Manage successfully');
     }
 
     /**
@@ -57,7 +71,8 @@ class ProductSupplierController extends Controller
      */
     public function edit($id)
     {
-        return vieW('productsetup.productsupplier.edit');
+        $product_supplier = Product_supplier::find($id);
+        return vieW('productsetup.productsupplier.edit',compaCT('product_supplier'));
     }
 
     /**
@@ -69,7 +84,16 @@ class ProductSupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_category = Product_category::findOrFail($id);
+       
+         //create a new product in database
+         $product_category->update([ 
+            'product_category' => request()->get('product_category'),
+            'product_category_code' => request()->get('product_category_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            ]);
+            return redirect()->route('productcategory.index')->with('success','Manage successfully');
     }
 
     /**

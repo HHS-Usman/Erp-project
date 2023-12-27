@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Stock_Type;
 class StockTypeController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class StockTypeController extends Controller
      */
     public function index()
     {
-        return vieW('productsetup.stocktype.index');
+        $stocktypes =Stock_Type::latest()->paginate();
+        return view('stocksetup.stocktype.index',compact('stocktypes'));
+        
     }
 
     /**
@@ -24,7 +26,7 @@ class StockTypeController extends Controller
      */
     public function create()
     {
-        return vieW('productsetup.stocktype.create');
+        return view('stocksetup.stocktype.create');
     }
 
     /**
@@ -35,7 +37,20 @@ class StockTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'stock_type'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new stock in database
+         Stock_Type::create([ 
+            'stock_type' => request()->get('stock_type'),
+            'stock_type_code' => request()->get('stock_type_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('stocktype.index')->with('success','Manage successfully');
     }
 
     /**
@@ -57,7 +72,8 @@ class StockTypeController extends Controller
      */
     public function edit($id)
     {
-        return vieW('productsetup.stocktype.edit');
+        $stock_type = Stock_Type::find($id);
+        return vieW('stocksetup.stocktype.edit');
     }
 
     /**
@@ -69,7 +85,15 @@ class StockTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $stock_type = Stock_Type::findOrFail($id);
+         //create a new stock in database
+        $stock_type->update([ 
+            'stock_type' => request()->get('stock_type'),
+            'stock_type_code' => request()->get('stock_type_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            ]);
+        return redirect()->route('stock_type.index')->with('success','Manage successfully');    
     }
 
     /**

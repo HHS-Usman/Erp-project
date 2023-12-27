@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\role_access;
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -53,6 +55,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'roles.*' => 'exists:roles,name',
         ]);
     }
 
@@ -64,10 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        // $user->assignRole($data['roles']);
+        // $user->givePermissionTo($data['permissions']);
+
+        return $user;
     }
 }

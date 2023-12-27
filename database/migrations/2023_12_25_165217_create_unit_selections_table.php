@@ -15,7 +15,14 @@ class CreateUnitSelectionsTable extends Migration
     {
         Schema::create('unit_selections', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->string('uom');
+            $table->string('uom_code');
+            $table->string('detail');
+            $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });
     }

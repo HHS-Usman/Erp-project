@@ -344,19 +344,9 @@
                                                 href="{{ route('city.create') }}">Create City</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.index') }}">Manage City</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('province.create') }}">Create Province</a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('province.index') }}">Manage Province</a>
-                                        </li>
+                                       
 
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('Bank.create') }}">Create Bank</a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('Bank.index') }}">Manage Bank</a>
-                                        </li>
+                                       
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -485,7 +475,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="dropdown-submenu dropdown-item dropright">
+                                {{-- <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Supplies Setup</a>
@@ -516,10 +506,10 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
                                         </li>
-                                    </ul>
+                                    </ul> 
                                    
-                                </div>
-                                <div class="dropdown-submenu dropdown-item dropright">
+                                </div>--}}
+                                {{-- <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Buyer Setup</a>
@@ -552,7 +542,7 @@
                                             </li>
                                         </ul>
                                    
-                                </div>
+                                </div> --}}
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"

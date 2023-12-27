@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Product_Activity;
 class ProductActivityController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class ProductActivityController extends Controller
      */
     public function index()
     {
-        return vieW('productsetup.productactivity.index');
+        $productactivities =Product_Activity::latest()->paginate();
+        return vieW('productsetup.productactivity.index',compact('productactivities'))->with(request()->input('page'));
     }
 
     /**
@@ -35,7 +36,19 @@ class ProductActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_activity'=>'required',
+            'is_active' => 'integer|in:0,1'
+
+        ]);
+         //create a new product in database
+         Product_Activity::create([ 
+            'product_activity' => request()->get('product_activity'),
+            'product_activity_code' => request()->get('product_activity_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+            return redirect()->route('packingactivity.index')->with('success','Manage successfully');
     }
 
     /**
@@ -57,7 +70,8 @@ class ProductActivityController extends Controller
      */
     public function edit($id)
     {
-        return vieW('productsetup.productactivity.edit');
+        $productactivity = Product_Activity::find($id);
+        return view('productsetup.productactivity.edit');
     }
 
     /**
@@ -69,8 +83,17 @@ class ProductActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_activity = Product_Activity::findOrFail($id);
+         //create a new product in database
+         $product_activity->update([ 
+            'packing_type' => request()->get('packing_type'),
+            'packing_type_code' => request()->get('packing_type_code'),
+            'detail' => request()->get('detail'),
+            'is_active'     => $request->has('is_active') ? 1 : 0, 
+        ]);
+        return redirect()->route('packing_type.index')->with('success','Manage successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.

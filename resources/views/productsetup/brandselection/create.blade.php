@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Designation
+    Create Brand Selection
 @endsection    
 @section('content')
 
@@ -17,26 +17,26 @@
             </div>
         @endif
             <div class="pagetitle" style="margin-left: 20px;">
-                <h1>Create Designation</h1>
+                <h1>Create Brand Selection</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Designation</a></li>
+                    <li class="breadcrumb-item active"><a> Create Brand Selection</a></li>
                 </ol>
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('brandselection.store') }}" method="POST">        
+            <form action="{{ route('brand_selection.store') }}" method="POST">        
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <strong>Designation Code</strong>
-                                <input type="text" name="designation_code" id="designation_code" class="form-control" placeholder="Designation Code">
+                                <strong>Brand Selection Code</strong>
+                                <input type="text" name="brand_selection_code" id="Brand Selection_code" class="form-control" placeholder="Brand Selection Code">
                             </div>
                             <div class="form-group">
-                                <strong>Designation<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="designation" id="designation" class="form-control" placeholder="Designation" required>
+                                <strong>brand_selection<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="brand_selection" id="Brand Selection" class="form-control" placeholder="Brand Selection" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
