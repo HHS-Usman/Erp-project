@@ -344,8 +344,19 @@
                                                 href="{{ route('city.create') }}">Create City</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.index') }}">Manage City</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('province.create') }}">Create Province</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('province.index') }}">Manage Province</a>
+                                        </li>
 
-
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('Bank.create') }}">Create Bank</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('Bank.index') }}">Manage Bank</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -467,11 +478,11 @@
                                                 href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('financailyear.create') }}">Create Financial Year</a>
-                                    </li>
-                                    <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('financailyear.index') }}">Manage Financial Year</a>
-                                    </li>
+                                                href="{{ route('financailyear.create') }}">Create Financial Year</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('financailyear.index') }}">Manage Financial Year</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -480,11 +491,57 @@
                                         aria-expanded="false">Supplies Setup</a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('accountcategory.create') }}">Create Account
-                                                Category
+                                                href="{{ route('supplier.create') }}">
+                                                Create Supplier
                                             </a>
                                         </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('scategory.create') }}">
+                                                Suplier Category
+                                            </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('scategory.index') }}">
+                                                Suplier Category Manage
+                                            </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('suppliertype.create') }}">Create Supplier Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
+                                        </li>
                                     </ul>
+                                   
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Buyer Setup</a>
+                                        <ul id="container" class="dropdown-menu dropdown-content">
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('buyer.create') }}">
+                                                    Create Buyer
+                                                </a>
+                                            </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('buyercategory.create') }}">
+                                                   Create Buyer Category
+                                                </a>
+                                            </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('scategory.index') }}">
+                                                    Manage buyer Category 
+                                                </a>
+                                            </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('buyertype.create') }}">Create Buyer Type</a>
+                                            </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('buyertype.index') }}">Manage Buyer Type</a>
+                                            </li>
+                                        </ul>
+                                   
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
@@ -779,7 +836,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li class="message-item">
                                 <a href="#">
                                     <img src="/assets/img/messages-3.jpg" alt="" class="rounded-circle">
@@ -800,8 +856,6 @@
 
                         </ul><!-- End Messages Dropdown Items -->
                     </li>
-
-
                     <li class="nav-item dropdown">
                         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                             <i class="bi bi-journal-bookmark"></i>
@@ -836,7 +890,6 @@
                                 }
                             </style>
                         </a>
-
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                             <li class="dropdown-header">
                                 You have 3 new messages
@@ -846,7 +899,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li class="message-item">
                                 <a href="#">
                                     <img src="/assets/img/messages-1.jpg" alt="" class="rounded-circle">
@@ -860,7 +912,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li class="message-item">
                                 <a href="#">
                                     <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
@@ -874,7 +925,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li class="message-item">
                                 <a href="#">
                                     <img src="/assets/img/messages-3.jpg" alt="" class="rounded-circle">

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bank;
+use App\Models\BuyerCategory;
 use Illuminate\Http\Request;
 
-class BankController extends Controller
+class BuyercategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $bank = Bank::all();
-        return view('generalsetup.bank.index',compact('bank'));
+        $buyerCAtegory = BuyerCategory::all();
+        return view('buyersetup.buyercategory.create',compact('buyerCAtegory'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('generalsetup.bank.create');
+        return view('buyersetup.buyercategory.create');
     }
 
     /**
@@ -38,16 +38,17 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Bank'=>'required',
+            'buyercategory'=>'required',
             'is_active' => 'integer|in:0,1'
         ]);
-        Bank::create([
-            'Bank'=>request()->get('Bank'),
-            'bank_code'=>request()->get('bankecode'),
+        BuyerCategory::create([
+            'buyercategory'=>request()->get('buyercategory'),
+            'buyercategory_Code'=>request()->get('buyercategorycode'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-        return redirect()->route('Bank.index')->with('success','Create successfully');
+
+        return redirect()->route('buyercategory.index')->with('success','Create successfully');
     }
 
     /**
