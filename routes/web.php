@@ -64,6 +64,7 @@ use App\Http\Controllers\Product\Productcontroller;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BuyercategoryController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\BuyerpaymentController;
 use App\Http\Controllers\BuyertypeController;
 use App\Http\Controllers\FinancialyearController;
 use App\Http\Controllers\JournalvoucherController;
@@ -86,7 +87,9 @@ use App\Http\Controllers\Product\ProductSupplierController;
 use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
+use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
+use App\Models\SupplierCategory;
 use App\Models\Suppliertype;
 use App\Models\Vouchertype;
 use App\Models\YearClosing;
@@ -184,6 +187,16 @@ Route::resource('stocktype',StockTypeController::class);
 Route::resource('uom',UomController::class);
 Route::resource('packingtype',PackingTypeController::class);
 Route::resource('coa',CoaController::class);
+Route::resource('buyer',BuyerController::class);
+Route::resource('buyercategory',BuyercategoryController::class);
+Route::resource('buyertype',BuyertypeController::class);
+Route::resource('scategory',SupplierCategoryController::class);
+Route::resource('suppliertype',SuppliertypeController::class);
+Route::resource('buyerpayment',BuyerpaymentController::class);
+
+
+
+
 Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);

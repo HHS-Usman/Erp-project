@@ -475,7 +475,20 @@
                                         </li>
                                     </ul>
                                 </div>
-                                {{-- <div class="dropdown-submenu dropdown-item dropright">
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Trajectory</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyerpayment.create') }}">
+                                                Create Buyer Payment
+                                            </a>
+                                        </li>
+                                    </ul> 
+                                   
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Supplies Setup</a>
@@ -508,8 +521,8 @@
                                         </li>
                                     </ul> 
                                    
-                                </div>--}}
-                                {{-- <div class="dropdown-submenu dropdown-item dropright">
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Buyer Setup</a>
@@ -530,7 +543,7 @@
                                                 </a>
                                             </li>
                                             <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('scategory.index') }}">
+                                                    href="{{ route('buyercategory.index') }}">
                                                     Manage buyer Category 
                                                 </a>
                                             </li>
@@ -542,7 +555,7 @@
                                             </li>
                                         </ul>
                                    
-                                </div> --}}
+                                </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
