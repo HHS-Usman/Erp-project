@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use File;
 class ProductController extends Controller
 {
     /**
@@ -35,52 +36,45 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-         // 'author_img' => 'required|mimes:png,jpg,jpeg,gif|max:2048';
-         //  $fileName = null;
-    	 // if (request()->hasFile('author_img')) 
-    	 // {
          
-           $request->validate([
-    		
-                'name' => 'required',
-                'expiry' => 'integer|in:No,Yes',
-                'expiry_n' => 'integer|in:No,Yes',
-                'service' => 'integer|in:No,Yes',
-                'fixedasset' => 'integer|in:No,Yes',
-                'general_product' => 'integer|in:No,Yes',
-                'product_active' => 'integer|in:No,Yes',
-                'pqc_required' => 'integer|in:No,Yes',
-                'other_unit' => 'nullable|numeric',
-                'blk_pkg_flt' => 'nullable|numeric',
-                'reorder_type' => 'nullable|numeric',
-                'min_qty' => 'nullable|numeric',
-                'max_qty' => 'nullable|numeric',
-                'price_per_unit' => 'nullable|numeric',
-                'dis_percentage' => 'nullable|numeric',
-                'dis_value' => 'nullable|numeric',
-                'dis_afterdis' => 'nullable|numeric',
-                'sale_price' => 'nullable|numeric',
-                'float' => 'nullable|numeric',
-                'float_value' => 'nullable|numeric',
-                'product_profit' => 'nullable|numeric',
-                'product_mrp' => 'nullable|numeric',
-                'fur_itm_tax' => 'nullable|numeric',
-                'fur_item_tax' => 'nullable|numeric',
-               
-            ]);
-    
-            $fileName = null;
-            if (request()->hasFile('product_image')) 
-            {
-                $file = request()->file('product_image');
-                $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads'), $fileName);
-            }
-
-            
-            Product::create([
-                'product_code' => request()->get('product_code'),
-                'name' => request()->get('name'),
+        $request->validate([
+            'name' => 'required',
+            'expiry' => 'in:Yes,No',
+            'expiry_n' => 'in:Yes,No',
+            'service' => 'in:Yes,No',
+            'fixedasset' => 'in:Yes,No',
+            'general_product' => 'in:Yes,No',
+            'product_active' => 'in:Yes,No',
+            'pqc_required' => 'in:Yes,No',
+            'other_unit' => 'nullable|numeric',
+            'blk_pkg_flt' => 'nullable|numeric',
+            'reorder_type' => 'nullable|numeric',
+            'min_qty' => 'nullable|numeric',
+            'max_qty' => 'nullable|numeric',
+            'price_per_unit' => 'nullable|numeric',
+            'dis_percentage' => 'nullable|numeric',
+            'dis_value' => 'nullable|numeric',
+            'dis_afterdis' => 'nullable|numeric',
+            'sale_price' => 'nullable|numeric',
+            'float' => 'nullable|numeric',
+            'float_value' => 'nullable|numeric',
+            'product_profit' => 'nullable|numeric',
+            'product_mrp' => 'nullable|numeric',
+            'fur_itm_tax' => 'nullable|numeric',
+            'fur_item_tax' => 'nullable|numeric',
+        ]);
+        
+        $fileName = null;
+        if ($request->hasFile('product_image')) 
+        {
+            $file = $request->file('product_image');
+            $fileName = md5($file->getClientOriginalName()) . time() . "." . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $fileName);
+        }
+        
+        $productData = [
+            'product_code' => $request->get('product_code'),
+            'name' => $request->get('name'),
                 'article_no' => request()->get('article_no'),
                 'product_uom' => request()->get('product_uom'),
                 'product_description' => request()->get('product_description'),
@@ -91,6 +85,7 @@ class ProductController extends Controller
                 'blk_pkg_flt' => request()->get('blk_pkg_flt'), // float
                 'blk_pkg' => request()->get('blk_pkg'),
                 'batch_coding' => request()->get('batch_coding'),
+                'batch_code' => request()->get('batch_code'),
                 'btch_code' => request()->get('btch_code'),
                 'product_color' => request()->get('product_color'),
                 'origin' => request()->get('origin'),
@@ -129,21 +124,27 @@ class ProductController extends Controller
                 'product_mrp' => request()->get('product_mrp'), // float
                 'fur_itm_tax' => request()->get('fur_itm_tax'), // float
                 'fur_item_tax' => request()->get('fur_item_tax'), // float
-                'calculation' => request()->get('calculation'),
+                'calculation_type' => request()->get('calculation_type'),
                 'applicable' => request()->get('applicable'),
                 'itm_cost_method' => request()->get('itm_cost_method'),
                 'direct_tax' => request()->get('direct_tax'),
                 'coa' => request()->get('coa'),
                 'product_image' => $fileName,
-            ]);
+            ];
+            Product::create($productData);
+
             $notification = [
                 'message' => 'Record Inserted Successfully!',
                 'alert-type' => 'success',
             ];
-            return redirect()->route('packingcategory.index')->with($notification);
+            return redirect()->route('product.create')->with($notification);
            
     }
-
+    // 'author_img' => 'required|mimes:png,jpg,jpeg,gif|max:2048';
+         //  $fileName = null;
+    	 // if (request()->hasFile('author_img')) 
+    	 // {
+         
     /**
      * Display the specified resource.
      *

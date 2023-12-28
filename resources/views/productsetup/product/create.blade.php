@@ -14,6 +14,15 @@
         </ol>
         </nav>
     </div>
+    @if($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
       <head>
       
         <style>
@@ -122,17 +131,17 @@
               </div>      
               <div class="form-group">
                 <label for="Service"> Service
-                <input type="checkbox" name="" id="" class="" Value="Yes">
+                <input type="checkbox" name="service" id="service" class="" Value="Yes">
                 </label>
               </div>
               <div class="form-group">
                 <label for="General Product">General Product
-                <input type="checkbox" name="" id="" class="" Value="Yes" >
+                <input type="checkbox" name="general_product" id="general_product" class="" Value="Yes" >
                 </label>
               </div>    
               <div class="form-group">
                 <label for="Product Active">Product Active
-                <input type="checkbox" name="" id="" class="" Value="Yes" checked>
+                <input type="checkbox" name="product_active" id="product_active" class="" Value="Yes" checked>
                 </label>
               </div>
             </div>     
@@ -199,7 +208,7 @@
                       <label for="Product">Product Barcode</label>
                     </div> 
                     <div> 
-                      <input type="text"  class="form-control" name="product_barcode" > 
+                      <input type="text"  class="form-control" name="product_barcode" id="product_barcode" > 
                     </div> 
                   
                   </div> 
@@ -212,7 +221,7 @@
                       <label for="Product">Re-OrderType</label>
                     </div> 
                     <div> 
-                      <input type="text"  class="form-control" name="reorder_type" id="reorder_type" value=""> 
+                      <input type="number"  class="form-control" name="reorder_type" id="reorder_type" value=""> 
                     </div> 
                   </div> 
                 </div>   
@@ -228,7 +237,7 @@
                     <label for="Product">Min Qty</label>
                   </div> 
                   <div> 
-                    <input type="number" step="0.01" class="form-control" name="min_qty" > 
+                    <input type="number" step="0.01" class="form-control" name="min_qty" id="min_qty" > 
                   </div> 
                 
                 </div> 
@@ -256,7 +265,7 @@
                     <label for="Product">MAX QTY</label>
                   </div> 
                   <div> 
-                    <input type="number"  class="form-control" name="max_qty" placeholder="0.0" step="0.01"> 
+                    <input type="number"  class="form-control" name="max_qty" id="max_qty" placeholder="0.0" step="0.01"> 
                   </div> 
                 </div> 
               </div>  
@@ -658,7 +667,7 @@
                   </div>  
                     <div class="form-group">
                       
-                      <input type="text" name="product_mrp" id="product_mrp" class="form-control">
+                      <input type="number" name="product_mrp" id="product_mrp" class="form-control">
                     </div>  
                 </div> 
                 <div class="form-group d-flex">   
