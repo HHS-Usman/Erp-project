@@ -27,7 +27,6 @@
             body {
                 font-family: Arial, sans-serif;
             }
-
             #nextbutton {
                 cursor: pointer;
                 width: 15%;
@@ -36,7 +35,6 @@
                 padding: 10px 10px 10px 10px;
                 background-color: rgb(250, 219, 42);
             }
-
             .container {
                 display: flex;
                 justify-content: center;
@@ -44,11 +42,9 @@
                 width: 100%;
                 margin-left: 20Spx;
             }
-
             #tab1 {
                 padding-left: 40px;
             }
-
             .tab {
                 display: none;
             }
@@ -56,15 +52,12 @@
             .btn {
                 margin-top: 10px;
             }
-
             .dropdown {}
-
             #options,
             .options {
                 width: 100%;
                 padding: 5px;
             }
-
             .tabs {
                 margin-bottom: 15px;
 
@@ -79,7 +72,6 @@
                 padding: 10px;
                 border: 1px solid #fffbfb;
             }
-
             .form-group {
                 margin-bottom: 15px;
             }
@@ -124,13 +116,11 @@
                         <div class="col-md-12 form-group">
                             <strong><h2>Buyer General Info</h2></strong>
                             <br>
-
                             <div class="col-md-3 form-group">
                                 <strong>System Code</strong>
                                 <input type="text" class="form-control" disabled id="customcode" value="{{$maxID}}" name="customcode"
                                     placeholder="0">
                             </div>
-                        
                             <div class="col-xs-6 col-sm-6 col-md-12"
                                 style="border: 1px solid black;padding:20px;margin:10px">
                                
@@ -146,7 +136,6 @@
                                             placeholder="Email">
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Company Name</strong>
