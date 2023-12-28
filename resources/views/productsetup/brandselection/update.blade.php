@@ -26,25 +26,25 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('brand_selection.update',$brandselection) }}" method="POST">        
+            <form action="{{ route('brand_selection.update',$brand_selection) }}" method="POST">        
                 @csrf
                 @method('PUT')
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Brand Selection Code</strong>
-                                <input type="text" name="brandselection_code" id="brandselection_code" value="{{$brandselection->brandselection_code}}" class="form-control" placeholder="Brand Selection Code">
+                                <input type="text" name="brand_selection_code" id="brand_selection_code" value="{{$brand_selection->brand_selection_code}}" class="form-control" placeholder="Brand Selection Code">
                             </div>
                             <div class="form-group">
                                 <strong>Brand Selection<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="brandselection" id="brandselection" class="form-control" value="{{$brandselection->brandselection}}" placeholder="Brand Selection" required>
+                                <input type="text" name="brand_selection" id="brand_selection" class="form-control" value="{{$brand_selection->brand_selection}}" placeholder="Brand Selection" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
-                                <input type="text" name="detail" id="detail" value="{{$brandselection->detail}}" class="form-control" placeholder="Detail">
+                                <input type="text" name="detail" id="detail" value="{{$brand_selection->detail}}" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$brandselection->is_active ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$brand_selection->is_active ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_active">
                                     Active
                                 </label>

@@ -33,11 +33,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Type Code</strong>
-                                <input type="text" name="producttype_code" id="producttype_code" value="{{$producttype->producttype_code}}" class="form-control" placeholder="ProductType Code">
+                                <input type="text" name="product_type_code" id="product_type_code" value="{{$producttype->product_type_code}}" class="form-control" placeholder="ProductType Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Type<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="producttype" id="producttype" class="form-control" value="{{$producttype->producttype}}" placeholder="ProductType" required>
+                                <input type="text" name="product_type" id="product_type" class="form-control" value="{{$producttype->product_type}}" placeholder="ProductType" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

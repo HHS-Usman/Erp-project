@@ -87,6 +87,7 @@ use App\Http\Controllers\Product\ProductSupplierController;
 use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
+use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
 use App\Models\SupplierCategory;
@@ -193,7 +194,7 @@ Route::resource('buyertype',BuyertypeController::class);
 Route::resource('scategory',SupplierCategoryController::class);
 Route::resource('suppliertype',SuppliertypeController::class);
 Route::resource('buyerpayment',BuyerpaymentController::class);
-
+Route::resource('supplierpayment',SupplyController::class);
 
 
 

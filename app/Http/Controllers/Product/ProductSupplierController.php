@@ -43,7 +43,7 @@ class ProductSupplierController extends Controller
 
         ]);
          //create a new product in database
-         Product_Supplier::create([ 
+         Product_supplier::create([ 
             'product_supplier' => request()->get('product_supplier'),
             'product_supplier_code' => request()->get('product_supplier_code'),
             'detail' => request()->get('detail'),
@@ -71,8 +71,8 @@ class ProductSupplierController extends Controller
      */
     public function edit($id)
     {
-        $product_supplier = Product_supplier::find($id);
-        return vieW('productsetup.productsupplier.edit',compaCT('product_supplier'));
+        $productsupplier = Product_supplier::find($id);
+        return vieW('productsetup.productsupplier.update',compact('productsupplier'));
     }
 
     /**
@@ -84,16 +84,16 @@ class ProductSupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product_category = Product_category::findOrFail($id);
+        $product_supplier = Product_supplier::findOrFail($id);
        
          //create a new product in database
-         $product_category->update([ 
-            'product_category' => request()->get('product_category'),
-            'product_category_code' => request()->get('product_category_code'),
+         $product_supplier->update([ 
+            'product_supplier' => request()->get('product_supplier'),
+            'product_supplier_code' => request()->get('product_supplier_code'),
             'detail' => request()->get('detail'),
             'is_active'     => $request->has('is_active') ? 1 : 0, 
             ]);
-            return redirect()->route('productcategory.index')->with('success','Manage successfully');
+            return redirect()->route('productsupplier.index')->with('success','Manage successfully');
     }
 
     /**

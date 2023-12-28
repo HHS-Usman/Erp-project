@@ -71,7 +71,8 @@ class PackingTypeController extends Controller
      */
     public function edit($id)
     {
-        return vieW('productsetup.packingtype.edit');
+        $packingtype = Packing_Type::find($id);
+        return vieW('productsetup.packingtype.update',compact('packingtype'));
     }
 
     /**

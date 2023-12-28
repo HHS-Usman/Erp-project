@@ -72,8 +72,8 @@ class ProductTypeController extends Controller
      */
     public function edit($id)
     {
-        $product_type = Product_Type::find($id);
-        return vieW('productsetup.producttype.edit');
+        $producttype = Product_Type::find($id);
+        return vieW('productsetup.producttype.update',compact('producttype'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProductTypeController extends Controller
             'detail' => request()->get('detail'),
             'is_active'     => $request->has('is_active') ? 1 : 0, 
             ]);
-        return redirect()->route('product_type.index')->with('success','Manage successfully');    
+        return redirect()->route('producttype.index')->with('success','Manage successfully');    
     }
 
     /**

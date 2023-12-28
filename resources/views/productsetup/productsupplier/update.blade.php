@@ -33,11 +33,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Supplier Code</strong>
-                                <input type="text" name="productsupplier_code" id="productsupplier_code" value="{{$productsupplier->productsupplier_code}}" class="form-control" placeholder="Product Supplier Code">
+                                <input type="text" name="product_supplier_code" id="product_supplier_code" value="{{$productsupplier->product_supplier_code}}" class="form-control" placeholder="Product Supplier Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Supplier<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="productsupplier" id="productsupplier" class="form-control" value="{{$productsupplier->productsupplier}}" placeholder="Product Supplier" required>
+                                <input type="text" name="product_supplier" id="product_supplier" class="form-control" value="{{$productsupplier->product_supplier}}" placeholder="Product Supplier" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

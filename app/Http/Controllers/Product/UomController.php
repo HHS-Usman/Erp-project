@@ -73,7 +73,7 @@ class UomController extends Controller
    public function edit($id)
    {
        $uom = Unit_Selection::find($id);
-       return view('stocksetup.uom.edit',compact('uom'));
+       return view('productsetup.uom.update',compact('uom'));
    }
 
    /**

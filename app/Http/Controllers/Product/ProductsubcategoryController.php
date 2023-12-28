@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductsubcategoryController extends Controller
+use App\Models\Product_2nd_sub_category;
+class ProductSubCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class ProductsubcategoryController extends Controller
      */
     public function index()
     {
-        return view('product.product2sbctgry.edit', compact());
+        $productsbctgries = Product_2nd_sub_category::latest()->paginate();
+        return view('productsetup.product2sbctgry.index',compact('product1stsbctgries'))->with(request()->input('page'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ProductsubcategoryController extends Controller
      */
     public function create()
     {
-        return view('product.product2sbctgry.edit', compact());
+        
+       return view('product.product2sbctgry.create');
     }
 
     /**
@@ -35,7 +38,19 @@ class ProductsubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product1stsbctgry'=>'required',
+            'is_active' => 'integer|in:0,1'
+            
+        ]);
+         //create a new product in database
+         Product_2nd_sub_category::create([ 
+            'product1stsbctgry'=> request()->get('product1stsbctgry'),
+            'product2ndsbctgry_code' => request()->get('product2ndsbctgry_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => request()->get('is_active', 0),
+            ]);
+        return redirect()->route('psub2category.index')->with('success','Manage successfully');
     }
 
     /**
@@ -57,7 +72,8 @@ class ProductsubcategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('product.product2sbctgry.edit', compact());
+        $product1stsbctgry = Product_2nd_sub_category::find($id); 
+        return view('product.product2sbctgry.edit', compact('product1stsbctgry'));
     }
 
     /**
@@ -69,7 +85,16 @@ class ProductsubcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_category = Product_2nd_sub_category::findOrFail($id);
+       
+         //create a new product in database
+         $product_category->update([ 
+            'product1stsbctgry'=> request()->get('product1stsbctgry'),
+            'product2ndsbctgry_code' => request()->get('product2ndsbctgry_code'),
+            'detail' => request()->get('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0, 
+            ]);
+            return redirect()->route('psub2category.index')->with('success','Manage successfully');
     }
 
     /**

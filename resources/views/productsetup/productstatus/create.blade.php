@@ -32,11 +32,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Status Code</strong>
-                                <input type="text" name="productstatus_code" id="productstatus_code" class="form-control" placeholder="Product Status Code">
+                                <input type="text" name="product_status_code" id="productstatus_code" class="form-control" placeholder="Product Status Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Status<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="productstatus" id="productstatus" class="form-control" placeholder="Product Status" required>
+                                <input type="text" name="product_status" id="productstatus" class="form-control" placeholder="Product Status" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

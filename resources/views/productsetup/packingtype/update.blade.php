@@ -33,11 +33,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Packing Type Code</strong>
-                                <input type="text" name="packingtype_code" id="packingtype_code" value="{{$packingtype->packingtype_code}}" class="form-control" placeholder="packingtype Code">
+                                <input type="text" name="packing_type_code" id="packing_type_code" value="{{$packingtype->packing_type_code}}" class="form-control" placeholder="packingtype Code">
                             </div>
                             <div class="form-group">
                                 <strong>Packing Type<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="packingtype" id="packingtype" class="form-control" value="{{$packingtype->packingtype}}" placeholder="packingtype" required>
+                                <input type="text" name="packing_type" id="packing_type" class="form-control" value="{{$packingtype->packing_type}}" placeholder="packingtype" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

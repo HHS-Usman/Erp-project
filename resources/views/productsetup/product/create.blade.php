@@ -112,11 +112,15 @@
       </head>
 <body>
   <div class=" wrapper d-flex">
-  
+    <div class="tabs">
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(1)"><h2>1st Tab</h2></button></div>
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(2)"><h2>2nd Tab</h2></button></div>
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(3)"><h2>3rd Tab</h2></button></div>
+    </div>
     <div class="container">
       <form class="w-100" id="multitab-form" action="{{ route('product.store') }}" enctype="multipart/form-data" method="POST">
         @csrf
-        <div class="" id="">
+        <div class="tab" id="tab1">
           <div class="container d-flex justify-content-center align-items-center">           
             <div class="form-group   d-flex">
               <div class="form-group   d-flex">
@@ -125,7 +129,7 @@
                 </div>  
                   <div class="form-group">
                 
-                    <input type="text" class="form-control" value="" readonly>
+                    <input type="text" class="form-control" value="{{ $nextId }}" readonly>
                   
                   </div>
               </div>      
@@ -175,9 +179,9 @@
               <div class="form-group">
                 {{-- country --}}   
                 <select name="origin" id="origin" class="form-select">
-                  <option value="01">1</option>
-                  <option value="02">2</option>  
-                  <option value="03">3</option>  
+                  @foreach ($countries as $item)
+                  <option value="{{ $item->id }}">{{ $item->country }}</option>
+                  @endforeach  
                 </select> 
                 
               </div>
@@ -251,9 +255,10 @@
                 <div class="form-group">
                   {{-- country --}}   
                   <select name="product_uom" id="product_uom" class="form-select">
-                    <option value="01">1</option>
-                    <option value="02">2</option>  
-                    <option value="03">3</option>  
+                    <option value="none">None</option>
+                    @foreach ($uoms as $item)
+                    <option value="{{ $item->id }}">{{ $item->uom }}</option>
+                  @endforeach    
                   </select> 
                   
                 </div>
@@ -284,9 +289,10 @@
               <div class="form-group">
                 {{-- country --}}   
                 <select name="stock_type" id="stock_type" class="form-select">
-                  <option value="01">1</option>
-                  <option value="02">2</option>  
-                  <option value="03">3</option>  
+                  <option value="none">none</option>
+                  @foreach ($stocktypes as $item)
+                  <option value="{{ $item->id }}">{{ $item->stocktype }}</option>
+                  @endforeach  
                 </select> 
                 
               </div>
@@ -299,9 +305,10 @@
                   <input type="text" name="other_uom" id="other_uom" class="form-control">
                   {{-- country --}}
                   <select name="other_unit" id="other_unit" class="form-select">
-                    <option value="01">1</option>
-                    <option value="02">2</option>  
-                    <option value="03">3</option>  
+                  <option value="none">None</option>
+                  @foreach ($uoms as $item)
+                    <option value="{{ $item->id }}">{{ $item->uom }}</option>
+                  @endforeach   
                   </select> 
                 </div>  
                 
@@ -312,8 +319,9 @@
                   <div class="form-group">
                     <select name="product_activity" id="product_activity" class="form-select">
                       <option value="01">1</option>
-                      <option value="02">2</option>  
-                      <option value="03">3</option>  
+                      @foreach ($productactivities as $item)
+                        <option value="{{ $item->id }}">{{ $item->product_activity }}</option>
+                      @endforeach  
                     </select> 
                     
                   </div>
@@ -325,9 +333,10 @@
               <div class="form-group d-flex">
                 <div class="form-group">
                   <select name="bulk_packing" id="bulk_packing" class="form-select">
-                    <option value="01">1</option>
-                    <option value="02">2</option>  
-                    <option value="03">3</option>  
+                    <option value="none">None</option>
+                    @foreach ($packingtypes as $item)
+                    <option value="{{ $item->id }}">{{ $item->packing_types}}</option>
+                  @endforeach
                   </select> 
                 </div>
                 <div class="form-group">  
@@ -390,10 +399,14 @@
                   </div>
             </div>
           </div>  
+          <div class="container d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit1()">Submit</button>
+            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Next</button>
+          </div>
         </div>
         <br>
         <br>
-        <div class="" id="">
+        <div class="tab" id="tab2">
           
     
           <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
@@ -406,9 +419,10 @@
                       <div class="form-group">
                         {{-- country --}}   
                         <select name="product_brand" id="product_brand" class="form-select">
-                          <option value="01">1</option>
-                          <option value="02">2</option>  
-                          <option value="03">3</option>  
+                          <option value="none">None</option>
+                          @foreach ($brandselections as $item)
+                            <option value="{{ $item->id }}">{{ $item->brand_selection}}</option>
+                          @endforeach  
                         </select> 
                       </div>  
                   </div> 
@@ -420,9 +434,10 @@
                       
                       {{-- country --}}   
                       <select name="product_type" id="product_type" class="form-select">
-                        <option value="01">1</option>
-                        <option value="02">2</option>  
-                        <option value="03">3</option>  
+                        <option value="none">None</option>
+                        @foreach ($producttypes as $item)
+                          <option value="{{ $item->id }}">{{ $item->product_type}}</option>
+                        @endforeach
                       </select> 
                     </div>  
                   </div>
@@ -439,9 +454,10 @@
                       
                       {{-- country --}}   
                       <select name="product_classification" id="product_classification" class="form-select">
-                        <option value="01">1</option>
-                        <option value="02">2</option>  
-                        <option value="03">3</option>  
+                        <option value="none">None</option>
+                        @foreach ($classifications as $item)
+                          <option value="{{ $item->id }}">{{ $item->classification }}</option>
+                        @endforeach  
                       </select> 
                     </div>  
                 </div> 
@@ -453,9 +469,10 @@
                     
                     {{-- country --}}   
                     <select name="product_status" id="product_status" class="form-select">
-                      <option value="01">1</option>
-                      <option value="02">2</option>  
-                      <option value="03">3</option>  
+                      <option value="none">None</option>
+                      @foreach ($productstatuses as $item)
+                        <option value="{{ $item->id }}">{{ $item->product_status}}</option>
+                      @endforeach 
                     </select> 
                   </div>  
                 </div>
@@ -472,9 +489,10 @@
                       
                       {{-- country --}}   
                       <select name="product_category" id="product_category" class="form-select">
-                        <option value="01">1</option>
-                        <option value="02">2</option>  
-                        <option value="03">3</option>  
+                        <option value="none">None</option>
+                        @foreach ($productcategories as $item)
+                         <option value="{{ $item->id }}">{{ $item->productcategory}}</option>
+                        @endforeach  
                       </select> 
                     </div>  
                 </div> 
@@ -513,9 +531,9 @@
                     
                     {{-- country --}}   
                     <select name="product_supplier" id="product_supplier" class="form-select">
-                      <option value="01">1</option>
-                      <option value="02">2</option>  
-                      <option value="03">3</option>  
+                      @foreach ($productsuppliers as $item)
+                       <option value="{{ $item->id }}">{{ $item->productsupplier}}</option>
+                      @endforeach  
                     </select> 
                   </div>  
                 </div>
@@ -526,7 +544,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Product 2nd Supplier</label>
+                    <label for="options">Product 2nd Category</label>
                   </div>  
                     <div class="form-group">
                       
@@ -569,11 +587,23 @@
               
             </div>
               
-            
+            <div class="container d-flex justify-content-center align-items-center">
+              <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+              <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+              <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+            </div>
+          <script>
+            function submit1() 
+            {
+              var form1 = document.getElementById('form1');
+              form1.submit();          
+            }
+          </script>
           </div>  
+
         </div>
-    <br><br>
-        <div class="" id="">
+           <br><br>
+        <div class="tab" id="tab3">
           
           <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
             
@@ -593,7 +623,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Product Type</label>
+                    <label for="options">Product Discount</label>
                   </div>  
                   <div class="form-group d-flex">
                     
@@ -761,25 +791,84 @@
                     
                     {{-- country --}}   
                     <select name="coa" id="coa" class="form-select">
-                      <option value="01">1</option>
-                      <option value="02">2</option>  
-                      <option value="03">3</option>  
+                        @foreach ($coas as $item)
+                         <option value="{{ $item->id }}">{{ $item->coaname}}</option>
+                        @endforeach  
                     </select> 
                   </div>  
                 </div>
             </div>
-            
+            <div class="container d-flex justify-content-center align-items-center">
+              <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="nextTab(2)">Previous</button>
+              <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit4()">Submit</button>       
+            </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
+          
+        
         </div>
 
         
       </form>  
     </div>
   </div>
+  <script>
+    let currentTab = 1;
 
+    function showTab(tabNumber) {
+      // Hide all tabs
+      const tabs = document.querySelectorAll(".tab");
+      tabs.forEach((tab) => (tab.style.display = "none"));
+
+      // Show the selected tab
+      document.getElementById(`tab${tabNumber}`).style.display = "block";
+    }
+
+    function nextTab(next) {
+      // Validate if needed
+
+      // Show the next tab
+      currentTab = next;
+      showTab(currentTab);
+    }
+    function submitForm() {
+          // You can add any final validation logic here before submitting the form
+          document.getElementById("multitab-form").submit();
+      }
+    function submit4() {
+      var form1 = document.getElementById('form1');
+      var form2 = document.getElementById('form2');
+      var form3 = document.getElementById('form3');
+      var form4 = document.getElementById('form4');
+
+      // Submit both forms
+      form1.submit();
+      form2.submit();
+      form3.submit();
+      form4.submit();
+
+    }
+
+    // Show the first tab initially
+    showTab(currentTab);
+    function submit2() {
+      var form1 = document.getElementById('form1');
+      var form2 = document.getElementById('form2');
+
+      // Submit both forms
+      form1.submit();
+      form2.submit();
+
+    }
+    function submit3() {
+      var form1 = document.getElementById('form1');
+      var form2 = document.getElementById('form2');
+      var form3 = document.getElementById('form3');
+      // Submit both forms
+      form1.submit();
+      form2.submit();
+      form3.submit();
+    }
+  </script>
 </body>
         
 </section> 

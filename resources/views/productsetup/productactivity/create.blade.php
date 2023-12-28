@@ -32,11 +32,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Activity Code</strong>
-                                <input type="text" name="productactivity_code" id="productactivity_code" class="form-control" placeholder="productactivity Code">
+                                <input type="text" name="product_activity_code" id="product_activity_code" class="form-control" placeholder="productactivity Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Activity<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="productactivity" id="productactivity" class="form-control" placeholder="productactivity" required>
+                                <input type="text" name="product_activity" id="product_activity" class="form-control" placeholder="productactivity" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

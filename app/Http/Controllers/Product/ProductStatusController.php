@@ -70,7 +70,8 @@ class ProductStatusController extends Controller
      */
     public function edit($id)
     {
-        return vieW('productsetup.productstatus.edit');
+        $productstatus = Product_status::find($id);
+        return vieW('productsetup.productstatus.edit',compact('productstatus'));
     }
 
     /**
