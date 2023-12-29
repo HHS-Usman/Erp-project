@@ -154,7 +154,6 @@ class EmpController extends Controller
             'document_type'=>'nullable',
             'document_expiredate'=>'nullable',
             'document_remark'=>'nullable',
-            
         ]);
          $fileName = 'none';
          if ($request->hasFile('document')) {

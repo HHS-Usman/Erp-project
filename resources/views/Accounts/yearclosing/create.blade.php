@@ -24,52 +24,50 @@
             </nav>
         </div>
         <br><br><br>
-        <form action="{{ route('yearclosing.store') }}" method="POST">
+        <form action="{{ route('yearclosing.store') }}" method="POST"  enctype="multipart/form-data">
             @csrf
-            <div class="row justify-content-center">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-
-                    <div class="row">
-                        <div class="col-md-6">
+            <div class="container justify-content">
+                <div class="container d-flex col-xs-6 col-sm-6 col-md-10">
+                    <div class="row" class="col-md-12">
+                        <div class="col-md-9">
                             <strong>Date</strong>
                             <input type="date" class="form-control" id="date" name="date">
                         </div>
-                        <div class="col-md-6">
-                            <strong for="attachment">Attachment (multiple)</strong>
-                            <input type="file" class="form-control-file" id="attachment" name="attachment" multiple>
+                        <br>
+                        <div class="col-md-9  mt-3">
+                            <strong for="description">Description</strong>
+                            <textarea class="form-control" id="description" name="description"></textarea>
                         </div>
-                    </div>
-            
-                    <div class="row mt-3">
-                        <div class="col-md-6">
+                        <br>
+                        <div class="col-md-9  mt-3">
                             <strong>Select Chart of Account</strong>
                             <select id="chartofaccount" name="chartofaccount" class="form-control">
-                                @foreach ( $coas as $item )
-                                    <option value={{$item->id}}>{{$item->coaname}}</option>
+                                @foreach ($coas as $item)
+                                    <option value={{ $item->id }}>{{ $item->coaname }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <br>
+                    <div class="col-md-6">
+                        <div class="col-md-12  mt-3">
+                            <strong for="attachment">Attachment (multiple)</strong>
+                            <input type="file" class="form-control-file" id="attachment" name="file" multiple>
+                        </div>
+                        <div class="col-md-12  mt-3">
                             <strong>View List</strong>
                             <ul class="list-group" style="border: 1px solid rgb(29, 27, 27)">
-                                <li class="list-group-item">employe.pdf</li>
-                                <li class="list-group-item">Account.csv</li>
-                                <li class="list-group-item">customer.pdf</li>
-                              </ul>
+                                @foreach ($fileaname as $item)
+                                <li class="list-group-item">{{ explode('.', $item->file_name)[0] }}</li>
+                            @endforeach
+                            
+                            </ul>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <strong for="description">Description</strong>
-                            <textarea class="form-control" id="description" name="description" ></textarea>
-                        </div>
-                    </div>
-                
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="container col-md-12 mt-5 text-center"> 
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
         </div>

@@ -15,44 +15,44 @@ class CreateBuyersTable extends Migration
     {
         Schema::create('buyers', function (Blueprint $table) {
             $table->bigIncrements('buyer_id');
-            $table->integer('customer_code');
-            $table->string('email');
-            $table->string('companyname');
-            $table->string('phone_no1');
-            $table->string('phone_no2');
-            $table->string('address');
-            $table->string('city'); #it is for forign key
-            $table->string('cell_no');
-            $table->string('province');#it is for forign key
-            $table->string('contactperson');
-            $table->integer('zipcode');
-            $table->string('contactpersoncell_no');
-            $table->string('country');#it is for forign key
-            $table->string('contactperson_email');
-            $table->string('buyertype'); #it is for forign key
-            $table->string('buyercategory');#it is for category
-            $table->integer('creditdays');
-            $table->string('buyerdiscount');
-            $table->string('creditlimit');
-            $table->string('buyeradvance');
-            $table->string('suplierlocality');
-            $table->string('shiping_addres');
-            $table->longText('shiping_city');
-            $table->string('shippingprovince');#it is for forign key
-            $table->string('shippingcountry');#it is for forign key
-            $table->string('title');
-            $table->string('contactpersonemail');
-            $table->string('dispnote_invoice');
-            $table->string('st_registration_no');
-            $table->string('st_invoicenote');
-            $table->string('withouttax_perc_age');
-            $table->string('bankname');#it is for forign key
-            $table->string('account_title');
-            $table->bigInteger('accountno');
-            $table->bigInteger('branchcode');
-            $table->bigInteger('branchname');
-            $table->float('openingbalance');
-            $table->string('dateopening');
+            $table->integer('customer_code')->nullable();
+            $table->string('email')->nullable();
+            $table->string('companyname')->nullable();
+            $table->string('phone_no1')->nullable();
+            $table->string('phone_no2')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable(); #it is for forign key
+            $table->string('cell_no')->nullable();
+            $table->string('province')->nullable();#it is for forign key
+            $table->string('contactperson')->nullable();
+            $table->integer('zipcode')->nullable();
+            $table->string('contactpersoncell_no')->nullable();
+            $table->string('country')->nullable();#it is for forign key
+            $table->string('contactperson_email')->nullable();
+            $table->string('buyertype')->nullable(); #it is for forign key
+            $table->string('buyercategory')->nullable();#it is for category
+            $table->integer('creditdays')->nullable();
+            $table->string('buyerdiscount')->nullable();
+            $table->string('creditlimit')->nullable();
+            $table->string('buyeradvance')->nullable();
+            $table->string('suplierlocality')->nullable();
+            $table->string('shiping_addres')->nullable();
+            $table->longText('shiping_city')->nullable();
+            $table->string('shippingprovince')->nullable();#it is for forign key
+            $table->string('shippingcountry')->nullable();#it is for forign key
+            $table->string('title')->nullable();
+            $table->string('contactpersonemail')->nullable();
+            $table->string('dispnote_invoice')->nullable();
+            $table->string('st_registration_no')->nullable();
+            $table->string('st_invoicenote')->nullable();
+            $table->string('withouttax_perc_age')->nullable();
+            $table->string('bankname')->nullable();#it is for forign key
+            $table->string('account_title')->nullable();
+            $table->bigInteger('accountno')->nullable();
+            $table->bigInteger('branchcode')->nullable();
+            $table->string('branchname')->nullable();
+            $table->float('openingbalance')->nullable();
+            $table->string('dateopening')->nullable();
             $table->timestamps();
         });
     }

@@ -736,8 +736,6 @@
                           @endforeach 
                         </select>
                       </div> 
-                      
-                      
                     </div>
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
@@ -778,16 +776,7 @@
                           @endforeach 
                         </select>
                       </div>
-                    </div>
-                    {{-- <h4>Emergency Information:</h4> --}}
-                    {{-- <div class="container d-flex justify-content-center align-items-center">
-                      <div class="form-group">
-                        <label for="Emergency Number">Emergency Contact Person</label>
-                        <textarea type="text" class="form-control" name=""  id="" rows="4" cols="130" placeholder="" readonly></textarea>
-                      </div>
-                    </div> --}}
-                    
-                      
+                    </div>                      
                       <div class="container d-flex justify-content-center align-items-center">
                         <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
                         <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
@@ -806,11 +795,8 @@
               <div class="tab" id="tab3">
                 <h4><b> Payroll/Overtime : </b></h4>
                 <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
-                  
-                        
                     <div class="container d-flex justify-content-center align-items-center">
                       <div class="form-group">
-                        
                         <label for="costcenter">Cost Center</label>
                         <select  name="payroll[costcenter]" id="costcenter"  class="options">
                             <option class="options">None</option>

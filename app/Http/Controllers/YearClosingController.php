@@ -27,8 +27,9 @@ class YearClosingController extends Controller
      */
     public function create()
     {
+        $fileaname = YearClosing::all();
         $coas = Coa::where('operational', 1)->get();
-        return view('Accounts.yearclosing.create',compact('coas'));
+        return view('Accounts.yearclosing.create',compact('coas','fileaname'));
     }
 
     /**
@@ -39,10 +40,19 @@ class YearClosingController extends Controller
      */
     public function store(Request $request)
     {
-        YearClosing::create([
+        $request->validate([
+            'file' => 'required|mimes:jpeg,png,jpg,gif,txt,pdf,xlsx,csv|max:2048',
+        ]);
+    //   this is orginal name file store in database
+         $fileName = time().'.'.$request->file->getClientOriginalName();
+          // this is random encrypted form file name randome number or number and text
+        // $fileName = time().'.'.$request->file->extension();
+         YearClosing::create([
             'clsoingyear'=>request()->get('date'),
             'description'=>request()->get('description'),
+            'file_name'=>$fileName,
             'coa_id'=>request()->get('chartofaccount'),
+
         ]);
         return redirect()->route('yearclosing.create')->with('success','Manage successfully');
     }

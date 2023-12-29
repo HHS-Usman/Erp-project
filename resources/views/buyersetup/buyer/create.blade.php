@@ -27,6 +27,7 @@
             body {
                 font-family: Arial, sans-serif;
             }
+
             #nextbutton {
                 cursor: pointer;
                 width: 15%;
@@ -35,6 +36,7 @@
                 padding: 10px 10px 10px 10px;
                 background-color: rgb(250, 219, 42);
             }
+
             .container {
                 display: flex;
                 justify-content: center;
@@ -42,9 +44,11 @@
                 width: 100%;
                 margin-left: 20Spx;
             }
+
             #tab1 {
                 padding-left: 40px;
             }
+
             .tab {
                 display: none;
             }
@@ -52,18 +56,22 @@
             .btn {
                 margin-top: 10px;
             }
+
             .dropdown {}
+
             #options,
             .options {
                 width: 100%;
                 padding: 5px;
             }
+
             .tabs {
                 margin-bottom: 15px;
 
                 justify-content: start;
                 align-items: center;
             }
+
             .tab-link {
                 border-radius: 5px;
                 background-color: rgb(250, 219, 42);
@@ -72,6 +80,7 @@
                 padding: 10px;
                 border: 1px solid #fffbfb;
             }
+
             .form-group {
                 margin-bottom: 15px;
             }
@@ -114,16 +123,18 @@
                     @csrf
                     <div class="tab" id="tab1">
                         <div class="col-md-12 form-group">
-                            <strong><h2>Buyer General Info</h2></strong>
+                            <strong>
+                                <h2>Buyer General Info</h2>
+                            </strong>
                             <br>
                             <div class="col-md-3 form-group">
                                 <strong>System Code</strong>
-                                <input type="text" class="form-control" disabled id="customcode" value="{{$maxID}}" name="customcode"
-                                    placeholder="0">
+                                <input type="text" class="form-control" disabled id="customcode"
+                                    value="{{ $maxID }}" name="customcode" placeholder="0">
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-12"
                                 style="border: 1px solid black;padding:20px;margin:10px">
-                               
+
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Custom Code (Optional)</strong>
@@ -168,7 +179,7 @@
                                         <select name="city" id="city" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
-                                                <option value={{$item->id}}>{{ $item->city }}</option>
+                                                <option value={{ $item->id }}>{{ $item->city }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -185,7 +196,7 @@
                                         <select name="province" id="province" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
-                                                <option value={{$item->province_id}}>{{ $item->province }}</option>
+                                                <option value={{ $item->province_id }}>{{ $item->province }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -215,7 +226,7 @@
                                         <select name="country" id="country" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
-                                                <option value={{$item->id}}>{{ $item->country }}</option>
+                                                <option value={{ $item->id }}>{{ $item->country }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -232,7 +243,7 @@
                                         <select name="buyertype" id="buyertype" class="form-control">
                                             <option value="Select Sale Type">Select Buyer Type </option>
                                             @foreach ($btype as $item)
-                                                <option value={{$item->btype_id}}>{{ $item->buyertype }}</option>
+                                                <option value={{ $item->btype_id }}>{{ $item->buyertype }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -241,7 +252,8 @@
                                         <select name="buyercategory" id="buyercategory" class="form-control">
                                             <option value="Select Sale Type">Select buyer Category </option>
                                             @foreach ($buyercetegory as $item)
-                                                <option value={{$item->bcategory_id}}>{{ $item->buyercategory }}</option>
+                                                <option value={{ $item->bcategory_id }}>{{ $item->buyercategory }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -277,7 +289,7 @@
                                     <div class="col-md-6 form-group">
                                         <strong>Buyer Locality</strong>
                                         <input type="text" class="form-control" id="buyerlocality"
-                                        name="buyerlocality" placeholder="Shipping Address">
+                                            name="buyerlocality" placeholder="Shipping Address">
                                     </div>
                                     <div class="col-md-6 form-group">
                                     </div>
@@ -289,7 +301,7 @@
                                         <select name="companyshipadres" id="companyshipadres" class="form-control">
                                             <option value="Select Sale Type">Select Company Shipping Adress </option>
                                             <option value="above">Same As Obove</option>
-                                            <option value="above">Other</option>
+                                            <option value="other">Other</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -305,7 +317,7 @@
                                         <select name="shippngcity" id="shippngcity" class="form-control">
                                             <option value="Select Shipping City">Select Shipping City </option>
                                             @foreach ($city as $item)
-                                                <option value={{$item->id}}>{{ $item->city }}</option>
+                                                <option value={{ $item->id }}>{{ $item->city }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -322,7 +334,7 @@
                                         <select name="shippingprovince" id="shippingprovince" class="form-control">
                                             <option value="Select Sale Type">Select Shipping province </option>
                                             @foreach ($province as $item)
-                                                <option value={{$item->province_id}}>{{ $item->province }}</option>
+                                                <option value={{ $item->province_id }}>{{ $item->province }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -331,20 +343,31 @@
                                         <select name="shippingcountry" id="shippingcountry" class="form-control">
                                             <option value="Select Sale Type">Select Shipping Country </option>
                                             @foreach ($country as $item)
-                                                <option value={{$item->id}}>{{ $item->country }}</option>
+                                                <option value={{ $item->id }}>{{ $item->country }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                            <div class="container d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                                <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(2)">Next</button>
+                              </div>
+                            <script>
+                              function submit1() 
+                              {
+                                var form1 = document.getElementById('form1');
+                                form1.submit();          
+                              }
+                            </script>
                         </div>
-                    
                     </div>
                     <div class="tab" id="tab2">
-                        <strong><h2>Contact Person</h2></strong>
-                        <div class="col-xs-6 col-sm-6 col-md-12"
-                            style="border: 1px solid black;padding:20px;margin:10px">
-                         
+                        <strong>
+                            <h2>Contact Person</h2>
+                        </strong>
+                        <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
+
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Title</strong>
@@ -365,8 +388,8 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person</strong>
-                                    <input type="text" class="form-control" id="contactperson"
-                                        name="contactperson" placeholder="Contact Person">
+                                    <input type="text" class="form-control" id="contactperson" name="contactperson"
+                                        placeholder="Contact Person">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person Cell no#</strong>
@@ -374,121 +397,153 @@
                                         placeholder="Contact Person Cell no#">
                                 </div>
                             </div>
+                    </div>
+                    <div class="container d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+                        <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                        <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+
+                      </div>
+                    <script>
+                      function submit1() 
+                      {
+                        var form1 = document.getElementById('form1');
+                        form1.submit();          
+                      }
+                    </script>
+            </div>
+            <div class="tab" id="tab3">
+                <strong>
+                    <h2>Buyer Tax</h2>
+                </strong>
+                <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>is Tax Filer / Registered?</strong>
+                            <select name="title" id="registered" class="form-control">
+                                <option value="Select ">Select here </option>
+                                <option value="yes">Yes </option>
+                                <option value="no">No </option>
+                            </select>
                         </div>
-                </div>
-                <div class="tab" id="tab3">
-                    <strong><h2>Buyer Tax</h2></strong>
-                        <div class="col-xs-6 col-sm-6 col-md-12"
-                            style="border: 1px solid black;padding:20px;margin:10px">
-                          
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <strong>is Tax Filer / Registered?</strong>
-                                    <select name="title" id="registered" class="form-control">
-                                        <option value="Select ">Select here </option>
-                                        <option value="yes">Yes </option>
-                                        <option value="no">No </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <strong>Display Notes in Invoice</strong>
-                                    <select name="dinvoice" id="invoice" class="form-control">
-                                        <option value="Select ">Select here </option>
-                                        <option value="yes">Yes </option>
-                                        <option value="no">No </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <strong>S.T. Registration No</strong>
-                                    <input type="text" class="form-control" id="registration_st"
-                                        name="registration_st" placeholder="S.T. Registration No">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <strong>S.T. Invoice Note / Terms</strong>
-                                    <input type="textarea" class="form-control" id="invoinceterm"
-                                        name="invoinceterm" placeholder="S.T. Invoice Note / Terms">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <strong>Withholding tax %age</strong>
-                                    <input type="text" class="form-control" id="Withholding" name="Withholding"
-                                        placeholder="Withholding tax %age">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                </div>
-                            </div>
+                        <div class="col-md-6 form-group">
+                            <strong>Display Notes in Invoice</strong>
+                            <select name="dinvoice" id="invoice" class="form-control">
+                                <option value="Select ">Select here </option>
+                                <option value="yes">Yes </option>
+                                <option value="no">No </option>
+                            </select>
                         </div>
-                </div>
-                <div class="tab" id="tab4">
-                    <strong><h2>Buyer Bank Info</h2></strong>
-                    <div class="col-xs-6 col-sm-6 col-md-12"
-                    
-                        style="border: 1px solid black;padding:20px;margin:10px">
-                        
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <strong>Select Bank</strong>
-                                <select name="bank" id="bank" class="form-control">
-                                    <option value="Select ">Select Bank </option>
-                                    @foreach ($bank as $item)
-                                        <option value={{$item->bank_id}}>{{ $item->Bank }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <strong>Account Title</strong>
-                                <input type="text" class="form-control" id="accounttext" name="accounttext"
-                                    placeholder="Account Title">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>S.T. Registration No</strong>
+                            <input type="text" class="form-control" id="registration_st" name="registration_st"
+                                placeholder="S.T. Registration No">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <strong>Account No</strong>
-                                <input type="text" class="form-control" id="accontno"
-                                    name="accontno" placeholder="Account No">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <strong>Branch Code</strong>
-                                <input type="text" class="form-control" id="branchcode" name="branchcode"
-                                    placeholder="Branch Code">
-                            </div>
+                        <div class="col-md-6 form-group">
+                            <strong>S.T. Invoice Note / Terms</strong>
+                            <input type="textarea" class="form-control" id="invoinceterm" name="invoinceterm"
+                                placeholder="S.T. Invoice Note / Terms">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <strong>Branch Name</strong>
-                                <input type="text" class="form-control" id="branchname" name="branchname"
-                                    placeholder="Branch Name">
-                            </div>
-                            <div class="col-md-6 form-group">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>Withholding tax %age</strong>
+                            <input type="text" class="form-control" id="Withholding" name="Withholding"
+                                placeholder="Withholding tax %age">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <strong>Opening Balance</strong>
-                                <input type="number" class="form-control" id="openingbalance"
-                                    name="openingbalance" placeholder="Opening Balance">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <strong>Opening Date</strong>
-                                <input type="number" class="form-control" placeholder="Opening Date" id="openingdate" 
-                                name="openingdate" min="0" 
-                                max="2000" step="0.01" /> 
-                            </div>
+                        <div class="col-md-6 form-group">
                         </div>
                     </div>
                 </div>
-
-                
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center ">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                </form>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
+                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                    <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(4)">Next</button>
+                  </div>
+                <script>
+                  function submit1() 
+                  {
+                    var form1 = document.getElementById('form1');
+                    form1.submit();          
+                  }
+                </script>
             </div>
+            <div class="tab" id="tab4">
+                <strong>
+                    <h2>Buyer Bank Info</h2>
+                </strong>
+                <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>Select Bank</strong>
+                            <select name="bank" id="bank" class="form-control">
+                                <option value="Select ">Select Bank </option>
+                                @foreach ($bank as $item)
+                                    <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong>Account Title</strong>
+                            <input type="text" class="form-control" id="accounttext" name="accounttext"
+                                placeholder="Account Title">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>Account No</strong>
+                            <input type="text" class="form-control" id="accontno" name="accontno"
+                                placeholder="Account No">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong>Branch Code</strong>
+                            <input type="text" class="form-control" id="branchcode" name="branchcode"
+                                placeholder="Branch Code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>Branch Name</strong>
+                            <input type="text" class="form-control" id="branchname" name="branchname"
+                                placeholder="Branch Name">
+                        </div>
+                        <div class="col-md-6 form-group">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <strong>Opening Balance</strong>
+                            <input type="number" class="form-control" id="openingbalance" name="openingbalance"
+                                placeholder="Opening Balance">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong>Opening Date</strong>
+                            <input type="number" class="form-control" placeholder="Opening Date" id="openingdate"
+                                name="openingdate" min="0" max="2000" step="0.01" />
+                        </div>
+                    </div>
+                </div>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(3)">Previous</button>
+                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                
+                  </div>
+                <script>
+                  function submit1() 
+                  {
+                    var form1 = document.getElementById('form1');
+                    form1.submit();          
+                  }
+                </script>
+            </div>
+            </form>
         </div>
-        
+        </div>
+
         <script>
             let currentTab = 1;
 

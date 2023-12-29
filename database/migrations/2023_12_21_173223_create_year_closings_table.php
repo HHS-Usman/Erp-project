@@ -17,6 +17,7 @@ class CreateYearClosingsTable extends Migration
             $table->bigIncrements('yclosing_id');
             $table->string('clsoingyear');
             $table->string('description');
+            $table->string('file_name');
             $table->unsignedBigInteger('coa_id');
             $table->foreign('coa_id')->references('id')->on('coas');
             $table->timestamps();

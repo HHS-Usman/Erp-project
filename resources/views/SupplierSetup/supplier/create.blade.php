@@ -348,6 +348,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(2)">Next</button>
+                          </div>
                       
                     </div>
                     <div class="tab" id="tab2">
@@ -379,6 +383,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+                          </div>
                     </div>
                     <div class="tab" id="tab3">
                         <strong><h2>Supplier Tax</h2></strong>
@@ -424,7 +433,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(4)">Next</button>
+                          </div>
                     </div>
+                    
                     <div class="tab" id="tab4">
                         <strong> <h2>Suplier Bank Infor</h2></strong>
                         <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
@@ -483,10 +498,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(3)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                          </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center ">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                   
             </div>
             </form>
         </div>

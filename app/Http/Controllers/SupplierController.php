@@ -52,19 +52,42 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customcode' => 'required',
-            'email' => 'required|email',
-            'companyname' => 'required',
-            'phone1' => 'required',
-            // Add more validation rules for other fields
-        ], [
-            'customcode.required' => 'Custom code is required.',
-            'email.required' => 'Email is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'companyname.required' => 'Company name is required.',
-            'phone1.required' => 'Phone number 1 is required.',
-            // Add more custom error messages for other fields
+
+            'shippingaddress' => 'nullable',
+            'phoneone' => 'nullable',
+            'customcode' => 'nullable',
+            'phonetwo' => 'nullable',
+            'adress' => 'nullable',
+            'city' => 'nullable',
+            'cellno' => 'nullable',
+            'province' => 'nullable',
+            'contactperson' => 'nullable',
+            'pcellno' => 'nullable',
+            'country' => 'nullable',
+            'contactemail' => 'nullable',
+            'suppliertype' => 'nullable',
+            'suppliercategory' => 'nullable',
+            'supplierdiscount' => 'nullable',
+            'supplieradvance' => 'nullable',
+            'supplierlocality' => 'nullable',
+            'shippngcity' => 'nullable',
+            'shippingprovince' => 'nullable',
+            'shippingcountry' => 'nullable',
+            'contactpersonemail' => 'nullable',
+            'registration_st' => 'nullable',
+            'invoinceterm' => 'nullable',
+            'Withholding' => 'nullable',
+            'accounttext' => 'nullable',
+            'bank' => 'nullable',
+            'accontno' => 'nullable',
+            'branchcode' => 'nullable',
+            'branchname' => 'nullable',
+            'openingbalance' => 'nullable',
+            'openingdate' => 'nullable',
+            'phone1' => 'nullable',
+            'phone2' => 'nullable',
         ]);
+      
         Supplier::create([
             'customer_code'=>request()->get('customcode'),
             'email'=>request()->get('email'),
