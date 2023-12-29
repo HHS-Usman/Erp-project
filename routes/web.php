@@ -198,6 +198,7 @@ Route::resource('supplierpayment',SupplyController::class);
 
 
 
+
 Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);

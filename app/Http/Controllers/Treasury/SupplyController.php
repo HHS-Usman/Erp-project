@@ -24,7 +24,7 @@ class SupplyController extends Controller
      */
     public function create()
     {
-        return view('trejetory.supplier.create');
+        return view('trejetory.supllierpayment.create');
     }
 
     /**

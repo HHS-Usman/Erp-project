@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Buyer Payment
+    Create Supllier Payment
 @endsection
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,11 +15,11 @@
             </div>
         @endif
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Create Buyer Payment</h1>
+            <h1>Create Supllier Payment</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Buyer Payment</a></li>
+                    <li class="breadcrumb-item active"><a> Create Supllier Payment</a></li>
                 </ol>
             </nav>
         </div>
@@ -31,9 +31,9 @@
                     <div class=" d-flex col-md-12" >
                         <div  class="col-md-6">
                             <div class="form-group text-center ">
-                                <strong>Select Buyer</strong>
+                                <strong>Select Suplier</strong>
                                 <select name="employee" id="employee" class="form-control mt-3">
-                                    <option value="Select Employee">Select Buyer</option>
+                                    <option value="Select Employee">Select Suplier</option>
                                 </select>
                             </div>
                            
