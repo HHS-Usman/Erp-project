@@ -88,7 +88,7 @@
             margin-bottom: 15px;
           }
     
-          .form-group label {
+          .form-group strong {
             margin-bottom: 5px;
           }
     
@@ -109,13 +109,23 @@
             }
           }
         </style>
+        <script>
+         function handleCheckboxChange(checkbox) {
+          var checkboxes = document.querySelectorAll('.choose');
+          checkboxes.forEach(function(currentCheckbox) {
+            if (currentCheckbox !== checkbox) {
+                currentCheckbox.checked = false;
+              }
+          });
+         } 
+        </script>
       </head>
 <body>
   <div class=" wrapper d-flex">
     <div class="tabs">
-      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(1)"><h2>1st Tab</h2></button></div>
-      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(2)"><h2>2nd Tab</h2></button></div>
-      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(3)"><h2>3rd Tab</h2></button></div>
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(1)">Product GN Info</button></div>
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(2)">Product CTLG Mng</button></div>
+      <div style="margin:5px;" ><button type="button" class="btn btn-primary p-3 px-5  col-12" onclick="showTab(3)">Pricing & Tax</button></div>
     </div>
     <div class="container">
       <form class="w-100" id="multitab-form" action="{{ route('product.store') }}" enctype="multipart/form-data" method="POST">
@@ -125,244 +135,214 @@
             <div class="form-group   d-flex">
               <div class="form-group   d-flex">
                 <div class="form-group">
-                  <label for="System">System</label>
+                  <strong for="System">System</strong>
                 </div>  
                   <div class="form-group">
-                
-                    <input type="text" class="form-control" value="{{ $nextId }}" readonly>
-                  
+                    <input type="text" class="form-control" value="{{ $nextId }}" readonly>     
                   </div>
               </div>      
-              <div class="form-group">
-                <label for="Service"> Service
-                <input type="checkbox" name="service" id="service" class="" Value="Yes">
-                </label>
+              <div class="form-group d-flex">
+                <strong for="Service"> Service
+                <input type="checkbox" name="service" id="service" class="choose" Value="Yes" onchange="handleCheckboxChange(this)">
+                </strong>
               </div>
-              <div class="form-group">
-                <label for="General Product">General Product
-                <input type="checkbox" name="general_product" id="general_product" class="" Value="Yes" >
-                </label>
+              <div class="form-group d-flex">
+                <strong for="General Product">General Product
+                  <input type="checkbox" name="general_product" id="general_product" class="choose" Value="Yes" onchange="handleCheckboxChange(this)" checked>
+                </strong>
               </div>    
-              <div class="form-group">
-                <label for="Product Active">Product Active
+              <div class="form-group d-flex">
+                <strong for="Product Active">Product Active
                 <input type="checkbox" name="product_active" id="product_active" class="" Value="Yes" checked>
-                </label>
+                </strong>
               </div>
             </div>     
           </div>
-          <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">         
-            <div class="container d-flex justify-content-center align-items-center">
-              {{-- {{ $nextId }} --}}
-                <div class="form-group">
-                <label for="Product">Product Code</label>
-                </div>
-                <div class="form-group">
-                  <input type="text"  class="form-control" name="product_code" id="product_code" value="01" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="options">Product Color</label>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="product_color" id="product_color" value="" placeholder="Product_color">
-                </div>
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group">
-                <label for="Product">Product Name <span style="color: #ff041d">*</span></label>
-              </div>
-              <div class="form-group"> 
-                <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" />
-              </div>
-              <div class="form-group">
-                <label for="Product">Origin</label>
-              </div>
-              <div class="form-group">
-                {{-- country --}}   
-                <select name="origin" id="origin" class="form-select">
-                  @foreach ($countries as $item)
-                  <option value="{{ $item->id }}">{{ $item->country }}</option>
-                  @endforeach  
-                </select> 
-                
-              </div>
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                  <label for="Article No">Article No/SKU</label>
-                </div>
-                <div class="form-group">
-                  
-                    <input type="text" class="form-control" name="article_no"  id="article_no" placeholder="Article No/SKU" />
-                </div>
-                <div class="form-group">
-                  <label for="Article No">Locality</label>
-                </div>
-                <div class="form-group">
-                  
-                  <select name="locality" id="locality" class="form-select">
-                    <option value="Imported">Imported</option>
-                    <option value="Local">Local</option>    
-                  </select>
-                </div>
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-                <div class="form-group ">
+          <div style="padding: 10px;  border: 1px solid rgb(5, 5, 5);">
+              <div class="container d-flex justify-content-center align-items-center">
+                {{-- {{ $nextId }} --}}
                   <div class="form-group d-flex">
-                    <div class="form-group d-flex">
-                      <label for="Product">Product Barcode</label>
-                    </div> 
-                    <div> 
-                      <input type="text"  class="form-control" name="product_barcode" id="product_barcode" > 
-                    </div> 
-                  
-                  </div> 
-                  
-                </div>
-                
-                <div class="form-group">
-                  <div class="form-group d-flex">
-                    <div class="form-group d-flex">
-                      <label for="Product">Re-OrderType</label>
-                    </div> 
-                    <div> 
-                      <input type="number"  class="form-control" name="reorder_type" id="reorder_type" value=""> 
-                    </div> 
-                  </div> 
-                </div>   
-            </div> 
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group text-center">
-                <button type="button" class="btn btn-primary text-end" style="margin: 1px;" >button</button>
-              </div>
-              
-              <div class="form-group">
-                <div class="form-group d-flex">
-                  <div class="form-group d-flex">
-                    <label for="Product">Min Qty</label>
-                  </div> 
-                  <div> 
-                    <input type="number" step="0.01" class="form-control" name="min_qty" id="min_qty" > 
-                  </div> 
-                
-                </div> 
-              </div>  
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group d-flex">
-                <div class="form-group">
-                  <label for="Product">Product UOM</label>
-                </div>
-                <div class="form-group">
-                  {{-- country --}}   
-                  <select name="product_uom" id="product_uom" class="form-select">
-                    <option value="none">None</option>
-                    @foreach ($uoms as $item)
-                    <option value="{{ $item->id }}">{{ $item->uom }}</option>
-                  @endforeach    
-                  </select> 
-                  
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <div class="form-group d-flex">
-                  <div class="form-group d-flex">
-                    <label for="Product">MAX QTY</label>
-                  </div> 
-                  <div> 
-                    <input type="number"  class="form-control" name="max_qty" id="max_qty" placeholder="0.0" step="0.01"> 
-                  </div> 
-                </div> 
-              </div>  
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              
-              <div class="form-group">
-                <label for="Product Description">Product Description</label>
-              </div>
-              <div class="form-group">  
-                <textarea type="text" class="form-control blue-border" name="product_description" id="product_description" placeholder="product_description"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="Product">Stock Type </label>
-              </div>
-              <div class="form-group">
-                {{-- country --}}   
-                <select name="stock_type" id="stock_type" class="form-select">
-                  <option value="none">none</option>
-                  @foreach ($stocktypes as $item)
-                  <option value="{{ $item->id }}">{{ $item->stocktype }}</option>
-                  @endforeach  
-                </select> 
-                
-              </div>
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group">
-                <label for="options">Other UOM</label>
-              </div>  
-                <div class="form-group">
-                  <input type="text" name="other_uom" id="other_uom" class="form-control">
-                  {{-- country --}}
-                  <select name="other_unit" id="other_unit" class="form-select">
-                  <option value="none">None</option>
-                  @foreach ($uoms as $item)
-                    <option value="{{ $item->id }}">{{ $item->uom }}</option>
-                  @endforeach   
-                  </select> 
-                </div>  
-                
-              
-                <div class="form-group">
-                  <label for="options">Product Activity  <span style="color:#DC3545">*</span></label>
-                </div>  
-                  <div class="form-group">
-                    <select name="product_activity" id="product_activity" class="form-select">
-                      <option value="01">1</option>
-                      @foreach ($productactivities as $item)
-                        <option value="{{ $item->id }}">{{ $item->product_activity }}</option>
-                      @endforeach  
-                    </select> 
+                    <strong for="Product">Product Code</strong>  
+                    <input type="text"  class="form-control" name="product_code" id="product_code" value="01">
+                  </div>
+                  <div class=" d-flex" style="margin: 3%">
+                      
                     
                   </div>
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group">
-                <label for="options">Bulk Packing</label>
-              </div>  
-              <div class="form-group d-flex">
-                <div class="form-group">
-                  <select name="bulk_packing" id="bulk_packing" class="form-select">
-                    <option value="none">None</option>
-                    @foreach ($packingtypes as $item)
-                    <option value="{{ $item->id }}">{{ $item->packing_types}}</option>
-                  @endforeach
-                  </select> 
+                  <div class="form-group d-flex">
+                    <strong for="options">Product Color</strong>
+                    <input type="text" class="form-control" name="product_color" id="product_color" value="" placeholder="Product_color">
+                  </div>
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                <div class="form-group d-flex">
+                  <strong for="Product">Product Name <span style="color: #ff041d">*</span></strong>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" style="margin-left: -2%;" />
                 </div>
-                <div class="form-group">  
-                  <input type="number" name="blk_pkg_flt" id="blk_pkg_flt" class="form-control" step="0.01" placeholder="0.0">
-                </div>  
-                {{-- country --}}
+                <div class=" d-flex" style="margin: 3%">
+
+                </div>
+                <div class="form-group d-flex">
+                  <strong for="Product" style="" >Origin</strong>
+                
+                  {{-- country --}}   
+                  <select name="origin" id="origin" class="form-select" style="margin-left: 8%;" >
+                    @foreach ($countries as $item)
+                    <option value="{{ $item->id }}">{{ $item->country }}</option>
+                    @endforeach  
+                  </select>          
+                </div>
+              </div>  
+              <div class="container d-flex justify-content-center align-items-center">
+                  <div class="form-group d-flex">
+                    <strong for="Article No">Article No/SKU</strong>
+                    <input type="text" class="form-control" name="article_no"  id="article_no" placeholder="Article No/SKU" />
+                  </div>
+                  <div class=" d-flex" style="margin: 3%">
+                      
+                    
+                  </div>
+                  <div class="form-group d-flex">
+                    <strong for="Article No" style="margin-right: 3%">Locality</strong>
+                    <select name="locality" id="locality" class="form-select" style="margin-left: 2%;">
+                      <option value="Imported">Imported</option>
+                      <option value="Local">Local</option>    
+                    </select>
+                  </div>
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                  
+                    <div class="form-group d-flex">
+                        <strong for="Product">Product Barcode</strong>
+                        <input type="text"  class="form-control" name="product_barcode" id="product_barcode" style="margin-left: -2%" > 
+                    </div> 
+                    <div class=" d-flex" style="margin: 3%">
+                      
+                    
+                    </div>
+                      <div class="form-group d-flex">
+                        <strong for="Product">Re-OrdrType</strong>
+                        <input type="number"  class="form-control" name="reorder_type" id="reorder_type" value=""> 
+                      </div>  
+                     
+              </div> 
+              <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group text-center">
+                      <button type="button" class="btn btn-primary text-end" style="margin: 1px;" >button</button>
+                    </div>
+                    <div class="form-group d-flex">
+                      <strong for="Product" style="margin-left: 6%">Min Qty</strong>
+                      <input type="number" step="0.01" class="form-control" name="min_qty" id="min_qty" style="margin-left: 6%" > 
+                    </div> 
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                <div class="form-group d-flex">
+                    <strong for="Product">Product UOM</strong>
+                    <select name="product_uom" id="product_uom" class="form-select" style="padding-bottom: 5;">
+                      <option value="none">None</option>
+                      @foreach ($uoms as $item)
+                        <option value="{{ $item->id }}">{{ $item->uom }}</option>
+                      @endforeach    
+                    </select> 
+                </div>
+                <div class=" d-flex" style="margin: 3%">
+                      
+                    
+                </div>
+                    <div class="form-group d-flex">
+                      <strong for="Product">MAX QTY</strong>
+                     
+                      <input type="number"  class="form-control" name="max_qty" id="max_qty" placeholder="0.0" step="0.01" style="margin-left: 3%"> 
+                    </div> 
+                  
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                
+                <div class="form-group d-flex">
+                  <strong for="Product Description">Product Description</strong>  
+                  <textarea type="text" class="form-control blue-border" name="product_description" id="product_description" placeholder="product_description" style=""></textarea>
+                </div>
+                <div class=" d-flex" style="margin: 3%">
+                      
+                    
+                </div>
+                <div class="form-group d-flex">
+                  <strong for="Product">Stock Type </strong>
+                 <select name="stock_type" id="stock_type" class="form-select">
+                    <option value="none">none</option>
+                    @foreach ($stocktypes as $item)
+                    <option value="{{ $item->id }}">{{ $item->stocktype }}</option>
+                    @endforeach  
+                  </select> 
+                  
+                </div>
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
                 <div class="form-group">
-                  <input type="text" name="blk_pkg" id="blk_pkg" class="form-control">
+                  <strong for="options">Other UOM</strong>
                 </div>  
-              </div>     
-            
+                  <div class="form-group">
+                    <input type="text" name="other_uom" id="other_uom" class="form-control">
+                    {{-- country --}}
+                    <select name="other_unit" id="other_unit" class="form-select">
+                    <option value="none">None</option>
+                    @foreach ($uoms as $item)
+                      <option value="{{ $item->id }}">{{ $item->uom }}</option>
+                    @endforeach   
+                    </select> 
+                  </div>  
+                  
+                
+                  <div class="form-group">
+                    <strong for="options">Product Activity  <span style="color:#DC3545">*</span></strong>
+                  </div>  
+                    <div class="form-group">
+                      <select name="product_activity" id="product_activity" class="form-select">
+                        <option value="01">1</option>
+                        @foreach ($productactivities as $item)
+                          <option value="{{ $item->id }}">{{ $item->product_activity }}</option>
+                        @endforeach  
+                      </select> 
+                      
+                    </div>
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                  <strong for="options">Bulk Packing</strong>
+                </div>  
+                <div class="form-group d-flex">
+                  <div class="form-group">
+                    <select name="bulk_packing" id="bulk_packing" class="form-select">
+                      <option value="none">None</option>
+                      @foreach ($packingtypes as $item)
+                      <option value="{{ $item->id }}">{{ $item->packing_types}}</option>
+                    @endforeach
+                    </select> 
+                  </div>
+                  <div class="form-group">  
+                    <input type="number" name="blk_pkg_flt" id="blk_pkg_flt" class="form-control" step="0.01" placeholder="0.0">
+                  </div>  
+                  {{-- country --}}
+                  <div class="form-group">
+                    <input type="text" name="blk_pkg" id="blk_pkg" class="form-control">
+                  </div>  
+                </div>     
+              
+                <div class="form-group">
+                  <strong for="options">Ware Housing</strong>
+                </div>  
+                <div class="form-group">    
+                  {{-- country --}}   
+                  <select name="warehousing" id="warehousing" class="form-select">
+                    <option value="01">1</option>
+                    <option value="02">2</option>  
+                    <option value="03">3</option>  
+                  </select> 
+                </div>  
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
               <div class="form-group">
-                <label for="options">Ware Housing</label>
-              </div>  
-              <div class="form-group">    
-                {{-- country --}}   
-                <select name="warehousing" id="warehousing" class="form-select">
-                  <option value="01">1</option>
-                  <option value="02">2</option>  
-                  <option value="03">3</option>  
-                </select> 
-              </div>  
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="form-group">
-                <label for="options">Batch Code Required</label>
+                <strong for="options">Batch Code Required</strong>
               </div>             
                   <div class="form-group d-flex">     
                     {{-- country --}}
@@ -381,7 +361,7 @@
                     </div>
                   </div> 
                   <div class="form-group">
-                    <label for="options">Expiry</label>
+                    <strong for="options">Expiry</strong>
                   </div>                 
                   <div class="form-group d-flex">
                       
@@ -404,6 +384,7 @@
             <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Next</button>
           </div>
         </div>
+        </div>
         <br>
         <br>
         <div class="tab" id="tab2">
@@ -414,7 +395,7 @@
               <div class="container d-flex justify-content-center align-items-center">
                   <div class="form-group   d-flex">
                     <div class="form-group">
-                      <label for="options">Product Brand</label>
+                      <strong for="options">Product Brand</strong>
                     </div>  
                       <div class="form-group">
                         {{-- country --}}   
@@ -428,7 +409,7 @@
                   </div> 
                   <div class="form-group d-flex">   
                     <div class="form-group">
-                      <label for="options">Product Type</label>
+                      <strong for="options">Product Type</strong>
                     </div>  
                     <div class="form-group">
                       
@@ -448,7 +429,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Product Classification</label>
+                    <strong for="options">Product Classification</strong>
                   </div>  
                     <div class="form-group">
                       
@@ -463,7 +444,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Product Status</label>
+                    <strong for="options">Product Status</strong>
                   </div>  
                   <div class="form-group">
                     
@@ -477,131 +458,131 @@
                   </div>  
                 </div>
               
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
-                
-                <div class="form-group   d-flex">
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                  
+                  <div class="form-group   d-flex">
 
-                  <div class="form-group">
-                    <label for="options">Product category <span style="color: red;">*</span></label>
-                  </div>  
+                    <div class="form-group">
+                      <strong for="options">Product category <span style="color: red;">*</span></strong>
+                    </div>  
+                      <div class="form-group">
+                        
+                        {{-- country --}}   
+                        <select name="product_category" id="product_category" class="form-select">
+                          <option value="none">None</option>
+                          @foreach ($productcategories as $item)
+                          <option value="{{ $item->id }}">{{ $item->productcategory}}</option>
+                          @endforeach  
+                        </select> 
+                      </div>  
+                  </div> 
+                  <div class="form-group d-flex">   
+                    <div class="form-group">
+                      <strong for="options">Product Qc Required</strong>
+                    </div>  
+                    <div class="form-group">
+                      <input type="checkbox" name="pqc_required" id="pqc_required" value="Yes">
+                    </div>  
+                  </div>
+                
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                  
+                  <div class="form-group   d-flex">
+
+                    <div class="form-group">
+                      <strong for="options">Product 1st Sub Category</strong>
+                    </div>  
+                      <div class="form-group">
+                        
+                        {{-- country --}}   
+                        <select name="product_1stcategory" id="product_1stcategory" class="form-select">
+                          <option value="01">1</option>
+                          <option value="02">2</option>  
+                          <option value="03">3</option>  
+                        </select> 
+                      </div>  
+                  </div> 
+                  <div class="form-group d-flex">   
+                    <div class="form-group">
+                      <strong for="options">Product Supplier</strong>
+                    </div>  
                     <div class="form-group">
                       
                       {{-- country --}}   
-                      <select name="product_category" id="product_category" class="form-select">
-                        <option value="none">None</option>
-                        @foreach ($productcategories as $item)
-                         <option value="{{ $item->id }}">{{ $item->productcategory}}</option>
+                      <select name="product_supplier" id="product_supplier" class="form-select">
+                        @foreach ($productsuppliers as $item)
+                        <option value="{{ $item->id }}">{{ $item->productsupplier}}</option>
                         @endforeach  
                       </select> 
                     </div>  
-                </div> 
-                <div class="form-group d-flex">   
-                  <div class="form-group">
-                    <label for="options">Product Qc Required</label>
-                  </div>  
-                  <div class="form-group">
-                    <input type="checkbox" name="pqc_required" id="pqc_required" value="Yes">
-                  </div>  
-                </div>
-              
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
+                  </div>
                 
-                <div class="form-group   d-flex">
+              </div>
+              <div class="container d-flex justify-content-center align-items-center">
+                  
+                  <div class="form-group   d-flex">
 
-                  <div class="form-group">
-                    <label for="options">Product 1st Sub Category</label>
-                  </div>  
                     <div class="form-group">
+                      <strong for="options">Product 2nd Category</strong>
+                    </div>  
+                      <div class="form-group">
+                        
+                        {{-- country --}}   
+                        <select name="product_2ndcategory" id="product_2ndcategory" class="form-select">
+                          <option value="01">1</option>
+                          <option value="02">2</option>  
+                          <option value="03">3</option>  
+                        </select> 
+                      </div>  
+                  </div> 
+                  <div class="form-group d-flex">   
+                    <div class="form-group">
+                      <strong for="options">Image</strong>
+                    </div>  
+                    <div class="form-group" style="border: 1px solid rgb(5,5,5);     display: block;
+                          width: 100%;
+                          padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+                          -moz-padding-start: calc(0.75rem - 3px);
+                          font-size: 1rem;
+                          font-weight: 400;
+                          line-height: 1.5;
+                          color: #212529;
+                          background-color: #fff;
+                          background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+                          background-repeat: no-repeat;
+                          background-position: right 0.75rem center;
+                          background-size: 16px 12px;
+                          border: 1px solid #ced4da;
+                          border-radius: 0.375rem;
+                          transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                          -webkit-appearance: none;
+                          -moz-appearance: none;
+                          appearance: none;">
                       
                       {{-- country --}}   
-                      <select name="product_1stcategory" id="product_1stcategory" class="form-select">
-                        <option value="01">1</option>
-                        <option value="02">2</option>  
-                        <option value="03">3</option>  
-                      </select> 
+                      <input type="file" name="product_image" id="product_image">
                     </div>  
-                </div> 
-                <div class="form-group d-flex">   
-                  <div class="form-group">
-                    <label for="options">Product Supplier</label>
-                  </div>  
-                  <div class="form-group">
-                    
-                    {{-- country --}}   
-                    <select name="product_supplier" id="product_supplier" class="form-select">
-                      @foreach ($productsuppliers as $item)
-                       <option value="{{ $item->id }}">{{ $item->productsupplier}}</option>
-                      @endforeach  
-                    </select> 
-                  </div>  
-                </div>
-              
-            </div>
-            <div class="container d-flex justify-content-center align-items-center">
+                  </div>
                 
-                <div class="form-group   d-flex">
-
-                  <div class="form-group">
-                    <label for="options">Product 2nd Category</label>
-                  </div>  
-                    <div class="form-group">
-                      
-                      {{-- country --}}   
-                      <select name="product_2ndcategory" id="product_2ndcategory" class="form-select">
-                        <option value="01">1</option>
-                        <option value="02">2</option>  
-                        <option value="03">3</option>  
-                      </select> 
-                    </div>  
-                </div> 
-                <div class="form-group d-flex">   
-                  <div class="form-group">
-                    <label for="options">Image</label>
-                  </div>  
-                  <div class="form-group" style="border: 1px solid rgb(5,5,5);     display: block;
-                        width: 100%;
-                        padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-                        -moz-padding-start: calc(0.75rem - 3px);
-                        font-size: 1rem;
-                        font-weight: 400;
-                        line-height: 1.5;
-                        color: #212529;
-                        background-color: #fff;
-                        background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
-                        background-repeat: no-repeat;
-                        background-position: right 0.75rem center;
-                        background-size: 16px 12px;
-                        border: 1px solid #ced4da;
-                        border-radius: 0.375rem;
-                        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        appearance: none;">
-                    
-                    {{-- country --}}   
-                    <input type="file" name="product_image" id="product_image">
-                  </div>  
-                </div>
-              
-            </div>
-              
-            <div class="container d-flex justify-content-center align-items-center">
-              <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
-              <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-              <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
-            </div>
-          <script>
-            function submit1() 
-            {
-              var form1 = document.getElementById('form1');
-              form1.submit();          
-            }
-          </script>
-          </div>  
-
-        </div>
+              </div>
+                
+              <div class="container d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
+                <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
+                <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+              </div>
+              <script>
+              function submit1() 
+              {
+                var form1 = document.getElementById('form1');
+                form1.submit();          
+              }
+              </script>
+            </div>  
+          </div>
+  </div>  
            <br><br>
         <div class="tab" id="tab3">
           
@@ -613,7 +594,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Product Price <span style="color:#010101;">(Per Unit)</span></label>
+                    <strong for="options">Product Price <span style="color:#010101;">(Per Unit)</span></strong>
                   </div>  
                     <div class="form-group">
                       
@@ -623,14 +604,14 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Product Discount</label>
+                    
                   </div>  
                   <div class="form-group d-flex">
                     
                     {{-- country --}}   
-                    <input type="number" step="0.01" name="dis_percentage" id="dis_percentage" class="form-control" placeholder="%" >
-                    <input type="number" step="0.01" name="dis_value" id="dis_value" class="form-control" placeholder="Value" >
-                    <input type="number" step="0.01" name="dis_afterdis" id="dis_afterdis" class="form-control" placeholder="After Discount" >
+                    <h6>Percentage</h6>
+                    <h6>% Value</h6>
+                    <h6>After Discount</h6>
                   </div>  
                 </div>
               
@@ -640,7 +621,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Sale Price<span style="color:#010101;">(Per Unit)</span></label>
+                    <strong for="options">Sale Price<span style="color:#010101;">(Per Unit)</span></strong>
                   </div>  
                     <div class="form-group">
                       
@@ -650,7 +631,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-check">
-                    <input type="checkbox" class="" checked>
+                   
                   </div>
                   <br>  
                   <div class="form-group d-flex">
@@ -668,7 +649,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Product Profit</label>
+                    <strong for="options">Product Profit</strong>
                   </div>  
                     <div class="form-group">
                       
@@ -678,7 +659,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Allow Product Special Pricing</label>
+                    <strong for="options">Allow Product Special Pricing</strong>
                   </div>  
                   <div class="form-check">
                     
@@ -693,7 +674,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Product MRP</label>
+                    <strong for="options">Product MRP</strong>
                   </div>  
                     <div class="form-group">
                       
@@ -702,7 +683,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Further Item Tax %</label>
+                    <strong for="options">Further Item Tax %</strong>
                   </div>  
                   <div class="form-group">
                     
@@ -717,7 +698,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Tax Applicable on</label>
+                    <strong for="options">Tax Applicable on</strong>
                   </div>  
                     <div class="form-group">
                       
@@ -731,7 +712,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                 <div class="form-group">
-                    <label for="options">Further Item Tax %</label>
+                    <strong for="options">Further Item Tax %</strong>
                   </div>  
                   <div class="form-group">
                     
@@ -745,7 +726,7 @@
                 <div class="form-group   d-flex">
 
                   <div class="form-group">
-                    <label for="options">Tax ICalculation Type</label>
+                    <strong for="options">Tax ICalculation Type</strong>
                   </div>  
                     <div class="form-group">
                       
@@ -758,7 +739,7 @@
                 </div> 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Item Costing Method</label>
+                    <strong for="options">Item Costing Method</strong>
                   </div>  
                   <div class="form-group">
                     
@@ -776,7 +757,7 @@
                 
                 <div class="form-group d-flex">   
                   <div class="form-group">
-                    <label for="options">Direct Item Tax</label>
+                    <strong for="options">Direct Item Tax</strong>
                   </div>  
                   <div class="form-group">
                     {{-- country --}}
@@ -785,7 +766,7 @@
                 </div>
                 <div class="form-group   d-flex">
                 <div class="form-group">
-                  <label for="MIC">Map Item COA</label>
+                  <strong for="MIC">Map Item COA</strong>
                 </div>  
                   <div class="form-group">
                     
