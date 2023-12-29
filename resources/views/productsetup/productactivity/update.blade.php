@@ -33,18 +33,18 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Activity Code</strong>
-                                <input type="text" name="productactivity_code" id="productactivity_code" value="{{$productactivity->productactivity_code}}" class="form-control" placeholder="Product Activity Code">
+                                <input type="text" name="product_activity_code" id="productactivity_code" value="{{$productactivity->product_activity_code}}" class="form-control" placeholder="Product Activity Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Activity<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="productactivity" id="productactivity" class="form-control" value="{{$productactivity->productactivity}}" placeholder="Product Activity" required>
+                                <input type="text" name="product_activity" id="product_activity" class="form-control" value="{{$productactivity->product_activity}}" placeholder="Product Activity" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
                                 <input type="text" name="detail" id="detail" value="{{$productactivity->detail}}" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$Product Activity->is_active ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$productactivity->is_active ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_active">
                                     Active
                                 </label>

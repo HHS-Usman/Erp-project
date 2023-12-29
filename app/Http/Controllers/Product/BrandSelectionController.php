@@ -73,7 +73,7 @@ class BrandSelectionController extends Controller
     public function edit($id)
     {
         $brand_selection = Brand_selection::find($id);
-        return view('productsetup.brandselection.edit',compact('brands_selection'));
+        return view('productsetup.brandselection.update',compact('brand_selection'));
     }
 
     /**

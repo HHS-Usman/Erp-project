@@ -77,8 +77,8 @@
                       <tr>
                         <th >{{ $productstatus + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->productstatus }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->productstatus_code }}</td>
+                        <td>{{ $item->product_status }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->product_status_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

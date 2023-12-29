@@ -77,8 +77,8 @@
                       <tr>
                         <th >{{ $brandselection + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->brandselection }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->brandselection_code }}</td>
+                        <td>{{ $item->brand_selection }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->brand_selection_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>
@@ -88,7 +88,7 @@
                         </td>
                         <td><form action="" method="POST">
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="{{route('brandselection.edit',$item->id)}}">Edit</a>
+                          <a class="btn btn-primary" href="{{route('brand_selection.edit',$item->id)}}">Edit</a>
                           
                           <button  class="btn btn-danger">Delete</button>
                       </form></td>

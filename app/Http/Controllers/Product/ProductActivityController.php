@@ -48,7 +48,7 @@ class ProductActivityController extends Controller
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
             ]);
-            return redirect()->route('packingactivity.index')->with('success','Manage successfully');
+            return redirect()->route('productactivity.index')->with('success','Manage successfully');
     }
 
     /**
@@ -71,7 +71,7 @@ class ProductActivityController extends Controller
     public function edit($id)
     {
         $productactivity = Product_Activity::find($id);
-        return view('productsetup.productactivity.edit');
+        return view('productsetup.productactivity.update', compact('productactivity'));
     }
 
     /**
@@ -86,12 +86,12 @@ class ProductActivityController extends Controller
         $product_activity = Product_Activity::findOrFail($id);
          //create a new product in database
          $product_activity->update([ 
-            'packing_type' => request()->get('packing_type'),
-            'packing_type_code' => request()->get('packing_type_code'),
+            'product_activity' => request()->get('product_activity'),
+            'product_activity_code' => request()->get('product_activity_code'),
             'detail' => request()->get('detail'),
             'is_active'     => $request->has('is_active') ? 1 : 0, 
         ]);
-        return redirect()->route('packing_type.index')->with('success','Manage successfully');
+        return redirect()->route('productactivity.index')->with('success','Manage successfully');
     }
 
 

@@ -64,7 +64,7 @@
                     <thead>
                       <tr >
                         <th scope="col">S.no</th>
-                        <th scope="col">Div_id</th>
+                        <th scope="col">Pckg_id</th>
                         <th scope="col">Packing Type</th>
                         <th scope="col">Packing Type Code</th>
                         <th scope="col">Detail</th>
@@ -77,8 +77,8 @@
                       <tr>
                         <th >{{ $packingtype + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->packingtype }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->packingtype_code }}</td>
+                        <td>{{ $item->packing_type }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->packing_type_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

@@ -49,7 +49,7 @@ class ProductCategoryController extends Controller
             'detail' => request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
             ]);
-            return redirect()->route('packingcategory.index')->with('success','Manage successfully');
+            return redirect()->route('productcategory.index')->with('success','Manage successfully');
     }
 
     /**
@@ -71,8 +71,8 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        $product_category = Product_category::find($id);
-        return vieW('productsetup.productcategory.edit');
+        $productcategory = Product_category::find($id);
+        return vieW('productsetup.productcategory.update',compact('productcategory'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProductCategoryController extends Controller
             'detail' => request()->get('detail'),
             'is_active'     => $request->has('is_active') ? 1 : 0, 
             ]);
-            return redirect()->route('product_category.index')->with('success','Manage successfully');
+            return redirect()->route('productcategory.index')->with('success','Manage successfully');
     }
 
     /**

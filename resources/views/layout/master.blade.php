@@ -401,6 +401,74 @@
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">Products</a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        {{-- <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('permission.create') }}">Create User Role  </a>
+                                        </li> --}}
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('product.create') }}">Create Product</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('classification.create') }}">Create Classification</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('classification.index') }}">Manage Classification</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('brand_selection.create') }}">Create Brands</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('brand_selection.index') }}">Manage Brands</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productactivity.create') }}">Create Product Activity</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productactivity.index') }}">Manage Product Activity</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productcategory.create') }}">Create Product Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productcategory.index') }}">Manage Product Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productstatus.create') }}">Create Product Status</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productstatus.index') }}">Manage Product Status</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productsupplier.create') }}">Create Product Supplier</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productsupplier.index') }}">Manage Product Supplier</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('producttype.create') }}">Create Product Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('producttype.index') }}">Manage Product Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('stocktype.create') }}">Create Stock Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('stocktype.index') }}">Manage Stock Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('uom.create') }}">Create UOM </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('uom.index') }}">Manage UOM </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">Sales Person</a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
@@ -556,6 +624,7 @@
                                         </ul>
                                    
                                 </div>
+                                
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
@@ -565,7 +634,8 @@
                                                 href="{{ route('permission.create') }}">Create User Role  </a>
                                         </li> --}}
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('permission.index') }}">Manage User Role </a></li>
+                                                href="{{ route('product.create') }}">Create Product</a>
+                                            </li>
                                     </ul>
                                 </div>
                             </div>

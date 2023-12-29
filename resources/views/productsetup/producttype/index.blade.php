@@ -77,8 +77,8 @@
                       <tr>
                         <th >{{ $producttype + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>
-                        <td>{{ $item->producttype }}</td>
-                        <td><a  class="datatable-sorter"></a>{{ $item->producttype_code }}</td>
+                        <td>{{ $item->product_type }}</td>
+                        <td><a  class="datatable-sorter"></a>{{ $item->product_type_code }}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                                 <p>Active</p>

@@ -73,7 +73,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($product1stsbctgrys as $product1stsbctgry =>$item )
+                      @foreach ($product1stsbctgries as $product1stsbctgry =>$item )
                       <tr>
                         <th >{{ $product1stsbctgry + 1 }}</a></th>
                         <th >{{ $item->id }}</a></th>

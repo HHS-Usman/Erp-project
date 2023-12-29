@@ -32,11 +32,11 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Product Category Code</strong>
-                                <input type="text" name="productcategory_code" id="productcategory_code" class="form-control" placeholder="productcategory Code">
+                                <input type="text" name="product_category_code" id="product_category_code" class="form-control" placeholder="productcategory Code">
                             </div>
                             <div class="form-group">
                                 <strong>Product Category<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="productcategory" id="productcategory" class="form-control" placeholder="productcategory" required>
+                                <input type="text" name="product_category" id="product_category" class="form-control" placeholder="productcategory" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

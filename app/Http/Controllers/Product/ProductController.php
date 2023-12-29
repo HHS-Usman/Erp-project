@@ -6,6 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use File;
+use Illuminate\Support\Facades\DB;
+use App\Models\Brand_Selection;
+use App\Models\Classification;
+use App\Models\Packing_Type;
+use App\Models\Product_Status;
+use App\Models\Product_Activity;
+use App\Models\Product_supplier;
+use App\Models\Product_Type;
+use App\Models\Stock_Type;
+use App\Models\Country;
+use App\Models\Product_category;
+use App\Models\Unit_selection;
+use App\Models\Coa;
 class ProductController extends Controller
 {
     /**
@@ -25,7 +38,25 @@ class ProductController extends Controller
      */
     public function create()
     {
-       return view('productsetup.product.create');
+        $brandselections = Brand_Selection::latest()->paginate();
+        $classifications =Classification::latest()->paginate();
+        $packingtypes =Packing_Type::latest()->paginate();
+        $productcategories =Product_category::latest()->paginate();
+        $productstatuses =Product_Status::latest()->paginate();
+        $productsuppliers =Product_supplier::latest()->paginate();
+        $producttypes =Product_Type::latest()->paginate();
+        $stocktypes =Stock_Type::latest()->paginate();
+        $uoms =Unit_Selection::latest()->paginate();
+        $countries = Country::latest()->paginate();
+        $productactivities = Product_Activity::latest()->paginate();
+        $coas = Coa::latest()->paginate();
+        $nextId = DB::table('products')->max('id') + 1;
+        return view('productsetup.product.create',compact('nextId'
+        ,'brandselections','countries','coas'
+        ,'classifications','packingtypes'
+        ,'productcategories','productstatuses'
+        ,'productsuppliers','producttypes'
+        ,'stocktypes','uoms','productactivities'));
     }
 
     /**
