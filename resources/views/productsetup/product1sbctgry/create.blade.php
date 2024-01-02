@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('page-tab')
     Create Product 1st Sub Category
-@endsection    
+@endsection
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
-        
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -26,7 +26,7 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('product1stsbctgry.store') }}" method="POST">        
+            <form action="{{ route('product_sub_category.store') }}" method="POST">
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -58,7 +58,7 @@
         <br>
         <br>
         <div><br> </div>
-        
-  </section> 
 
-@endsection    
+  </section>
+
+@endsection

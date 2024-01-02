@@ -51,43 +51,43 @@ class DivuploadController extends Controller
       $path = public_path('csvfile/Function_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function manageleveluploadercsv()
    {
       $path = public_path('csvfile/ManagmentLevel_Templete Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function designationuploadercsv()
    {
       $path = public_path('csvfile/Designation_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function gradpuploadercsv()
    {
       $path = public_path('csvfile/Grade_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function groupuploadercsv()
    {
       $path = public_path('csvfile/Group_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function leavingreasonuoloadercsv()
    {
       $path = public_path('csvfile/LeavingReasons_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function languageupoloadercsv()
    {
       $path = public_path('csvfile/Language_Templete_Uploader_(CSV).csv');
       return response()->download($path);
    }
-   // function here create for csv file download 
+   // function here create for csv file download
    public function religionupoloadercsv()
    {
       $path = public_path('csvfile/Religion_Templete_Uploader_(CSV).csv');
@@ -181,7 +181,7 @@ class DivuploadController extends Controller
          ]);
          $file = $request->file('file');
          $extension = $file->getClientOriginalExtension();
-         
+
          $valuegetting = $request->input('filedatainfor');
          if ($extension === 'csv') {
             // Check if the selected file type matches the expected type
@@ -217,7 +217,7 @@ class DivuploadController extends Controller
             $department->detail = $value['Detail'];
 
             // Check if the 'Active' column contains only 0 or 1
-            $isActive = intval($value['Active ']);
+            $isActive = intval($value['Active']);
             if ($isActive === 0 || $isActive === 1) {
                $department->is_active = $isActive;
                $department->save();
@@ -228,7 +228,6 @@ class DivuploadController extends Controller
                return redirect()->back()->with('error', 'We Dont Accept Greater than 0 and 1 We accept only 0 or 1 in Active');
             }
          }
-
          return redirect()->back()->with('success', 'File uploaded successfully.');
       }
       if ($request->key == 'Division') {
@@ -741,7 +740,7 @@ class DivuploadController extends Controller
    /**
     * Display the specified resource.
     *
-     
+
     * @return \Illuminate\Http\Response
     */
    public function show()

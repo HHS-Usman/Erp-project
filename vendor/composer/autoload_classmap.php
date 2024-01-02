@@ -86,6 +86,7 @@ return array(
     'App\\Http\\Controllers\\Product\\ProductCategoryController' => $baseDir . '/app/Http/Controllers/Product/ProductCategoryController.php',
     'App\\Http\\Controllers\\Product\\ProductController' => $baseDir . '/app/Http/Controllers/Product/ProductController.php',
     'App\\Http\\Controllers\\Product\\ProductStatusController' => $baseDir . '/app/Http/Controllers/Product/ProductStatusController.php',
+    'App\\Http\\Controllers\\Product\\ProductSubCategoryController' => $baseDir . '/app/Http/Controllers/Product/ProductSubCategoryController.php',
     'App\\Http\\Controllers\\Product\\ProductSupplierController' => $baseDir . '/app/Http/Controllers/Product/ProductSupplierController.php',
     'App\\Http\\Controllers\\Product\\ProductTypeController' => $baseDir . '/app/Http/Controllers/Product/ProductTypeController.php',
     'App\\Http\\Controllers\\Product\\StockTypeController' => $baseDir . '/app/Http/Controllers/Product/StockTypeController.php',

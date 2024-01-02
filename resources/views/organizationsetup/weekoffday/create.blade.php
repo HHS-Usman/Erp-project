@@ -198,7 +198,7 @@
                     
                     </table>
                   </div>
-                  <button type="submit"> btn daba</button>
+                  <button type="submit" class="btn btn-primary" >Save</button>
                  </form> 
                 </div>  
               </div>  

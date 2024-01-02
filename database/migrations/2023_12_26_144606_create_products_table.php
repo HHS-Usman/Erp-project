@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id(); 
+            $table->id();
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->unsignedBigInteger('company_id')->nullable();
@@ -22,10 +22,12 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->string('name');
             $table->string('article_no');
-            $table->string('product_uom');
+            $table->unsignedBigInteger('product_uom_id')->nullable();
+            $table->foreign('product_uom_id')->references('id')->on('unit_selections')->onDelete('cascade');
             $table->string('product_description');
             $table->string('product_barcode');
-            $table->string('other_uom'); 
+            $table->unsignedBigInteger('other_uom')->nullable();
+            $table->foreign('other_uom')->references('id')->on('unit_selections')->onDelete('cascade');
             $table->float('other_unit');
             $table->string('bulk_packing');
             $table->float('blk_pkg_flt');
@@ -48,23 +50,23 @@ class CreateProductsTable extends Migration
             $table->string('product_brand');
             $table->string('product_classification');
             $table->string('product_category');
-            $table->string('product_1stcategory');            
-            $table->string('product_2ndcategory');            
-            $table->string('product_type');   
+            $table->string('product_1stcategory');
+            $table->string('product_2ndcategory');
+            $table->string('product_type');
             $table->string('service')->default('No')->nullable();
             $table->string('fixedasset')->default('No')->nullable();
             $table->string('general_product')->default('No')->nullable();
             $table->string('product_active')->default('No')->nullable();
             $table->string('pqc_required')->default('No')->nullable();
             $table->string('product_supplier');
-            $table->string('product_image'); 
+            $table->string('product_image');
             $table->string('product_status');
             $table->float('price_per_unit');
             $table->float('dis_percentage');
             $table->float('dis_value');
             $table->float('dis_afterdis');
             $table->float('sale_price');
-            $table->float('float');          
+            $table->float('float');
             $table->float('float_value');
             $table->string('product_value');
             $table->float('product_profit');
