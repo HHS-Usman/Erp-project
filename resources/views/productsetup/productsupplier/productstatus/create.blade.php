@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('page-tab')
-    Update Product 1st Sub Category
-@endsection
+    Create Product Status
+@endsection    
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
-
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -17,36 +17,34 @@
             </div>
         @endif
             <div class="pagetitle" style="margin-left: 20px;">
-                <h1>Update Product 1st Sub Category</h1>
+                <h1>Create Product Status</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Update Product 1st Sub Category</a></li>
+                    <li class="breadcrumb-item active"><a> Create Product Status</a></li>
                 </ol>
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('product_sub_category.update',$product1stsbctgry) }}" method="POST">
+            <form action="{{ route('productstatus.store') }}" method="POST">        
                 @csrf
-                @method('PUT')
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <strong>Product 1st Sub Category Code</strong>
-                                <input type="text" name="product1stsbctgry_code" id="product1stsbctgry_code" value="{{$product1stsbctgry->product1stsbctgry_code}}" class="form-control" placeholder="Product 1st Sub Category Code">
+                                <strong>Product Status Code</strong>
+                                <input type="text" name="product_status_code" id="productstatus_code" class="form-control" placeholder="Product Status Code">
                             </div>
                             <div class="form-group">
-                                <strong>Product 1st Sub Category<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="product1stsbctgry" id="product1stsbctgry" class="form-control" value="{{$product1stsbctgry->product1stsbctgry}}" placeholder="Product 1st Sub Category" required>
+                                <strong>Product Status<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="product_status" id="productstatus" class="form-control" placeholder="Product Status" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
-                                <input type="text" name="detail" id="detail" value="{{$product1stsbctgry->detail}}" class="form-control" placeholder="Detail">
+                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{$product1stsbctgry->is_active ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_active">
-                                    Active
+                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                                Active
                                 </label>
                             </div>
                         </div>
@@ -60,7 +58,7 @@
         <br>
         <br>
         <div><br> </div>
+        
+  </section> 
 
-  </section>
-
-@endsection
+@endsection    

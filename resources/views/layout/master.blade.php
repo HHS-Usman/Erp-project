@@ -344,9 +344,9 @@
                                                 href="{{ route('city.create') }}">Create City</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.index') }}">Manage City</a></li>
-                                       
 
-                                       
+
+
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -463,7 +463,19 @@
                                         <li class="p-0"><a class="dropdown-item"
                                             href="{{ route('uom.index') }}">Manage UOM </a>
                                         </li>
-                                        
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('product_sub_category.create') }}">Create Product Sub Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('product_sub_category.index') }}">Manage Product Sub Category</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('product_2nd_sub_category.create') }}">Create Product 2nd Sub Category </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd Sub Category </a>
+                                        </li>
+
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -553,8 +565,8 @@
                                                 Create Buyer Payment
                                             </a>
                                         </li>
-                                    </ul> 
-                                   
+                                    </ul>
+
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
@@ -587,8 +599,8 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
                                         </li>
-                                    </ul> 
-                                   
+                                    </ul>
+
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
@@ -612,7 +624,7 @@
                                             </li>
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('buyercategory.index') }}">
-                                                    Manage buyer Category 
+                                                    Manage buyer Category
                                                 </a>
                                             </li>
                                             <li class="p-0"><a class="dropdown-item"
@@ -622,9 +634,9 @@
                                                     href="{{ route('buyertype.index') }}">Manage Buyer Type</a>
                                             </li>
                                         </ul>
-                                   
+
                                 </div>
-                                
+
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
