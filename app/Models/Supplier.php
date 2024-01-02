@@ -11,4 +11,30 @@ class Supplier extends Model
     protected $guarded = [
         'id',
     ];
+    public function Bank()
+    {
+        return $this->belongsTo(Bank::class, 'bank_id');
+    }
+    public function Suppliercategory()
+    {
+        return $this->belongsTo(SupplierCategory::class, 'suplierCatg_id');
+    }
+    public function Supliertype()
+    {
+        return $this->belongsTo(Suppliertype::class, 'supliertype_id');
+    }
+    public function Province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+    public function Country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+    public function City()
+    {
+        return $this->belongsTo(City::class, 'City_id');
+    }
+
+
 }

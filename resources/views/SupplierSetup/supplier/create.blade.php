@@ -158,7 +158,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Adress</strong>
-                                        <input type="textarea" class="form-control" id="adress" name="adress"
+                                        <input type="textarea" class="form-control" id="adress" name="adressabove"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -171,7 +171,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>City</strong>
-                                        <select name="city" id="city" class="form-control">
+                                        <select name="citydabove" id="city" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -188,7 +188,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Province</strong>
-                                        <select name="province" id="province" class="form-control">
+                                        <select name="provinceabove" id="province" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -205,7 +205,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Zip/Postal Code</strong>
-                                        <input type="text" class="form-control" id="zipcode" name="zipcode"
+                                        <input type="text" class="form-control" id="zipcode" name="zipcodeabove"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -218,7 +218,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Country</strong>
-                                        <select name="country" id="country" class="form-control">
+                                        <select name="countryabove" id="country" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -234,7 +234,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 form-group">
-                                        <strong>Buyer Type</strong>
+                                        <strong>Suplier Type</strong>
 
                                         <select name="suppliertype" id="suppliertype" class="form-control">
                                             <option value="Select Sale Type">Select Supplier Type </option>
@@ -298,21 +298,20 @@
                                         <select name="companyshipadres" id="companyshipadres" class="form-control">
                                             <option value="Select Sale Type">Select Company Shipping Adress </option>
                                             <option value="above">Same As Obove</option>
-                                            <option value="above">Other</option>
+                                            <option value="other">Other</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Address</strong>
                                         <input type="text" class="form-control" id="shippingaddress"
-                                            name="shippingaddress" placeholder="Shipping Address">
+                                            name="shippingaddresson" placeholder="Shipping Address">
                                     </div>
                                 </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping City</strong>
-                                        <select name="shippngcity" id="shippngcity" class="form-control">
+                                        <select name="shippngcityon" id="shippngcity" class="form-control">
                                             <option value="Select Shipping City">Select Shipping City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -321,7 +320,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>ZIP/Postal Code</strong>
-                                        <input type="text" class="form-control" id="postalcode" name="postalcode"
+                                        <input type="text" class="form-control" id="postalcode" name="postalcodeon"
                                             placeholder="ZIP/Postal Code">
                                     </div>
                                 </div>
@@ -329,7 +328,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Province</strong>
-                                        <select name="shippingprovince" id="shippingprovince" class="form-control">
+                                        <select name="shippingprovinceon" id="shippingprovince" class="form-control">
                                             <option value="Select Sale Type">Select Shipping province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -338,7 +337,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Country</strong>
-                                        <select name="shippingcountry" id="shippingcountry" class="form-control">
+                                        <select name="shippingcountryon" id="shippingcountry" class="form-control">
                                             <option value="Select Sale Type">Select Shipping Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -450,7 +449,7 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Select Bank</strong>
-                                    <select name="bank" id="bank" class="form-control">
+                                    <select name="bankdata" id="bank" class="form-control">
                                         <option value="Select ">Select Bank </option>
                                         @foreach ($bank as $item)
                                             <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>

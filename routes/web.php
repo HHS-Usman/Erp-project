@@ -87,11 +87,13 @@ use App\Http\Controllers\Product\ProductSupplierController;
 use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
+use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
 use App\Models\SupplierCategory;
 use App\Models\Suppliertype;
+use App\Models\Supplieruploader;
 use App\Models\Vouchertype;
 use App\Models\YearClosing;
 use Illuminate\Support\Facades\Auth;
@@ -196,6 +198,8 @@ Route::resource('suppliertype',SuppliertypeController::class);
 Route::resource('buyerpayment',BuyerpaymentController::class);
 Route::resource('supplierpayment',SupplyController::class);
 
+Route::resource('supplierupload',SupplieruploaderController::class);
+
 
 
 
@@ -269,4 +273,6 @@ Route::get('religionupoloadcsv',[DivuploadController::class ,'religionupoloaderc
 Route::get('/download', 'DivuploadController@DivuploadController')->name('download');
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
 Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
+// for supplier Route
+Route::post('/supplierupload',[SupplieruploaderController::class ,'store'])->name('supplierupload');
 });

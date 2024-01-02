@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupplierpaymentsTable extends Migration
+class CreateSupplieruploadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateSupplierpaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supplierpayments', function (Blueprint $table) {
+        Schema::create('supplieruploaders', function (Blueprint $table) {
             $table->id();
-            $table->string('');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateSupplierpaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplierpayments');
+        Schema::dropIfExists('supplieruploaders');
     }
 }

@@ -592,6 +592,9 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
                                         </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
+                                    </li>
                                     </ul> 
                                    
                                 </div>

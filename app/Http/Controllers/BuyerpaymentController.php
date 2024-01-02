@@ -35,7 +35,7 @@ class BuyerpaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

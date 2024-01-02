@@ -19,8 +19,6 @@ class CreateAccounttypesTable extends Migration
             $table->string('Code');
             $table->string('Detail');
             $table->timestamps();
-
-
     });
     }
 
