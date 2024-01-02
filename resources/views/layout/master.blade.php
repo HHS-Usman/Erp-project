@@ -565,8 +565,12 @@
                                                 Create Buyer Payment
                                             </a>
                                         </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('supplierpayment.create') }}">
+                                            Create Supplier Payment
+                                            </a>
+                                        </li>
                                     </ul>
-
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
