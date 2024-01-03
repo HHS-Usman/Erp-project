@@ -217,7 +217,7 @@ class DivuploadController extends Controller
             $department->detail = $value['Detail'];
 
             // Check if the 'Active' column contains only 0 or 1
-            $isActive = intval($value['Active']);
+            $isActive = intval($value['Active ']);
             if ($isActive === 0 || $isActive === 1) {
                $department->is_active = $isActive;
                $department->save();
@@ -228,6 +228,7 @@ class DivuploadController extends Controller
                return redirect()->back()->with('error', 'We Dont Accept Greater than 0 and 1 We accept only 0 or 1 in Active');
             }
          }
+
          return redirect()->back()->with('success', 'File uploaded successfully.');
       }
       if ($request->key == 'Division') {
