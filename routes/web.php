@@ -88,6 +88,7 @@ use App\Http\Controllers\Product\ProductSupplierController;
 use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
+use App\Http\Controllers\Product\UploaderController;
 use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
@@ -128,6 +129,7 @@ Route::resource('subdepartment',SubdepartmentController::class);
 Route::resource('function',FundtionController::class);
 Route::resource('userrole',User_role_controller::class);
 Route::resource('users',Usercontroller::class);
+Route::resource('productuploader',UploaderController::class);
 Route::resource('management',MangementlevelController::class);
 Route::resource('submanagement',SubmanagementlevelController::class);
 Route::resource('gazetedholiday',GazetedholidayController::class);
@@ -275,6 +277,7 @@ Route::get('/download', 'DivuploadController@DivuploadController')->name('downlo
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
 Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
 // for supplier Route
+Route::post('/productupload',[UploaderController::class ,'store'])->name('productupload');
 Route::post('/supplierupload',[SupplieruploaderController::class ,'store'])->name('supplierupload');
 
 

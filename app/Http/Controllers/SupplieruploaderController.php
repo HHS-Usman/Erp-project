@@ -38,24 +38,13 @@ class SupplieruploaderController extends Controller
     public function store(Request $request)
     {
         if ($request->key == 'Supplier') {
-            // $request->validate([
-            //    'file' => 'required|mimes:csv,xlsx',
-            //    'key' => 'required|in:Supplier',
-            // ]);
             $file = $request->file('file');
-            // $extension = $file->getClientOriginalExtension();
-            // $valuegetting = $request->input('filedatainfor');
-
             $csv = Reader::createFromPath($file->getPathname(), 'r');
             $csv->setHeaderOffset(0);
             $data = $csv->getRecords();
             if ($request->has('Overwrite')) {
                 Supplier::truncate();
             }
-            // Add new data to the existing data in the table
-            // if($value['Active '] > 1 && $value['Active '] < 0){
-            //    return redirect()->back()->with('error', 'We Dont Accept Greater than 0 and 1 We accept only 0 or 1 in Active');
-            // }
             foreach ($data as $value) {
                 $supplier = new Supplier();
                 $supplier->customer_code= $value['customer_code'];
