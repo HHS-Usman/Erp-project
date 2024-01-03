@@ -66,6 +66,7 @@ use App\Http\Controllers\BuyercategoryController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\BuyerpaymentController;
 use App\Http\Controllers\BuyertypeController;
+use App\Http\Controllers\BuyeruploadController;
 use App\Http\Controllers\FinancialyearController;
 use App\Http\Controllers\JournalvoucherController;
 use App\Http\Controllers\ProvinceController;
@@ -275,4 +276,8 @@ Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])-
 Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
 // for supplier Route
 Route::post('/supplierupload',[SupplieruploaderController::class ,'store'])->name('supplierupload');
+
+
+Route::resource('buyerupload',BuyeruploadController::class);
+Route::post('/buyerupload',[BuyeruploadController::class ,'store'])->name('buyerupload');
 });

@@ -25,7 +25,7 @@ class BuyerController extends Controller
     public function index()
     {
         $buyer = Buyer::all();
-        return view('buyersetup.buyer.index',compact('buyer'));
+        return view('buyersetup.buyer.index', compact('buyer'));
     }
 
     /**
@@ -35,14 +35,14 @@ class BuyerController extends Controller
      */
     public function create()
     {
-        $maxID = Buyer::max('buyer_id')+1;
+        $maxID = Buyer::max('buyer_id') + 1;
         $bank = Bank::all();
         $buyercetegory = BuyerCategory::all();
-        $btype =Buyertype::all();
+        $btype = Buyertype::all();
         $province = Province::all();
         $country = Country::all();
         $city = City::all();
-        return view('buyersetup.buyer.create',compact('province','country','city','btype','buyercetegory','bank','maxID'));
+        return view('buyersetup.buyer.create', compact('province', 'country', 'city', 'btype', 'buyercetegory', 'bank', 'maxID'));
     }
 
     /**
@@ -53,49 +53,6 @@ class BuyerController extends Controller
      */
     public function store(Request $request)
     {
-        // $aboveaddress = request()->get('companyshipadres');
-        // if($aboveaddress=="above"){
-        //     Buyer::create([
-        //         'customer_code'=>request()->get('customcode'),
-        //         'email'=>request()->get('email'),
-        //         'companyname'=>request()->get('companyname'),
-        //         'phone_no1'=>request()->get('phoneone'),
-        //         'phone_no2'=>request()->get('phonetwo'),
-        //         'address'=>request()->get('adress'),
-        //         'city'=>request()->get('city'),
-        //         'cell_no'=>request()->get('cellno'),
-        //         'province'=>request()->get('province'),
-        //         'contactperson'=>request()->get('contactperson'),
-        //         'zipcode'=>request()->get('zipcode'),
-        //         'contactpersoncell_no'=>request()->get('pcellno'),
-        //         'country'=>request()->get('country'),
-        //         'contactperson_email'=>request()->get('contactemail'),
-        //         'buyertype'=>request()->get('buyertype'),
-        //         'buyercategory'=>request()->get('buyercategory'),
-        //         'creditdays'=>request()->get('creditdays'),
-        //         'creditlimit'=>request()->get('creditlimit'),
-        //         'buyerdiscount'=>request()->get('buyerdiscount'),
-        //         'buyeradvance'=>request()->get('buyeradvance'),
-        //         'suplierlocality'=>request()->get('buyerlocality'),
-        //         'shiping_addres'=>request()->get('shippingaddress'),
-        //         'shiping_city'=>request()->get('shippngcity'),
-        //         'shippingprovince'=>request()->get('shippingprovince'),
-        //         'shippingcountry'=>request()->get('shippingcountry'),
-        //         'title'=>request()->get('title'),
-        //         'contactpersonemail'=>request()->get('contactpersonemail'),
-        //         'dispnote_invoice'=>request()->get('dinvoice'),
-        //         'st_registration_no'=>request()->get('registration_st'),
-        //         'st_invoicenote'=>request()->get('invoinceterm'),
-        //         'withouttax_perc_age'=>request()->get('Withholding'),
-        //         'bankname'=>request()->get('bank'),
-        //         'account_title'=>request()->get('accounttext'),
-        //         'accountno'=>request()->get('accontno'),
-        //         'branchcode'=>request()->get('branchcode'),
-        //         'branchname'=>request()->get('bank'),
-        //         'openingbalance'=>request()->get('openingbalance'),
-        //         'dateopening'=>request()->get('openingdate'),
-        //     ]);
-        // }
         $request->validate([
 
             'shippingaddress' => 'nullable',
@@ -130,50 +87,108 @@ class BuyerController extends Controller
             'openingbalance' => 'nullable',
             'openingdate' => 'nullable',
         ]);
+        $aboveaddress = request()->get('companyshipadres');
+        if ($aboveaddress == "above") {
+            Buyer::create([
+                'customer_code' => request()->get('customcode'),
+                'email' => request()->get('email'),
+                'companyname' => request()->get('companyname'),
+                'phone_no1' => request()->get('phoneone'),
+                'phone_no2' => request()->get('phonetwo'),
+                'address' => request()->get('adressb'),
+                // 'city'=>request()->get('cityb'),
+                'cell_no' => request()->get('cellno'),
+                // 'province' => request()->get('provinceb'),
+                'contactperson' => request()->get('contactperson'),
+                'zipcode' => request()->get('zipcodeb'),
+                'contactpersoncell_no' => request()->get('pcellno'),
+                // 'country' => request()->get('countryb'),
+                'contactperson_email' => request()->get('contactemail'),
+                // 'buyertype'=>request()->get('buyertype'),
+                // 'buyercategory'=>request()->get('buyercategory'),
+                'creditdays' => request()->get('creditdays'),
+                'creditlimit' => request()->get('creditlimit'),
+                'buyerdiscount' => request()->get('buyerdiscount'),
+                'buyeradvance' => request()->get('buyeradvance'),
+                'suplierlocality' => request()->get('buyerlocality'),
+                // 'shiping_addres' => request()->get('shippingaddress'),
+                // 'shiping_city'=>request()->get('shippngcity'),
+                // 'shippingprovince'=>request()->get('shippingprovince'),
+                // 'shippingcountry'=>request()->get('shippingcountry'),
+                'title' => request()->get('title'),
+                'contactpersonemail' => request()->get('contactpersonemail'),
+                'dispnote_invoice' => request()->get('dinvoice'),
+                'st_registration_no' => request()->get('registration_st'),
+                'st_invoicenote' => request()->get('invoinceterm'),
+                'withouttax_perc_age' => request()->get('Withholding'),
+                'bankname' => request()->get('bank'),
+                'account_title' => request()->get('accounttext'),
+                'accountno' => request()->get('accontno'),
+                'branchcode' => request()->get('branchcode'),
+                'branchname' => request()->get('bank'),
+                'openingbalance' => request()->get('openingbalance'),
+                'dateopening' => request()->get('openingdate'),
+                // forign key
+                'bank_id' => request()->get('bankvalue'),
+                'bcategory_id' => request()->get('buyercategory'),
+                'btype_id' => request()->get('buyertype'),
+                'province_id' => request()->get('provinceb'),
+                'country_id' => request()->get('countryb'),
+                'City_id' => request()->get('cityb'),
+            ]);
+        }
+        else{
         Buyer::create([
-            'customer_code'=>request()->get(''),
-            'email'=>request()->get('email'),
-            'companyname'=>request()->get('companyname'),
-            'phone_no1'=>request()->get('phoneone'),
-            'phone_no2'=>request()->get('phonetwo'),
-            'address'=>request()->get('adress'),
-            'city'=>request()->get('city'),
-            'cell_no'=>request()->get('cellno'),
-            'province'=>request()->get('province'),
-            'contactperson'=>request()->get('contactperson'),
-            'zipcode'=>request()->get('zipcode'),
-            'contactpersoncell_no'=>request()->get('pcellno'),
-            'country'=>request()->get('country'),
-            'contactperson_email'=>request()->get('contactemail'),
-            'buyertype'=>request()->get('buyertype'),
-            'buyercategory'=>request()->get('buyercategory'),
-            'creditdays'=>request()->get('creditdays'),
-            'creditlimit'=>request()->get('creditlimit'),
-            'buyerdiscount'=>request()->get('buyerdiscount'),
-            'buyeradvance'=>request()->get('buyeradvance'),
-            'suplierlocality'=>request()->get('buyerlocality'),
-            'shiping_addres'=>request()->get('shippingaddress'),
-            'shiping_city'=>request()->get('shippngcity'),
-            'shippingprovince'=>request()->get('shippingprovince'),
-            'shippingcountry'=>request()->get('shippingcountry'),
-            'title'=>request()->get('title'),
-            'contactpersonemail'=>request()->get('contactpersonemail'),
-            'dispnote_invoice'=>request()->get('dinvoice'),
-            'st_registration_no'=>request()->get('registration_st'),
-            'st_invoicenote'=>request()->get('invoinceterm'),
-            'withouttax_perc_age'=>request()->get('Withholding'),
-            'bankname'=>request()->get('bank'),
-            'account_title'=>request()->get('accounttext'),
-            'accountno'=>request()->get('accontno'),
-            'branchcode'=>request()->get('branchcode'),
-            'branchname'=>request()->get('branchname'),
-            'openingbalance'=>request()->get('openingbalance'),
-            'dateopening'=>request()->get('openingdate'),
+            'customer_code' => request()->get('customcode'),
+            'email' => request()->get('email'),
+            'companyname' => request()->get('companyname'),
+            'phone_no1' => request()->get('phoneone'),
+            'phone_no2' => request()->get('phonetwo'),
+            'address' => request()->get('shippingaddress'),
+            // 'city' => request()->get('city'),
+            'cell_no' => request()->get('cellno'),
+            // 'province' => request()->get('province'),
+            'contactperson' => request()->get('contactperson'),
+            // 'zipcode' => request()->get('zipcode'),
+            'contactpersoncell_no' => request()->get('pcellno'),
+            // 'country' => request()->get('country'),
+            'contactperson_email' => request()->get('contactemail'),
+            // 'buyertype' => request()->get('buyertype'),
+            // 'buyercategory' => request()->get('buyercategory'),
+            'creditdays' => request()->get('creditdays'),
+            'creditlimit' => request()->get('creditlimit'),
+            'buyerdiscount' => request()->get('buyerdiscount'),
+            'buyeradvance' => request()->get('buyeradvance'),
+            'suplierlocality' => request()->get('buyerlocality'),
+            'shiping_addres' => request()->get('shippingaddress'),
+            // 'shiping_city' => request()->get('shippngcity'),
+            // 'shippingprovince' => request()->get('shippingprovince'),
+            // 'shippingcountry' => request()->get('shippingcountry'),
+            'title' => request()->get('title'),   
+            'zipcode' => request()->get('postalcodeon'),
+            'contactpersonemail' => request()->get('contactpersonemail'),
+            'dispnote_invoice' => request()->get('dinvoice'),
+            'st_registration_no' => request()->get('registration_st'),
+            'st_invoicenote' => request()->get('invoinceterm'),
+            'withouttax_perc_age' => request()->get('Withholding'),
+            'bankname' => request()->get('bank'),
+            'account_title' => request()->get('accounttext'),
+            'accountno' => request()->get('accontno'),
+            'branchcode' => request()->get('branchcode'),
+            'branchname' => request()->get('branchname'),
+            'openingbalance' => request()->get('openingbalance'),
+            'dateopening' => request()->get('openingdate'),
+             // forign key
+             'bank_id' => request()->get('bankvalue'),
+             'bcategory_id' => request()->get('buyercategory'),
+             'btype_id' => request()->get('buyertype'),
+             'province_id' => request()->get('shippingprovince'),
+             'country_id' => request()->get('shippingcountry'),
+             'City_id' => request()->get('city'),
         ]);
-        // $buyer->payroll()->create($request->input('payroll'));
-        // $buyer->companyInfo()->create($request->get('company_info'));
+    }
 
-        return redirect()->route('buyer.index')->with('success','Create successfully');
+        return redirect()->route('buyer.index')->with('success', 'Create successfully');
     }
 
     /**

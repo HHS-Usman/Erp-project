@@ -163,7 +163,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Adress</strong>
-                                        <input type="textarea" class="form-control" id="adress" name="adress"
+                                        <input type="textarea" class="form-control" id="adress" name="adressb"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -176,7 +176,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>City</strong>
-                                        <select name="city" id="city" class="form-control">
+                                        <select name="cityb" id="city" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -193,7 +193,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Province</strong>
-                                        <select name="province" id="province" class="form-control">
+                                        <select name="provinceb" id="province" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -210,7 +210,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Zip/Postal Code</strong>
-                                        <input type="text" class="form-control" id="zipcode" name="zipcode"
+                                        <input type="text" class="form-control" id="zipcode" name="zipcodeb"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -223,7 +223,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Country</strong>
-                                        <select name="country" id="country" class="form-control">
+                                        <select name="countryb" id="country" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -314,7 +314,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping City</strong>
-                                        <select name="shippngcity" id="shippngcity" class="form-control">
+                                        <select name="city" id="shippngcity" class="form-control">
                                             <option value="Select Shipping City">Select Shipping City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -323,7 +323,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>ZIP/Postal Code</strong>
-                                        <input type="text" class="form-control" id="postalcode" name="postalcode"
+                                        <input type="text" class="form-control" id="postalcode" name="postalcodeon"
                                             placeholder="ZIP/Postal Code">
                                     </div>
                                 </div>
@@ -480,7 +480,7 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <strong>Select Bank</strong>
-                            <select name="bank" id="bank" class="form-control">
+                            <select name="bankvalue" id="bank" class="form-control">
                                 <option value="Select ">Select Bank </option>
                                 @foreach ($bank as $item)
                                     <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>

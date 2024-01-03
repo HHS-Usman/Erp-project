@@ -183,8 +183,6 @@
                             </a>
                             <div class="dropdown-menu" style="hover">
 
-
-
                                 <div class="dropdown-submenu dropdown-item dropright ">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
@@ -259,24 +257,19 @@
                                                 href="{{ route('grade.create') }}">Create Grade</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('grade.index') }}">Manage Grade</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('leavereson.create') }}">Create Leaving Reason</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('leavereson.index') }}">Manage Leaving Reason</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subleavingreason.create') }}">Create Sub Leaving
                                                 Reason</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('weekoffday.create') }}">Create Week Off days</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('divupload.index') }}"> Uploader</a></li>
-
                                     </ul>
                                 </div>
 
@@ -344,9 +337,6 @@
                                                 href="{{ route('city.create') }}">Create City</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.index') }}">Manage City</a></li>
-
-
-
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -607,7 +597,6 @@
                                             href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
                                     </li>
                                     </ul> 
-                                   
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -641,6 +630,9 @@
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('buyertype.index') }}">Manage Buyer Type</a>
                                             </li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyerupload.create') }}">Buyer Uploader</a>
+                                        </li>
                                         </ul>
 
                                 </div>

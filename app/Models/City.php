@@ -15,4 +15,8 @@ class City extends Model
     {
         return $this->hasMany(Coa::class, 'id');
     }
+    public function buyer()
+    {
+        return $this->hasMany(buyer::class, 'buyer_id');
+    }
 }
