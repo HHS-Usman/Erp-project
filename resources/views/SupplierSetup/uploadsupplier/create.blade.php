@@ -105,6 +105,8 @@
                 </ul>
             </div>
         @endif
+        
+        
         <div class="pagetitle" style="margin-left: 20px;">
             <h1>Create Supplier Uploader </h1>
             <nav>
@@ -114,6 +116,17 @@
                 </ol>
             </nav>
         </div>
+        @if (session('success'))
+        <div id="successMessage" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 7000); // 7 seconds
+        </script>
+    @endif
         <br><br><br>
         <div class="col-sm-12 col-lg-4 main-container-uploader">
             <!-- Main div -->

@@ -118,6 +118,46 @@
                 <div style="margin:5px;"><button type="button" class="btn btn-primary p-3 px-5  col-12"
                         onclick="showTab(4)">Buyer Bank Info</button></div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    $('#companyshipadres').on('change', function () {
+                        var selectedOption = $(this).val();
+        
+                        // Enable/disable fields based on the selected option
+                        if (selectedOption === 'above') {
+                            $('#shippingaddress').prop('disabled', true);
+                            $('#shippngcity').prop('disabled', true);
+                            $('#postalcodeon').prop('disabled', true);
+                            $('#shippingprovince').prop('disabled', true);
+                            $('#shippingcountry').prop('disabled', true);
+                            $('#countryb').prop('disabled', false);
+                            $('#zipcodea').prop('disabled', false);
+                            $('#provincea').prop('disabled', false);
+                            $('#citya').prop('disabled', false);
+                            $('#adressa').prop('disabled', false);
+                        } else if (selectedOption === 'other') {
+                            $('#shippingaddress').prop('disabled', false);
+                            $('#shippngcity').prop('disabled', false);
+                            $('#postalcodeon').prop('disabled', false);
+                            $('#shippingprovince').prop('disabled', false);
+                            $('#shippingcountry').prop('disabled', false);
+                            $('#countryb').prop('disabled', true);
+                            $('#zipcodea').prop('disabled', true);
+                            $('#provincea').prop('disabled', true);
+                            $('#citya').prop('disabled', true);
+                            $('#adressa').prop('disabled', true);
+                        } else {
+                            // Reset fields when 'Select' is chosen
+                            $('#name').prop('disabled', true);
+                            $('#city').prop('disabled', true);
+                            $('#address').prop('disabled', true);
+                        }
+                    });
+                });
+            </script>
+
+
+
             <div class="container">
                 <form class="w-100" id="multitab-form" action="{{ route('buyer.store') }}" method="POST">
                     @csrf
@@ -163,7 +203,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Adress</strong>
-                                        <input type="textarea" class="form-control" id="adress" name="adressb"
+                                        <input type="textarea" class="form-control" id="adressa" name="adressb"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -176,7 +216,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>City</strong>
-                                        <select name="cityb" id="city" class="form-control">
+                                        <select name="cityb" id="citya" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -193,7 +233,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Province</strong>
-                                        <select name="provinceb" id="province" class="form-control">
+                                        <select name="provinceb" id="provincea" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -210,7 +250,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Zip/Postal Code</strong>
-                                        <input type="text" class="form-control" id="zipcode" name="zipcodeb"
+                                        <input type="text" class="form-control" id="zipcodea" name="zipcodeb"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -223,7 +263,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Country</strong>
-                                        <select name="countryb" id="country" class="form-control">
+                                        <select name="countryb" id="countryb" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -323,7 +363,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>ZIP/Postal Code</strong>
-                                        <input type="text" class="form-control" id="postalcode" name="postalcodeon"
+                                        <input type="text" class="form-control" id="postalcodeon" name="postalcodeon"
                                             placeholder="ZIP/Postal Code">
                                     </div>
                                 </div>

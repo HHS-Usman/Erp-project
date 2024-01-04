@@ -11,6 +11,10 @@ class SupplierCategory extends Model
     protected $guarded = [
         'id',
     ];
+    protected $attributes = [
+        'suppliercategoty_Code' => '',
+        'detail' => '',
+    ];
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');

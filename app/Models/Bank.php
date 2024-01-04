@@ -11,6 +11,10 @@ class Bank extends Model
     protected $guarded = [
         'id',
     ];
+    protected $attributes = [
+        'bank_code' => '',
+        'detail' => '',
+    ];
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');

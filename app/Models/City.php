@@ -11,6 +11,7 @@ class City extends Model
     protected $guarded = [
         'id',
     ];
+    
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');

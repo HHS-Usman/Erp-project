@@ -12,26 +12,26 @@ class Buyer extends Model
 
     public function Bank()
     {
-        return $this->belongsTo(Bank::class, 'bank_id');
+        return $this->belongsTo(Bank::class, 'bank_id')->withDefault();
     }
     public function buyercategory()
     {
-        return $this->belongsTo(SupplierCategory::class, 'bcategory_id');
+        return $this->belongsTo(SupplierCategory::class, 'bcategory_id')->withDefault();
     }
     public function buyertype()
     {
-        return $this->belongsTo(Suppliertype::class, 'btype_id');
+        return $this->belongsTo(Suppliertype::class, 'btype_id')->withDefault();
     }
     public function Province()
     {
-        return $this->belongsTo(Province::class, 'province_id');
+        return $this->belongsTo(Province::class, 'province_id')->withDefault();
     }
     public function Country()
     {
-        return $this->belongsTo(Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id')->withDefault();
     }
     public function City()
     {
-        return $this->belongsTo(City::class, 'City_id');
+        return $this->belongsTo(City::class, 'City_id')->withDefault();
     }
 }

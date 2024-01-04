@@ -116,6 +116,38 @@
                 <div style="margin:5px;"><button type="button" class="btn btn-primary p-3 px-5  col-12"
                         onclick="showTab(4)">Suplier Bank Info</button></div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    $('#companyshipadres').on('change', function () {
+                        var selectedOption = $(this).val();
+        
+                        // Enable/disable fields based on the selected option
+                        if (selectedOption === 'above') {
+                            $('#shippingaddress').prop('disabled', true);
+                            $('#shippngcityon').prop('disabled', true);
+                            $('#postalcodeon').prop('disabled', true);
+                            $('#shippingprovinceon').prop('disabled', true);
+                            $('#shippingcountryon').prop('disabled', true);
+                            $('#countryabove').prop('disabled', false);
+                            $('#zipcodeabove').prop('disabled', false);
+                            $('#countryabove').prop('disabled', false);
+                            $('#cityabove').prop('disabled', false);
+                            $('#adressabove').prop('disabled', false);
+                        } else if (selectedOption === 'other') {
+                            $('#shippingaddress').prop('disabled', false);
+                            $('#shippngcityon').prop('disabled', false);
+                            $('#postalcodeon').prop('disabled', false);
+                            $('#shippingprovinceon').prop('disabled', false);
+                            $('#shippingcountryon').prop('disabled', false);
+                            $('#countryabove').prop('disabled', true);
+                            $('#zipcodeabove').prop('disabled', true);
+                            $('#provinceabove').prop('disabled', true);
+                            $('#cityabove').prop('disabled', true);
+                            $('#adressabove').prop('disabled', true);
+                        } 
+                    });
+                });
+            </script>
             <div class="container">
                 <form class="w-100" id="multitab-form" action="{{ route('supplier.store') }}" method="POST">
                     @csrf
@@ -158,7 +190,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Adress</strong>
-                                        <input type="textarea" class="form-control" id="adress" name="adressabove"
+                                        <input type="textarea" class="form-control" id="adressabove" name="adressabove"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -171,7 +203,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>City</strong>
-                                        <select name="citydabove" id="city" class="form-control">
+                                        <select name="citydabove" id="cityabove" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -188,7 +220,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Province</strong>
-                                        <select name="provinceabove" id="province" class="form-control">
+                                        <select name="provinceabove" id="provinceabove" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -205,7 +237,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Zip/Postal Code</strong>
-                                        <input type="text" class="form-control" id="zipcode" name="zipcodeabove"
+                                        <input type="text" class="form-control" id="zipcodeabove" name="zipcodeabove"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -218,7 +250,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Country</strong>
-                                        <select name="countryabove" id="country" class="form-control">
+                                        <select name="countryabove" id="countryabove" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -311,7 +343,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping City</strong>
-                                        <select name="shippngcityon" id="shippngcity" class="form-control">
+                                        <select name="shippngcity" id="shippngcityon" class="form-control">
                                             <option value="Select Shipping City">Select Shipping City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -320,7 +352,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>ZIP/Postal Code</strong>
-                                        <input type="text" class="form-control" id="postalcode" name="postalcodeon"
+                                        <input type="text" class="form-control" id="postalcodeon" name="postalcodeon"
                                             placeholder="ZIP/Postal Code">
                                     </div>
                                 </div>
@@ -328,7 +360,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Province</strong>
-                                        <select name="shippingprovinceon" id="shippingprovince" class="form-control">
+                                        <select name="shippingprovinceon" id="shippingprovinceon" class="form-control">
                                             <option value="Select Sale Type">Select Shipping province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -337,7 +369,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Country</strong>
-                                        <select name="shippingcountryon" id="shippingcountry" class="form-control">
+                                        <select name="shippingcountryon" id="shippingcountryon" class="form-control">
                                             <option value="Select Sale Type">Select Shipping Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
