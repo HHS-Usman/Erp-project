@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
+use App\Rules\FileOptionMatch;
+use Illuminate\Support\Facades\Validator;
+use PhpParser\Builder\Function_;
 use League\Csv\Reader;
 use App\Models\Product;
 use App\Models\Unit_selection;
@@ -20,6 +27,9 @@ use App\Models\Product_Type;
 use App\Models\Product_supplier;
 use App\Models\Product_Status;
 use App\Models\Brand_Selection;
+use App\Exports\CsvExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExcelExport;
 
 class UploaderController extends Controller
 {
@@ -30,10 +40,31 @@ class UploaderController extends Controller
     public function store(Request $request)
     {
         if ($request->key == 'Product') {
+            $request->validate([
+                'file' => 'required|mimes:csv,xlsx',
+                'key' => 'required|in:Functiondata',
+             ]);
             $file = $request->file('file');
-            $csv = Reader::createFromPath($file->getPathname(), 'r');
-            $csv->setHeaderOffset(0);
-            $data = $csv->getRecords();
+            $valuegetting = $request->input('filedatainfor');
+            if ($extension === 'csv') {
+                // Check if the selected file type matches the expected type
+                if (($valuegetting == "1" && $extension != 'csv') ||
+                   ($valuegetting == "2" && $extension != 'xlsx')
+                ) {
+
+                   return redirect()->back()->with('error', 'Invalid file format. Please upload a ' . ($request->input('filedatainfor') == 1 ? 'CSV' : 'Excel') . ' file.');
+                } elseif ($valuegetting == "0") {
+                   return redirect()->back()->with('error', 'None not Accept Please choose any Type.');
+                }
+
+                $csv = Reader::createFromPath($file->getPathname(), 'r');
+                $csv->setHeaderOffset(0);
+                $data = $csv->getRecords();
+             } elseif ($extension == 'xlsx') {
+                // i will implement logic of excel
+                // here will use library like Maatwebsite\Excel to handle Excel files
+                return redirect()->back()->with('error', 'Invalid file format. Please upload an Excel file.');
+            }
             if ($request->has('Overwrite')) {
                 Product::truncate();
             }
@@ -113,5 +144,17 @@ class UploaderController extends Controller
 
             return redirect()->route('productuploader.index')->with('success', 'Create successfully');
         }
+    }
+
+    public function downloadCsv()
+    {
+        $path = public_path('csvfile/products.csv');
+        return response()->download($path);
+    }
+
+    public function downloadExcel()
+    {
+        $path = public_path('file/products.xlsx');
+        return response()->download($path);
     }
 }

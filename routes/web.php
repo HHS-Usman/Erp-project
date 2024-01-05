@@ -283,4 +283,6 @@ Route::post('/supplierupload',[SupplieruploaderController::class ,'store'])->nam
 
 Route::resource('buyerupload',BuyeruploadController::class);
 Route::post('/buyerupload',[BuyeruploadController::class ,'store'])->name('buyerupload');
+Route::get('downloadcsv', [UploaderController::class ,'downloadCsv'])->name('downloadcsv');
+Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name('downloadexcel');
 });
