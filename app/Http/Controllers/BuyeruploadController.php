@@ -62,64 +62,92 @@ class BuyeruploadController extends Controller
             // if($value['Active '] > 1 && $value['Active '] < 0){
             //    return redirect()->back()->with('error', 'We Dont Accept Greater than 0 and 1 We accept only 0 or 1 in Active');
             // }
-            $getbank = Bank::all();
             $buyertype = Buyertype::all();
-            $buyecategory = BuyerCategory::all();
-            $privince = Province::all();
-            $city = City::all();
-            $country = Country::all();
+            // $buyecategory = BuyerCategory::all();
+            // $privince = Province::all();
+            // $city = City::all();
+            // $country = Country::all();
             foreach ($data as $value) {
                 $bankdata = null;
                 $btypeid = null;
                 $btcategoryid = null;
                 $provincedata = null;
-                $cityid =null;
+                $cityid = null;
                 $countryid = null;
                 // for bankdata get here
-                foreach ($getbank as $bank) {
-                    if (strtolower($value['bank_id']) == strtolower($bank->Bank)){
-                        $bankdata = $bank->bank_id;
-                        break;
-                    } 
+                $dataBank = Bank::where('Bank', $value['bank_id'])->first();
+                if ($dataBank) {
+                    $bankdata =  $dataBank->bank_id;
+                } else {
+                    Bank::create([
+                        'Bank' => $value['bank_id'],
+                        'bank_code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
                 }
                 // for buyertypedata get here
-                foreach ($buyertype as $btye) {
-                    if ($value['btype_id'] == $btye->buyertype) {
-                        $btypeid = $btye->btype_id;
-                        break;
-                    } 
+                $buyertype = Buyertype::where('buyertype', $value['btype_id'])->first();
+                if ($buyertype) {
+                    $btypeid = $buyertype->btype_id;
+                } else {
+                    Buyertype::create([
+                        'buyertype' => $value['btype_id'],
+                        'buyertype_code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
                 }
                 // for buyer category data get here
-                foreach ($buyecategory as $bcategory) {
-                    if ($value['bcategory_id'] == $bcategory->buyercategory) {
-                        $btcategoryid = $bcategory->bcategory_id;
-                        break;
-                    }
+                $buyercategory = BuyerCategory::where('buyercategory', $value['bcategory_id'])->first();
+                if ($buyercategory) {
+                    $btcategoryid =  $buyercategory->bcategory_id;
+                } else {
+                    BuyerCategory::create([
+                        'buyercategory' => $value['bcategory_id'],
+                        'buyercategory_Code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
                 }
                 // for Province data get here
-                foreach ($privince as $province) {
-                    if ($value['province_id'] == $province->province) {
-                        $provincedata = $province->province_id;
-                        break;
-                    } 
+                $dataprovince = Province::where('province', $value['province_id'])->first();
+                if ($dataprovince) {
+                    $provincedata = $dataprovince->province_id;
+  
+                } else {
+                    Province::create([
+                        'province' => $value['province_id'],
+                        'province_code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
                 }
                 // for City data get here
-                foreach ($city as $citys) {
-                    if ($value['City_id'] == $citys->city) {
-                        $cityid = $citys->id;
-                        break;
-                    };
-                }
+                $datacity = City::where('city', $value['City_id'])->first();
+                if ($datacity) {
+                    $cityid = $datacity->id;
 
+                } else {
+                    City::create([
+                        'city' => $value['City_id'],
+                        'city_code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
+                }
                 // for country data get here
-                $countryid = null;  // Initialize to null in case no match is found
-                foreach ($country as $countryItem) {
-                    if (strtolower($value['country_id']) == strtolower($countryItem->country)) {
-                        $countryid = $countryItem->id;
-                        break; // Break out of the loop once a match is found
-                    }
+                $datacountry = Country::where('country', $value['country_id'])->first();
+                if ($datacountry) {
+                    $countryid = $datacountry->id;
+                } else {
+                    Country::create([
+                        'country' => $value['country_id'],
+                        'country_code' => " ",
+                        'detail' => " ",
+                        'is_active' => request()->get('is_active', 1),
+                    ]);
                 }
-
                 $buyer = new Buyer();
                 $buyer->customer_code = $value['customer_code'];
                 $buyer->email = $value['email'];
@@ -158,7 +186,11 @@ class BuyeruploadController extends Controller
                 $buyer->City_id = $cityid;
                 $buyer->save();
             }
+            return redirect()->back()->with('success', 'File uploaded successfully.');
             return redirect()->route('buyerupload.create')->with('success', 'Create successfully');
+        }
+        else{
+            return redirect()->route('buyerupload.create')->with('error', 'Error uploading file');
         }
     }
 

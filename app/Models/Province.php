@@ -11,6 +11,10 @@ class Province extends Model
     protected $guarded = [
         'id',
     ];
+    protected $attributes = [
+        'province_code' => '',
+        'detail' => '',
+    ];
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');

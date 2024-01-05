@@ -114,6 +114,20 @@
                 </ol>
             </nav>
         </div>
+        @if (session('success'))
+        <div id="successMessage" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 7000); // 7 seconds
+        </script>
+    @endif
+    @error('file')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
         <br><br><br>
         <div class="col-sm-12 col-lg-4 main-container-uploader">
             <!-- Main div -->
@@ -126,19 +140,7 @@
                         <div>
                             <h5>Upload Buyer</h5>
                         </div>
-                        {{-- <div class="file-upload">
-                            <div>
-                                <a id="downloaddata" href="{{ route('divisionupload') }}" download>Download</a>
-                            </div>
-                            <div class="select-dropdown">
-                                <select id="selectiondata" name="filedatainfor" class="form-select"
-                                    aria-label="Default select example" onchange="updateDownloadLink()">
-                                    <option value="0">None</option>
-                                    <option value="1">Csv</option>
-                                    <option value="2">Excel</option>
-                                </select>
-                            </div>
-                        </div> --}}
+                       
                     </div>
 
                     <div class="selection d-flex">

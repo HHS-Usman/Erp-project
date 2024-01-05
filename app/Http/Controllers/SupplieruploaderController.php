@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Province;
 use App\Models\Supplier;
+use App\Models\SupplierCategory;
+use App\Models\Suppliertype;
 use Illuminate\Http\Request;
 use League\Csv\Reader;
 
@@ -46,9 +52,29 @@ class SupplieruploaderController extends Controller
                 Supplier::truncate();
             }
             foreach ($data as $value) {
+                // for country data
+                $countrydata = Country::firstOrCreate(['country' => $value['country_id']]);
+                $countryid = $countrydata->id;
+                // for province data
+                $provincedata = Province::firstOrCreate(['province' => $value['province_id']]);
+                $provinceid = $provincedata->province_id;
+                // for  data city
+                $citydata = City::firstOrCreate(['city' => $value['City_id']]);
+                $cityid =  $citydata->id;
+                // for  data bank
+                $bankdata = Bank::firstOrCreate(['Bank' => $value['bank_id']]);
+                $bankid =  $bankdata->bank_id;
+                // for  data supplier category
+                $suppliercategorydata = SupplierCategory::firstOrCreate(['suplliercategoty' => $value['suplierCatg_id']]);
+                $supliercatgoryid =   $suppliercategorydata->supliercatg_id;
+                // for  data supplier type
+                $suppliertypedata = Suppliertype::firstOrCreate(['suppliertype' => $value['supliertype_id']]);
+                $supliertypeid = $suppliertypedata->stype_id;
+
                 $supplier = new Supplier();
-                $supplier->customer_code= $value['customer_code'];
+                $supplier->customer_code = $value['customer_code'];
                 $supplier->email = $value['email'];
+                $supplier->companyname = $value['companyname'];
                 $supplier->phone_no1 = $value['phone_no1'];
                 $supplier->phone_no2 = $value['phone_no2'];
                 $supplier->address = $value['address'];
@@ -58,7 +84,7 @@ class SupplieruploaderController extends Controller
                 $supplier->contactpersoncell_no = $value['contactpersoncell_no'];
                 $supplier->contactperson_email = $value['contactperson_email'];
                 $supplier->creditdays = $value['creditdays'];
-                $supplier->suplierdiscount	 = $value['suplierdiscount'];
+                $supplier->suplierdiscount     = $value['suplierdiscount'];
                 $supplier->creditlimit = $value['creditlimit'];
                 $supplier->suplieradvance = $value['suplieradvance'];
                 $supplier->suplierlocality = $value['suplierlocality'];
@@ -76,17 +102,15 @@ class SupplieruploaderController extends Controller
                 $supplier->branchname = $value['branchname'];
                 $supplier->openingbalance = $value['openingbalance'];
                 $supplier->dateopening = $value['dateopening'];
-                $supplier->bank_id = $value['bank_id'];
-                $supplier->suplierCatg_id = $value['suplierCatg_id'];
-                $supplier->supliertype_id = $value['supliertype_id'];
-                $supplier->province_id = $value['province_id'];
-                $supplier->country_id = $value['country_id'];
-                $supplier->City_id = $value['City_id'];
-                $supplier->created_at = $value['created_at'];
-                $supplier->updated_at = $value['updated_at'];
+                $supplier->bank_id = $bankid;
+                $supplier->suplierCatg_id = $supliercatgoryid;
+                $supplier->supliertype_id = $supliertypeid;
+                $supplier->province_id = $provinceid;
+                $supplier->country_id =  $countryid;
+                $supplier->City_id = $cityid;
+                $supplier->save();
             }
-            $supplier->save();
-
+            return redirect()->back()->with('success', 'File uploaded successfully.');
             return redirect()->route('supplierupload.create')->with('success', 'Create successfully');
         }
     }
