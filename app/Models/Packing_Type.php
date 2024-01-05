@@ -11,4 +11,8 @@ class Packing_Type extends Model
     protected $guarded = [
         'id'
     ];
+    protected $attributes = [
+        'packing_type_code' => '',
+        'detail' => '',
+    ];
 }

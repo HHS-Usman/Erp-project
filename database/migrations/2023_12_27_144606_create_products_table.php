@@ -75,8 +75,6 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('product_status_id')->nullable();
             $table->foreign('product_status_id')->references('id')->on('product__statuses')->onDelete('cascade');
             $table->float('price_per_unit');
-
-            
             $table->float('sale_price');
             $table->float('float');
             $table->float('float_value');

@@ -11,6 +11,10 @@ class Country extends Model
     protected $guarded = [
         'id',
     ];
+    protected $attributes = [
+        'country_code' => '',
+        'detail' => '',
+    ];
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');

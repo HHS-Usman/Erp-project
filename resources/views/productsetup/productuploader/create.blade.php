@@ -165,6 +165,16 @@
                                             value="Add-on"checked>
                                     </span>
                                 </div>
+                                <script>
+                                    var overwrite = document.getElementById("Overwrite");
+                                    var addon = document.getElementById("checkbox2");
+                                    overwrite.addEventListener("change", function() {
+                                        addon.checked = !this.checked;
+                                    });
+                                    addon.addEventListener("change", function() {
+                                        overwrite.checked = !this.checked;
+                                    });
+                                </script>
                                 <div class="d-flex label">
                                     <div class="checkboxtext" id="overwritetxt">
                                         <p>Overwrite</p>

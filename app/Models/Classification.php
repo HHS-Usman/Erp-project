@@ -9,4 +9,8 @@ class Classification extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $attributes = [
+        'classification_code' => '',
+        'detail' => '',
+    ];
 }

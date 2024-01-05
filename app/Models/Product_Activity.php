@@ -9,4 +9,8 @@ class Product_Activity extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $attributes = [
+        'product_activity_code' => '',
+        'detail' => '',
+    ];
 }

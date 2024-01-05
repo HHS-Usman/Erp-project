@@ -15,7 +15,7 @@ class CreateSupplierpaymentsTable extends Migration
     {
         Schema::create('supplierpayments', function (Blueprint $table) {
             $table->id();
-            $table->string('');
+            $table->string('name');
             $table->timestamps();
         });
     }

@@ -9,4 +9,8 @@ class Product_Type extends Model
 {
     use HasFactory;
     protected $guarded =['id'];
+    protected $attributes = [
+        'product_type_code' => '',
+        'detail' => '',
+    ];
 }
