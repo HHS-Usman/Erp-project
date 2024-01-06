@@ -124,8 +124,21 @@ require __DIR__.'/auth.php';
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
-Route::resource('division',DivisionController::class);
+    Route::middleware(['checkPermission:add-division'])->group(function () {
+        Route::get('division/create', [DivisionController::class, 'create'])->name('division.create');
+    });
+
+    Route::middleware(['checkPermission:edit-division'])->group(function () {
+        Route::get('division/{division}/edit', [DivisionController::class, 'edit'])->name('division.edit');
+    });
+
+    // Define resourceful routes (excluding create)
+    Route::resource('division', DivisionController::class)->except(['create','edit']);
+
+    // Route::get('division/create', [DivisionController::class, 'create'])->middleware('checkPermission:add-division');
+    // Route::resource('division',DivisionController::class);
 Route::resource('department',DepartmentController::class);
+
 Route::resource('subdepartment',SubdepartmentController::class);
 Route::resource('function',FundtionController::class);
 Route::resource('userrole',User_role_controller::class);

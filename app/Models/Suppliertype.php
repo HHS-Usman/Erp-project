@@ -9,7 +9,7 @@ class Suppliertype extends Model
 {
     use HasFactory;
     protected $guarded = [
-        'id',
+        'stype_id',
     ];
     protected $attributes = [
         'suppliertype_code' => '',
@@ -23,4 +23,5 @@ class Suppliertype extends Model
     {
         return $this->hasMany(buyer::class, 'buyer_id');
     }
+    protected $primaryKey = 'stype_id';
 }

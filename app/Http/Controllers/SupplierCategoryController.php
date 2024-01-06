@@ -38,12 +38,12 @@ class SupplierCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'suplliercategory'=>'required',
+            'suplliercategoty'=>'required',
             'is_active' => 'integer|in:0,1'
         ]);
         SupplierCategory::create([
-            'suplliercategoty'=>request()->get('suplliercategory'),
-            'suppliercategoty_Code'=>request()->get('suplliercategorycode'),
+            'suplliercategoty'=>request()->get('suplliercategoty'),
+            'suppliercategoty_Code'=>request()->get('suppliercategoty_Code'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
@@ -56,7 +56,7 @@ class SupplierCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($supliercatg_id)
     {
         //
     }
@@ -64,33 +64,42 @@ class SupplierCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $supliercatg_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($supliercatg_id)
     {
-        //
+        $supcategory =SupplierCategory::find($supliercatg_id);
+        return view('SupplierSetup.supliercategory.update',compact('supcategory'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $supliercatg_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $supliercatg_id)
     {
-        //
-    }
+        $supcategory = SupplierCategory::findorfail($supliercatg_id);
 
+        $supcategory->update([
+            'suplliercategoty'=>request()->get('suplliercategoty'),
+            'suppliercategoty_Code'=>request()->get('suppliercategoty_Code'),
+            'detail'=>request()->get('detail'),
+            'is_active' =>  $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('scategory.index')->with('success','Create successfully');
+
+    }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $supliercatg_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($supliercatg_id)
     {
         //
     }

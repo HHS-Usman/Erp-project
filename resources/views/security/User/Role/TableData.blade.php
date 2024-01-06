@@ -1,4 +1,4 @@
-@foreach ($roles as $key => $row)
+foreach ($roles as $key => $row)
     <tr class="text-center">
         <td>{{ ++$key }}</td>
         <td>{{ $row->name }}</td>

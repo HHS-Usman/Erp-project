@@ -99,21 +99,24 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     {{-- <style>
-    .list-group {
-      max-height: 600px; /* Set a maximum height for the list */
-      overflow-y: auto;  /* Add a vertical scrollbar when content overflows */
-      opacity: 0.9;
+        .list-group {
+            max-height: 600px;
+            /* Set a maximum height for the list */
+            overflow-y: auto;
+            /* Add a vertical scrollbar when content overflows */
+            opacity: 0.9;
 
-    }
-  </style> --}}
+        }
+    </style> --}}
     {{-- <style>
-  .dropdown-item
-  {
-    max-height: 600px; /* Set a maximum height for the list */
-      overflow-y: auto;  /* Add a vertical scrollbar when content overflows */
-      opacity: 0.9;
-  }
-  </style>   --}}
+        .dropdown-item {
+            max-height: 600px;
+            /* Set a maximum height for the list */
+            overflow-y: auto;
+            /* Add a vertical scrollbar when content overflows */
+            opacity: 0.9;
+        }
+    </style> --}}
     <style>
         .dropbtn {
             background-color: #04AA6D;
@@ -145,7 +148,7 @@
         }
 
         .dropdown-content li:hover {
-            background-color: hsl(0, 33%, 98%);
+            background-color: hsl(34, 84%, 52%);
         }
 
         .dropright:hover .dropdown-content {
@@ -156,10 +159,9 @@
 
 <body>
     <x-navigation />
-    <div
-        style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
-  transform-origin: 0 0;
-  width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
+    <div style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
+            transform-origin: 0 0;
+            width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
         <nav class="navbar navbar-expand-lg navbar-light bg-white " id="navbarcontainermain"
             style="box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);">
             <div style="width: 10%" id="logocompany">
@@ -184,20 +186,18 @@
                             <div class="dropdown-menu" style="hover">
 
                                 <div class="dropdown-submenu dropdown-item dropright ">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Organization Setup</a>
-                                    <ul id="container" class="dropdown-menu dropdown-content"
-                                        style="{display: block;}">
-
+                                    <a class="nav-link dropdown-toggle" style="color: black;"><strong>Organization
+                                            Setup</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
+                                        @can('add-division')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
-
+                                        @endcan
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
 
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('department.create') }}">Create Deparrtment</a></li>
+                                                href="{{ route('department.create') }}">Create Department</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.index') }}">Manage Department</a></li>
 
@@ -232,10 +232,6 @@
                                                 href="{{ route('gazetedholiday.index') }}">Manage Gazeted Holidays</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('costcenter.create') }}">Create Cost Center</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('costcenter.index') }}">Manage Cost Center</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('language.create') }}">Create Language</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('language.index') }}">Manage Language</a></li>
@@ -268,15 +264,15 @@
                                                 href="{{ route('weekoffday.create') }}">Create Week Off days</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('divupload.index') }}"> Uploader</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index') }}">
+                                                Uploader</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">General Setup</a>
+                                    <a class="nav-link   dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>General Setup</strong> </a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('paymentterm.create') }}">Create Payment Term</a></li>
@@ -314,8 +310,8 @@
 
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('cast.create') }}">Create Cast</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('cast.index') }}">Manage Cast</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index') }}">Manage
+                                                Cast</a></li>
 
 
                                         <li class="p-0"><a class="dropdown-item"
@@ -335,14 +331,14 @@
 
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.create') }}">Create City</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('city.index') }}">Manage City</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
+                                                City</a></li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Employee</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
                                         <li class="p-0"><a class="dropdown-item"
@@ -389,89 +385,93 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Products</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('permission.create') }}">Create User Role  </a>
+                                                href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('product.create') }}">Create Product</a>
+                                                href="{{ route('classification.create') }}">Create Classification</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('classification.create') }}">Create Classification</a>
+                                                href="{{ route('classification.index') }}">Manage Classification</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('classification.index') }}">Manage Classification</a>
+                                                href="{{ route('brand_selection.create') }}">Create Brands</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('brand_selection.create') }}">Create Brands</a>
+                                                href="{{ route('brand_selection.index') }}">Manage Brands</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('brand_selection.index') }}">Manage Brands</a>
+                                                href="{{ route('productactivity.create') }}">Create Product Activity</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productactivity.create') }}">Create Product Activity</a>
+                                                href="{{ route('productactivity.index') }}">Manage Product Activity</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productactivity.index') }}">Manage Product Activity</a>
+                                                href="{{ route('productcategory.create') }}">Create Product Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productcategory.create') }}">Create Product Category</a>
+                                                href="{{ route('productcategory.index') }}">Manage Product Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productcategory.index') }}">Manage Product Category</a>
+                                                href="{{ route('productstatus.create') }}">Create Product Status</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productstatus.create') }}">Create Product Status</a>
+                                                href="{{ route('productstatus.index') }}">Manage Product Status</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productstatus.index') }}">Manage Product Status</a>
+                                                href="{{ route('productsupplier.create') }}">Create Product Supplier</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productsupplier.create') }}">Create Product Supplier</a>
+                                                href="{{ route('productsupplier.index') }}">Manage Product Supplier</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('productsupplier.index') }}">Manage Product Supplier</a>
+                                                href="{{ route('producttype.create') }}">Create Product Type</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('producttype.create') }}">Create Product Type</a>
+                                                href="{{ route('producttype.index') }}">Manage Product Type</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('producttype.index') }}">Manage Product Type</a>
+                                                href="{{ route('stocktype.create') }}">Create Stock Type</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('stocktype.create') }}">Create Stock Type</a>
+                                                href="{{ route('stocktype.index') }}">Manage Stock Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('uom.create') }}">Create
+                                                UOM </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('uom.index') }}">Manage
+                                                UOM </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('stocktype.index') }}">Manage Stock Type</a>
+                                                href="{{ route('product_sub_category.create') }}">Create Product Sub
+                                                Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('uom.create') }}">Create UOM </a>
+                                                href="{{ route('product_sub_category.index') }}">Manage Product Sub
+                                                Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('uom.index') }}">Manage UOM </a>
+                                                href="{{ route('product_2nd_sub_category.create') }}">Create Product 2nd
+                                                Sub Category </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('product_sub_category.create') }}">Create Product Sub Category</a>
+                                                href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd
+                                                Sub Category </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('product_sub_category.index') }}">Manage Product Sub Category</a>
+                                                href="{{ route('productuploader.index') }}"> Product Uploader</a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('product_2nd_sub_category.create') }}">Create Product 2nd Sub Category </a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd Sub Category </a>
-                                        </li>
-
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Sales Person</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Sales
+                                            Person</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('salepersontype.create') }}">Create Person Type </a>
@@ -486,9 +486,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Accounts</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Accounts</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('accountcategory.create') }}">Create Account
@@ -505,10 +505,10 @@
                                                 href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level
                                             </a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('coa.create') }}">Create Coa</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('coa.index') }}">Manage Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create
+                                                Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">Manage
+                                                Coa</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
                                         </li>
@@ -546,9 +546,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Trajectory</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Treasury</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('buyerpayment.create') }}">
@@ -556,34 +556,23 @@
                                             </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('supplierpayment.create') }}">
-                                            Create Supplier Payment
+                                                href="{{ route('supplierpayment.create') }}">
+                                                Create Supplier Payment
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Supplies Setup</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                        <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('supplier.create') }}">
-                                                Create Supplier
-                                            </a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('supplier.index') }}">
-                                            Manage Supplier
-                                        </a>
-                                    </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('scategory.create') }}">
+
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
                                                 Suplier Category
                                             </a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('scategory.index') }}">
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
                                                 Suplier Category Manage
                                             </a>
                                         </li>
@@ -594,89 +583,107 @@
                                                 href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                            href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
-                                    </li>
-                                    </ul> 
+                                                href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
+                                        </li>
+                                    </ul>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Buyer Setup</a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyer.create') }}">
-                                                    Create Buyer
-                                                </a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('buyer.index') }}">
-                                                Manage Buyer
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                        <strong>Buyer Setup</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyercategory.create') }}">
+                                                Create Buyer Category
                                             </a>
                                         </li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyercategory.create') }}">
-                                                   Create Buyer Category
-                                                </a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyercategory.index') }}">
-                                                    Manage buyer Category
-                                                </a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyertype.create') }}">Create Buyer Type</a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyertype.index') }}">Manage Buyer Type</a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item"
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyercategory.index') }}">
+                                                Manage buyer Category
+                                            </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyertype.create') }}">Create Buyer Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyertype.index') }}">Manage Buyer Type</a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('buyerupload.create') }}">Buyer Uploader</a>
                                         </li>
-                                        </ul>
+                                    </ul>
 
                                 </div>
-
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Security</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Security</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('permission.create') }}">Create User Role  </a>
+                                                href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('product.create') }}">Create Product</a>
-                                            </li>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-line-chart" aria-hidden="true"
-                                    style="color: black;"></i>&nbsp;ERP&CRM
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" onclick="addTab('Data2', data2)">data2</a>
-                                <a class="dropdown-item" href="{{ route('division.create') }}">Data 4</a>
+                                <a class="nav-link dropdown-item" href="{{ route('product.create') }}"
+                                    style="color: black;">Create Product</a>
+                                <a class="nav-link dropdown-item" href="{{ route('product.index') }}"
+                                    style="color: black;">Manage Product</a>
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
+                                    Create Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.index') }}"
+                                    style="color: black;">
+                                    Manage Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.create') }}">
+                                    Create Buyer
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
+                                    Manage Buyer
+                                </a>
+                            </div>
+                            <div class="dropdown-menu">
+                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"
+                                        style="color: black;">Manage Product</a>
+                                </li>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
+                                    Create Supplier
+                                </a>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.index') }}">
+                                    Manage Supplier
+                                </a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-users-gear" style="color: black;"></i>&nbsp;HCM
                             </a>
                             <div class="dropdown-menu">
-                                <a id="fontsize" class="dropdown-item" href="#"
-                                    onclick="addTab('Data5', data5)">Data 5</a>
+                                <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data5', data5)">Data
+                                    5</a>
                                 <a class="dropdown-item" href="#" onclick="addTab('Data6', data6)">Data 6</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-book" aria-hidden="true" style="color:  black;"></i>&nbsp;REPORTS
                             </a>
                             <div class="dropdown-menu">
@@ -686,8 +693,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-chart-column" style="color:  black;"></i>&nbsp;DASHBOARDS
                             </a>
                             <div class="dropdown-menu">
@@ -697,8 +704,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-bullhorn" style="color: black;"></i>&nbsp;ANNCOUNCEMENTS
                             </a>
                             <div class="dropdown-menu">
@@ -1197,7 +1204,7 @@
     <script src="/assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
-            $('.dropdown-submenu a.test').on("click", function(e) {
+            $('.dropdown-submenu a.nav-link').on("click", function(e) {
                 $(this).next('ul').toggle();
                 e.stopPropagation();
                 e.preventDefault();
@@ -1217,7 +1224,7 @@
             margin-top: -1px;
         }
     </style>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const myTable = new simpleDatatables.DataTable("#myTable", {
                 paging: true,
@@ -1232,7 +1239,7 @@
                 bottomPagination.innerHTML = topPagination.innerHTML;
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Supplier Type
+    Update Buyer Category
 @endsection
 @section('content')
   <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,39 +15,41 @@
             </div>
         @endif
             <div class="pagetitle" style="margin-left: 20px;">
-                <h1>Create Supplier Type</h1>
+                <h1>Update Buyer Category</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Supplier Type</a></li>
+                    <li class="breadcrumb-item active"><a> Update Buyer Category</a></li>
                 </ol>
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('suppliertype.store') }}" method="POST">
-                @csrf
+                <form action="{{ route('buyercategory.update',$buyerCAtegory) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <strong>Supplier Type Code</strong>
-                                <input type="text" name="suppliertype_code" id="suppliertype_code" class="form-control" placeholder="Supplier Type Code">
+                            <strong class="form-group">Buyer Category Code</strong>
+                                <input type="text" name="buyercategorycode" id="buyercategorycode" value="{{$buyerCAtegory->buyercategorycode}}" class="form-control" placeholder="Buyer Category Code">
                             </div>
                             <div class="form-group">
-                                <strong>Supplier Type<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="suppliertype" id="province" class="form-control" placeholder="Supplier Type" required>
+                                <strong>Buyer Category<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="buyercategory" id="buyercategory" value="{{$buyerCAtegory->buyercategory}}" class="form-control" placeholder="Buyer Category" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
-                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                                <input type="text" name="detail" id="detail" value="{{$buyerCAtegory->detail}}" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                                Active
+                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" {{$buyerCAtegory->is_active ? 'checked' : '' }} checked>
+                                <label class="form-check-label" for="is_active">
+                                    Active
                                 </label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
             </form>

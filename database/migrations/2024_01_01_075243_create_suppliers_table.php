@@ -60,8 +60,8 @@ class CreateSuppliersTable extends Migration
             $table->unsignedBigInteger('suplierCatg_id');
             $table->foreign('suplierCatg_id')->references('supliercatg_id')->on('supplier_categories')->onDelete('cascade');
 
-            $table->unsignedBigInteger('supliertype_id');
-            $table->foreign('supliertype_id')->references('stype_id')->on('suppliertypes')->onDelete('cascade');
+            $table->unsignedBigInteger('stype_id');
+            $table->foreign('stype_id')->references('stype_id')->on('suppliertypes')->onDelete('cascade');
 
             $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')->references('province_id')->on('provinces')->onDelete('cascade');

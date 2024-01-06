@@ -21,7 +21,7 @@ class Supplier extends Model
     }
     public function Supliertype()
     {
-        return $this->belongsTo(Suppliertype::class, 'supliertype_id');
+        return $this->belongsTo(Suppliertype::class, 'stype_id');
     }
     public function Province()
     {
@@ -35,6 +35,6 @@ class Supplier extends Model
     {
         return $this->belongsTo(City::class, 'City_id');
     }
-
+    protected $primaryKey = 'suplier_id';
 
 }

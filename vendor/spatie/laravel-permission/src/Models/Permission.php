@@ -14,6 +14,9 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
 
 /**
+ * @property int $id
+ * @property string $name
+ * @property string $guard_name
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
@@ -31,14 +34,13 @@ class Permission extends Model implements PermissionContract
         parent::__construct($attributes);
 
         $this->guarded[] = $this->primaryKey;
-        $this->table = config('permission.table_names.permissions') ?: parent::getTable();
     }
 
-    /**
-     * @return PermissionContract|Permission
-     *
-     * @throws PermissionAlreadyExists
-     */
+    public function getTable()
+    {
+        return config('permission.table_names.permissions', parent::getTable());
+    }
+
     public static function create(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
@@ -60,8 +62,8 @@ class Permission extends Model implements PermissionContract
         return $this->belongsToMany(
             config('permission.models.role'),
             config('permission.table_names.role_has_permissions'),
-            app(PermissionRegistrar::class)->pivotPermission,
-            app(PermissionRegistrar::class)->pivotRole
+            PermissionRegistrar::$pivotPermission,
+            PermissionRegistrar::$pivotRole
         );
     }
 
@@ -74,7 +76,7 @@ class Permission extends Model implements PermissionContract
             getModelForGuard($this->attributes['guard_name'] ?? config('auth.defaults.guard')),
             'model',
             config('permission.table_names.model_has_permissions'),
-            app(PermissionRegistrar::class)->pivotPermission,
+            PermissionRegistrar::$pivotPermission,
             config('permission.column_names.model_morph_key')
         );
     }
@@ -82,11 +84,11 @@ class Permission extends Model implements PermissionContract
     /**
      * Find a permission by its name (and optionally guardName).
      *
-     * @return PermissionContract|Permission
+     * @param  string|null  $guardName
      *
-     * @throws PermissionDoesNotExist
+     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
      */
-    public static function findByName(string $name, ?string $guardName = null): PermissionContract
+    public static function findByName(string $name, $guardName = null): PermissionContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
         $permission = static::getPermission(['name' => $name, 'guard_name' => $guardName]);
@@ -100,11 +102,11 @@ class Permission extends Model implements PermissionContract
     /**
      * Find a permission by its id (and optionally guardName).
      *
-     * @return PermissionContract|Permission
+     * @param  string|null  $guardName
      *
-     * @throws PermissionDoesNotExist
+     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
      */
-    public static function findById(int|string $id, ?string $guardName = null): PermissionContract
+    public static function findById(int $id, $guardName = null): PermissionContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
         $permission = static::getPermission([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
@@ -119,9 +121,9 @@ class Permission extends Model implements PermissionContract
     /**
      * Find or create permission by its name (and optionally guardName).
      *
-     * @return PermissionContract|Permission
+     * @param  string|null  $guardName
      */
-    public static function findOrCreate(string $name, ?string $guardName = null): PermissionContract
+    public static function findOrCreate(string $name, $guardName = null): PermissionContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
         $permission = static::getPermission(['name' => $name, 'guard_name' => $guardName]);
@@ -146,11 +148,10 @@ class Permission extends Model implements PermissionContract
     /**
      * Get the current cached first permission.
      *
-     * @return PermissionContract|Permission|null
+     * @return \Spatie\Permission\Contracts\Permission
      */
     protected static function getPermission(array $params = []): ?PermissionContract
     {
-        /** @var PermissionContract|null */
         return static::getPermissions($params, true)->first();
     }
 }

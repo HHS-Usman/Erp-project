@@ -43,7 +43,7 @@ class SuppliertypeController extends Controller
         ]);
         Suppliertype::create([
             'suppliertype'=>request()->get('suppliertype'),
-            'suppliertype_code'=>request()->get('suppliertypecode'),
+            'suppliertype_code'=>request()->get('suppliertype_code'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
@@ -53,10 +53,10 @@ class SuppliertypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($stype_id)
     {
         //
     }
@@ -64,33 +64,42 @@ class SuppliertypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($stype_id)
     {
-        //
+        $suppliertype = Suppliertype::find($stype_id);
+        return view('SupplierSetup.suppliertype.update', compact('suppliertype'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $stype_id)
     {
-        //
+        $supcategory = Suppliertype::findorfail($stype_id);
+
+        $supcategory->update([
+            'suppliertype'=>request()->get('suppliertype'),
+            'suppliertype_code'=>request()->get('suppliertype_code'),
+            'detail'=>request()->get('detail'),
+            'is_active' =>  $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('suppliertype.index')->with('success','Create successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($stype_id)
     {
         //
     }

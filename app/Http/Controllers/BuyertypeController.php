@@ -67,30 +67,40 @@ class BuyertypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($btype_id)
     {
-        //
+        $buyertype  = Buyertype::find($btype_id);
+        return view('buyersetup.buyertype.update',compact('buyertype'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $btype_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $btype_id)
     {
-        //
+        $buyertype = Buyertype::findOrFail($btype_id);
+
+        //create a new product in database
+        $buyertype->update([
+            'buyertype'=>request()->get('buyertype'),
+            'buyertype_code'=>request()->get('buyertype_code'),
+            'detail'=>request()->get('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('buyertype.index')->with('success','Create successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $btype_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($btype_id)
     {
         //
     }

@@ -16,7 +16,7 @@ class ProductCategoryController extends Controller
     {
         $productcategories =Product_category::latest()->paginate();
         return vieW('productsetup.productcategory.index',compact('productcategories'))->with(request()->input('page'));
-        
+
     }
 
     /**
@@ -40,10 +40,10 @@ class ProductCategoryController extends Controller
         $request->validate([
             'product_category'=>'required',
             'is_active' => 'integer|in:0,1'
-            
+
         ]);
          //create a new product in database
-         Product_category::create([ 
+         Product_category::create([
             'product_category' => request()->get('product_category'),
             'product_category_code' => request()->get('product_category_code'),
             'detail' => request()->get('detail'),
@@ -85,13 +85,13 @@ class ProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $product_category = Product_category::findOrFail($id);
-       
+
          //create a new product in database
-         $product_category->update([ 
+         $product_category->update([
             'product_category' => request()->get('product_category'),
             'product_category_code' => request()->get('product_category_code'),
             'detail' => request()->get('detail'),
-            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            'is_active'     => $request->has('is_active') ? 1 : 0,
             ]);
             return redirect()->route('productcategory.index')->with('success','Manage successfully');
     }

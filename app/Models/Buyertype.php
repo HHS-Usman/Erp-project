@@ -9,4 +9,5 @@ class Buyertype extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $primaryKey = 'btype_id';
 }
