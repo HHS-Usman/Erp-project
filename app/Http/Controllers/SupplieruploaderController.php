@@ -24,7 +24,19 @@ class SupplieruploaderController extends Controller
     {
         //
     }
-
+    // for csv uploader
+    public function suplieruploadercsv()
+    {
+        $path = public_path('supliercsv/supplier_uploader.csv');
+        return response()->download($path);
+    }
+    // for excel uploader
+    // public function suplieruploaderexcel()
+    // {
+    //    $path = public_path('csvfile/Grade_Templete_Uploader_(CSV).csv');
+    //    return response()->download($path);
+    // }
+     
     /**
      * Show the form for creating a new resource.
      *
@@ -55,12 +67,12 @@ class SupplieruploaderController extends Controller
                 // for country data
                 $countrydata = Country::firstOrCreate(['country' => $value['country_id']]);
                 $countryid = $countrydata->id;
-                // for province data
-                $provincedata = Province::firstOrCreate(['province' => $value['province_id']]);
-                $provinceid = $provincedata->province_id;
                 // for  data city
                 $citydata = City::firstOrCreate(['city' => $value['City_id']]);
                 $cityid =  $citydata->id;
+                // for province data
+                $provincedata = Province::firstOrCreate(['province' => $value['province_id']]);
+                $provinceid = $provincedata->province_id;
                 // for  data bank
                 $bankdata = Bank::firstOrCreate(['Bank' => $value['bank_id']]);
                 $bankid =  $bankdata->bank_id;

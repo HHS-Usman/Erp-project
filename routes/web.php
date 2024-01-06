@@ -93,6 +93,7 @@ use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
+use App\Models\Supplier;
 use App\Models\SupplierCategory;
 use App\Models\Suppliertype;
 use App\Models\Supplieruploader;
@@ -220,6 +221,14 @@ Route::get('/get-group', [MonthlydaywiseController::class, 'getGroup']);
 Route::get('/get-state', [MonthlydaywiseController::class, 'getState']);
 // rollacces temporary
 // Route::resource('uplaoder',DivisionuploadController::class);
+
+// Suplier Uploader CSV
+Route::get('suplieruploadcsv',[SupplieruploaderController::class ,'suplieruploadercsv'])->name('suplieruploadcsv');
+
+// Buyer Uploader CSV
+Route::get('buyeruploadcsv',[BuyeruploadController::class ,'buyeruploadercsv'])->name('buyeruploadcsv');
+
+
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
 
