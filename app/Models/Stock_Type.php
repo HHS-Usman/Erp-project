@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Stock_Type extends Model
 {
     use HasFactory;
+    protected $guarded = [
+        'id'
+    ];
+    protected $attributes = [
+        'Stocktype_code' => '',
+        'detail' => '',
+    ];
 }

@@ -163,7 +163,7 @@
                         enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="tab" id="tab1">
-                            <div class="container d-flex justify-content-center align-items-center"
+                            <div class="container d-flex flex-sm-row justify-content-center align-items-center"
                                 style="margin-bottom:-15px;">
                                 <div class="form-group  d-flex">
                                     <div class="form-group  d-flex">
@@ -198,16 +198,16 @@
                                 <div class="container d-flex justify-content-center align-items-center"
                                     style="margin-bottom:-15px;">
                                     {{-- {{ $nextId }} --}}
-                                    <div class="form-group d-flex">
+                                    <div class="form-group d-flex .col-xs-12 .col-md-6">
                                         <strong for="Product">Product Code</strong>
                                         <input type="text" class="form-control" name="product_code" id="product_code"
                                             value="01">
                                     </div>
-                                    <div class="d-flex" style="margin: 3%">
+                                    {{-- <div class="d-flex" style="margin: 3%">
 
 
-                                    </div>
-                                    <div class="form-group d-flex">
+                                    </div> --}}
+                                    <div class="form-group d-flex .col-xs-12 .col-md-6">
                                         <strong for="options">Product Color</strong>
                                         <input type="text" class="form-control" name="product_color" id="product_color"
                                             value="" placeholder="Product_color">

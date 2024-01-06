@@ -11,4 +11,9 @@ class Brand_Selection extends Model
     protected $guarded = [
         'id'
     ];
+    protected $attributes = [
+        'brand_selection_code' => '',
+        'detail' => '',
+    ];
+
 }

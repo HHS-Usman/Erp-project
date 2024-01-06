@@ -11,4 +11,8 @@ class Product_sub_category extends Model
     protected $guarded = [
         'id'
     ];
+    protected $attributes = [
+        'product1stsbctgry_code'=>'',
+        'detail'=>'',
+    ];
 }

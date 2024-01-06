@@ -20,8 +20,8 @@ class CreateUnitSelectionsTable extends Migration
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->string('uom');
-            $table->string('uom_code');
-            $table->string('detail');
+            $table->string('uom_code')->default('null');;
+            $table->string('detail')->default('null');
             $table->boolean('is_active')->default(true)->nullable();
             $table->timestamps();
         });

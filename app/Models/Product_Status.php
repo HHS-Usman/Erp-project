@@ -9,4 +9,9 @@ class Product_Status extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $attributes = [
+        'product_status_code' => '',
+        'detail' => '',
+
+    ];
 }
