@@ -15,6 +15,10 @@ class Province extends Model
         'province_code' => '',
         'detail' => '',
     ];
+    public function supplier()
+    {
+        return $this->hasMany(Supplier::class, 'suplier_id');
+    }
     public function coas()
     {
         return $this->hasMany(Coa::class, 'id');
