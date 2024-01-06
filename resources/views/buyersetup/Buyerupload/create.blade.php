@@ -129,20 +129,34 @@
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
         <br><br><br>
-        <div class="col-sm-12 col-lg-4 main-container-uploader">
+        <div class="col-sm-12 col-lg-4 main-container-uploader mx-auto text-center">
+
             <!-- Main div -->
             <div class="inner-container">
                 <form action="{{ route('buyerupload') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <!-- Inner main div -->
-                    <div class="division-uploader">
+                      <!-- Inner main div -->
+                      <div class="division-uploader">
                         <!-- Division uploader and other elements -->
                         <div>
                             <h5>Upload Buyer</h5>
                         </div>
-                       
+                        <div class="file-upload">
+                            <div>
+                                <a id="downloaddata" href="{{ route('divisionupload') }}" download>Download</a>
+                            </div>
+                            <div class="select-dropdown">
+                                <select id="selectiondata" name="filedatainfor" class="form-select"
+                                    aria-label="Default select example" onchange="updateDownloadLink()">
+                                    <option value="0">None</option>
+                                    <option value="1">Csv</option>
+                                    <option value="2">Excel</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-
+                    <!-- Inner main div -->
+                 
                     <div class="selection d-flex">
                         <div>
                             <h6>Selection:</h6>
@@ -201,6 +215,24 @@
         <br>
         <br>
         <div><br> </div>
+        <script>
+             function updateDownloadLink() {
+                    var selection = document.getElementById("selectiondata");
+                    var downloadLink = document.getElementById("downloaddata");
+
+                    if (selection.value === "1") {
+                        downloadLink.innerText = "Download CSV";
+                        downloadLink.href = "{{ route('buyeruploadcsv') }}";
+                    } else if (selection.value === "2") {
+                        downloadLink.innerText = "Download Excel";
+                        downloadLink.href = "{{ route('divisionupload') }}";
+
+                    } else {
+                        downloadLink.innerText = "Download";
+                    }
+                }
+
+        </script>
 
     </section>
 

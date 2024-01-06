@@ -128,7 +128,7 @@
         </script>
     @endif
         <br><br><br>
-        <div class="col-sm-12 col-lg-4 main-container-uploader">
+        <div class="col-sm-12 col-lg-4 main-container-uploader mx-auto text-center">
             <!-- Main div -->
             <div class="inner-container">
                 <form action="{{ route('supplierupload') }}" method="POST" enctype="multipart/form-data">
@@ -137,9 +137,9 @@
                     <div class="division-uploader">
                         <!-- Division uploader and other elements -->
                         <div>
-                            <h5>Upload Supplier</h5>
+                            <h5>Uploads Suplier</h5>
                         </div>
-                        {{-- <div class="file-upload">
+                        <div class="file-upload">
                             <div>
                                 <a id="downloaddata" href="{{ route('divisionupload') }}" download>Download</a>
                             </div>
@@ -151,7 +151,7 @@
                                     <option value="2">Excel</option>
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
 
                     <div class="selection d-flex">
@@ -212,6 +212,24 @@
         <br>
         <br>
         <div><br> </div>
+        <script>
+            function updateDownloadLink() {
+                   var selection = document.getElementById("selectiondata");
+                   var downloadLink = document.getElementById("downloaddata");
+
+                   if (selection.value === "1") {
+                       downloadLink.innerText = "Download CSV";
+                       downloadLink.href = "{{ route('suplieruploadcsv') }}";
+                   } else if (selection.value === "2") {
+                       downloadLink.innerText = "Download Excel";
+                       downloadLink.href = "{{ route('divisionupload') }}";
+
+                   } else {
+                       downloadLink.innerText = "Download";
+                   }
+               }
+
+       </script>
 
     </section>
 

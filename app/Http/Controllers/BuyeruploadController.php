@@ -24,7 +24,17 @@ class BuyeruploadController extends Controller
     {
         //
     }
-
+    public function buyeruploadercsv()
+    {
+        $path = public_path('buyerupload/buyersuploader.csv');
+        return response()->download($path);
+    }
+    // for excel uploader
+    // public function buyeruploaderexcel()
+    // {
+    //    $path = public_path('csvfile/Grade_Templete_Uploader_(CSV).csv');
+    //    return response()->download($path);
+    // }
     /**
      * Show the form for creating a new resource.
      *
