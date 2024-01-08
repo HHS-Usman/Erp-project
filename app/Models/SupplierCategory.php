@@ -12,7 +12,7 @@ class SupplierCategory extends Model
         'id',
     ];
     protected $attributes = [
-        'suppliercategoty_Code' => '',
+        'suppliercategory_Code' => '',
         'detail' => '',
     ];
     public function coas()
@@ -23,5 +23,5 @@ class SupplierCategory extends Model
     {
         return $this->hasMany(buyer::class, 'buyer_id');
     }
-    
+
 }

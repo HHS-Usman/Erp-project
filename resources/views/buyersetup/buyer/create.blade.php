@@ -106,7 +106,7 @@
                 }
             }
         </style>
-        <br><br><br>
+       
         <div class=" wrapper d-flex">
             <div class="tabs">
                 <div style="margin:5px;"><button type="button" class="btn btn-primary p-3 px-5  col-12"
@@ -122,7 +122,7 @@
                 $(document).ready(function () {
                     $('#companyshipadres').on('change', function () {
                         var selectedOption = $(this).val();
-        
+
                         // Enable/disable fields based on the selected option
                         if (selectedOption === 'above') {
                             $('#shippingaddress').prop('disabled', true);
@@ -394,10 +394,10 @@
                                 <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(2)">Next</button>
                               </div>
                             <script>
-                              function submit1() 
+                              function submit1()
                               {
                                 var form1 = document.getElementById('form1');
-                                form1.submit();          
+                                form1.submit();
                               }
                             </script>
                         </div>
@@ -445,10 +445,10 @@
 
                       </div>
                     <script>
-                      function submit1() 
+                      function submit1()
                       {
                         var form1 = document.getElementById('form1');
-                        form1.submit();          
+                        form1.submit();
                       }
                     </script>
             </div>
@@ -504,10 +504,10 @@
                     <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(4)">Next</button>
                   </div>
                 <script>
-                  function submit1() 
+                  function submit1()
                   {
                     var form1 = document.getElementById('form1');
-                    form1.submit();          
+                    form1.submit();
                   }
                 </script>
             </div>
@@ -570,13 +570,13 @@
                 <div class="container d-flex justify-content-center align-items-center">
                     <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(3)">Previous</button>
                     <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-                
+
                   </div>
                 <script>
-                  function submit1() 
+                  function submit1()
                   {
                     var form1 = document.getElementById('form1');
-                    form1.submit();          
+                    form1.submit();
                   }
                 </script>
             </div>

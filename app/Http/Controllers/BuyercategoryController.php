@@ -16,7 +16,7 @@ class BuyercategoryController extends Controller
     public function index()
     {
         $buyerCAtegory = BuyerCategory::all();
-        return view('buyersetup.buyercategory.create',compact('buyerCAtegory'));
+        return view('buyersetup.buyercategory.index',compact('buyerCAtegory'));
     }
 
     /**
@@ -70,7 +70,8 @@ class BuyercategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $buyerCAtegory  = BuyerCategory::find($id);
+        return view('buyersetup.buyercategory.update',compact('buyerCAtegory'));
     }
 
     /**
@@ -82,7 +83,16 @@ class BuyercategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $buyercategories = BuyerCategory::findOrFail($id);
+
+         //create a new product in database
+         $buyercategories->update([
+            'buyercategory'=>request()->get('buyercategory'),
+            'buyercategory_Code'=>request()->get('buyercategorycode'),
+            'detail'=>request()->get('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            ]);
+            return redirect()->route('buyercategory.index')->with('success','Manage successfully');
     }
 
     /**

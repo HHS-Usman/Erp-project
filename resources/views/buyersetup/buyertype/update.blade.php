@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Create Buyer Category
+Update Buyer Type
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,35 +15,38 @@ Create Buyer Category
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Buyer Category</h1>
+        <h1>Update Buyer Type</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a> Create Buyer Category</a></li>
+                <li class="breadcrumb-item active"><a> Update Buyer Type</a></li>
             </ol>
         </nav>
     </div>
     <br><br><br>
-    <form action="{{ route('buyercategory.store') }}" method="POST">
+    <form action="{{ route('buyertype.update',$buyertype) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="row justify-content-center">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong class="form-group">Buyer Category Code</strong>
-                    <input type="text" name="buyercategorycode" id="buyercategorycode" class="form-control"
-                        placeholder="Buyer Category Code">
+                    <strong class="form-group">Buyer type Code</strong>
+                    <input type="text" name="buyertype_code" id="buyertype_code" value="{{$buyertype->buyertype_code}}"
+                        class="form-control" placeholder="Buyer Type Code">
                 </div>
                 <div class="form-group">
-                    <strong>Buyer Category<span style="color:#DC3545">*</span></strong>
-                    <input type="text" name="buyercategory" id="buyercategory" class="form-control"
-                        placeholder="Buyer Category" required>
+                    <strong>Buyer Type<span style="color:#DC3545">*</span></strong>
+                    <input type="text" name="buyertype" id="buyertype" value="{{$buyertype->buyertype}}"
+                        class="form-control" placeholder="Buyer Type" required>
                 </div>
                 <div class="form-group">
                     <strong>Details</strong>
-                    <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                    <input type="text" name="detail" id="detail" value="{{$buyertype->detail}}" class="form-control"
+                        placeholder="Detail">
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
+                    <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active"
+                        {{$buyertype->is_active ? 'checked' : '' }} checked>
                     Active
                     </label>
                 </div>

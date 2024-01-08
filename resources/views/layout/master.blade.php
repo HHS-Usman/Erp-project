@@ -158,8 +158,8 @@
     <x-navigation />
     <div
         style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
-  transform-origin: 0 0;
-  width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
+            transform-origin: 0 0;
+            width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
         <nav class="navbar navbar-expand-lg navbar-light bg-white " id="navbarcontainermain"
             style="box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);">
             <div style="width: 10%" id="logocompany">
@@ -231,10 +231,6 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('gazetedholiday.index') }}">Manage Gazeted Holidays</a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('costcenter.create') }}">Create Cost Center</a></li>
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('costcenter.index') }}">Manage Cost Center</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('language.create') }}">Create Language</a></li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -465,7 +461,9 @@
                                         <li class="p-0"><a class="dropdown-item"
                                             href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd Sub Category </a>
                                         </li>
-
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('productuploader.index') }}"> Product Uploader</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -548,7 +546,7 @@
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
                                         href="#" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Trajectory</a>
+                                        aria-expanded="false">Treasury</a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('buyerpayment.create') }}">
@@ -596,7 +594,7 @@
                                         <li class="p-0"><a class="dropdown-item"
                                             href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
                                     </li>
-                                    </ul> 
+                                    </ul>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
@@ -1217,7 +1215,7 @@
             margin-top: -1px;
         }
     </style>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const myTable = new simpleDatatables.DataTable("#myTable", {
                 paging: true,
@@ -1232,7 +1230,7 @@
                 bottomPagination.innerHTML = topPagination.innerHTML;
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

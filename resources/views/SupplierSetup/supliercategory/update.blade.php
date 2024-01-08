@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Suplier Category
+    Update Suplier Category
 @endsection
 @section('content')
   <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,33 +15,35 @@
             </div>
         @endif
             <div class="pagetitle" style="margin-left: 20px;">
-                <h1>Create Suplier Category</h1>
+                <h1>Update Suplier Category</h1>
                 <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Suplier Category</a></li>
+                    <li class="breadcrumb-item active"><a> Update Suplier Category</a></li>
                 </ol>
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('scategory.store') }}" method="POST">
+            <form action="{{ route('scategory.update',$supcategory) }}" method="POST">
                 @csrf
+                @csrf
+                @method('PUT')
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                             <strong class="form-group">Suplier Category Code</strong>
-                                <input type="text" name="suplliercategory_Code" id="suplliercategory_Code" class="form-control" placeholder="Supllier Category Code">
+                                <input type="text" name="suppliercategoty_Code" value="{{$supcategory->suppliercategoty_Code }}" id="suppliercategoty_Code" class="form-control" placeholder="Supllier Category Code">
                             </div>
                             <div class="form-group">
                                 <strong>Supllier Category<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="suplliercategory" id="suplliercategory" class="form-control" placeholder="Supplier Category" required>
+                                <input type="text" name="suplliercategory" value="{{$supcategory->suplliercategory }}" id="suplliercategory" class="form-control" placeholder="Supplier Category" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>
-                                <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                                <input type="text" name="detail" value="{{$supcategory->detail }}" id="detail" class="form-control" placeholder="Detail">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                                <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" {{$supcategory->is_active? 'checked' : '' }}  >
                                 Active
                                 </label>
                             </div>

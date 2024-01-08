@@ -14,7 +14,8 @@ trait HasRoles
 {
     use HasPermissions;
 
-    private ?string $roleClass = null;
+    /** @var string */
+    private $roleClass;
 
     public static function bootHasRoles()
     {
@@ -23,19 +24,16 @@ trait HasRoles
                 return;
             }
 
-            $teams = app(PermissionRegistrar::class)->teams;
-            app(PermissionRegistrar::class)->teams = false;
+            $teams = PermissionRegistrar::$teams;
+            PermissionRegistrar::$teams = false;
             $model->roles()->detach();
-            if (is_a($model, Permission::class)) {
-                $model->users()->detach();
-            }
-            app(PermissionRegistrar::class)->teams = $teams;
+            PermissionRegistrar::$teams = $teams;
         });
     }
 
-    public function getRoleClass(): string
+    public function getRoleClass()
     {
-        if (! $this->roleClass) {
+        if (! isset($this->roleClass)) {
             $this->roleClass = app(PermissionRegistrar::class)->getRoleClass();
         }
 
@@ -52,27 +50,27 @@ trait HasRoles
             'model',
             config('permission.table_names.model_has_roles'),
             config('permission.column_names.model_morph_key'),
-            app(PermissionRegistrar::class)->pivotRole
+            PermissionRegistrar::$pivotRole
         );
 
-        if (! app(PermissionRegistrar::class)->teams) {
+        if (! PermissionRegistrar::$teams) {
             return $relation;
         }
 
-        $teamField = config('permission.table_names.roles').'.'.app(PermissionRegistrar::class)->teamsKey;
-
-        return $relation->wherePivot(app(PermissionRegistrar::class)->teamsKey, getPermissionsTeamId())
-            ->where(fn ($q) => $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId()));
+        return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId())
+            ->where(function ($q) {
+                $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
+                $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
+            });
     }
 
     /**
      * Scope the model query to certain roles only.
      *
-     * @param  string|int|array|Role|Collection|\BackedEnum  $roles
+     * @param  string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
      * @param  string  $guard
-     * @param  bool  $without
      */
-    public function scopeRole(Builder $query, $roles, $guard = null, $without = false): Builder
+    public function scopeRole(Builder $query, $roles, $guard = null): Builder
     {
         if ($roles instanceof Collection) {
             $roles = $roles->all();
@@ -83,41 +81,27 @@ trait HasRoles
                 return $role;
             }
 
-            if ($role instanceof \BackedEnum) {
-                $role = $role->value;
-            }
+            $method = is_numeric($role) ? 'findById' : 'findByName';
 
-            $method = is_int($role) || PermissionRegistrar::isUid($role) ? 'findById' : 'findByName';
-
-            return $this->getRoleClass()::{$method}($role, $guard ?: $this->getDefaultGuardName());
+            return $this->getRoleClass()->{$method}($role, $guard ?: $this->getDefaultGuardName());
         }, Arr::wrap($roles));
 
-        $key = (new ($this->getRoleClass())())->getKeyName();
-
-        return $query->{! $without ? 'whereHas' : 'whereDoesntHave'}('roles', fn (Builder $subQuery) => $subQuery
-            ->whereIn(config('permission.table_names.roles').".$key", \array_column($roles, $key))
-        );
+        return $query->whereHas('roles', function (Builder $subQuery) use ($roles) {
+            $roleClass = $this->getRoleClass();
+            $key = (new $roleClass())->getKeyName();
+            $subQuery->whereIn(config('permission.table_names.roles').".$key", \array_column($roles, $key));
+        });
     }
 
     /**
-     * Scope the model query to only those without certain roles.
+     * Assign the given role to the model.
      *
-     * @param  string|int|array|Role|Collection|\BackedEnum  $roles
-     * @param  string  $guard
+     * @param  array|string|int|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  ...$roles
+     * @return $this
      */
-    public function scopeWithoutRole(Builder $query, $roles, $guard = null): Builder
+    public function assignRole(...$roles)
     {
-        return $this->scopeRole($query, $roles, $guard, true);
-    }
-
-    /**
-     * Returns roles ids as array keys
-     *
-     * @param  string|int|array|Role|Collection|\BackedEnum  $roles
-     */
-    private function collectRoles(...$roles): array
-    {
-        return collect($roles)
+        $roles = collect($roles)
             ->flatten()
             ->reduce(function ($array, $role) {
                 if (empty($role)) {
@@ -129,49 +113,34 @@ trait HasRoles
                     return $array;
                 }
 
-                if (! in_array($role->getKey(), $array)) {
-                    $this->ensureModelSharesGuard($role);
-                    $array[] = $role->getKey();
-                }
+                $this->ensureModelSharesGuard($role);
+
+                $array[$role->getKey()] = PermissionRegistrar::$teams && ! is_a($this, Permission::class) ?
+                    [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
 
                 return $array;
             }, []);
-    }
-
-    /**
-     * Assign the given role to the model.
-     *
-     * @param  string|int|array|Role|Collection|\BackedEnum  ...$roles
-     * @return $this
-     */
-    public function assignRole(...$roles)
-    {
-        $roles = $this->collectRoles($roles);
 
         $model = $this->getModel();
-        $teamPivot = app(PermissionRegistrar::class)->teams && ! is_a($this, Permission::class) ?
-            [app(PermissionRegistrar::class)->teamsKey => getPermissionsTeamId()] : [];
 
         if ($model->exists) {
-            $currentRoles = $this->roles->map(fn ($role) => $role->getKey())->toArray();
-
-            $this->roles()->attach(array_diff($roles, $currentRoles), $teamPivot);
-            $model->unsetRelation('roles');
+            $this->roles()->sync($roles, false);
+            $model->load('roles');
         } else {
             $class = \get_class($model);
 
             $class::saved(
-                function ($object) use ($roles, $model, $teamPivot) {
+                function ($object) use ($roles, $model) {
                     if ($model->getKey() != $object->getKey()) {
                         return;
                     }
-                    $model->roles()->attach($roles, $teamPivot);
-                    $model->unsetRelation('roles');
+                    $model->roles()->sync($roles, false);
+                    $model->load('roles');
                 }
             );
         }
 
-        if (is_a($this, Permission::class)) {
+        if (is_a($this, get_class($this->getPermissionClass()))) {
             $this->forgetCachedPermissions();
         }
 
@@ -181,15 +150,15 @@ trait HasRoles
     /**
      * Revoke the given role from the model.
      *
-     * @param  string|int|Role|\BackedEnum  $role
+     * @param  string|int|\Spatie\Permission\Contracts\Role  $role
      */
     public function removeRole($role)
     {
         $this->roles()->detach($this->getStoredRole($role));
 
-        $this->unsetRelation('roles');
+        $this->load('roles');
 
-        if (is_a($this, Permission::class)) {
+        if (is_a($this, get_class($this->getPermissionClass()))) {
             $this->forgetCachedPermissions();
         }
 
@@ -199,16 +168,12 @@ trait HasRoles
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param  string|int|array|Role|Collection|\BackedEnum  ...$roles
+     * @param  array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection|string|int  ...$roles
      * @return $this
      */
     public function syncRoles(...$roles)
     {
-        if ($this->getModel()->exists) {
-            $this->collectRoles($roles);
-            $this->roles()->detach();
-            $this->setRelation('roles', collect());
-        }
+        $this->roles()->detach();
 
         return $this->assignRole($roles);
     }
@@ -216,32 +181,29 @@ trait HasRoles
     /**
      * Determine if the model has (one of) the given role(s).
      *
-     * @param  string|int|array|Role|Collection|\BackedEnum  $roles
+     * @param  string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
      */
-    public function hasRole($roles, ?string $guard = null): bool
+    public function hasRole($roles, string $guard = null): bool
     {
         $this->loadMissing('roles');
 
-        if (is_string($roles) && strpos($roles, '|') !== false) {
+        if (is_string($roles) && false !== strpos($roles, '|')) {
             $roles = $this->convertPipeToArray($roles);
-        }
-
-        if ($roles instanceof \BackedEnum) {
-            $roles = $roles->value;
-        }
-
-        if (is_int($roles) || PermissionRegistrar::isUid($roles)) {
-            $key = (new ($this->getRoleClass())())->getKeyName();
-
-            return $guard
-                ? $this->roles->where('guard_name', $guard)->contains($key, $roles)
-                : $this->roles->contains($key, $roles);
         }
 
         if (is_string($roles)) {
             return $guard
                 ? $this->roles->where('guard_name', $guard)->contains('name', $roles)
                 : $this->roles->contains('name', $roles);
+        }
+
+        if (is_int($roles)) {
+            $roleClass = $this->getRoleClass();
+            $key = (new $roleClass())->getKeyName();
+
+            return $guard
+                ? $this->roles->where('guard_name', $guard)->contains($key, $roles)
+                : $this->roles->contains($key, $roles);
         }
 
         if ($roles instanceof Role) {
@@ -258,11 +220,7 @@ trait HasRoles
             return false;
         }
 
-        if ($roles instanceof Collection) {
-            return $roles->intersect($guard ? $this->roles->where('guard_name', $guard) : $this->roles)->isNotEmpty();
-        }
-
-        throw new \TypeError('Unsupported type for $roles parameter to hasRole().');
+        return $roles->intersect($guard ? $this->roles->where('guard_name', $guard) : $this->roles)->isNotEmpty();
     }
 
     /**
@@ -270,7 +228,7 @@ trait HasRoles
      *
      * Alias to hasRole() but without Guard controls
      *
-     * @param  string|int|array|Role|Collection|\BackedEnum  $roles
+     * @param  string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
      */
     public function hasAnyRole(...$roles): bool
     {
@@ -280,17 +238,13 @@ trait HasRoles
     /**
      * Determine if the model has all of the given role(s).
      *
-     * @param  string|array|Role|Collection|\BackedEnum  $roles
+     * @param  string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
      */
-    public function hasAllRoles($roles, ?string $guard = null): bool
+    public function hasAllRoles($roles, string $guard = null): bool
     {
         $this->loadMissing('roles');
 
-        if ($roles instanceof \BackedEnum) {
-            $roles = $roles->value;
-        }
-
-        if (is_string($roles) && strpos($roles, '|') !== false) {
+        if (is_string($roles) && false !== strpos($roles, '|')) {
             $roles = $this->convertPipeToArray($roles);
         }
 
@@ -305,10 +259,6 @@ trait HasRoles
         }
 
         $roles = collect()->make($roles)->map(function ($role) {
-            if ($role instanceof \BackedEnum) {
-                return $role->value;
-            }
-
             return $role instanceof Role ? $role->name : $role;
         });
 
@@ -322,13 +272,13 @@ trait HasRoles
     /**
      * Determine if the model has exactly all of the given role(s).
      *
-     * @param  string|array|Role|Collection  $roles
+     * @param  string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
      */
-    public function hasExactRoles($roles, ?string $guard = null): bool
+    public function hasExactRoles($roles, string $guard = null): bool
     {
         $this->loadMissing('roles');
 
-        if (is_string($roles) && strpos($roles, '|') !== false) {
+        if (is_string($roles) && false !== strpos($roles, '|')) {
             $roles = $this->convertPipeToArray($roles);
         }
 
@@ -340,8 +290,9 @@ trait HasRoles
             $roles = [$roles->name];
         }
 
-        $roles = collect()->make($roles)->map(fn ($role) => $role instanceof Role ? $role->name : $role
-        );
+        $roles = collect()->make($roles)->map(function ($role) {
+            return $role instanceof Role ? $role->name : $role;
+        });
 
         return $this->roles->count() == $roles->count() && $this->hasAllRoles($roles, $guard);
     }
@@ -363,16 +314,14 @@ trait HasRoles
 
     protected function getStoredRole($role): Role
     {
-        if ($role instanceof \BackedEnum) {
-            $role = $role->value;
-        }
+        $roleClass = $this->getRoleClass();
 
-        if (is_int($role) || PermissionRegistrar::isUid($role)) {
-            return $this->getRoleClass()::findById($role, $this->getDefaultGuardName());
+        if (is_numeric($role)) {
+            return $roleClass->findById($role, $this->getDefaultGuardName());
         }
 
         if (is_string($role)) {
-            return $this->getRoleClass()::findByName($role, $this->getDefaultGuardName());
+            return $roleClass->findByName($role, $this->getDefaultGuardName());
         }
 
         return $role;
@@ -383,7 +332,7 @@ trait HasRoles
         $pipeString = trim($pipeString);
 
         if (strlen($pipeString) <= 2) {
-            return [str_replace('|', '', $pipeString)];
+            return $pipeString;
         }
 
         $quoteCharacter = substr($pipeString, 0, 1);

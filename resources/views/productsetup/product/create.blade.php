@@ -203,10 +203,10 @@
                                         <input type="text" class="form-control" name="product_code" id="product_code"
                                             value="01">
                                     </div>
-                                    {{-- <div class="d-flex" style="margin: 3%">
+                                     <div class="d-flex" style="margin: 3%">
 
 
-                                    </div> --}}
+                                    </div> 
                                     <div class="form-group d-flex .col-xs-12 .col-md-6">
                                         <strong for="options">Product Color</strong>
                                         <input type="text" class="form-control" name="product_color" id="product_color"

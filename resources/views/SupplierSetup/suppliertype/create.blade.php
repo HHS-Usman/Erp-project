@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
     Create Supplier Type
-@endsection    
+@endsection
 @section('content')
   <section id="main" class="main" style="padding-top: 0vh;">
         @if ($errors->any())
@@ -24,13 +24,13 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('suppliertype.store') }}" method="POST">        
+            <form action="{{ route('suppliertype.store') }}" method="POST">
                 @csrf
                     <div class="row justify-content-center">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <strong>Supplier Type Code</strong>
-                                <input type="text" name="suppliertypecode" id="suppliertypecode" class="form-control" placeholder="Supplier Type Code">
+                                <input type="text" name="suppliertype_code" id="suppliertype_code" class="form-control" placeholder="Supplier Type Code">
                             </div>
                             <div class="form-group">
                                 <strong>Supplier Type<span style="color:#DC3545">*</span></strong>
@@ -56,7 +56,7 @@
         <br>
         <br>
         <div><br> </div>
-        
-  </section> 
 
-@endsection    
+  </section>
+
+@endsection

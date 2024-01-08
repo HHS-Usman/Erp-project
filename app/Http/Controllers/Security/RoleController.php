@@ -12,6 +12,9 @@ use App\Models\Module;
 use App\Models\Page;
 use App\Models\PageAction;
 use App\Models\role_access;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Validation\Rule;
 class RoleController extends Controller
 {
     /**
@@ -21,7 +24,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-     
+
         return view('security.User.Role.IndexRole');
 
     }
@@ -48,10 +51,10 @@ class RoleController extends Controller
         // ->select('permissions.*', 'modules.module_name as module_name')
         // ->get();
 
-       
+
         return view('security.User.Role.Addrole', compact('permissions', 'pageactions',
          'modules', 'pages', 'pagers','pgactions', 'roles'));
-        
+
     }
 
     /**
@@ -62,30 +65,14 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
-        $moduleNames = $request->input('module_id', []);
-        $pageIds = $request->input('page_id', []);
-        
-        // Assuming 'role_access' is the model name
-        foreach ($pageIds as $pageId) {
-            // Perform your logic to store page data here
-        
-            // Check if $moduleNames is not empty and get the first element
-            $moduleName = !empty($moduleNames) ? reset($moduleNames) : null;
-        
-            role_access::create([
-                'page_id' => $pageId,
-                'role_id' => $request->get('role_id'),
-                'module_id' => $moduleName,
-                // Add other fields as needed
-            ]);
-        
-            // Remove the processed module name from the array
-            array_shift($moduleNames);
-        }
-        
-        return redirect()->route('role.create')->with('success', 'Manage successfully');
+
+
+        // $moduleNames = $request->input('module_id', []);
+        // $pageIds = $request->input('page_id', []);
+
+        $role = Role::create(['name' => $request->role_name]);
+        $role->givePermissionTo($request->permissions);
+        return redirect()->route('role.index')->with('success', 'Manage successfully');
     }
 
     /**
@@ -96,7 +83,12 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+            ->where("role_has_permissions.role_id",$id)
+            ->get();
+
+        return view('general.roles.show',compact('role','rolePermissions'));
     }
 
     /**
@@ -107,7 +99,17 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return view('security.User.Role.EditRole');
+        $role = Role::findOrFail($id);
+
+        return  view($this->page.'EditRole', compact('role'));
+
+        // $role = Role::find($id);
+        // $permission = Permission::get();
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+        //     ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        //     ->all();
+
+        // return view('general.roles.edit',compact('role','permission','rolePermissions'));
     }
 
     /**
@@ -119,9 +121,25 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $role = Role::findOrFail($id);
+        $role->syncPermissions($request->permissions);
+        $role = $role->update(['name' => $request->role_name]);
 
+
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'permission' => 'required',
+        // ]);
+
+        // $role = Role::find($id);
+        // $role->name = $request->input('name');
+        // $role->save();
+
+        // $role->syncPermissions($request->input('permission'));
+
+        return redirect()->route('role.index')
+                        ->with('success','Role updated successfully');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -130,6 +148,10 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $role = role::where('id', $id)->update(['status'=> 0]);
+        // return response()->json(['success'=>'Role Deleted Successfully']);
+        DB::table("roles")->where('id',$id)->delete();
+        return redirect()->route('roles.index')
+                        ->with('success','Role deleted successfully');
     }
 }

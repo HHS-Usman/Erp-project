@@ -42,8 +42,8 @@ class SupplierCategoryController extends Controller
             'is_active' => 'integer|in:0,1'
         ]);
         SupplierCategory::create([
-            'suplliercategoty'=>request()->get('suplliercategory'),
-            'suppliercategoty_Code'=>request()->get('suplliercategorycode'),
+            'suplliercategory'=>request()->get('suplliercategory'),
+            'suppliercategoty_Code'=>request()->get('suppliercategoty_Code'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
@@ -69,7 +69,8 @@ class SupplierCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supcategory =SupplierCategory::find($id);
+        return view('SupplierSetup.supliercategory.update',compact('supcategory'));
     }
 
     /**
@@ -81,9 +82,17 @@ class SupplierCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $supcategory = SupplierCategory::findorfail($id);
 
+        $supcategory->update([
+            'suplliercategory'=>request()->get('suplliercategory'),
+            'suppliercategory_Code'=>request()->get('suppliercategoty_Code'),
+            'detail'=>request()->get('detail'),
+            'is_active' =>  $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('scategory.index')->with('success','Create successfully');
+
+    }
     /**
      * Remove the specified resource from storage.
      *

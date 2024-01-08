@@ -43,7 +43,7 @@ class SuppliertypeController extends Controller
         ]);
         Suppliertype::create([
             'suppliertype'=>request()->get('suppliertype'),
-            'suppliertype_code'=>request()->get('suppliertypecode'),
+            'suppliertype_code'=>request()->get('suppliertype_code'),
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
@@ -69,7 +69,8 @@ class SuppliertypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $suppliertype = Suppliertype::find($id);
+        return view('SupplierSetup.suppliertype.update', compact('suppliertype'));
     }
 
     /**
@@ -81,7 +82,15 @@ class SuppliertypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supcategory = SupplierCategory::findorfail($id);
+
+        $supcategory->update([
+            'suppliertype'=>request()->get('suppliertype'),
+            'suppliertype_code'=>request()->get('suppliertype_code'),
+            'detail'=>request()->get('detail'),
+            'is_active' =>  $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('suppliertype.index')->with('success','Create successfully');
     }
 
     /**

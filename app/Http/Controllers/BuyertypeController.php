@@ -69,7 +69,8 @@ class BuyertypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $buyertype  = Buyertype::find($id);
+        return view('buyersetup.buyertype.update',compact('buyertype'));
     }
 
     /**
@@ -81,7 +82,16 @@ class BuyertypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $buyertype = Buyertype::findOrFail($id);
+
+        //create a new product in database
+        $buyertype->update([
+            'buyertype'=>request()->get('buyertype'),
+            'buyertype_code'=>request()->get('buyertype_code'),
+            'detail'=>request()->get('detail'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
+        ]);
+        return redirect()->route('buyertype.index')->with('success','Create successfully');
     }
 
     /**
