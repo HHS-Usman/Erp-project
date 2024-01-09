@@ -22,10 +22,13 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        return view('security.User.Role.IndexRole');
+        $roles = Role::all();
+        if ($request->ajax()):
+            return view($this->page.'TableData',compact('roles'));
+        endif;
+        return view('security.User.Role.IndexRole',compact('roles'));
 
     }
 
@@ -88,7 +91,7 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->get();
 
-        return view('general.roles.show',compact('role','rolePermissions'));
+        return redirect()->route('role.index',compact('role','rolePermissions'));
     }
 
     /**
@@ -99,9 +102,22 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        $roles = User_role::all();
         $role = Role::findOrFail($id);
-
-        return  view($this->page.'EditRole', compact('role'));
+        $permissions = Permissions::with('module', 'page')->get();
+        $modals = Module::with('permissions')->get();
+        $pagers = Permissions::join('pages', 'permissions.page_id', '=', 'pages.id')
+         ->select('permissions.*', 'pages.name as page_name')
+         ->get();
+        $pgactions = Permissions::join('page_actions', 'permissions.page_action_id', '=', 'page_actions.id')
+        ->select('permissions.*', 'page_actions.Name as page_action_name')
+        ->get();
+        $modules = Module::all();
+        $pages = Page::all();
+        $pageactions = PageAction::all();
+         $permissions = Permissions::with('module', 'page')->get();
+        return  view('security.User.Role.EditRole', compact('roles','role','permissions','permissions', 'pageactions',
+        'modules', 'pages', 'pagers','pgactions'));
 
         // $role = Role::find($id);
         // $permission = Permission::get();

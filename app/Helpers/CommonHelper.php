@@ -3,10 +3,9 @@
 namespace App\Helpers;
 use DB;
 use Config;
-use App\Models\Branch;  // Create Branch Table For that  ok 
-use App\Models\Company;  
+use App\Models\Branch;  // Create Branch Table For that  ok
+use App\Models\Company;
 use App\Models\Module;  
-
 
 use Auth;
 use Session;

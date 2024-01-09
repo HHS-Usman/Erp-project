@@ -54,10 +54,10 @@ use Spatie\Permission\Models\Permission;
                         <h4>Role</h4>
                     </label>
                     <div></div>
-                    <select id="gender" name="name" class="form-select" style="margin-left: 2%">
+                    <select id="name" name="role_name" class="form-select" style="margin-left: 2%">
                         <option class="options">None</option>
                         @foreach($roles as $item)
-                        <option value="{{ $item->id }}">{{ $item->user_role }}</option>
+                        <option value="{{ $item->user_role}}">{{ $item->user_role }}</option>
                         @endforeach
                     </select>
 
@@ -129,7 +129,7 @@ use Spatie\Permission\Models\Permission;
                             <td>
                                 {{ $moduleGroup['permissions'][$key] }}
                                 {{ $moduleGroup['permission_id'][$key] }}
-                                <input type="checkbox" name="page_action_id"
+                                <input type="checkbox" name="permissions[]"
                                     id="freezer-{{ $moduleGroup['main_module'] }}" class="item"
                                     value="{{$moduleGroup['page_action_id'][$key] }}"
                                     data-module="{{ $moduleGroup['main_module'] }}"
