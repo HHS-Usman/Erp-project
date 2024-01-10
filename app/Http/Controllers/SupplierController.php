@@ -33,7 +33,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $getMaxid = Supplier::max('suplier_id')+1;
+        $getMaxid = Supplier::max('id')+1;
         $bank = Bank::all();
         $scategory = SupplierCategory::all();
         $stype = Suppliertype::all();
@@ -65,8 +65,8 @@ class SupplierController extends Controller
             'pcellno' => 'nullable',
             'country' => 'nullable',
             'contactemail' => 'nullable',
-            'suppliertype' => 'nullable',
-            'suppliercategory' => 'nullable',
+            'supliertype_id' => 'nullable',
+            'suplierCatg_id' => 'nullable',
             'supplierdiscount' => 'nullable',
             'supplieradvance' => 'nullable',
             'supplierlocality' => 'nullable',
@@ -87,7 +87,7 @@ class SupplierController extends Controller
             'phone1' => 'nullable',
             'phone2' => 'nullable',
         ]);
-        
+
         if(request()->get('companyshipadres') ==  "above"){
 
             Supplier::create([
@@ -129,9 +129,9 @@ class SupplierController extends Controller
                 'dateopening'=>request()->get('openingdate'),
                 // for forign key use here
                 'bank_id'=>request()->get('bankdata'),
-                'suplierCatg_id'=>request()->get('suppliercategory'),
-                'supliertype_id'=>request()->get('suppliertype'),
-                'province_id'=>request()->get('provinceabove'),
+                'suplierCatg_id'=>request()->get('suplierCatg_id'),
+                'supliertype_id'=>request()->get('supliertype_id'),
+                'province_id'=>request()->get('province_id'),
                 'country_id'=>request()->get('countryabove'),
                 'City_id'=>request()->get('citydabove'),
             ]);
@@ -208,7 +208,14 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $getMaxid = Supplier::find($id);
+        $bank = Bank::all();
+        $scategory = SupplierCategory::all();
+        $stype = Suppliertype::all();
+        $province = Province::all();
+        $country = Country::all();
+        $city = City::all();
+        return view('SupplierSetup.supplier.update',compact('province','country','city','stype','scategory','bank','getMaxid'));
     }
 
     /**
@@ -220,7 +227,107 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier = Supplier::findOrFail($id);
+        $supplier->update([]);
+        if(request()->get('companyshipadres') ==  "above"){
+
+            $supplier->update([
+                'customer_code'=>request()->get('customcode'),
+                'email'=>request()->get('email'),
+                'companyname'=>request()->get('companyname'),
+                'phone_no1'=>request()->get('phone1'),
+                'phone_no2'=>request()->get('phone2'),
+                'address'=>request()->get('adressabove'),
+                // 'city'=>request()->get('city'),
+                'cell_no'=>request()->get('cellno'),
+                // 'province'=>request()->get('province'),
+                'contactperson'=>request()->get('contactperson'),
+                'zipcode'=>request()->get('zipcodeabove'),
+                'contactpersoncell_no'=>request()->get('pcellno'),
+                // 'country'=>request()->get('country'),
+                'contactperson_email'=>request()->get('contactemail'),
+                'creditdays'=>request()->get('creditdays'),
+                'creditlimit'=>request()->get('creditlimit'),
+                'suplierdiscount'=>request()->get('supplierdiscount'),
+                'suplieradvance'=>request()->get('supplieradvance'),
+                'suplierlocality'=>request()->get('supplierlocality'),
+                'shipier_addres'=>request()->get('shippingaddress'),
+                // 'shiping_city'=>request()->get('shippngcity'),
+                // 'shippingprovince'=>request()->get('shippingprovince'),
+                // 'shippingcountry'=>request()->get('shippingcountry'),
+                'title'=>request()->get('title'),
+                'contactpersonemail'=>request()->get('contactpersonemail'),
+                'dispnote_invoice'=>request()->get('dinvoice'),
+                'st_registration_no'=>request()->get('registration_st'),
+                'st_invoicenote'=>request()->get('invoinceterm'),
+                'withouttax_perc_age'=>request()->get('Withholding'),
+                'bankname'=>request()->get('bank'),
+                'account_title'=>request()->get('accounttext'),
+                'accountno'=>request()->get('accountno'),
+                'branchcode'=>request()->get('branchcode'),
+                'branchname'=>request()->get('branchname'),
+                'openingbalance'=>request()->get('openingbalance'),
+                'dateopening'=>request()->get('openingdate'),
+                // for forign key use here
+                'bank_id'=>request()->get('bankdata'),
+                'suplierCatg_id'=>request()->get('suplierCatg_id'),
+                'supliertype_id'=>request()->get('supliertype_id'),
+                'province_id'=>request()->get('province_id'),
+                'country_id'=>request()->get('countryabove'),
+                'City_id'=>request()->get('citydabove'),
+            ]);
+        }
+        else{
+        $supplier->update([
+            'customer_code'=>request()->get('customcode'),
+            'email'=>request()->get('email'),
+            'companyname'=>request()->get('companyname'),
+            'phone_no1'=>request()->get('phone1'),
+            'phone_no2'=>request()->get('phone2'),
+            'address'=>request()->get('adress'),
+            // 'city'=>request()->get('city'),
+            'cell_no'=>request()->get('cellno'),
+            // 'province'=>request()->get('province'),
+            'contactperson'=>request()->get('contactperson'),
+            // 'zipcode'=>request()->get('postalcodeon'),
+            'contactpersoncell_no'=>request()->get('pcellno'),
+            'country'=>request()->get('country'),
+            'contactperson_email'=>request()->get('contactemail'),
+            // 'supliertype'=>request()->get('suppliertype'),
+            // 'supliercategory'=>request()->get('suppliercategory'),
+            'creditdays'=>request()->get('creditdays'),
+            'creditlimit'=>request()->get('creditlimit'),
+            'suplierdiscount'=>request()->get('supplierdiscount'),
+            'suplieradvance'=>request()->get('supplieradvance'),
+            'suplierlocality'=>request()->get('supplierlocality'),
+            'shipier_addres'=>request()->get('shippingaddresson'),
+            // 'shiping_city'=>request()->get('shippngcity'),
+            // 'shippingprovince'=>request()->get('shippingprovince'),
+            // 'shippingcountry'=>request()->get('shippingcountry'),
+            'title'=>request()->get('title'),
+            'zipcode' => request()->get('postalcodeon'),
+            'contactpersonemail'=>request()->get('contactpersonemail'),
+            'dispnote_invoice'=>request()->get('dinvoice'),
+            'st_registration_no'=>request()->get('registration_st'),
+            'st_invoicenote'=>request()->get('invoinceterm'),
+            'withouttax_perc_age'=>request()->get('Withholding'),
+            'bankname'=>request()->get('bank'),
+            'account_title'=>request()->get('accounttext'),
+            'accountno'=>request()->get('accountno'),
+            'branchcode'=>request()->get('branchcode'),
+            'branchname'=>request()->get('branchname'),
+            'openingbalance'=>request()->get('openingbalance'),
+            'dateopening'=>request()->get('openingdate'),
+            // for forign key use here
+            'bank_id'=>request()->get('bankdata'),
+            'suplierCatg_id'=>request()->get('suppliercategory'),
+            'supliertype_id'=>request()->get('suppliertype'),
+            'province_id'=>request()->get('shippingprovinceon'),
+            'country_id'=>request()->get('shippingcountryon'),
+            'City_id'=>request()->get('shippngcityon'),
+        ]);
+    }
+    return redirect()->route('supplier.index')->with('success','Create successfully');
     }
 
     /**

@@ -150,14 +150,15 @@ Create Supplier
                 });
         </script>
         <div class="container">
-            <form class="w-100" id="multitab-form" action="{{ route('supplier.store') }}" method="POST">
+            <form class="w-100" id="multitab-form" action="{{ route('supplier.update',$getMaxid) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="tab" id="tab1">
                     <div class="col-md-12 form-group">
                         <h3> Suplier General Info</h3>
                         <div class="col-md-6  justify-content-center">
                             <strong>System Code</strong>
-                            <input type="text" class="form-control" disabled id="systemid" value={{ $getMaxid }}
+                            <input type="text" class="form-control" disabled id="systemid" value={{ $getMaxid->id }}
                                 name="systemid" placeholder="0">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-12"
@@ -166,12 +167,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Custom Code (Optional)</strong>
                                     <input type="text" class="form-control" id="customcode" name="customcode"
-                                        placeholder="Customer Code">
+                                        placeholder="Customer Code" value={{ $getMaxid->suplier_id }}>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Email</strong>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Email">
+                                        placeholder="Email" value="{{ $getMaxid->email }}">
                                 </div>
                             </div>
 
@@ -179,12 +180,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Company Name</strong>
                                     <input type="text" class="form-control" id="companyname" name="companyname"
-                                        placeholder="Company Name">
+                                        placeholder="Company Name" value="{{ $getMaxid->companyname }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Phone no1#</strong>
                                     <input type="number" class="form-control" id="phone1" name="phone1"
-                                        placeholder="Phone No1#">
+                                        placeholder="Phone No1#" value="{{ $getMaxid->phone_no1 }}">
                                 </div>
                             </div>
 
@@ -192,12 +193,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Adress</strong>
                                     <input type="textarea" class="form-control" id="adressabove" name="adressabove"
-                                        placeholder="Address">
+                                        placeholder="Address" value="{{ $getMaxid->address }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong for="attachment">phone no2#</strong>
                                     <input type="text" class="form-control" id="phone2" name="phone2"
-                                        placeholder="phone no2#">
+                                        placeholder="phone no2#" value="{{ $getMaxid->phone_no2 }}">
                                 </div>
                             </div>
 
@@ -207,14 +208,14 @@ Create Supplier
                                     <select name="citydabove" id="cityabove" class="form-control">
                                         <option value="Select City">Select City </option>
                                         @foreach ($city as $item)
-                                        <option value={{ $item->id }}>{{ $item->city }}</option>
+                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->City_id ) selected @endif>{{ $item->city }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong for="attachment">Cell no#</strong>
                                     <input type="text" class="form-control" id="cellno" name="cellno"
-                                        placeholder="Cell no#">
+                                        placeholder="Cell no#"  value="{{ $getMaxid->cell_no }}">
                                 </div>
                             </div>
 
@@ -224,14 +225,14 @@ Create Supplier
                                     <select name="province_id" id="province_id" class="form-control">
                                         <option value="Select Sale Type">Select Province </option>
                                         @foreach ($province as $item)
-                                        <option value={{ $item->province_id }}>{{ $item->province }}</option>
+                                        <option value={{ $item->province_id }} @if ($item->id == $getMaxid->province_id ) selected @endif>{{ $item->province }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person</strong>
                                     <input type="text" class="form-control" id="contactperson" name="contactperson"
-                                        placeholder="Contact Person">
+                                        placeholder="Contact Person" value="{{ $getMaxid->contactpersoncell_no }}">
                                 </div>
                             </div>
 
@@ -239,12 +240,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Zip/Postal Code</strong>
                                     <input type="text" class="form-control" id="zipcodeabove" name="zipcodeabove"
-                                        placeholder="Zip/Postal Code">
+                                        placeholder="Zip/Postal Code" value="{{ $getMaxid->zipcode }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person Cell no</strong>
                                     <input type="number" class="form-control" id="pcellno" name="pcellno"
-                                        placeholder="ontact Person Cell no">
+                                        placeholder="{{ $getMaxid->contactpersoncell_no }}">
                                 </div>
                             </div>
 
@@ -254,14 +255,14 @@ Create Supplier
                                     <select name="countryabove" id="countryabove" class="form-control">
                                         <option value="Select Sale Type">Select Country </option>
                                         @foreach ($country as $item)
-                                        <option value={{ $item->id }}>{{ $item->country }}</option>
+                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->country_id ) selected @endif>{{ $item->country }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person Email</strong>
                                     <input type="text" class="form-control" id="contactemail" name="contactemail"
-                                        placeholder="Contact Person Email">
+                                        placeholder="Contact Person Email" value="{{ $getMaxid->contactperson_email }}">
                                 </div>
                             </div>
 
@@ -272,7 +273,7 @@ Create Supplier
                                     <select name="supliertype_id" id="supliertype_id" class="form-control">
                                         <option value="Select Sale Type">Select Supplier Type </option>
                                         @foreach ($stype as $item)
-                                        <option value={{ $item->id }}>{{ $item->suppliertype }}</option>
+                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->supliertype_id ) selected @endif>{{ $item->suppliertype }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -281,7 +282,7 @@ Create Supplier
                                     <select name="suplierCatg_id" id="suplierCatg_id" class="form-control">
                                         <option value="Select Sale Type">Select Supplier Category </option>
                                         @foreach ($scategory as $item)
-                                        <option value={{ $item->id }}>
+                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->suplierCatg_id ) selected @endif>
                                             {{ $item->suplliercategory }}
                                         </option>
                                         @endforeach
@@ -293,12 +294,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Credit Days</strong>
                                     <input type="text" class="form-control" id="creditdays" name="creditdays"
-                                        placeholder="Credit Days">
+                                        placeholder="Credit Days" value="{{ $getMaxid->creditdays }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Supplier Discount</strong>
                                     <input type="text" class="form-control" id="supplierdiscount"
-                                        name="supplierdiscount" placeholder="Supplier Discount">
+                                        name="supplierdiscount" placeholder="Supplier Discount" value="{{ $getMaxid->suplierdiscount }}" >
                                 </div>
                             </div>
 
@@ -306,12 +307,12 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Credit limit</strong>
                                     <input type="text" class="form-control" id="creditlimit" name="creditlimit"
-                                        placeholder="Credit limit">
+                                        placeholder="Credit limit" value="{{ $getMaxid->creditlimit }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Supplier Advance</strong>
                                     <input type="text" class="form-control" id="supplieradvance" name="supplieradvance"
-                                        placeholder="Supplier Advance">
+                                    placeholder="Supplier Advance" value="{{ $getMaxid->suplieradvance }}">
                                 </div>
                             </div>
 
@@ -319,7 +320,7 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Supplier Locality</strong>
                                     <input type="text" class="form-control" id="supplierlocality"
-                                        name="supplierlocality" placeholder="Supplier Locality">
+                                        name="supplierlocality" placeholder="Supplier Locality" value="{{ $getMaxid->suplierlocality }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                 </div>
@@ -327,7 +328,7 @@ Create Supplier
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <strong>Company Shipping Addres</strong>
+                                    <strong>Company Shipping Address</strong>
                                     <select name="companyshipadres" id="companyshipadres" class="form-control">
                                         <option value="Select Sale Type">Select Company Shipping Adress </option>
                                         <option value="above">Same As Obove</option>
@@ -337,7 +338,7 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Shipping Address</strong>
                                     <input type="text" class="form-control" id="shippingaddress"
-                                        name="shippingaddresson" placeholder="Shipping Address">
+                                        name="shippingaddresson" placeholder="Shipping Address" value="{{ $getMaxid->shipier_addres }}">
                                 </div>
                             </div>
 
@@ -347,14 +348,14 @@ Create Supplier
                                     <select name="shippngcity" id="shippngcityon" class="form-control">
                                         <option value="Select Shipping City">Select Shipping City </option>
                                         @foreach ($city as $item)
-                                        <option value={{ $item->id }}>{{ $item->city }}</option>
+                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->shiping_city) selected @endif>{{ $item->city }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>ZIP/Postal Code</strong>
                                     <input type="text" class="form-control" id="postalcodeon" name="postalcodeon"
-                                        placeholder="ZIP/Postal Code">
+                                        placeholder="ZIP/Postal Code" value="{{ $getMaxid->zipcode }}">
                                 </div>
                             </div>
 
@@ -364,7 +365,9 @@ Create Supplier
                                     <select name="shippingprovinceon" id="shippingprovinceon" class="form-control">
                                         <option value="Select Sale Type">Select Shipping province </option>
                                         @foreach ($province as $item)
-                                        <option value={{ $item->province_id }}>{{ $item->province }}</option>
+                                            <option value={{ $item->province_id }}
+                                            @if ($item->province_id == $getMaxid->province_id) selected @endif>
+                                            {{ $item->province }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -373,7 +376,7 @@ Create Supplier
                                     <select name="shippingcountryon" id="shippingcountryon" class="form-control">
                                         <option value="Select Sale Type">Select Shipping Country </option>
                                         @foreach ($country as $item)
-                                        <option value={{ $item->id }}>{{ $item->country }}</option>
+                                        <option value={{ $item->id }} @if ( $item->id == $getMaxid->country_id) selected @endif>{{ $item->country }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -397,7 +400,7 @@ Create Supplier
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Title</strong>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ $getMaxid->title }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>Contact Person Email</strong>
@@ -437,17 +440,17 @@ Create Supplier
                             <div class="col-md-6 form-group">
                                 <strong>is Tax Filer / Registered?</strong>
                                 <select name="filterregistered" id="registered" class="form-control">
-                                    <option value="Select ">Select here </option>
-                                    <option value="yes">Yes </option>
+                                    <option value="">Select here </option>
+                                    <option value="yes" >Yes </option>
                                     <option value="no">No </option>
                                 </select>
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>Display Notes in Invoice</strong>
                                 <select name="dinvoice" id="dinvoice" class="form-control">
-                                    <option value="Select ">Select here </option>
-                                    <option value="yes">Yes </option>
-                                    <option value="no">No </option>
+                                    <option value="">Select here </option>
+                                    <option value="yes" @if ($getMaxid->dinvoice == 'yes') selected @endif>Yes </option>
+                                    <option value="no" @if ($getMaxid->dinvoice == 'no') selected @endif>No </option>
                                 </select>
                             </div>
                         </div>
@@ -455,19 +458,19 @@ Create Supplier
                             <div class="col-md-6 form-group">
                                 <strong>S.T. Registration No</strong>
                                 <input type="text" class="form-control" id="registration_st" name="registration_st"
-                                    placeholder="S.T. Registration No">
+                                    placeholder="S.T. Registration No" value="{{  $getMaxid->st_registration_no}}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>S.T. Invoice Note / Terms</strong>
                                 <input type="textarea" class="form-control" id="invoinceterm" name="invoinceterm"
-                                    placeholder="S.T. Invoice Note / Terms">
+                                    placeholder="S.T. Invoice Note / Terms" value="{{  $getMaxid->st_invoicenote}}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Withholding tax %age</strong>
                                 <input type="text" class="form-control" id="Withholding" name="Withholding"
-                                    placeholder="Withholding tax %age">
+                                    placeholder="Withholding tax %age" value="{{  $getMaxid->withouttax_perc_age }}">
                             </div>
                             <div class="col-md-6 form-group">
                             </div>
@@ -498,14 +501,14 @@ Create Supplier
                                 <select name="bankdata" id="bank" class="form-control">
                                     <option value="Select ">Select Bank </option>
                                     @foreach ($bank as $item)
-                                    <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>
+                                    <option value={{ $item->bank_id }} @if ( $item->bank_id == $getMaxid->bank_id) selected @endif>{{ $item->Bank }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 form-group">
                                 h <strong>Account Title</strong>
                                 <input type="text" class="form-control" id="accounttext" name="accounttext"
-                                    placeholder="Account Title">
+                                    placeholder="Account Title" value="{{ $getMaxid->account_title }}">
                             </div>
                         </div>
                         <div class="row">
@@ -513,20 +516,20 @@ Create Supplier
                                 <strong>Account No</strong>
 
                                 <input type="text" class="form-control" id="accountno" name="accountno"
-                                    placeholder="Account No">
+                                    placeholder="Account No" value="{{ $getMaxid->accountno }}">
 
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>Branch Code</strong>
                                 <input type="text" class="form-control" id="branchcode" name="branchcode"
-                                    placeholder="Branch Code">
+                                    placeholder="Branch Code" value="{{ $getMaxid->branchcode }}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Branch Name</strong>
                                 <input type="text" class="form-control" id="branchname" name="branchname"
-                                    placeholder="Branch Name">
+                                    placeholder="Branch Name" value="{{ $getMaxid->branchname }}">
                             </div>
                             <div class="col-md-6 form-group"></div>
                         </div>
@@ -534,12 +537,12 @@ Create Supplier
                             <div class="col-md-6 form-group">
                                 <strong>Opening Balance</strong>
                                 <input type="number" class="form-control" id="openingbalance" name="openingbalance"
-                                    placeholder="Opening Balance">
+                                    placeholder="Opening Balance" value="{{ $getMaxid->openingbalance }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>Opening Date</strong>
-                                <input type="text" class="form-control" id="openingdate" name="openingdate"
-                                    placeholder="Opening Date">
+                                <input type="date" class="form-control" id="openingdate" name="openingdate"
+                                    placeholder="Opening Date" value="{{ $getMaxid->dateopening }}">
                             </div>
                         </div>
                     </div>

@@ -186,8 +186,8 @@
                             <div class="dropdown-menu" style="hover">
 
                                 <div class="dropdown-submenu dropdown-item dropright ">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Organization Setup</a>
+                                    <a class="nav-link dropdown-toggle" style="color: black;"><strong>Organization
+                                            Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
                                         @can('add-division')
                                         <li class="p-0"><a class="dropdown-item"
@@ -197,7 +197,7 @@
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
 
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('department.create') }}">Create Deparrtment</a></li>
+                                                href="{{ route('department.create') }}">Create Department</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.index') }}">Manage Department</a></li>
 
@@ -270,8 +270,9 @@
                                 </div>
 
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">General Setup</a>
+                                    <a class="nav-link   dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>General Setup</strong> </a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('paymentterm.create') }}">Create Payment Term</a></li>
@@ -335,8 +336,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Employee</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
                                         <li class="p-0"><a class="dropdown-item"
@@ -383,8 +385,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('permission.create') }}">Create User Role </a>
@@ -468,8 +471,10 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Sales Person</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Sales
+                                            Person</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('salepersontype.create') }}">Create Person Type </a>
@@ -484,8 +489,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Accounts</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('accountcategory.create') }}">Create Account
@@ -543,8 +549,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Treasury</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Treasury</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('buyerpayment.create') }}">
@@ -559,8 +566,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Supplies Setup</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                        <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('supplier.create') }}">
                                                 Create Supplier
@@ -591,8 +599,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Buyer Setup</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                        <strong>Buyer Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('buyer.create') }}">
                                                 Create Buyer
@@ -624,10 +633,10 @@
                                     </ul>
 
                                 </div>
-
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="test dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false">Security</a>
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('permission.create') }}">Create User Role </a>
@@ -645,8 +654,24 @@
                                 <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" onclick="addTab('Data2', data2)">data2</a>
-                                <a class="dropdown-item" href="{{ route('division.create') }}">Data 4</a>
+                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.create') }}"
+                                        style="color: black;">Create Product</a>
+                                </li>
+                            </div>
+                            <div class="dropdown-menu">
+                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"
+                                        style="color: black;">Manage Product</a>
+                                </li>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
+                                    Create Supplier
+                                </a>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.index') }}">
+                                    Manage Supplier
+                                </a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -1183,7 +1208,7 @@
     <script src="/assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
-            $('.dropdown-submenu a.test').on("click", function(e) {
+            $('.dropdown-submenu a.nav-link').on("click", function(e) {
                 $(this).next('ul').toggle();
                 e.stopPropagation();
                 e.preventDefault();
