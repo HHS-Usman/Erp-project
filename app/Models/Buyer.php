@@ -34,4 +34,5 @@ class Buyer extends Model
     {
         return $this->belongsTo(City::class, 'City_id')->withDefault();
     }
+    protected $primaryKey = 'buyer_id';
 }

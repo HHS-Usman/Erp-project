@@ -654,9 +654,23 @@
                                 <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
-                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.create') }}"
-                                        style="color: black;">Create Product</a>
-                                </li>
+                                <a class="nav-link dropdown-item" href="{{ route('product.create') }}"
+                                    style="color: black;">Create Product</a>
+                                <a class="nav-link dropdown-item" href="{{ route('product.index') }}"
+                                    style="color: black;">Manage Product</a>
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
+                                    Create Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.index') }}"
+                                    style="color: black;">
+                                    Manage Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.create') }}">
+                                    Create Buyer
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
+                                    Manage Buyer
+                                </a>
                             </div>
                             <div class="dropdown-menu">
                                 <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"

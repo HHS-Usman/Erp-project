@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('page-tab')
-    Manage Buyer 
-@endsection    
+    Manage Buyer
+@endsection
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
         @if ($errors->any())
@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-            
+
       <div class="pagetitle" style="margin-left: 20px;">
           <h1> Manage Buyer </h1>
           <nav>
@@ -24,8 +24,8 @@
           </ol>
           </nav>
       </div>
-                  
-                    
+
+
       <div style="background-color: lightgray;opacity: 0.9; height='20px'; ">
         <ul class="nav nav-tabs" id="myTabs">
           <li class="nav-item">
@@ -37,14 +37,14 @@
         <div class="tab-content" id="myTabContent">
                           <!-- Tab content will be dynamically added here -->
                         </div>
-                      </div>                                
+                      </div>
                 {{-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                   <li class="dropdown-header text-start">
                     <h6>Filter</h6>
                   </li>
                 </ul> --}}
               <div class="row justify-content-center" >
-                <div class="card-body">  
+                <div class="card-body">
                   <table class="table table-border datatable " style="border: 1px solid black">
                     <thead>
                       <tr >
@@ -78,24 +78,24 @@
                         <td>{{$item->account_title}}</td>
                         <td>
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="">Edit</a>
+                          <a class="btn btn-primary" href="{{route('buyer.edit',$item->buyer_id)}}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </td>
                       </tr>
                     @endforeach
-                      
+
                     </tbody>
                   </table>
-                </div>  
+                </div>
               </div>
-              
-                
-              
-          
-              
-           
+
+
+
+
+
+
               <!-- End Recent Sales -->
-            
+
                 <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
                 <script src="/asset/vendor/chart.js/chart.umd.js"></script>
                 <script src="/asset/vendor/echarts/echarts.min.js"></script>
@@ -108,10 +108,10 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
                 <!-- Template Main JS File -->
-                <script src="/asset/js/main.js"></script> 
+                <script src="/asset/js/main.js"></script>
                 <br><br>
-             
+
     </section>
-   
-   
+
+
 @endsection

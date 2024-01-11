@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CheckPermission
 {
@@ -20,6 +21,14 @@ class CheckPermission
             return $next($request);
         }
 
-        abort(403, 'Unauthorized action.');
+        // $sadFace = '😢'; // Unicode character for a sad face
+
+        // // Replace with the actual URL of your GIF
+
+        // $content = '<div style="color: dark; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Access denied ' . $sadFace . ' </div>';
+        // $response = new Response($content, 403);
+        // $response = new Response($content, 403);
+        abort(403, 'Access denied');
+
     }
 }
