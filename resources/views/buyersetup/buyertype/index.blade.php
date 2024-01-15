@@ -61,7 +61,7 @@
                       @foreach ($buyertype as $btype =>$item )
                       <tr>
                         <th>{{ $btype + 1 }}</th>
-                        <th >{{ $item->id }}</th>
+                        <th >{{ $item->btype_id }}</th>
                         <td>{{ $item->buyertype_code }}</td>
                         <td>{{ $item->buyertype }}</td>
                         <td>{{ $item ->detail }}</td>
@@ -73,7 +73,7 @@
                         </td>
                         <td>
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="{{ route('buyertype.edit',$item->id) }}">Edit</a>
+                          <a class="btn btn-primary" href="{{ route('buyertype.edit',$item->btype_id) }}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </td>
                       </tr>

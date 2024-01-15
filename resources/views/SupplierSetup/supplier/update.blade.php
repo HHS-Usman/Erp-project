@@ -158,7 +158,7 @@ Create Supplier
                         <h3> Suplier General Info</h3>
                         <div class="col-md-6  justify-content-center">
                             <strong>System Code</strong>
-                            <input type="text" class="form-control" disabled id="systemid" value={{ $getMaxid->id }}
+                            <input type="text" class="form-control" disabled id="systemid" value={{ $getMaxid->suplier_id }}
                                 name="systemid" placeholder="0">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-12"
@@ -206,7 +206,7 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>City</strong>
                                     <select name="citydabove" id="cityabove" class="form-control">
-                                        <option value="Select City">Select City </option>
+                                        <option value="">Select City </option>
                                         @foreach ($city as $item)
                                         <option value={{ $item->id }} @if ($item->id == $getMaxid->City_id ) selected @endif>{{ $item->city }}</option>
                                         @endforeach
@@ -223,9 +223,9 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Province</strong>
                                     <select name="province_id" id="province_id" class="form-control">
-                                        <option value="Select Sale Type">Select Province </option>
+                                        <option value="">Select Province </option>
                                         @foreach ($province as $item)
-                                        <option value={{ $item->province_id }} @if ($item->id == $getMaxid->province_id ) selected @endif>{{ $item->province }}</option>
+                                        <option value={{ $item->province_id }} @if ($item->province_id == $getMaxid->province_id ) selected @endif>{{ $item->province }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -270,20 +270,20 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Suplier Type</strong>
 
-                                    <select name="supliertype_id" id="supliertype_id" class="form-control">
+                                    <select name="stype_id" id="supliertype_id" class="form-control">
                                         <option value="Select Sale Type">Select Supplier Type </option>
                                         @foreach ($stype as $item)
-                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->supliertype_id ) selected @endif>{{ $item->suppliertype }}</option>
+                                            <option value={{ $item->stype_id }} @if ($item->stype_id == $getMaxid->stype_id ) selected @endif>{{ $item->suppliertype }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Supplier Category</strong>
                                     <select name="suplierCatg_id" id="suplierCatg_id" class="form-control">
-                                        <option value="Select Sale Type">Select Supplier Category </option>
+                                        <option value="">Select Supplier Category </option>
                                         @foreach ($scategory as $item)
-                                        <option value={{ $item->id }} @if ($item->id == $getMaxid->suplierCatg_id ) selected @endif>
-                                            {{ $item->suplliercategory }}
+                                        <option value={{ $item->supliercatg_id }} @if ($item->supliercatg_id == $getMaxid->suplierCatg_id ) selected @endif>
+                                            {{ $item->suplliercategoty }}
                                         </option>
                                         @endforeach
                                     </select>

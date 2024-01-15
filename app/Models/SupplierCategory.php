@@ -9,10 +9,10 @@ class SupplierCategory extends Model
 {
     use HasFactory;
     protected $guarded = [
-        'id',
+        'supliercatg_id',
     ];
     protected $attributes = [
-        'suppliercategory_Code' => '',
+        'suppliercategoty_Code' => '',
         'detail' => '',
     ];
     public function coas()
@@ -23,5 +23,5 @@ class SupplierCategory extends Model
     {
         return $this->hasMany(buyer::class, 'buyer_id');
     }
-
+    protected $primaryKey = 'supliercatg_id';
 }

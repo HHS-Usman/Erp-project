@@ -148,7 +148,7 @@
         }
 
         .dropdown-content li:hover {
-            background-color: hsl(0, 33%, 98%);
+            background-color: hsl(34, 84%, 52%);
         }
 
         .dropright:hover .dropdown-content {
@@ -393,9 +393,6 @@
                                                 href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('product.create') }}">Create Product</a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('classification.create') }}">Create Classification</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -570,14 +567,7 @@
                                         role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
                                         <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('supplier.create') }}">
-                                                Create Supplier
-                                            </a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('supplier.index') }}">
-                                                Manage Supplier
-                                            </a>
-                                        </li>
+
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
                                                 Suplier Category
                                             </a>
@@ -603,14 +593,6 @@
                                         role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
                                         <strong>Buyer Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('buyer.create') }}">
-                                                Create Buyer
-                                            </a>
-                                        </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('buyer.index') }}">
-                                                Manage Buyer
-                                            </a>
-                                        </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('buyercategory.create') }}">
                                                 Create Buyer Category
@@ -636,7 +618,7 @@
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false"
-                                        style="color: black;"><strong>Product</strong></a>
+                                        style="color: black;"><strong>Security</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('permission.create') }}">Create User Role </a>

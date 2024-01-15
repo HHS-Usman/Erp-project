@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                 <strong>Supllier Category<span style="color:#DC3545">*</span></strong>
-                                <input type="text" name="suplliercategory" value="{{$supcategory->suplliercategory }}" id="suplliercategory" class="form-control" placeholder="Supplier Category" required>
+                                <input type="text" name="suplliercategoty" value="{{$supcategory->suplliercategoty }}" id="suplliercategory" class="form-control" placeholder="Supplier Category" required>
                             </div>
                             <div class="form-group">
                                 <strong>Details</strong>

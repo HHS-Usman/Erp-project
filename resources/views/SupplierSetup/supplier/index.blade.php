@@ -66,7 +66,7 @@ Manage Supplier
                     @foreach ( $suplier as $supliers=>$item)
                     <tr>
                         <td>{{$supliers+1}}</td>
-                        <td>{{$item->id}}</td>
+                        <td>{{$item->suplier_id}}</td>
                         <td>{{$item->customer_code}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->companyname}}</td>
@@ -78,7 +78,7 @@ Manage Supplier
                         <td>{{$item->account_title}}</td>
                         <td>
                             <a class="btn btn-info" href="">Show</a>
-                            <a class="btn btn-primary" href="{{route('supplier.edit',$item->id)}}">Edit</a>
+                            <a class="btn btn-primary" href="{{route('supplier.edit',$item->suplier_id)}}">Edit</a>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>

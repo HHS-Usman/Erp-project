@@ -221,8 +221,7 @@ Create Buyer
                                     <select name="cityb" id="citya" class="form-control">
                                         <option value="Select City">Select City </option>
                                         @foreach ($city as $item)
-                                        <option value={{ $item->id }} @if ($item->id == $buyer->city) selected @endif>{{
-                                            $item->city }}</option>
+                                            <option value={{ $item->id }} @if ($item->id == $buyer->City_id) selected @endif>{{$item->city }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -238,7 +237,7 @@ Create Buyer
                                     <select name="provinceb" id="provincea" class="form-control">
                                         <option value="Select Sale Type">Select Province </option>
                                         @foreach ($province as $item)
-                                        <option value={{ $item->province_id }} @if ($item->id == $buyer->province )
+                                        <option value={{ $item->province_id }} @if ($item->province_id == $buyer->province_id )
                                             selected @endif>{{ $item->province }}</option>
                                         @endforeach
                                     </select>
@@ -269,7 +268,7 @@ Create Buyer
                                     <select name="countryb" id="countryb" class="form-control">
                                         <option value="Select Sale Type">Select Country </option>
                                         @foreach ($country as $item)
-                                        <option value={{ $item->id }} @if ($item->id == $buyer->country) selected
+                                        <option value={{ $item->id }} @if ($item->id == $buyer->country_id) selected
                                             @endif>{{ $item->country }}</option>
                                         @endforeach
                                     </select>
@@ -287,7 +286,7 @@ Create Buyer
                                     <select name="buyertype" id="buyertype" class="form-control">
                                         <option value="Select Sale Type">Select Buyer Type </option>
                                         @foreach ($btype as $item)
-                                        <option value={{ $item->btype_id }} @if ($item->btype_id == $buyer->buyertype)
+                                        <option value={{ $item->btype_id }} @if ($item->btype_id == $buyer->btype_id)
                                             selected @endif>{{ $item->buyertype }}</option>
                                         @endforeach
                                     </select>
@@ -298,7 +297,7 @@ Create Buyer
                                         <option value="Select Sale Type">Select buyer Category </option>
                                         @foreach ($buyercetegory as $item)
                                         <option value={{ $item->bcategory_id }} @if ($item->bcategory_id ==
-                                            $buyer->buyercategory) @endif>{{ $item->buyercategory }}
+                                            $buyer->bcategory_id) @endif>{{ $item->buyercategory }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -543,7 +542,7 @@ Create Buyer
                                 <select name="bankvalue" id="bank" class="form-control">
                                     <option value="Select ">Select Bank </option>
                                     @foreach ($bank as $item)
-                                    <option value={{ $item->bank_id }} @if($item->bank_id == $buyer->bankname) selected
+                                    <option value={{ $item->bank_id }} @if($item->bank_id == $buyer->bank_id) selected
                                         @endif >{{ $item->Bank }}</option>
                                     @endforeach
                                 </select>

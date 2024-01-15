@@ -189,7 +189,7 @@ class BuyerController extends Controller
     }
 
         return redirect()->route('buyer.index')->with('success', 'Create successfully');
-    }
+    }Z
 
     /**
      * Display the specified resource.

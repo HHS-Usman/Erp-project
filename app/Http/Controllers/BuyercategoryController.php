@@ -68,9 +68,9 @@ class BuyercategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($bcategory_id)
     {
-        $buyerCAtegory  = BuyerCategory::find($id);
+        $buyerCAtegory  = BuyerCategory::find($bcategory_id);
         return view('buyersetup.buyercategory.update',compact('buyerCAtegory'));
     }
 
@@ -81,9 +81,9 @@ class BuyercategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $bcategory_id)
     {
-        $buyercategories = BuyerCategory::findOrFail($id);
+        $buyercategories = BuyerCategory::findOrFail($bcategory_id);
 
          //create a new product in database
          $buyercategories->update([

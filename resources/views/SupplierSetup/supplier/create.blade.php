@@ -269,10 +269,10 @@ Create Supplier
                                 <div class="col-md-6 form-group">
                                     <strong>Suplier Type</strong>
 
-                                    <select name="supliertype_id" id="supliertype_id" class="form-control">
+                                    <select name="stype_id" id="supliertype_id" class="form-control">
                                         <option value="Select Sale Type">Select Supplier Type </option>
                                         @foreach ($stype as $item)
-                                        <option value={{ $item->id }}>{{ $item->suppliertype }}</option>
+                                        <option value={{ $item->stype_id }}>{{ $item->suppliertype }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -281,8 +281,8 @@ Create Supplier
                                     <select name="suplierCatg_id" id="suplierCatg_id" class="form-control">
                                         <option value="Select Sale Type">Select Supplier Category </option>
                                         @foreach ($scategory as $item)
-                                        <option value={{ $item->id }}>
-                                            {{ $item->suplliercategory }}
+                                        <option value={{ $item->supliercatg_id }}>
+                                            {{ $item->suplliercategoty }}
                                         </option>
                                         @endforeach
                                     </select>

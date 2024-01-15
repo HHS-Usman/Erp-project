@@ -61,7 +61,7 @@ Manage Buyer Category
                     @foreach ($buyerCAtegory as $buycategory =>$item )
                     <tr>
                         <th>{{ $buycategory + 1 }}</th>
-                        <th>{{ $item->id }}</th>
+                        <th>{{ $item->bcategory_id }}</th>
                         <td>{{ $item->buyercategory_Code }}</td>
                         <td>{{ $item->buyercategory}}</td>
                         <td>{{ $item ->detail }}</td>
@@ -75,7 +75,7 @@ Manage Buyer Category
                         <td>
                             <form action="" method="POST">
                                 <a class="btn btn-info" href="">Show</a>
-                                <a class="btn btn-primary" href="{{route('buyercategory.edit',$item->id)}}">Edit</a>
+                                <a class="btn btn-primary" href="{{route('buyercategory.edit',$item->bcategory_id)}}">Edit</a>
 
                                 <button class="btn btn-danger">Delete</button>
                             </form>

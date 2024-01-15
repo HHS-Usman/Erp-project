@@ -73,7 +73,7 @@
                         </td>
                         <td>
                           <a class="btn btn-info" href="">Show</a>
-                          <a class="btn btn-primary" href="{{route('suppliertype.edit',$item->id)}}">Edit</a>
+                          <a class="btn btn-primary" href="{{route('suppliertype.edit',$item->stype_id)}}">Edit</a>
                           <button  class="btn btn-danger">Delete</button>
                       </td>
                       </tr>

@@ -24,25 +24,25 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('scategory.update',$supcategory) }}" method="POST">
+            <form action="{{ route('suppliertype.update',$suppliertype) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row justify-content-center">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <strong>Supplier Type Code</strong>
-                            <input type="text" name="suppliertype_code" id="suppliertype_code" class="form-control" placeholder="Supplier Type Code">
+                            <input type="text" name="suppliertype_code" id="suppliertype_code" value="{{$suppliertype->suppliertype_code }}" class="form-control" placeholder="Supplier Type Code">
                         </div>
                         <div class="form-group">
                             <strong>Supplier Type<span style="color:#DC3545">*</span></strong>
-                            <input type="text" name="suppliertype" id="province" class="form-control" placeholder="Supplier Type" required>
+                            <input type="text" name="suppliertype" id="province" class="form-control" value="{{$suppliertype->suppliertype }}" placeholder="Supplier Type" required>
                         </div>
                         <div class="form-group">
                             <strong>Details</strong>
-                            <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
+                            <input type="text" name="detail" id="detail" class="form-control" value="{{$suppliertype->detail }}" placeholder="Detail">
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                            <input class="form-check-input" type="checkbox" value="1"name="is_active"  id="is_active" {{$suppliertype->is_active? 'checked' : '' }}>
                             Active
                             </label>
                         </div>

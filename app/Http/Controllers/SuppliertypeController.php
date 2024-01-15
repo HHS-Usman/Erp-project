@@ -53,10 +53,10 @@ class SuppliertypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($stype_id)
     {
         //
     }
@@ -64,12 +64,12 @@ class SuppliertypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($stype_id)
     {
-        $suppliertype = Suppliertype::find($id);
+        $suppliertype = Suppliertype::find($stype_id);
         return view('SupplierSetup.suppliertype.update', compact('suppliertype'));
     }
 
@@ -77,12 +77,12 @@ class SuppliertypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $stype_id)
     {
-        $supcategory = SupplierCategory::findorfail($id);
+        $supcategory = Suppliertype::findorfail($stype_id);
 
         $supcategory->update([
             'suppliertype'=>request()->get('suppliertype'),
@@ -96,10 +96,10 @@ class SuppliertypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $stype_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($stype_id)
     {
         //
     }

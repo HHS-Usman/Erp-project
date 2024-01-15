@@ -33,7 +33,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $getMaxid = Supplier::max('id')+1;
+        $getMaxid = Supplier::max('suplier_id')+1;
         $bank = Bank::all();
         $scategory = SupplierCategory::all();
         $stype = Suppliertype::all();
@@ -130,7 +130,7 @@ class SupplierController extends Controller
                 // for forign key use here
                 'bank_id'=>request()->get('bankdata'),
                 'suplierCatg_id'=>request()->get('suplierCatg_id'),
-                'supliertype_id'=>request()->get('supliertype_id'),
+                'stype_id'=>request()->get('stype_id'),
                 'province_id'=>request()->get('province_id'),
                 'country_id'=>request()->get('countryabove'),
                 'City_id'=>request()->get('citydabove'),
@@ -192,10 +192,10 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $suplier_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($suplier_id)
     {
         //
     }
@@ -203,12 +203,12 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $suplier_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($suplier_id)
     {
-        $getMaxid = Supplier::find($id);
+        $getMaxid = Supplier::find($suplier_id);
         $bank = Bank::all();
         $scategory = SupplierCategory::all();
         $stype = Suppliertype::all();
@@ -222,12 +222,12 @@ class SupplierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $suplier_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $suplier_id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $supplier = Supplier::findOrFail($suplier_id);
         $supplier->update([]);
         if(request()->get('companyshipadres') ==  "above"){
 
@@ -271,7 +271,7 @@ class SupplierController extends Controller
                 // for forign key use here
                 'bank_id'=>request()->get('bankdata'),
                 'suplierCatg_id'=>request()->get('suplierCatg_id'),
-                'supliertype_id'=>request()->get('supliertype_id'),
+                'stype_id'=>request()->get('stype_id'),
                 'province_id'=>request()->get('province_id'),
                 'country_id'=>request()->get('countryabove'),
                 'City_id'=>request()->get('citydabove'),
@@ -320,7 +320,7 @@ class SupplierController extends Controller
             'dateopening'=>request()->get('openingdate'),
             // for forign key use here
             'bank_id'=>request()->get('bankdata'),
-            'suplierCatg_id'=>request()->get('suppliercategory'),
+            'suplierCatg_id'=>request()->get('suplierCatg_id'),
             'supliertype_id'=>request()->get('suppliertype'),
             'province_id'=>request()->get('shippingprovinceon'),
             'country_id'=>request()->get('shippingcountryon'),
@@ -333,10 +333,10 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $suplier_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($suplier_id)
     {
         //
     }

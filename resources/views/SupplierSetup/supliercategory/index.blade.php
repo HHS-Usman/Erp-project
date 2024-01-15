@@ -61,9 +61,9 @@ Manage Supplier Categoty
                     @foreach ($supcategory as $supcategory =>$item )
                     <tr>
                         <th>{{ $supcategory + 1 }}</th>
-                        <th>{{ $item->id }}</th>
-                        <td>{{ $item->suppliercategory_Code }}</td>
-                        <td>{{ $item->suplliercategory}}</td>
+                        <th>{{ $item->supliercatg_id }}</th>
+                        <td>{{ $item->suppliercategoty_Code }}</td>
+                        <td>{{ $item->suplliercategoty}}</td>
                         <td>{{ $item ->detail }}</td>
                         <td>@if($item->is_active)
                             <p>Active</p>
@@ -73,7 +73,7 @@ Manage Supplier Categoty
                         </td>
                         <td>
                             <a class="btn btn-info" href="">Show</a>
-                            <a class="btn btn-primary" href="{{route('scategory.edit',$item->id)}}">Edit</a>
+                            <a class="btn btn-primary" href="{{route('scategory.edit',$item->supliercatg_id)}}">Edit</a>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>

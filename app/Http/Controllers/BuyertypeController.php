@@ -67,9 +67,9 @@ class BuyertypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($btype_id)
     {
-        $buyertype  = Buyertype::find($id);
+        $buyertype  = Buyertype::find($btype_id);
         return view('buyersetup.buyertype.update',compact('buyertype'));
     }
 
@@ -77,12 +77,12 @@ class BuyertypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $btype_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $btype_id)
     {
-        $buyertype = Buyertype::findOrFail($id);
+        $buyertype = Buyertype::findOrFail($btype_id);
 
         //create a new product in database
         $buyertype->update([
@@ -97,10 +97,10 @@ class BuyertypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $btype_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($btype_id)
     {
         //
     }
