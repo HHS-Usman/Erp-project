@@ -24,8 +24,21 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::orderBy('id','desc')->get();
-        return view('pages.User.Permission.index', compact('permissions'));
+        $permissions = Permissions::with('module', 'page', 'pageaction')->orderBy('id','desc')->get();
+        $modules = Module::all();
+        $modals = Permission::join('page_actions', 'permissions.page_action_id', '=', 'page_actions.id')
+        ->select('permissions.*', 'page_actions.Name as page_action_name')
+        ->get();
+        $pages = Page::all();
+        $pageactions = PageAction::all();
+        $pageacts = PageAction::with('permissions')->get();
+        $pagers = Permission::join('pages', 'permissions.page_id', '=', 'pages.id')
+        ->select('permissions.*', 'pages.name as page_name')
+        ->get();
+        $pgactions = Permission::join('page_actions', 'permissions.page_action_id', '=', 'page_actions.id')
+        ->select('permissions.*', 'page_actions.Name as page_action_name')
+        ->get();
+        return view('pages.User.Permission.index', compact('permissions','modules','modals','pages','pagers','pageactions','pgactions'));
     }
 
     /**
@@ -51,14 +64,14 @@ class PermissionController extends Controller
             foreach ($request->name as $key => $name) {
                 if (!empty($name)) {
                     $name = Str::replace(' ', '_', $name);
-                    Permission::create(['name' => $name, 'main_module' => $request->main_module[$key]]);
+                    Permission::create(['name' => $name, 'module_id' => $request->module_id[$key],'page_id' => $request->page_id[$key],'page_action_id' => $request->page_action_id[$key]]);
                 }
             }
             DB::commit();
-            return response()->json(['success' => 'Permission created successfully.']);
+            return redirect()->route('permission.index')->with('success', 'Your Permission Created Successfully');
         } catch (Exception $th) {
             DB::rollBack();
-            return response()->json(['error' => $th->getMessage()]);
+            return redirect()->route('permission.index')->with('success', 'Error');
         }
     }
 

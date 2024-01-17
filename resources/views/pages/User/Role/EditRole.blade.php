@@ -44,8 +44,9 @@ use Spatie\Permission\Models\Permission;
         </style>
     </head>
 
-    <form action="{{ route('role.store') }}" method="POST">
+    <form action="{{ route('role.update', $roles) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="row justify-content-center">
             <div class="col-xs-6 col-sm-6 col-md-6">
 
@@ -57,7 +58,7 @@ use Spatie\Permission\Models\Permission;
                     <select id="name" name="role_name" class="form-select" style="margin-left: 2%">
                         <option class="options" value="">None</option>
                         @foreach($roles as $item)
-                            <option value="{{ $item->user_role}}">{{ $item->user_role }}</option>
+                        <option value="{{ $item->user_role}}"{{ $saleperson->persontype == $item->id ? 'selected' : '' }}>{{ $item->user_role }}</option>
                         @endforeach
                     </select>
 
@@ -433,8 +434,6 @@ use Spatie\Permission\Models\Permission;
 
     </script>
 </section>
-
-
 <!-- Basic Floating Label Form section end -->
 
 @endsection
