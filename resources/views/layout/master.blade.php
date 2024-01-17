@@ -159,7 +159,8 @@
 
 <body>
     <x-navigation />
-    <div style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
+    <div
+        style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
             transform-origin: 0 0;
             width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
         <nav class="navbar navbar-expand-lg navbar-light bg-white " id="navbarcontainermain"
@@ -188,31 +189,28 @@
                                 <div class="dropdown-submenu dropdown-item dropright ">
                                     <a class="nav-link dropdown-toggle" style="color: black;"><strong>Organization
                                             Setup</strong></a>
-                                    <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
+                                    <ul id="container" class="dropdown-menu dropdown-content"
+                                        style="{display: block;}">
                                         @can('add-division')
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('division.create') }}">Create Division</a></li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.create') }}">Create Department</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.index') }}">Manage Department</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.create') }}">Create Sub Department
                                                 Level</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.index') }}">Manage Sub Department
                                                 Level</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.create') }}">Create Function</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.index') }}">Manage Function</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('management.create') }}">Create Management Level</a>
                                         </li>
@@ -243,12 +241,10 @@
                                                 href="{{ route('designation.create') }}">Create Designation</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('designation.index') }}">Manage Designation</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('group.create') }}">Create Group</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('group.index') }}">Manage Group</a></li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('grade.create') }}">Create Grade</a></li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -264,7 +260,8 @@
                                                 href="{{ route('weekoffday.create') }}">Create Week Off days</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index') }}">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('divupload.index') }}">
                                                 Uploader</a></li>
                                     </ul>
                                 </div>
@@ -285,7 +282,6 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('modeofpayment.index') }}">Manage Mode Of Payment</a>
                                         </li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('email.create') }}">Create Email</a></li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -310,7 +306,8 @@
 
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('cast.create') }}">Create Cast</a></li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index') }}">Manage
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('cast.index') }}">Manage
                                                 Cast</a></li>
 
 
@@ -318,6 +315,10 @@
                                                 href="{{ route('country.create') }}">Create Country</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('country.index') }}">Manage Country</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('province.create') }}">Create Province</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('province.index') }}">Manage Province</a></li>
 
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('citizenship.create') }}">Create Citizenship</a></li>
@@ -331,13 +332,21 @@
 
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('city.create') }}">Create City</a></li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
+
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('city.index') }}">Manage
                                                 City</a></li>
+
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('bank.create') }}">Create Bank</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('bank.index') }}">Manage
+                                                Bank</a></li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
@@ -385,8 +394,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -405,16 +414,20 @@
                                                 href="{{ route('brand_selection.index') }}">Manage Brands</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productactivity.create') }}">Create Product Activity</a>
+                                                href="{{ route('productactivity.create') }}">Create Product
+                                                Activity</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productactivity.index') }}">Manage Product Activity</a>
+                                                href="{{ route('productactivity.index') }}">Manage Product
+                                                Activity</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productcategory.create') }}">Create Product Category</a>
+                                                href="{{ route('productcategory.create') }}">Create Product
+                                                Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productcategory.index') }}">Manage Product Category</a>
+                                                href="{{ route('productcategory.index') }}">Manage Product
+                                                Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('productstatus.create') }}">Create Product Status</a>
@@ -423,10 +436,12 @@
                                                 href="{{ route('productstatus.index') }}">Manage Product Status</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productsupplier.create') }}">Create Product Supplier</a>
+                                                href="{{ route('productsupplier.create') }}">Create Product
+                                                Supplier</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productsupplier.index') }}">Manage Product Supplier</a>
+                                                href="{{ route('productsupplier.index') }}">Manage Product
+                                                Supplier</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('producttype.create') }}">Create Product Type</a>
@@ -440,10 +455,12 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('stocktype.index') }}">Manage Stock Type</a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('uom.create') }}">Create
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('uom.create') }}">Create
                                                 UOM </a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('uom.index') }}">Manage
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('uom.index') }}">Manage
                                                 UOM </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -455,11 +472,13 @@
                                                 Category</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('product_2nd_sub_category.create') }}">Create Product 2nd
+                                                href="{{ route('product_2nd_sub_category.create') }}">Create Product
+                                                2nd
                                                 Sub Category </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd
+                                                href="{{ route('product_2nd_sub_category.index') }}">Manage Product
+                                                2nd
                                                 Sub Category </a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
@@ -468,8 +487,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Sales
                                             Person</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
@@ -486,8 +505,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Accounts</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
@@ -502,12 +521,15 @@
                                                 href="{{ route('account-store.index') }}">Add Chart Account</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level
+                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head
+                                                Level
                                             </a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('coa.create') }}">Create
                                                 Coa</a></li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">Manage
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('coa.index') }}">Manage
                                                 Coa</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
@@ -522,12 +544,12 @@
                                                 href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('journalvoucher.create') }}">Create Journal Voucher</a>
+                                                href="{{ route('journalvoucher.create') }}">Create Journal
+                                                Voucher</a>
                                         </li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
                                         </li>
-
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
                                         </li>
@@ -546,8 +568,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Treasury</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
@@ -563,16 +585,19 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;">
                                         <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
-                                                Suplier Category
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('scategory.create') }}">
+                                                Create Suplier Category
                                             </a>
                                         </li>
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('scategory.index') }}">
                                                 Suplier Category Manage
                                             </a>
                                         </li>
@@ -589,8 +614,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;">
                                         <strong>Buyer Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         <li class="p-0"><a class="dropdown-item"
@@ -616,8 +642,8 @@
 
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Security</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -631,9 +657,10 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-line-chart" aria-hidden="true"
+                                    style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
                                 <a class="nav-link dropdown-item" href="{{ route('product.create') }}"
@@ -653,10 +680,13 @@
                                 <a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
                                     Manage Buyer
                                 </a>
+                                <a class="nav-link dropdown-item" href="{{ route('purchaserequisition.create') }}">
+                                    Create Purchase Requisition
+                                </a>
                             </div>
                             <div class="dropdown-menu">
-                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"
-                                        style="color: black;">Manage Product</a>
+                                <li class="p-0"><a class="nav-link dropdown-item"
+                                        href="{{ route('product.index') }}" style="color: black;">Manage Product</a>
                                 </li>
                             </div>
                             <div class="dropdown-menu">
@@ -671,19 +701,20 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-users-gear" style="color: black;"></i>&nbsp;HCM
                             </a>
                             <div class="dropdown-menu">
-                                <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data5', data5)">Data
+                                <a id="fontsize" class="dropdown-item" href="#"
+                                    onclick="addTab('Data5', data5)">Data
                                     5</a>
                                 <a class="dropdown-item" href="#" onclick="addTab('Data6', data6)">Data 6</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-book" aria-hidden="true" style="color:  black;"></i>&nbsp;REPORTS
                             </a>
                             <div class="dropdown-menu">
@@ -693,8 +724,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-chart-column" style="color:  black;"></i>&nbsp;DASHBOARDS
                             </a>
                             <div class="dropdown-menu">
@@ -704,8 +735,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-bullhorn" style="color: black;"></i>&nbsp;ANNCOUNCEMENTS
                             </a>
                             <div class="dropdown-menu">
@@ -979,7 +1010,7 @@
                                     border-radius: 6px;
                                     padding: 5px 0;
 
-                                    /* Position the tooltip */
+                                    /* Position the tooltip */f
                                     position: absolute;
                                     z-index: 1;
                                     top: 100%;

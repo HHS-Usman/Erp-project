@@ -89,6 +89,7 @@ use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
 use App\Http\Controllers\Product\UploaderController;
+use App\Http\Controllers\PurchasereuquisitionController;
 use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
@@ -174,6 +175,8 @@ Route::resource('country',CountryController::class);
 Route::resource('citizenship',CitizenshipController::class);
 Route::resource('nationality',NationalityController::class);
 Route::resource('city',CityController::class);
+Route::resource('bank',BankController::class);
+Route::resource('province',ProvinceController::class);
 Route::resource('state',StateController::class);
 Route::resource('employeeflag',EmployeeflagController::class);
 Route::resource('employeerule',EmployeeruleController::class);
@@ -219,7 +222,7 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 
 
 
-
+Route::resource('purchaserequisition',PurchasereuquisitionController::class);
 Route::resource('account-store',AccountController::class);
 Route::resource('costcenteraccount',CostcenteraccountController::class);
 Route::resource('salesperson',SalespersonController::class);

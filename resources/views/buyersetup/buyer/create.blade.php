@@ -106,7 +106,7 @@
                 }
             }
         </style>
-       
+
         <div class=" wrapper d-flex">
             <div class="tabs">
                 <div style="margin:5px;"><button type="button" class="btn btn-primary p-3 px-5  col-12"
@@ -119,38 +119,24 @@
                         onclick="showTab(4)">Buyer Bank Info</button></div>
             </div>
             <script>
-                $(document).ready(function () {
-                    $('#companyshipadres').on('change', function () {
+                $(document).ready(function() {
+                    $('#companyshipadres').on('change', function() {
                         var selectedOption = $(this).val();
 
                         // Enable/disable fields based on the selected option
                         if (selectedOption === 'above') {
                             $('#shippingaddress').prop('disabled', true);
-                            $('#shippngcity').prop('disabled', true);
+                            $('#shippngcityon').prop('disabled', true);
                             $('#postalcodeon').prop('disabled', true);
-                            $('#shippingprovince').prop('disabled', true);
-                            $('#shippingcountry').prop('disabled', true);
-                            $('#countryb').prop('disabled', false);
-                            $('#zipcodea').prop('disabled', false);
-                            $('#provincea').prop('disabled', false);
-                            $('#citya').prop('disabled', false);
-                            $('#adressa').prop('disabled', false);
-                        } else if (selectedOption === 'other') {
+                            $('#shippingprovinceon').prop('disabled', true);
+                            $('#shipping_countryon').prop('disabled', true);
+                        } 
+                        else if(selectedOption == "other"){
                             $('#shippingaddress').prop('disabled', false);
-                            $('#shippngcity').prop('disabled', false);
+                            $('#shippngcityon').prop('disabled', false);
                             $('#postalcodeon').prop('disabled', false);
-                            $('#shippingprovince').prop('disabled', false);
-                            $('#shippingcountry').prop('disabled', false);
-                            $('#countryb').prop('disabled', true);
-                            $('#zipcodea').prop('disabled', true);
-                            $('#provincea').prop('disabled', true);
-                            $('#citya').prop('disabled', true);
-                            $('#adressa').prop('disabled', true);
-                        } else {
-                            // Reset fields when 'Select' is chosen
-                            $('#name').prop('disabled', true);
-                            $('#city').prop('disabled', true);
-                            $('#address').prop('disabled', true);
+                            $('#shippingprovinceon').prop('disabled', false);
+                            $('#shipping_countryon').prop('disabled', false);
                         }
                     });
                 });
@@ -203,7 +189,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Adress</strong>
-                                        <input type="textarea" class="form-control" id="adressa" name="adressb"
+                                        <input type="textarea" class="form-control" id="adressa" name="adress"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -216,7 +202,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>City</strong>
-                                        <select name="cityb" id="citya" class="form-control">
+                                        <select name="city_id" id="citya" class="form-control">
                                             <option value="Select City">Select City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -233,7 +219,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Province</strong>
-                                        <select name="provinceb" id="provincea" class="form-control">
+                                        <select name="province_id" id="provincea" class="form-control">
                                             <option value="Select Sale Type">Select Province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -250,7 +236,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Zip/Postal Code</strong>
-                                        <input type="text" class="form-control" id="zipcodea" name="zipcodeb"
+                                        <input type="text" class="form-control" id="zipcodea" name="zipcode"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -263,7 +249,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Country</strong>
-                                        <select name="countryb" id="countryb" class="form-control">
+                                        <select name="country_id" id="countryb" class="form-control">
                                             <option value="Select Sale Type">Select Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -339,7 +325,7 @@
                                     <div class="col-md-6 form-group">
                                         <strong>Company Shipping Addres</strong>
                                         <select name="companyshipadres" id="companyshipadres" class="form-control">
-                                            <option value="Select Sale Type">Select Company Shipping Adress </option>
+                                            <option value="selectdata">Select Company Shipping Adress </option>
                                             <option value="above">Same As Obove</option>
                                             <option value="other">Other</option>
                                         </select>
@@ -347,14 +333,14 @@
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Address</strong>
                                         <input type="text" class="form-control" id="shippingaddress"
-                                            name="shippingaddress" placeholder="Shipping Address">
+                                            name="shipping_addres" placeholder="Shipping Address">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping City</strong>
-                                        <select name="city" id="shippngcity" class="form-control">
+                                        <select name="shipping_city_id" id="shippngcityon" class="form-control">
                                             <option value="Select Shipping City">Select Shipping City </option>
                                             @foreach ($city as $item)
                                                 <option value={{ $item->id }}>{{ $item->city }}</option>
@@ -363,7 +349,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>ZIP/Postal Code</strong>
-                                        <input type="text" class="form-control" id="postalcodeon" name="postalcodeon"
+                                        <input type="text" class="form-control" id="postalcodeon" name="zip_code_shpping"
                                             placeholder="ZIP/Postal Code">
                                     </div>
                                 </div>
@@ -371,7 +357,7 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Province</strong>
-                                        <select name="shippingprovince" id="shippingprovince" class="form-control">
+                                        <select name="shipping_province_id" id="shippingprovinceon" class="form-control">
                                             <option value="Select Sale Type">Select Shipping province </option>
                                             @foreach ($province as $item)
                                                 <option value={{ $item->province_id }}>{{ $item->province }}</option>
@@ -380,7 +366,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Shipping Country</strong>
-                                        <select name="shippingcountry" id="shippingcountry" class="form-control">
+                                        <select name="shipping_country_id" id="shipping_countryon" class="form-control">
                                             <option value="Select Sale Type">Select Shipping Country </option>
                                             @foreach ($country as $item)
                                                 <option value={{ $item->id }}>{{ $item->country }}</option>
@@ -390,15 +376,16 @@
                                 </div>
                             </div>
                             <div class="container d-flex justify-content-center align-items-center">
-                                <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-                                <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(2)">Next</button>
-                              </div>
+                                <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                    onclick="submit()">Submit</button>
+                                <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2"
+                                    style="margin: 5px;" onclick="showTab(2)">Next</button>
+                            </div>
                             <script>
-                              function submit1()
-                              {
-                                var form1 = document.getElementById('form1');
-                                form1.submit();
-                              }
+                                function submit1() {
+                                    var form1 = document.getElementById('form1');
+                                    form1.submit();
+                                }
                             </script>
                         </div>
                     </div>
@@ -428,160 +415,166 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person</strong>
-                                    <input type="text" class="form-control" id="contactperson" name="contactperson"
+                                    <input type="text" class="form-control" id="contactperson" name="cont_person"
                                         placeholder="Contact Person">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person Cell no#</strong>
-                                    <input type="text" class="form-control" id="personcell#" name="personcell#"
+                                    <input type="text" class="form-control" id="personcell#" name="cont_person_no"
                                         placeholder="Contact Person Cell no#">
                                 </div>
                             </div>
-                    </div>
-                    <div class="container d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(1)">Previous</button>
-                        <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-                        <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(3)">Next</button>
+                        </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="showTab(1)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="submit()">Submit</button>
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2"
+                                style="margin: 5px;" onclick="showTab(3)">Next</button>
 
-                      </div>
-                    <script>
-                      function submit1()
-                      {
-                        var form1 = document.getElementById('form1');
-                        form1.submit();
-                      }
-                    </script>
+                        </div>
+                        <script>
+                            function submit1() {
+                                var form1 = document.getElementById('form1');
+                                form1.submit();
+                            }
+                        </script>
+                    </div>
+                    <div class="tab" id="tab3">
+                        <strong>
+                            <h2>Buyer Tax</h2>
+                        </strong>
+                        <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>is Tax Filer / Registered?</strong>
+                                    <select name="title" id="registered" class="form-control">
+                                        <option value="Select ">Select here </option>
+                                        <option value="yes">Yes </option>
+                                        <option value="no">No </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <strong>Display Notes in Invoice</strong>
+                                    <select name="dinvoice" id="invoice" class="form-control">
+                                        <option value="Select ">Select here </option>
+                                        <option value="yes">Yes </option>
+                                        <option value="no">No </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>S.T. Registration No</strong>
+                                    <input type="text" class="form-control" id="registration_st"
+                                        name="registration_st" placeholder="S.T. Registration No">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <strong>S.T. Invoice Note / Terms</strong>
+                                    <input type="textarea" class="form-control" id="invoinceterm" name="st_invoicenote"
+                                        placeholder="S.T. Invoice Note / Terms">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>Withholding tax %age</strong>
+                                    <input type="text" class="form-control" id="Withholding" name="Withholding"
+                                        placeholder="Withholding tax %age">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="showTab(2)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="submit()">Submit</button>
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2"
+                                style="margin: 5px;" onclick="showTab(4)">Next</button>
+                        </div>
+                        <script>
+                            function submit1() {
+                                var form1 = document.getElementById('form1');
+                                form1.submit();
+                            }
+                        </script>
+                    </div>
+                    <div class="tab" id="tab4">
+                        <strong>
+                            <h2>Buyer Bank Info</h2>
+                        </strong>
+                        <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>Select Bank</strong>
+                                    <select name="bankvalue" id="bank" class="form-control">
+                                        <option value="Select ">Select Bank </option>
+                                        @foreach ($bank as $item)
+                                            <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <strong>Account Title</strong>
+                                    <input type="text" class="form-control" id="accounttext" name="accounttext"
+                                        placeholder="Account Title">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>Account No</strong>
+                                    <input type="text" class="form-control" id="accontno" name="accontno"
+                                        placeholder="Account No">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <strong>Branch Code</strong>
+                                    <input type="text" class="form-control" id="branchcode" name="branchcode"
+                                        placeholder="Branch Code">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>Branch Name</strong>
+                                    <input type="text" class="form-control" id="branchname" name="branchname"
+                                        placeholder="Branch Name">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <strong>Opening Balance</strong>
+                                    <input type="number" class="form-control" id="openingbalance" name="openingbalance"
+                                        placeholder="Opening Balance">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <strong>Opening Date</strong>
+                                    <input type="text" class="form-control" placeholder="Opening Date"
+                                        id="openingdate" name="openingdate" min="0" max="2000"
+                                        step="0.01" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="showTab(3)">Previous</button>
+                            <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;"
+                                onclick="submit()">Submit</button>
+
+                        </div>
+                        <script>
+                            function submit1() {
+                                var form1 = document.getElementById('form1');
+                                form1.submit();
+                            }
+                        </script>
+                    </div>
+                </form>
             </div>
-            <div class="tab" id="tab3">
-                <strong>
-                    <h2>Buyer Tax</h2>
-                </strong>
-                <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
-
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>is Tax Filer / Registered?</strong>
-                            <select name="title" id="registered" class="form-control">
-                                <option value="Select ">Select here </option>
-                                <option value="yes">Yes </option>
-                                <option value="no">No </option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Display Notes in Invoice</strong>
-                            <select name="dinvoice" id="invoice" class="form-control">
-                                <option value="Select ">Select here </option>
-                                <option value="yes">Yes </option>
-                                <option value="no">No </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>S.T. Registration No</strong>
-                            <input type="text" class="form-control" id="registration_st" name="registration_st"
-                                placeholder="S.T. Registration No">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <strong>S.T. Invoice Note / Terms</strong>
-                            <input type="textarea" class="form-control" id="invoinceterm" name="invoinceterm"
-                                placeholder="S.T. Invoice Note / Terms">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Withholding tax %age</strong>
-                            <input type="text" class="form-control" id="Withholding" name="Withholding"
-                                placeholder="Withholding tax %age">
-                        </div>
-                        <div class="col-md-6 form-group">
-                        </div>
-                    </div>
-                </div>
-                <div class="container d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(2)">Previous</button>
-                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-                    <button type="button" class="btn btn-primary p-3 px-5  col-3" id="sbumit2" style="margin: 5px;" onclick="showTab(4)">Next</button>
-                  </div>
-                <script>
-                  function submit1()
-                  {
-                    var form1 = document.getElementById('form1');
-                    form1.submit();
-                  }
-                </script>
-            </div>
-            <div class="tab" id="tab4">
-                <strong>
-                    <h2>Buyer Bank Info</h2>
-                </strong>
-                <div class="col-xs-6 col-sm-6 col-md-12" style="border: 1px solid black;padding:20px;margin:10px">
-
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Select Bank</strong>
-                            <select name="bankvalue" id="bank" class="form-control">
-                                <option value="Select ">Select Bank </option>
-                                @foreach ($bank as $item)
-                                    <option value={{ $item->bank_id }}>{{ $item->Bank }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Account Title</strong>
-                            <input type="text" class="form-control" id="accounttext" name="accounttext"
-                                placeholder="Account Title">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Account No</strong>
-                            <input type="text" class="form-control" id="accontno" name="accontno"
-                                placeholder="Account No">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Branch Code</strong>
-                            <input type="text" class="form-control" id="branchcode" name="branchcode"
-                                placeholder="Branch Code">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Branch Name</strong>
-                            <input type="text" class="form-control" id="branchname" name="branchname"
-                                placeholder="Branch Name">
-                        </div>
-                        <div class="col-md-6 form-group">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Opening Balance</strong>
-                            <input type="number" class="form-control" id="openingbalance" name="openingbalance"
-                                placeholder="Opening Balance">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Opening Date</strong>
-                            <input type="number" class="form-control" placeholder="Opening Date" id="openingdate"
-                                name="openingdate" min="0" max="2000" step="0.01" />
-                        </div>
-                    </div>
-                </div>
-                <div class="container d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="showTab(3)">Previous</button>
-                    <button type="submit" class="btn btn-primary p-3 px-5  col-3" style="margin: 5px;" onclick="submit()">Submit</button>
-
-                  </div>
-                <script>
-                  function submit1()
-                  {
-                    var form1 = document.getElementById('form1');
-                    form1.submit();
-                  }
-                </script>
-            </div>
-            </form>
-        </div>
         </div>
 
         <script>
