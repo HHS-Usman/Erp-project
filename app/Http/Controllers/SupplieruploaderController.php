@@ -72,7 +72,7 @@ class SupplieruploaderController extends Controller
                 $cityid =  $citydata->id;
                 // for province data
                 $provincedata = Province::firstOrCreate(['province' => $value['province_id']]);
-                $provinceid = $provincedata->province_id;
+              
                 // for  data bank
                 $bankdata = Bank::firstOrCreate(['Bank' => $value['bank_id']]);
                 $bankid =  $bankdata->bank_id;
@@ -117,7 +117,7 @@ class SupplieruploaderController extends Controller
                 $supplier->bank_id = $bankid;
                 $supplier->suplierCatg_id = $supliercatgoryid;
                 $supplier->supliertype_id = $supliertypeid;
-                $supplier->province_id = $provinceid;
+                $supplier->province_id = $provincedata->province_id;
                 $supplier->country_id =  $countryid;
                 $supplier->City_id = $cityid;
                 $supplier->save();
