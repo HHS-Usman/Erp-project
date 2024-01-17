@@ -50,7 +50,7 @@ class RoleController extends Controller
         $modules = Module::all();
         $pages = Page::all();
         $pageactions = PageAction::all();
-         $permissions = Permissions::with('module', 'page')->get(); // Permission::join('modules', 'permissions.module_id', '=', 'modules.id')
+        $permissions = Permissions::with('module', 'page', 'pageaction')->get(); // Permission::join('modules', 'permissions.module_id', '=', 'modules.id')
         // ->select('permissions.*', 'modules.module_name as module_name')
         // ->get();
 
@@ -75,7 +75,7 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->role_name]);
         $role->givePermissionTo($request->permissions);
-        return redirect()->route('role.index')->with('success', 'Manage successfully');
+        return response()->json(['success'=>'Role Created Successfully']);
     }
 
     /**

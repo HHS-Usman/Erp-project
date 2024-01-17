@@ -127,20 +127,50 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkPermission:add-division'])->group(function () {
         Route::get('division/create', [DivisionController::class, 'create'])->name('division.create');
     });
-
+    Route::middleware(['checkPermission:view-division'])->group(function () {
+        Route::get('division/index', [DivisionController::class, 'create'])->name('division.index');
+    });
     Route::middleware(['checkPermission:edit-division'])->group(function () {
         Route::get('division/{division}/edit', [DivisionController::class, 'edit'])->name('division.edit');
     });
 
     // Define resourceful routes (excluding create)
-    Route::resource('division', DivisionController::class)->except(['create','edit']);
+    Route::resource('division', DivisionController::class)->except(['create','edit','index']);
 
     // Route::get('division/create', [DivisionController::class, 'create'])->middleware('checkPermission:add-division');
     // Route::resource('division',DivisionController::class);
-Route::resource('department',DepartmentController::class);
+    Route::middleware(['checkPermission:add-department'])->group(function () {
+        Route::get('department/create', [DepartmentController::class, 'create'])->name('department.create');
+    });
+    Route::middleware(['checkPermission:view-department'])->group(function () {
+        Route::get('department/index', [DepartmentController::class, 'index'])->name('department.index');
+    });
+    Route::middleware(['checkPermission:edit-department'])->group(function () {
+        Route::get('department/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
+    });
+Route::resource('department',DepartmentController::class)->except(['create','edit','index']);
 
-Route::resource('subdepartment',SubdepartmentController::class);
-Route::resource('function',FundtionController::class);
+    Route::middleware(['checkPermission:add-subdepartment'])->group(function () {
+        Route::get('subdepartment/create', [SubdepartmentController::class, 'create'])->name('subdepartment.create');
+    });
+    Route::middleware(['checkPermission:view-subdepartment'])->group(function () {
+        Route::get('subdepartment/index', [SubdepartmentController::class, 'index'])->name('subdepartment.index');
+    });
+    Route::middleware(['checkPermission:edit-subdepartment'])->group(function () {
+        Route::get('subdepartment/{subdepartment}/edit', [SubdepartmentController::class, 'edit'])->name('subdepartment.edit');
+    });
+Route::resource('subdepartment',SubdepartmentController::class)->except(['create','edit','index']);
+Route::middleware(['checkPermission:add-function'])->group(function () {
+    Route::get('function/create', [FundtionController::class, 'create'])->name('function.create');
+});
+Route::middleware(['checkPermission:view-function'])->group(function () {
+    Route::get('function/index', [FundtionController::class, 'index'])->name('function.index');
+});
+Route::middleware(['checkPermission:edit-function'])->group(function () {
+    Route::get('function/{function}/edit', [FundtionController::class, 'edit'])->name('function.edit');
+});
+Route::resource('function',FundtionController::class)->except(['create','edit','index']);;
+
 Route::resource('userrole',User_role_controller::class);
 Route::resource('users',Usercontroller::class);
 Route::resource('productuploader',UploaderController::class);

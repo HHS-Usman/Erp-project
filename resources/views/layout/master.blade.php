@@ -186,36 +186,50 @@
                             <div class="dropdown-menu" style="hover">
 
                                 <div class="dropdown-submenu dropdown-item dropright ">
-                                    <a class="nav-link dropdown-toggle" style="color: black;"><strong>Organization
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Organization
                                             Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
                                         @can('add-division')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
+                                        @can('view-division')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
-
+                                        @endcan
+                                        @can('add-department')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.create') }}">Create Department</a></li>
+                                        @endcan
+                                        @can('view-department')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.index') }}">Manage Department</a></li>
-
+                                        @endcan
+                                        @can('add-subdepartment')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.create') }}">Create Sub Department
                                                 Level</a></li>
+                                        @endcan
+                                        @can('view-subdepartment')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.index') }}">Manage Sub Department
                                                 Level</a></li>
-
+                                        @endcan
+                                        @can('add-function')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.create') }}">Create Function</a></li>
+                                        @endcan
+                                        @can('view-function')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.index') }}">Manage Function</a></li>
-
+                                        @endcan
+                                        @can('add-management-level')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('management.create') }}">Create Management Level</a>
                                         </li>
+                                        @endcan
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('management.index') }}">Manage Management Level</a>
                                         </li>
@@ -336,8 +350,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
