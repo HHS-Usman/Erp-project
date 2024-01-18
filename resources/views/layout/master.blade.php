@@ -891,6 +891,9 @@
                                 <a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
                                     Manage Buyer
                                 </a>
+                                <a class="nav-link dropdown-item" href="{{ route('purchaserequisition.create') }}">
+                                    Create Purchase Requisition
+                                </a>
                             </div>
                             <div class="dropdown-menu">
                                 <li class="p-0"><a class="nav-link dropdown-item"

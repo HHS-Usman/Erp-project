@@ -8,6 +8,8 @@ use App\Models\BuyerCategory;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Product;
+use App\Models\Product_category;
+use App\Models\Unit_selection;
 use Illuminate\Http\Request;
 
 class PurchasereuquisitionController extends Controller
@@ -21,7 +23,25 @@ class PurchasereuquisitionController extends Controller
     {
         //
     }
-
+    public function getUOM($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product Not found'], 404);
+        }
+        $uom = Unit_selection::find($product->product_uom_id);
+        $minqty = $product->min_qty;  
+        $maxqty = $product->max_qty;
+        if (!$uom) {
+            return response()->json(['error' => 'UOM not found'], 404);
+        }
+        return response()->json([
+            'uom' => $uom->uom,
+            'minqty' => $minqty,
+            'maxqty' => $maxqty,
+            ]
+        );
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -29,12 +49,14 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
+
         $deaprtment = Department::all();
         $employee = Employee::all();
-        $bcategory = BuyerCategory::all();
+        $pcategory = Product_category::all();
         $product = Product::all();
         $brand = Brand_Selection::all();
-        return view('purchaserequisition.create',compact('deaprtment','employee','bcategory','product','brand'));
+        $uom = Unit_selection::all();
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'brand', 'uom'));
     }
 
     /**

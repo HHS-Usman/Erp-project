@@ -149,7 +149,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkPermission:edit-department'])->group(function () {
         Route::get('department/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
     });
-Route::resource('department',DepartmentController::class)->except(['create','edit','index']);
+Route::resource('department',DepartmentController::class);
+// ->except(['create','edit','index'])
 
     Route::middleware(['checkPermission:add-subdepartment'])->group(function () {
         Route::get('subdepartment/create', [SubdepartmentController::class, 'create'])->name('subdepartment.create');
@@ -340,4 +341,7 @@ Route::resource('buyerupload',BuyeruploadController::class);
 Route::post('/buyerupload',[BuyeruploadController::class ,'store'])->name('buyerupload');
 Route::get('downloadcsv', [UploaderController::class ,'downloadCsv'])->name('downloadcsv');
 Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name('downloadexcel');
+// Create a route in your web.php file to handle the AJAX request.
+
+Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'getUOM']);
 });

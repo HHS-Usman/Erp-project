@@ -23,6 +23,8 @@
                 </ol>
             </nav>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         <style>
             .wrapper {
                 margin: 0px 100px 0px 100px
@@ -36,6 +38,10 @@
             .innercontainer {
                 text-align: center;
             }
+
+            /* .{
+                                                        font-size: 2rem !important;
+                                                    } */
         </style>
         <br><br><br>
         <form action="{{ route('bank.store') }}" method="POST">
@@ -118,9 +124,9 @@
                 <thead>
                     <tr>
                         <th>S.No</th>
-                        <th>Category</th>
-                        <th>Sub Category</th>
-                        <th>Brand</th>
+                        <th>Product_Ctgy</th>
+                        <th>Sub_Category</th>
+                        <th>Brand </th>
                         <th>Productr/Item</th>
                         <th>UOM</th>
                         <th>Current Stock</th>
@@ -138,33 +144,38 @@
                         <td>1</td>
                         <td>
                             <select name="category" id="category" class="form-control">
-                                <option value="category">Select Category</option>
-                                @foreach ($bcategory as $category)
-                                    <option value={{ $category->bcategory_id }}>{{ $category->buyercategory }}</option>
+                                <option value="category" id="chnagefont">Select</option>
+                                @foreach ($pcategory as $category)
+                                    <option id="chnagefont" value={{ $category->id }}>{{ $category->product_category }}
+                                    </option>
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
+                        <td><input type="number" class="form-control debit" placeholder="Sub-Category" name="debit1"></td>
                         <td> <select name="brand_id" id="category" class="form-control">
-                                <option value="brand">Select brand</option>
+                                <option value="brand" id="chnagefont">Select</option>
                                 @foreach ($brand as $b)
-                                    <option value={{ $b->id }}>{{ $b->brand_selection }}</option>
+                                    <option id="chnagefont" value={{ $b->id }}>{{ $b->brand_selection }}</option>
                                 @endforeach
                             </select></td>
-                        <td> <select name="product_d" id="category" class="form-control">
-                                <option value="product">Select Product</option>
+                        <td> <select name="product_d" id="product" class="form-control">
+                                <option id="chnagefont" value="product">Select</option>
                                 @foreach ($product as $p)
-                                    <option value={{ $p->id }}>{{ $p->name }}</option>
+                                    <option id="chnagefont" value={{ $p->id }}>{{ $p->name }}</option>
                                 @endforeach
                             </select></td>
-                        <td><input type="number" class="form-control credit" placeholder="0.00" name="credit1"></td>
-                        <td><input type="text" class="form-control" placeholder="Quality Required" name="memo1">
+                        <td><input type="text" class="form-control credit" value="" placeholder="UOM"
+                                name="UOM"></td>
+                        <td><input type="text" class="form-control" placeholder="Current Stock" name="memo1">
                         </td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit1"></td>
+                        <td><input type="text" class="form-control debit" placeholder="Qty Required"
+                                name="qty_required">
+                        </td>
+                        <td><input type="number" class="form-control debit" placeholder="0.00" name="lastpurchase">
+                        </td>
+                        <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"></td>
+                        <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"></td>
+                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit5"></td>
                         <td> <!-- Add More Rows Button -->
                             <div class="row">
                                 <div class="col-md-12">
@@ -172,24 +183,41 @@
                                 </div>
                             </div>
                         </td>
-                        <td> <!-- Add More Rows Button -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                   <p>-----</p>
-                                </div>
-                            </div>
+                        <td>
+
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-
             <script>
+                $.noConflict();
+                jQuery(document).ready(function($) {
+                    $('#product').change(function() {
+                        var productId = $(this).val();
+                        // Make an AJAX request to get UOM data
+                        $.ajax({
+                            url: '/get-uom/' + productId,
+                            type: 'GET',
+                            success: function(data) {
+                                var uomInput = $('input[name="UOM"]');
+                                uomInput.val(data.uom);
+
+                                var minstock = $('input[name="minstock"]');
+                                minstock.val(data.minqty);
+
+                                var maxstock = $('input[name="maxstock"]');
+                                maxstock.val(data.maxqty);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+                });
+
                 function addRow() {
                     var table = document.getElementById("tableBody");
-                    console.log(table);
                     var newRow = table.insertRow(table.rows.length);
-                    console.log(table.rows.length);
                     var counter = table.rows.length
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
@@ -206,6 +234,7 @@
                     var cell13 = newRow.insertCell(12);
                     var cell14 = newRow.insertCell(13);
 
+
                     // start Category
                     // create element select category
                     var selectElement = document.createElement("select");
@@ -213,28 +242,32 @@
                     selectElement.name = "account" + table.rows.length;
                     // Add a default option Element of Category
                     var defaultOption = document.createElement("option");
-                    defaultOption.value = "category";
-                    defaultOption.text = "Select Category";
+                    defaultOption.text = "Select";
                     selectElement.add(defaultOption);
 
                     // Add options from PHP array for category
-                    @foreach ($bcategory as $category)
+                    @foreach ($pcategory as $category)
                         var option = document.createElement("option");
-                        option.value = "{{ $category->bcategory_id }}";
-                        option.text = "{{ $category->buyercategory }}";
+                        option.value = "{{ $category->id }}";
+                        option.text = "{{ $category->product_category }}";
                         selectElement.add(option);
                     @endforeach
                     // End
-                    // start Product
+                    // Start Product
                     // create element select Product
                     var selectproduct = document.createElement("select");
+                    selectproduct.id = "product" + counter;
                     selectproduct.className = "form-control";
-                    selectproduct.name = "account" + table.rows.length;
+                    selectproduct.name = "account" + counter;
+                    var productname = selectproduct.name;
+
+
                     // Select option Element of product
                     var defaultOption1 = document.createElement("option");
                     defaultOption1.value = "product";
-                    defaultOption1.text = "Select product";
+                    defaultOption1.text = "Select";
                     selectproduct.add(defaultOption1);
+
                     // Data fetch from product 
                     @foreach ($product as $p)
                         var option = document.createElement("option");
@@ -248,11 +281,11 @@
                     // create element select Brand
                     var selectbrand = document.createElement("select");
                     selectbrand.className = "form-control";
-                    selectbrand.name = "account" + table.rows.length;
+                    selectbrand.name = "brand";
                     // Select option Element of product
                     var defaultOption2 = document.createElement("option");
                     defaultOption2.value = "Brand";
-                    defaultOption2.text = "Select Brand";
+                    defaultOption2.text = "Select";
                     selectbrand.add(defaultOption2);
                     // Data fetch from product 
                     @foreach ($brand as $b)
@@ -268,37 +301,64 @@
                     // This cell2.appendChild is use for add option selected value in category
                     cell2.appendChild(selectElement);
                     // cell3.appendChild(selectElement);
-                    cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="debit' + table.rows
+                    cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="Sub-Category" name="debit' +
+                        table.rows
                         .length + '">';
                     cell4.appendChild(selectbrand);
+                    // Append the select element to the cel
                     cell5.appendChild(selectproduct);
-                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="debit' + table.rows
+                    // Event listener for product change
+
+                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
                         .length + '">';
-                    cell7.innerHTML =
-                        '<input type="number" class="form-control credit" placeholder="Quality Required" name="credit' + table.rows
-                        .length + '">';
-                    cell8.innerHTML = '<input type="text" class="form-control" placeholder="0.00" name="memo' + table.rows.length +
-                        '">';
-                    cell9.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="debit' + table.rows
-                        .length + '">';
-                    cell10.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="credit' + table
-                        .rows.length + '">';
-                    cell11.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="credit' + table
-                        .rows.length + '">';
-                    cell12.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="credit' + table
-                        .rows.length + '">';
-                    cell13.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">Add</button>';
                     cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
-                    // Update totals
-                    updateTotals(); 
+                    // Separate function to handle the product change event
+
+                    var productId = jQuery(this).val();
+                    jQuery.ajax({
+                        url: '/get-uom/' + productId,
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            var uomInput = jQuery('input[name="UOM' + counter + '"]');
+                            console.log("This is input Name UOM " + counter)
+                            uomInput.val(data.uom);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                    handleProductChange(selectproduct, counter);
+                    console.log("daslfkjasd");
+                    updateTotals();
                 }
 
-                function removeRow(){
+                function handleProductChange(selectElement, counter) {
+                    console.log("sdflkjhdsl")
+                    selectElement.addEventListener('change', function() {
+                        var productId = this.value;
+
+                        jQuery.ajax({
+                            url: '/get-uom/' + productId,
+                            type: 'GET',
+                            success: function(data) {
+                                var uomInput = jQuery('input[name="UOM' + counter + '"]');
+                                console.log("This is input Name UOM " + counter)
+                                uomInput.val(data.uom);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+                }
+
+
+                function removeRow() {
                     var table = document.getElementById("tableBody");
-                    if(table.rows.length > 0){
-                        table.deleteRow(table.rows.length-1)
-                    }
-                    else{
+                    if (table.rows.length > 0) {
+                        table.deleteRow(table.rows.length - 1)
+                    } else {
                         alert("No Rows to Remove");
                     }
                 }
@@ -330,29 +390,7 @@
                     updateTotals();
                 });
             </script>
-            {{-- <div class="container mt-5">
-                    <table class="table mt-3 border">
-                      <thead>
-                        <tr>
-                          <th>Total</th>
-                          <th>Total of Debit Amount</th>
-                          <th>Total of Credit Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td></td>
-                            <td id="debitTotal">0.00</td>
-                            <td id="creditTotal">0.00</td>
-                        </tr>
-                        <tr>
-                            <td><input type="hidden" name="totalDebit" id="totalDebit" value="0.00"></td>
-                            <td></td>
-                            <td><input type="hidden" name="totalCredit" id="totalCredit" value="0.00"></td>
-                        </tr>
-                    </tbody>
-                    </table>
-                  </div> --}}
+
 
         </form>
         </div>
