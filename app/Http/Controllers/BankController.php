@@ -47,7 +47,7 @@ class BankController extends Controller
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-        return redirect()->route('Bank.index')->with('success','Create successfully');
+        return redirect()->route('bank.index')->with('success','Create successfully');
     }
 
     /**

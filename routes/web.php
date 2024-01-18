@@ -89,6 +89,7 @@ use App\Http\Controllers\Product\ProductTypeController;
 use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
 use App\Http\Controllers\Product\UploaderController;
+use App\Http\Controllers\PurchasereuquisitionController;
 use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
@@ -349,6 +350,19 @@ permissionRoutes('add-persontype', SalepersontypeController::class, 'salepersont
 permissionRoutes('view-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('edit-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('delete-persontype', SalepersontypeController::class, 'salepersontype');
+    // Route::get('division/create', [DivisionController::class, 'create'])->middleware('checkPermission:add-division');
+    // Route::resource('division',DivisionController::class);
+    Route::middleware(['checkPermission:add-department'])->group(function () {
+        Route::get('department/create', [DepartmentController::class, 'create'])->name('department.create');
+    });
+    Route::middleware(['checkPermission:view-department'])->group(function () {
+        Route::get('department/index', [DepartmentController::class, 'index'])->name('department.index');
+    });
+    Route::middleware(['checkPermission:edit-department'])->group(function () {
+        Route::get('department/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
+    });
+Route::resource('department',DepartmentController::class);
+// ->except(['create','edit','index'])
 
 permissionRoutes('add-accountcategory', AccountcategoryController::class, 'accountcategory');
 permissionRoutes('view-accountcategory', AccountcategoryController::class, 'accountcategory');
@@ -441,11 +455,37 @@ Route::resource('permission',PermissionController::class);
 Route::resource('/roleaccess',RoleAccessController::class);
 Route::resource('role',RoleController::class);
 Route::resource('accesspermit',AccessPermitController::class);
+
 // Route::resource('costcenter',CostcenterController::class);
 // Route::resource('company_info',Emp_Company_Info_Controller::class);
 // Route::resource('emp_payroll',Emp_Payroll_Controller::class);
 // Route::resource('emp_document',Emp_Document_Controller::class);
 
+
+Route::resource('costcenter',CostcenterController::class);
+Route::resource('language',LanguageController::class);
+Route::resource('religion',ReligionController::class);
+Route::resource('designation',DesignationController::class);
+Route::resource('group',GroupController::class);
+Route::resource('grade',GradController::class);
+Route::resource('leavereson',LeavereasonController::class);
+Route::resource('subleavingreason',SubleavingreasonController::class);
+Route::resource('weekoffday',WeekoffdayController::class);
+Route::resource('paymentterm',PaymentController::class);
+Route::resource('modeofpayment',ModeofpaymentController::class);
+Route::resource('email',EmailController::class);
+Route::resource('usergroup',UsergroupController::class);
+Route::resource('process',ProcessController::class);
+Route::resource('cast',CastController::class);
+Route::resource('company_info',Emp_Company_Info_Controller::class);
+Route::resource('emp_payroll',Emp_Payroll_Controller::class);
+Route::resource('emp_document',Emp_Document_Controller::class);
+Route::resource('country',CountryController::class);
+Route::resource('citizenship',CitizenshipController::class);
+Route::resource('nationality',NationalityController::class);
+Route::resource('city',CityController::class);
+Route::resource('bank',BankController::class);
+Route::resource('province',ProvinceController::class);
 Route::resource('state',StateController::class);
 Route::resource('event',EventController::class);
 Route::resource('product',ProductController::class);
@@ -464,7 +504,7 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 
 
 
-
+Route::resource('purchaserequisition',PurchasereuquisitionController::class);
 Route::resource('account-store',AccountController::class);
 
 
@@ -551,4 +591,7 @@ Route::resource('buyerupload',BuyeruploadController::class);
 Route::post('/buyerupload',[BuyeruploadController::class ,'store'])->name('buyerupload');
 Route::get('downloadcsv', [UploaderController::class ,'downloadCsv'])->name('downloadcsv');
 Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name('downloadexcel');
+// Create a route in your web.php file to handle the AJAX request.
+
+Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'getUOM']);
 });

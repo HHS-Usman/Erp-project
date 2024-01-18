@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Create Supplier
+Update Supplier
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,7 +15,7 @@ Create Supplier
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Supplier</h1>
+        <h1>Update Supplier</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
@@ -205,7 +205,7 @@ Create Supplier
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>City</strong>
-                                    <select name="citydabove" id="cityabove" class="form-control">
+                                    <select name="city_id" id="cityabove" class="form-control">
                                         <option value="">Select City </option>
                                         @foreach ($city as $item)
                                         <option value={{ $item->id }} @if ($item->id == $getMaxid->City_id ) selected @endif>{{ $item->city }}</option>
@@ -231,7 +231,7 @@ Create Supplier
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person</strong>
-                                    <input type="text" class="form-control" id="contactperson" name="contactperson"
+                                    <input type="text" class="form-control" id="contactperson" name="contact_person"
                                         placeholder="Contact Person" value="{{ $getMaxid->contactpersoncell_no }}">
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ Create Supplier
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Contact Person Cell no</strong>
-                                    <input type="number" class="form-control" id="pcellno" name="pcellno"
+                                    <input type="number" class="form-control" id="pcellno" name="cont_p_no"
                                         placeholder="{{ $getMaxid->contactpersoncell_no }}">
                                 </div>
                             </div>
@@ -252,7 +252,7 @@ Create Supplier
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Country</strong>
-                                    <select name="countryabove" id="countryabove" class="form-control">
+                                    <select name="country_id" id="countryabove" class="form-control">
                                         <option value="Select Sale Type">Select Country </option>
                                         @foreach ($country as $item)
                                         <option value={{ $item->id }} @if ($item->id == $getMaxid->country_id ) selected @endif>{{ $item->country }}</option>
@@ -279,7 +279,7 @@ Create Supplier
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Supplier Category</strong>
-                                    <select name="suplierCatg_id" id="suplierCatg_id" class="form-control">
+                                    <select name="supliercatg_id" id="suplierCatg_id" class="form-control">
                                         <option value="">Select Supplier Category </option>
                                         @foreach ($scategory as $item)
                                         <option value={{ $item->supliercatg_id }} @if ($item->supliercatg_id == $getMaxid->suplierCatg_id ) selected @endif>
@@ -411,12 +411,12 @@ Create Supplier
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Contact Person</strong>
-                                <input type="text" class="form-control" id="contactperson" name="contactperson"
+                                <input type="text" class="form-control" id="contactperson" name="contact_person"
                                     placeholder="Contact Person">
                             </div>
                             <div class="col-md-6 form-group">
                                 <strong>Contact Person Cell no#</strong>
-                                <input type="text" class="form-control" id="personcell#" name="personcell#"
+                                <input type="text" class="form-control" id="personcell#" name="cont_person_no"
                                     placeholder="Contact Person Cell no#">
                             </div>
                         </div>

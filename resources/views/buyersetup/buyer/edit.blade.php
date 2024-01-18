@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Create Buyer
+Update Buyer
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,7 +15,7 @@ Create Buyer
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Buyer</h1>
+        <h1>Update Buyer</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
@@ -124,33 +124,20 @@ Create Buyer
                         var selectedOption = $(this).val();
 
                         // Enable/disable fields based on the selected option
-                        if (selectedOption === 'above') {
+                      // Enable/disable fields based on the selected option
+                      if (selectedOption === 'above') {
                             $('#shippingaddress').prop('disabled', true);
                             $('#shippngcity').prop('disabled', true);
                             $('#postalcodeon').prop('disabled', true);
                             $('#shippingprovince').prop('disabled', true);
                             $('#shippingcountry').prop('disabled', true);
-                            $('#countryb').prop('disabled', false);
-                            $('#zipcodea').prop('disabled', false);
-                            $('#provincea').prop('disabled', false);
-                            $('#citya').prop('disabled', false);
-                            $('#adressa').prop('disabled', false);
-                        } else if (selectedOption === 'other') {
+                        } 
+                        else if(selectedOption == "other"){
                             $('#shippingaddress').prop('disabled', false);
                             $('#shippngcity').prop('disabled', false);
                             $('#postalcodeon').prop('disabled', false);
                             $('#shippingprovince').prop('disabled', false);
                             $('#shippingcountry').prop('disabled', false);
-                            $('#countryb').prop('disabled', true);
-                            $('#zipcodea').prop('disabled', true);
-                            $('#provincea').prop('disabled', true);
-                            $('#citya').prop('disabled', true);
-                            $('#adressa').prop('disabled', true);
-                        } else {
-                            // Reset fields when 'Select' is chosen
-                            $('#name').prop('disabled', true);
-                            $('#city').prop('disabled', true);
-                            $('#address').prop('disabled', true);
                         }
                     });
                 });
@@ -218,7 +205,7 @@ Create Buyer
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>City</strong>
-                                    <select name="cityb" id="citya" class="form-control">
+                                    <select name="city_id" id="citya" class="form-control">
                                         <option value="Select City">Select City </option>
                                         @foreach ($city as $item)
                                             <option value={{ $item->id }} @if ($item->id == $buyer->City_id) selected @endif>{{$item->city }}</option>
@@ -234,7 +221,7 @@ Create Buyer
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Province</strong>
-                                    <select name="provinceb" id="provincea" class="form-control">
+                                    <select name="province_id" id="provincea" class="form-control">
                                         <option value="Select Sale Type">Select Province </option>
                                         @foreach ($province as $item)
                                         <option value={{ $item->province_id }} @if ($item->province_id == $buyer->province_id )
@@ -265,7 +252,7 @@ Create Buyer
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Country</strong>
-                                    <select name="countryb" id="countryb" class="form-control">
+                                    <select name="country_id" id="countryb" class="form-control">
                                         <option value="Select Sale Type">Select Country </option>
                                         @foreach ($country as $item)
                                         <option value={{ $item->id }} @if ($item->id == $buyer->country_id) selected
@@ -351,7 +338,7 @@ Create Buyer
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Shipping Address</strong>
-                                    <input type="text" class="form-control" id="shippingaddress" name="shippingaddress"
+                                    <input type="text" class="form-control" id="shippingaddress" name="shipping_addres"
                                         placeholder="Shipping Address" value="{{ $buyer->shiping_addres }}">
                                 </div>
                             </div>
@@ -359,7 +346,7 @@ Create Buyer
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Shipping City</strong>
-                                    <select name="city" id="shippngcity" class="form-control">
+                                    <select name="shipping_city_id" id="shippngcity" class="form-control">
                                         <option value="Select Shipping City">Select Shipping City </option>
                                         @foreach ($city as $item)
                                         <option value={{ $item->id }} @if ($item->id == $buyer->shiping_city) selected
@@ -369,7 +356,7 @@ Create Buyer
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>ZIP/Postal Code</strong>
-                                    <input type="text" class="form-control" id="postalcodeon" name="postalcodeon"
+                                    <input type="text" class="form-control" id="postalcodeon" name="zip_code_shpping"
                                         placeholder="ZIP/Postal Code">
                                 </div>
                             </div>
@@ -377,7 +364,7 @@ Create Buyer
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <strong>Shipping Province</strong>
-                                    <select name="shippingprovince" id="shippingprovince" class="form-control">
+                                    <select name="shipping_province_id" id="shippingprovince" class="form-control">
                                         <option value="Select Sale Type">Select Shipping province </option>
                                         @foreach ($province as $item)
                                         <option value={{ $item->province_id }} @if ($item->province_id ==
@@ -387,7 +374,7 @@ Create Buyer
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <strong>Shipping Country</strong>
-                                    <select name="shippingcountry" id="shippingcountry" class="form-control">
+                                    <select name="shipping_country_id" id="shippingcountry" class="form-control">
                                         <option value="Select Sale Type">Select Shipping Country </option>
                                         @foreach ($country as $item)
                                         <option value={{ $item->id }} @if ($item->province_id ==

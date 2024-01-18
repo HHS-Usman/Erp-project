@@ -47,7 +47,7 @@ class ProvinceController extends Controller
             'detail'=>request()->get('detail'),
             'is_active' => request()->get('is_active', 0),
         ]);
-        return redirect()->route('province.create')->with('success','Create successfully');
+        return redirect()->route('province.index')->with('success','Create successfully');
     }
 
     /**

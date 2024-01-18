@@ -159,7 +159,8 @@
 
 <body>
     <x-navigation />
-    <div style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
+    <div
+        style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
             transform-origin: 0 0;
             width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
         <nav class="navbar navbar-expand-lg navbar-light bg-white " id="navbarcontainermain"
@@ -190,24 +191,23 @@
                                         aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Organization
                                             Setup</strong></a>
-                                    <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
+                                    <ul id="container" class="dropdown-menu dropdown-content"
+                                        style="{display: block;}">
                                         @can('add-division')
-                                        <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('division.create') }}">Create Division</a></li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                    href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
                                         @can('view-division')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.index') }}">Manage Division</a></li>
-                                        @endcan
-                                        @can('add-department')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.create') }}">Create Department</a></li>
                                         @endcan
                                         @can('view-department')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('department.index') }}">Manage Department</a></li>
-                                        @endcan
-                                        @can('add-subdepartment')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.create') }}">Create Sub Department
                                                 Level</a></li>
@@ -216,16 +216,14 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('subdepartment.index') }}">Manage Sub Department
                                                 Level</a></li>
-                                        @endcan
-                                        @can('add-function')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.create') }}">Create Function</a></li>
                                         @endcan
                                         @can('view-function')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.index') }}">Manage Function</a></li>
-                                        @endcan
-                                        @can('add-managementlevel')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('management.create') }}">Create Management Level</a>
                                         </li>
@@ -278,16 +276,14 @@
                                         @can('view-designation')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('designation.index') }}">Manage Designation</a></li>
-                                        @endcan
-                                        @can('add-group')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('group.create') }}">Create Group</a></li>
                                         @endcan
                                         @can('view-group')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('group.index') }}">Manage Group</a></li>
-                                        @endcan
-                                        @can('add-grade')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('grade.create') }}">Create Grade</a></li>
                                         @endcan
@@ -315,8 +311,6 @@
                                         @can('view-weekday')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
-                                        @endcan
-                                        @can('uploader')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index') }}">
                                                 Uploader</a></li>
                                         @endcan
@@ -346,8 +340,7 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('modeofpayment.index') }}">Manage Mode Of Payment</a>
                                         </li>
-                                        @endcan
-                                        @can('add-email')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('email.create') }}">Create Email</a>
                                         </li>
@@ -386,8 +379,6 @@
                                         @can('add-cast')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('cast.create') }}">Create Cast</a></li>
-                                        @endcan
-                                        @can('view-cast')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index') }}">Manage
                                                 Cast</a></li>
                                         @endcan
@@ -398,10 +389,8 @@
                                         @endcan
                                         @can('view-country')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('country.index') }}">Manage Country</a>
-                                        </li>
-                                        @endcan
-                                        @can('add-citizenship')
+                                                href="{{ route('country.index') }}">Manage Country</a></li>
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('citizenship.create') }}">Create Citizenship</a></li>
                                         @endcan
@@ -422,18 +411,14 @@
                                         @endcan
                                         @can('add-city')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('city.create') }}">Create City</a>
-                                        </li>
-                                        @endcan
-                                        @can('view-city')
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage City</a>
-                                        </li>
-                                        @endcan
+                                                href="{{ route('city.create') }}">Create City</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
+                                                City</a></li>
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                        aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
@@ -508,8 +493,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -547,22 +532,26 @@
                                         @endcan
                                         @can('add-productactivity')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productactivity.create') }}">Create Product Activity</a>
+                                                href="{{ route('productactivity.create') }}">Create Product
+                                                Activity</a>
                                         </li>
                                         @endcan
                                         @can('view-productactivity')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productactivity.index') }}">Manage Product Activity</a>
+                                                href="{{ route('productactivity.index') }}">Manage Product
+                                                Activity</a>
                                         </li>
                                         @endcan
                                         @can('add-productcategory')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productcategory.create') }}">Create Product Category</a>
+                                                href="{{ route('productcategory.create') }}">Create Product
+                                                Category</a>
                                         </li>
                                         @endcan
                                         @can('view-productcategory')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productcategory.index') }}">Manage Product Category</a>
+                                                href="{{ route('productcategory.index') }}">Manage Product
+                                                Category</a>
                                         </li>
                                         @endcan
                                         @can('add-productstatus')
@@ -577,12 +566,14 @@
                                         @endcan
                                         @can('add-productsupplier')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productsupplier.create') }}">Create Product Supplier</a>
+                                                href="{{ route('productsupplier.create') }}">Create Product
+                                                Supplier</a>
                                         </li>
                                         @endcan
                                         @can('view-productsupplier')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('productsupplier.index') }}">Manage Product Supplier</a>
+                                                href="{{ route('productsupplier.index') }}">Manage Product
+                                                Supplier</a>
                                         </li>
                                         @endcan
                                         @can('add-producttype')
@@ -604,13 +595,9 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('stocktype.index') }}">Manage Stock Type</a>
                                         </li>
-                                        @endcan
-                                        @can('add-uom')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('uom.create') }}">Create
                                                 UOM </a>
                                         </li>
-                                        @endcan
-                                        @can('view-uom')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('uom.index') }}">Manage
                                                 UOM </a>
                                         </li>
@@ -629,13 +616,15 @@
                                         @endcan
                                         @can('add-product2subcategory')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('product_2nd_sub_category.create') }}">Create Product 2nd
+                                                href="{{ route('product_2nd_sub_category.create') }}">Create Product
+                                                2nd
                                                 Sub Category </a>
                                         </li>
                                         @endcan
                                         @can('view-product2subcategory')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('product_2nd_sub_category.index') }}">Manage Product 2nd
+                                                href="{{ route('product_2nd_sub_category.index') }}">Manage Product
+                                                2nd
                                                 Sub Category </a>
                                         </li>
                                         @endcan
@@ -649,7 +638,8 @@
                                 <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false"
-                                        style="color: black;"><strong>Sales  Person</strong></a>
+                                        style="color: black;"><strong>Sales
+                                            Person</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-persontype')
                                         <li class="p-0"><a class="dropdown-item"
@@ -674,8 +664,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Accounts</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-accountcategory')
@@ -697,19 +687,14 @@
                                         @endcan
                                         @can('add-mainheadlevel')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head Level
+                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head
+                                                Level
                                             </a>
                                         </li>
-                                        @endcan
-                                        @can('add-coa')
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create Coa</a>
-                                        </li>
-                                        @endcan
-                                        @can('view-coa')
-                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">
-                                        Manage Coa</a></li>
-                                        @endcan
-                                        @can('add-costcenter')
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create
+                                                Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">Manage
+                                                Coa</a></li>
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
                                         </li>
@@ -731,15 +716,15 @@
                                         @endcan
                                         @can('add-journalvoucher')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('journalvoucher.create') }}">Create Journal Voucher</a>
+                                                href="{{ route('journalvoucher.create') }}">Create Journal
+                                                Voucher</a>
                                         </li>
                                         @endcan
                                         @can('view-journalvoucher')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
                                         </li>
-                                        @endcan
-                                        @can('add-voucherentry')
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
                                         </li>
@@ -767,8 +752,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Treasury</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-buyerpayment')
@@ -788,30 +773,16 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;">
                                         <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
-                                        @can('add-supplier')
-                                        <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
-                                            Create Supplier
-                                        </a>
-                                        @endcan
-                                        @can('add-supplier')
-                                        </li>
-                                        <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('supplier.index') }}"
-                                            style="color: black;">
-                                            Manage Supplier
-                                            </a>
-                                        </li>
-                                        @endcan
-                                        @can('add-s-category')
+
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
                                                 Suplier Category
                                             </a>
                                         </li>
-                                        @endcan
-                                        @can('view-s-category')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
                                                 Suplier Category Manage
                                             </a>
@@ -836,8 +807,9 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;">
                                         <strong>Buyer Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-buyer')
@@ -884,8 +856,8 @@
 
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Security</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -896,21 +868,36 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-line-chart" aria-hidden="true"
+                                    style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
                                 <a class="nav-link dropdown-item" href="{{ route('product.create') }}"
                                     style="color: black;">Create Product</a>
                                 <a class="nav-link dropdown-item" href="{{ route('product.index') }}"
                                     style="color: black;">Manage Product</a>
-
-
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.create') }}">
+                                    Create Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('supplier.index') }}"
+                                    style="color: black;">
+                                    Manage Supplier
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.create') }}">
+                                    Create Buyer
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
+                                    Manage Buyer
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('purchaserequisition.create') }}">
+                                    Create Purchase Requisition
+                                </a>
                             </div>
                             <div class="dropdown-menu">
-                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"
-                                        style="color: black;">Manage Product</a>
+                                <li class="p-0"><a class="nav-link dropdown-item"
+                                        href="{{ route('product.index') }}" style="color: black;">Manage Product</a>
                                 </li>
                             </div>
                             <div class="dropdown-menu">
@@ -925,19 +912,20 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-users-gear" style="color: black;"></i>&nbsp;HCM
                             </a>
                             <div class="dropdown-menu">
-                                <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data5', data5)">Data
+                                <a id="fontsize" class="dropdown-item" href="#"
+                                    onclick="addTab('Data5', data5)">Data
                                     5</a>
                                 <a class="dropdown-item" href="#" onclick="addTab('Data6', data6)">Data 6</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-book" aria-hidden="true" style="color:  black;"></i>&nbsp;REPORTS
                             </a>
                             <div class="dropdown-menu">
@@ -947,8 +935,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-chart-column" style="color:  black;"></i>&nbsp;DASHBOARDS
                             </a>
                             <div class="dropdown-menu">
@@ -958,8 +946,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-bullhorn" style="color: black;"></i>&nbsp;ANNCOUNCEMENTS
                             </a>
                             <div class="dropdown-menu">
@@ -1233,7 +1221,7 @@
                                     border-radius: 6px;
                                     padding: 5px 0;
 
-                                    /* Position the tooltip */
+                                    /* Position the tooltip */f
                                     position: absolute;
                                     z-index: 1;
                                     top: 100%;
