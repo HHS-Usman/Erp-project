@@ -23,7 +23,10 @@
                 </ol>
             </nav>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+
 
         <style>
             .wrapper {
@@ -38,10 +41,6 @@
             .innercontainer {
                 text-align: center;
             }
-
-            /* .{
-                                                        font-size: 2rem !important;
-                                                    } */
         </style>
         <br><br><br>
         <form action="{{ route('bank.store') }}" method="POST">
@@ -161,7 +160,8 @@
                         <td> <select name="product_d" id="product" class="form-control">
                                 <option id="chnagefont" value="product">Select</option>
                                 @foreach ($product as $p)
-                                    <option id="chnagefont" value={{ $p->id }}>{{ $p->name }}</option>
+                                    <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
+                                        {{ $p->name }}</option>
                                 @endforeach
                             </select></td>
                         <td><input type="text" class="form-control credit" value="" placeholder="UOM"
@@ -189,31 +189,10 @@
                     </tr>
                 </tbody>
             </table>
+
+
             <script>
-                $.noConflict();
-                jQuery(document).ready(function($) {
-                    $('#product').change(function() {
-                        var productId = $(this).val();
-                        // Make an AJAX request to get UOM data
-                        $.ajax({
-                            url: '/get-uom/' + productId,
-                            type: 'GET',
-                            success: function(data) {
-                                var uomInput = $('input[name="UOM"]');
-                                uomInput.val(data.uom);
-
-                                var minstock = $('input[name="minstock"]');
-                                minstock.val(data.minqty);
-
-                                var maxstock = $('input[name="maxstock"]');
-                                maxstock.val(data.maxqty);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    });
-                });
+                var selectproduct = "";
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
@@ -233,7 +212,6 @@
                     var cell12 = newRow.insertCell(11);
                     var cell13 = newRow.insertCell(12);
                     var cell14 = newRow.insertCell(13);
-
 
                     // start Category
                     // create element select category
@@ -261,7 +239,6 @@
                     selectproduct.name = "account" + counter;
                     var productname = selectproduct.name;
 
-
                     // Select option Element of product
                     var defaultOption1 = document.createElement("option");
                     defaultOption1.value = "product";
@@ -276,7 +253,7 @@
                         selectproduct.add(option);
                     @endforeach
                     // END
-
+                    console.log(selectproduct);
                     // Start Brand
                     // create element select Brand
                     var selectbrand = document.createElement("select");
@@ -307,52 +284,13 @@
                     cell4.appendChild(selectbrand);
                     // Append the select element to the cel
                     cell5.appendChild(selectproduct);
-                    // Event listener for product change
 
                     cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
                         .length + '">';
                     cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
                     // Separate function to handle the product change event
 
-                    var productId = jQuery(this).val();
-                    jQuery.ajax({
-                        url: '/get-uom/' + productId,
-                        type: 'GET',
-                        success: function(data) {
-                            console.log(data);
-                            var uomInput = jQuery('input[name="UOM' + counter + '"]');
-                            console.log("This is input Name UOM " + counter)
-                            uomInput.val(data.uom);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                    handleProductChange(selectproduct, counter);
-                    console.log("daslfkjasd");
-                    updateTotals();
                 }
-
-                function handleProductChange(selectElement, counter) {
-                    console.log("sdflkjhdsl")
-                    selectElement.addEventListener('change', function() {
-                        var productId = this.value;
-
-                        jQuery.ajax({
-                            url: '/get-uom/' + productId,
-                            type: 'GET',
-                            success: function(data) {
-                                var uomInput = jQuery('input[name="UOM' + counter + '"]');
-                                console.log("This is input Name UOM " + counter)
-                                uomInput.val(data.uom);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    });
-                }
-
 
                 function removeRow() {
                     var table = document.getElementById("tableBody");
@@ -384,13 +322,59 @@
                     document.getElementById('totalCredit').value = creditTotal.toFixed(2);
 
                 }
-
                 // Attach event listeners to update totals when values change
-                document.addEventListener('input', function() {
-                    updateTotals();
+                document.addEventListener('input', function() {});
+            </script>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+            <script>
+                $.noConflict();
+                jQuery(document).ready(function($) {
+                    $('#product').change(function() {
+                        var productId = $(this).val();
+                        // Make an AJAX request to get UOM data
+                        $.ajax({
+                            url: '/get-uom/' + productId,
+                            type: 'GET',
+                            success: function(data) {
+                                console.log(data);
+                                var uomInput = $('input[name="UOM"]');
+                                uomInput.val(data.uom);
+
+                                var minstock = $('input[name="minstock"]');
+                                minstock.val(data.minqty);
+
+                                var maxstock = $('input[name="maxstock"]');
+                                maxstock.val(data.maxqty);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+
+                    jQuery.noConflict();
+                    jQuery(document).ready(function($) {
+                        $(document).on('change', '#product2', function() {
+                            var productId = $(this).val();
+                            console.log('Product 2 changed');
+                            jQuery.ajax({
+                                url: '/get-uom/' + productId,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log("sdlfjsldf");
+                                    var uomInput = $('input[name="UOM' + counter + '"]');
+                                    uomInput.val(data.uom);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(error);
+                                }
+                            });
+                        });
+                    });
                 });
             </script>
-
 
         </form>
         </div>
