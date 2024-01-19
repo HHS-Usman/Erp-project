@@ -19,7 +19,7 @@ use Spatie\Permission\Models\Permission;
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Role Permission</h1>
+        <h1>Create recent Role Permission</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
@@ -63,7 +63,7 @@ use Spatie\Permission\Models\Permission;
 
                 </div>
                 <table class="table table-bordered" style="border: 1px solid black">
-                    {{-- <thead>
+                    <thead>
                         <tr>
                             <th scope="col"></th>
                             <th>Active</th>
@@ -73,8 +73,108 @@ use Spatie\Permission\Models\Permission;
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
-                    </thead> --}}
-                    @php
+                    </thead>
+                    @foreach ($permissions->groupBy('module.module_name') as $moduleName => $moduleGroup)
+                            <tbody>
+
+                                <tr>
+                                    <td><h1>{{ $moduleName }}</h1></td>
+                                    <td><input type="checkbox" name="module_{{ $moduleName }}" id="unfreezeToggle_{{ $moduleName }}" value="{{ $moduleGroup->first()->module->id }}" onclick="toggleUnfreeze('{{ $moduleName }}', {{ $moduleGroup->first()->module->id }})"></td>
+                                    <td></td>
+                                    <td><input type="checkbox" name="{{ $moduleName }}" id="freezer_{{ $moduleName }}" class="item" value="{{ $moduleGroup->first()->module->id }}" onclick="freeze('{{ $moduleName }}', {{ $moduleGroup->first()->module->id }})" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer1_{{ $moduleName }}" class="item" value="1" onclick="freeze1('{{ $moduleName }}', {{ $moduleGroup->first()->module->id }})" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer2_{{ $moduleName }}" class="item" value="1" onclick="freeze2('{{ $moduleName }}', {{ $moduleGroup->first()->module->id }})" checked></td>
+                                    <td><input type="checkbox" name="" id="freezer3_{{ $moduleName }}" class="item" value="1" onclick="freeze3('{{ $moduleName }}', {{ $moduleGroup->first()->module->id }})" checked></td>
+                                </tr>
+                                <tr>
+                                    <td>Tick All</td>
+                                    <td><input type="checkbox" name="" id="selectAll" class="item" value="1"></td>
+                                    <td></td>
+                                    <td><input type="checkbox" name="" id="selectAdd" class="item not" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectView" class="item but" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectEdit" class="item why" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectDelete" class="item the" value="1"></td>
+                                </tr>
+                                @foreach ($moduleGroup->groupBy('page.name') as $pageName => $pageGroup)
+                                    <tr>
+                                        <td>{{ $pageName }}</td>
+                                        <td><input type="checkbox" name="" id="" class="item example" value="1"></td>
+                                        <td></td>
+                                        @foreach ($pageGroup as $data)
+                                            @if ($data->page_action_id == 1)
+                                                <td>
+                                                    <input type="checkbox" name="permissions[]" id="item_one" class="item example2 not" value="{{ $data->id }}">
+
+                                                </td>
+                                            @elseif ($data->page_action_id == 2)
+                                                <td><input type="checkbox" name="permissions[]" id="2ndweek_tue_03" class="item example3 but" value="{{ $data->id }}"></td>
+                                            @elseif ($data->page_action_id == 3)
+                                                <td><input type="checkbox" name="permissions[]" id="3rdweek_tue_03" class="item example4 why" value="{{ $data->id }}"></td>
+                                            @elseif ($data->page_action_id == 4)
+                                                <td><input type="checkbox" name="permissions[]" id="4thweek_tue_03" class="item example5 the" value="{{ $data->id }}"></td>
+                                            @endif
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        @endforeach
+                    {{-- @foreach ($permissions->groupBy('module.module_name') as $moduleName => $moduleGroup)
+                        <tbody>
+                            <tr>
+                                <td><h1>{{ $moduleName }}</h1></td>
+                                <td>
+                                    <input type="checkbox" name="module_id[{{ $moduleGroup->first()->module->id }}]" id="unfreezeToggle" value="{{ $moduleGroup->first()->module->id }}" onclick="toggleUnfreeze({{ $moduleGroup->first()->module->id }})">
+                                </td>
+                                <td></td>
+                                <td><input type="checkbox" name="action[{{ $moduleGroup->first()->module->id }}][]" id="freezer" class="item" value="1" onclick="freeze()" checked></td>
+                                <!-- ... Other checkboxes for module actions ... -->
+                            </tr>
+                            <tr>
+                                <td>Tick All</td>
+                                <td><input type="checkbox" name="select_all[{{ $moduleGroup->first()->module->id }}]" id="selectAll" class="item" value="1"></td>
+                                <td></td>
+                                <td><input type="checkbox" name="" id="selectAdd-{{ $moduleGroup->first()->module->id }}"
+                                            class="item" data-module="{{ $moduleGroup->first()->module->id }}" value="1"></td>
+                                    <td><input type="checkbox" name="" id="selectView-{{ $moduleGroup->first()->module->id }}"
+                                            class="item but" data-module="{{ $moduleGroup->first()->module->id }}" value="1">
+                                    </td>
+                                    <td><input type="checkbox" name="" id="selectEdit-{{ $moduleGroup->first()->module->id }}"
+                                            class="item why" data-module="{{ $moduleGroup->first()->module->id }}" value="1">
+                                    </td>
+                                    <td><input type="checkbox" name="" id="selectDelete-{{ $moduleGroup->first()->module->id }}"
+                                            class="item the" data-module="{{ $moduleGroup->first()->module->id }}" value="1">
+                                    </td>
+                                <!-- ... Other checkboxes for module actions ... -->
+                            </tr>
+                            @foreach ($moduleGroup->groupBy('page.name') as $pageName => $pageGroup)
+                                <tr>
+                                    <td>{{ $pageName }}</td>
+                                    <td><input type="checkbox" name="select_page[{{ $pageGroup->first()->page->id }}]" id="" class="item example" value="1"></td>
+                                    <td></td>
+                                    @foreach ($pageGroup as $data)
+                                    @if ($data->page_action_id == 1)
+                                    <td>
+                                        <input type="checkbox" name="permissions[]" id="item_one" class="item example2 not"
+                                            value="{{ $data->id }}" data-module="{{ $moduleGroup->first()->module->id }}">
+                                        {{ $data->name }}
+                                    </td>
+                                    @elseif ($data->page_action_id == 2)
+                                    <td><input type="checkbox" name="permissions[]" id="2ndweek_tue_03" class="item example3 but"
+                                            value="{{ $data->id }}" data-module="{{ $moduleGroup->first()->module->id }}"></td>
+                                    @elseif ($data->page_action_id == 3)
+                                    <td><input type="checkbox" name="permissions[]" id="3rdweek_tue_03" class="item example4 why"
+                                            value="{{ $data->id }}" data-module="{{ $moduleGroup->first()->module->id }}"></td>
+                                    @elseif ($data->page_action_id == 4)
+                                    <td><input type="checkbox" name="permissions[]" id="4thweek_tue_03" class="item example5 the"
+                                            value="{{ $data->id }}" data-module="{{ $moduleGroup->first()->module->id }}"></td>
+                                    @endif
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @endforeach --}}
+                    {{-- @php
                     use App\Helpers\CommonHelper;
                     $permissions = Permission::query()
                     ->select('module_id')
@@ -108,8 +208,8 @@ use Spatie\Permission\Models\Permission;
                     @php
                     // dd($moduleGroup['main_module'],$moduleGroup['permissions'],$moduleName);
                     // dd(CommonHelper::get_Module_by_name($moduleGroup['main_module']));
-                    @endphp
-                    <tbody>
+                    @endphp --}}
+                    {{-- <tbody>
 
                         <tr>
                             <td>
@@ -119,7 +219,7 @@ use Spatie\Permission\Models\Permission;
                                     id="unfreezeToggle-{{$moduleGroup['main_module'] }}"
                                     value="{{$moduleGroup['main_module'] }}"
                                     onclick="toggleUnfreeze({{ $moduleGroup['main_module'] }})"></td>
-                            {{-- <td></td> --}}
+                            {{-- <td></td>
                             @php
                             // dd($moduleGroup['permissions']);
                             @endphp
@@ -145,9 +245,9 @@ use Spatie\Permission\Models\Permission;
                                     onclick="freeze2('{{ $moduleGroup->first()->module->id }}')" checked></td>
                             <td><input type="checkbox" name="" id="freezer3-{{ $moduleGroup->first()->module->id }}"
                                     class="item" value="1" data-module="{{ $moduleGroup->first()->module->id }}"
-                                    onclick="freeze3('{{ $moduleGroup->first()->module->id }}')" checked></td> --}}
+                                    onclick="freeze3('{{ $moduleGroup->first()->module->id }}')" checked></td>
                         </tr>
-                        {{-- <tr>
+                         <tr>
                             <td>Tick All</td>
                             <td><input type="checkbox" name="" id="selectAll-{{ $moduleGroup->first()->module->id }}"
                                     class="item" data-module="{{ $moduleGroup->first()->module->id }}" value="1"></td>
@@ -189,12 +289,12 @@ use Spatie\Permission\Models\Permission;
                             @endif
                             @endforeach
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                     @endforeach
 
 
-                    {{-- @foreach ($permissions as $item)
+                     @foreach ($permissions as $item)
                     <tbody>
                         <tr>
                             <td>
@@ -259,177 +359,159 @@ use Spatie\Permission\Models\Permission;
     <br>
 
     <div><br> </div>
-    <script>
+
+       <script>
         $(document).ready(function () {
-        // By default, set Freeze All to checked and disable individual items
+            // By default, set Freeze All to checked and disable individual items
 
-        $('.item').prop('disabled', true);
+            $('.item').prop('disabled', true);
 
-        // Select All checkbox change event
-        // $('#selectAll').change(function () {
-        //     $('.example').prop('checked', $(this).prop('checked'));
-        // });
-        $('[id^=selectAll]').change(function () {
-            var moduleId = $(this).data('module');
-            $('.example[data-module="' + moduleId + '"]').prop('checked', $(this).prop('checked'));
-        });
-
-        // Individual item checkbox change event
-        // $('.example').change(function () {
-        //     if (!$(this).prop('checked')) {
-        //         $('#selectAll').prop('checked', false);
-        //     }
-        // });
-
-        // Freeze All checkbox change event
-        // $('#selectAdd').change(function () {
-        //     $('.example2').prop('checked', $(this).prop('checked'));
-        // });
-        $('[id^=selectAdd]').change(function () {
-            var moduleId = $(this).data('module');
-            $('.example2[data-module="' + moduleId + '"]').prop('checked', $(this).prop('checked'));
-        });
-        // Individual item checkbox change event
-        // $('.example2').change(function () {
-        //     if (!$(this).prop('checked')) {
-        //         $('#selectAdd').prop('checked', false);
-        //     }
-        // });
-        $('[id^=selectView]').change(function () {
-            var moduleId = $(this).data('module');
-            $('.example3[data-module="' + moduleId + '"]').prop('checked', $(this).prop('checked'));
-        });
-        // $('#selectView').change(function () {
-        //     $('.example3').prop('checked', $(this).prop('checked'));
-        // });
-
-        // $('.example3').change(function () {
-        //     if (!$(this).prop(checked)) {
-        //         $('#selectView').prop('checked', false);
-        //     }
-        // });
-
-        $('[id^=selectEdit]').change(function () {
-            var moduleId = $(this).data('module');
-            $('.example4[data-module="' + moduleId + '"]').prop('checked', $(this).prop('checked'));
-        });
-
-        $('[id^=selectDelete]').change(function () {
-            var moduleId = $(this).data('module');
-            $('.example5[data-module="'+ moduleId + '"]').prop('checked', $(this).prop('checked'));
-        });
-
+            // Select All checkbox change event
+            $('#selectAll').change(function () {
+        $('.example').prop('checked', $(this).prop('checked'));
     });
 
-    // function toggleUnfreeze() {
-    //     var unfreezeToggle = document.getElementById('unfreezeToggle');
-    //     var checkboxes = document.getElementsByClassName('item');
-
-    //     if (unfreezeToggle.checked) {
-    //         // Unfreeze all checkboxes
-    //         for (var i = 0; i < checkboxes.length; i++) {
-    //             checkboxes[i].disabled = false;
-    //             checkboxes[i].classList.remove('frozen');
-    //         }
-    //     } else {
-    //         // Freeze all checkboxes
-    //         for (var i = 0; i < checkboxes.length; i++) {
-    //             checkboxes[i].disabled = true;
-    //             checkboxes[i].classList.add('frozen');
-    //         }
-    //     }
-    // }
-            function toggleUnfreeze(moduleId) {
-            var unfreezeToggle = document.getElementById('unfreezeToggle-' + moduleId);
-            var checkboxes = document.querySelectorAll('.item[data-module="' + moduleId + '"]');
-
-            if (unfreezeToggle.checked) {
-                // Unfreeze all checkboxes in the same group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = false;
-                    checkbox.classList.remove('frozen');
-                });
-            } else {
-                // Freeze all checkboxes in the same group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = true;
-                    checkbox.classList.add('frozen');
-                });
-            }
+    // Individual item checkbox change event
+    $('.example').change(function () {
+        if (!$(this).prop('checked')) {
+            $('#selectAll').prop('checked', false);
         }
-        function freeze(moduleId) {
-            var unfreezeToggle = document.getElementById('freezer-' + moduleId);
-            var checkboxes = document.querySelectorAll('.not[data-module="' + moduleId + '"]');
+    });
 
-            if (unfreezeToggle.checked) {
-                // Unfreeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = false;
-                    checkbox.classList.remove('frozen');
-                });
-            } else {
-                // Freeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = true;
-                    checkbox.classList.add('frozen');
-                });
-            }
+    // Freeze All checkbox change event
+    $('#selectAdd').change(function () {
+        $('.example2').prop('checked', $(this).prop('checked'));
+    });
+
+    // Individual item checkbox change event
+    $('.example2').change(function () {
+        if (!$(this).prop('checked')) {
+            $('#selectAdd').prop('checked', false);
         }
+    });
 
-        function freeze1(moduleId) {
-            var unfreezeToggle = document.getElementById('freezer1-' + moduleId);
-            var checkboxes = document.querySelectorAll('.but[data-module="' + moduleId + '"]');
+    $('#selectView').change(function () {
+        $('.example3').prop('checked', $(this).prop('checked'));
+    });
 
-            if (unfreezeToggle.checked) {
-                // Unfreeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = false;
-                    checkbox.classList.remove('frozen');
-                });
-            } else {
-                // Freeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = true;
-                    checkbox.classList.add('frozen');
-                });
-            }
+    $('.example3').change(function () {
+        if (!$(this).prop('checked')) {
+            $('#selectView').prop('checked', false);
         }
-        function freeze2(moduleId) {
-            var unfreezeToggle = document.getElementById('freezer2-' + moduleId);
-            var checkboxes = document.querySelectorAll('.why[data-module="' + moduleId + '"]');
+    });
 
-            if (unfreezeToggle.checked) {
-                // Unfreeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = false;
-                    checkbox.classList.remove('frozen');
-                });
-            } else {
-                // Freeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = true;
-                    checkbox.classList.add('frozen');
-                });
-            }
-        }
-        function freeze3(moduleId) {
-            var unfreezeToggle = document.getElementById('freezer3-' + moduleId);
-            var checkboxes = document.querySelectorAll('.the[data-module="' + moduleId + '"]');
+    $('#selectEdit').change(function () {
+        $('.example4').prop('checked', $(this).prop('checked'));
+    });
 
-            if (unfreezeToggle.checked) {
-                // Unfreeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = false;
-                    checkbox.classList.remove('frozen');
-                });
-            } else {
-                // Freeze all checkboxes in the specific group
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.disabled = true;
-                    checkbox.classList.add('frozen');
-                });
-            }
+    $('.example4').change(function () {
+        if (!$(this).prop('checked')) {
+            $('#selectEdit').prop('checked', false);
         }
+    });
+
+    $('#selectDelete').change(function () {
+        $('.example5').prop('checked', $(this).prop('checked'));
+    });
+
+    $('.example5').change(function () {
+        if (!$(this).prop('checked')) {
+            $('#selectDelete').prop('checked', false);
+        }
+    });
+        });
+
+            function toggleUnfreeze(moduleName, moduleId) {
+                var unfreezeToggle = document.getElementById('unfreezeToggle_' + moduleName);
+                var checkboxes = document.getElementsByClassName('item');
+
+                if (unfreezeToggle.checked) {
+                    // Unfreeze all checkboxes
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].disabled = false;
+                        checkboxes[i].classList.remove('frozen');
+                    }
+                } else {
+                    // Freeze all checkboxes
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].disabled = true;
+                        checkboxes[i].classList.add('frozen');
+                    }
+                }
+            }
+
+          function freeze(moduleName, moduleId) {
+              var unfreezeToggle = document.getElementById('freezer_' + moduleName);
+              var checkboxes = document.getElementsByClassName('not');
+
+              if (unfreezeToggle.checked) {
+                 //  Unfreeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = false;
+                      checkboxes[i].classList.remove('frozen');
+                  }
+              } else {
+                //   Freeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = true;
+                      checkboxes[i].classList.add('frozen');
+                  }
+              }
+          }
+          function freeze1(moduleName, moduleId) {
+              var unfreezeToggle = document.getElementById('freezer1_' + moduleName);
+              var checkboxes = document.getElementsByClassName('but');
+
+              if (unfreezeToggle.checked) {
+                 //  Unfreeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = false;
+                      checkboxes[i].classList.remove('frozen');
+                  }
+              } else {
+                //   Freeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = true;
+                      checkboxes[i].classList.add('frozen');
+                  }
+              }
+          }
+          function freeze2(moduleName, moduleId) {
+              var unfreezeToggle = document.getElementById('freezer2_' + moduleName);
+              var checkboxes = document.getElementsByClassName('why');
+
+              if (unfreezeToggle.checked) {
+                 //  Unfreeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = false;
+                      checkboxes[i].classList.remove('frozen');
+                  }
+              } else {
+                //   Freeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = true;
+                      checkboxes[i].classList.add('frozen');
+                  }
+              }
+          }
+          function freeze3(moduleName, moduleId) {
+              var unfreezeToggle = document.getElementById('freezer3_' + moduleName);
+              var checkboxes = document.getElementsByClassName('the');
+
+              if (unfreezeToggle.checked) {
+                 //  Unfreeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = false;
+                      checkboxes[i].classList.remove('frozen');
+                  }
+              } else {
+                //   Freeze all checkboxes
+                  for (var i = 0; i < checkboxes.length; i++) {
+                      checkboxes[i].disabled = true;
+                      checkboxes[i].classList.add('frozen');
+                  }
+              }
+          }
 
     </script>
 </section>

@@ -69,10 +69,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
 
-
-        // $moduleNames = $request->input('module_id', []);
-        // $pageIds = $request->input('page_id', []);
-
         $role = Role::create(['name' => $request->role_name]);
         $role->givePermissionTo($request->permissions);
         return response()->json(['success'=>'Role Created Successfully']);

@@ -15,6 +15,10 @@ use App\Models\role_access;
 use App\Models\Permissions;
 use App\Models\AccessPermit;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
 use Validator;
 
 class AccessPermitController extends Controller
@@ -22,7 +26,7 @@ class AccessPermitController extends Controller
 
     public function index()
     {
-        
+
     }
 
     public function create()
@@ -32,9 +36,9 @@ class AccessPermitController extends Controller
         $modules = Module::all();
         $pages = Page::all();
         $companies = Company::all();
-        
+
         $role_access = role_access::all();
-        $branches = Branch::with('company')->get(); 
+        $branches = Branch::with('company')->get();
         return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies', 'branches', 'role_access' ));
     }
     public function store(Request $request)
@@ -42,25 +46,33 @@ class AccessPermitController extends Controller
         // dd($request->all());
         // $records = $request->input('record', []);
 
-    foreach ($request->emp_id as $key=> $record) {
-        AccessPermit::create([
-            'emp_id' => $request->emp_id[$key],
-            'login_id' => $request->login_id[$key],
-            'access' => $request->access[$key],
-            'password' => $request->password[$key],
-            'report_access' => $request->report_access[$key],
-            'back_date_entry' => $request->back_date_entry[$key],
-            'post_date_entry' => $request->post_date_entry[$key],
-            'role_id' => $request->role_id[$key],
-            'module_id' => $request->module_id[$key],
-            'page_id' => $request->page_id[$key],
-            // Add other fields as needed
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6', // Adjust the minimum length as needed
+            'roles' => 'required|array',
+            'role_name' => 'required|string',
+            'permissions' => 'required|array',
         ]);
-    }
-    
+
+        // Create the user
+        $input = $request->only(['name', 'email', 'password']);
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
+
+        // Create the role
+        $role = Role::create(['name' => $request->role_name]);
+
+        // Assign the role and permissions to the user
+        $user->assignRole($request->roles);
+        $role->givePermissionTo($request->permissions);
+
+
+
         return redirect()->route('accesspermit.create')->with('success', 'Permission created successfully.');
-    } 
-   
+    }
+
     /**
      * Display the specified resource.
      *
@@ -80,7 +92,7 @@ class AccessPermitController extends Controller
      */
     public function edit(User_role $userrole)
     {
-       
+
     }
 
     /**
@@ -92,7 +104,7 @@ class AccessPermitController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+
     }
 
     /**
@@ -132,6 +144,6 @@ class AccessPermitController extends Controller
             return response()->json([
                 'error' => 'No role access records found for the specified role_id.',
             ], 404);
-        }    
+        }
     }
 }
