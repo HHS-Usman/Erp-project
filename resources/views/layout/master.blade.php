@@ -159,8 +159,7 @@
 
 <body>
     <x-navigation />
-    <div
-        style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
+    <div style="position: fixed; top:0px;left:0px;right:0px;bottom:0px; transform: scale(0.8);
             transform-origin: 0 0;
             width: 125%;;height: 0vh; background-color: rgb(246, 142, );">
         <nav class="navbar navbar-expand-lg navbar-light bg-white " id="navbarcontainermain"
@@ -191,11 +190,10 @@
                                         aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Organization
                                             Setup</strong></a>
-                                    <ul id="container" class="dropdown-menu dropdown-content"
-                                        style="{display: block;}">
+                                    <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
                                         @can('add-division')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('division.create') }}">Create Division</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
                                         @can('view-division')
                                         <li class="p-0"><a class="dropdown-item"
@@ -414,11 +412,12 @@
                                                 href="{{ route('city.create') }}">Create City</a></li>
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
                                                 City</a></li>
+                                        @endcan
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Employee</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
@@ -459,7 +458,8 @@
                                         @endcan
                                         @can('add-employeejobstatus')
                                         <li class="p-0"><a class="dropdown-item"
-                                                href="{{ route('employeejobstatus.create') }}">Create Employee job Status</a>
+                                                href="{{ route('employeejobstatus.create') }}">Create Employee job
+                                                Status</a>
                                         </li>
                                         @endcan
                                         @can('view-employeejobstatus')
@@ -493,8 +493,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Product</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -664,8 +664,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Accounts</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-accountcategory')
@@ -752,8 +752,8 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Treasury</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-buyerpayment')
@@ -773,16 +773,19 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
-                                        style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
                                         <strong>Supplier Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
 
+
+                                        @can('add-s-category')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
                                                 Suplier Category
                                             </a>
                                         </li>
+                                        @endcan
+                                        @can('view-s-category')
                                         <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
                                                 Suplier Category Manage
                                             </a>
@@ -807,20 +810,21 @@
                                     </ul>
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
-                                        style="color: black;">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
                                         <strong>Buyer Setup</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         @can('add-buyer')
-                                        <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('buyer.create') }}">
-                                            Create Buyer
-                                        </a></li>
+                                        <li class="p-0"><a class="nav-link dropdown-item"
+                                                href="{{ route('buyer.create') }}">
+                                                Create Buyer
+                                            </a></li>
                                         @endcan
                                         @can('view-buyer')
-                                        <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('buyer.index') }}">
-                                            Manage Buyer
-                                        </a>
+                                        <li class="p-0"><a class="nav-link dropdown-item"
+                                                href="{{ route('buyer.index') }}">
+                                                Manage Buyer
+                                            </a>
                                         </li>
                                         @endcan
                                         @can('add-b-category')
@@ -856,8 +860,8 @@
 
                                 </div>
                                 <div class="dropdown-submenu dropdown-item dropright">
-                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Security</strong></a>
                                     <ul id="container" class="dropdown-menu dropdown-content">
                                         {{-- <li class="p-0"><a class="dropdown-item"
@@ -868,10 +872,9 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-line-chart" aria-hidden="true"
-                                    style="color: black;"></i>&nbsp;ERP&CRM
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-line-chart" aria-hidden="true" style="color: black;"></i>&nbsp;ERP&CRM
                             </a>
                             <div class="dropdown-menu">
                                 <a class="nav-link dropdown-item" href="{{ route('product.create') }}"
@@ -896,8 +899,8 @@
                                 </a>
                             </div>
                             <div class="dropdown-menu">
-                                <li class="p-0"><a class="nav-link dropdown-item"
-                                        href="{{ route('product.index') }}" style="color: black;">Manage Product</a>
+                                <li class="p-0"><a class="nav-link dropdown-item" href="{{ route('product.index') }}"
+                                        style="color: black;">Manage Product</a>
                                 </li>
                             </div>
                             <div class="dropdown-menu">
@@ -912,20 +915,19 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-users-gear" style="color: black;"></i>&nbsp;HCM
                             </a>
                             <div class="dropdown-menu">
-                                <a id="fontsize" class="dropdown-item" href="#"
-                                    onclick="addTab('Data5', data5)">Data
+                                <a id="fontsize" class="dropdown-item" href="#" onclick="addTab('Data5', data5)">Data
                                     5</a>
                                 <a class="dropdown-item" href="#" onclick="addTab('Data6', data6)">Data 6</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-book" aria-hidden="true" style="color:  black;"></i>&nbsp;REPORTS
                             </a>
                             <div class="dropdown-menu">
@@ -935,8 +937,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-chart-column" style="color:  black;"></i>&nbsp;DASHBOARDS
                             </a>
                             <div class="dropdown-menu">
@@ -946,8 +948,8 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-bullhorn" style="color: black;"></i>&nbsp;ANNCOUNCEMENTS
                             </a>
                             <div class="dropdown-menu">
@@ -1221,8 +1223,8 @@
                                     border-radius: 6px;
                                     padding: 5px 0;
 
-                                    /* Position the tooltip */f
-                                    position: absolute;
+                                    /* Position the tooltip */
+                                    f position: absolute;
                                     z-index: 1;
                                     top: 100%;
                                     left: 50%;

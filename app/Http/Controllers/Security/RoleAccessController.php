@@ -14,7 +14,7 @@ class RoleAccessController extends Controller
 {
     public function index()
     {
-        
+
     }
 
     public function create()
@@ -27,26 +27,21 @@ class RoleAccessController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'employee_name'=>'required',
-            'role' => 'required'
-        ]);
-        //create a new product in database
-        Give_Permit::create([
-            'employee_name' => request()->get('employee_name'),
-            'role' => request()->get('role'),
-            'company_name' => request()->get('company_name'),
-            'access' => request()->get('access'),
-            'module' => request()->get('module'),
-            'page' => request()->get('page'),
-            'password' => request()->get('password'),
-            'report_access' => request()->get('report_access'),
-            'back_date_entry' => request()->get('back_date_entry'),
-            'post_date_entry' => request()->get('post_date_entry'),
+        // Validate the incoming request data
+        $this->validate($request, [
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:your_permission_table,id',
+            // Add other validation rules for other fields if needed
         ]);
 
-        //redirect the user and send friendly message
-        return redirect()->route('cast.index')->with('success','Manage successfully');
+        // Assuming you want to store the permissions related to a specific user or model
+        $model = YourModel::find($request->your_model_id);
+
+        // Attach the selected permissions to the model
+        $model->permissions()->sync($request->input('permissions'));
+
+        // You can redirect back with a success message or to any other route
+        return redirect()->back()->with('success', 'Permissions have been saved successfully.');
     }
 
     /**
@@ -68,7 +63,7 @@ class RoleAccessController extends Controller
      */
     public function edit(User_role $userrole)
     {
-       
+
     }
 
     /**
@@ -80,7 +75,7 @@ class RoleAccessController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+
     }
 
     /**

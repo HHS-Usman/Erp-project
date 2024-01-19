@@ -304,7 +304,10 @@ permissionRoutes('add-productcategory', ProductCategoryController::class, 'produ
 permissionRoutes('view-productcategory', ProductCategoryController::class, 'productcategory');
 permissionRoutes('edit-productcategory', ProductCategoryController::class, 'productcategory');
 permissionRoutes('delete-productcategory', ProductCategoryController::class, 'productcategory');
-
+permissionRoutes('add-skilllevel', SkilllevelController::class, 'skilllevel');
+permissionRoutes('view-skilllevel', SkilllevelController::class, 'skilllevel');
+permissionRoutes('edit-skilllevel', SkilllevelController::class, 'skilllevel');
+permissionRoutes('delete-skilllevel', SkilllevelController::class, 'skilllevel');
 permissionRoutes('add-productstatus', ProductStatusController::class, 'productstatus');
 permissionRoutes('view-productstatus', ProductStatusController::class, 'productstatus');
 permissionRoutes('edit-productstatus', ProductStatusController::class, 'productstatus');
@@ -342,26 +345,16 @@ permissionRoutes('add-persontype', SalepersontypeController::class, 'salepersont
 permissionRoutes('view-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('edit-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('delete-persontype', SalepersontypeController::class, 'salepersontype');
-permissionRoutes('add-saleperson', SalespersonController::class, 'salesaleperson');
-permissionRoutes('view-saleperson', SalespersonController::class, 'salesaleperson');
-permissionRoutes('edit-saleperson', SalespersonController::class, 'salesaleperson');
-permissionRoutes('delete-persontype', SalespersonController::class, 'salesaleperson');
+permissionRoutes('add-saleperson', SalespersonController::class, 'saleperson');
+permissionRoutes('view-saleperson', SalespersonController::class, 'saleperson');
+permissionRoutes('edit-saleperson', SalespersonController::class, 'saleperson');
+permissionRoutes('delete-persontype', SalespersonController::class, 'saleperson');
 permissionRoutes('add-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('view-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('edit-persontype', SalepersontypeController::class, 'salepersontype');
 permissionRoutes('delete-persontype', SalepersontypeController::class, 'salepersontype');
     // Route::get('division/create', [DivisionController::class, 'create'])->middleware('checkPermission:add-division');
     // Route::resource('division',DivisionController::class);
-    Route::middleware(['checkPermission:add-department'])->group(function () {
-        Route::get('department/create', [DepartmentController::class, 'create'])->name('department.create');
-    });
-    Route::middleware(['checkPermission:view-department'])->group(function () {
-        Route::get('department/index', [DepartmentController::class, 'index'])->name('department.index');
-    });
-    Route::middleware(['checkPermission:edit-department'])->group(function () {
-        Route::get('department/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
-    });
-Route::resource('department',DepartmentController::class);
 // ->except(['create','edit','index'])
 
 permissionRoutes('add-accountcategory', AccountcategoryController::class, 'accountcategory');
@@ -400,7 +393,10 @@ permissionRoutes('add-voucherentry', VoucherentriesController::class, 'voucheren
 permissionRoutes('view-voucherentry', VoucherentriesController::class, 'voucherentry');
 permissionRoutes('edit-voucherentry', VoucherentriesController::class, 'voucherentry');
 permissionRoutes('delete-voucherentry', VoucherentriesController::class, 'voucherentry');
-
+permissionRoutes('add-persontype', VoucherentriesController::class, 'salesperson');
+permissionRoutes('view-persontype', VoucherentriesController::class, 'salesperson');
+permissionRoutes('edit-persontype', VoucherentriesController::class, 'salesperson');
+permissionRoutes('delete-persontype', VoucherentriesController::class, 'salesperson');
 permissionRoutes('add-buyerpayment', BuyerpaymentController::class, 'buyerpayment');
 permissionRoutes('view-buyerpayment', BuyerpaymentController::class, 'buyerpayment');
 permissionRoutes('edit-buyerpayment', BuyerpaymentController::class, 'buyerpayment');

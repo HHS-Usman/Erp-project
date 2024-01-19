@@ -28,7 +28,7 @@
             <br>
             <head>
                 {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    
+
                 <!-- JS -->
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> --}}
@@ -47,8 +47,8 @@
                 }
 
                 .form-group  {
-                    
-                   
+
+
                     box-sizing: border-box;
                 }
 
@@ -64,75 +64,73 @@
                 }
 
                 </style>
-            </head> 
-    <form action="{{ route('accesspermit.store') }}" method="POST">        
-            @csrf 
-            
+            </head>
+    <form action="{{ route('accesspermit.store') }}" method="POST">
+            @csrf
+
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
                             <div class="form-group">
                                 <label for="options">Select Employee</label>
-                                <select id="gender" name="emp_id[]"  class="select2">
-                                  <option class="options">None</option>
+                                <select id="name" name="name"  class="select2">
+                                  <option class="options" value="">None</option>
                                   @foreach($employes as $item)
                                   <option value="{{ $item->id }}">{{ $item->employee_name }}</option>
                                 @endforeach
                                 </select>
-                            </div> 
-                        
-                        
+                            </div>
+
+
                         </div>
                         <div class="tab" id="tab1">
-                            
+
                                 <div class="container d-flex justify-content-center align-items-center">
-                                  <div class="form-group">  
+                                  <div class="form-group">
                                     <h4>Companies/ Units</h4>
-                                  </div>  
-                                  <div class="form-group">  
+                                  </div>
+                                  <div class="form-group">
                                     <h4>Login ID</h4>
                                   </div>
-                                  <div class="form-group">  
+                                  <div class="form-group">
                                     <h4>Access</h4>
-                                  </div> 
-                                  <div class="form-group">  
+                                  </div>
+                                  <div class="form-group">
                                     <h4>Set Password </h4>
-                                  </div> 
-                                  <div class="form-group">  
+                                  </div>
+                                  <div class="form-group">
                                     <h4>Report Access</h4>
-                                  </div> 
-                                  <div class="form-group">  
+                                  </div>
+                                  <div class="form-group">
                                     <h4>Back days Entres</h4>
-                                  </div> 
-                                  <div class="form-group">  
+                                  </div>
+                                  <div class="form-group">
                                     <h4>Post Days Entries</h4>
-                                  </div>  
+                                  </div>
                                 </div>
                                 @foreach ($companies as $company =>$item )
                                   <div class="container d-flex justify-content-center align-items-center">
-                                      
-                                      <div class="form-group">    
+
+                                      <div class="form-group">
                                         <h6>{{ $item->name }}</h6>
-                                      
                                       </div>
                                       <div class="form-group">
-                                        
-                                        <input type="text" class="form-control" id="input1" name="login_id[]" class="input1" placeholder="Login ID" />
+                                        <input type="text" class="form-control" id="input1" name="email" class="input1" placeholder="Login ID" />
                                       </div>
                                       <div class="form-group">
                                           <input type="checkbox" id="freezeCheckbox" name="access[]" value="1" placeholder="Access" />
                                       </div>
                                       <div class="form-group">
-                                        
-                                        <input type="password" name="password[]" class="form-control input2" id="input2" placeholder="Password" />
+
+                                        <input type="password" name="password" class="form-control input2" id="input2" placeholder="Password" />
                                       </div>
                                         <div class="form-group">
-                                          
+
                                           <input
                                             type="text"
                                             class="form-control"
                                             id="bit"
                                             name="report_access[]"
-                                            placeholder="report_access" 
+                                            placeholder="report_access"
                                           />
                                         </div>
                                         <div class="form-group">
@@ -140,25 +138,25 @@
                                             type="text"
                                             class="form-control"
                                             id="input"
-                                            
+
                                             name="back_date_entry[]"
-                                            placeholder="back_date_entry" 
+                                            placeholder="back_date_entry"
                                           />
                                         </div>
                                         <div class="form-group">
-                                          
+
                                           <input
                                             type="email"
                                             class="form-control"
                                             id="input"
                                             name="post_date_entry[]"
-                                            placeholder="post_date_entry" 
+                                            placeholder="post_date_entry"
                                           />
                                       </div>
-                                      
+
                                   </div>
                                 @endforeach
-                              
+
                               <div class="container  justify-content-center align-items-center">
                                 @foreach ($branches->groupBy('company.name') as $companyName => $companyGroup)
                                   <h3>
@@ -169,13 +167,13 @@
                                       <label for="options"> {{ $data->name }} </label>
                                       {{-- <input type="email" class="form-control" id="input" name="{{ $data->name }}" placeholder="{{ $data->name }}" /> --}}
                                     </div>
-                                    
-                                  @endforeach  
-                                 
-                                @endforeach()  
-                                
+
+                                  @endforeach
+
+                                @endforeach()
+
                               </div>
-                              
+
                               <div class="container  justify-content-center" style="margin-top: 10px;">
                                 <div class="form-group">
                                     <label for="options">Role Selection</label>
@@ -186,13 +184,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                             </div>                              
+                             </div>
                         </div>
-                        
-                         
-                  
-                      <div class="d-flex container">       
-                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">  
+
+
+
+                      <div class="d-flex container">
+                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
                             <table id="roletable" class="table table-bordered" style="border: 1px solid black">
                                 <thead>
                                     <tr>
@@ -208,7 +206,7 @@
                                     <!-- Table rows will be populated dynamically using JavaScript -->
                                 </tbody>
                             </table>
-                        
+
                         </div>
 
                         <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style="top: 30%; left:2%;">
@@ -225,7 +223,7 @@
                                       <th>Role</th>
                                       <th>Module</th>
                                       <th>Page</th>
-                                      
+
                                   </tr>
                               </thead>
                               <tbody>
@@ -234,18 +232,18 @@
                           </table>
                         </div>
                       </div>
-                     
+
                       <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
-        
-                              
-  
-    </form>        
+
+
+
+    </form>
     <script>
 
 
-        //this all code is set on that ui which Sir usman give me on excel 
+        //this all code is set on that ui which Sir usman give me on excel
              document.addEventListener('DOMContentLoaded', function () {
                     var originalOptions = document.getElementById('roleSelect').cloneNode(true);
 
@@ -330,21 +328,21 @@
                     function fetchRoleData(roleId) {
                                     // Replace with your API endpoint URL
                                     var apiUrl = '/fetch-employee-data/' + roleId;
-                        
+
                                     // Make an AJAX request to fetch data for the selected role ID
                                     var xhr = new XMLHttpRequest();
                                     xhr.open('GET', apiUrl, true);
                                     xhr.onreadystatechange = function () {
                                         if (xhr.readyState == 4 && xhr.status == 200) {
                                             var data = JSON.parse(xhr.responseText);
-                        
+
                                             updateRoleTable(data.role_access_records);
                                         }
                                     };
                                     xhr.send();
                                 }
                         // For now, let's simulate a response with dummy data
-                        
+
                     // Function to update the dropdown options
                     function updateDropdownOptions(roleAccessRecords) {
                         var dropdown = document.getElementById('roleSelect');
@@ -429,6 +427,6 @@
 
     </script>
 
-  </section> 
+  </section>
 
-@endsection    
+@endsection
