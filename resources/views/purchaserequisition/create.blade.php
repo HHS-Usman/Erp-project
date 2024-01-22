@@ -191,135 +191,141 @@
             </table>
             <script>
                 $.noConflict();
-                jQuery(document).ready(function($) {
-                    $('#product').change(function() {
-                        var productId = $(this).val();
-                        // Make an AJAX request to get UOM data
-                        $.ajax({
-                            url: '/get-uom/' + productId,
-                            type: 'GET',
-                            success: function(data) {
-                                var uomInput = $('input[name="UOM"]');
-                                uomInput.val(data.uom);
+                    jQuery(document).ready(function($) {
+                        $('#product').change(function() {
+                            var productId = $(this).val();
+                            // Make an AJAX request to get UOM data
+                            $.ajax({
+                                url: '/get-uom/' + productId,
+                                type: 'GET',
+                                success: function(data) {
+                                    var uomInput = $('input[name="UOM"]');
+                                    uomInput.val(data.uom);
 
-                                var minstock = $('input[name="minstock"]');
-                                minstock.val(data.minqty);
+                                    var minstock = $('input[name="minstock"]');
+                                    minstock.val(data.minqty);
 
-                                var maxstock = $('input[name="maxstock"]');
-                                maxstock.val(data.maxqty);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
+                                    var maxstock = $('input[name="maxstock"]');
+                                    maxstock.val(data.maxqty);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(error);
+                                }
+                            });
                         });
                     });
-                });
 
-                function addRow() {
-                    var table = document.getElementById("tableBody");
-                    var newRow = table.insertRow(table.rows.length);
-                    var counter = table.rows.length
-                    var cell1 = newRow.insertCell(0);
-                    var cell2 = newRow.insertCell(1);
-                    var cell3 = newRow.insertCell(2);
-                    var cell4 = newRow.insertCell(3);
-                    var cell5 = newRow.insertCell(4);
-                    var cell6 = newRow.insertCell(5);
-                    var cell7 = newRow.insertCell(6);
-                    var cell8 = newRow.insertCell(7);
-                    var cell9 = newRow.insertCell(8);
-                    var cell10 = newRow.insertCell(9);
-                    var cell11 = newRow.insertCell(10);
-                    var cell12 = newRow.insertCell(11);
-                    var cell13 = newRow.insertCell(12);
-                    var cell14 = newRow.insertCell(13);
-
-
-                    // start Category
-                    // create element select category
-                    var selectElement = document.createElement("select");
-                    selectElement.className = "form-control";
-                    selectElement.name = "account" + table.rows.length;
-                    // Add a default option Element of Category
-                    var defaultOption = document.createElement("option");
-                    defaultOption.text = "Select";
-                    selectElement.add(defaultOption);
-
-                    // Add options from PHP array for category
-                    @foreach ($pcategory as $category)
-                        var option = document.createElement("option");
-                        option.value = "{{ $category->id }}";
-                        option.text = "{{ $category->product_category }}";
-                        selectElement.add(option);
-                    @endforeach
-                    // End
-                    // Start Product
-                    // create element select Product
-                    var selectproduct = document.createElement("select");
-                    selectproduct.id = "product" + counter;
-                    selectproduct.className = "form-control";
-                    selectproduct.name = "account" + counter;
-                    var productname = selectproduct.name;
+                    function addRow() {
+                        var table = document.getElementById("tableBody");
+                        var newRow = table.insertRow(table.rows.length);
+                        var counter = table.rows.length;
+                        var cell1 = newRow.insertCell(0);
+                        var cell2 = newRow.insertCell(1);
+                        var cell3 = newRow.insertCell(2);
+                        var cell4 = newRow.insertCell(3);
+                        var cell5 = newRow.insertCell(4);
+                        var cell6 = newRow.insertCell(5);
+                        var cell7 = newRow.insertCell(6);
+                        var cell8 = newRow.insertCell(7);
+                        var cell9 = newRow.insertCell(8);
+                        var cell10 = newRow.insertCell(9);
+                        var cell11 = newRow.insertCell(10);
+                        var cell12 = newRow.insertCell(11);
+                        var cell13 = newRow.insertCell(12);
+                        var cell14 = newRow.insertCell(13);
 
 
-                    // Select option Element of product
-                    var defaultOption1 = document.createElement("option");
-                    defaultOption1.value = "product";
-                    defaultOption1.text = "Select";
-                    selectproduct.add(defaultOption1);
+                        // start Category
+                        // create element select category
+                        var selectElement = document.createElement("select");
+                        selectElement.className = "form-control";
+                        selectElement.name = "account" + table.rows.length;
+                        // Add a default option Element of Category
+                        var defaultOption = document.createElement("option");
+                        defaultOption.text = "Select";
+                        selectElement.add(defaultOption);
 
-                    // Data fetch from product 
-                    @foreach ($product as $p)
-                        var option = document.createElement("option");
-                        option.value = "{{ $p->id }}";
-                        option.text = "{{ $p->name }}";
-                        selectproduct.add(option);
-                    @endforeach
-                    // END
+                        // Add options from PHP array for category
+                        @foreach ($pcategory as $category)
+                            var option = document.createElement("option");
+                            option.value = "{{ $category->id }}";
+                            option.text = "{{ $category->product_category }}";
+                            selectElement.add(option);
+                        @endforeach
+                        // End
+                        // Start Product
+                        // create element select Product
+                        var selectproduct = document.createElement("select");
+                        selectproduct.id = "product" + counter;
+                        selectproduct.className = "form-control";
+                        selectproduct.name = "account" + counter;
+                        var productname = selectproduct.name;
 
-                    // Start Brand
-                    // create element select Brand
-                    var selectbrand = document.createElement("select");
-                    selectbrand.className = "form-control";
-                    selectbrand.name = "brand";
-                    // Select option Element of product
-                    var defaultOption2 = document.createElement("option");
-                    defaultOption2.value = "Brand";
-                    defaultOption2.text = "Select";
-                    selectbrand.add(defaultOption2);
-                    // Data fetch from product 
-                    @foreach ($brand as $b)
-                        var option = document.createElement("option");
-                        option.value = "{{ $b->id }}";
-                        option.text = "{{ $b->brand_selection }}";
-                        selectbrand.add(option);
-                    @endforeach
-                    // END
 
-                    // Append the select element to the cell
-                    cell1.innerHTML = counter;
-                    // This cell2.appendChild is use for add option selected value in category
-                    cell2.appendChild(selectElement);
-                    // cell3.appendChild(selectElement);
-                    cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="Sub-Category" name="debit' +
-                        table.rows
-                        .length + '">';
-                    cell4.appendChild(selectbrand);
-                    // Append the select element to the cel
-                    cell5.appendChild(selectproduct);
-                    // Event listener for product change
+                        // Select option Element of product
+                        var defaultOption1 = document.createElement("option");
+                        defaultOption1.value = "product";
+                        defaultOption1.text = "Select";
+                        selectproduct.add(defaultOption1);
 
-                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
-                        .length + '">';
-                    cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
-                    // Separate function to handle the product change event
+                        // Data fetch from product
+                        @foreach ($product as $p)
+                            var option = document.createElement("option");
+                            option.value = "{{ $p->id }}";
+                            option.text = "{{ $p->name }}";
+                            selectproduct.add(option);
+                        @endforeach
+                        // END
 
-                    var productId = jQuery(this).val();
-                    jQuery.ajax({
+                        // Start Brand
+                        // create element select Brand
+                        var selectbrand = document.createElement("select");
+                        selectbrand.className = "form-control";
+                        selectbrand.name = "brand";
+                        // Select option Element of product
+                        var defaultOption2 = document.createElement("option");
+                        defaultOption2.value = "Brand";
+                        defaultOption2.text = "Select";
+                        selectbrand.add(defaultOption2);
+                        // Data fetch from product
+                        @foreach ($brand as $b)
+                            var option = document.createElement("option");
+                            option.value = "{{ $b->id }}";
+                            option.text = "{{ $b->brand_selection }}";
+                            selectbrand.add(option);
+                        @endforeach
+                        // END
+                        cell7.innerHTML = '<input type="text" class="form-control" placeholder="Current Stock" name="memo' + counter + '">';
+                        cell8.innerHTML = '<input type="text" class="form-control debit" placeholder="Qty Required" name="qty_required' + counter + '">';
+                        cell9.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="lastpurchase' + counter + '">';
+                        cell10.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="minstock' + counter + '">';
+                        cell11.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="maxstock' + counter + '">';
+                        cell12.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="debit5' + counter + '">';
+                        cell13.innerHTML = '<button type="button" class="btn btn-primary" onclick="addRow()">Add</button>';
+                        cell14.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
+                        // Append the select element to the cell
+                        cell1.innerHTML = counter;
+                        // This cell2.appendChild is use for add option selected value in category
+                        cell2.appendChild(selectElement);
+                        // cell3.appendChild(selectElement);
+                        cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="Sub-Category" name="debit' +
+                            table.rows
+                            .length + '">';
+                        cell4.appendChild(selectbrand);
+                        // Append the select element to the cel
+                        cell5.appendChild(selectproduct);
+                        // Event listener for product change
+
+                        cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                            .length + '">';
+                        cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
+                        // Separate function to handle the product change event
+
+                        var productId = jQuery('#product' + counter).val();
+                        jQuery.ajax({
                         url: '/get-uom/' + productId,
                         type: 'GET',
                         success: function(data) {
-                            console.log(data);
                             var uomInput = jQuery('input[name="UOM' + counter + '"]');
                             console.log("This is input Name UOM " + counter)
                             uomInput.val(data.uom);
@@ -327,13 +333,13 @@
                         error: function(xhr, status, error) {
                             console.error(error);
                         }
-                    });
-                    handleProductChange(selectproduct, counter);
-                    console.log("daslfkjasd");
-                    updateTotals();
-                }
+                        });
+                        handleProductChange(jQuery('#product' + counter), counter);
+                        console.log("daslfkjasd");
+                        updateTotals();
+                    }
 
-                function handleProductChange(selectElement, counter) {
+                    function handleProductChange(selectElement, counter) {
                     console.log("sdflkjhdsl")
                     selectElement.addEventListener('change', function() {
                         var productId = this.value;
@@ -351,44 +357,44 @@
                             }
                         });
                     });
-                }
-
-
-                function removeRow() {
-                    var table = document.getElementById("tableBody");
-                    if (table.rows.length > 0) {
-                        table.deleteRow(table.rows.length - 1)
-                    } else {
-                        alert("No Rows to Remove");
                     }
-                }
-                // Function to update totals
-                function updateTotals() {
-                    var debitTotal = 0;
-                    var creditTotal = 0;
 
-                    // Loop through rows with class 'debit' and 'credit'
-                    document.querySelectorAll('.debit').forEach(function(element) {
-                        debitTotal += parseFloat(element.value) || 0;
+
+                    function removeRow() {
+                        var table = document.getElementById("tableBody");
+                        if (table.rows.length > 0) {
+                            table.deleteRow(table.rows.length - 1)
+                        } else {
+                            alert("No Rows to Remove");
+                        }
+                    }
+                    // Function to update totals
+                    function updateTotals() {
+                        var debitTotal = 0;
+                        var creditTotal = 0;
+
+                        // Loop through rows with class 'debit' and 'credit'
+                        document.querySelectorAll('.debit').forEach(function(element) {
+                            debitTotal += parseFloat(element.value) || 0;
+                        });
+
+                        document.querySelectorAll('.credit').forEach(function(element) {
+                            creditTotal += parseFloat(element.value) || 0;
+                        });
+
+                        // Update total row
+                        document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
+                        document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
+
+                        document.getElementById('totalDebit').value = debitTotal.toFixed(2);
+                        document.getElementById('totalCredit').value = creditTotal.toFixed(2);
+
+                    }
+
+                    // Attach event listeners to update totals when values change
+                    document.addEventListener('input', function() {
+                        updateTotals();
                     });
-
-                    document.querySelectorAll('.credit').forEach(function(element) {
-                        creditTotal += parseFloat(element.value) || 0;
-                    });
-
-                    // Update total row
-                    document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
-                    document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
-
-                    document.getElementById('totalDebit').value = debitTotal.toFixed(2);
-                    document.getElementById('totalCredit').value = creditTotal.toFixed(2);
-
-                }
-
-                // Attach event listeners to update totals when values change
-                document.addEventListener('input', function() {
-                    updateTotals();
-                });
             </script>
 
 

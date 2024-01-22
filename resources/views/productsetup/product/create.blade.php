@@ -206,7 +206,7 @@
                                      <div class="d-flex" style="margin: 3%">
 
 
-                                    </div> 
+                                    </div>
                                     <div class="form-group d-flex .col-xs-12 .col-md-6">
                                         <strong for="options">Product Color</strong>
                                         <input type="text" class="form-control" name="product_color" id="product_color"
@@ -369,7 +369,7 @@
                                             style="margin-left: 6%">
                                             <option value="">None</option>
                                             @foreach ($packingtypes as $item)
-                                                <option value="{{ $item->id }}">{{ $item->packing_types }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->packing_type }}</option>
                                             @endforeach
                                         </select>
 

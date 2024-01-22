@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('page-tab')
     Update Stock Type
-@endsection    
+@endsection
 @section('content')
 
   <section id="main" class="main" style="padding-top: 0vh;">
-        
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -26,7 +26,7 @@
                 </nav>
             </div>
             <br><br><br>
-            <form action="{{ route('stocktype.update',$stocktype) }}" method="POST">        
+            <form action="{{ route('stocktype.update',$stocktype) }}" method="POST">
                 @csrf
                 @method('PUT')
                     <div class="row justify-content-center">
@@ -60,7 +60,7 @@
         <br>
         <br>
         <div><br> </div>
-        
-  </section> 
 
-@endsection    
+  </section>
+
+@endsection
