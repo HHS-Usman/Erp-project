@@ -21,7 +21,7 @@ class PurchasereuquisitionController extends Controller
      */
     public function index()
     {
-        //
+        return view('purchaserequisition.index');
     }
     public function getUOM($id)
     {
@@ -49,7 +49,6 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
-
         $deaprtment = Department::all();
         $employee = Employee::all();
         $pcategory = Product_category::all();

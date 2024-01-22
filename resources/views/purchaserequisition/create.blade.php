@@ -23,7 +23,10 @@
                 </ol>
             </nav>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+
 
         <style>
             .wrapper {
@@ -38,10 +41,6 @@
             .innercontainer {
                 text-align: center;
             }
-
-            /* .{
-                                                        font-size: 2rem !important;
-                                                    } */
         </style>
         <br><br><br>
         <form action="{{ route('bank.store') }}" method="POST">
@@ -161,7 +160,8 @@
                         <td> <select name="product_d" id="product" class="form-control">
                                 <option id="chnagefont" value="product">Select</option>
                                 @foreach ($product as $p)
-                                    <option id="chnagefont" value={{ $p->id }}>{{ $p->name }}</option>
+                                    <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
+                                        {{ $p->name }}</option>
                                 @endforeach
                             </select></td>
                         <td><input type="text" class="form-control credit" value="" placeholder="UOM"
@@ -189,7 +189,10 @@
                     </tr>
                 </tbody>
             </table>
+
+
             <script>
+
                 $.noConflict();
                     jQuery(document).ready(function($) {
                         $('#product').change(function() {
@@ -214,6 +217,9 @@
                             });
                         });
                     });
+=======
+                var selectproduct = "";
+>>>>>>> 11997c5bcc0c5a1ff04087e4490b8c1977471e80
 
                     function addRow() {
                         var table = document.getElementById("tableBody");
@@ -244,6 +250,14 @@
                         var defaultOption = document.createElement("option");
                         defaultOption.text = "Select";
                         selectElement.add(defaultOption);
+                    // create element select category
+                    var selectElement = document.createElement("select");
+                    selectElement.className = "form-control";
+                    selectElement.name = "account" + table.rows.length;
+                    // Add a default option Element of Category
+                    var defaultOption = document.createElement("option");
+                    defaultOption.text = "Select";
+                    selectElement.add(defaultOption);
 
                         // Add options from PHP array for category
                         @foreach ($pcategory as $category)
@@ -395,9 +409,23 @@
                     document.addEventListener('input', function() {
                         updateTotals();
                     });
+
+                    document.querySelectorAll('.credit').forEach(function(element) {
+                        creditTotal += parseFloat(element.value) || 0;
+                    });
+
+                    // Update total row
+                    document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
+                    document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
+
+                    document.getElementById('totalDebit').value = debitTotal.toFixed(2);
+                    document.getElementById('totalCredit').value = creditTotal.toFixed(2);
+
+
+                // Attach event listeners to update totals when values change
+                document.addEventListener('input', function() {});
             </script>
-
-
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         </form>
         </div>
         <br><br><br>
