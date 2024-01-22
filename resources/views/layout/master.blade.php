@@ -8,7 +8,6 @@
     <title>Dashboard - HHS-Softwares</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
     <script src="https://code.jquery.com/jquery-3.6.5.min.js"></script>
     <script src="https://appuals.com/wp-content/litespeed/localres/aHR0cHM6Ly9jb2RlLmpxdWVyeS5jb20vjquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- Add the Bootstrap CSS -->
@@ -17,7 +16,7 @@
     <link href="/assets/img/favicon.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -1422,7 +1421,7 @@
             margin-top: -1px;
         }
     </style>
-    
+
 </body>
 
 </html>
