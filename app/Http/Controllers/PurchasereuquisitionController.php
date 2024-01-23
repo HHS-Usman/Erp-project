@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Product;
 use App\Models\Product_category;
+use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,9 @@ class PurchasereuquisitionController extends Controller
         $product = Product::all();
         $brand = Brand_Selection::all();
         $uom = Unit_selection::all();
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'brand', 'uom'));
+        $counterid = Purchaserequisition::count("purchase_id");
+        $pr = $counterid+1;
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'brand', 'uom','pr'));
     }
 
     /**
@@ -66,7 +69,24 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'file' => 'required|mimes:jpeg,png,jpg,gif,txt,pdf,xlsx,csv|max:2048',
+        // ]);
+        // getting primary id
+        $id = Purchaserequisition::count("purchase_id");
+        $file = $request->file('filename')->getClientOriginalName();
+        $filepath = "PR_".$id."_".$file;
+        Purchaserequisition::create([
+            'doc_ref_no'=>request()->get('doc_ref_no'),
+            'model_type'=>request()->get('mode_type'),
+            'date_picker'=>request()->get('date_picker'),
+            'pr_detail'=>request()->get('pr_remarks'),
+            'file'=> $filepath,
+            'depart_id'=>request()->get('depart_id'),
+            'emp_id'=>request()->get('emp_id'),
+
+        ]);
+        return redirect()->route('purchaserequisition.create')->with('success','Create successfully');
     }
 
     /**

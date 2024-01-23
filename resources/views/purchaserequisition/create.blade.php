@@ -43,13 +43,13 @@
             }
         </style>
         <br><br><br>
-        <form action="{{ route('bank.store') }}" method="POST">
+        <form action="{{ route('purchaserequisition.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="wrapper">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" id="prdocnumber" name="prdoc_no" placeholder="PR Doc#">
+                        <input type="text" class="form-control" value={{$pr}} id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -58,25 +58,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <strong>Date</strong>
-                        <input type="text" class="form-control" id="prdocnumber" name="pak_standard"
-                            placeholder="Pakistan Standard time">
-                    </div>
+                     <div class="col-md-6">
+                    <label for="journalDate">Document Creation Date</label>
+                    <input type="text" class="form-control"  disabled id="documentdate" name="documentdate" value="" readonly>
+                </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
                         <select name="mode_type" id="mode_type" class="form-control">
                             <option value="modetype">Select Mode Type</option>
-                            <option value="select">Urgent</option>
-                            <option value="select">Most Urgent</option>
-                            <option value="select">Normal</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="mosturgent">Most Urgent</option>
+                            <option value="Normal">Normal</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Department</strong>
-                        <select name="department" id="mode_type" class="form-control">
+                        <select name="depart_id" id="mode_type" class="form-control">
                             <option value="department">Select Department</option>
                             @foreach ($deaprtment as $depart)
                                 <option value={{ $depart->id }}>{{ $depart->department }}</option>
@@ -85,14 +84,14 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="required_date" name="required_date"
+                        <input type="date" class="form-control" id="date_picker" name="date_picker"
                             placeholder="Date">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Employe</strong>
-                        <select name="employe" id="employe" class="form-control">
+                        <select name="emp_id" id="employe" class="form-control">
                             <option value="employe">Select Employe</option>
                             @foreach ($employee as $employ)
                                 <option value={{ $employ->branch_id }}>{{ $employ->employee_name }}</option>
@@ -101,7 +100,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="required_date"
+                        <input type="file" class="form-control" id="required_date" name="filename"
                             placeholder="Date">
                     </div>
                 </div>
@@ -193,11 +192,12 @@
 
             <script>
                 var selectproduct = "";
+                var counter = 0;
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
                     var newRow = table.insertRow(table.rows.length);
-                    var counter = table.rows.length
+                    counter = table.rows.length;
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
                     var cell3 = newRow.insertCell(2);
@@ -285,10 +285,12 @@
                     // Append the select element to the cel
                     cell5.appendChild(selectproduct);
 
-                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
                         .length + '">';
                     cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
                     // Separate function to handle the product change event
+                    bindProductChangeEvent(counter);
+
 
                 }
 
@@ -322,12 +324,6 @@
                     document.getElementById('totalCredit').value = creditTotal.toFixed(2);
 
                 }
-                // Attach event listeners to update totals when values change
-                document.addEventListener('input', function() {});
-            </script>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-            <script>
                 $.noConflict();
                 jQuery(document).ready(function($) {
                     $('#product').change(function() {
@@ -353,17 +349,18 @@
                         });
                     });
 
-                    jQuery.noConflict();
-                    jQuery(document).ready(function($) {
-                        $(document).on('change', '#product2', function() {
+                });
+
+                function bindProductChangeEvent(counter) {
+                    jQuery(document).ready(function($) {    
+                        $(document).on('change', "#product" + counter, function() {
                             var productId = $(this).val();
-                            console.log('Product 2 changed');
-                            jQuery.ajax({
+                            console.log("skdf")
+                            $.ajax({
                                 url: '/get-uom/' + productId,
                                 type: 'GET',
                                 dataType: 'json',
                                 success: function(data) {
-                                    console.log("sdlfjsldf");
                                     var uomInput = $('input[name="UOM' + counter + '"]');
                                     uomInput.val(data.uom);
                                 },
@@ -372,16 +369,39 @@
                                 }
                             });
                         });
-                    });
-                });
-            </script>
 
+                    });
+                }
+            </script>
+             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
         </div>
         <br><br><br>
         <br>
         <br>
         <div><br> </div>
+        <script>
+            // Get the current UTC time
+        var utcTime = new Date();
+        
+        // Calculate the time difference for Pakistan Standard Time (UTC+5)
+        var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+        
+        // Calculate the Pakistan Standard Time by adding the offset
+        var pstTime = new Date(utcTime.getTime() + pstOffset);
+        
+        // Format the date components
+        var year = pstTime.getUTCFullYear();
+        var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
+        var day = ('0' + pstTime.getUTCDate()).slice(-2);
+        
+        // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
+        var formattedDate = year + '-' + month + '-' + day;
+        var pakisatndate = document.getElementById('documentdate');
+        pakisatndate.value= formattedDate;
+</script>
 
     </section>
 

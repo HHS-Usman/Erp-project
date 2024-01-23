@@ -15,4 +15,8 @@ class Department extends Model
      {
          return $this->hasMany(Costcenteraccount::class,'id');
      }
+     public function purchaserequisition()
+     {
+         return $this->hasMany(Purchaserequisition::class,'purchase_id');
+     }
 }

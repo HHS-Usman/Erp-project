@@ -25,4 +25,8 @@ class Employee extends Model
     {
         return $this->hasOne(Emp_document::class);
     }
+    public function purchaserequisition()
+    {
+        return $this->hasMany(Purchaserequisition::class,'purchase_id');
+    }
 }

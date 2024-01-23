@@ -365,10 +365,10 @@ permissionRoutes('add-mainheadlevel', CoaheadlevelController::class, 'coamainhea
 permissionRoutes('view-mainheadlevel', CoaheadlevelController::class, 'coamainheaderlevel');
 permissionRoutes('edit-mainheadlevel', CoaheadlevelController::class, 'coamainheaderlevel');
 permissionRoutes('delete-mainheadlevel', CoaheadlevelController::class, 'coamainheaderlevel');
-permissionRoutes('add-coa', CoaControllerController::class, 'coa');
-permissionRoutes('view-coa', CoaControllerController::class, 'coa');
-permissionRoutes('edit-coa', CoaControllerController::class, 'coa');
-permissionRoutes('delete-coa', CoaControllerController::class, 'coa');
+permissionRoutes('add-coa', CoaController::class, 'coa');
+permissionRoutes('view-coa', CoaController::class, 'coa');
+permissionRoutes('edit-coa',CoaController::class, 'coa');
+permissionRoutes('delete-coa', CoaController::class, 'coa');
 permissionRoutes('add-costcenter', CostcenteraccountController::class, 'costcenteraccount');
 permissionRoutes('view-costcenter', CostcenteraccountController::class, 'costcenteraccount');
 permissionRoutes('edit-costcenter', CostcenteraccountController::class, 'costcenteraccount');
