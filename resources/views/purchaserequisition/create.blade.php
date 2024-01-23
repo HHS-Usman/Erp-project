@@ -1,55 +1,52 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Purchase Requisition
+Create Purchase Requisition
 @endsection
 @section('content')
-    <section id="main" class="main" style="padding-top: 0vh;">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Create Purchase Requisition</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Purchase Requisition</a></li>
-                </ol>
-            </nav>
-        </div>
+<section id="main" class="main" style="padding-top: 0vh;">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="pagetitle" style="margin-left: 20px;">
+        <h1>Create Purchase Requisition</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item active"><a> Create Purchase Requisition</a></li>
+            </ol>
+        </nav>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <style>
+        .wrapper {
+            margin: 0px 100px 0px 100px
+        }
 
-
-
-
-        <style>
-            .wrapper {
-                margin: 0px 100px 0px 100px
-            }
-
-            #prdetail {
-                border: 1px solid black;
-                padding: 1%;
-            }
+        #prdetail {
+            border: 1px solid black;
+            padding: 1%;
+        }
 
             .innercontainer {
                 text-align: center;
             }
         </style>
         <br><br><br>
-        <form action="{{ route('purchaserequisition.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('bank.store') }}" method="POST">
             @csrf
             <div class="wrapper">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" value={{$pr}} id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
+                        <input type="text" class="form-control" id="prdocnumber" name="prdoc_no" placeholder="PR Doc#">
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -58,24 +55,25 @@
                     </div>
                 </div>
                 <div class="row">
-                     <div class="col-md-6">
-                    <label for="journalDate">Document Creation Date</label>
-                    <input type="text" class="form-control"  disabled id="documentdate" name="documentdate" value="" readonly>
-                </div>
+                    <div class="col-md-6 form-group">
+                        <strong>Date</strong>
+                        <input type="text" class="form-control" id="prdocnumber" name="pak_standard"
+                            placeholder="Pakistan Standard time">
+                    </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
                         <select name="mode_type" id="mode_type" class="form-control">
                             <option value="modetype">Select Mode Type</option>
-                            <option value="urgent">Urgent</option>
-                            <option value="mosturgent">Most Urgent</option>
-                            <option value="Normal">Normal</option>
+                            <option value="select">Urgent</option>
+                            <option value="select">Most Urgent</option>
+                            <option value="select">Normal</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Department</strong>
-                        <select name="depart_id" id="mode_type" class="form-control">
+                        <select name="department" id="mode_type" class="form-control">
                             <option value="department">Select Department</option>
                             @foreach ($deaprtment as $depart)
                                 <option value={{ $depart->id }}>{{ $depart->department }}</option>
@@ -84,14 +82,14 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="date_picker" name="date_picker"
+                        <input type="date" class="form-control" id="required_date" name="required_date"
                             placeholder="Date">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Employe</strong>
-                        <select name="emp_id" id="employe" class="form-control">
+                        <select name="employe" id="employe" class="form-control">
                             <option value="employe">Select Employe</option>
                             @foreach ($employee as $employ)
                                 <option value={{ $employ->branch_id }}>{{ $employ->employee_name }}</option>
@@ -100,7 +98,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="filename"
+                        <input type="file" class="form-control" id="required_date" name="required_date"
                             placeholder="Date">
                     </div>
                 </div>
@@ -184,20 +182,19 @@
                         </td>
                         <td>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 
             <script>
                 var selectproduct = "";
-                var counter = 0;
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
                     var newRow = table.insertRow(table.rows.length);
-                    counter = table.rows.length;
+                    var counter = table.rows.length
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
                     var cell3 = newRow.insertCell(2);
@@ -285,12 +282,10 @@
                     // Append the select element to the cel
                     cell5.appendChild(selectproduct);
 
-                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
                         .length + '">';
                     cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
                     // Separate function to handle the product change event
-                    bindProductChangeEvent(counter);
-
 
                 }
 
@@ -324,6 +319,12 @@
                     document.getElementById('totalCredit').value = creditTotal.toFixed(2);
 
                 }
+                // Attach event listeners to update totals when values change
+                document.addEventListener('input', function() {});
+            </script>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+            <script>
                 $.noConflict();
                 jQuery(document).ready(function($) {
                     $('#product').change(function() {
@@ -337,8 +338,8 @@
                                 var uomInput = $('input[name="UOM"]');
                                 uomInput.val(data.uom);
 
-                                var minstock = $('input[name="minstock"]');
-                                minstock.val(data.minqty);
+                                   var minstock = $('input[name="minstock"]');
+                                   minstock.val(data.minqty);
 
                                 var maxstock = $('input[name="maxstock"]');
                                 maxstock.val(data.maxqty);
@@ -349,18 +350,16 @@
                         });
                     });
 
-                });
-
-                function bindProductChangeEvent(counter) {
-                    jQuery(document).ready(function($) {    
-                        $(document).on('change', "#product" + counter, function() {
+                    jQuery.noConflict();
+                    jQuery(document).ready(function($) {
+                        $(document).on('change', '#product2', function() {
                             var productId = $(this).val();
-                            console.log("skdf")
-                            $.ajax({
+                            console.log('Product 2 changed');
+                            jQuery.ajax({
                                 url: '/get-uom/' + productId,
                                 type: 'GET',
-                                dataType: 'json',
                                 success: function(data) {
+                                    console.log("sdlfjsldf");
                                     var uomInput = $('input[name="UOM' + counter + '"]');
                                     uomInput.val(data.uom);
                                 },
@@ -369,40 +368,17 @@
                                 }
                             });
                         });
-
                     });
-                }
+                });
             </script>
-             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+
         </form>
         </div>
         <br><br><br>
         <br>
         <br>
         <div><br> </div>
-        <script>
-            // Get the current UTC time
-        var utcTime = new Date();
-        
-        // Calculate the time difference for Pakistan Standard Time (UTC+5)
-        var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
-        
-        // Calculate the Pakistan Standard Time by adding the offset
-        var pstTime = new Date(utcTime.getTime() + pstOffset);
-        
-        // Format the date components
-        var year = pstTime.getUTCFullYear();
-        var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
-        var day = ('0' + pstTime.getUTCDate()).slice(-2);
-        
-        // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
-        var formattedDate = year + '-' + month + '-' + day;
-        var pakisatndate = document.getElementById('documentdate');
-        pakisatndate.value= formattedDate;
-</script>
 
-    </section>
+</section>
 
 @endsection

@@ -12,7 +12,7 @@ class Stock_Type extends Model
         'id'
     ];
     protected $attributes = [
-        'Stocktype_code' => '',
+        'stocktype_code' => '',
         'detail' => '',
     ];
 }
