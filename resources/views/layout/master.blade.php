@@ -8,6 +8,7 @@
     <title>Dashboard - HHS-Softwares</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+
     <script src="https://code.jquery.com/jquery-3.6.5.min.js"></script>
     <script src="https://appuals.com/wp-content/litespeed/localres/aHR0cHM6Ly9jb2RlLmpxdWVyeS5jb20vjquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- Add the Bootstrap CSS -->
@@ -16,26 +17,21 @@
     <link href="/assets/img/favicon.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Bootstrap JS and Popper.js -->
-    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- Select2 CSS and JS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <!-- Include FullCalendar CSS -->
+
+    <!-- FullCalendar CSS and JS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Include FullCalendar CSS -->
-    <!--end cdn for tabs data -->
+
+    <!-- Font Awesome and Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
- <!-- Bootstrap Icons -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.css">
-    <!-- fontawesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.css">
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -150,21 +146,21 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
-                                        @can('view-division')
+                                        
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('division.index') }}">Manage Division</a></li>
 
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('department.create') }}">Create Department</a></li>
-                                        @endcan
-                                        @can('view-department')
+                                    
+                                       
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('department.index') }}">Manage Department</a></li>
 
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('subdepartment.create') }}">Create Sub Department
                                                     Level</a></li>
-                                        @endcan
+                                    
                                         @can('view-subdepartment')
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('subdepartment.index') }}">Manage Sub Department
@@ -455,11 +451,11 @@
                                         {{-- <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
-                                        @can('add-product')
+                                       
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('product.create') }}">Create Product</a>
                                         </li>
-                                        @endcan
+                                  
                                         @can('view-product')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('product.index') }}">Create Product</a>
