@@ -278,11 +278,14 @@ Create Purchase Requisition
                         }
                     }
 
-                function removeRow(button) {
-                    var table = document.getElementById("tableBody");
-                    var rowIndex = button.closest('tr').rowIndex;
-                    table.deleteRow(rowIndex);
-                }
+                    function removeRow() {
+                        var table = document.getElementById("tableBody");
+                        if (table.rows.length > 0) {
+                            table.deleteRow(table.rows.length - 1)
+                        } else {
+                            alert("No Rows to Remove");
+                        }
+                    }
                 //    function addRow(counter) {
                 //        var table = document.getElementById("tableBody");
                 //        var newRow = table.insertRow(table.rows.length);

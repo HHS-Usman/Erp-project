@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Create Access Permission
+Edit Access Permission
 @endsection
 @section('content')
 
@@ -17,11 +17,11 @@ Create Access Permission
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Permit</h1>
+        <h1>Edit Permit</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a> Create Permit</a></li>
+                <li class="breadcrumb-item active"><a> Edit Permit</a></li>
             </ol>
         </nav>
     </div>
@@ -111,168 +111,174 @@ Create Access Permission
             }
         </style>
     </head>
-            <form action="{{ route('accesspermit.store') }}" method="POST">
-                @csrf
+    <form action="{{ route('accesspermit.update',  $user) }}" method="POST">
+        @method('PUT')
+        @csrf
 
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
-                        <div class="form-group">
-                            <label for="options">Select Employee</label>
-                            <select id="name" name="name" class="select2">
-                                <option class="options" value="">None</option>
-                                @foreach($employes as $item)
-                                <option value="{{ $item->employee_name }}">{{ $item->employee_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="tab" id="tab1">
-
-                        <div class="container d-flex justify-content-center align-items-center">
-                            <div class="form-group">
-                                <h4>Companies/ Units</h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Login ID</h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Access</h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Set Password </h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Report Access</h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Back days Entres</h4>
-                            </div>
-                            <div class="form-group">
-                                <h4>Post Days Entries</h4>
-                            </div>
-                        </div>
-                        @foreach ($companies as $company =>$item )
-                        <div class="container d-flex justify-content-center align-items-center">
-
-                            <div class="form-group">
-                                <h6>{{ $item->name }}</h6>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="input1" name="email" class="input1"
-                                    placeholder="Login ID" />
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="freezeCheckbox" name="access[]" value="1" placeholder="Access" />
-                            </div>
-                            <div class="form-group">
-
-                                <input type="password" name="password" class="form-control input2" id="input2"
-                                    placeholder="Password" />
-                            </div>
-                            <div class="form-group">
-
-                                <input type="text" class="form-control" id="bit" name="report_access[]"
-                                    placeholder="report_access" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="input" name="back_date_entry[]"
-                                    placeholder="back_date_entry" />
-                            </div>
-                            <div class="form-group">
-
-                                <input type="email" class="form-control" id="input" name="post_date_entry[]"
-                                    placeholder="post_date_entry" />
-                            </div>
-
-                        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="options">Select Employee</label>
+                    <select id="name" name="name" class="select2">
+                        <option class="options" value="">None</option>
+                        @foreach($employes as $item)
+                        <option value="{{ $item->employee_name }}" @if ($item->employee_name == $user->name) selected
+                            @endif>{{ $item->employee_name }}</option>
                         @endforeach
-
-                        <div class="container  justify-content-center align-items-center">
-                            @foreach ($branches->groupBy('company.name') as $companyName => $companyGroup)
-                            <h3>
-                                {{ $companyName }}
-                            </h3>
-                            @foreach ($companyGroup as $data)
-                            <div class="form-group">
-                                <label for="options"> {{ $data->name }} </label>
-                                {{-- <input type="email" class="form-control" id="input" name="{{ $data->name }}"
-                                    placeholder="{{ $data->name }}" /> --}}
-                            </div>
-
-                            @endforeach
-
-                            @endforeach()
-
-                        </div>
-
-                        <div class="container justify-content-center" style="margin-top: 10px;">
-                            <div class="dropdown" id="myDropdown">
-                                <div class="dropdown-button" onclick="toggleDropdown()">Select Options</div>
-                                <div id="dropdownOptions" class="dropdown-content">
-                                    @foreach ($roles as $item)
-                                    <a><input type="checkbox" name="roles[]" value="{{ $item->id }}"> {{ $item->name }}</a>
-                                    <!-- Add more options as needed -->
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div id="selectedOptions" class="selected-options"></div>
+                    </select>
+                </div>
 
 
-                        </div>
-                    </div>
-
-                    <div class="d-flex container">
-                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
-                            <table id="roletable" class="table table-bordered" style="border: 1px solid black">
-                                <thead>
-                                    <tr>
-                                        <th>Select</th>
-                                        <th>Role ID</th>
-                                        <th>Add </th>
-                                        <th>View</th>
-                                        <th>Edit</th>
-                                        <th>Dele</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Table rows will be populated dynamically using JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style="top: 30%; left:2%;">
-                            <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
-                            <div class="" style="margin-top: 2%;">
-                                <button type="button" class="btn btn-primary" onclick="getData()">
-                                    < /button>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
-                            <table id="secondTable" class="table table-bordered" style="border: 1px solid black; ">
-                                <thead>
-                                    <tr>
-                                        <th>Role</th>
-                                        <th>Module</th>
-                                        <th>Page</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Table rows will be populated dynamically using JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
-                        <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-        </form>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
+            <div class="tab" id="tab1">
+
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div class="form-group">
+                        <h4>Companies/ Units</h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Login ID</h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Access</h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Set Password </h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Report Access</h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Back days Entres</h4>
+                    </div>
+                    <div class="form-group">
+                        <h4>Post Days Entries</h4>
+                    </div>
+                </div>
+                @foreach ($companies as $company =>$item )
+                <div class="container d-flex justify-content-center align-items-center">
+
+                    <div class="form-group">
+                        <h6>{{ $item->name }}</h6>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="input1" name="email" class="input1"
+                            placeholder="Login ID" value="{{ $user->email }}" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="freezeCheckbox" name="access[]" value="1" placeholder="Access" />
+                    </div>
+                    <div class="form-group">
+
+                        <input type="password" name="password" class="form-control input2" id="input2"
+                            placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" id="bit" name="report_access[]"
+                            placeholder="report_access" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="input" name="back_date_entry[]"
+                            placeholder="back_date_entry" />
+                    </div>
+                    <div class="form-group">
+
+                        <input type="email" class="form-control" id="input" name="post_date_entry[]"
+                            placeholder="post_date_entry" />
+                    </div>
+
+                </div>
+                @endforeach
+
+                <div class="container  justify-content-center align-items-center">
+                    @foreach ($branches->groupBy('company.name') as $companyName => $companyGroup)
+                    <h3>
+                        {{ $companyName }}
+                    </h3>
+                    @foreach ($companyGroup as $data)
+                    <div class="form-group">
+                        <label for="options"> {{ $data->name }} </label>
+                        {{-- <input type="email" class="form-control" id="input" name="{{ $data->name }}"
+                            placeholder="{{ $data->name }}" /> --}}
+                    </div>
+
+                    @endforeach
+
+                    @endforeach()
+
+                </div>
+
+                <div class="container justify-content-center" style="margin-top: 10px;">
+                    <div class="dropdown" id="myDropdown">
+                        <div class="dropdown-button" onclick="toggleDropdown()">Select Options</div>
+                        <div id="dropdownOptions" class="dropdown-content">
+                            @foreach ($roles as $item)
+                            <a>
+                                <input type="checkbox" name="roles[]" value="{{ $item->id }}" {{$item->id == $user->role
+                                ? 'checked' : '' }}>
+                                {{ $item->name }}
+                            </a>
+                            <!-- Add more options as needed -->
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div id="selectedOptions" class="selected-options"></div>
+
+
+                </div>
+            </div>
+
+            <div class="d-flex container">
+                <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
+                    <table id="roletable" class="table table-bordered" style="border: 1px solid black">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Role ID</th>
+                                <th>Add </th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Dele</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be populated dynamically using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style="top: 30%; left:2%;">
+                    <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
+                    <div class="" style="margin-top: 2%;">
+                        <button type="button" class="btn btn-primary" onclick="getData()">
+                            < /button>
+                    </div>
+                </div>
+
+                <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
+                    <table id="secondTable" class="table table-bordered" style="border: 1px solid black; ">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Module</th>
+                                <th>Page</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be populated dynamically using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
                         var originalOptions = document.getElementById('roleSelect').cloneNode(true);
 
                         // Fetch data when the page is loaded
@@ -485,7 +491,7 @@ Create Access Permission
 
                         // Handle checkbox changes to update selected options
                         document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
-            </script>
+    </script>
 
 </section>
 

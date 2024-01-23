@@ -485,8 +485,8 @@ Route::resource('province',ProvinceController::class);
 Route::resource('state',StateController::class);
 Route::resource('event',EventController::class);
 Route::resource('product',ProductController::class);
-Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'fetchEmployeeData']);
 
+Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'getPermissionId']);
 Route::resource('supplier',SupplierController::class);
 Route::resource('buyer',BuyerController::class);
 Route::resource('buyercategory',BuyercategoryController::class);

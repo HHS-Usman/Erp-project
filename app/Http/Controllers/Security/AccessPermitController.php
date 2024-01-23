@@ -17,21 +17,23 @@ use App\Models\AccessPermit;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+
 use DB;
 use Hash;
-use Validator;
+use Illuminate\Support\Arr;
 
 class AccessPermitController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-
+        $data = User::orderBy('id','DESC')->paginate(5);
+        return view('security.permit.index',compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
-        $roles = User_role::all();
+        $roles = Role::all();
         $employes = Employee::all();
         $modules = Module::all();
         $pages = Page::all();
@@ -52,27 +54,19 @@ class AccessPermitController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6', // Adjust the minimum length as needed
             'roles' => 'required|array',
-            'role_name' => 'required|string',
-            'permissions' => 'required|array',
+
         ]);
 
         // Create the user
-        $input = $request->only(['name', 'email', 'password']);
+        $input = $request->all();
         $input['password'] = Hash::make($input['password']);
+
         $user = User::create($input);
+        $user->assignRole($request->input('roles'));
 
-        // Create the role
-        $role = Role::create(['name' => $request->role_name]);
-
-        // Assign the role and permissions to the user
-        $user->assignRole($request->roles);
-        $role->givePermissionTo($request->permissions);
-
-
-
-        return redirect()->route('accesspermit.create')->with('success', 'Permission created successfully.');
+        return redirect()->route('accesspermit.index')
+                        ->with('success','User created successfully');
     }
-
     /**
      * Display the specified resource.
      *
@@ -90,9 +84,19 @@ class AccessPermitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User_role $userrole)
+    public function edit($id)
     {
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
+        $employes = Employee::all();
+        $modules = Module::all();
+        $pages = Page::all();
+        $companies = Company::all();
 
+        $role_access = role_access::all();
+        $branches = Branch::with('company')->get();
+        return view('security.permit.update',compact('user','roles','userRole','employes' , 'modules', 'pages', 'companies', 'branches', 'role_access',));
     }
 
     /**
@@ -104,7 +108,28 @@ class AccessPermitController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6', // Adjust the minimum length as needed
+            'roles' => 'required|array',
 
+        ]);
+        $input = $request->all();
+        if(!empty($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = Arr::except($input,array('password'));
+        }
+
+        $user = User::findOrFail($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('accesspermit.index')
+                        ->with('success','User updated successfully');
     }
 
     /**
@@ -115,35 +140,28 @@ class AccessPermitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('accesspermit.index')->with('success','User deleted successfully');
     }
-    public function fetchEmployeeData($role_id)
-    {
-        // $roleAccessRecords = role_access::where('role_id', $role_id)->get();
+    public function getPermissionId($roleId)
+        {
 
-        // if ($roleAccessRecords->isNotEmpty()) {
-        //     // Adjust the response format based on your needs
-        //     return response()->json([
-        //         'role_access_records' => $roleAccessRecords,
-        //     ]);
-        // } else {
-        //     // Handle the case where no records were found for the specified role_id
-        //     return response()->json([
-        //         'error' => 'No role access records found for the specified role_id.',
-        //     ], 404); // You can customize the HTTP status code accordingly
-        // }
-        $roleAccessRecords = role_access::with(['user_role', 'module', 'page',])->where('role_id', $role_id)->get();
+            $role = Role::find($roleId);
 
-        if ($roleAccessRecords->isNotEmpty()) {
-            // Adjust the response format based on your needs
-            return response()->json([
-                'role_access_records' => $roleAccessRecords,
-            ]);
-        } else {
-            // Handle the case where no records were found for the specified role_id
-            return response()->json([
-                'error' => 'No role access records found for the specified role_id.',
-            ], 404);
+            if ($role) {
+                $permissions = $role->permissions;
+
+                // Extract the relevant information (ID and name) from each permission
+                $formattedPermissions = $permissions->map(function ($permission) {
+                    return [
+                        'id'   => $permission->id,
+                        'name' => $permission->name,
+                    ];
+                });
+
+                return response()->json(['permissions' => $formattedPermissions]);
+            } else {
+                return response()->json(['error' => 'Role not found for ID: ' . $roleId], 404);
+            }
         }
-    }
 }
