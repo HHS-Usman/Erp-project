@@ -18,7 +18,7 @@ class Branch extends Model
 
     public function vouchertypes()
     {
-        return $this->hasMany(Vouchertype::class, 'branch_id');
+        return $this->hasMany(Vouchertype::class, 'branch_id');     
     }
     public function jvoucher(){
         return $this->hasMany(Journalvoucher::class,'voucher_id');

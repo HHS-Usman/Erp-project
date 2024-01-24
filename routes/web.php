@@ -94,6 +94,7 @@ use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
+use App\Models\Product_category;
 use App\Models\Supplier;
 use App\Models\SupplierCategory;
 use App\Models\Suppliertype;
@@ -589,5 +590,6 @@ Route::get('downloadcsv', [UploaderController::class ,'downloadCsv'])->name('dow
 Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name('downloadexcel');
 // Create a route in your web.php file to handle the AJAX request.
 
-Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'getUOM']);
+Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'purchasedata']);
+Route::get('/get-category/{id}', [PurchasereuquisitionController::class, 'categorydata']);
 });

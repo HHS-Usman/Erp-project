@@ -9,6 +9,8 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Product;
 use App\Models\Product_category;
+use App\Models\Product_sub_category;
+use App\Models\PurchaseDetail;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
 use Illuminate\Http\Request;
@@ -24,7 +26,7 @@ class PurchasereuquisitionController extends Controller
     {
         return view('purchaserequisition.index');
     }
-    public function getUOM($id)
+    public function purchasedata($id)
     {
         $product = Product::find($id);
         if (!$product) {
@@ -43,6 +45,22 @@ class PurchasereuquisitionController extends Controller
             ]
         );
     }
+    public function categorydata($id){
+        $pcategory = Product_category::find($id);
+        if(!$pcategory){
+                return response()->json(['error' => 'Product Category Not found'], 404);
+        }
+        $firstcategory = Product_sub_category::find($pcategory->product_sub_category_id);
+        if (!$firstcategory) {
+            return response()->json(['error' => 'Product Category not found'], 404);
+        }
+        return response()->json([
+            'firstcategory' =>  $firstcategory->product1stsbctgry,
+            ]
+        );
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -69,10 +87,6 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'file' => 'required|mimes:jpeg,png,jpg,gif,txt,pdf,xlsx,csv|max:2048',
-        // ]);
-        // getting primary id
         $id = Purchaserequisition::count("purchase_id");
         $file = $request->file('filename')->getClientOriginalName();
         $filepath = "PR_".$id."_".$file;
@@ -85,6 +99,18 @@ class PurchasereuquisitionController extends Controller
             'depart_id'=>request()->get('depart_id'),
             'emp_id'=>request()->get('emp_id'),
 
+        ]);
+
+        PurchaseDetail::create([
+            'sub_category'=>request()->get('firstcategory'),
+            'UOM'=>request()->get('UOM'),
+            'current_stock'=>request()->get('currentstock'),
+            'qty_required'=>request()->get('qty_required'),
+            'last_purchase'=>request()->get('lastpurchase'),
+            'min_stock'=>request()->get('minstock'),
+            'max_stock'=>request()->get('maxstock'),
+            'history'=>request()->get('history'),
+            
         ]);
         return redirect()->route('purchaserequisition.create')->with('success','Create successfully');
     }

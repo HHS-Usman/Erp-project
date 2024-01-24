@@ -1,52 +1,55 @@
 @extends('layout.master')
 @section('page-tab')
-Create Purchase Requisition
+    Create Purchase Requisition
 @endsection
 @section('content')
-<section id="main" class="main" style="padding-top: 0vh;">
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Create Purchase Requisition</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active"><a> Create Purchase Requisition</a></li>
-            </ol>
-        </nav>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <section id="main" class="main" style="padding-top: 0vh;">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="pagetitle" style="margin-left: 20px;">
+            <h1>Create Purchase Requisition</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active"><a> Create Purchase Requisition</a></li>
+                </ol>
+            </nav>
+        </div>
 
-    <style>
-        .wrapper {
-            margin: 0px 100px 0px 100px
-        }
 
-        #prdetail {
-            border: 1px solid black;
-            padding: 1%;
-        }
+
+
+
+        <style>
+            .wrapper {
+                margin: 0px 100px 0px 100px
+            }
+
+            #prdetail {
+                border: 1px solid black;
+                padding: 1%;
+            }
 
             .innercontainer {
                 text-align: center;
             }
         </style>
         <br><br><br>
-        <form action="{{ route('bank.store') }}" method="POST">
+        <form action="{{ route('purchaserequisition.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="wrapper">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" id="prdocnumber" name="prdoc_no" placeholder="PR Doc#">
+                        <input type="text" class="form-control" value={{$pr}} id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -55,25 +58,24 @@ Create Purchase Requisition
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <strong>Date</strong>
-                        <input type="text" class="form-control" id="prdocnumber" name="pak_standard"
-                            placeholder="Pakistan Standard time">
-                    </div>
+                     <div class="col-md-6">
+                    <label for="journalDate">Document Creation Date</label>
+                    <input type="text" class="form-control"  disabled id="documentdate" name="documentdate" value="" readonly>
+                </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
                         <select name="mode_type" id="mode_type" class="form-control">
                             <option value="modetype">Select Mode Type</option>
-                            <option value="select">Urgent</option>
-                            <option value="select">Most Urgent</option>
-                            <option value="select">Normal</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="mosturgent">Most Urgent</option>
+                            <option value="Normal">Normal</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Department</strong>
-                        <select name="department" id="mode_type" class="form-control">
+                        <select name="depart_id" id="mode_type" class="form-control">
                             <option value="department">Select Department</option>
                             @foreach ($deaprtment as $depart)
                                 <option value={{ $depart->id }}>{{ $depart->department }}</option>
@@ -82,14 +84,14 @@ Create Purchase Requisition
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="required_date" name="required_date"
+                        <input type="date" class="form-control" id="date_picker" name="date_picker"
                             placeholder="Date">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Employe</strong>
-                        <select name="employe" id="employe" class="form-control">
+                        <select name="emp_id" id="employe" class="form-control">
                             <option value="employe">Select Employe</option>
                             @foreach ($employee as $employ)
                                 <option value={{ $employ->branch_id }}>{{ $employ->employee_name }}</option>
@@ -98,7 +100,7 @@ Create Purchase Requisition
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="required_date"
+                        <input type="file" class="form-control" id="required_date" name="filename"
                             placeholder="Date">
                     </div>
                 </div>
@@ -142,12 +144,12 @@ Create Purchase Requisition
                             <select name="category" id="category" class="form-control">
                                 <option value="category" id="chnagefont">Select</option>
                                 @foreach ($pcategory as $category)
-                                    <option id="chnagefont" value={{ $category->id }}>{{ $category->product_category }}
+                                    <option onclick="categoryData()" id="chnagefont" value={{ $category->id }}>{{ $category->product_category }}
                                     </option>
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="number" class="form-control debit" placeholder="Sub-Category" name="debit1"></td>
+                        <td><input type="text" class="form-control debit" placeholder="Sub-Category" name="firstcategory"></td>
                         <td> <select name="brand_id" id="category" class="form-control">
                                 <option value="brand" id="chnagefont">Select</option>
                                 @foreach ($brand as $b)
@@ -163,7 +165,7 @@ Create Purchase Requisition
                             </select></td>
                         <td><input type="text" class="form-control credit" value="" placeholder="UOM"
                                 name="UOM"></td>
-                        <td><input type="text" class="form-control" placeholder="Current Stock" name="memo1">
+                        <td><input type="text" class="form-control" placeholder="Current Stock" name="currentstock">
                         </td>
                         <td><input type="text" class="form-control debit" placeholder="Qty Required"
                                 name="qty_required">
@@ -172,29 +174,30 @@ Create Purchase Requisition
                         </td>
                         <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"></td>
                         <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="debit5"></td>
+                        <td><input type="number" class="form-control debit" placeholder="0.00" name="history"></td>
                         <td> <!-- Add More Rows Button -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary" onclick="addRow()">Add</button>
+                                    <button type="button" class="btn btn-primary" onclick="addRow()">+</button>
                                 </div>
                             </div>
                         </td>
                         <td>
 
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
 
             <script>
                 var selectproduct = "";
+                var counter = 0;
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
                     var newRow = table.insertRow(table.rows.length);
-                    var counter = table.rows.length
+                    counter = table.rows.length;
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
                     var cell3 = newRow.insertCell(2);
@@ -242,7 +245,7 @@ Create Purchase Requisition
                     defaultOption1.text = "Select";
                     selectproduct.add(defaultOption1);
 
-                    // Data fetch from product
+                    // Data fetch from product 
                     @foreach ($product as $p)
                         var option = document.createElement("option");
                         option.value = "{{ $p->id }}";
@@ -261,7 +264,7 @@ Create Purchase Requisition
                     defaultOption2.value = "Brand";
                     defaultOption2.text = "Select";
                     selectbrand.add(defaultOption2);
-                    // Data fetch from product
+                    // Data fetch from product 
                     @foreach ($brand as $b)
                         var option = document.createElement("option");
                         option.value = "{{ $b->id }}";
@@ -275,17 +278,33 @@ Create Purchase Requisition
                     // This cell2.appendChild is use for add option selected value in category
                     cell2.appendChild(selectElement);
                     // cell3.appendChild(selectElement);
-                    cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="Sub-Category" name="debit' +
+                    cell3.innerHTML = '<input type="text" class="form-control debit" placeholder="Sub-Category" name="debit' +
                         table.rows
                         .length + '">';
                     cell4.appendChild(selectbrand);
                     // Append the select element to the cel
                     cell5.appendChild(selectproduct);
 
-                    cell6.innerHTML = '<input type="number" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
                         .length + '">';
-                    cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
+                        
+                    cell7.innerHTML =   '<input type="number" class="form-control credit" placeholder="Current Stock" name="credit' + table.rows.length +
+                        '">';
+                    cell8.innerHTML = '<input type="text" class="form-control" placeholder="Quality Required" name="memo' + table.rows.length +
+                        '">';
+                    cell9.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="Last Purchase' + table.rows
+                        .length + '">';
+                    cell10.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="Last Puchase Rate' + table
+                        .rows.length + '">';
+                    cell11.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="minstock">';
+                    cell12.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="credit' + table
+                        .rows.length + '">';
+                    cell13.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
+                    cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
                     // Separate function to handle the product change event
+                    
+                    bindProductChangeEvent(counter);
+
 
                 }
 
@@ -319,12 +338,6 @@ Create Purchase Requisition
                     document.getElementById('totalCredit').value = creditTotal.toFixed(2);
 
                 }
-                // Attach event listeners to update totals when values change
-                document.addEventListener('input', function() {});
-            </script>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-            <script>
                 $.noConflict();
                 jQuery(document).ready(function($) {
                     $('#product').change(function() {
@@ -338,8 +351,8 @@ Create Purchase Requisition
                                 var uomInput = $('input[name="UOM"]');
                                 uomInput.val(data.uom);
 
-                                   var minstock = $('input[name="minstock"]');
-                                   minstock.val(data.minqty);
+                                var minstock = $('input[name="minstock"]');
+                                minstock.val(data.minqty);
 
                                 var maxstock = $('input[name="maxstock"]');
                                 maxstock.val(data.maxqty);
@@ -349,17 +362,35 @@ Create Purchase Requisition
                             }
                         });
                     });
+                    $('#category').change(function() {
+                        var prodcategy_id = $(this).val();
+                        console.log(prodcategy_id);
+                        // Make an AJAX request to get UOM data
+                        $.ajax({
+                            url: '/get-category/' + prodcategy_id,
+                            type: 'GET',
+                            success: function(data) {
+                               var firstcategory = $('input[name="firstcategory"]');
+                               firstcategory.val(data.firstcategory);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    });
 
-                    jQuery.noConflict();
-                    jQuery(document).ready(function($) {
-                        $(document).on('change', '#product2', function() {
+                });
+
+                function bindProductChangeEvent(counter) {
+                    jQuery(document).ready(function($) {    
+                        $(document).on('change', "#product" + counter, function() {
                             var productId = $(this).val();
-                            console.log('Product 2 changed');
-                            jQuery.ajax({
+                            console.log("skdf")
+                            $.ajax({
                                 url: '/get-uom/' + productId,
                                 type: 'GET',
+                                dataType: 'json',
                                 success: function(data) {
-                                    console.log("sdlfjsldf");
                                     var uomInput = $('input[name="UOM' + counter + '"]');
                                     uomInput.val(data.uom);
                                 },
@@ -367,223 +398,41 @@ Create Purchase Requisition
                                     console.error(error);
                                 }
                             });
-                        }
-                    }
+                        });
 
-                function removeRow(button) {
-                    var table = document.getElementById("tableBody");
-                    var rowIndex = button.closest('tr').rowIndex;
-                    table.deleteRow(rowIndex);
+                    });
                 }
-                //    function addRow(counter) {
-                //        var table = document.getElementById("tableBody");
-                //        var newRow = table.insertRow(table.rows.length);
-                //        var counter = table.rows.length;
-                //        var cell1 = newRow.insertCell(0);
-                //        var cell2 = newRow.insertCell(1);
-                //        var cell3 = newRow.insertCell(2);
-                //        var cell4 = newRow.insertCell(3);
-                //        var cell5 = newRow.insertCell(4);
-                //        var cell6 = newRow.insertCell(5);
-                //        var cell7 = newRow.insertCell(6);
-                //        var cell8 = newRow.insertCell(7);
-                //        var cell9 = newRow.insertCell(8);
-                //        var cell10 = newRow.insertCell(9);
-                //        var cell11 = newRow.insertCell(10);
-                //        var cell12 = newRow.insertCell(11);
-                //        var cell13 = newRow.insertCell(12);
-                //        var cell14 = newRow.insertCell(13);
+            </script>
+             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        </div>
+        <br><br><br>
+        <br>
+        <br>
+        <div><br> </div>
+        <script>
+            // Get the current UTC time
+        var utcTime = new Date();
+        
+        // Calculate the time difference for Pakistan Standard Time (UTC+5)
+        var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+        
+        // Calculate the Pakistan Standard Time by adding the offset
+        var pstTime = new Date(utcTime.getTime() + pstOffset);
+        
+        // Format the date components
+        var year = pstTime.getUTCFullYear();
+        var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
+        var day = ('0' + pstTime.getUTCDate()).slice(-2);
+        
+        // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
+        var formattedDate = year + '-' + month + '-' + day;
+        var pakisatndate = document.getElementById('documentdate');
+        pakisatndate.value= formattedDate;
+</script>
 
-
-                //        // start Category
-                //        // create element select category
-                //        var selectElement = document.createElement("select");
-                //        selectElement.className = "form-control";
-                //        selectElement.name = "account" + table.rows.length;
-                //        // Add a default option Element of Category
-                //        var defaultOption = document.createElement("option");
-                //        defaultOption.text = "Select";
-                //        selectElement.add(defaultOption);
-
-                //        // Add options from PHP array for category
-                //        @foreach ($pcategory as $category)
-                //            var option = document.createElement("option");
-                //            option.value = "{{ $category->id }}";
-                //            option.text = "{{ $category->product_category }}";
-                //            selectElement.add(option);
-                //        @endforeach
-                //        // End
-                //        // Start Product
-                //        // create element select Product
-
-
-                //        var selectproduct = document.createElement("select");
-                //        selectproduct.id = "product" + counter;
-                //        selectproduct.className = "form-control";
-                //        selectproduct.name = "account" + counter;
-                //        var productname = selectproduct.name;
-                //        // Select option Element of product
-                //        var defaultOption1 = document.createElement("option");
-                //        defaultOption1.value = "product";
-                //        defaultOption1.text = "Select";
-                //        selectproduct.add(defaultOption1);
-
-                //        // Data fetch from product
-                //        @foreach ($product as $p)
-                //            var option = document.createElement("option");
-                //            option.value = "{{ $p->id }}";
-                //            option.text = "{{ $p->name }}";
-                //            selectproduct.add(option);
-                //        @endforeach
-                //        // END
-
-                //        // Start Brand
-                //        // create element select Brand
-                //        var selectbrand = document.createElement("select");
-                //        selectbrand.className = "form-control";
-                //        selectbrand.name = "brand";
-                //        // Select option Element of product
-                //        var defaultOption2 = document.createElement("option");
-                //        defaultOption2.value = "Brand";
-                //        defaultOption2.text = "Select";
-                //        selectbrand.add(defaultOption2);
-                //        // Data fetch from product
-                //        @foreach ($brand as $b)
-                //            var option = document.createElement("option");
-                //            option.value = "{{ $b->id }}";
-                //            option.text = "{{ $b->brand_selection }}";
-                //            selectbrand.add(option);
-                //        @endforeach
-                //        // END
-                //        cell7.innerHTML = '<input type="text" class="form-control" placeholder="Current Stock" name="memo' + counter + '">';
-                //        cell8.innerHTML = '<input type="text" class="form-control debit" placeholder="Qty Required" name="qty_required' + counter + '">';
-                //        cell9.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="lastpurchase' + counter + '">';
-                //        cell10.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="minstock' + counter + '">';
-                //        cell11.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="maxstock' + counter + '">';
-                //        cell12.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="debit5' + counter + '">';
-                //        cell13.innerHTML = '<button type="button" class="btn btn-primary" onclick="addRow(' + counter + ')">Add</button>';
-                //        cell14.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
-                //        // Append the select element to the cell
-                //        cell1.innerHTML = counter;
-                //        // This cell2.appendChild is use for add option selected value in category
-                //        cell2.appendChild(selectElement);
-                //        // cell3.appendChild(selectElement);
-                //        cell3.innerHTML = '<input type="number" class="form-control debit" placeholder="Sub-Category" name="debit' +
-                //            table.rows
-                //            .length + '">';
-                //        cell4.appendChild(selectbrand);
-                //        // Append the select element to the cel
-                //        cell5.appendChild(selectproduct);
-                //        // Event listener for product change
-                //        jQuery(document).on('change', 'select[id^="product"]', function() {
-                //             var productId = jQuery(this).val();
-                //             var counter = jQuery(this).attr('id').replace('product', '');
-                //             handleProductChange(jQuery(this), counter, productId);
-                //         });
-                //        cell6.innerHTML = '<input type="text" class="form-control credit" value="" placeholder="UOM" name="UOM' + table.rows
-                //            .length + '">';
-                //        cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">Remove</button>';
-                //        // Separate function to handle the product change event
-
-                //        var productId = jQuery('#product' + counter).val();
-                //        Query(document).on('change', '#product' + counter, function() {
-                //            var productId = jQuery(this).val();
-                //            handleProductChange(jQuery(this), counter, productId);
-                //        });
-                //        handleProductChange(jQuery('#product' + counter), counter);
-                //        console.log("daslfkjasd");
-                //        updateTotals();
-                //    }
-
-                //    function handleProductChange(selectElement, counter, productId) {
-                //         jQuery.ajax({
-                //             url: '/get-uom/' + productId,
-                //             type: 'GET',
-                //             success: function(data) {
-                //                 var uomInput = jQuery('input[name="UOM' + counter + '"]');
-                //                 uomInput.val(data.uom);
-                //             },
-                //             error: function(xhr, status, error) {
-                //                 console.error(error);
-                //             }
-                //         });
-
-                //         console.log("daslfkjasd");
-                //         updateTotals();
-                // }
-
-
-
-                //    function removeRow() {
-                //        var table = document.getElementById("tableBody");
-                //        if (table.rows.length > 0) {
-                //            table.deleteRow(table.rows.length - 1)
-                //        } else {
-                //            alert("No Rows to Remove");
-                //        }
-                //    }
-                   // Function to update totals
-                //    function updateTotals() {
-                //        var debitTotal = 0;
-                //        var creditTotal = 0;
-                //        var rowCount = 0;
-
-                //        // Loop through rows
-                //        jQuery('tbody#tableBody tr').each(function() {
-                //            var row = jQuery(this);
-                //            var productId = row.find('select[name^="product_d"]').val();
-
-                //            // Skip the first row (header)
-                //            if (productId !== "product") {
-                //                rowCount++;
-
-                //                // Make an AJAX request to get UOM data
-                //                jQuery.ajax({
-                //                    url: '/get-uom/' + productId,
-                //                    type: 'GET',
-                //                    async: false,  // Make sure AJAX requests are synchronous
-                //                    success: function(data) {
-                //                        var debitInput = row.find('input[name^="debit5"]');
-                //                        debitTotal += parseFloat(debitInput.val())
-                //                        console.log("AJAX request for row " + rowCount + " completed");
-                //                    },
-                //                    error: function(xhr, status, error) {
-                //                        console.error(error);
-                //                    }
-                //                });
-                //            }
-                //        });
-
-                //            // Loop through rows with class 'debit' and 'credit'
-                //        document.querySelectorAll('.debit').forEach(function(element) {
-                //            debitTotal += parseFloat(element.value) || 0;
-                //        });
-
-                //        document.querySelectorAll('.credit').forEach(function(element) {
-                //            creditTotal += parseFloat(element.value) || 0;
-                //        });
-
-                //        // Update total row
-                //        document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
-                //        document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
-
-                //        document.getElementById('totalDebit').value = debitTotal.toFixed(2);
-                //        document.getElementById('totalCredit').value = creditTotal.toFixed(2);
-
-                //    }
-
-                //    // Attach event listeners to update totals when values change
-                //    document.addEventListener('input', function() {
-                //        updateTotals();
-                //    });
-        </script>
-    </form>
-    </div>
-    <br><br><br>
-    <br>
-    <br>
-    <div><br> </div>
-
-</section>
+    </section>
 
 @endsection
