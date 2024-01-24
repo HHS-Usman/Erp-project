@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <!-- Custom Styles for Dropdown -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -9,17 +10,15 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <script src="https://code.jquery.com/jquery-3.6.5.min.js"></script>
-    <script src="https://appuals.com/wp-content/litespeed/localres/aHR0cHM6Ly9jb2RlLmpxdWVyeS5jb20vjquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <!-- Add the Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Select2 CSS and JS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -28,6 +27,22 @@
     <!-- FullCalendar CSS and JS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js"></script>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- jQuery Bootstrap Year Calendar -->
+    <link rel="stylesheet" href="/as/jquery.bootstrap.year.calendar.css">
+    <script src="/as/jquery.bootstrap.year.calendar.js"></script>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Font Awesome and Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -146,21 +161,21 @@
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('division.create') }}">Create Division</a></li>
                                         @endcan
-                                        
+
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('division.index') }}">Manage Division</a></li>
 
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('department.create') }}">Create Department</a></li>
-                                    
-                                       
+
+
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('department.index') }}">Manage Department</a></li>
 
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('subdepartment.create') }}">Create Sub Department
                                                     Level</a></li>
-                                    
+
                                         @can('view-subdepartment')
                                             <li class="p-0"><a class="dropdown-item"
                                                     href="{{ route('subdepartment.index') }}">Manage Sub Department
@@ -451,11 +466,11 @@
                                         {{-- <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
-                                       
+
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('product.create') }}">Create Product</a>
                                         </li>
-                                  
+
                                         @can('view-product')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('product.index') }}">Create Product</a>
@@ -1373,25 +1388,7 @@
 
     <!-- start from here all code which i have copy it  -->
     <!-- Vendor JS Files -->
-    <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="/assets/vendor/quill/quill.min.js"></script>
-    <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="/assets/vendor/php-email-form/validate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/asset/vendor/chart.js/chart.umd.js"></script>
-    <script src="/asset/vendor/echarts/echarts.min.js"></script>
-    <script src="/asset/vendor/quill/quill.min.js"></script>
-    <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
-    <script src="/asset/vendor/php-email-form/validate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     @stack('scripts')
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>

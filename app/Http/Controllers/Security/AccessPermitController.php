@@ -150,7 +150,7 @@ class AccessPermitController extends Controller
 
             if ($role) {
                 $permissions = $role->permissions;
-
+                
                 // Extract the relevant information (ID and name) from each permission
                 $formattedPermissions = $permissions->map(function ($permission) {
                     return [
@@ -164,4 +164,4 @@ class AccessPermitController extends Controller
                 return response()->json(['error' => 'Role not found for ID: ' . $roleId], 404);
             }
         }
-}
+    }
