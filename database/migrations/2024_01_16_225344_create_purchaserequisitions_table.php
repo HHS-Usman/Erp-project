@@ -14,20 +14,22 @@ class CreatePurchaserequisitionsTable extends Migration
     public function up()
     {
         Schema::create('purchaserequisitions', function (Blueprint $table) {
-            $table->bigIncrements("purchase_id");
+            $table->bigIncrements("pr_id");
             $table->integer('doc_ref_no');
-            $table->string('model_type');
             $table->string('date_picker');
             $table->text("pr_detail");
             $table->string("file");
-        
+            $table->integer("t_no_product");
+            $table->integer("t_qty_product");
+            // foreign key of Modetype 
+            $table->unsignedInteger("modet_id");
+            $table->foreign("modet_id")->references("mt_id")->on("modetypes")->onDelete("cascade");
             // foreign key of department 
             $table->unsignedBigInteger("depart_id");
             $table->foreign("depart_id")->references("id")->on("departments")->onDelete("cascade");
             // foreign key of employee 
             $table->unsignedBigInteger("emp_id");
             $table->foreign("emp_id")->references("id")->on("employees")->onDelete("cascade");
-
             $table->timestamps();
         });
     }

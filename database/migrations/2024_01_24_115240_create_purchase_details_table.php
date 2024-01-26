@@ -17,14 +17,14 @@ class CreatePurchaseDetailsTable extends Migration
             $table->integerIncrements("pdetail_id");
             $table->string("sub_category");
             $table->string("UOM");
-            $table->string("current_stock");
-            $table->string("qty_required");
-            $table->string("last_purchase");
+            $table->string("current_stock")->nullable();
+            $table->string("qty_required")->nullable();
+            $table->string("last_purchase")->nullable();
             $table->integer("min_stock");
             $table->integer("max_stock");
-            $table->string("history");
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->string("history")->nullable();
+            $table->unsignedBigInteger('p_prequisition_id');
+            $table->foreign('p_prequisition_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
             $table->timestamps();
         });
     }

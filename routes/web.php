@@ -592,4 +592,5 @@ Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name(
 
 Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'purchasedata']);
 Route::get('/get-category/{id}', [PurchasereuquisitionController::class, 'categorydata']);
+Route::post('/save-data', [PurchasereuquisitionController::class, 'store']);
 });

@@ -43,13 +43,14 @@
             }
         </style>
         <br><br><br>
-        <form action="{{ route('purchaserequisition.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form" enctype="multipart/form-data">
             @csrf
             <div class="wrapper">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" value={{$pr}} id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
+                        <input type="text" class="form-control" value={{ $pr }} id="prdocnumber"
+                            name="prdoc_no" placeholder="PR Doc#" readonly>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -58,17 +59,18 @@
                     </div>
                 </div>
                 <div class="row">
-                     <div class="col-md-6">
-                    <label for="journalDate">Document Creation Date</label>
-                    <input type="text" class="form-control"  disabled id="documentdate" name="documentdate" value="" readonly>
-                </div>
+                    <div class="col-md-6">
+                        <label for="journalDate">Document Creation Date</label>
+                        <input type="text" class="form-control" disabled id="documentdate" name="documentdate"
+                            value="" readonly>
+                    </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
-                        <select name="mode_type" id="mode_type" class="form-control">
-                            <option value="modetype">Select Mode Type</option>
-                            <option value="urgent">Urgent</option>
-                            <option value="mosturgent">Most Urgent</option>
-                            <option value="Normal">Normal</option>
+                        <select name="mt_id" id="mode_type" class="form-control">
+                            <option value="None">Select Mode Type</option>
+                            @foreach ($modetype as $item)
+                                <option value={{ $item->mt_id }}>{{ $item->modetype_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -84,8 +86,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="date_picker" name="date_picker"
-                            placeholder="Date">
+                        <input type="date" class="form-control" id="date_picker" name="date_picker" placeholder="Date">
                     </div>
                 </div>
                 <div class="row">
@@ -94,14 +95,13 @@
                         <select name="emp_id" id="employe" class="form-control">
                             <option value="employe">Select Employe</option>
                             @foreach ($employee as $employ)
-                                <option value={{ $employ->branch_id }}>{{ $employ->employee_name }}</option>
+                                <option value={{ $employ->id }}>{{ $employ->employee_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="filename"
-                            placeholder="Date">
+                        <input type="file" class="form-control" id="required_date" name="filename" placeholder="Date">
                     </div>
                 </div>
                 <br>
@@ -116,81 +116,183 @@
                         <strong>PR Detail</strong>
                     </div>
                 </div>
+                {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
+                <input type="hidden" id="qtyproductInput" name="qtyproduct" value="0">
+                {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
+                <input type="hidden" id="totalnoproductInput" name="totalnoproduct" value="1">
             </div>
             {{-- Contetn for Grid Here --}}
-            <table class="table mt-3 border" id="tabledate">
-                <thead>
-                    <tr>
-                        <th>S.No</th>
-                        <th>Product_Ctgy</th>
-                        <th>Sub_Category</th>
-                        <th>Brand </th>
-                        <th>Productr/Item</th>
-                        <th>UOM</th>
-                        <th>Current Stock</th>
-                        <th>Qty Required</th>
-                        <th>Last Purchase</th>
-                        <th>Min Stock</th>
-                        <th>Max Stock</th>
-                        <th>History</th>
-                        <th>Add</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <select name="category" id="category" class="form-control">
-                                <option value="category" id="chnagefont">Select</option>
-                                @foreach ($pcategory as $category)
-                                    <option onclick="categoryData()" id="chnagefont" value={{ $category->id }}>{{ $category->product_category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td><input type="text" class="form-control debit" placeholder="Sub-Category" name="firstcategory"></td>
-                        <td> <select name="brand_id" id="category" class="form-control">
-                                <option value="brand" id="chnagefont">Select</option>
-                                @foreach ($brand as $b)
-                                    <option id="chnagefont" value={{ $b->id }}>{{ $b->brand_selection }}</option>
-                                @endforeach
-                            </select></td>
-                        <td> <select name="product_d" id="product" class="form-control">
-                                <option id="chnagefont" value="product">Select</option>
-                                @foreach ($product as $p)
-                                    <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
-                                        {{ $p->name }}</option>
-                                @endforeach
-                            </select></td>
-                        <td><input type="text" class="form-control credit" value="" placeholder="UOM"
-                                name="UOM"></td>
-                        <td><input type="text" class="form-control" placeholder="Current Stock" name="currentstock">
-                        </td>
-                        <td><input type="text" class="form-control debit" placeholder="Qty Required"
-                                name="qty_required">
-                        </td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="lastpurchase">
-                        </td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"></td>
-                        <td><input type="number" class="form-control debit" placeholder="0.00" name="history"></td>
-                        <td> <!-- Add More Rows Button -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary" onclick="addRow()">+</button>
+            <div style="border: 1px solid rgb(20, 19, 19); margin-top:10px;margin-bottom:10px;padding:0px 10px 0px 10px">
+                <table class="table mt-3 border" id="tabledate">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Product_Ctgy</th>
+                            <th>Sub_Category</th>
+                            <th>Brand </th>
+                            <th>Product</th>
+                            <th>Product Remarks</th>
+                            <th>UOM</th>
+                            <th>Current Stock</th>
+                            <th>Qty Required</th>
+                            <th>Last Purchase</th>
+                            <th>Last Purchase Rate</th>
+                            <th>Last Purchase Date</th>
+                            <th>Min Stock</th>
+                            <th>Max Stock</th>
+                            <th>Add</th>
+                            <th></th>
+                            <th>Refresh</th>
+                            <th>History</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="category" id="chnagefont">Select</option>
+                                    @foreach ($pcategory as $category)
+                                        <option onclick="categoryData()" id="chnagefont" value="{{ $category->id }}">
+                                            id{{ $category->id }} | Product Category Name| {{ $category->product_category }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="firstcategory" id="subcategory" class="form-control">
+                                    <option value="None" id="chnagefont">Select</option>
+                                    @foreach ($subcategory as $item)
+                                        <option id="chnagefont" value={{ $item->id }}>
+                                           id | {{ $item->id }} | Sub_Category_Name | {{$item->product1stsbctgry}}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </td>
+                            <td> <select name="brand_id" id="category" class="form-control">
+                                    <option value="brand" id="chnagefont">Select</option>
+                                    @foreach ($brand as $b)
+                                        <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} | Brand Selection | {{ $b->brand_selection }}
+                                        </option>
+                                    @endforeach
+                                </select></td>
+                            <td> <select name="product_d" id="product" class="form-control">
+                                    <option id="chnagefont" value="product">Select</option>
+                                    @foreach ($product as $p)
+                                        <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
+                                            id| {{ $p->id }}| Product Name | {{ $p->name }}</option>
+                                    @endforeach
+                                </select></td>
+                            <td><input type="text" class="form-control credit" value=""
+                                    placeholder="product Remarks" name="pd"></td>
+                            <td>
+                                <span>UOM</span>
+                                <input type="hidden" class="form-control credit" value="" placeholder="UOM"
+                                    name="UOM">
+                            </td>
+                            <td>
+                                <span>---</span>
+                            </td>
+                            <td><input type="text" class="form-control debit" id="qtyproductvalue"
+                                    placeholder="Qty Required" name="qty_required">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control debit" id="lastpurchase"
+                                    placeholder="Last Purchase" name="lastpurchase">
+                            </td>
+                            <td>
+                                ---
+                            </td>
+                            <td>
+                                ---
+                            </td>
+
+                            <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"
+                                    required>
+                            </td>
+                            <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"
+                                    required>
+                            </td>
+                            <td> <!-- Add More Rows Button -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-primary" onclick="addRow()">+</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="refreshtext()">Ref</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-danger">.</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-2">
+                        <strong>
+                            <p id="tnop">Total Number of Products</p>
+                        </strong>
+                    </div>
+                    <div class="col-md-2">
+                        <strong>
+                            <p id="noproduct">1</p>
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <strong>
+                            <p>Total Qty of Products</p>
+                        </strong>
+                    </div>
+                    <div class="col-md-2">
+                        <strong>
+                            <p id="qtyproduct">0</p>
+                        </strong>
+                    </div>
+                </div>
+            </div>
             <script>
+                // function declare for refresh test for first row
+                function refreshtext() {
+                    // Reset the dropdown selections to their default values
+                    document.getElementById('category').selectedIndex = 0;
+                    document.getElementById('product').selectedIndex = 0;
+                    document.getElementById('brand_id').selectedIndex = 0;
+
+                    // Clear the input field values
+                    document.getElementsByName('firstcategory')[0].value = '';
+                    document.getElementsByName('pd')[0].value = '';
+                    document.getElementsByName('qty_required')[0].value = '';
+                    document.getElementsByName('lastpurchase')[0].value = '';
+                    document.getElementsByName('minstock')[0].value = '';
+                    document.getElementsByName('maxstock')[0].value = '';
+                }
+                // no of product 
+                var gettvalueok = 0;
+                var totalproduct = document.getElementById("noproduct");
+                var totalproductInput = document.getElementById("totalnoproductInput");
+                var qtyproduct = document.getElementById("qtyproduct");
+                document.getElementById("qtyproductvalue").addEventListener("input", function() {
+                    var valuegetting = document.getElementById('qtyproductvalue').value;
+                    gettvalueok = parseInt(valuegetting);
+                });
+
                 var selectproduct = "";
                 var counter = 0;
 
@@ -198,6 +300,9 @@
                     var table = document.getElementById("tableBody");
                     var newRow = table.insertRow(table.rows.length);
                     counter = table.rows.length;
+                    totalproduct.innerHTML = counter;
+                    totalproductInput.value = counter;
+
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
                     var cell3 = newRow.insertCell(2);
@@ -212,12 +317,23 @@
                     var cell12 = newRow.insertCell(11);
                     var cell13 = newRow.insertCell(12);
                     var cell14 = newRow.insertCell(13);
+                    var cell15 = newRow.insertCell(14);
+                    var cell16 = newRow.insertCell(15);
+                    var cell17 = newRow.insertCell(16);
+                    var cell18 = newRow.insertCell(17);
 
+                    var namesInput = document.createElement("input");
+                    namesInput.type = "hidden";
+                    namesInput.name = "names[]";
+                    namesInput.value = counter;
+                    cell14.appendChild(namesInput);
                     // start Category
                     // create element select category
                     var selectElement = document.createElement("select");
+                    selectElement.id = "pcategory" + counter;
                     selectElement.className = "form-control";
                     selectElement.name = "account" + table.rows.length;
+                    console.log(selectElement);
                     // Add a default option Element of Category
                     var defaultOption = document.createElement("option");
                     defaultOption.text = "Select";
@@ -227,8 +343,26 @@
                     @foreach ($pcategory as $category)
                         var option = document.createElement("option");
                         option.value = "{{ $category->id }}";
-                        option.text = "{{ $category->product_category }}";
+                        option.text = "id| {{ $category->id }} | Product Category | {{ $category->product_category }}";
                         selectElement.add(option);
+                    @endforeach
+                    // End
+                    // start Sub Category
+                    // create element select sub category category
+                    var subcategory = document.createElement("select");
+                    subcategory.id = "subcategory" + counter;
+                    subcategory.className = "form-control";
+                    subcategory.name = "subcategory" + table.rows.length;
+                    // Add a default option Element of Category
+                    var defaultOption = document.createElement("option");
+                    defaultOption.text = "Select";
+                    subcategory.add(defaultOption);
+                    // Add options from PHP array for category
+                    @foreach ($subcategory as $subcategory)
+                        var option = document.createElement("option");
+                        option.value = "{{ $subcategory->id }}";
+                        option.text = " id | {{$subcategory->id }}| SubCategoryname|{{$subcategory->product1stsbctgry}}";
+                        subcategory.add(option);
                     @endforeach
                     // End
                     // Start Product
@@ -249,7 +383,7 @@
                     @foreach ($product as $p)
                         var option = document.createElement("option");
                         option.value = "{{ $p->id }}";
-                        option.text = "{{ $p->name }}";
+                        option.text = "id|{{ $p->id }} | productName | {{ $p->name }}";
                         selectproduct.add(option);
                     @endforeach
                     // END
@@ -268,7 +402,7 @@
                     @foreach ($brand as $b)
                         var option = document.createElement("option");
                         option.value = "{{ $b->id }}";
-                        option.text = "{{ $b->brand_selection }}";
+                        option.text = "id|{{ $b->id }}| Brand Selection| {{ $b->brand_selection }}";
                         selectbrand.add(option);
                     @endforeach
                     // END
@@ -278,39 +412,109 @@
                     // This cell2.appendChild is use for add option selected value in category
                     cell2.appendChild(selectElement);
                     // cell3.appendChild(selectElement);
-                    cell3.innerHTML = '<input type="text" class="form-control debit" placeholder="Sub-Category" name="debit' +
+                    cell3.appendChild(subcategory);
+                    cell3.appendChild(namesInput);
+                    cell4.appendChild(selectbrand);
+                    // Append the select element 
+                    cell5.appendChild(selectproduct);
+                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="description" name="Remarks' +
                         table.rows
                         .length + '">';
-                    cell4.appendChild(selectbrand);
-                    // Append the select element to the cel
-                    cell5.appendChild(selectproduct);
+                    cell7.innerHTML = '<input type="hidden" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                        .length + '">';
+                    cell7.innerHTML = '<span>UOM</span>';
+                    cell7.appendChild(namesInput);
+                    cell8.innerHTML =
+                        '---';
+                    var input = document.createElement("input");
+                    input.type = "text";
+                    input.className = "form-control debit";
+                    input.placeholder = "Quality Required";
+                    input.name = "qty_required" + counter;
+                    input.addEventListener("input", function() {
+                        // Update total quantity
+                        updateTotalQuantity();
+                    });
+                    cell9.appendChild(input);
+                    // Update total quantity initially
+                    cell9.appendChild(input);
+                    cell10.innerHTML =
+                        '<input type="number" class="form-control debit" placeholder="last Purchase" name="last_purchase' + table
+                        .rows
+                        .length + '">';
+                    cell11.innerHTML = '<span>---</span>';
+                    cell12.innerHTML = '<span>---</span>';
+                    cell13.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="minstock' + table
+                        .rows.length + '">';
+                    cell13.appendChild(namesInput);
+                    cell14.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="maxstock' + table
+                        .rows.length + '">';
+                    cell14.appendChild(namesInput);
+                    cell15.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
+                    cell16.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
+                    cell17.innerHTML = '<button type="button" class="btn btn-primary">Ref</button>';
+                    cell18.innerHTML = '<button type="button" class="btn btn-danger" >.</button>';
 
-                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
-                        .length + '">';
-                        
-                    cell7.innerHTML =   '<input type="number" class="form-control credit" placeholder="Current Stock" name="credit' + table.rows.length +
-                        '">';
-                    cell8.innerHTML = '<input type="text" class="form-control" placeholder="Quality Required" name="memo' + table.rows.length +
-                        '">';
-                    cell9.innerHTML = '<input type="number" class="form-control debit" placeholder="0.00" name="Last Purchase' + table.rows
-                        .length + '">';
-                    cell10.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="Last Puchase Rate' + table
-                        .rows.length + '">';
-                    cell11.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="minstock">';
-                    cell12.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="credit' + table
-                        .rows.length + '">';
-                    cell13.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
-                    cell14.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
-                    // Separate function to handle the product change event
-                    
+                    var formData = $('#form').serialize();
+                    console.log(formData);
+                    jQuery.ajax({
+                        url: '/save-data',
+                        method: 'POST',
+                        data: formData,
+                        success: function(response) {
+
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+
+                            console.error(error);
+                        }
+                    });
                     bindProductChangeEvent(counter);
+                    bindProductChangeCategoryEvent(counter);
+                    updateTotalQuantity();
+                }
 
+                function updateTotalQuantity() {
+                    var totalQuantity = gettvalueok;
+                    var table = document.getElementById("tableBody");
+                    // Iterate through rows to sum up quantity values
+                    for (var i = 1; i < table.rows.length; i++) {
+                        var inputValue = parseInt(table.rows[i].cells[8].querySelector("input").value);
+                        if (!isNaN(inputValue)) {
+                            totalQuantity += inputValue;
+                        }
+                    }
+                    // Update total quantity display
+                    qtyproduct.innerHTML = totalQuantity;
 
+                    // Update hidden input field value
+                    document.getElementById("qtyproductInput").value = totalQuantity;
                 }
 
                 function removeRow() {
+                    var totalproductInput = document.getElementById("totalnoproductInput");
                     var table = document.getElementById("tableBody");
-                    if (table.rows.length > 0) {
+                    var totalproduct = document.getElementById("noproduct");
+                    totalproduct.innerHTML = table.rows.length - 1;
+                    totalproductInput.value = table.rows.length - 1;
+                    totalQuantity = gettvalueok;
+
+
+
+                    // Iterate through rows to sum up quantity values
+                    for (var i = 1; i < table.rows.length - 1; i++) {
+                        var inputValue = parseInt(table.rows[i].cells[8].querySelector("input").value);
+                        if (!isNaN(inputValue)) {
+                            console.log(i);
+                            totalQuantity = totalQuantity + inputValue;
+                        }
+                    }
+                    document.getElementById("qtyproductInput").value = totalQuantity;
+                    // Update total quantity display
+                    qtyproduct.innerHTML = totalQuantity;
+                    var table = document.getElementById("tableBody");
+                    if (table.rows.length > 1) {
                         table.deleteRow(table.rows.length - 1)
                     } else {
                         alert("No Rows to Remove");
@@ -370,8 +574,8 @@
                             url: '/get-category/' + prodcategy_id,
                             type: 'GET',
                             success: function(data) {
-                               var firstcategory = $('input[name="firstcategory"]');
-                               firstcategory.val(data.firstcategory);
+                                var firstcategory = $('input[name="firstcategory"]');
+                                firstcategory.val(data.firstcategory);
                             },
                             error: function(xhr, status, error) {
                                 console.error(error);
@@ -382,7 +586,7 @@
                 });
 
                 function bindProductChangeEvent(counter) {
-                    jQuery(document).ready(function($) {    
+                    jQuery(document).ready(function($) {
                         $(document).on('change', "#product" + counter, function() {
                             var productId = $(this).val();
                             console.log("skdf")
@@ -392,7 +596,33 @@
                                 dataType: 'json',
                                 success: function(data) {
                                     var uomInput = $('input[name="UOM' + counter + '"]');
+                                    let minstock = $('input[name="minstock' + counter + '"]');
+                                    let maxstock = $('input[name="maxstock' + counter + '"]');
                                     uomInput.val(data.uom);
+                                    minstock.val(data.minqty);
+                                    maxstock.val(data.maxqty);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(error);
+                                }
+                            });
+                        });
+
+                    });
+                }
+
+                function bindProductChangeCategoryEvent(counter) {
+                    jQuery(document).ready(function($) {
+                        $(document).on('change', "#pcategory" + counter, function() {
+                            var prodcategy_id = $(this).val();
+                            console.log("skdf")
+                            $.ajax({
+                                url: '/get-category/' + prodcategy_id,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    var firstcategory = $('input[name="subcategory' + counter + '"]');
+                                    firstcategory.val(data.firstcategory);
                                 },
                                 error: function(xhr, status, error) {
                                     console.error(error);
@@ -403,7 +633,7 @@
                     });
                 }
             </script>
-             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
@@ -414,24 +644,24 @@
         <div><br> </div>
         <script>
             // Get the current UTC time
-        var utcTime = new Date();
-        
-        // Calculate the time difference for Pakistan Standard Time (UTC+5)
-        var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
-        
-        // Calculate the Pakistan Standard Time by adding the offset
-        var pstTime = new Date(utcTime.getTime() + pstOffset);
-        
-        // Format the date components
-        var year = pstTime.getUTCFullYear();
-        var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
-        var day = ('0' + pstTime.getUTCDate()).slice(-2);
-        
-        // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
-        var formattedDate = year + '-' + month + '-' + day;
-        var pakisatndate = document.getElementById('documentdate');
-        pakisatndate.value= formattedDate;
-</script>
+            var utcTime = new Date();
+
+            // Calculate the time difference for Pakistan Standard Time (UTC+5)
+            var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+
+            // Calculate the Pakistan Standard Time by adding the offset
+            var pstTime = new Date(utcTime.getTime() + pstOffset);
+
+            // Format the date components
+            var year = pstTime.getUTCFullYear();
+            var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
+            var day = ('0' + pstTime.getUTCDate()).slice(-2);
+
+            // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
+            var formattedDate = year + '-' + month + '-' + day;
+            var pakisatndate = document.getElementById('documentdate');
+            pakisatndate.value = formattedDate;
+        </script>
 
     </section>
 

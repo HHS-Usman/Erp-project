@@ -11,6 +11,10 @@ class Purchaserequisition extends Model
     protected $guarded = [
         'id',
     ];
+    public function modeltype()
+    {
+        return $this->hasOne(Modetype::class);
+    }
     public function department()
     {
         return $this->hasOne(Department::class);
@@ -18,5 +22,9 @@ class Purchaserequisition extends Model
     public function employee()
     {
         return $this->hasOne(Employee::class);
+    }
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class, 'pdetail_id');
     }
 }

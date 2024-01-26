@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseDetail extends Model
+class Modetype extends Model
 {
     use HasFactory;
-    protected $guarded = [
+    protected $guarded =  [
         'id',
     ];
-    public function purchaseRequisition()
-    {
-        return $this->hasOne(Purchaserequisition::class);
+    public function purchaseRequisition(){
+        return $this->hasMany(Purchaserequisition::class,'pr_id');
     }
 }
