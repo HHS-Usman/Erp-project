@@ -13,5 +13,4 @@ class Product_category extends Model
         'product_category_code'=>'',
         'detail'=>'',
     ];
-
 }
