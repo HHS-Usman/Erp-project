@@ -119,7 +119,7 @@ Create Access Permission
             <div class="col-xs-6 col-sm-6 col-md-6 container  justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="options">Select Employee</label>
-                    <select id="name" name="name" class="select2">
+                    <select id="name" name="name" class="form-select">
                         <option class="options" value="">None</option>
                         @foreach($employes as $item)
                         <option value="{{ $item->employee_name }}">{{ $item->employee_name }}</option>
@@ -131,7 +131,7 @@ Create Access Permission
             </div>
             <div class="tab" id="tab1">
 
-                <div class="container d-flex justify-content-center align-items-center">
+                <div class=" d-flex justify-content-center align-items-center">
                     <div class="form-group">
                         <h4>Companies/ Units</h4>
                     </div>
@@ -155,42 +155,57 @@ Create Access Permission
                     </div>
                 </div>
                 @foreach ($companies as $company =>$item )
-                <div class="container d-flex justify-content-center align-items-center">
+                <div class=" d-flex justify-content-center align-items-center">
 
                     <div class="form-group">
                         <h6>{{ $item->name }}</h6>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="input1" name="email" class="input1"
-                            placeholder="Login ID" />
+                        <input type="text" class="form-control" id="input1" name="email" class="input1" placeholder="Login ID" />
                     </div>
+
                     <div class="form-group">
                         <input type="checkbox" id="freezeCheckbox" name="access[]" value="1" placeholder="Access" />
-                    </div>
-                    <div class="form-group">
 
-                        <input type="password" name="password" class="form-control input2" id="input2"
-                            placeholder="Password" />
                     </div>
-                    <div class="form-group">
 
-                        <input type="text" class="form-control" id="bit" name="report_access[]"
-                            placeholder="report_access" />
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control input2" id="input2" placeholder="Password" disabled />
+                        <input type="checkbox" id="showPasswordCheckbox" onclick="togglePassword()" />
+                        <label for="showPasswordCheckbox">Show Password</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="input" name="back_date_entry[]"
-                            placeholder="back_date_entry" />
+                        <select name="" id="" class="form-select">
+                            <option value="">None</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
                     </div>
                     <div class="form-group">
-
-                        <input type="email" class="form-control" id="input" name="post_date_entry[]"
-                            placeholder="post_date_entry" />
+                        <select name="" id="" class="form-select">
+                            <option value="">None</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="" id="" class="form-select">
+                            <option value="">None</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
                     </div>
 
                 </div>
                 @endforeach
 
-                <div class="container  justify-content-center align-items-center">
+                <div class="  justify-content-center align-items-center">
                     @foreach ($branches->groupBy('company.name') as $companyName => $companyGroup)
                     <h4>
                         {{ $companyName }}
@@ -213,7 +228,7 @@ Create Access Permission
                         <div class="dropdown-button" onclick="toggleDropdown()">Select Options</div>
                         <div id="dropdownOptions" class="dropdown-content">
                             @foreach ($roles as $item)
-                            <a><input type="checkbox" name="roles[]" value="{{ $item->id }}"> {{ $item->name }}</a>
+                            <a><input type="checkbox" name="" value="{{ $item->id }}"> {{ $item->name }}</a>
                             <!-- Add more options as needed -->
                             @endforeach
                         </div>
@@ -224,59 +239,180 @@ Create Access Permission
 
                 </div>
                 <div class="form-group">
-                    <label for="options">Role Selection</label>
-                    <select id="roleSelect" class="select2">
-                        <option class="options">None</option>
+                    <label for="role-select">Select Role:</label>
+                    <select id="role-select" class="form-select">
+                        <option value="">Select Role</option>
                         @foreach($roles as $item)
-                        <option id="roled" value="{{ $item->id }}" data-user-role="{{ $item->name }}">{{ $item->name }}
-                        </option>
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-
-            <div class="d-flex container">
+            <div class="row">
                 <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
-                    <table id="roletable" class="table table-bordered" style="border: 1px solid black">
+                    <table id="permissions-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Select</th>
-                                <th>Role ID</th>
-                                <th>Add </th>
-                                <th>View</th>
-                                <th>Edit</th>
-                                <th>Dele</th>
+                                <th>Select All</th>
+                                <th>Role Name</th>
+                                <th>Permission Name</th>
+
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Table rows will be populated dynamically using JavaScript -->
+                        <tbody id="myid">
+                            <!-- Permissions will be dynamically added here -->
                         </tbody>
                     </table>
                 </div>
-
-                <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center" style="top: 30%; left:2%;">
-                    <button type="button" class="btn btn-primary" onclick="sendData()">>></button>
-                    <div class="" style="margin-top: 2%;">
-                        <button type="button" class="btn btn-primary" onclick="getData()">
-                            < /button>
+                <div class="col-xs-1 col-sm-1 col-md-1 justify-content-center">
+                    <button type="button" class="btn btn-primary" id="sendToSecondTable">>></button>
+                    <div class="">
+                        <button type="button" class="btn btn-primary" id="removeFromSecondTable">
+                            <<</button>
                     </div>
                 </div>
-
                 <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
-                    <table id="secondTable" class="table table-bordered" style="border: 1px solid black; ">
+                    <table id="second-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Role</th>
-                                <th>Module</th>
-                                <th>Page</th>
+                                <th>Checkbox</th>
+                                <th>Role Name</th>
+                                <th>Permission Name</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Table rows will be populated dynamically using JavaScript -->
+                        <tbody id="secondTableBody">
+                            <!-- Selected permissions from the first table will be dynamically added here -->
                         </tbody>
                     </table>
                 </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                                $('#role-select').on('change', function () {
+                                    var selectedRole = $(this).val();
+
+                                    $.ajax({
+                                        url: '/fetch-employee-data/' + selectedRole,
+                                        type: 'GET',
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            updatePermissionsTable(response.permissions);
+                                        },
+                                        error: function (error) {
+                                            console.error(error);
+                                        }
+                                    });
+                                });
+
+                                function updatePermissionsTable(permissions) {
+                                    var permissionsTable = $('#myid');
+
+                                    // Clear existing content
+                                    permissionsTable.empty();
+
+                                    // Append new rows
+                                    permissions.forEach(function (permission) {
+                                        var row = $('<tr></tr>');
+                                        row.append('<td><input type="checkbox" class="permission-checkbox" ></td>');
+                                        row.append('<td>' + permission.role_name + '</td>');
+                                        row.append('<td><input type="hidden" class="permissione" value="' + permission.permission_id + '" >' + permission.name + '</td>');
+
+                                        permissionsTable.append(row);
+                                    });
+
+                                    // Add Select All checkbox
+                                    var selectAllRow = $('<tr></tr>');
+                                    selectAllRow.append('<td><input type="checkbox" id="selectAllCheckbox"></td>');
+
+                                    selectAllRow.append('<td></td>');
+                                    selectAllRow.append('<td></td>');
+                                    permissionsTable.prepend(selectAllRow);
+
+                                    // Add functionality for Select All checkbox
+                                    $('#selectAllCheckbox').on('change', function () {
+                                        $('.permission-checkbox').prop('checked', this.checked);
+                                    });
+                                }
+
+                                $('#sendToSecondTable').on('click', function () {
+                                    var selectedRows = $('#permissions-table .permission-checkbox:checked');
+
+                                    // Clone and append selected rows to the second table
+                                    var clonedRows = selectedRows.closest('tr').clone();
+                                    clonedRows.find('.permission-checkbox').prop('checked', false); // Uncheck the cloned checkboxes
+
+                                    // Set the 'name' attribute for the cloned rows in the second table
+                                    clonedRows.each(function () {
+                                        var permissionId = $(this).find('.permissione').val();
+                                        $(this).attr('name', 'permissions[]'); // Set the 'name' attribute for the entire row
+                                        $(this).find('.permissione').attr('name', 'permissions[]').val(permissionId);
+                                    });
+
+                                    $('#secondTableBody').append(clonedRows);
+
+                                    // Clear the selection in the first table
+                                    selectedRows.prop('checked', false);
+                                });
+
+                                $('#removeFromSecondTable').on('click', function () {
+                                    // Remove selected rows from the second table
+                                    $('#second-table .permission-checkbox:checked').closest('tr').remove();
+                                });
+                            });
+                            function toggleDropdown() {
+                                var dropdown = document.getElementById('dropdownOptions');
+                                dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                            }
+
+                            function updateSelectedOptions() {
+                                var selectedOptionsDiv = document.getElementById('selectedOptions');
+                                var selectedOptions = Array.from(document.querySelectorAll('#dropdownOptions input:checked'))
+                                                            .map(checkbox => checkbox.parentElement.textContent.trim());
+
+                                selectedOptionsDiv.textContent = 'Selected Options: ' + selectedOptions.join(', ');
+                            }
+
+                            // Handle checkbox changes to update selected options
+                            document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+
+                function toggleDropdown() {
+                    var dropdown = document.getElementById('dropdownOptions');
+                    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                }
+
+                function updateSelectedOptions() {
+                    var selectedOptionsDiv = document.getElementById('selectedOptions');
+                    var selectedOptions = Array.from(document.querySelectorAll('#dropdownOptions input:checked'))
+                                                .map(checkbox => checkbox.parentElement.textContent.trim());
+
+                    selectedOptionsDiv.textContent = 'Selected Options: ' + selectedOptions.join(', ');
+                }
+
+                // Handle checkbox changes to update selected options
+                document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+                function handleCheckboxChange() {
+                    const checkbox = document.getElementById("freezeCheckbox");
+                    const passwordInput = document.getElementById("input2");
+                    const emailInput = document.getElementById("input1");
+                    // Enable or disable password input based on checkbox state
+                    passwordInput.disabled = !checkbox.checked;
+                    emailInput.disabled = !checkbox.checked;
+                }
+
+                // Attach event listener to checkbox
+                document.getElementById("freezeCheckbox").addEventListener("change", handleCheckboxChange);
+
+                // Initial call to set up password input based on checkbox state
+                handleCheckboxChange();
+                function togglePassword() {
+                    const passwordInput = document.getElementById("input2");
+                    const showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
+
+                    // Toggle password visibility
+                    passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+                }
+            </script>
 
             <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -329,114 +465,6 @@ Create Access Permission
             }
         });
     </script>
-    <table id="permissions-table">
-        <label for="role-select">Select Role:</label>
-        <select id="role-select" class="form-select">
-            @foreach($roles as $item)
-            <option value="{{ $item->id }}">{{ $item->name }}</option>
-            @endforeach
-        </select>
-
-        <table id="permissions-table">
-            <thead>
-                <tr>
-                    <th>Select All</th>
-                    <th>Checkbox</th>
-                    <th>Role Name</th>
-                    <th>Permission ID</th>
-                </tr>
-            </thead>
-            <tbody id="myid">
-                <!-- Permissions will be dynamically added here -->
-            </tbody>
-        </table>
-
-        <div>
-            <button type="button" class="btn btn-primary" id="sendToSecondTable">Send to Second Table</button>
-            <button type="button" class="btn btn-primary" id="removeFromSecondTable">Remove from Second Table</button>
-        </div>
-
-        <table id="second-table">
-            <thead>
-                <tr>
-                    <th>Checkbox</th>
-                    <th>Role Name</th>
-                    <th>Permission ID</th>
-                </tr>
-            </thead>
-            <tbody id="secondTableBody">
-                <!-- Selected permissions from the first table will be dynamically added here -->
-            </tbody>
-        </table>
-
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#role-select').on('change', function () {
-                    var selectedRole = $(this).val();
-
-                    $.ajax({
-                        url: '/fetch-employee-data/' + selectedRole,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (response) {
-                            updatePermissionsTable(response.permissions);
-                        },
-                        error: function (error) {
-                            console.error(error);
-                        }
-                    });
-                });
-
-                function updatePermissionsTable(permissions) {
-                    var permissionsTable = $('#myid');
-
-                    // Clear existing content
-                    permissionsTable.empty();
-
-                    // Append new rows
-                    permissions.forEach(function (permission) {
-                        var row = $('<tr></tr>');
-                        row.append('<td><input type="checkbox" class="permission-checkbox"></td>');
-                        row.append('<td>' + permission.role_name + '</td>');
-                        row.append('<td>' + permission.id + '</td>');
-                        permissionsTable.append(row);
-                    });
-
-                    // Add Select All checkbox
-                    var selectAllRow = $('<tr></tr>');
-                    selectAllRow.append('<td><input type="checkbox" id="selectAllCheckbox"></td>');
-                    selectAllRow.append('<td>Select All</td>');
-                    selectAllRow.append('<td></td>');
-                    selectAllRow.append('<td></td>');
-                    permissionsTable.prepend(selectAllRow);
-
-                    // Add functionality for Select All checkbox
-                    $('#selectAllCheckbox').on('change', function () {
-                        $('.permission-checkbox').prop('checked', this.checked);
-                    });
-                }
-
-                $('#sendToSecondTable').on('click', function () {
-                    var selectedRows = $('#permissions-table .permission-checkbox:checked');
-
-                    // Clone and append selected rows to the second table
-                    var clonedRows = selectedRows.closest('tr').clone();
-                    $('#secondTableBody').append(clonedRows);
-
-                    // Clear the selection in the first table
-                    selectedRows.prop('checked', false);
-                });
-
-                $('#removeFromSecondTable').on('click', function () {
-                    // Remove selected rows from the second table
-                    $('#second-table .permission-checkbox:checked').closest('tr').remove();
-                });
-            });
-        </script>
-        </body>
-
-        </html>
 </section>
 
 @endsection

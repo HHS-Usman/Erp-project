@@ -17,7 +17,7 @@ use App\Models\AccessPermit;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
-
+use Spatie\Permission\Models\Permission;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
@@ -44,29 +44,32 @@ class AccessPermitController extends Controller
         return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies', 'branches', 'role_access' ));
     }
     public function store(Request $request)
-    {
-        // dd($request->all());
-        // $records = $request->input('record', []);
+{
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:6',
+        'permissions' => 'required|array', // Add this line for permissions
+    ]);
+
+    // Create the user
+    $input = $request->all();
+    $input['password'] = Hash::make($input['password']);
+
+    $user = User::create($input);
+
+    // Assign roles to the user
 
 
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6', // Adjust the minimum length as needed
-            'roles' => 'required|array',
-
-        ]);
-
-        // Create the user
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-
-        return redirect()->route('accesspermit.index')
-                        ->with('success','User created successfully');
+    // Assign permissions to the user
+    if ($request->has('permissions')) {
+        $user->givePermissionTo($request->input('permissions'));
     }
+
+    return redirect()->route('accesspermit.index')
+                    ->with('success', 'User created successfully');
+}
+
     /**
      * Display the specified resource.
      *
@@ -126,7 +129,7 @@ class AccessPermitController extends Controller
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
-        $user->assignRole($request->input('roles'));
+
 
         return redirect()->route('accesspermit.index')
                         ->with('success','User updated successfully');
@@ -143,19 +146,44 @@ class AccessPermitController extends Controller
         User::find($id)->delete();
         return redirect()->route('accesspermit.index')->with('success','User deleted successfully');
     }
+    // public function getPermissionId($roleId)
+    //     {
+
+    //         $role = Role::find($roleId);
+
+    //         if ($role) {
+    //             $permissions = $role->permissions;
+
+    //             // Extract the relevant information (ID and name) from each permission
+    //             $formattedPermissions = $permissions->map(function ($permission) {
+    //                 return [
+    //                     'id'   => $permission->id,
+    //                     'name' => $permission->name,
+    //                 ];
+    //             });
+
+    //             return response()->json(['permissions' => $formattedPermissions]);
+    //         } else {
+    //             return response()->json(['error' => 'Role not found for ID: ' . $roleId], 404);
+    //         }
+    //     }
     public function getPermissionId($roleId)
         {
-
             $role = Role::find($roleId);
 
             if ($role) {
                 $permissions = $role->permissions;
-                
+
                 // Extract the relevant information (ID and name) from each permission
-                $formattedPermissions = $permissions->map(function ($permission) {
+                $formattedPermissions = $permissions->map(function ($permission) use ($role) {
+                    $module = $permission->module;
                     return [
-                        'id'   => $permission->id,
+                        'role_id' => $role->id, // Include role_id in the response
+                        'role_name' => $role->name, // Include role_name in the response
+                        'permission_id'   => $permission->id,
                         'name' => $permission->name,
+                        'module_id'     => optional($module)->id,    // Include module_id, handle the case where module is not set
+                        'module_name'   => optional($module)->name,  // Include module_name, handle the case where module is not set
                     ];
                 });
 

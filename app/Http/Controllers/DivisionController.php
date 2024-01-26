@@ -9,7 +9,7 @@ use PDO;
 class DivisionController extends Controller
 {
     public function index()
-    {  
+    {
         $divisions = Division::latest()->paginate();
         return view('organizationsetup.division.index',compact('divisions'))->with(request()->input('page'));
     }
@@ -49,7 +49,7 @@ class DivisionController extends Controller
     /**
      * Display the specified resource.
      *
-     
+
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -62,8 +62,9 @@ class DivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Division $division)
+    public function edit($id)
     {
+        $division = Division::find($id);
         return view('organizationsetup.division.update',compact('division'));
     }
 
@@ -79,7 +80,7 @@ class DivisionController extends Controller
             'division_code' => $request->input('division_code'),
             'division'      => $request->input('division'),
             'detail'        => $request->input('detail'),
-            'is_active'     => $request->has('is_active') ? 1 : 0, 
+            'is_active'     => $request->has('is_active') ? 1 : 0,
         ]);
         return redirect()->route('division.index')->with('success','division made  successfully ');
     }
