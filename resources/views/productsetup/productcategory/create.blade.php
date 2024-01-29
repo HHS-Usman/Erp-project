@@ -39,6 +39,11 @@
                                 <input type="text" name="product_category" id="product_category" class="form-control" placeholder="productcategory" required>
                             </div>
                             <div class="form-group">
+                                <strong>Product Category<span style="color:#DC3545">*</span></strong>
+                                <input type="text" name="product_category" id="product_category" class="form-control" placeholder="productcategory" required>
+                            </div>
+                           
+                            <div class="form-group">
                                 <strong>Details</strong>
                                 <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">
                             </div>

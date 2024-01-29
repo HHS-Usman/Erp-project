@@ -13,4 +13,7 @@ class Product_category extends Model
         'product_category_code'=>'',
         'detail'=>'',
     ];
+    public function productsubcategory(){
+        return $this->hasMany(Product_sub_category::class,'id');
+    }
 }

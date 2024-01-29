@@ -16,6 +16,7 @@ use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\Console;
 
 class PurchasereuquisitionController extends Controller
 {
@@ -27,6 +28,11 @@ class PurchasereuquisitionController extends Controller
     public function index()
     {
         return view('purchaserequisition.index');
+    }
+    // Declare function getfirstCategory for fetching data on basis on product category for first category by Abrar
+    public function getfirstCategory($pc_id){
+        $subcategory = Product_sub_category::where('pc_id',$pc_id)->get();
+        return response()->json($subcategory);
     }
     public function purchasedata($id)
     {

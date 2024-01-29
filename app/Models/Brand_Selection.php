@@ -15,5 +15,8 @@ class Brand_Selection extends Model
         'brand_selection_code' => '',
         'detail' => '',
     ];
+    public function pSubc(){
+        return $this->belongsTo(Product_sub_category::class,'psubc_id');
+    }
 
 }

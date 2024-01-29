@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product_category;
+use App\Models\Product_sub_category;
+
 class ProductCategoryController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return vieW('productsetup.productcategory.create');
+        $subcategory = Product_sub_category::all();
+        return vieW('productsetup.productcategory.create',compact('subcategory'));
     }
 
     /**
@@ -47,6 +50,7 @@ class ProductCategoryController extends Controller
             'product_category' => request()->get('product_category'),
             'product_category_code' => request()->get('product_category_code'),
             'detail' => request()->get('detail'),
+            'psubc_id' => request()->get('psubc_id'),
             'is_active' => request()->get('is_active', 0),
             ]);
             return redirect()->route('productcategory.index')->with('success','Manage successfully');
