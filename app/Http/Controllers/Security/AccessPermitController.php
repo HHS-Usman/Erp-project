@@ -38,15 +38,15 @@ class AccessPermitController extends Controller
         $modules = Module::all();
         $pages = Page::all();
         $companies = Company::all();
-
+        $permissions = Permissions::with('module', 'page', 'pageaction')->get();
         $role_access = role_access::all();
         $branches = Branch::with('company')->get();
-        return view('security.permit.create' ,compact('employes' , 'modules', 'pages', 'roles', 'companies', 'branches', 'role_access' ));
+        return view('security.permit.create' ,compact( 'permissions', 'employes' , 'modules', 'pages', 'roles', 'companies', 'branches', 'role_access' ));
     }
     public function store(Request $request)
 {
     $this->validate($request, [
-        'name' => 'required',
+        'name' => 'required|unique:users,name',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:6',
         'permissions' => 'required|array', // Add this line for permissions

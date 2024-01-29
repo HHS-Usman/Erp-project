@@ -18,6 +18,14 @@ use Spatie\Permission\Models\Permission;
         </ul>
     </div>
     @endif
+    @if(session('success'))
+    <script>
+        window.onload = function() {
+                    alert("{{ session('success') }}");
+                }
+    </script>
+    @endif
+
     <div class="pagetitle" style="margin-left: 20px;">
         <h1>Create recent Role Permission</h1>
         <nav>
@@ -56,7 +64,7 @@ use Spatie\Permission\Models\Permission;
                     <select id="name" name="role_name" class="form-select" style="margin-left: 2%">
                         <option class="options" value="">None</option>
                         @foreach($roles as $item)
-                        <option value="{{ $item->user_role}}">{{ $item->user_role }}</option>
+                        <option value="{{ $item->user_role }}|{{ $item->id }}">{{ $item->user_role }}</option>
                         @endforeach
                     </select>
 
@@ -116,47 +124,47 @@ use Spatie\Permission\Models\Permission;
                             </td>
                             <td></td>
                             <td><input type="checkbox" name="" id="selectAdd_{{ $moduleName }}"
-                                    class="ite item_{{ $moduleName }} not_{{ $moduleName }} selectAdd"
+                                    class="ite item_{{ $moduleName }} example0_{{ $moduleName}} not_{{ $moduleName }} selectAdd"
                                     value="{{ $moduleGroup->first()->module->id }}" data-module="{{ $moduleName }}">
                             </td>
                             <td><input type="checkbox" name="" id="selectView_{{ $moduleName }}"
-                                    class="ite item_{{ $moduleName}} but_{{ $moduleName}} selectView"
+                                    class="ite item_{{ $moduleName}} example0_{{ $moduleName}} but_{{ $moduleName}} selectView"
                                     value="{{ $moduleGroup->first()->module->id }}" data-module="{{ $moduleName }}">
                             </td>
                             <td><input type="checkbox" name="" id="selectEdit_{{ $moduleName }}"
-                                    class="ite item_{{ $moduleName}} why_{{ $moduleName}} selectEdit"
+                                    class="ite item_{{ $moduleName}} example0_{{ $moduleName}} why_{{ $moduleName}} selectEdit"
                                     value="{{ $moduleGroup->first()->module->id }}" data-module="{{ $moduleName }}">
                             </td>
                             <td><input type="checkbox" name="" id="selectDelete"
-                                    class="ite item_{{ $moduleName}} the_{{ $moduleName}} selectDelete"
+                                    class="ite item_{{ $moduleName}} example0_{{ $moduleName}} the_{{ $moduleName}} selectDelete"
                                     value="{{ $moduleGroup->first()->module->id }}" data-module="{{ $moduleName }}">
                             </td>
                         </tr>
                         @foreach ($moduleGroup->groupBy('page.name') as $pageName => $pageGroup)
                         <tr>
                             <td>{{ $pageName }}</td>
-                            <td><input type="checkbox" name="" id=""
-                                    class="ite item_{{ $moduleName}} example0_{{ $moduleName}}" value="1"></td>
+                            <td><input type="checkbox" name="" id="tick_{{ $pageName}}"
+                                    class="ite item_{{ $moduleName}} example0_{{ $moduleName}} tick" value="{{ $pageGroup->first()->module->id }}" data-page="{{ $pageName }}"></td>
                             <td></td>
                             @foreach ($pageGroup as $data)
                             @if ($data->page_action_id == 1)
                             <td>
                                 <input type="checkbox" name="permissions[]" id="item_one"
-                                    class="ite item_{{ $moduleName}} example2_{{ $moduleName}} not_{{ $moduleName}} "
+                                    class="ite item_{{ $moduleName}} example2_{{ $moduleName}} not_{{ $moduleName}} exam_{{ $pageName}}  example0_{{ $moduleName}}"
                                     value="{{ $data->id }}">
                             </td>
 
                             @elseif ($data->page_action_id == 2)
                             <td><input type="checkbox" name="permissions[]" id="2ndweek_tue_03"
-                                    class="ite item_{{ $moduleName}} example3_{{ $moduleName}} but_{{ $moduleName}}"
+                                    class="ite item_{{ $moduleName}} example3_{{ $moduleName}} but_{{ $moduleName}} exam_{{ $pageName}}  example0_{{ $moduleName}}"
                                     value="{{ $data->id }}"></td>
                             @elseif ($data->page_action_id == 3)
                             <td><input type="checkbox" name="permissions[]" id="3rdweek_tue_03"
-                                    class="ite item_{{ $moduleName}} example4_{{ $moduleName}} why_{{ $moduleName}}"
+                                    class="ite item_{{ $moduleName}} example4_{{ $moduleName}} why_{{ $moduleName}} exam_{{ $pageName}}  example0_{{ $moduleName}}"
                                     value="{{ $data->id }}"></td>
                             @elseif ($data->page_action_id == 4)
                             <td><input type="checkbox" name="permissions[]" id="4thweek_tue_03"
-                                    class="ite item_{{ $moduleName}} example5_{{ $moduleName}} the_{{ $moduleName}}"
+                                    class="ite item_{{ $moduleName}} example5_{{ $moduleName}} the_{{ $moduleName}} exam_{{ $pageName}}  example0_{{ $moduleName}}"
                                     value="{{ $data->id }}"></td>
                             @endif
                             @endforeach
@@ -185,16 +193,37 @@ use Spatie\Permission\Models\Permission;
             $('.ite').prop('disabled', true);
 
             // Select All checkbox change event
-            // $('#selectAll').change(function () {
-            // $('.example').prop('checked', $(this).prop('checked'));
-            //     });
+            $('.tick').change(function () {
+                    var $pageName = $(this).attr('data-page');
+                    $('.exam_' + $pageName).prop('checked', $(this).prop('checked'));
 
-            //     // Individual item checkbox change event
-            //     $('.example').change(function () {
-            //         if (!$(this).prop('checked')) {
-            //             $('#selectAll').prop('checked', false);
-            //         }
-            //     });
+                    // Check the state of the individual checkboxes and update selectAdd accordingly
+                    updateSelectAddState($pageName);
+                });
+
+                // Individual item checkbox change event
+                $('.exam_{{ $pageName }}').change(function () {
+                    var $pageName = $(this).attr('data-page');
+
+                    // Check the state of the individual checkboxes and update selectAdd accordingly
+                    updateSelectAddState($pageName);
+                });
+
+                // Initial state check for selectAdd
+                $('.exam_{{ $pageName }}').each(function () {
+                    var $pageName = $(this).attr('data-page');
+
+                    // Check the state of the individual checkboxes and update selectAdd accordingly
+                    updateSelectAddState($pageName);
+                });
+
+                // Initial state check for selectAdd
+                $('.exam_{{ $pageName }}').each(function () {
+                    var $pageName = $(this).attr('data-page');
+                    if (!$(this).prop('checked')) {
+                        $('.tick[data-page="' + $pageName + '"]').prop('checked', false);
+                    }
+                });
 
                 // Freeze All checkbox change event
                 $('.selectAdd').change(function () {
@@ -355,6 +384,7 @@ use Spatie\Permission\Models\Permission;
                         $('.selectAll[data-module="' + moduleName + '"]').prop('checked', false);
                     }
                 });
+
                     });
 
             function toggleUnfreeze(moduleName, moduleId) {
@@ -448,7 +478,26 @@ use Spatie\Permission\Models\Permission;
                   }
               }
           }
+          $(document).ready(function () {
+            $('#roleForm').submit(function (e) {
+                e.preventDefault();
 
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            $('#successModalBody').text(response.message);
+                            $('#successModal').modal('show');
+                        } else {
+                            $('#errorModalBody').text(response.message);
+                            $('#errorModal').modal('show');
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </section>
 

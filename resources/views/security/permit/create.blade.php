@@ -122,7 +122,8 @@ Create Access Permission
                     <select id="name" name="name" class="form-select">
                         <option class="options" value="">None</option>
                         @foreach($employes as $item)
-                        <option value="{{ $item->employee_name }}">{{ $item->employee_name }}</option>
+                        <option value="{{ $item->employee_name }}">{{ $item->employee_code }}-{{ $item->employee_name }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -161,7 +162,8 @@ Create Access Permission
                         <h6>{{ $item->name }}</h6>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="input1" name="email" class="input1" placeholder="Login ID" />
+                        <input type="text" class="form-control" id="input1" name="email" class="input1"
+                            placeholder="Login ID" />
                     </div>
 
                     <div class="form-group">
@@ -170,7 +172,8 @@ Create Access Permission
                     </div>
 
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control input2" id="input2" placeholder="Password" disabled />
+                        <input type="password" name="password" class="form-control input2" id="input2"
+                            placeholder="Password" disabled />
                         <input type="checkbox" id="showPasswordCheckbox" onclick="togglePassword()" />
                         <label for="showPasswordCheckbox">Show Password</label>
                     </div>
@@ -253,7 +256,7 @@ Create Access Permission
                     <table id="permissions-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Select All</th>
+                                <th><input type="checkbox" id="selectAllCheckboxFirstTable"></th>
                                 <th>Role Name</th>
                                 <th>Permission Name</th>
 
@@ -268,14 +271,14 @@ Create Access Permission
                     <button type="button" class="btn btn-primary" id="sendToSecondTable">>></button>
                     <div class="">
                         <button type="button" class="btn btn-primary" id="removeFromSecondTable">
-                            <<</button>
+                            << </button>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-5 justify-content-center">
                     <table id="second-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                                <th><input type="checkbox" id="selectAllCheckboxSecondTable"></th>
                                 <th>Role Name</th>
                                 <th>Permission Name</th>
                             </tr>
@@ -289,92 +292,88 @@ Create Access Permission
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script>
                 $(document).ready(function () {
-                                $('#role-select').on('change', function () {
-                                    var selectedRole = $(this).val();
+                    $('#selectAllCheckboxFirstTable').on('change', function () {
+                    $('#myid .permission-checkbox').prop('checked', this.checked);
+                });
 
-                                    $.ajax({
-                                        url: '/fetch-employee-data/' + selectedRole,
-                                        type: 'GET',
-                                        dataType: 'json',
-                                        success: function (response) {
-                                            updatePermissionsTable(response.permissions);
-                                        },
-                                        error: function (error) {
-                                            console.error(error);
-                                        }
-                                    });
-                                });
+                // Add functionality for Select All checkbox in the second table
+                $('#selectAllCheckboxSecondTable').on('change', function () {
+                    $('#secondTableBody .permission-checkbox').prop('checked', this.checked);
+                });
 
-                                function updatePermissionsTable(permissions) {
-                                    var permissionsTable = $('#myid');
+                $('#role-select').on('change', function () {
+                    var selectedRole = $(this).val();
 
-                                    // Clear existing content
-                                    permissionsTable.empty();
+                    $.ajax({
+                            url: '/fetch-employee-data/' + selectedRole,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            updatePermissionsTable(response.permissions);
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                });
 
-                                    // Append new rows
-                                    permissions.forEach(function (permission) {
-                                        var row = $('<tr></tr>');
-                                        row.append('<td><input type="checkbox" class="permission-checkbox" ></td>');
-                                        row.append('<td>' + permission.role_name + '</td>');
-                                        row.append('<td><input type="hidden" class="permissione" value="' + permission.permission_id + '" >' + permission.name + '</td>');
+                function updatePermissionsTable(permissions) {
+                    var permissionsTable = $('#myid');
 
-                                        permissionsTable.append(row);
-                                    });
+                    // Append new rows to existing content
+                    permissions.forEach(function (permission) {
+                        var row = $('<tr></tr>');
+                        row.append('<td><input type="checkbox" class="permission-checkbox" ></td>');
+                        row.append('<td>' + permission.role_name + '</td>');
+                        row.append('<td><input type="hidden" class="permissione" value="' + permission.permission_id + '" >' + permission.name + '</td>');
 
-                                    // Add Select All checkbox
-                                    var selectAllRow = $('<tr></tr>');
-                                    selectAllRow.append('<td><input type="checkbox" id="selectAllCheckbox"></td>');
+                        permissionsTable.append(row);
+                    });
 
-                                    selectAllRow.append('<td></td>');
-                                    selectAllRow.append('<td></td>');
-                                    permissionsTable.prepend(selectAllRow);
+                // Add Select All checkbox if it doesn't exist
+                // if ($('#selectAllCheckbox').length === 0) {
+                //     var selectAllRow = $('<tr></tr>');
+                //     selectAllRow.append('<td><input type="checkbox" id="selectAllCheckbox"></td>');
+                //     selectAllRow.append('<td></td>');
+                //     selectAllRow.append('<td></td>');
+                //     permissionsTable.prepend(selectAllRow);
 
-                                    // Add functionality for Select All checkbox
-                                    $('#selectAllCheckbox').on('change', function () {
-                                        $('.permission-checkbox').prop('checked', this.checked);
-                                    });
-                                }
+                //     // Add functionality for Select All checkbox
+                //     $('#selectAllCheckbox').on('change', function () {
+                //         $('.permission-checkbox').prop('checked', this.checked);
+                //     });
+                // }
+                }
 
-                                $('#sendToSecondTable').on('click', function () {
-                                    var selectedRows = $('#permissions-table .permission-checkbox:checked');
+                $('#sendToSecondTable').on('click', function () {
+                    var selectedRows = $('#permissions-table .permission-checkbox:checked');
 
-                                    // Clone and append selected rows to the second table
-                                    var clonedRows = selectedRows.closest('tr').clone();
-                                    clonedRows.find('.permission-checkbox').prop('checked', false); // Uncheck the cloned checkboxes
+                    // Clone and append selected rows to the second table
+                    var clonedRows = selectedRows.closest('tr').clone();
+                    clonedRows.find('.permission-checkbox').prop('checked', false); // Uncheck the cloned checkboxes
 
-                                    // Set the 'name' attribute for the cloned rows in the second table
-                                    clonedRows.each(function () {
-                                        var permissionId = $(this).find('.permissione').val();
-                                        $(this).attr('name', 'permissions[]'); // Set the 'name' attribute for the entire row
-                                        $(this).find('.permissione').attr('name', 'permissions[]').val(permissionId);
-                                    });
+                    // Set the 'name' attribute for the cloned rows in the second table
+                    clonedRows.each(function () {
+                        var permissionId = $(this).find('.permissione').val();
+                        $(this).attr('name', 'permissions[]'); // Set the 'name' attribute for the entire row
+                        $(this).find('.permissione').attr('name', 'permissions[]').val(permissionId);
+                    });
 
-                                    $('#secondTableBody').append(clonedRows);
+                    $('#secondTableBody').append(clonedRows);
 
-                                    // Clear the selection in the first table
-                                    selectedRows.prop('checked', false);
-                                });
+                    // Clear the selection in the first table
+                    selectedRows.prop('checked', false);
+                });
 
-                                $('#removeFromSecondTable').on('click', function () {
-                                    // Remove selected rows from the second table
-                                    $('#second-table .permission-checkbox:checked').closest('tr').remove();
-                                });
-                            });
-                            function toggleDropdown() {
-                                var dropdown = document.getElementById('dropdownOptions');
-                                dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-                            }
+                $('#removeFromSecondTable').on('click', function () {
+                    // Remove selected rows from the second table
+                    $('#secondTableBody .permission-checkbox:checked').closest('tr').remove();
+                });
 
-                            function updateSelectedOptions() {
-                                var selectedOptionsDiv = document.getElementById('selectedOptions');
-                                var selectedOptions = Array.from(document.querySelectorAll('#dropdownOptions input:checked'))
-                                                            .map(checkbox => checkbox.parentElement.textContent.trim());
-
-                                selectedOptionsDiv.textContent = 'Selected Options: ' + selectedOptions.join(', ');
-                            }
-
-                            // Handle checkbox changes to update selected options
-                            document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+                // Add functionality for Select All checkbox in the second table
+                $('#selectAllCheckboxSecondTable').on('change', function () {
+                    $('#secondTableBody .permission-checkbox').prop('checked', this.checked);
+                });
 
                 function toggleDropdown() {
                     var dropdown = document.getElementById('dropdownOptions');
@@ -384,13 +383,14 @@ Create Access Permission
                 function updateSelectedOptions() {
                     var selectedOptionsDiv = document.getElementById('selectedOptions');
                     var selectedOptions = Array.from(document.querySelectorAll('#dropdownOptions input:checked'))
-                                                .map(checkbox => checkbox.parentElement.textContent.trim());
+                        .map(checkbox => checkbox.parentElement.textContent.trim());
 
                     selectedOptionsDiv.textContent = 'Selected Options: ' + selectedOptions.join(', ');
                 }
 
                 // Handle checkbox changes to update selected options
                 document.getElementById('myDropdown').addEventListener('change', updateSelectedOptions);
+
                 function handleCheckboxChange() {
                     const checkbox = document.getElementById("freezeCheckbox");
                     const passwordInput = document.getElementById("input2");
@@ -405,6 +405,7 @@ Create Access Permission
 
                 // Initial call to set up password input based on checkbox state
                 handleCheckboxChange();
+
                 function togglePassword() {
                     const passwordInput = document.getElementById("input2");
                     const showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
@@ -412,6 +413,8 @@ Create Access Permission
                     // Toggle password visibility
                     passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
                 }
+            });
+
             </script>
 
             <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">

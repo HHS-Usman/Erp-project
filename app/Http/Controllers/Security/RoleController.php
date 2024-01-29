@@ -15,6 +15,8 @@ use App\Models\role_access;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
+use Exception;
+
 class RoleController extends Controller
 {
     /**
@@ -40,23 +42,22 @@ class RoleController extends Controller
     public function create()
     {
         $roles = User_role::all();
-        $modals = Module::with('permissions')->get();
-        $pagers = Permissions::join('pages', 'permissions.page_id', '=', 'pages.id')
-         ->select('permissions.*', 'pages.name as page_name')
-         ->get();
-        $pgactions = Permissions::join('page_actions', 'permissions.page_action_id', '=', 'page_actions.id')
-        ->select('permissions.*', 'page_actions.Name as page_action_name')
-        ->get();
-        $modules = Module::all();
-        $pages = Page::all();
+        // $modals = Module::with('permissions')->get();
+        // $pagers = Permissions::join('pages', 'permissions.page_id', '=', 'pages.id')
+        //  ->select('permissions.*', 'pages.name as page_name')
+        //  ->get();
+        // $pgactions = Permissions::join('page_actions', 'permissions.page_action_id', '=', 'page_actions.id')
+        // ->select('permissions.*', 'page_actions.Name as page_action_name')
+        // ->get();
+        // $modules = Module::all();
+        // $pages = Page::all();
         $pageactions = PageAction::all();
         $permissions = Permissions::with('module', 'page', 'pageaction')->get(); // Permission::join('modules', 'permissions.module_id', '=', 'modules.id')
         // ->select('permissions.*', 'modules.module_name as module_name')
         // ->get();
 
 
-        return view('security.User.Role.Addrole', compact('permissions', 'pageactions',
-         'modules', 'pages', 'pagers','pgactions', 'roles'));
+        return view('security.User.Role.Addrole', compact('permissions',  'roles'));
 
     }
 
@@ -68,10 +69,25 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
 
-        $role = Role::create(['name' => $request->role_name]);
-        $role->givePermissionTo($request->permissions);
-        return response()->json(['success'=>'Role Created Successfully']);
+        try {
+            // Assuming $request->role_name contains the 'user_role|id' format
+            list($userRole, $id) = explode('|', $request->role_name);
+
+            // Create the role and give permissions
+            $role = Role::create(['name' => $userRole ,
+            'ur_id' => $id ]);
+            $role->givePermissionTo($request->permissions);
+
+
+            DB::commit();
+
+            return redirect()->route('role.create')->with(['success' => 'Role Created Successfully']);
+        } catch (Exception $th) {
+            DB::rollBack();
+            return redirect()->route('role.create')->with('error', 'Error');
+        }
     }
 
     /**

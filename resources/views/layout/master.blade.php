@@ -34,7 +34,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
-    
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -465,7 +465,7 @@
                                             @endcan
                                             @can('view-product')
                                             <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('product.index') }}">Create Product</a>
+                                                    href="{{ route('product.index') }}">Manage Product</a>
                                             </li>
                                             @endcan
                                             @can('add-classification')
