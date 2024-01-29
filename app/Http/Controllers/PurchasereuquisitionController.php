@@ -27,7 +27,8 @@ class PurchasereuquisitionController extends Controller
      */
     public function index()
     {
-        return view('purchaserequisition.index');
+        $Prdata = Purchaserequisition::all();
+        return view('purchaserequisition.index',compact('Prdata'));
     }
     // Declare function getfirstCategory for fetching data on basis on product category for first category by Abrar
     public function getfirstCategory($pc_id){
@@ -83,13 +84,13 @@ class PurchasereuquisitionController extends Controller
         $employee = Employee::all();
         $pcategory = Product_category::all();
         $product = Product::all();
-        $brand = Brand_Selection::all();
+        // $brand = Brand_Selection::all();
         $uom = Unit_selection::all();
         $modetype = Modetype::all();
         $subcategory = Product_sub_category::all();
         $counterid = Purchaserequisition::count("pr_id");
         $pr = $counterid + 1;
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'brand', 'uom', 'pr','modetype','subcategory'));
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','modetype','subcategory'));
     }
 
     /**

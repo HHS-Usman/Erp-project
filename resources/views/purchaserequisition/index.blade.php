@@ -40,17 +40,32 @@
                     <thead>
                         <tr>
                             <th scope="col">S.no</th>
-                            <th scope="col">sp_id</th>
-                            <th scope="col">saleperson_code</th>
-                            <th scope="col">persontype</th>
-                            <th scope="col">employee</th>
-                            <th scope="col">detail</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Doc_no</th>
+                            <th scope="col">Supplier</th>
+                            <th scope="col">Quatation PR no</th>
+                            <th scope="col">Quatation Amount</th>
+                            <th scope="col">Quotation Remarks</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        @foreach ($Prdata as $item=>$pr)
+                        <tr>
+                            <th>{{ $item + 1 }}</a></th>
+                            <th>{{ $pr->doc_ref_no }}</a></th>
+                            <td>{{ $pr->saleperson_code }}</td>
+                            <td>{{ $pr->persontype }}</td>
+                            <td>{{ $pr->employee }}</td>
+                            <td>{{ $pr->detail }}</td>
+                            <td>
+                                <form action="" method="POST">
+                                    <a class="btn btn-info" href="">Show</a>
+                                    <a class="btn btn-primary">Edit</a>
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="pagination" id="topPagination"></div>

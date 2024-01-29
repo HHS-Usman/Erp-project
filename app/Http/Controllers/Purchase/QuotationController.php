@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Purchase;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Brand_Selection;
 use App\Models\Department;
 use App\Models\Employee;
@@ -12,7 +13,7 @@ use App\Models\Product_category;
 use App\Models\Product_sub_category;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
-use Illuminate\Http\Request;
+
 
 class QuotationController extends Controller
 {
@@ -37,13 +38,14 @@ class QuotationController extends Controller
         $employee = Employee::all();
         $pcategory = Product_category::all();
         $product = Product::all();
-        $brand = Brand_Selection::all();
+        // $brand = Brand_Selection::all();
         $uom = Unit_selection::all();
         $modetype = Modetype::all();
         $subcategory = Product_sub_category::all();
         $counterid = Purchaserequisition::count("pr_id");
         $pr = $counterid + 1;
-        return view('quotation.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'brand', 'uom', 'pr','modetype','subcategory'));
+        return view('quotation.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','modetype','subcategory'));
+
     }
 
     /**

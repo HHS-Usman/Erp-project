@@ -174,11 +174,11 @@
                             </td>
                             <td> <select name="brand_id" id="category" class="form-control">
                                     <option value="brand" id="chnagefont">Select</option>
-                                    @foreach ($brand as $b)
+                                    {{-- @foreach ($brand as $b)
                                         <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} |
                                             Brand Selection | {{ $b->brand_selection }}
                                         </option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select></td>
                             <td> <select name="product_d" id="product" class="form-control">
                                     <option id="chnagefont" value="product">Select</option>
@@ -402,12 +402,7 @@
                     defaultOption2.text = "Select";
                     selectbrand.add(defaultOption2);
                     // Data fetch from product 
-                    @foreach ($brand as $b)
-                        var option = document.createElement("option");
-                        option.value = "{{ $b->id }}";
-                        option.text = "id|{{ $b->id }}| Brand Selection| {{ $b->brand_selection }}";
-                        selectbrand.add(option);
-                    @endforeach
+                  
                     // END
 
                     // Append the select element to the cell

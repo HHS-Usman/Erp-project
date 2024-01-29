@@ -90,7 +90,7 @@ use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
 use App\Http\Controllers\Product\UploaderController;
 use App\Http\Controllers\PurchasereuquisitionController;
-use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\Purchase\QuotationController;
 use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;

@@ -53,7 +53,7 @@ class CreateProductsTable extends Migration
             $table->string('expiry_ap')->nullable();
             $table->string('expiry_n')->default('No')->nullable();
             $table->unsignedBigInteger('product_brand_id')->nullable();
-            $table->foreign('product_brand_id')->references('id')->on('brand__selections')->onDelete('cascade');
+            $table->foreign('product_brand_id')->references('id')->on('brand_selections')->onDelete('cascade');
             $table->unsignedBigInteger('product_classification_id')->nullable();
             $table->foreign('product_classification_id')->references('id')->on('classifications')->onDelete('cascade');
             $table->unsignedBigInteger('product_category_id')->nullable();
