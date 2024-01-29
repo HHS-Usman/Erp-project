@@ -11,7 +11,8 @@
     <meta content="" name="keywords">
 
     <script src="https://code.jquery.com/jquery-3.6.5.min.js"></script>
-    <script src="https://appuals.com/wp-content/litespeed/localres/aHR0cHM6Ly9jb2RlLmpxdWVyeS5jb20vjquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://appuals.com/wp-content/litespeed/localres/aHR0cHM6Ly9jb2RlLmpxdWVyeS5jb20vjquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- Add the Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -55,10 +56,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+        </script>
     <!-- Project Files -->
 
     <script src="/as/jquery.bootstrap.year.calendar.js"></script>
@@ -97,7 +98,7 @@
 
         .dropdown-content li:hover {
             background-color: hsl(34, 84%, 52%);
-        }
+        }4
 
         .dropright:hover .dropdown-content {
             display: block;
@@ -133,321 +134,321 @@
                             </a>
                             <div class="dropdown-menu" style="hover">
                                 @can('Organization-setup')
-                                    <div class="dropdown-submenu dropdown-item dropright ">
-                                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                                aria-haspopup="true" aria-expanded="false"
-                                                style="color: black;"><strong>Organization
-                                                    Setup</strong></a>
-                                            <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
-                                                @can('add-division')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('division.create') }}">Create Division</a></li>
-                                                @endcan
-                                                @can('view-division')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('division.index') }}">Manage Division</a></li>
-                                                @endcan
-                                                @can('add-department')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('department.create') }}">Create Department</a></li>
-                                                @endcan
-                                                @can('view-department')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('department.index') }}">Manage Department</a></li>
-                                                @endcan
-                                                @can('add-subdepartment')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('subdepartment.create') }}">Create Sub Department
-                                                        Level</a></li>
-                                                @endcan
-                                                @can('view-subdepartment')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('subdepartment.index') }}">Manage Sub Department
-                                                        Level</a></li>
-                                                @endcan
-                                                @can('add-function')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('function.create') }}">Create Function</a></li>
-                                                @endcan
-                                                @can('view-function')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('function.index') }}">Manage Function</a></li>
+                                <div class="dropdown-submenu dropdown-item dropright ">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Organization
+                                            Setup</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content" style="{display: block;}">
+                                        @can('add-division')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('division.create') }}">Create Division</a></li>
+                                        @endcan
+                                        @can('view-division')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('division.index') }}">Manage Division</a></li>
+                                        @endcan
+                                        @can('add-department')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('department.create') }}">Create Department</a></li>
+                                        @endcan
+                                        @can('view-department')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('department.index') }}">Manage Department</a></li>
+                                        @endcan
+                                        @can('add-subdepartment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('subdepartment.create') }}">Create Sub Department
+                                                Level</a></li>
+                                        @endcan
+                                        @can('view-subdepartment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('subdepartment.index') }}">Manage Sub Department
+                                                Level</a></li>
+                                        @endcan
+                                        @can('add-function')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('function.create') }}">Create Function</a></li>
+                                        @endcan
+                                        @can('view-function')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('function.index') }}">Manage Function</a></li>
 
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('management.create') }}">Create Management Level</a>
-                                                </li>
-                                                @endcan
-                                                @can('view-managementlevel')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('management.index') }}">Manage Management Level</a>
-                                                </li>
-                                                @endcan
-                                                @can('add-submanagementlevel')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('submanagement.create') }}">Create Sub Management</a>
-                                                </li>
-                                                @endcan
-                                                @can('view-submanagementlevel')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('submanagement.index') }}">Manage Sub Management</a>
-                                                </li>
-                                                @endcan
-                                                @can('add-gazitedholiday')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('gazetedholiday.create') }}">Create Gazeted
-                                                        Holidays</a></li>
-                                                @endcan
-                                                @can('view-gazitedholiday')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('gazetedholiday.index') }}">Manage Gazeted Holidays</a>
-                                                </li>
-                                                @endcan
-                                                @can('add-language')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('language.create') }}">Create Language</a></li>
-                                                @endcan
-                                                @can('view-language')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('language.index') }}">Manage Language</a></li>
-                                                @endcan
-                                                @can('add-religion')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('religion.create') }}">Create Religion</a></li>
-                                                @endcan
-                                                @can('view-religion')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('religion.index') }}">Manage Religion</a></li>
-                                                @endcan
-                                                @can('add-designation')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('designation.create') }}">Create Designation</a></li>
-                                                @endcan
-                                                @can('view-designation')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('designation.index') }}">Manage Designation</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('management.create') }}">Create Management Level</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-managementlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('management.index') }}">Manage Management Level</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-submanagementlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('submanagement.create') }}">Create Sub Management</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-submanagementlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('submanagement.index') }}">Manage Sub Management</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-gazitedholiday')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('gazetedholiday.create') }}">Create Gazeted
+                                                Holidays</a></li>
+                                        @endcan
+                                        @can('view-gazitedholiday')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('gazetedholiday.index') }}">Manage Gazeted Holidays</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-language')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('language.create') }}">Create Language</a></li>
+                                        @endcan
+                                        @can('view-language')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('language.index') }}">Manage Language</a></li>
+                                        @endcan
+                                        @can('add-religion')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('religion.create') }}">Create Religion</a></li>
+                                        @endcan
+                                        @can('view-religion')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('religion.index') }}">Manage Religion</a></li>
+                                        @endcan
+                                        @can('add-designation')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('designation.create') }}">Create Designation</a></li>
+                                        @endcan
+                                        @can('view-designation')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('designation.index') }}">Manage Designation</a></li>
 
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('group.create') }}">Create Group</a></li>
-                                                @endcan
-                                                @can('view-group')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('group.index') }}">Manage Group</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('group.create') }}">Create Group</a></li>
+                                        @endcan
+                                        @can('view-group')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('group.index') }}">Manage Group</a></li>
 
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('grade.create') }}">Create Grade</a></li>
-                                                @endcan
-                                                @can('view-grade')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('grade.index') }}">Manage Grade</a></li>
-                                                @endcan
-                                                @can('add-leavingreason')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('leavereson.create') }}">Create Leaving Reason</a></li>
-                                                @endcan
-                                                @can('view-leavingreason')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('leavereson.index') }}">Manage Leaving Reason</a></li>
-                                                @endcan
-                                                @can('add-subleavingreason')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('subleavingreason.create') }}">Create Sub Leaving
-                                                        Reason</a></li>
-                                                @endcan
-                                                @can('add-weekday')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('weekoffday.create') }}">Create Week Off days</a></li>
-                                                @endcan
-                                                @can('view-weekday')
-                                                <li class="p-0"><a class="dropdown-item"
-                                                        href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
-                                                <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index') }}">
-                                                        Uploader</a></li>
-                                                @endcan
-                                            </ul>
-                                    </div>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('grade.create') }}">Create Grade</a></li>
+                                        @endcan
+                                        @can('view-grade')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('grade.index') }}">Manage Grade</a></li>
+                                        @endcan
+                                        @can('add-leavingreason')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('leavereson.create') }}">Create Leaving Reason</a></li>
+                                        @endcan
+                                        @can('view-leavingreason')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('leavereson.index') }}">Manage Leaving Reason</a></li>
+                                        @endcan
+                                        @can('add-subleavingreason')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('subleavingreason.create') }}">Create Sub Leaving
+                                                Reason</a></li>
+                                        @endcan
+                                        @can('add-weekday')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('weekoffday.create') }}">Create Week Off days</a></li>
+                                        @endcan
+                                        @can('view-weekday')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('weekoffday.index') }}">Manage Week Off days</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('divupload.index') }}">
+                                                Uploader</a></li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('General-setup')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link   dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false"
-                                            style="color: black;"><strong>General Setup</strong> </a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link   dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>General Setup</strong> </a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
 
-                                            @can('add-paymentterm')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('paymentterm.create') }}">Create Payment Term</a></li>
-                                            @endcan
-                                            @can('view-paymentterm')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('paymentterm.index') }}">Manage Payment Term</a></li>
-                                            @endcan
-                                            @can('add-modeofpayment')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('modeofpayment.create') }}">Create Mode Of Payment</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-modeofpayment')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('modeofpayment.index') }}">Manage Mode Of Payment</a>
-                                            </li>
+                                        @can('add-paymentterm')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('paymentterm.create') }}">Create Payment Term</a></li>
+                                        @endcan
+                                        @can('view-paymentterm')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('paymentterm.index') }}">Manage Payment Term</a></li>
+                                        @endcan
+                                        @can('add-modeofpayment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('modeofpayment.create') }}">Create Mode Of Payment</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-modeofpayment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('modeofpayment.index') }}">Manage Mode Of Payment</a>
+                                        </li>
 
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('email.create') }}">Create Email</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-email')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('email.index') }}">Manage Email</a></li>
-                                            @endcan
-                                            @can('add-usergroup')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('usergroup.create') }}">Create User Group</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-usergroup')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('usergroup.index') }}">Manage User Group</a></li>
-                                            @endcan
-                                            @can('add-workflowgroup')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('workflowgroup.create') }}">Create Workflow Group</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-workflowgroup')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('workflowgroup.index') }}">Manage Workflow Group</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-process')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('process.create') }}">Create Process</a></li>
-                                            @endcan
-                                            @can('view-process')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('process.index') }}">Manage Process</a></li>
-                                            @endcan
-                                            @can('add-cast')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('cast.create') }}">Create Cast</a></li>
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index') }}">Manage
-                                                    Cast</a></li>
-                                            @endcan
-                                            @can('add-country')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('country.create') }}">Create Country</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-country')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('country.index') }}">Manage Country</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('email.create') }}">Create Email</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-email')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('email.index') }}">Manage Email</a></li>
+                                        @endcan
+                                        @can('add-usergroup')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('usergroup.create') }}">Create User Group</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-usergroup')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('usergroup.index') }}">Manage User Group</a></li>
+                                        @endcan
+                                        @can('add-workflowgroup')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('workflowgroup.create') }}">Create Workflow Group</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-workflowgroup')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('workflowgroup.index') }}">Manage Workflow Group</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-process')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('process.create') }}">Create Process</a></li>
+                                        @endcan
+                                        @can('view-process')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('process.index') }}">Manage Process</a></li>
+                                        @endcan
+                                        @can('add-cast')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('cast.create') }}">Create Cast</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('cast.index') }}">Manage
+                                                Cast</a></li>
+                                        @endcan
+                                        @can('add-country')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('country.create') }}">Create Country</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-country')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('country.index') }}">Manage Country</a></li>
 
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('citizenship.create') }}">Create Citizenship</a></li>
-                                            @endcan
-                                            @can('view-citizenship')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('citizenship.index') }}">Manage Citizenship</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-nationality')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('nationality.create') }}">Create Nationality</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-nationality')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('nationality.index') }}">Manage Nationality</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-city')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('city.create') }}">Create City</a></li>
-                                            @endcan
-                                            @can('view-city')
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
-                                                    City</a></li>
-                                            @endcan
-                                        </ul>
-                                    </div>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('citizenship.create') }}">Create Citizenship</a></li>
+                                        @endcan
+                                        @can('view-citizenship')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('citizenship.index') }}">Manage Citizenship</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-nationality')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('nationality.create') }}">Create Nationality</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-nationality')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('nationality.index') }}">Manage Nationality</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-city')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('city.create') }}">Create City</a></li>
+                                        @endcan
+                                        @can('view-city')
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('city.index') }}">Manage
+                                                City</a></li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Employee-setup')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false"
-                                            style="color: black;"><strong>Employee</strong></a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Employee</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
 
-                                            @can('add-employee')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employees.create') }}">Create Employees</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-employee')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employees.index') }}">Manage Employees</a></li>
-                                            @endcan
-                                            @can('add-employeeflag')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeeflag.create') }}">Create Employee Flag</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-employeeflag')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeeflag.index') }}">Manage Employee Flag</a></li>
-                                            @endcan
-                                            @can('add-employeerule')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeerule.create') }}">Create Employee rule</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-employeerule')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeerule.index') }}">Manage Employee rule</a></li>
-                                            @endcan
-                                            @can('add-skilllevel')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('skilllevel.create') }}">Create Skill level</a></li>
-                                            @endcan
-                                            @can('view-skilllevel')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('skilllevel.index') }}">Manage Skill level</a></li>
-                                            @endcan
-                                            @can('add-employeejobstatus')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeejobstatus.create') }}">Create Employee job
-                                                    Status</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-employeejobstatus')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('employeejobstatus.index') }}">Manage Employee job
-                                                    Status</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-qualification')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('qualification.create') }}">Create Qualification</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-qualification')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('qualification.index') }}">Manage Qualification</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-qualificationlevel')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('qualificationlevel.create') }}">Create Qualification
-                                                    Level</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-qualificationlevel')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('qualificationlevel.index') }}">Manage Qualification
-                                                    Level</a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                    </div>
+                                        @can('add-employee')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employees.create') }}">Create Employees</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-employee')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employees.index') }}">Manage Employees</a></li>
+                                        @endcan
+                                        @can('add-employeeflag')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeeflag.create') }}">Create Employee Flag</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-employeeflag')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeeflag.index') }}">Manage Employee Flag</a></li>
+                                        @endcan
+                                        @can('add-employeerule')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeerule.create') }}">Create Employee rule</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-employeerule')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeerule.index') }}">Manage Employee rule</a></li>
+                                        @endcan
+                                        @can('add-skilllevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('skilllevel.create') }}">Create Skill level</a></li>
+                                        @endcan
+                                        @can('view-skilllevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('skilllevel.index') }}">Manage Skill level</a></li>
+                                        @endcan
+                                        @can('add-employeejobstatus')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeejobstatus.create') }}">Create Employee job
+                                                Status</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-employeejobstatus')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('employeejobstatus.index') }}">Manage Employee job
+                                                Status</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-qualification')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('qualification.create') }}">Create Qualification</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-qualification')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('qualification.index') }}">Manage Qualification</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-qualificationlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('qualificationlevel.create') }}">Create Qualification
+                                                Level</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-qualificationlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('qualificationlevel.index') }}">Manage Qualification
+                                                Level</a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Product')
                                     <div class="dropdown-submenu dropdown-item dropright">
@@ -465,7 +466,7 @@
                                             @endcan
                                             @can('view-product')
                                             <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('product.index') }}">Manage Product</a>
+                                                    href="{{ route('product.index') }}">Create Product</a>
                                             </li>
                                             @endcan
                                             @can('add-classification')
@@ -595,187 +596,187 @@
                                     </div>
                                 @endcan
                                 @can('Sales-Person')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false"
-                                            style="color: black;"><strong>Sales
-                                                Person</strong></a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
-                                            @can('add-persontype')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('salepersontype.create') }}">Create Person Type </a>
-                                            </li>
-                                            @endcan
-                                            @can('view-persontype')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('salepersontype.index') }}">Manage Person Type</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-saleperson')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('salesperson.create') }}">Create sale Person</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-saleperson')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('salesperson.index') }}">Manage Sale Person</a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                    </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Sales
+                                            Person</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        @can('add-persontype')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('salepersontype.create') }}">Create Person Type </a>
+                                        </li>
+                                        @endcan
+                                        @can('view-persontype')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('salepersontype.index') }}">Manage Person Type</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-saleperson')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('salesperson.create') }}">Create sale Person</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-saleperson')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('salesperson.index') }}">Manage Sale Person</a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Accounts')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false"
-                                            style="color: black;"><strong>Accounts</strong></a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
-                                            @can('add-accountcategory')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('accountcategory.create') }}">Create Account
-                                                    Category</a>
-                                            </li>
-                                            @endcan
-                                            @can('edit-accountcategory')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('accountcategory.index') }}">Manage Account
-                                                    Category</a>
-                                            </li>
-                                            @endcan
-                                            @can('')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('account-store.index') }}">Add Chart Account</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-mainheadlevel')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('coamainheaderlevel.create') }}">Create Main Head
-                                                    Level
-                                                </a>
-                                            </li>
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create
-                                                    Coa</a></li>
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">Manage
-                                                    Coa</a></li>
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-costcenter')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-vouchertype')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('vouchertype.create') }}">Create Voucher Type</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-vouchertype')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-journalvoucher')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('journalvoucher.create') }}">Create Journal
-                                                    Voucher</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-journalvoucher')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
-                                            </li>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Accounts</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        @can('add-accountcategory')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('accountcategory.create') }}">Create Account
+                                                Category</a>
+                                        </li>
+                                        @endcan
+                                        @can('edit-accountcategory')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('accountcategory.index') }}">Manage Account
+                                                Category</a>
+                                        </li>
+                                        @endcan
+                                        @can('')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('account-store.index') }}">Add Chart Account</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-mainheadlevel')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('coamainheaderlevel.create') }}">Create Main Head
+                                                Level
+                                            </a>
+                                        </li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.create') }}">Create
+                                                Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('coa.index') }}">Manage
+                                                Coa</a></li>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('costcenteraccount.create') }}">Create Cost Center</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-costcenter')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('costcenteraccount.index') }}">Manage Cost Center</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-vouchertype')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('vouchertype.create') }}">Create Voucher Type</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-vouchertype')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('vouchertype.index') }}">Manage Voucher Type</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-journalvoucher')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('journalvoucher.create') }}">Create Journal
+                                                Voucher</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-journalvoucher')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('journalvoucher.index') }}">Manage Journal Voucher</a>
+                                        </li>
 
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-yearclosing')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('yearclosing.create') }}">Create Closing Year</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-yearclosing')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
-                                            </li>
-                                            @endcan
-                                            @can('add-financialyear')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('financailyear.create') }}">Create Financial Year</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-financialyear')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('financailyear.index') }}">Manage Financial Year</a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                    </div>
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('voucherentry.create') }}">Create Voucher Entry</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-yearclosing')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('yearclosing.create') }}">Create Closing Year</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-yearclosing')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('yearclosing.index') }}">Manage Closing Year</a>
+                                        </li>
+                                        @endcan
+                                        @can('add-financialyear')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('financailyear.create') }}">Create Financial Year</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-financialyear')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('financailyear.index') }}">Manage Financial Year</a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Treasury')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false"
-                                            style="color: black;"><strong>Treasury</strong></a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
-                                            @can('add-buyerpayment')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('buyerpayment.create') }}">
-                                                    Create Buyer Payment
-                                                </a>
-                                            </li>
-                                            @endcan
-                                            @can('add-supplierpayment')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('supplierpayment.create') }}">
-                                                    Create Supplier Payment
-                                                </a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                    </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false"
+                                        style="color: black;"><strong>Treasury</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        @can('add-buyerpayment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('buyerpayment.create') }}">
+                                                Create Buyer Payment
+                                            </a>
+                                        </li>
+                                        @endcan
+                                        @can('add-supplierpayment')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('supplierpayment.create') }}">
+                                                Create Supplier Payment
+                                            </a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Supplier-setup')
-                                    <div class="dropdown-submenu dropdown-item dropright">
-                                        <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
-                                            <strong>Supplier Setup</strong></a>
-                                        <ul id="container" class="dropdown-menu dropdown-content">
-                                            @can('add-s-category')
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
-                                                    Suplier Category
-                                                </a>
-                                            </li>
-                                            @endcan
-                                            @can('view-s-category')
-                                            <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
-                                                    Suplier Category Manage
-                                                </a>
-                                            </li>
-                                            @endcan
-                                            @can('add-s-type')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('suppliertype.create') }}">Create Supplier Type</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-s-type')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
-                                            </li>
-                                            @endcan
-                                            @can('view-s-uploader')
-                                            <li class="p-0"><a class="dropdown-item"
-                                                    href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                        </ul>
-                                    </div>
+                                <div class="dropdown-submenu dropdown-item dropright">
+                                    <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                                        <strong>Supplier Setup</strong></a>
+                                    <ul id="container" class="dropdown-menu dropdown-content">
+                                        @can('add-s-category')
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.create') }}">
+                                                Suplier Category
+                                            </a>
+                                        </li>
+                                        @endcan
+                                        @can('view-s-category')
+                                        <li class="p-0"><a class="dropdown-item" href="{{ route('scategory.index') }}">
+                                                Suplier Category Manage
+                                            </a>
+                                        </li>
+                                        @endcan
+                                        @can('add-s-type')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('suppliertype.create') }}">Create Supplier Type</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-s-type')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('suppliertype.index') }}">Manage Supplier Type</a>
+                                        </li>
+                                        @endcan
+                                        @can('view-s-uploader')
+                                        <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('supplierupload.create') }}">Suplier Uploader</a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                    </ul>
+                                </div>
                                 @endcan
                                 @can('Buyer-setup')
-                                    <div class="dropdown-submenu dropdown-item dropright">
+                                <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false" style="color: black;">
                                         <strong>Buyer Setup</strong></a>
@@ -824,10 +825,10 @@
                                         @endcan
                                     </ul>
 
-                                    </div>
+                                </div>
                                 @endcan
                                 @can('Security')
-                                    <div class="dropdown-submenu dropdown-item dropright">
+                                <div class="dropdown-submenu dropdown-item dropright">
                                     <a class="nav-link dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" href="#"
                                         role="button" aria-haspopup="true" aria-expanded="false"
                                         style="color: black;"><strong>Security</strong></a>
@@ -836,7 +837,7 @@
                                                 href="{{ route('permission.create') }}">Create User Role </a>
                                         </li> --}}
 
-                                    </div>
+                                </div>
                                 @endcan
                             </div>
                         </div>
@@ -868,6 +869,9 @@
                                 </a>
                                 <a class="nav-link dropdown-item" href="{{ route('purchaserequisition.index') }}">
                                     Mange Purchase Requisition
+                                </a>
+                                <a class="nav-link dropdown-item" href="{{ route('quotation.create') }}">
+                                    Create Quotation
                                 </a>
                             </div>
                             <div class="dropdown-menu">
@@ -1401,8 +1405,8 @@
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.dropdown-submenu a.nav-link').on("click", function(e) {
+        $(document).ready(function () {
+            $('.dropdown-submenu a.nav-link').on("click", function (e) {
                 $(this).next('ul').toggle();
                 e.stopPropagation();
                 e.preventDefault();

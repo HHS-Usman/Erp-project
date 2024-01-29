@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Purchase Requisition
+    Create Quotation
 @endsection
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,11 +15,11 @@
             </div>
         @endif
         <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Create Purchase Requisition</h1>
+            <h1>Create Quotation</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Purchase Requisition</a></li>
+                    <li class="breadcrumb-item active"><a> Create Qoutation</a></li>
                 </ol>
             </nav>
         </div>

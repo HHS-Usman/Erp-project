@@ -38,6 +38,15 @@
                                 <strong>Product 1st Sub Category<span style="color:#DC3545">*</span></strong>
                                 <input type="text" name="product1stsbctgry" id="product1stsbctgry" class="form-control" placeholder="Product 1st Sub Category" required>
                             </div>
+                            <div class="col-md-6 form-group">
+                                <strong>Product Category</strong>
+                                <select name="pc_id" id="productcategory" class="form-control">
+                                    <option value="None">Select Sub Category</option>
+                                    @foreach ($product as $item)
+                                        <option value={{ $item->id }}>{{ $item->product_category}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <strong>Details</strong>
                                 <input type="text" name="detail" id="detail" class="form-control" placeholder="Detail">

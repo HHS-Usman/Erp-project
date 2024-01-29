@@ -26,8 +26,9 @@ class ProductSubCategoryController extends Controller
      */
     public function create()
     {
-
-       return view('productsetup.product1sbctgry.create');
+        
+        $product= Product_sub_category::all();
+       return view('productsetup.product1sbctgry.create',compact('product'));
     }
 
     /**

@@ -90,11 +90,13 @@ use App\Http\Controllers\Product\StockTypeController;
 use App\Http\Controllers\Product\UomController;
 use App\Http\Controllers\Product\UploaderController;
 use App\Http\Controllers\PurchasereuquisitionController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SupplieruploaderController;
 use App\Http\Controllers\Treasury\SupplyController;
 use App\Models\BuyerCategory;
 use App\Models\Journalvoucher;
 use App\Models\Product_category;
+use App\Models\Purchaserequisition;
 use App\Models\Supplier;
 use App\Models\SupplierCategory;
 use App\Models\Suppliertype;
@@ -502,6 +504,8 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 
 
 Route::resource('purchaserequisition',PurchasereuquisitionController::class);
+Route::resource('quotation',QuotationController::class);
+
 Route::resource('account-store',AccountController::class);
 
 
@@ -593,4 +597,7 @@ Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name(
 Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'purchasedata']);
 Route::get('/get-category/{id}', [PurchasereuquisitionController::class, 'categorydata']);
 Route::post('/save-data', [PurchasereuquisitionController::class, 'store']);
+// this route declare beacuse i am fetching data from Product sub Category(Ajax) by Abrar ul Hassan
+Route::get('/getsubcategory/{pc_id}',[PurchasereuquisitionController::class,'getfirstCategory']);
+// this route declare beacuse i am fetching data from Product sub Category(Ajax) by Abrar ul Hassan
 });
