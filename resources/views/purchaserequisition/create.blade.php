@@ -104,6 +104,7 @@
                         <input type="file" class="form-control" id="required_date" name="filename" placeholder="Date">
                     </div>
                 </div>
+
                 <br>
                 <div class="row">
                     <div class="d-flex col-md-12 form-group">
@@ -154,7 +155,8 @@
                                     <option value="category" id="chnagefont">Select</option>
                                     @foreach ($pcategory as $category)
                                         <option onclick="categoryData()" id="chnagefont" value="{{ $category->id }}">
-                                            id{{ $category->id }} | Product Category Name| {{ $category->product_category }}
+                                            id{{ $category->id }} | Product Category Name|
+                                            {{ $category->product_category }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -164,7 +166,7 @@
                                     <option value="None" id="chnagefont">Select</option>
                                     @foreach ($subcategory as $item)
                                         <option id="chnagefont" value={{ $item->id }}>
-                                           id | {{ $item->id }} | Sub_Category_Name | {{$item->product1stsbctgry}}
+                                            id | {{ $item->id }} | Sub_Category_Name | {{ $item->product1stsbctgry }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -173,7 +175,8 @@
                             <td> <select name="brand_id" id="category" class="form-control">
                                     <option value="brand" id="chnagefont">Select</option>
                                     @foreach ($brand as $b)
-                                        <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} | Brand Selection | {{ $b->brand_selection }}
+                                        <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} |
+                                            Brand Selection | {{ $b->brand_selection }}
                                         </option>
                                     @endforeach
                                 </select></td>
@@ -227,15 +230,15 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="refreshtext()">Ref</button>
+                                        <button type="button" class="btn btn-primary" onclick="refreshtext()">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-danger">.</button>
+                                        <button type="button" class="btn btn-warning">.</button>
                                     </div>
                                 </div>
                             </td>
@@ -361,7 +364,7 @@
                     @foreach ($subcategory as $subcategory)
                         var option = document.createElement("option");
                         option.value = "{{ $subcategory->id }}";
-                        option.text = " id | {{$subcategory->id }}| SubCategoryname|{{$subcategory->product1stsbctgry}}";
+                        option.text = " id | {{ $subcategory->id }}| SubCategoryname|{{ $subcategory->product1stsbctgry }}";
                         subcategory.add(option);
                     @endforeach
                     // End
@@ -452,8 +455,9 @@
                     cell14.appendChild(namesInput);
                     cell15.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
                     cell16.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
-                    cell17.innerHTML = '<button type="button" class="btn btn-primary">Ref</button>';
-                    cell18.innerHTML = '<button type="button" class="btn btn-danger" >.</button>';
+                    cell17.innerHTML =
+                        '<button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>';
+                    cell18.innerHTML = '<button type="button" class="btn  btn-warning" >.</button>';
 
                     var formData = $('#form').serialize();
                     console.log(formData);
