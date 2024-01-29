@@ -24,7 +24,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        //
+        return view('quotation.index');
     }
 
     /**
@@ -102,5 +102,9 @@ class QuotationController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function approval(Request $request)
+    {
+        return view('quotation.approval');
     }
 }

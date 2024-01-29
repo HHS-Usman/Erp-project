@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Manage Quotation
+Approval List
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,11 +15,11 @@ Manage Quotation
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Manage Quotation</h1>
+        <h1>Approval List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active"><a> Manage Quotation </a></li>
+                <li class="breadcrumb-item active"><a> Approval List </a></li>
             </ol>
         </nav>
     </div>
@@ -42,10 +42,17 @@ Manage Quotation
             </li>
         </ul>
     </div>
-    <div style=" left:0px; top:170px;z-index: -1; width: 100%;">
-        <div class="tab-content" id="myTabContent">
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <select class="form-select" name="" id="">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="card-body">
             <table id="myTable" class="table table-border datatable " style="border: 1px solid black">
