@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Select Supplier</strong>
-                                <select name="b_id" id="branch" class="form-control">
+                                <select name="s_id" id="supplier" class="form-control">
                                     <option value="None">Select Supplier</option>
                                     @foreach ($suplier as $item)
                                         <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
@@ -233,6 +233,9 @@
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
         </div>

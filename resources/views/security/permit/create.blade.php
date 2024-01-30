@@ -305,13 +305,10 @@ Create Access Permission
                 });
 
                 $('#role-select').on('change', function () {
-                    $('#role-select').on('change', function () {
-                    var selectedRoles = $(this).val();
+                    var selectedRole = $(this).val();
 
-                    // Display selected roles in the div
-                    $('#selectedRolesDiv').html('Selected Roles: ' + selectedRoles.join(', '));
                     $.ajax({
-                            url: '/fetch-employee-data/' + selectedRoles,
+                            url: '/fetch-employee-data/' + selectedRole,
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {
@@ -421,7 +418,7 @@ Create Access Permission
                 }
             });
 
-            </script>
+            </script>
 
             <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
                 <button type="submit" class="btn btn-primary">Submit</button>

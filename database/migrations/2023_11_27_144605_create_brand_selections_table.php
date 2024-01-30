@@ -19,6 +19,9 @@ class CreateBrandSelectionsTable extends Migration
             $table->string('brand_selection_code');
             $table->string('detail');
             $table->boolean('is_active')->default(true)->nullable();
+            // forign key of product sub category by Abrar ul Hassan
+            $table->unsignedBigInteger('psubc_id');
+            $table->foreign('psubc_id')->references('id')->on('product_sub_categories');
 
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
@@ -26,9 +29,6 @@ class CreateBrandSelectionsTable extends Migration
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             
-            // forign key of product sub category by Abrar ul Hassan
-            //  $table->unsignedBigInteger('psubc_id');
-            //  $table->foreign('psubc_id')->references('id')->on('product_sub_categories');
             $table->timestamps();
         });
     }
@@ -40,6 +40,6 @@ class CreateBrandSelectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brand__selections');
+        Schema::dropIfExists('brand_selections');
     }
 }

@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
 use App\Models\Purchaserequisition;
+use App\Models\Quotation;
 use App\Models\Supplier;
 use App\Models\Unit_selection;
 
@@ -51,7 +52,19 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // validate the input
+         $request->validate([
+            'remarks'=>'required',
+            
+        ]);
+        //create a new Quotation in database
+        Quotation::create([
+            'remarks' => request()->get('qremarks'),
+            'branch_id' => request()->get('b_id'),
+            'depart_id' => request()->get('d_id'),
+            'supplier_id' => request()->get('s_id')
+        ]);
+
     }
 
     /**

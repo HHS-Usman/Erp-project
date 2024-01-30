@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Brand_Selection extends Model
 {
     use HasFactory;
+    // I have used because it was giving me conflict between table which is not available 
+    protected $table = 'brand_selections';
     protected $guarded = [
         'id'
     ];

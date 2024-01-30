@@ -26,4 +26,8 @@ class Branch extends Model
     public function evoucher(){
         return $this->hasMany(Voucherentires::class,'ventry_id');
     }
+    public function quotationdata()
+    {
+        return $this->hasMany(Quotation::class);
+    }
 }

@@ -15,6 +15,16 @@ class CreateQuotationsTable extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
+            $table->string("remarks");
+            // branch forign key
+            $table->unsignedBigInteger('branch_id');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            // deparmtent forign key
+            $table->unsignedBigInteger('depart_id');
+            $table->foreign('depart_id')->references('id')->on('departments')->onDelete('cascade');
+            // supplier forign key
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->timestamps();
         });
     }

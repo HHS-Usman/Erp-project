@@ -41,10 +41,9 @@
                         <tr>
                             <th scope="col">S.no</th>
                             <th scope="col">Doc_no</th>
-                            <th scope="col">Supplier</th>
-                            <th scope="col">Quatation PR no</th>
-                            <th scope="col">Quatation Amount</th>
-                            <th scope="col">Quotation Remarks</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Document status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
