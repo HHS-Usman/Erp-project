@@ -16,4 +16,8 @@ class Department extends Model
      {
          return $this->hasMany(Purchaserequisition::class,'id');
      }
+     public function quotationdata()
+     {
+         return $this->hasMany(Quotation::class);
+     }
 }

@@ -35,6 +35,10 @@ class Supplier extends Model
     {
         return $this->belongsTo(City::class, 'City_id');
     }
+    public function quotationdata()
+    {
+        return $this->hasMany(Quotation::class);
+    }
     protected $primaryKey = 'suplier_id';
 
 }

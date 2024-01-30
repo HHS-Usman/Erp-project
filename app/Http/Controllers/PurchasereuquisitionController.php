@@ -84,13 +84,13 @@ class PurchasereuquisitionController extends Controller
         $employee = Employee::all();
         $pcategory = Product_category::all();
         $product = Product::all();
-        // $brand = Brand_Selection::all();
+        $brand = Brand_Selection::all();
         $uom = Unit_selection::all();
         $modetype = Modetype::all();
         $subcategory = Product_sub_category::all();
         $counterid = Purchaserequisition::count("pr_id");
         $pr = $counterid + 1;
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','modetype','subcategory'));
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','brand','modetype','subcategory'));
     }
 
     /**

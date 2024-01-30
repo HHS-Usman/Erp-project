@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Purchase;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Models\Brand_Selection;
 use App\Models\Department;
@@ -12,6 +13,8 @@ use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
 use App\Models\Purchaserequisition;
+use App\Models\Quotation;
+use App\Models\Supplier;
 use App\Models\Unit_selection;
 
 
@@ -35,16 +38,9 @@ class QuotationController extends Controller
     public function create()
     {
         $deaprtment = Department::all();
-        $employee = Employee::all();
-        $pcategory = Product_category::all();
-        $product = Product::all();
-        // $brand = Brand_Selection::all();
-        $uom = Unit_selection::all();
-        $modetype = Modetype::all();
-        $subcategory = Product_sub_category::all();
-        $counterid = Purchaserequisition::count("pr_id");
-        $pr = $counterid + 1;
-        return view('quotation.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','modetype','subcategory'));
+        $branch = Branch::all();
+        $suplier = Supplier::all();
+        return view('quotation.create', compact('branch','deaprtment','suplier'));
 
     }
 
@@ -56,7 +52,19 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // validate the input
+         $request->validate([
+            'remarks'=>'required',
+            
+        ]);
+        //create a new Quotation in database
+        Quotation::create([
+            'remarks' => request()->get('qremarks'),
+            'branch_id' => request()->get('b_id'),
+            'depart_id' => request()->get('d_id'),
+            'supplier_id' => request()->get('s_id')
+        ]);
+
     }
 
     /**

@@ -418,7 +418,7 @@ Create Access Permission
                 }
             });
 
-            </script>
+            </script>
 
             <div class="col-xs-12 col-sm-12 col-md-12 bottom-fixed text-center" style="right:4%; margin-top:10%;">
                 <button type="submit" class="btn btn-primary">Submit</button>
