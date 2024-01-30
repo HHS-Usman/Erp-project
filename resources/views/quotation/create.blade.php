@@ -36,100 +36,71 @@
             .innercontainer {
                 text-align: center;
             }
+
+            .tablecalculation {
+                border: 1px solid black;
+                text-align: center;
+            }
         </style>
         <br><br><br>
         <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form" enctype="multipart/form-data">
             @csrf
-            <div class="wrapper">
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <strong>Document Doc#</strong>
-                        <input type="text" class="form-control" value={{ $pr }} id="prdocnumber" name="doc_no"
-                            placeholder="PR Doc#" readonly>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <strong>Document Doc#</strong>
+                            <input type="text" class="form-control" value="" id="prdocnumber" name="doc_no"
+                                placeholder="PR Doc#" readonly>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <div class="col-md-6 form-group">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
                             <strong>Branch</strong>
                             <select name="b_id" id="branch" class="form-control">
                                 <option value="None">Select Branch</option>
-                                {{-- @foreach ($modetype as $item)
-                                <option value={{ $item->mt_id }}>{{ $item->modetype_name }}</option>
-                            @endforeach --}}
+                                @foreach ($branch as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Branch</strong>
-                            <select name="b_id" id="branch" class="form-control">
+                        <div class="col-md-4 form-group">
+                            <strong>Department</strong>
+                            <select name="d_id" id="department" class="form-control">
                                 <option value="None">Select Department</option>
-                                {{-- @foreach ($modetype as $item)
-                                <option value={{ $item->mt_id }}>{{ $item->modetype_name }}</option>
-                            @endforeach --}}
+                                @foreach ($deaprtment as $item)
+                                    <option value="{{ $item->id }}">{{ $item->department }}</option>
+                                @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <strong>Branch</strong>
-                        <select name="b_id" id="branch" class="form-control">
-                            <option value="None">Select Department</option>
-                            {{-- @foreach ($modetype as $item)
-                            <option value={{ $item->mt_id }}>{{ $item->modetype_name }}</option>
-                        @endforeach --}}
-                        </select>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <strong>Department</strong>
-                        <select name="depart_id" id="mode_type" class="form-control">
-                            <option value="department">Select Department</option>
-                            @foreach ($deaprtment as $depart)
-                                <option value={{ $depart->id }}>{{ $depart->department }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="date_picker" name="date_picker" placeholder="Date">
+                        <div class="col-md-4 form-group" style="margin-top: 20px">
+                            <button type="button" class="btn btn-primary">GET PRS Data</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <strong>Employe</strong>
-                        <select name="emp_id" id="employe" class="form-control">
-                            <option value="employe">Select Employe</option>
-                            @foreach ($employee as $employ)
-                                <option value={{ $employ->id }}>{{ $employ->employee_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="filename" placeholder="Date">
-                    </div>
-                </div>
-
-                <br>
-                <div class="row">
-                    <div class="d-flex col-md-12 form-group">
-                        <div class="col-md-2 form-group"><strong>PR Remarks</strong></div>
-                        <textarea id="pr_remarks" name="pr_remarks" rows="3" cols="135"></textarea>
-                    </div>
-                </div>
-                <div class="row" id="prdetail">
-                    <div class="innercontainer" class="col-md-12">
-                        <strong>PR Detail</strong>
-                    </div>
-                </div>
-                {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
-                <input type="hidden" id="qtyproductInput" name="qtyproduct" value="0">
-                {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
-                <input type="hidden" id="totalnoproductInput" name="totalnoproduct" value="1">
             </div>
             {{-- Contetn for Grid Here --}}
-            <div style="border: 1px solid rgb(20, 19, 19); margin-top:10px;margin-bottom:10px;padding:0px 10px 0px 10px">
+            <div style="border: 1px solid rgb(20, 19, 19); margin-top:14px;margin-bottom:10px;padding:0px 10px 0px 10px">
+                <div class="row justify-content-center" style="padding-top:30px">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <strong>Select Supplier</strong>
+                                <select name="b_id" id="branch" class="form-control">
+                                    <option value="None">Select Supplier</option>
+                                    @foreach ($suplier as $item)
+                                        <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <strong>Quotation Remarks</strong>
+                                <input type="text" class="form-control" value="" id="prdocnumber" name="qremarks"
+                                    placeholder="Quotation Remarks">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table mt-3 border" id="tabledate">
                     <thead>
                         <tr>
@@ -138,7 +109,7 @@
                             <th>Product/Item</th>
                             <th>Product Wise Desciption </th>
                             <th>UOM</th>
-                            <th>City</th>
+                            <th>Qty</th>
                             <th>Last Received Date</th>
                             <th>Last Received Rate</th>
                             <th>Rate</th>
@@ -149,135 +120,119 @@
                             <th>Discount Amount</th>
                             <th>Net Amount</th>
                             <th>Action</th>
-
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         <tr>
                             <td>1</td>
                             <td>
-                                <select name="category" id="pc_data" class="form-control">
-                                    <option value="category" id="chnagefont">Select</option>
-                                    @foreach ($pcategory as $category)
-                                        <option onclick="categoryData()" id="chnagefont" value="{{ $category->id }}">
-                                            id{{ $category->id }} | Product Category Name|
-                                            {{ $category->product_category }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            <td>
-                                <select name="firstcategory" id="subcategory" class="form-control">
-                                    <option value="None" id="chnagefont">Select</option>
-                                    @foreach ($subcategory as $item)
-                                        <option id="chnagefont" value={{ $item->id }}>
-                                            id | {{ $item->id }} | Sub_Category_Name | {{ $item->product1stsbctgry }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                            </td>
-                            <td> <select name="brand_id" id="category" class="form-control">
-                                    <option value="brand" id="chnagefont">Select</option>
-                                    {{-- @foreach ($brand as $b)
-                                        <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} |
-                                            Brand Selection | {{ $b->brand_selection }}
-                                        </option>
-                                    @endforeach --}}
-                                </select></td>
-                            <td> <select name="product_d" id="product" class="form-control">
-                                    <option id="chnagefont" value="product">Select</option>
-                                    @foreach ($product as $p)
-                                        <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
-                                            id| {{ $p->id }}| Product Name | {{ $p->name }}</option>
-                                    @endforeach
-                                </select></td>
-                            <td><input type="text" class="form-control credit" value=""
-                                    placeholder="product Remarks" name="pd"></td>
-                            <td>
-                                <span>UOM</span>
-                                <input type="hidden" class="form-control credit" value="" placeholder="UOM"
-                                    name="UOM">
-                            </td>
-                            <td>
-                                <span>---</span>
-                            </td>
-                            <td><input type="text" class="form-control debit" id="qtyproductvalue"
-                                    placeholder="Qty Required" name="qty_required">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control debit" id="lastpurchase"
-                                    placeholder="Last Purchase" name="lastpurchase">
-                            </td>
-                            <td>
-                                ---
-                            </td>
-                            <td>
-                                ---
+                                <input type="text" class="form-control" value="" placeholder="PR Number"
+                                    name="prnumber" readonly>
                             </td>
 
-                            <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"
-                                    required>
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Product"
+                                    name="product" readonly>
                             </td>
-                            <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"
-                                    required>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Product Description"
+                                    name="product">
                             </td>
-                            <td> <!-- Add More Rows Button -->
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="UOM" name="UOM"
+                                    readonly>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" id="qtyproductvalue"
+                                    placeholder="Qty" name="productqty">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Laste Recived Date"
+                                    name="lreceiveddate" readonly>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Last Received Rate"
+                                    name="lrr" readonly>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Rate"
+                                    name="rate">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Tax%"
+                                    name="taxper">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Tax Amount"
+                                    name="taxamount">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Amount"
+                                    name="amount" readonly>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Discount%"
+                                    name="discount">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Discount Amount"
+                                    name="discountamount">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="" placeholder="Net Amount"
+                                    name="netamount"readonly>
+                            </td>
+
+                            <td>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button" class="btn btn-primary" onclick="addRow()">+</button>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary" onclick="refreshtext()">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i></button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-warning">.</button>
-                                    </div>
-                                </div>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-md-2">
-                        <strong>
-                            <p id="tnop">Total Number of Products</p>
-                        </strong>
-                    </div>
-                    <div class="col-md-2">
-                        <strong>
-                            <p id="noproduct">1</p>
-                        </strong>
+                {{-- end table here by Abrar ul hassan --}}
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="tablecalculation">Total no of Products</td>
+                                    <td class="tablecalculation" id="totalproduct">1</td>
+                                    <td class="tablecalculation">Total Tax Amount</td>
+                                    <td class="tablecalculation">0.00</td>
+                                    <td class="tablecalculation">Gross Amount</td>
+                                    <td class="tablecalculation">0.00</td>
+                                    <td class="tablecalculation">Invoice Discount</td>
+                                </tr>
+                                <tr>
+                                    <td class="tablecalculation">Total Qty of Products</td>
+                                    <td class="tablecalculation" id="qtyproduct">0.00</td>
+                                    <td class="tablecalculation">Total Discount amount</td>
+                                    <td class="tablecalculation">0.00</td>
+                                    <td class="tablecalculation">Net Amount</td>
+                                    <td class="tablecalculation">0.00</td>
+                                    <td class="tablecalculation">0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <strong>
-                            <p>Total Qty of Products</p>
-                        </strong>
-                    </div>
-                    <div class="col-md-2">
-                        <strong>
-                            <p id="qtyproduct">0</p>
-                        </strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
         </div>
@@ -286,6 +241,128 @@
         <br>
         <div><br> </div>
         <script>
+            tproduct = document.getElementById("totalproduct");
+            var qtyproduct = document.getElementById("qtyproduct");
+            var gettvalueqty = 0;
+            document.getElementById("qtyproductvalue").addEventListener("input", function() {
+                var valuegetting = document.getElementById('qtyproductvalue').value;
+                gettvalueqty = parseInt(valuegetting);
+            });
+            // function for add new row (Abrar ul Hassan)
+            function addRow() {
+                var tableBody = document.getElementById("tableBody");
+                var rowCount = tableBody.rows.length;
+                tproduct.innerHTML = rowCount + 1;
+                // declaring cell for each td for first row
+                var newRow = tableBody.insertRow(rowCount);
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
+                var cell7 = newRow.insertCell(6);
+                var cell8 = newRow.insertCell(7);
+                var cell9 = newRow.insertCell(8);
+                var cell10 = newRow.insertCell(9);
+                var cell11 = newRow.insertCell(10);
+                var cell12 = newRow.insertCell(11);
+                var cell13 = newRow.insertCell(12);
+                var cell14 = newRow.insertCell(13);
+                var cell15 = newRow.insertCell(14);
+                var cell16 = newRow.insertCell(15);
+                var cell17 = newRow.insertCell(16);
+                // dynamic input field and other tag for each cell 
+                cell1.innerHTML = rowCount + 1;
+                cell2.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="PR Number" name="prnumber" readonly>';
+                cell3.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Product" name="product" readonly>';
+                cell4.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Product Description" name="product">';
+                cell5.innerHTML = '<input type="text" class="form-control" value="" placeholder="UOM" name="UOM" readonly>';
+                var input = document.createElement("input");
+                input.type = "text";
+                input.className = "form-control debit";
+                input.placeholder = "Quality";
+                input.name = "qty_required" + rowCount;
+                input.addEventListener("input", function() {
+                    // Update total quantity
+                    updateTotalQuantity();
+                });
+                cell6.appendChild(input);
+                cell7.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Last Received Date" name="lreceiveddate" readonly>';
+                cell8.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Last Received Rate" name="lrr" readonly>';
+                cell9.innerHTML = '<input type="text" class="form-control" value="" placeholder="Rate" name="rate">';
+                cell10.innerHTML = '<input type="text" class="form-control" value="" placeholder="Tax%" name="taxper">';
+                cell11.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Tax Amount" name="taxamount">';
+                cell12.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Amount" name="amount" readonly>';
+                cell13.innerHTML = '<input type="text" class="form-control" value="" placeholder="Discount%" name="discount">';
+                cell14.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Discount Amount" name="discountamount">';
+                cell15.innerHTML =
+                    '<input type="text" class="form-control" value="" placeholder="Net Amount" name="netamount" readonly>';
+                cell16.innerHTML =
+                    '<button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
+                cell17.innerHTML =
+                    '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
+
+            }
+            // function is for update quality text td 
+            function updateTotalQuantity() {
+                var totalQuantity = gettvalueqty; // Corrected variable name
+                var table = document.getElementById("tableBody");
+                // Iterate through rows to sum up quantity values
+                for (var i = 1; i < table.rows.length; i++) {
+                    // Adjusted cell index to target the quantity input field
+                    var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
+                    if (!isNaN(inputValue)) {
+                        totalQuantity = totalQuantity + inputValue;
+                    }
+                }
+                // Update total quantity display
+                qtyproduct.innerHTML = totalQuantity;
+
+                // Update hidden input field value
+                // document.getElementById("qtyproductInput").value = totalQuantity;
+            }
+            // function for remove row here
+            function removeRow() {
+                var table = document.getElementById("tableBody");
+                var tproduct = document.getElementById("totalproduct");
+                var qtyproduct = document.getElementById("qtyproduct");
+
+                // Update total product count
+                tproduct.innerHTML = table.rows.length - 1;
+
+                // Recalculate total quantity
+                var totalQuantity = 0;
+                for (var i = 0; i < table.rows.length-1; i++) {
+                    var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
+                    if (!isNaN(inputValue)) {
+                        console.log(inputValue);
+                        totalQuantity += inputValue;
+                    }
+                }
+                // Update total quantity display
+                qtyproduct.innerHTML = totalQuantity;
+
+                // Check if there are rows to remove
+                if (table.rows.length > 1) {
+                    // Remove the last row
+                    table.deleteRow(table.rows.length - 1);
+                } else {
+                    // Otherwise, show a message
+                    alert("No Rows to Remove");
+                }
+            }
+
+
+            // end functionality of dynamic add row
             // Get the current UTC time
             var utcTime = new Date();
 
