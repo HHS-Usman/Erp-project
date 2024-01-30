@@ -305,13 +305,10 @@ Create Access Permission
                 });
 
                 $('#role-select').on('change', function () {
-                    $('#role-select').on('change', function () {
-                    var selectedRoles = $(this).val();
+                    var selectedRole = $(this).val();
 
-                    // Display selected roles in the div
-                    $('#selectedRolesDiv').html('Selected Roles: ' + selectedRoles.join(', '));
                     $.ajax({
-                            url: '/fetch-employee-data/' + selectedRoles,
+                            url: '/fetch-employee-data/' + selectedRole,
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {
