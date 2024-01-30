@@ -237,7 +237,7 @@ Create Access Permission
                         </div>
                     </div>
 
-                    <div id="selectedOptions" class="selected-options"></div>
+
 
 
                 </div>
@@ -249,6 +249,9 @@ Create Access Permission
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
+                    <div id="selectedRoleDiv">
+                        <!-- Selected role will be displayed here -->
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -302,10 +305,13 @@ Create Access Permission
                 });
 
                 $('#role-select').on('change', function () {
-                    var selectedRole = $(this).val();
+                    $('#role-select').on('change', function () {
+                    var selectedRoles = $(this).val();
 
+                    // Display selected roles in the div
+                    $('#selectedRolesDiv').html('Selected Roles: ' + selectedRoles.join(', '));
                     $.ajax({
-                            url: '/fetch-employee-data/' + selectedRole,
+                            url: '/fetch-employee-data/' + selectedRoles,
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {

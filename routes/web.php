@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\AccountcategoryController;
-use App\Http\Controllers\AccountController;
+
 use App\Http\Controllers\BankController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
@@ -61,7 +61,7 @@ use App\Http\Controllers\Security\AccesspermitController;
 use App\Http\Controllers\Security\User_role_controller;
 use App\Http\Controllers\Security\Usercontroller;
 use App\Http\Controllers\Product\Productcontroller;
-use App\Http\Controllers\BranchController;
+
 use App\Http\Controllers\BuyercategoryController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\BuyerpaymentController;
@@ -505,13 +505,13 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 
 Route::resource('purchaserequisition',PurchasereuquisitionController::class);
 Route::resource('quotation',QuotationController::class);
+Route::get('/approval', [QuotationController::class, 'approval']);
 
-Route::resource('account-store',AccountController::class);
 
 
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
-Route::get('/branches', 'BranchController@index');
-Route::post('/account-store', 'AccountController@store')->name('account-store');
+
+
 // for fetch record of DB in JS file
 Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);
 Route::get('/get-religion', [MonthlydaywiseController::class, 'getReligion']);
