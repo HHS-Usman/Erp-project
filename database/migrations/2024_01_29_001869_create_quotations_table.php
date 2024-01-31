@@ -13,7 +13,6 @@ class CreateQuotationsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('quotations');
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
@@ -24,8 +23,8 @@ class CreateQuotationsTable extends Migration
             $table->unsignedBigInteger('depart_id');
             $table->foreign('depart_id')->references('id')->on('departments')->onDelete('cascade');
             // supplier foreign key
-            $table->unsignedInteger('supplier_id');
-            $table->foreign('supplier_id')->references('suplier_id')->on('suppliers')->onDelete('cascade');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('supplier_id')->on('suppliers')->onDelete('cascade')->collation('utf8_unicode_ci');
             $table->timestamps();
         });
     }

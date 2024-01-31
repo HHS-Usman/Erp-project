@@ -15,9 +15,9 @@ class Product_sub_category extends Model
         'product1stsbctgry_code'=>'',
         'detail'=>'',
     ];
-    
+
     public function productcategory(){
-        return $this->hasOne(Product_category::class);
+        return $this->belongsTo(Product_category::class);
     }
     public function brandselection(){
         return $this->hasMany(Brand_Selection::class);
