@@ -43,21 +43,21 @@ Approval List
         </ul>
     </div>
     <br>
-    <div class="row justify-content-center">
-        <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="row justify-content-start">
+        <div class="d-flex col-md-3 col-sm-12 col-xs-12">
+            <label for="">Dropdown Selection</label>
             <select class="form-select" name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+                <option value="Pending">Pending</option>
             </select>
         </div>
     </div>
-
+    <br><br>
     <div class="row justify-content-center">
         <div class="card-body">
             <table id="myTable" class="table table-border datatable " style="border: 1px solid black">
                 <thead>
                     <tr>
+                        <th scope="col"><input type="checkbox" id="selectAll" class="" onclick="toggleSelectAll()"></th>
                         <th scope="col">S.no</th>
                         <th scope="col">Document No</th>
                         <th scope="col">Supplier</th>
@@ -70,16 +70,17 @@ Approval List
                 </thead>
                 <tbody>
                     <tr>
+                        <td><input type="checkbox" class="check"></td>
                         <td>1</td>
                         <td>Q-00321</td>
                         <td>pr-10231</td>
                         <td>Supplier</td>
                         <td>10000</td>
                         <td>thisdfds</td>
-                        <td>Pending For Approval</td>
+                        <td><a class="btn btn-outline-warning" href="#">Pending For Approval</a></td>
                         <td>
                             <form action="" method="POST">
-                                <a class="btn btn-info" href="">Show</a>
+                                <a class="btn btn-info" href="#">Show</a>
                                 <a class="btn btn-primary" href="#">Edit</a>
                                 <button type="button" class="btn btn-danger">Delete</button>
                             </form>
@@ -87,42 +88,27 @@ Approval List
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination" id="topPagination"></div>
-            <div class="pagination" id="bottomPagination"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12" id="topPagination">
+                <button class="btn btn-primary">Request to the requester</button>
+                <button class="btn btn-primary">Approve</button>
+                <button class="btn btn-primary">Save </button>
+            </div>
+
         </div>
     </div>
 
     <!-- End Recent Sales -->
-    <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/asset/vendor/chart.js/chart.umd.js"></script>
-    <script src="/asset/vendor/echarts/echarts.min.js"></script>
-    <script src="/asset/vendor/quill/quill.min.js"></script>
-    <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.10/js/jquery.dataTables.min.js">
-    </script>
-    <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
-    <script src="/asset/vendor/php-email-form/validate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="/asset/js/main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-                const myTable = new simpleDatatables.DataTable("#myTable", {
-                    paging: true,
-                    perPage: 10, // Set your desired number of items per page
-                    // Add other DataTable options as needed
-                });
+        function toggleSelectAll() {
+        var checkboxes = document.querySelectorAll('.check');
+        var selectAllCheckbox = document.getElementById('selectAll');
 
-                // Link the top and bottom pagination containers
-                myTable.on("datatable.sort", () => {
-                    const topPagination = document.querySelector("#topPagination");
-                    const bottomPagination = document.querySelector("#bottomPagination");
-                    bottomPagination.innerHTML = topPagination.innerHTML;
-                });
-            });
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = selectAllCheckbox.checked;
+        }
+    }
     </script>
     <br><br>
 
