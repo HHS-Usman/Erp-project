@@ -13,18 +13,26 @@ class CreateQuotationsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('quotations');
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
-            // branch foreign key
+            $table->float('total_no_product');
+            $table->float('total_qty_product');
+            $table->float('total_tax_amount');
+            $table->float('total_discount_amount');
+            $table->float('gross_amount');
+            $table->float('net_amount');
+            $table->float('invoice_discount');
+            // branch foreign key by Abrar
             $table->unsignedBigInteger('branch_id');
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            // department foreign key
+            $table->foreign('branch_id')->references('id')->on('branches');
+            // department foreign key by Abrar
             $table->unsignedBigInteger('depart_id');
-            $table->foreign('depart_id')->references('id')->on('departments')->onDelete('cascade');
-            // supplier foreign key
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')->references('supplier_id')->on('suppliers')->onDelete('cascade')->collation('utf8_unicode_ci');
+            $table->foreign('depart_id')->references('id')->on('departments');
+            // supplier foreign key by Abrar
+            $table->unsignedInteger('supplier_id');
+            $table->foreign('supplier_id')->references('suplier_id')->on('suppliers')->collation('utf8_unicode_ci');
             $table->timestamps();
         });
     }
