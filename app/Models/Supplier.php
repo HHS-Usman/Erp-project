@@ -9,7 +9,7 @@ class Supplier extends Model
 {
     use HasFactory;
     protected $guarded = [
-        'id',
+        'suplier_id',
     ];
     public function Bank()
     {

@@ -16,10 +16,10 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
-            // branch forign key by abrar
+            // branch forign key by abrar and nullable by badar
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            // deparmtent forign key
+            // department foreign key
             $table->unsignedBigInteger('depart_id');
             $table->foreign('depart_id')->references('id')->on('departments')->onDelete('cascade');
             $table->unsignedBigInteger('supplier_id');
@@ -34,7 +34,6 @@ class CreateQuotationsTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

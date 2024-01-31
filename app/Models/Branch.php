@@ -30,4 +30,8 @@ class Branch extends Model
     {
         return $this->hasMany(Quotation::class);
     }
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
 }

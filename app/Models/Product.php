@@ -11,5 +11,8 @@ class Product extends Model
     protected $guarded = [
         'id'
     ];
-   
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
 }

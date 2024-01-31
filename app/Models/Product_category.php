@@ -16,4 +16,12 @@ class Product_category extends Model
     public function productsubcategory(){
         return $this->hasMany(Product_sub_category::class,'id');
     }
+    public function buyer()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
 }
