@@ -16,15 +16,21 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
-            // branch forign key
-            $table->unsignedBigInteger('branch_id');
+            // branch forign key by abrar
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             // deparmtent forign key
             $table->unsignedBigInteger('depart_id');
             $table->foreign('depart_id')->references('id')->on('departments')->onDelete('cascade');
-            // supplier forign key
             $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->foreign('supplier_id')->references('suplier_id')->on('suppliers')->onDelete('cascade')->collation('utf8_unicode_ci');
+            $table->float("total_no_product");
+            $table->float("total_qty_product");
+            $table->float("total_taxamount");
+            $table->float("total_discountamount");
+            $table->float("grossamount");
+            $table->float("netamount");
+            $table->float("invoice_wise_discount");
             $table->timestamps();
         });
     }
