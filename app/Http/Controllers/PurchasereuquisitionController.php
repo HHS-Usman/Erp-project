@@ -101,10 +101,9 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
-        try {
             $qtyproduct = $request->input('qtyproduct');
             $totalnoproduct = $request->input('totalnoproduct');
-            $names = request()->input('names');
+            // $names = request()->input('names');
             $id = Purchaserequisition::count("pr_id");
             $file = $request->file('filename')->getClientOriginalName();
             $filepath = "PR_" . $id . "_" . $file;
@@ -120,30 +119,29 @@ class PurchasereuquisitionController extends Controller
                 'depart_id' => request()->get('depart_id'),
                 'emp_id' => request()->get('emp_id'),
             ]);
-            foreach ($names as $key => $name) {
-                // Check if the required input fields exist and are not null before accessing them
-                if ($request->has('subcategory')) {
+        //     foreach ($names as $key => $name) {
+        //         if ($request->has('subcategory')) {
                     
-                    PurchaseDetail::create([
-                        'sub_category' => $request->input('subcategory')[$key],
-                        'UOM' => $request->input('UOM')[$key],
-                        'current_stock' => $request->input('currentstock')[$key],
-                        'qty_required' => $request->input('qty_required')[$key],
-                        'last_purchase' => $request->input('last_purchase')[$key],
-                        'min_stock' => $request->input('minstock')[$key],
-                        'max_stock' => $request->input('maxstock')[$key],
-                        'history' => $request->input('history')[$key],
-                        'p_prequisition_id' => $id 
-                    ]);
-                } else {
-                    // Handle the case where one or more input fields are missing or null
-                    return response()->json(['error' => 'One or more required input fields are missing or null'], 400);
-                }
-            }
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        //             PurchaseDetail::create([
+        //                 'sub_category' => $request->input('subcategory')[$key],
+        //                 'UOM' => $request->input('UOM')[$key],
+        //                 'current_stock' => $request->input('currentstock')[$key],
+        //                 'qty_required' => $request->input('qty_required')[$key],
+        //                 'last_purchase' => $request->input('last_purchase')[$key],
+        //                 'min_stock' => $request->input('minstock')[$key],
+        //                 'max_stock' => $request->input('maxstock')[$key],
+        //                 'history' => $request->input('history')[$key],
+        //                 'p_prequisition_id' => $id 
+        //             ]);
+        //         } else {
+        //             // Handle the case where one or more input fields are missing or null
+        //             return response()->json(['error' => 'One or more required input fields are missing or null'], 400);
+        //         }
+        //     }
+        //     return response()->json(['success' => true]);
+        // } catch (\Exception $e) {
+        //     return response()->json(['error' => $e->getMessage()], 500);
+        // }
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
 

@@ -401,14 +401,14 @@
                     defaultOption2.value = "Brand";
                     defaultOption2.text = "Select";
                     selectbrand.add(defaultOption2);
-                    Data fetch from product
+                    // Data fetch from product 
                     @foreach ($brand as $b)
                         var option = document.createElement("option");
                         option.value = "{{ $b->id }}";
                         option.text = "id|{{ $b->id }}| Brand Selection| {{ $b->brand_selection }}";
                         selectbrand.add(option);
                     @endforeach
-                    END
+                    // END
 
                     // Append the select element to the cell
                     cell1.innerHTML = counter;
@@ -544,7 +544,7 @@
 
                 }
                 $.noConflict();
-                $(document).ready(function($) {
+                jQuery(document).ready(function($) {
                     $('#product').change(function() {
                         var productId = $(this).val();
                         // Make an AJAX request to get UOM data
@@ -593,8 +593,7 @@
                             success: function(response) {
                                 $('#subcategory').empty();
                                 $.each(response, function(index, psubc) {
-                                    $('#subcategory').append('<option value="' + psubc.id +
-                                        '">' + psubc.product1stsbctgry + '</option>');
+                                    $('#subcategory').append('<option value="' + psubc.id + '">' + psubc.product1stsbctgry + '</option>');
                                 });
                             }
                         });
@@ -649,6 +648,7 @@
 
                     });
                 }
+                
             </script>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
