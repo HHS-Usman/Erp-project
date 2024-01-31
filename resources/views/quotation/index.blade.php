@@ -53,33 +53,40 @@ Manage Quotation
                     <tr>
 
                         <th scope="col">S.no</th>
-                        <th scope="col">Document No</th> <!--data of this comes from quotation_detail table -->
-                        <th scope="col">Supplier</th> <!--data of this comes from quotation table -->
-                        <th scope="col">Quotation Pr No</th> <!--data of this comes from quotation_detail table -->
-                        <th scope="col">Quotation AMount</th> <!--data of this comes from quotation_detail table -->
-                        <th scope="col">Quotation remarks</th> <!--data of this comes from quotation table -->
-                        <th scope="col">Status</th> <!--data of this comes from quotation_detail table -->
+                        <th scope="col">Document No</th>
+                        <!--data of this comes from quotation_detail table -->
+                        <th scope="col">Supplier</th>
+                        <!--data of this comes from quotation table -->
+                        <th scope="col">Quotation Pr No</th>
+                        <!--data of this comes from quotation_detail table -->
+                        <th scope="col">Quotation AMount</th>
+                        <!--data of this comes from quotation_detail table -->
+                        <th scope="col">Quotation remarks</th>
+                        <!--data of this comes from quotation table -->
+                        <th scope="col">Status</th>
+                        <!--data of this comes from quotation_detail table -->
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $record)
-                        <tr>
-                            <td>1</td>
-                            <td>Q-00321</td>
-                            <td>pr-10231</td>
-                            <td>Supplier</td>
-                            <td>10000</td>
-                            <td>thisdfds</td>
-                            <td>Pending For Approval</td>
-                            <td>
-                                <form action="" method="POST">
-                                    <a class="btn btn-info" href="">Show</a>
-                                    <a class="btn btn-primary" href="#">Edit</a>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    @foreach($quotationDetails as $quotationDetail)
+                    <tr>
+                        <td>1</td>
+                        <td>{{ $quotationDetail->document_no }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ optional($quotationDetail->quotation)->supplier_id }}</td> <!-- data from quotation table -->
+                        <td>{{ $quotationDetail->pr_no }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ $quotationDetail->amount }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ $quotationDetail->quotation->remarks }}</td>
+                        <!-- data from quotation table -->
+                        <td>{{ $quotationDetail->approvel }}</td> <!-- data from quotation_detail table -->
+                        <td>
+                            <form action="" method="POST">
+                                <a class="btn btn-info" href="">Show</a>
+                                <a class="btn btn-primary" href="#">Edit</a>
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

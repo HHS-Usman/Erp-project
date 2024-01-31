@@ -14,7 +14,7 @@ use App\Models\Product_category;
 use App\Models\Product_sub_category;
 use App\Models\Purchaserequisition;
 use App\Models\Quotation;
-use App\Models\quotation_detail;
+use App\Models\QuotationDetail;
 use App\Models\Supplier;
 use App\Models\Unit_selection;
 
@@ -28,10 +28,9 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::all();
-        $quotation_details = quotation_detail::all();
-        $combinedData = $quotations->merge($quotationDetails);
-         return view('quotation.index', ['data' => $combinedData]);
+        
+        $quotationDetails = QuotationDetail::with('quotation')->get();
+         return view('quotation.index', ['quotationDetails' => $quotationDetails]);
     }
 
     /**
