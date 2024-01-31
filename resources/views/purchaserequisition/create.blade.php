@@ -154,7 +154,7 @@
                                 <select name="category" id="pc_data" class="form-control">
                                     <option value="category" id="chnagefont">Select</option>
                                     @foreach ($pcategory as $category)
-                                        <option onclick="categoryData()" id="chnagefont" value="{{ $category->id }}">
+                                        <option id="chnagefont" value="{{ $category->id }}">
                                             id{{ $category->id }} | Product Category Name|
                                             {{ $category->product_category }}
                                         </option>
@@ -172,14 +172,16 @@
                                 </select>
 
                             </td>
-                            <td> <select name="brand_id" id="category" class="form-control">
+                            <td>
+                                <select name="brand_id" id="brandselection" class="form-control">
                                     <option value="brand" id="chnagefont">Select</option>
                                     @foreach ($brand as $b)
                                         <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} |
                                             Brand Selection | {{ $b->brand_selection }}
                                         </option>
                                     @endforeach
-                                </select></td>
+                                </select>
+                            </td>
                             <td> <select name="product_d" id="product" class="form-control">
                                     <option id="chnagefont" value="product">Select</option>
                                     @foreach ($product as $p)
@@ -211,11 +213,11 @@
                                 ---
                             </td>
 
-                            <td><input type="number" class="form-control debit" placeholder="0.00" name="minstock"
-                                    required>
+                            <td><input type="number" class="form-control debit" id="minstock" placeholder="0.00"
+                                    name="minstock" required>
                             </td>
-                            <td><input type="number" class="form-control debit" placeholder="0.00" name="maxstock"
-                                    required>
+                            <td><input type="number" class="form-control debit" id="maxstock" placeholder="0.00"
+                                    name="maxstock" required>
                             </td>
                             <td> <!-- Add More Rows Button -->
                                 <div class="row">
@@ -271,22 +273,6 @@
                 </div>
             </div>
             <script>
-                // function declare for refresh test for first row
-                function refreshtext() {
-                    // Reset the dropdown selections to their default values
-                    document.getElementById('category').selectedIndex = 0;
-                    document.getElementById('product').selectedIndex = 0;
-                    document.getElementById('brand_id').selectedIndex = 0;
-
-                    // Clear the input field values
-                    document.getElementsByName('firstcategory')[0].value = '';
-                    document.getElementsByName('pd')[0].value = '';
-                    document.getElementsByName('qty_required')[0].value = '';
-                    document.getElementsByName('lastpurchase')[0].value = '';
-                    document.getElementsByName('minstock')[0].value = '';
-                    document.getElementsByName('maxstock')[0].value = '';
-                }
-                // no of product 
                 var gettvalueok = 0;
                 var totalproduct = document.getElementById("noproduct");
                 var totalproductInput = document.getElementById("totalnoproductInput");
@@ -295,9 +281,17 @@
                     var valuegetting = document.getElementById('qtyproductvalue').value;
                     gettvalueok = parseInt(valuegetting);
                 });
-
                 var selectproduct = "";
                 var counter = 0;
+                // this is define conversted in json format of category data by Abrar
+                var pcategoryData = {!! json_encode($pcategory) !!};
+                // this is define conversted in json format of sub first category data by Abrar
+                var psubcategorydata = {!! json_encode($subcategory) !!};
+                // this is define converted in json format of product data by Abrar
+                var productdata = {!! json_encode($product) !!};
+                // this is define converted in json format of product data by Abrar
+                var brand = {!! json_encode($brand) !!};
+                console.log(brand);
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
@@ -305,7 +299,6 @@
                     counter = table.rows.length;
                     totalproduct.innerHTML = counter;
                     totalproductInput.value = counter;
-
                     var cell1 = newRow.insertCell(0);
                     var cell2 = newRow.insertCell(1);
                     var cell3 = newRow.insertCell(2);
@@ -331,94 +324,93 @@
                     namesInput.value = counter;
                     cell14.appendChild(namesInput);
                     // start Category
-                    // create element select category
+                    // create element select product category 
                     var selectElement = document.createElement("select");
                     selectElement.id = "pcategory" + counter;
                     selectElement.className = "form-control";
-                    selectElement.name = "account" + table.rows.length;
+                    selectElement.name = "account[]";
                     console.log(selectElement);
                     // Add a default option Element of Category
                     var defaultOption = document.createElement("option");
                     defaultOption.text = "Select";
                     selectElement.add(defaultOption);
-
                     // Add options from PHP array for category
-                    @foreach ($pcategory as $category)
+                    //here fetching all records
+                    for (var i = 0; i < pcategoryData.length; i++) {
+                        var category = pcategoryData[i];
                         var option = document.createElement("option");
-                        option.value = "{{ $category->id }}";
-                        option.text = "id| {{ $category->id }} | Product Category | {{ $category->product_category }}";
+                        option.value = category.id;
+                        option.text = "id| " + category.id + " | Product Category | " + category.product_category;
                         selectElement.add(option);
-                    @endforeach
+                    }
                     // End
                     // start Sub Category
                     // create element select sub category category
                     var subcategory = document.createElement("select");
                     subcategory.id = "subcategory" + counter;
                     subcategory.className = "form-control";
-                    subcategory.name = "subcategory" + table.rows.length;
+                    subcategory.name = "subcategory[]";
                     // Add a default option Element of Category
                     var defaultOption = document.createElement("option");
                     defaultOption.text = "Select";
                     subcategory.add(defaultOption);
                     // Add options from PHP array for category
-                    @foreach ($subcategory as $subcategory)
+                    for (let i = 0; i < psubcategorydata.length; i++) {
+                        var firstcategory = psubcategorydata[i];
                         var option = document.createElement("option");
-                        option.value = "{{ $subcategory->id }}";
-                        option.text = " id | {{ $subcategory->id }}| SubCategoryname|{{ $subcategory->product1stsbctgry }}";
+                        option.value = firstcategory.id;
+                        option.text = "id| " + firstcategory.id + " | Sub Category | " + firstcategory.product1stsbctgry;
                         subcategory.add(option);
-                    @endforeach
+                    }
                     // End
                     // Start Product
                     // create element select Product
                     var selectproduct = document.createElement("select");
                     selectproduct.id = "product" + counter;
                     selectproduct.className = "form-control";
-                    selectproduct.name = "account" + counter;
+                    selectproduct.name = "product[]";
                     var productname = selectproduct.name;
-
                     // Select option Element of product
                     var defaultOption1 = document.createElement("option");
                     defaultOption1.value = "product";
                     defaultOption1.text = "Select";
                     selectproduct.add(defaultOption1);
-
                     // Data fetch from product 
-                    @foreach ($product as $p)
+                    for (let i = 0; i < productdata.length; i++) {
+                        var product = productdata[i];
                         var option = document.createElement("option");
-                        option.value = "{{ $p->id }}";
-                        option.text = "id|{{ $p->id }} | productName | {{ $p->name }}";
+                        option.value = product.id;
+                        option.text = "id| " + product.id + " | product " + product.name;
                         selectproduct.add(option);
-                    @endforeach
+                    }
                     // END
-                    console.log(selectproduct);
-                    // Start Brand
+                    // Start brand
                     // create element select Brand
                     var selectbrand = document.createElement("select");
+                    selectbrand.id = "brand" + counter;
                     selectbrand.className = "form-control";
-                    selectbrand.name = "brand";
-                    // Select option Element of product
-                    var defaultOption2 = document.createElement("option");
-                    defaultOption2.value = "Brand";
-                    defaultOption2.text = "Select";
-                    selectbrand.add(defaultOption2);
-                    // Data fetch from product 
-                    @foreach ($brand as $b)
+                    selectbrand.name = "brand[]";
+                    var brandname = selectbrand.name;
+                    // Select option Element of brand
+                    var defaultOption1 = document.createElement("option");
+                    defaultOption1.value = "brand";
+                    defaultOption1.text = "Select";
+                    selectbrand.add(defaultOption1);
+                    // data fetch from json and print in drop down selection
+                    for (let i = 0; i < brand.length; i++) {
+                        var brandata = brand[i];
                         var option = document.createElement("option");
-                        option.value = "{{ $b->id }}";
-                        option.text = "id|{{ $b->id }}| Brand Selection| {{ $b->brand_selection }}";
+                        option.value = brandata.id;
+                        option.text = "id| " + brandata.id + " | Brand " + brandata.brand_selection;
                         selectbrand.add(option);
-                    @endforeach
+                    }
                     // END
-
                     // Append the select element to the cell
                     cell1.innerHTML = counter;
                     // This cell2.appendChild is use for add option selected value in category
                     cell2.appendChild(selectElement);
-                    // cell3.appendChild(selectElement);
                     cell3.appendChild(subcategory);
-                    cell3.appendChild(namesInput);
                     cell4.appendChild(selectbrand);
-                    // Append the select element 
                     cell5.appendChild(selectproduct);
                     cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="description" name="Remarks' +
                         table.rows
@@ -447,10 +439,12 @@
                         .length + '">';
                     cell11.innerHTML = '<span>---</span>';
                     cell12.innerHTML = '<span>---</span>';
-                    cell13.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="minstock' + table
+                    cell13.innerHTML =
+                        '<input type="number" class="form-control credit" placeholder="0.00" name="minstock[]" id="minstock' + table
                         .rows.length + '">';
                     cell13.appendChild(namesInput);
-                    cell14.innerHTML = '<input type="number" class="form-control credit" placeholder="0.00" name="maxstock' + table
+                    cell14.innerHTML =
+                        '<input type="number" class="form-control credit" placeholder="0.00" name="maxstock[]"id="maxstock' + table
                         .rows.length + '">';
                     cell14.appendChild(namesInput);
                     cell15.innerHTML = ' <button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
@@ -458,27 +452,11 @@
                     cell17.innerHTML =
                         '<button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>';
                     cell18.innerHTML = '<button type="button" class="btn  btn-warning" >.</button>';
-
-                    var formData = $('#form').serialize();
-                    console.log(formData);
-                    jQuery.ajax({
-                        url: '/save-data',
-                        method: 'POST',
-                        data: formData,
-                        success: function(response) {
-
-                            console.log(response);
-                        },
-                        error: function(xhr, status, error) {
-
-                            console.error(error);
-                        }
-                    });
                     bindProductChangeEvent(counter);
                     bindProductChangeCategoryEvent(counter);
                     updateTotalQuantity();
                 }
-
+                // function declare for update to Quality product
                 function updateTotalQuantity() {
                     var totalQuantity = gettvalueok;
                     var table = document.getElementById("tableBody");
@@ -495,7 +473,7 @@
                     // Update hidden input field value
                     document.getElementById("qtyproductInput").value = totalQuantity;
                 }
-
+                // this function is declare for erase rows from bottom to top
                 function removeRow() {
                     var totalproductInput = document.getElementById("totalnoproductInput");
                     var table = document.getElementById("tableBody");
@@ -521,28 +499,8 @@
                         alert("No Rows to Remove");
                     }
                 }
-                // Function to update totals
-                function updateTotals() {
-                    var debitTotal = 0;
-                    var creditTotal = 0;
+                // end here
 
-                    // Loop through rows with class 'debit' and 'credit'
-                    document.querySelectorAll('.debit').forEach(function(element) {
-                        debitTotal += parseFloat(element.value) || 0;
-                    });
-
-                    document.querySelectorAll('.credit').forEach(function(element) {
-                        creditTotal += parseFloat(element.value) || 0;
-                    });
-
-                    // Update total row
-                    document.getElementById('debitTotal').textContent = debitTotal.toFixed(2);
-                    document.getElementById('creditTotal').textContent = creditTotal.toFixed(2);
-
-                    document.getElementById('totalDebit').value = debitTotal.toFixed(2);
-                    document.getElementById('totalCredit').value = creditTotal.toFixed(2);
-
-                }
                 $.noConflict();
                 jQuery(document).ready(function($) {
                     $('#product').change(function() {
@@ -556,10 +514,10 @@
                                 var uomInput = $('input[name="UOM"]');
                                 uomInput.val(data.uom);
 
-                                var minstock = $('input[name="minstock"]');
+                                var minstock = $('input[id="minstock"]');
                                 minstock.val(data.minqty);
 
-                                var maxstock = $('input[name="maxstock"]');
+                                var maxstock = $('input[id="maxstock"]');
                                 maxstock.val(data.maxqty);
                             },
                             error: function(xhr, status, error) {
@@ -583,24 +541,65 @@
                             }
                         });
                     });
-                    // Using Jquery AJax for First category Data fetch by Abrar Ul Hassan
+                    // this ajax is use for when use click on option of product category related to id filter data in get brand select by Abrar
+                    // Function to populate Sub Category dropdown based on Product Category selection
+                    // counter
                     $('#pc_data').change(function() {
-                        console.log("hello");
                         var pc_id = $(this).val();
                         $.ajax({
                             url: '/getsubcategory/' + pc_id,
                             type: 'GET',
                             success: function(response) {
                                 $('#subcategory').empty();
+                                $('#subcategory').append(
+                                    '<option value="None" id="chnagefont">Select</option>');
                                 $.each(response, function(index, psubc) {
-                                    $('#subcategory').append('<option value="' + psubc.id + '">' + psubc.product1stsbctgry + '</option>');
+                                    $('#subcategory').append('<option value="' + psubc.id +
+                                        '">id| ' + psubc.id + ' | Sub Category | ' + psubc
+                                        .product1stsbctgry + '</option>');
+                                });
+                            }
+                        });
+                    });
+                    // for dynamic 
+                    $('#pcategory' + counter).change(function() {
+                        var pc_id = $(this).val();
+                        $.ajax({
+                            url: '/getsubcategory/' + pc_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#subcategory' + counter).empty();
+                                $('#subcategory' + counter).append(
+                                    '<option value="None" id="chnagefont">Select</option>');
+                                $.each(response, function(index, psubc) {
+                                    $('#subcategory' + counter).append('<option value="' + psubc
+                                        .id + '">id| ' + psubc.id + ' | Sub Category | ' +
+                                        psubc.product1stsbctgry + '</option>');
+                                });
+                            }
+                        });
+                    });
+                    // Function to populate Brand Selection dropdown based on Sub Category selection
+                    $('#subcategory').change(function() {
+                        var psubc_id = $(this).val();
+                        $.ajax({
+                            url: '/getbrand/' + psubc_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#brandselection').empty();
+                                $('#brandselection').append(
+                                    '<option value="brand" id="chnagefont">Select</option>');
+                                $.each(response, function(index, brand) {
+                                    $('#brandselection').append(
+                                        '<option id="chnagefont" value="' + brand.id +
+                                        '">id | ' + brand.id + ' | Brand Selection | ' +
+                                        brand.brand_selection + '</option>');
                                 });
                             }
                         });
                     });
 
                 });
-
                 function bindProductChangeEvent(counter) {
                     jQuery(document).ready(function($) {
                         $(document).on('change', "#product" + counter, function() {
@@ -612,8 +611,8 @@
                                 dataType: 'json',
                                 success: function(data) {
                                     var uomInput = $('input[name="UOM' + counter + '"]');
-                                    let minstock = $('input[name="minstock' + counter + '"]');
-                                    let maxstock = $('input[name="maxstock' + counter + '"]');
+                                    let minstock = $('input[id="minstock' + counter + '"]');
+                                    let maxstock = $('input[id="maxstock' + counter + '"]');
                                     uomInput.val(data.uom);
                                     minstock.val(data.minqty);
                                     maxstock.val(data.maxqty);
@@ -623,10 +622,8 @@
                                 }
                             });
                         });
-
                     });
                 }
-
                 function bindProductChangeCategoryEvent(counter) {
                     jQuery(document).ready(function($) {
                         $(document).on('change', "#pcategory" + counter, function() {
@@ -648,7 +645,6 @@
 
                     });
                 }
-                
             </script>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -658,28 +654,8 @@
         <br><br><br>
         <br>
         <br>
-        <div><br> </div>
-        <script>
-            // Get the current UTC time
-            var utcTime = new Date();
-
-            // Calculate the time difference for Pakistan Standard Time (UTC+5)
-            var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
-
-            // Calculate the Pakistan Standard Time by adding the offset
-            var pstTime = new Date(utcTime.getTime() + pstOffset);
-
-            // Format the date components
-            var year = pstTime.getUTCFullYear();
-            var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
-            var day = ('0' + pstTime.getUTCDate()).slice(-2);
-
-            // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
-            var formattedDate = year + '-' + month + '-' + day;
-            var pakisatndate = document.getElementById('documentdate');
-            pakisatndate.value = formattedDate;
-        </script>
-
+        <div><br>
+        </div>
     </section>
 
 @endsection

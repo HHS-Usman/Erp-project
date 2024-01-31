@@ -22,4 +22,8 @@ class Product_sub_category extends Model
     public function brandselection(){
         return $this->hasMany(Brand_Selection::class);
     }
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
 }

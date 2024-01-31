@@ -25,6 +25,6 @@ class Purchaserequisition extends Model
     }
     public function prdetail()
     {
-        return $this->hasMany(Pr_detail::class, 'pdetail_id');
+        return $this->hasMany(Pr_detail::class);
     }
 }

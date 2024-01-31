@@ -21,5 +21,9 @@ class Brand_Selection extends Model
     public function pSubc(){
         return $this->belongsTo(Product_sub_category::class,'psubc_id');
     }
+    public function prdetail()
+    {
+        return $this->hasMany(Pr_detail::class);
+    }
 
 }

@@ -8,6 +8,7 @@ use App\Models\BuyerCategory;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Modetype;
+use App\Models\Pr_detail;
 use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
@@ -28,13 +29,21 @@ class PurchasereuquisitionController extends Controller
     public function index()
     {
         $Prdata = Purchaserequisition::all();
-        return view('purchaserequisition.index',compact('Prdata'));
+        return view('purchaserequisition.index', compact('Prdata'));
+    }
+    // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
+    public function getbrandselection($psubc_id)
+    {
+        $brandselection = Brand_Selection::where('psubc_id', $psubc_id)->get();
+        return response()->json($brandselection);
     }
     // Declare function getfirstCategory for fetching data on basis on product category for first category by Abrar
-    public function getfirstCategory($pc_id){
-        $subcategory = Product_sub_category::where('pc_id',$pc_id)->get();
+    public function getfirstCategory($pc_id)
+    {
+        $subcategory = Product_sub_category::where('pc_id', $pc_id)->get();
         return response()->json($subcategory);
     }
+
     public function purchasedata($id)
     {
         $product = Product::find($id);
@@ -90,7 +99,7 @@ class PurchasereuquisitionController extends Controller
         $subcategory = Product_sub_category::all();
         $counterid = Purchaserequisition::count("pr_id");
         $pr = $counterid + 1;
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr','brand','modetype','subcategory'));
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory'));
     }
 
     /**
@@ -101,47 +110,39 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
-            $qtyproduct = $request->input('qtyproduct');
-            $totalnoproduct = $request->input('totalnoproduct');
-            // $names = request()->input('names');
-            $id = Purchaserequisition::count("pr_id");
-            $file = $request->file('filename')->getClientOriginalName();
-            $filepath = "PR_" . $id . "_" . $file;
-            Log::info('Purchase Requisition created successfully');
-            Purchaserequisition::create([
-                'doc_ref_no' =>request()->get('doc_ref_no'),
-                'date_picker' =>request()->get('date_picker'),
-                'pr_detail' =>request()->get('pr_remarks'),
-                'file' => $filepath,
-                't_no_product'=> $totalnoproduct,
-                't_qty_product'=>$qtyproduct,
-                'modet_id' => request()->get('mt_id'),
-                'depart_id' => request()->get('depart_id'),
-                'emp_id' => request()->get('emp_id'),
+        $qtyproduct = $request->input('qtyproduct');
+        $totalnoproduct = $request->input('totalnoproduct');
+        // $names = request()->input('names');
+        $id = Purchaserequisition::count("pr_id");
+        $file = $request->file('filename')->getClientOriginalName();
+        $filepath = "PR_" . $id . "_" . $file;
+        Log::info('Purchase Requisition created successfully');
+        Purchaserequisition::create([
+            'doc_ref_no' => request()->get('doc_ref_no'),
+            'date_picker' => request()->get('date_picker'),
+            'pr_detail' => request()->get('pr_remarks'),
+            'file' => $filepath,
+            't_no_product' => $totalnoproduct,
+            't_qty_product' => $qtyproduct,
+            'modet_id' => request()->get('mt_id'),
+            'depart_id' => request()->get('depart_id'),
+            'emp_id' => request()->get('emp_id'),
+        ]);
+        $counterid = Purchaserequisition::count("pr_id");
+        // Store pr_details data
+        foreach ($request->input('minstock') as $index => $minstock) {
+            Pr_detail::create([
+                'maxstock' =>$request->input('maxstock')[$index],
+                'minstock' =>$minstock,
+                'uom'=>"",
+                'branch_id'=>1,
+                'pc_id'=>$request->input('account')[$index],
+                'psubc_id'=>$request->input('subcategory')[$index],
+                'p_id'=>$request->input('product')[$index],
+                'bs_id'=>$request->input('brand')[$index],
+                'pre_id'=>$counterid
             ]);
-        //     foreach ($names as $key => $name) {
-        //         if ($request->has('subcategory')) {
-                    
-        //             PurchaseDetail::create([
-        //                 'sub_category' => $request->input('subcategory')[$key],
-        //                 'UOM' => $request->input('UOM')[$key],
-        //                 'current_stock' => $request->input('currentstock')[$key],
-        //                 'qty_required' => $request->input('qty_required')[$key],
-        //                 'last_purchase' => $request->input('last_purchase')[$key],
-        //                 'min_stock' => $request->input('minstock')[$key],
-        //                 'max_stock' => $request->input('maxstock')[$key],
-        //                 'history' => $request->input('history')[$key],
-        //                 'p_prequisition_id' => $id 
-        //             ]);
-        //         } else {
-        //             // Handle the case where one or more input fields are missing or null
-        //             return response()->json(['error' => 'One or more required input fields are missing or null'], 400);
-        //         }
-        //     }
-        //     return response()->json(['success' => true]);
-        // } catch (\Exception $e) {
-        //     return response()->json(['error' => $e->getMessage()], 500);
-        // }
+        }
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
 
