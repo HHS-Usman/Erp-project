@@ -412,12 +412,11 @@
                     cell3.appendChild(subcategory);
                     cell4.appendChild(selectbrand);
                     cell5.appendChild(selectproduct);
-                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="description" name="Remarks' +
+                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="Product description" name="Remarks' +
                         table.rows
                         .length + '">';
-                    cell7.innerHTML = '<input type="hidden" class="form-control debit" placeholder="UOM" name="UOM' + table.rows
+                    cell7.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM[]' + table.rows
                         .length + '">';
-                    cell7.innerHTML = '<span>UOM</span>';
                     cell7.appendChild(namesInput);
                     cell8.innerHTML =
                         '---';
@@ -434,9 +433,7 @@
                     // Update total quantity initially
                     cell9.appendChild(input);
                     cell10.innerHTML =
-                        '<input type="number" class="form-control debit" placeholder="last Purchase" name="last_purchase' + table
-                        .rows
-                        .length + '">';
+                        '<input type="number" class="form-control debit" placeholder="last Purchase" name="last_purchase' + table.rows.length + '">';
                     cell11.innerHTML = '<span>---</span>';
                     cell12.innerHTML = '<span>---</span>';
                     cell13.innerHTML =

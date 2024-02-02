@@ -601,4 +601,7 @@ Route::post('/save-data', [PurchasereuquisitionController::class, 'store']);
 Route::get('/getsubcategory/{pc_id}',[PurchasereuquisitionController::class,'getfirstCategory']);
 // this route declare beacuse i am fetching data from brand selection(Ajax) by Abrar ul Hassan
 Route::get('/getbrand/{psubc_id}',[PurchasereuquisitionController::class,'getbrandselection']);
+// route to handle the AJAX request for prs data
+Route::get('/fetch-data',[QuotationController::class,'fetchData']);
+
 });

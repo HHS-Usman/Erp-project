@@ -20,6 +20,10 @@ class CreatePrDetailsTable extends Migration
             $table->string("maxstock");
             $table->string("minstock");
             $table->string("uom")->nullable();
+            $table->string("quantity")->nullable();
+            $table->string("last_received_date")->nullable();
+            $table->string("last_received_rate")->nullable();
+            $table->string("product_description")->nullable();
             // forign key define here
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');

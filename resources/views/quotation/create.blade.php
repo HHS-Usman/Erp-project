@@ -43,42 +43,55 @@
             }
         </style>
         <br><br><br>
-        <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form" enctype="multipart/form-data">
+        <form action="{{ route('quotation.store') }}" method="POST" id="form" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-3 form-group">
                             <strong>Document Doc#</strong>
-                            <input type="text" class="form-control" value="" id="prdocnumber" name="doc_no"
-                                placeholder="PR Doc#" readonly>
+                            <input type="text" class="form-control" value={{ $qcounter }} id="prdocnumber"
+                                name="doc_no" placeholder="PR Doc#" readonly>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-3 form-group">
                             <strong>Branch</strong>
-                            <select name="b_id" id="branch" class="form-control">
+                            <select name="branchs_id" id="branch" class="form-control">
                                 <option value="None">Select Branch</option>
                                 @foreach ($branch as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-3 form-group">
                             <strong>Department</strong>
-                            <select name="d_id" id="department" class="form-control">
+                            <select name="depart_id" id="department" class="form-control">
                                 <option value="None">Select Department</option>
                                 @foreach ($deaprtment as $item)
                                     <option value="{{ $item->id }}">{{ $item->department }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4 form-group" style="margin-top: 20px">
-                            <button type="button" class="btn btn-primary">GET PRS Data</button>
+                        <div class="col-md-3 form-group">
+                            <strong>Select PRs</strong>
+                            <input type="text" class="form-control" value=""  id="prs" name="PRS"
+                                    placeholder="Quotation Remarks">
+                        </div>
+                        <div class="col-md-3 form-group" style="margin-top: 20px">
+                            <button type="button" class="btn btn-primary" onclick="Getprsdata()">GET PRS Data</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- calculation hidden field for entry in database by Abrar --}}
+            <input type="hidden" name="total_no_product" value="3" id="tnoproduct">
+            <input type="hidden" name="total_qty_product" value="3" id="tqtyproduct">
+            <input type="hidden" name="total_tax_amount" value="3" id="ttaxamount">
+            <input type="hidden" name="total_discount_amount" value="3" id="tdamount">
+            <input type="hidden" name="gross_amount" value="3" id="grossamount">
+            <input type="hidden" name="invoice_discount" value="3" id="invoicediscount">
+            <input type="hidden" name="net_amount" value="3" id="invoicediscount">
             {{-- Contetn for Grid Here --}}
             <div style="border: 1px solid rgb(20, 19, 19); margin-top:14px;margin-bottom:10px;padding:0px 10px 0px 10px">
                 <div class="row justify-content-center" style="padding-top:30px">
@@ -86,7 +99,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <strong>Select Supplier</strong>
-                                <select name="s_id" id="supplier" class="form-control">
+                                <select name="supplier_id" id="supplier" class="form-control">
                                     <option value="None">Select Supplier</option>
                                     @foreach ($suplier as $item)
                                         <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
@@ -104,12 +117,13 @@
                 <table class="table mt-3 border" id="tabledate">
                     <thead>
                         <tr>
-                            <th>S.No#</th>
+                        <tr>
+                            <th>S.No</th>
                             <th>PR_No</th>
-                            <th>Product/Item</th>
-                            <th>Product Wise Desciption </th>
+                            <th>Product</th>
+                            <th>product Wise Description</th>
                             <th>UOM</th>
-                            <th>Qty</th>
+                            <th>Quality</th>
                             <th>Last Received Date</th>
                             <th>Last Received Rate</th>
                             <th>Rate</th>
@@ -119,95 +133,15 @@
                             <th>Discount%</th>
                             <th>Discount Amount</th>
                             <th>Net Amount</th>
-                            <th>Action</th>
-                            <th></th>
+                        </tr>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="PR Number"
-                                    name="prnumber" readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Product"
-                                    name="product" readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Product Description"
-                                    name="product">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="UOM" name="UOM"
-                                    readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" id="qtyproductvalue"
-                                    placeholder="Qty" name="productqty">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Laste Recived Date"
-                                    name="lreceiveddate" readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Last Received Rate"
-                                    name="lrr" readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Rate"
-                                    name="rate">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Tax%"
-                                    name="taxper">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Tax Amount"
-                                    name="taxamount">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Amount"
-                                    name="amount" readonly>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Discount%"
-                                    name="discount">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Discount Amount"
-                                    name="discountamount">
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" value="" placeholder="Net Amount"
-                                    name="netamount"readonly>
-                            </td>
-
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary" onclick="addRow()">+</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
+
                 </table>
                 {{-- end table here by Abrar ul hassan --}}
-                <div class="row justify-content-center">
+                {{-- <div class="row justify-content-center">
                     <div class="col-md-12">
                         <table class="table">
                             <tbody>
@@ -232,7 +166,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -244,146 +178,291 @@
         <br>
         <div><br> </div>
         <script>
-            tproduct = document.getElementById("totalproduct");
-            var qtyproduct = document.getElementById("qtyproduct");
-            var gettvalueqty = 0;
-            document.getElementById("qtyproductvalue").addEventListener("input", function() {
-                var valuegetting = document.getElementById('qtyproductvalue').value;
-                gettvalueqty = parseInt(valuegetting);
-            });
+            // tproduct = document.getElementById("totalproduct");
+            // var qtyproduct = document.getElementById("qtyproduct");
+            // var gettvalueqty = 0;
+            // document.getElementById("qtyproductvalue").addEventListener("input", function() {
+            //     var valuegetting = document.getElementById('qtyproductvalue').value;
+            //     gettvalueqty = parseInt(valuegetting);
+            // });
+
             // function for add new row (Abrar ul Hassan)
-            function addRow() {
-                var tableBody = document.getElementById("tableBody");
-                var rowCount = tableBody.rows.length;
-                tproduct.innerHTML = rowCount + 1;
-                // declaring cell for each td for first row
-                var newRow = tableBody.insertRow(rowCount);
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4 = newRow.insertCell(3);
-                var cell5 = newRow.insertCell(4);
-                var cell6 = newRow.insertCell(5);
-                var cell7 = newRow.insertCell(6);
-                var cell8 = newRow.insertCell(7);
-                var cell9 = newRow.insertCell(8);
-                var cell10 = newRow.insertCell(9);
-                var cell11 = newRow.insertCell(10);
-                var cell12 = newRow.insertCell(11);
-                var cell13 = newRow.insertCell(12);
-                var cell14 = newRow.insertCell(13);
-                var cell15 = newRow.insertCell(14);
-                var cell16 = newRow.insertCell(15);
-                var cell17 = newRow.insertCell(16);
-                // dynamic input field and other tag for each cell 
-                cell1.innerHTML = rowCount + 1;
-                cell2.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="PR Number" name="prnumber" readonly>';
-                cell3.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Product" name="product" readonly>';
-                cell4.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Product Description" name="product">';
-                cell5.innerHTML = '<input type="text" class="form-control" value="" placeholder="UOM" name="UOM" readonly>';
-                var input = document.createElement("input");
-                input.type = "text";
-                input.className = "form-control debit";
-                input.placeholder = "Quality";
-                input.name = "qty_required" + rowCount;
-                input.addEventListener("input", function() {
-                    // Update total quantity
-                    updateTotalQuantity();
+            // function addRow() {
+            //     var tableBody = document.getElementById("tableBody");
+            //     var rowCount = tableBody.rows.length;
+            //     tproduct.innerHTML = rowCount + 1;
+            //     // declaring cell for each td for first row
+            //     var newRow = tableBody.insertRow(rowCount);
+            //     var cell1 = newRow.insertCell(0);
+            //     var cell2 = newRow.insertCell(1);
+            //     var cell3 = newRow.insertCell(2);
+            //     var cell4 = newRow.insertCell(3);
+            //     var cell5 = newRow.insertCell(4);
+            //     var cell6 = newRow.insertCell(5);
+            //     var cell7 = newRow.insertCell(6);
+            //     var cell8 = newRow.insertCell(7);
+            //     var cell9 = newRow.insertCell(8);
+            //     var cell10 = newRow.insertCell(9);
+            //     var cell11 = newRow.insertCell(10);
+            //     var cell12 = newRow.insertCell(11);
+            //     var cell13 = newRow.insertCell(12);
+            //     var cell14 = newRow.insertCell(13);
+            //     var cell15 = newRow.insertCell(14);
+            //     var cell16 = newRow.insertCell(15);
+            //     var cell17 = newRow.insertCell(16);
+            //     // dynamic input field and other tag for each cell 
+            //     cell1.innerHTML = rowCount + 1;
+            //     cell2.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="PR Number" name="prnumber" readonly>';
+            //     cell3.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Product" name="product" readonly>';
+            //     cell4.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Product Description" name="product">';
+            //     cell5.innerHTML = '<input type="text" class="form-control" value="" placeholder="UOM" name="UOM" readonly>';
+            //     var input = document.createElement("input");
+            //     input.type = "text";
+            //     input.className = "form-control debit";
+            //     input.placeholder = "Quality";
+            //     input.name = "qty_required" + rowCount;
+            //     input.addEventListener("input", function() {
+            //         // Update total quantity
+            //         updateTotalQuantity();
+            //     });
+            //     cell6.appendChild(input);
+            //     cell7.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Last Received Date" name="lreceiveddate" readonly>';
+            //     cell8.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Last Received Rate" name="lrr" readonly>';
+            //     cell9.innerHTML = '<input type="text" class="form-control" value="" placeholder="Rate" name="rate">';
+            //     cell10.innerHTML = '<input type="text" class="form-control" value="" placeholder="Tax%" name="taxper">';
+            //     cell11.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Tax Amount" name="taxamount">';
+            //     cell12.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Amount" name="amount" readonly>';
+            //     cell13.innerHTML = '<input type="text" class="form-control" value="" placeholder="Discount%" name="discount">';
+            //     cell14.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Discount Amount" name="discountamount">';
+            //     cell15.innerHTML =
+            //         '<input type="text" class="form-control" value="" placeholder="Net Amount" name="netamount" readonly>';
+            //     cell16.innerHTML =
+            //         '<button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
+            //     cell17.innerHTML =
+            //         '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
+
+            // }
+            // Define the Getprsdata function
+            function Getprsdata() {
+                var inputValue = document.getElementById('prs').value;
+                fetch('/fetch-data?prs=' + inputValue)
+                    .then(response => response.json())
+                    .then(data => {
+                        updateTable(data);
+                        console.log(data);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function updateTable(data) {
+
+                var tableBody = document.querySelector('#tableBody');
+                tableBody.innerHTML = '';
+                data.forEach((item, index) => {
+                    console.log("This is Inside function");
+                    console.log("item = " + item + " index = " + index)
+                    var row = tableBody.insertRow();
+                    console.log(row);
+
+                    // S.No
+                    var snoCell = row.insertCell();
+                    snoCell.textContent = index + 1;
+
+                    // PR_No
+                    var prNoCell = row.insertCell();
+                    prNoCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.minstock}" placeholder="PR Number" name="prnumber" readonly>`;
+
+                    // Product
+                    var prNoCell = row.insertCell();
+                    prNoCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.product.name}" placeholder="Product" name="product" readonly>`;
+
+                    // Product Wise Description
+                    var descCell = row.insertCell();
+                    descCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.product_description}" placeholder="Product Description" name="product">`;
+
+                    // UOM
+                    var uomCell = row.insertCell();
+                    uomCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.uom}" placeholder="uom" name="uom">`;
+
+
+                    // Quality
+                    var qualityCell = row.insertCell();
+                    var qualityInput = document.createElement('input');
+                    qualityInput.type = 'text';
+                    // qualityInput.value = "$";
+                    qualityInput.className = "form-control";
+                    qualityInput.placeholder = "Quality";
+                    qualityInput.name = "qty_required" + (index + 1);
+                    qualityInput.addEventListener("input", function() {
+                        // Update total quantity
+                        updateTotalQuantity();
+                    });
+                    qualityCell.appendChild(qualityInput);
+                    // Last Received Date
+                    var lastReceivedDateCell = row.insertCell();
+                    lastReceivedDateCell.innerHTML =
+                        lastReceivedDateCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.last_received_date}" placeholder="last received date" name="prd" readonly>`;
+                    // Last Received Rate
+                    var lastReceivedRateCell = row.insertCell();
+                    lastReceivedRateCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.last_received_rate}" placeholder="last received rate" name="prt" readonly>`;
+                    // Rate
+                    var rateCell = row.insertCell();
+                    var rateInput = document.createElement('input');
+                    rateInput.type = 'text';
+                    rateInput.className = "form-control";
+                    rateInput.placeholder = "Rate";
+                    rateInput.name = "rate";
+                    rateInput.addEventListener("input", function() {
+                        // Update tax amount
+                        updateTaxAmount(row);
+                    });
+                    rateCell.appendChild(rateInput);
+
+                    // Tax%
+                    var taxPercentCell = row.insertCell();
+                    taxPercentCell.innerHTML =
+                        `<input type="text" class="form-control" value="${item.product.direct_tax}" placeholder="Tax Percentage" name="tax_percentage" readonly>`;
+
+                    // Tax Amount
+                    var taxAmountCell = row.insertCell();
+                    taxAmountCell.innerHTML =
+                        '<input type="text" class="form-control" value="" placeholder="Tax Amount" id="amount" name="tax_amount" readonly>';
+
+                    // Function to update tax amount based on rate and tax percentage
+                    function updateTaxAmount(row) {
+                        var rate = parseFloat(row.querySelector('[name="rate"]').value);
+                        var taxPercentage = parseFloat(row.querySelector('[name="tax_percentage"]').value);
+                        var taxAmount = (rate * taxPercentage) / 100;
+                        row.querySelector('[name="tax_amount"]').value = taxAmount.toFixed(2);
+
+                        // Calculate Amount (rate + tax)
+                        var amount = rate + taxAmount;
+                        row.querySelector('[name="amount"]').value = amount.toFixed(2);
+
+                        // Fetch discount percentage
+                        var discountPercentage = parseFloat(row.querySelector('[name="discountpercentage"]').value);
+
+                        // Calculate Discount Amount (amount * discountPercentage / 100)
+                        var discountAmount = amount * (discountPercentage / 100);
+                        row.querySelector('[name="discountamount"]').value = discountAmount.toFixed(2);
+
+                        // Calculate Net Amount (amount - discountAmount)
+                        var netAmount = amount - discountAmount;
+                        row.querySelector('[name="netamount"]').value = netAmount.toFixed(2);
+                    }
+
+                    // Amount
+                    var amountCell = row.insertCell();
+                    amountCell.innerHTML =
+                        '<input type="text" class="form-control" value="" placeholder="Amount" name="amount" readonly>';
+
+                    // Discount%
+                    var discountPercentCell = row.insertCell();
+                    discountPercentCell.innerHTML =
+                        '<input type="text" class="form-control" value="" placeholder="Discount%" name="discountpercentage">';
+
+                    // Discount Amount
+                    var discountAmountCell = row.insertCell();
+                    discountAmountCell.innerHTML =
+                        '<input type="text" class="form-control" value="" placeholder="Discount Amount" name="discountamount">';
+
+                    // Net Amount
+                    var netAmountCell = row.insertCell();
+                    netAmountCell.innerHTML =
+                        '<input type="text" class="form-control" value="" placeholder="Net Amount" name="netamount" readonly>';
+                    // Call updateTaxAmount initially to calculate tax amount for the first time
+                    updateTaxAmount(row);
+                    // Add event listener to discountpercentage input field
+                    row.querySelector('[name="discountpercentage"]').addEventListener("input", function() {
+                        // Update tax amount, discount amount, and net amount when discount percentage changes
+                        updateTaxAmount(row);
+                    });
                 });
-                cell6.appendChild(input);
-                cell7.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Last Received Date" name="lreceiveddate" readonly>';
-                cell8.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Last Received Rate" name="lrr" readonly>';
-                cell9.innerHTML = '<input type="text" class="form-control" value="" placeholder="Rate" name="rate">';
-                cell10.innerHTML = '<input type="text" class="form-control" value="" placeholder="Tax%" name="taxper">';
-                cell11.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Tax Amount" name="taxamount">';
-                cell12.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Amount" name="amount" readonly>';
-                cell13.innerHTML = '<input type="text" class="form-control" value="" placeholder="Discount%" name="discount">';
-                cell14.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Discount Amount" name="discountamount">';
-                cell15.innerHTML =
-                    '<input type="text" class="form-control" value="" placeholder="Net Amount" name="netamount" readonly>';
-                cell16.innerHTML =
-                    '<button type="button" class="btn btn-primary" onclick="addRow()">+</button>';
-                cell17.innerHTML =
-                    '<button type="button" class="btn btn-danger" onclick="removeRow()">-</button>';
 
             }
-            // function is for update quality text td 
-            function updateTotalQuantity() {
-                var totalQuantity = gettvalueqty; // Corrected variable name
-                var table = document.getElementById("tableBody");
-                // Iterate through rows to sum up quantity values
-                for (var i = 1; i < table.rows.length; i++) {
-                    // Adjusted cell index to target the quantity input field
-                    var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
-                    if (!isNaN(inputValue)) {
-                        totalQuantity = totalQuantity + inputValue;
-                    }
-                }
-                // Update total quantity display
-                qtyproduct.innerHTML = totalQuantity;
 
-                // Update hidden input field value
-                // document.getElementById("qtyproductInput").value = totalQuantity;
-            }
-            // function for remove row here
-            function removeRow() {
-                var table = document.getElementById("tableBody");
-                var tproduct = document.getElementById("totalproduct");
-                var qtyproduct = document.getElementById("qtyproduct");
+            // function updateTotalQuantity() {
+            //     var totalQuantity = gettvalueqty; // Corrected variable name
+            //     var table = document.getElementById("tableBody");
+            //     // Iterate through rows to sum up quantity values
+            //     for (var i = 1; i < table.rows.length; i++) {
+            //         // Adjusted cell index to target the quantity input field
+            //         var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
+            //         if (!isNaN(inputValue)) {
+            //             totalQuantity = totalQuantity + inputValue;
+            //         }
+            //     }
+            //     // Update total quantity display
+            //     qtyproduct.innerHTML = totalQuantity;
 
-                // Update total product count
-                tproduct.innerHTML = table.rows.length - 1;
+            //     // Update hidden input field value
+            //     // document.getElementById("qtyproductInput").value = totalQuantity;
+            // }
+            // // function for remove row here
+            // function removeRow() {
+            //     var table = document.getElementById("tableBody");
+            //     var tproduct = document.getElementById("totalproduct");
+            //     var qtyproduct = document.getElementById("qtyproduct");
 
-                // Recalculate total quantity
-                var totalQuantity = 0;
-                for (var i = 0; i < table.rows.length-1; i++) {
-                    var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
-                    if (!isNaN(inputValue)) {
-                        console.log(inputValue);
-                        totalQuantity += inputValue;
-                    }
-                }
-                // Update total quantity display
-                qtyproduct.innerHTML = totalQuantity;
+            //     // Update total product count
+            //     tproduct.innerHTML = table.rows.length - 1;
 
-                // Check if there are rows to remove
-                if (table.rows.length > 1) {
-                    // Remove the last row
-                    table.deleteRow(table.rows.length - 1);
-                } else {
-                    // Otherwise, show a message
-                    alert("No Rows to Remove");
-                }
-            }
+            //     // Recalculate total quantity
+            //     var totalQuantity = 0;
+            //     for (var i = 0; i < table.rows.length - 1; i++) {
+            //         var inputValue = parseInt(table.rows[i].cells[5].querySelector("input").value);
+            //         if (!isNaN(inputValue)) {
+            //             console.log(inputValue);
+            //             totalQuantity += inputValue;
+            //         }
+            //     }
+            //     // Update total quantity display
+            //     qtyproduct.innerHTML = totalQuantity;
+
+            //     // Check if there are rows to remove
+            //     if (table.rows.length > 1) {
+            //         // Remove the last row
+            //         table.deleteRow(table.rows.length - 1);
+            //     } else {
+            //         // Otherwise, show a message
+            //         alert("No Rows to Remove");
+            //     }
+            // }
 
 
             // end functionality of dynamic add row
             // Get the current UTC time
-            var utcTime = new Date();
+            // var utcTime = new Date();
 
-            // Calculate the time difference for Pakistan Standard Time (UTC+5)
-            var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+            // // Calculate the time difference for Pakistan Standard Time (UTC+5)
+            // var pstOffset = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
 
-            // Calculate the Pakistan Standard Time by adding the offset
-            var pstTime = new Date(utcTime.getTime() + pstOffset);
+            // // Calculate the Pakistan Standard Time by adding the offset
+            // var pstTime = new Date(utcTime.getTime() + pstOffset);
 
-            // Format the date components
-            var year = pstTime.getUTCFullYear();
-            var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
-            var day = ('0' + pstTime.getUTCDate()).slice(-2);
+            // // Format the date components
+            // var year = pstTime.getUTCFullYear();
+            // var month = ('0' + (pstTime.getUTCMonth() + 1)).slice(-2);
+            // var day = ('0' + pstTime.getUTCDate()).slice(-2);
 
-            // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
-            var formattedDate = year + '-' + month + '-' + day;
-            var pakisatndate = document.getElementById('documentdate');
-            pakisatndate.value = formattedDate;
+            // // Create a string in the format 'YYYY-MM-DD HH:mm:ss'
+            // var formattedDate = year + '-' + month + '-' + day;
+            // var pakisatndate = document.getElementById('documentdate');
+            // pakisatndate.value = formattedDate;
         </script>
 
     </section>
