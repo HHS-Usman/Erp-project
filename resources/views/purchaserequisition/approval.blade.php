@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-tab')
-Quotation Approval List
+Purchase Requisition Approval
 @endsection
 @section('content')
 <section id="main" class="main" style="padding-top: 0vh;">
@@ -15,11 +15,11 @@ Quotation Approval List
     </div>
     @endif
     <div class="pagetitle" style="margin-left: 20px;">
-        <h1>Approval List</h1>
+        <h1>Purchase Requisition Approval</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active"><a> Approval List </a></li>
+                <li class="breadcrumb-item active"><a>Purchase Requisition Approval</a></li>
             </ol>
         </nav>
     </div>
@@ -56,40 +56,34 @@ Quotation Approval List
         <div class="card-body">
             <form id="updateForm">
                 @csrf
-                <table id="myTable" class="table table-border datatable " style="border: 1px solid black">
+                <table id="myTable" class="table table-border datatable" style="border: 1px solid black">
                     <thead>
                         <tr>
                             <th scope="col"><input type="checkbox" id="selectAll" class="" onclick="toggleSelectAll()">
                             </th>
                             <th scope="col">S.no</th>
                             <th scope="col">Document No</th>
-                            <th scope="col">Supplier</th>
-                            <th scope="col">Quotation Pr No</th>
-                            <th scope="col">Quotation AMount</th>
-                            <th scope="col">Quotation remarks</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Document Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <form id="updateForm">
                             @csrf
-                            @foreach($quotationDetails as $quotationDetail)
+                            @foreach($Prdatas as $Prdata => $pr)
 
 
                             <tr>
-                                <td><input type="checkbox" class="check" name="ids[]" value="{{ $quotationDetail->id }}">
+                                <td><input type="checkbox" class="check" name="ids[]" value="{{ $pr->id }}"></td>
+                                <td>{{ $Prdata + 1 }}</a></td>
+                                <td>{{ optional($pr->purchaserequisition)->doc_ref_no }}</a></td>
+                                <td>{{ $pr->purchaserequisition->department->department }}</td>
+                                <td>{{ optional($pr->purchaserequisition->employee)->employee_name }}</td>
+                                <td>
+                                    <p class="btn btn-outline-warning">{{ $pr->documentstatus->doc_status}}</p>
                                 </td>
-                                <td>1</td>
-                                <td>{{ $quotationDetail->document_no }}</td> <!-- data from quotation_detail table -->
-                                <td>{{ optional($quotationDetail->quotation)->supplier_id }}</td>
-                                <!-- data from quotation table -->
-                                <td>{{ $quotationDetail->pr_no }}</td> <!-- data from quotation_detail table -->
-                                <td>{{ $quotationDetail->amount }}</td> <!-- data from quotation_detail table -->
-                                <td>{{ $quotationDetail->quotation->remarks }}</td>
-                                <!-- data from quotation table -->
-                                <td><p class="btn btn-outline-warning">{{ $quotationDetail->documentstatus->doc_status}}</p>
-                                </td> <!-- data from quotation_detail table -->
                                 <td>
                                     <form action="" method="POST">
                                         <a class="btn btn-info" href="">Show</a>
@@ -122,15 +116,14 @@ Quotation Approval List
 </section>
 <script>
     $(document).ready(function() {
-        $('#submitButton').on('click', function(event) {
-            event.preventDefault(); // disable link functionality.
+        $('#submitButton').on('click', function() {
             var ids = $('input[name="ids[]"]:checked').map(function(){
                 return $(this).val();
             }).get();
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route("update.approval") }}',
+                url: '{{ route("update.Prapproval") }}',
                 data: {
                     ids: ids,
                     approval: 2, // Assuming you want to set approval to 1 when checked
@@ -144,30 +137,6 @@ Quotation Approval List
                     console.log(error);
                 }
             });
-        });
-    });
-    $(document).ready(function() {
-        $.ajax({
-            url: "{{ route('get.quotations') }}",
-            type: 'GET',
-            success: function(data) {
-                // Clear existing table rows
-                $('#tablerow').empty();
-
-                // Iterate through each quotation and append a new row to the table
-                $.each(data, function(index, quotation) {
-                    $('#tablerow').append(`
-                        <tr>
-                            <td>${quotation.id}</td>
-                            <td>${quotation.title}</td>
-                            <!-- Add other columns as needed -->
-                        </tr>
-                    `);
-                });
-            },
-            error: function(error) {
-                console.error('Error fetching quotations:', error);
-            }
         });
     });
 function toggleSelectAll() {

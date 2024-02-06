@@ -16,4 +16,8 @@ class QuotationDetail extends Model
     {
         return $this->belongsTo(Quotation::class , 'quo_id');
     }
+    public function documentstatus()
+    {
+        return $this->belongsTo(Documentstatus::class, 'doc_status');
+    }
 }

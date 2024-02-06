@@ -69,16 +69,18 @@ Manage Quotation
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($quotationDetails as $quotationDetail)
+                    @foreach($quotationDetails as $quotationDetail => $item )
                     <tr>
-                        <td>1</td>
-                        <td>{{ $quotationDetail->document_no }}</td> <!-- data from quotation_detail table -->
-                        <td>{{ optional($quotationDetail->quotation)->supplier_id }}</td> <!-- data from quotation table -->
-                        <td>{{ $quotationDetail->pr_no }}</td> <!-- data from quotation_detail table -->
-                        <td>{{ $quotationDetail->amount }}</td> <!-- data from quotation_detail table -->
-                        <td>{{ $quotationDetail->quotation->remarks }}</td>
+                        <td>{{ $quotationDetail + 1}}</td>
+                        <td>{{ $item->document_no }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ optional($item->quotation->supplierdata)->companyname }}</td>
                         <!-- data from quotation table -->
-                        <td>{{ $quotationDetail->approvel }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ $item->pr_no }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ $item->amount }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ $item->quotation->remarks }}</td>
+                        <!-- data from quotation table -->
+                        <td><p class="btn btn-outline-warning">{{ $item->quotation->documentstatus->doc_status}}</p>
+                        </td> <!-- data from quotation_detail table -->
                         <td>
                             <form action="" method="POST">
                                 <a class="btn btn-info" href="">Show</a>

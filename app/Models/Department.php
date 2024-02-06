@@ -11,10 +11,10 @@ class Department extends Model
     protected $guarded = [
         'id',
      ];
-     
+
      public function purchaserequisition()
      {
-         return $this->hasMany(Purchaserequisition::class,'id');
+         return $this->hasMany(Purchaserequisition::class);
      }
      public function quotationdata()
      {

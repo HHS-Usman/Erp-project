@@ -13,6 +13,6 @@ class PurchaseDetail extends Model
     ];
     public function purchaseRequisition()
     {
-        return $this->hasOne(Purchaserequisition::class);
+        return $this->hasMany(Purchaserequisition::class );
     }
 }

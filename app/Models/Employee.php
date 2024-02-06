@@ -27,6 +27,6 @@ class Employee extends Model
     }
     public function purchaserequisition()
     {
-        return $this->hasMany(Purchaserequisition::class,'purchase_id');
+        return $this->hasMany(Purchaserequisition::class);
     }
 }
