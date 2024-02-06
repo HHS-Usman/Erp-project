@@ -29,7 +29,6 @@ class CreateQuotationDetailsTable extends Migration
             $table->float('amount');
             $table->float('discount');
             $table->float('discount_amount')->nullable();
-            $table->boolean('appproval')->default(false);
             $table->unsignedBigInteger('quo_id')->nullable();
             $table->foreign('quo_id')->references('id')->on('quotations')->onDelete('cascade');
             $table->timestamps();

@@ -504,9 +504,15 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 
 
 Route::resource('purchaserequisition',PurchasereuquisitionController::class);
+Route::get('Pr/approval', [PurchasereuquisitionController::class, 'approval']);
+
 Route::resource('quotation',QuotationController::class);
 Route::get('/approval', [QuotationController::class, 'approval']);
-
+Route::post('Pr/update-approval', [PurchasereuquisitionController::class ,'updateApproval'])->name('update.Prapproval');
+//for approval By Badar
+Route::post('/update-approval', [QuotationController::class ,'updateApproval'])->name('update.approval');
+Route::get('quotationcomparitive',[QuotationController::class, 'comparitive' ]);
+Route::get('/get-quotation',[QuotationController::class, 'getquotations']);
 
 
 Route::resource('monthlydaywise',MonthlydaywiseController::class);

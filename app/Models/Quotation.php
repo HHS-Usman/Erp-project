@@ -23,6 +23,10 @@ class Quotation extends Model
     {
         return $this->belongsTo(Department::class, 'depart_id');
     }
+    public function documentstatus()
+    {
+        return $this->belongsTo(Documentstatus::class, 'doc_status');
+    }
     public function quotationDetails()
     {
         return $this->hasMany(QuotationDetail::class);

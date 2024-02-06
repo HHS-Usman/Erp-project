@@ -16,7 +16,10 @@ class Pr_detail extends Model
     {
         return $this->belongsTo(Product_category::class, 'pc_id');
     }
-
+    public function documentstatus()
+    {
+        return $this->belongsTo(Documentstatus::class, 'doc_status');
+    }
     public function productsubcategory()
     {
         return $this->belongsTo(Product_sub_category::class, 'psubc_id');
@@ -36,8 +39,10 @@ class Pr_detail extends Model
         return $this->belongsTo(Branch::class, 'branch_id');
     }
     public function purchaserequisition()
+
     {
-        return $this->belongsTo(Branch::class, 'pre_id');
+        return $this->belongsTo(Purchaserequisition::class, 'pre_id');
     }
+
 }
 

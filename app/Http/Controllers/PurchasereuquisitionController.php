@@ -28,8 +28,8 @@ class PurchasereuquisitionController extends Controller
      */
     public function index()
     {
-        $Prdata = Purchaserequisition::all();
-        return view('purchaserequisition.index', compact('Prdata'));
+        $Prdatas = Pr_detail::with('purchaserequisition')->get();
+        return view('purchaserequisition.index',['Prdatas' => $Prdatas]);
     }
     // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
     public function getbrandselection($psubc_id)
@@ -189,5 +189,21 @@ class PurchasereuquisitionController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function approval()
+    {
+        $Prdatas = Pr_detail::with('purchaserequisition')->get();
+        return view('purchaserequisition.approval',['Prdatas' => $Prdatas]);
+    }
+    public function updateApproval(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        $approvalValue = $request->input('approval', 0);
+
+        // Validate or sanitize $ids as needed
+
+        Pr_detail::whereIn('id', $ids)->update(['doc_status' => $approvalValue]);
+
+        return response()->json(['message' => 'Approval status updated successfully']);
     }
 }

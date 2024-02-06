@@ -28,7 +28,7 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        
+
         $quotationDetails = QuotationDetail::with('quotation')->get();
          return view('quotation.index', ['quotationDetails' => $quotationDetails]);
     }
@@ -116,6 +116,29 @@ class QuotationController extends Controller
     }
     public function approval(Request $request)
     {
-        return view('quotation.approval');
+        $quotationDetails = QuotationDetail::with('quotation')->get();
+        return view('quotation.approval' , ['quotationDetails' => $quotationDetails]);
+    }
+    public function updateApproval(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        $approvalValue = $request->input('approval', 0);
+
+        // Validate or sanitize $ids as needed
+
+        Quotation::whereIn('id', $ids)->update(['doc_status' => $approvalValue]);
+
+        return response()->json(['message' => 'Approval status updated successfully']);
+    }
+    public function comparitive()
+    {
+
+        $quotationDetails = QuotationDetail::with('quotation')->get();
+         return view('quotation.comparitive', ['quotationDetails' => $quotationDetails]);
+    }
+    public function getquotations()
+    {
+        $quotation= Quotation::all();
+        return response()->json($quotation);
     }
 }

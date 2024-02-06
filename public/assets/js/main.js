@@ -6,8 +6,8 @@
 */
 // const righttogle = document.getElementById("right_toggle");
  // Handle dropdown item click
- 
- 
+
+
  //end new tab dynamically....
  var mydata = document.getElementById("maincontainer");
  var mydata2 = document.getElementById("dash");
@@ -29,7 +29,7 @@
 //       </div>
 //     </footer><!-- End Footer -->
 //  `;
- 
+
 //  const data2 = `
 //      This is Data 2
 //      <footer id="footer" class="footer">
@@ -217,7 +217,7 @@ const footeritem = document.getElementById("footer")
       tabLink.remove();
       console.log(tabId)
      }
-     
+
      // Create the tab content
      const tabContentElement = document.createElement('div');
      tabContentElement.classList.add('tab-pane', 'fade');
@@ -242,7 +242,7 @@ const footeritem = document.getElementById("footer")
      }
  }
 
-//  start Sidebar Toggle 
+//  start Sidebar Toggle
 const sidebar = document.getElementById("asidecontent");
 const maincontainerdiv = document.getElementById("main");
 const container = document.querySelector('.sidebarleft');
@@ -252,7 +252,7 @@ const toggleSidebar = () =>{
    maincontainerdiv.classList.toggle('removebg');
    myTabCont.classList.toggle('myothertabs');
   //  maincontainerdiv.style.display = ""
-   
+
   //  container.style.height="50dvh";
 }
 const container1 = document.querySelector('.sidebarright');
@@ -290,7 +290,7 @@ const toggleSidebarright = () =>{
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -577,3 +577,27 @@ const toggleSidebarright = () =>{
   }
 
 })();
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function () {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

@@ -8,22 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Purchaserequisition extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'pr_id';
     protected $guarded = [
-        'id',
+        'pr_id',
     ];
     public function modeltype()
     {
-        return $this->hasOne(Modetype::class);
+        return $this->belongsTo(Modetype::class,'modet_id');
     }
     public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class,'depart_id');
     }
     public function employee()
     {
-        return $this->hasOne(Employee::class);
+        return $this->belongsTo(Employee::class, 'emp_id');
     }
-    public function prdetail()
+    public function Pr_detail()
     {
         return $this->hasMany(Pr_detail::class);
     }
