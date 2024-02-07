@@ -15,7 +15,6 @@ class CreateQuotationDetailsTable extends Migration
     {
         Schema::create('quotation_details', function (Blueprint $table) {
             $table->id();
-            $table->string('document_no');
             $table->string('pr_no');
             $table->string('product_item');
             $table->string('product_wise_description')->nullable();
@@ -31,6 +30,8 @@ class CreateQuotationDetailsTable extends Migration
             $table->float('discount_amount')->nullable();
             $table->unsignedBigInteger('quo_id')->nullable();
             $table->foreign('quo_id')->references('id')->on('quotations')->onDelete('cascade');
+            $table->unsignedBigInteger('doc_status')->default('1');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -18,7 +18,17 @@ class CreateQuotationsTable extends Migration
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
-            $table->string('prs');
+            $table->string('document_no');
+            $table->string('pr_no');
+            $table->string('doc_no');
+            $table->string('doc_no_l_d')->nullable();
+            $table->string('voucher_no');
+            $table->string('voucher_date');
+            $table->integer('comparative_no');
+            $table->unsignedBigInteger('company')->nullable();
+            $table->foreign('company')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('branch')->nullable();
+            $table->foreign('branch')->references('id')->on('branches')->onDelete('cascade');
             $table->float('total_no_product')->nullable();
             $table->float('total_qty_product')->nullable();
             $table->float('total_tax_amount')->nullable();
@@ -26,15 +36,14 @@ class CreateQuotationsTable extends Migration
             $table->float('gross_amount')->nullable();
             $table->float('net_amount')->nullable();
             $table->float('invoice_discount')->nullable();
-            // branch foreign key by Abrar
-            $table->unsignedBigInteger('branch_id');
-            $table->foreign('branch_id')->references('id')->on('branches');
             // department foreign key by Abrar
             $table->unsignedBigInteger('depart_id');
             $table->foreign('depart_id')->references('id')->on('departments');
             // supplier foreign key by Abrar
-            $table->unsignedInteger('supplier_id');
-            $table->foreign('supplier_id')->references('suplier_id')->on('suppliers');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('suplier_id')->on('suppliers')->onDelete('cascade');
+            $table->unsignedBigInteger('doc_status')->default('1');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -153,12 +153,42 @@ Manage Quotation
                             <a class="btn btn-info" href="">Show</a>
                             <a class="btn btn-primary" href="#">Edit</a>
                             <button type="button" class="btn btn-danger">Delete</button>
-                            <button type="button" id="openModalBtn">Open Modal</button>
-
-                            <div id="myModal" class="modal">
+                            @if (  )
+                                <button type="button" class="openModalBtn">Open Modal</button>
+                            @endif
+                            <div id="myModal" class="modal ">
                                 <div class="modal-content">
                                     <span class="close">&times;</span>
-                                    <p>This is a full-screen modal box!</p>
+                                    <table class="table-responsive">
+
+                                            <tr>
+                                                <th>S.No#</th>
+                                                <th>Approved vender</th>
+                                                <th>Last PO No#</th>
+                                                <th>Pr No#</th>
+                                                <th>Department</th>
+                                                <th>Req mode</th>
+                                                <th>Product/Item</th>
+                                                <th>UOM</th>
+                                                <th>Req Qty</th>
+                                                <th>Pending for PO Approval</th>
+                                                <th>Approved for PO</th>
+                                                <th>Description</th>
+                                                <th>Last Purchase Rate</th>
+                                                <th>Last Purchase Supplier</th>
+                                                <th>Last Purchase Remarks</th>
+                                                <th>Supplier</th>
+                                                <th>Supplier</th>
+                                                <th>Supplier</th>
+                                                <th>Action</th>
+                                                <th>Activity</th>
+
+                                            </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                             <!-- <div class="modal-footer">
@@ -175,30 +205,48 @@ Manage Quotation
         </div>
     </div>
     <script>
-        var modal = document.getElementById("myModal");
+        // Get all elements that trigger the modal
+            var modalTriggers = document.querySelectorAll(".openModalBtn");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("openModalBtn");
+            // Get the modal
+            var modal = document.getElementById("myModal");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks the button, open the modal
-        btn.onclick = function () {
+            // Flag to track if the modal has been opened before
+            var modalOpened = false;
+
+            // Function to open the modal
+            function openModal() {
             modal.style.display = "block";
-        }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // Check if the modal has been opened before
+            if (!modalOpened) {
+                modalOpened = true;
+                modal.classList.add("slideIn"); // Add slide-in animation class
             }
-        }
+            }
+
+            // Function to close the modal
+            function closeModal() {
+            modal.style.display = "none";
+            }
+
+            // Add event listeners to all elements that trigger the modal
+            modalTriggers.forEach(function(trigger) {
+            trigger.addEventListener("click", openModal);
+            });
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = closeModal;
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+            }
 
     </script>
 
