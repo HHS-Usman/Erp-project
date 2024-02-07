@@ -192,7 +192,6 @@
                     uomCell.innerHTML =
                         `<input type="text" class="form-control" value="${item.uom}" id="uom_${index}" placeholder="uom" name="uom">`;
 
-
                     // Quality
                     var qualityCell = row.insertCell();
                     qualityCell.innerHTML =
@@ -291,7 +290,7 @@
                 var table = document.getElementById("tableBody");
                 var row = table.rows[index];
                 // Remove the row at the given index
-                if (row) { 
+                if (row) {
                     table.deleteRow(index);
                     // Recalculate total quantities or any other necessary updates
                     // ...

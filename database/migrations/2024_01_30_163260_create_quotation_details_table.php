@@ -15,7 +15,6 @@ class CreateQuotationDetailsTable extends Migration
     {
         Schema::create('quotation_details', function (Blueprint $table) {
             $table->id();
-            $table->string('document_no');
             $table->string('pr_no');
             $table->string('product_item');
             $table->string('product_wise_description')->nullable();
