@@ -31,6 +31,8 @@ class CreateQuotationDetailsTable extends Migration
             $table->boolean('appproval')->default(false);
             $table->unsignedBigInteger('quo_id')->nullable();
             $table->foreign('quo_id')->references('id')->on('quotations')->onDelete('cascade');
+            $table->unsignedBigInteger('doc_status')->default('1');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

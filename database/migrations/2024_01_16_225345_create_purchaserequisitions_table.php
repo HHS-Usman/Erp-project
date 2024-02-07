@@ -21,15 +21,17 @@ class CreatePurchaserequisitionsTable extends Migration
             $table->string("file");
             $table->integer("t_no_product");
             $table->integer("t_qty_product");
-            // foreign key of Modetype 
+            // foreign key of Modetype
             $table->unsignedInteger("modet_id");
             $table->foreign("modet_id")->references("mt_id")->on("modetypes")->onDelete("cascade");
-            // foreign key of department 
+            // foreign key of department
             $table->unsignedBigInteger("depart_id");
             $table->foreign("depart_id")->references("id")->on("departments")->onDelete("cascade");
-            // foreign key of employee 
+            // foreign key of employee
             $table->unsignedBigInteger("emp_id");
             $table->foreign("emp_id")->references("id")->on("employees")->onDelete("cascade");
+            $table->unsignedBigInteger('doc_status')->default('1');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

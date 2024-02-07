@@ -27,10 +27,10 @@ class CreatePrDetailsTable extends Migration
             // forign key define here
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            
+
             $table->unsignedBigInteger('pc_id')->nullable()->nullable();
             $table->foreign('pc_id')->references('id')->on('product_categories')->onDelete('cascade');
-            
+
             $table->unsignedBigInteger('psubc_id')->nullable()->nullable();
             $table->foreign('psubc_id')->references('id')->on('product_sub_categories')->onDelete('cascade');
 
@@ -42,6 +42,8 @@ class CreatePrDetailsTable extends Migration
 
             $table->unsignedBigInteger('pre_id')->nullable()->nullable();
             $table->foreign('pre_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
+            $table->unsignedBigInteger('doc_status')->default('1');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }
