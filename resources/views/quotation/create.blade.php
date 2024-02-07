@@ -102,7 +102,7 @@
                                 <select name="supplier_id" id="supplier" class="form-control">
                                     <option value="None">Select Supplier</option>
                                     @foreach ($suplier as $item)
-                                        <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
+                                        <option value={{ $item->suplier_id }}>{{ $item->companyname }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -142,7 +142,7 @@
                 </table>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
             </div>
         </form>
         </div>
@@ -301,6 +301,8 @@
             document.getElementById('formdata').addEventListener('submit', function(event) {
                 // Prevent the default form submission
                 event.preventDefault();
+                // Disable the submit button to prevent multiple submissions
+                // document.getElementById("submitBtn").disabled = true;
                 // Create FormData object from the form element
                 var formData = new FormData(this);
                 console.log(formData);
@@ -312,15 +314,24 @@
                     data: formData,
                     contentType: false,
                     processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     success: function(response) {
                         // Handle success response
                         console.log('Data saved successfully:', response);
-                        // Optionally, you can perform further actions here 
+                        // Optionally, you can provide user feedback here
+                        alert('Data saved successfully');
                     },
                     error: function(xhr, status, error) {
                         // Handle error response
                         console.error('Error saving data:', error);
                         // Optionally, you can provide user feedback here
+                        alert('Error saving data');
+                    },
+                    complete: function() {
+                        // Re-enable the submit button after request is complete
+                        document.getElementById("submitBtn").disabled = false;
                     }
                 });
             });

@@ -83,15 +83,24 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        
-      
+
+
         $maxidquotation = Quotation::count('id');
         try {
             // Start a database transaction
             DB::beginTransaction();
 
+            // Validate the incoming request data
+            $validatedData = $request->validate([
+                'prnumber.*' => 'required', // Example validation rule
+                // Add more validation rules as needed
+            ]);
+
+            // Extract validated data
+            $data = $validatedData;
+
             // Extract data from the request
-            $data = $request->all();
+            // $data = $request->all();
 
             // Loop through the data to save each row to the database
             foreach ($data['prnumber'] as $index => $prNumber) {
@@ -179,7 +188,7 @@ class QuotationController extends Controller
     public function approval(Request $request)
     {
         $quotationDetails = QuotationDetail::with('quotation')->get();
-        return view('quotation.approval' , ['quotationDetails' => $quotationDetails]);
+        return view('quotation.approval', ['quotationDetails' => $quotationDetails]);
     }
     public function updateApproval(Request $request)
     {
@@ -196,11 +205,11 @@ class QuotationController extends Controller
     {
 
         $quotationDetails = QuotationDetail::with('quotation')->get();
-         return view('quotation.comparitive', ['quotationDetails' => $quotationDetails]);
+        return view('quotation.comparitive', ['quotationDetails' => $quotationDetails]);
     }
     public function getquotations()
     {
-        $quotation= Quotation::all();
+        $quotation = Quotation::all();
         return response()->json($quotation);
     }
 }
