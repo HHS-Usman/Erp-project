@@ -18,7 +18,9 @@ use App\Models\Quotation;
 use App\Models\QuotationDetail;
 use App\Models\Supplier;
 use App\Models\Unit_selection;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use PgSql\Lob;
 
 class QuotationController extends Controller
 {
@@ -81,22 +83,53 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        //create a new Quotation in database
-        Quotation::create([
-            'remarks' => request()->get('qremarks'),
-            'prs' => request()->get('prs'),
-            'total_no_product' => request()->get('total_no_product'),
-            'total_qty_product' => request()->get('total_qty_product'),
-            'total_tax_amount' => request()->get('total_tax_amount'),
-            'total_discount_amount' => request()->get('total_discount_amount'),
-            'gross_amount' => request()->get('gross_amount'),
-            'invoice_discount' => request()->get('invoice_discount'),
-            'net_amount' => request()->get('net_amount'),
-            'branch_id' => request()->get('branchs_id'),
-            'depart_id' => request()->get('depart_id'),
-            'supplier_id' => request()->get('supplier_id')
-        ]);
-        return redirect()->route('quotation.create')->with('success', 'Create successfully');
+        
+      
+        $maxidquotation = Quotation::count('id');
+        try {
+            // Start a database transaction
+            DB::beginTransaction();
+
+            // Extract data from the request
+            $data = $request->all();
+
+            // Loop through the data to save each row to the database
+            foreach ($data['prnumber'] as $index => $prNumber) {
+                QuotationDetail::create([
+                    'pr_no' => $prNumber,
+                    'product_item' => $data['product'][$index],
+                    'product_wise_description' => $data['product_description'][$index],
+                    'uom' => $data['uom'][$index],
+                    'qty' => $data['qty_required'][$index],
+                    'last_receivedate' => $data['last_received_date'][$index],
+                    'last_receive_rate' => $data['last_received_rate'][$index],
+                    'rate' => $data['rate'][$index],
+                    'tax' => $data['tax_percentage'][$index],
+                    'tax_amount' => $data['tax_amount'][$index],
+                    'amount' => $data['amount'][$index],
+                    'discount' => $data['discountpercentage'][$index],
+                    'discount_amount' => $data['discountamount'][$index],
+                    'netamount' => $data['netamount'][$index],
+                    // Adjust foreign key value if necessary
+                    'quo_id' =>  $maxidquotation,
+                ]);
+            }
+
+            // Commit the transaction
+            DB::commit();
+
+            // Return a success response
+            return response()->json(['message' => 'Quotation details saved successfully']);
+        } catch (\Exception $e) {
+            // If an error occurs, rollback the transaction
+            DB::rollBack();
+
+            // Log the error for further investigation
+            Log::error('Error saving data: ' . $e->getMessage());
+
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
