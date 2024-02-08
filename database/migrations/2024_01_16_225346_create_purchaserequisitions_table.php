@@ -30,9 +30,8 @@ class CreatePurchaserequisitionsTable extends Migration
             // foreign key of employee
             $table->unsignedBigInteger("emp_id");
             $table->foreign("emp_id")->references("id")->on("employees")->onDelete("cascade");
-
-            $table->unsignedBigInteger('doc_status')->default('1');
-            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
+            // $table->unsignedBigInteger('doc_status')->default('1');
+            // $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -342,13 +342,7 @@
                     defaultOption.text = "Select";
                     subcategory.add(defaultOption);
                     // Add options from PHP array for category
-                    for (let i = 0; i < psubcategorydata.length; i++) {
-                        var firstcategory = psubcategorydata[i];
-                        var option = document.createElement("option");
-                        option.value = firstcategory.id;
-                        option.text = "id| " + firstcategory.id + " | Sub Category | " + firstcategory.product1stsbctgry;
-                        subcategory.add(option);
-                    }
+                    
                     // End
                     // Start Product
                     // create element select Product
@@ -363,13 +357,7 @@
                     defaultOption1.text = "Select";
                     selectproduct.add(defaultOption1);
                     // Data fetch from product 
-                    for (let i = 0; i < productdata.length; i++) {
-                        var product = productdata[i];
-                        var option = document.createElement("option");
-                        option.value = product.id;
-                        option.text = "id| " + product.id + " | product " + product.name;
-                        selectproduct.add(option);
-                    }
+                   
                     // END
                     // Start brand
                     // create element select Brand
@@ -384,13 +372,7 @@
                     defaultOption1.text = "Select";
                     selectbrand.add(defaultOption1);
                     // data fetch from json and print in drop down selection
-                    for (let i = 0; i < brand.length; i++) {
-                        var brandata = brand[i];
-                        var option = document.createElement("option");
-                        option.value = brandata.id;
-                        option.text = "id| " + brandata.id + " | Brand " + brandata.brand_selection;
-                        selectbrand.add(option);
-                    }
+                   
                     // END
                     // Append the select element to the cell
                     cell1.innerHTML = counter;

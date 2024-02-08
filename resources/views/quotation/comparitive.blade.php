@@ -153,9 +153,9 @@ Manage Quotation
                             <a class="btn btn-info" href="">Show</a>
                             <a class="btn btn-primary" href="#">Edit</a>
                             <button type="button" class="btn btn-danger">Delete</button>
-                            @if (  )
+                            {{-- @if (  )
                                 <button type="button" class="openModalBtn">Open Modal</button>
-                            @endif
+                            @endif --}}
                             <div id="myModal" class="modal ">
                                 <div class="modal-content">
                                     <span class="close">&times;</span>

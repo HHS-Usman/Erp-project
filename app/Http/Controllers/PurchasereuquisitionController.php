@@ -15,6 +15,7 @@ use App\Models\Product_sub_category;
 use App\Models\PurchaseDetail;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Psy\Readline\Hoa\Console;
@@ -135,19 +136,18 @@ class PurchasereuquisitionController extends Controller
             'doc_status'=> 1
 
         ]);
-        $counterid = Purchaserequisition::count("pr_id");
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
-            Pr_detail::create([
-                'maxstock' =>$request->input('maxstock')[$index],
-                'minstock' =>$minstock,
+             Pr_detail::create([
+                'max_stock' =>$request->input('maxstock')[$index],
+                'min_stock' =>$minstock,
                 'uom'=>"",
                 'branch_id'=>1,
                 'pc_id'=>$request->input('account')[$index],
                 'psubc_id'=>$request->input('subcategory')[$index],
                 'p_id'=>$request->input('product')[$index],
                 'bs_id'=>$request->input('brand')[$index],
-                'pre_id'=>$counterid
+                'pre_id'=>$id
             ]);
         }
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');

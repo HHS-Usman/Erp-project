@@ -129,12 +129,13 @@ class QuotationController extends Controller
 
             // Return a success response
             return response()->json(['message' => 'Quotation details saved successfully']);
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) {
             // If an error occurs, rollback the transaction
             DB::rollBack();
 
             // Log the error for further investigation
-            Log::error('Error saving data: ' . $e->getMessage());
+            Log::error('Internal Server Error 500: ' . $e->getMessage());
 
             // Return an error response
             return response()->json(['error' => 'Internal Server Error'], 500);

@@ -298,8 +298,7 @@
                     alert("Row does not exist.");
                 }
             }
-            document.getElementById('formdata').addEventListener('submit', function(event) {
-                // Prevent the default form submission
+            document.getElementById('formdata').addEventListener('submit', function(event) {                // Prevent the default form submission
                 event.preventDefault();
                 // Disable the submit button to prevent multiple submissions
                 // document.getElementById("submitBtn").disabled = true;
@@ -325,9 +324,9 @@
                     },
                     error: function(xhr, status, error) {
                         // Handle error response
-                        console.error('Error saving data:', error);
+                        console.error('Internal Server Error 500:', error);
                         // Optionally, you can provide user feedback here
-                        alert('Error saving data');
+                        alert('Internal Server Error 500');
                     },
                     complete: function() {
                         // Re-enable the submit button after request is complete
