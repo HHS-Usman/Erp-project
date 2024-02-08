@@ -164,30 +164,16 @@
                             <td>
                                 <select name="firstcategory" id="subcategory" class="form-control">
                                     <option value="None" id="chnagefont">Select</option>
-                                    @foreach ($subcategory as $item)
-                                        <option id="chnagefont" value={{ $item->id }}>
-                                            id | {{ $item->id }} | Sub_Category_Name | {{ $item->product1stsbctgry }}
-                                        </option>
-                                    @endforeach
                                 </select>
 
                             </td>
                             <td>
                                 <select name="brand_id" id="brandselection" class="form-control">
                                     <option value="brand" id="chnagefont">Select</option>
-                                    @foreach ($brand as $b)
-                                        <option id="chnagefont" value={{ $b->id }}>id | {{ $b->id }} |
-                                            Brand Selection | {{ $b->brand_selection }}
-                                        </option>
-                                    @endforeach
                                 </select>
                             </td>
-                            <td> <select name="product_d" id="product" class="form-control">
+                            <td> <select name="product_id" id="productdata" class="form-control">
                                     <option id="chnagefont" value="product">Select</option>
-                                    @foreach ($product as $p)
-                                        <option onclick="datafetch()" id="chnagefont" value={{ $p->id }}>
-                                            id| {{ $p->id }}| Product Name | {{ $p->name }}</option>
-                                    @endforeach
                                 </select></td>
                             <td><input type="text" class="form-control credit" value=""
                                     placeholder="product Remarks" name="pd"></td>
@@ -291,7 +277,8 @@
                 var productdata = {!! json_encode($product) !!};
                 // this is define converted in json format of product data by Abrar
                 var brand = {!! json_encode($brand) !!};
-                console.log(brand);
+                // this is define converted in json format of product data by Abrar
+                var productdata = {!! json_encode($product) !!};
 
                 function addRow() {
                     var table = document.getElementById("tableBody");
@@ -412,7 +399,8 @@
                     cell3.appendChild(subcategory);
                     cell4.appendChild(selectbrand);
                     cell5.appendChild(selectproduct);
-                    cell6.innerHTML = '<input type="text" class="form-control debit" placeholder="Product description" name="Remarks' +
+                    cell6.innerHTML =
+                        '<input type="text" class="form-control debit" placeholder="Product description" name="Remarks' +
                         table.rows
                         .length + '">';
                     cell7.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM[]' + table.rows
@@ -433,7 +421,8 @@
                     // Update total quantity initially
                     cell9.appendChild(input);
                     cell10.innerHTML =
-                        '<input type="number" class="form-control debit" placeholder="last Purchase" name="last_purchase' + table.rows.length + '">';
+                        '<input type="number" class="form-control debit" placeholder="last Purchase" name="last_purchase' + table
+                        .rows.length + '">';
                     cell11.innerHTML = '<span>---</span>';
                     cell12.innerHTML = '<span>---</span>';
                     cell13.innerHTML =
@@ -452,6 +441,12 @@
                     bindProductChangeEvent(counter);
                     bindProductChangeCategoryEvent(counter);
                     updateTotalQuantity();
+                    // declare for dynamic addrow dropdown selection of product category -> sub category 
+                    bindProductChangeCategoryEvent(counter);
+                    // declare for dynamic addrow dropdown selection of product sub category -> Brand Selection 
+                    bindsubcategoryChangebrandselectionEvent(counter);
+                    // declare for dynamic addrow dropdown selection of brand selction -> product 
+                    bindbrandChangeproductEvent(counter);
                 }
                 // function declare for update to Quality product
                 function updateTotalQuantity() {
@@ -500,14 +495,13 @@
 
                 $.noConflict();
                 jQuery(document).ready(function($) {
-                    $('#product').change(function() {
+                    jQuery('#productdata').change(function() {
                         var productId = $(this).val();
                         // Make an AJAX request to get UOM data
                         $.ajax({
                             url: '/get-uom/' + productId,
                             type: 'GET',
                             success: function(data) {
-                                console.log(data);
                                 var uomInput = $('input[name="UOM"]');
                                 uomInput.val(data.uom);
 
@@ -558,24 +552,7 @@
                             }
                         });
                     });
-                    // for dynamic 
-                    $('#pcategory' + counter).change(function() {
-                        var pc_id = $(this).val();
-                        $.ajax({
-                            url: '/getsubcategory/' + pc_id,
-                            type: 'GET',
-                            success: function(response) {
-                                $('#subcategory' + counter).empty();
-                                $('#subcategory' + counter).append(
-                                    '<option value="None" id="chnagefont">Select</option>');
-                                $.each(response, function(index, psubc) {
-                                    $('#subcategory' + counter).append('<option value="' + psubc
-                                        .id + '">id| ' + psubc.id + ' | Sub Category | ' +
-                                        psubc.product1stsbctgry + '</option>');
-                                });
-                            }
-                        });
-                    });
+
                     // Function to populate Brand Selection dropdown based on Sub Category selection
                     $('#subcategory').change(function() {
                         var psubc_id = $(this).val();
@@ -595,8 +572,93 @@
                             }
                         });
                     });
+                    // Function to populate Product dropdown based on Brand Selection
+                    $('#brandselection').change(function() {
+                        var p_id = $(this).val();
+                        $.ajax({
+                            url: '/getproductdata/' + p_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#productdata').empty();
+                                $('#productdata').append(
+                                    '<option value="product" id="">Select</option>'
+                                )
+                                $.each(response, function(index, product) {
+                                    $('#productdata').append(
+                                        '<option id="chnagefont" value="' + product.id +
+                                        '">id | ' + product.id + ' | Brand Selection | ' +
+                                        product.name + '</option>'
+                                    )
+                                })
+                            }
+                        })
+                    })
 
                 });
+                // this function declare in addRow this is for dynamic when user click dropdown on product category base selection option dropdown show option dropdown in sub category
+                function bindProductChangeCategoryEvent(counter) {
+                    jQuery('#pcategory' + counter).change(function() {
+                        var pc_id = $(this).val();
+                        $.ajax({
+                            url: '/getsubcategory/' + pc_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#subcategory' + counter).empty();
+                                $('#subcategory' + counter).append(
+                                    '<option value="None" id="chnagefont">Select</option>');
+                                $.each(response, function(index, psubc) {
+                                    $('#subcategory' + counter).append('<option value="' + psubc.id +
+                                        '">id| ' + psubc.id + ' | Sub Category | ' + psubc
+                                        .product1stsbctgry + '</option>');
+                                });
+                            }
+                        });
+                    });
+                }
+                // this function declare in addRow this is for dynamic when user click dropdown on product sub category base on brand selection option dropdown show option dropdown in brand selection
+                function bindsubcategoryChangebrandselectionEvent(counter) {
+                    jQuery('#subcategory' + counter).change(function() {
+                        var psubc_id = $(this).val();
+                        $.ajax({
+                            url: '/getbrand/' + psubc_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#brand' + counter).empty();
+                                $('#brand' + counter).append(
+                                    '<option value="None" id="chnagefont">Select</option>');
+                                $.each(response, function(index, brand) {
+                                    $('#brand' + counter).append('<option id="chnagefont" value="' +
+                                        brand.id +
+                                        '">id | ' + brand.id + ' | Brand Selection | ' +
+                                        brand.brand_selection + '</option>');
+                                });
+                            }
+                        });
+                    });
+                }
+
+                // this function declare in addRow this is for dynamic when user click dropdown on brand selection base on brand selection option dropdown show option dropdown in product dropdown
+                function bindbrandChangeproductEvent(counter) {
+                    jQuery('#brand' + counter).change(function() {
+                        var p_id = $(this).val();
+                        $.ajax({
+                            url: '/getproductdata/' + p_id,
+                            type: 'GET',
+                            success: function(response) {
+                                $('#product' + counter).empty();
+                                $('#product' + counter).append(
+                                    '<option value="None" id="chnagefont">Select</option>');
+                                $.each(response, function(index, product) {
+                                    $('#product' + counter).append('<option id="chnagefont" value="' +
+                                        product.id +
+                                        '">id | ' + product.id + ' | Product Name | ' +
+                                        product.name + '</option>');
+                                });
+                            }
+                        });
+                    });
+                }
+
                 function bindProductChangeEvent(counter) {
                     jQuery(document).ready(function($) {
                         $(document).on('change', "#product" + counter, function() {
@@ -621,27 +683,28 @@
                         });
                     });
                 }
-                function bindProductChangeCategoryEvent(counter) {
-                    jQuery(document).ready(function($) {
-                        $(document).on('change', "#pcategory" + counter, function() {
-                            var prodcategy_id = $(this).val();
-                            console.log("skdf")
-                            $.ajax({
-                                url: '/get-category/' + prodcategy_id,
-                                type: 'GET',
-                                dataType: 'json',
-                                success: function(data) {
-                                    var firstcategory = $('input[name="subcategory' + counter + '"]');
-                                    firstcategory.val(data.firstcategory);
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error(error);
-                                }
-                            });
-                        });
 
-                    });
-                }
+                // function bindProductChangeCategoryEvent(counter) {
+                //     jQuery(document).ready(function($) {
+                //         $(document).on('change', "#pcategory" + counter, function() {
+                //             var prodcategy_id = $(this).val();
+                //             console.log("skdf")
+                //             $.ajax({
+                //                 url: '/get-category/' + prodcategy_id,
+                //                 type: 'GET',
+                //                 dataType: 'json',
+                //                 success: function(data) {
+                //                     var firstcategory = $('input[name="subcategory' + counter + '"]');
+                //                     firstcategory.val(data.firstcategory);
+                //                 },
+                //                 error: function(xhr, status, error) {
+                //                     console.error(error);
+                //                 }
+                //             });
+                //         });
+
+                //     });
+                // }
             </script>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

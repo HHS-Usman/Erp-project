@@ -43,7 +43,12 @@ class PurchasereuquisitionController extends Controller
         $subcategory = Product_sub_category::where('pc_id', $pc_id)->get();
         return response()->json($subcategory);
     }
+    // Declare function getproduct for fetching data on basis on brand selection for product by Abrar
+    public function getproduct($brand_id){
+        $productgetdata = Product::where('product_brand_id',$brand_id)->get();
+        return response()->json($productgetdata);
 
+    }
     public function purchasedata($id)
     {
         $product = Product::find($id);
@@ -127,6 +132,8 @@ class PurchasereuquisitionController extends Controller
             'modet_id' => request()->get('mt_id'),
             'depart_id' => request()->get('depart_id'),
             'emp_id' => request()->get('emp_id'),
+            'doc_status'=> 1
+
         ]);
         $counterid = Purchaserequisition::count("pr_id");
         // Store pr_details data

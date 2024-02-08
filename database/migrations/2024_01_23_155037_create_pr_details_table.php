@@ -26,9 +26,6 @@ class CreatePrDetailsTable extends Migration
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 
-            $table->unsignedBigInteger('purchase_requisition_id')->nullable();
-            $table->foreign('purchase_requisition_id')->references('id')->on('purchase_requisitions')->onDelete('cascade');
-
             $table->unsignedBigInteger('psubc_id')->nullable()->nullable();
             $table->foreign('psubc_id')->references('id')->on('product_sub_categories')->onDelete('cascade');
 
@@ -38,11 +35,11 @@ class CreatePrDetailsTable extends Migration
             $table->unsignedBigInteger('p_id')->nullable()->nullable();
             $table->foreign('p_id')->references('id')->on('products')->onDelete('cascade');
 
-            $table->unsignedInteger('pre_id')->nullable()->nullable();
-            $table->foreign('pre_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
+            $table->unsignedBigInteger('pr_id')->nullable()->nullable();
+            $table->foreign('pr_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
 
             $table->unsignedBigInteger('doc_status')->default(1);
-            $table->foreign('doc_status')->references('id')->on('document_statuses')->onDelete('cascade');
+            $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
         });
     }
