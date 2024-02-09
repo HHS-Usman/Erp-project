@@ -27,10 +27,13 @@ Manage Quotation
             padding: 20px;
             width: 100%;
             max-width: 100%;
+            height: 100%;
+
             background-color: #fefefe;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
             animation: slideIn 1.1s forwards;
+
             /* Slide in animation */
         }
 
@@ -133,34 +136,46 @@ Manage Quotation
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($quotationDetails as $quotationDetail => $item )
+                    @foreach($quotations as $quotationDetail => $item )
                     <tr>
-                        <td>{{ $quotationDetail + 1}}</td>
-                        <td>{{ $item->document_no }}</td>
+                        <td>{{ $quotationDetail +1 }}</td>
+                        <td>{{ $item->comparative_no }}</td>
                         <td>Q-{{ $item->id }}</td>
-                        <td>{{ $item->last_receivedate }}</td> <!-- data from quotation_detail table -->
-                        <td>{{ optional($item->quotation->supplierdata)->companyname }}</td>
-                        <td>{{ $item->pr_no }}</td>
-                        <td>{{ $item->quotation->remarks }}</td>
-                        <td>{{ $item->amount }}</td>
-                        <td>{{ $item->amount }}</td>
+                        <td>{{ $item->voucher_date }}</td> <!-- data from quotation_detail table -->
+                        <td>{{ optional($item->supplierdata)->companyname }}</td>
+                        <td>@foreach($item->quotationDetails as $value )
+                            {{ $value->pr_no }}
+                            @endforeach
+                        </td>
+                        <td>{{ $item->remarks }}</td>
+                        <td>{{ $item->net_amount }}</td>
+                        <td>
+                            <p class="btn btn-outline-warning">{{ $item->documentstatus->doc_status}}</p>
+                        </td>
                         <!-- data from quotation table -->
                         <td>
-                            <p class="btn btn-outline-warning">{{ $item->quotation->documentstatus->doc_status}}</p>
+                            <p class="btn btn-outline-warning">{{ $item->documentstatus->doc_status}}</p>
                         </td> <!-- data from quotation_detail table -->
                         <td>
 
                             <a class="btn btn-info" href="">Show</a>
                             <a class="btn btn-primary" href="#">Edit</a>
                             <button type="button" class="btn btn-danger">Delete</button>
-                            @if (  )
-                                <button type="button" class="openModalBtn">Open Modal</button>
+                            @if ($item->doc_status == 2)
+                            <button type="button" class="openModalBtn btn"
+                                style="background-image: linear-gradient(red, yellow); color:#fefefe;">Open
+                                Modal</button>
+
+
                             @endif
+
+
                             <div id="myModal" class="modal ">
                                 <div class="modal-content">
                                     <span class="close">&times;</span>
-                                    <table class="table-responsive">
-
+                                    <br>
+                                    <table class="table-responsive table-bordered">
+                                        <thead>
                                             <tr>
                                                 <th>S.No#</th>
                                                 <th>Approved vender</th>
@@ -177,17 +192,41 @@ Manage Quotation
                                                 <th>Last Purchase Rate</th>
                                                 <th>Last Purchase Supplier</th>
                                                 <th>Last Purchase Remarks</th>
-                                                <th>Supplier</th>
-                                                <th>Supplier</th>
-                                                <th>Supplier</th>
+                                                @foreach($quotations as $quotationDetail)
+                                                <th>{{ $quotationDetail->supplierdata->companyname }}</th>
+                                                @endforeach
                                                 <th>Action</th>
                                                 <th>Activity</th>
-
                                             </tr>
-                                        <tr>
-                                            <td>
-                                            </td>
-                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($item->quotationDetails as $index => $value)
+                                            <tr>
+                                                <td>{{ $index +1 }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ $value->pr_no }}</td>
+                                                <td>{{ $value->depart_id }}</td>
+                                                <td></td>
+                                                <td>{{ $value->product_item }}</td>
+                                                <td>{{ $value->uom }}</td>
+                                                <td>{{ $value->qty }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ $item->remarks }}</td>
+                                                <td>{{ $value->last_receive_rate }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                @foreach($quotations as $quotationDetail)
+                                                <td><input type="checkbox" value="{{ $quotationDetail->supplierdata->id }}"></td>
+                                                @endforeach
+
+                                                <td><a class="btn btn-info" href="">Save</a></td>
+
+                                                <td></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

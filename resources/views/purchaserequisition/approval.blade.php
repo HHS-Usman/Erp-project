@@ -77,7 +77,7 @@ Purchase Requisition Approval
 
                             <tr>
                                 <td><input type="checkbox" class="check" name="ids[]" value="{{ $pr->id }}"></td>
-                                <td>{{ $Prdata + 1 }}</a></td>
+                                <td>{{ $Prdata ++ }}</a></td>
                                 <td>{{ optional($pr->purchaserequisition)->doc_ref_no }}</a></td>
                                 <td>{{ $pr->purchaserequisition->department->department }}</td>
                                 <td>{{ optional($pr->purchaserequisition->employee)->employee_name }}</td>
@@ -85,7 +85,7 @@ Purchase Requisition Approval
                                     <p class="btn btn-outline-warning">{{ $pr->documentstatus->doc_status}}</p>
                                 </td>
                                 <td>
-                                    <form action="" method="POST">
+                                    <form action="" method="">
                                         <a class="btn btn-info" href="">Show</a>
                                         <a class="btn btn-primary" href="#">Edit</a>
                                         <button type="button" class="btn btn-danger">Delete</button>

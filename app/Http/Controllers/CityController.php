@@ -12,7 +12,7 @@ class CityController extends Controller
         $cities = City::latest()->paginate();
         return view('generalsetup.city.index',compact('cities'))->with(request()->input('page'));
     }
-    
+
     public function create()
     {
         return view('generalsetup.city.create');
@@ -30,7 +30,7 @@ class CityController extends Controller
         $request->validate([
             'city'=>'required',
             'is_active' => 'integer|in:0,1'
-            
+
         ]);
         //create a new product in database
         City::create([
@@ -47,7 +47,7 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     
+
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -60,8 +60,9 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit($id)
     {
+        $city = City::find($id);
         return view('generalsetup.city.update',compact('city'));
     }
 

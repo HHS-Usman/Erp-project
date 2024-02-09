@@ -135,7 +135,7 @@ class PurchasereuquisitionController extends Controller
                 'maxstock' =>$request->input('maxstock')[$index],
                 'minstock' =>$minstock,
                 'uom'=>"",
-                'branch_id'=>1,
+
                 'pc_id'=>$request->input('account')[$index],
                 'psubc_id'=>$request->input('subcategory')[$index],
                 'p_id'=>$request->input('product')[$index],
@@ -202,7 +202,7 @@ class PurchasereuquisitionController extends Controller
 
         // Validate or sanitize $ids as needed
 
-        Pr_detail::whereIn('id', $ids)->update(['doc_status' => $approvalValue]);
+        Purchaserequisition::whereIn('id', $ids)->update(['doc_status' => $approvalValue]);
 
         return response()->json(['message' => 'Approval status updated successfully']);
     }

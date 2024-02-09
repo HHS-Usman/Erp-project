@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\pagination\paginator; 
-
+use Illuminate\pagination\paginator;
+use App\Models\Quotation;
+use App\Observers\QuotationObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         paginator::useBootstrap();
+        Quotation::observe(QuotationObserver::class);
     }
 }

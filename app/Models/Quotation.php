@@ -29,6 +29,6 @@ class Quotation extends Model
     }
     public function quotationDetails()
     {
-        return $this->hasMany(QuotationDetail::class);
+        return $this->hasMany(QuotationDetail::class, 'quo_id');
     }
 }
