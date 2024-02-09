@@ -15,6 +15,7 @@ use App\Models\Product_sub_category;
 use App\Models\PurchaseDetail;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Psy\Readline\Hoa\Console;
@@ -43,7 +44,12 @@ class PurchasereuquisitionController extends Controller
         $subcategory = Product_sub_category::where('pc_id', $pc_id)->get();
         return response()->json($subcategory);
     }
+    // Declare function getproduct for fetching data on basis on brand selection for product by Abrar
+    public function getproduct($brand_id){
+        $productgetdata = Product::where('product_brand_id',$brand_id)->get();
+        return response()->json($productgetdata);
 
+    }
     public function purchasedata($id)
     {
         $product = Product::find($id);
@@ -127,20 +133,21 @@ class PurchasereuquisitionController extends Controller
             'modet_id' => request()->get('mt_id'),
             'depart_id' => request()->get('depart_id'),
             'emp_id' => request()->get('emp_id'),
+            'doc_status'=> 1
+
         ]);
-        $counterid = Purchaserequisition::count("pr_id");
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
-            Pr_detail::create([
-                'maxstock' =>$request->input('maxstock')[$index],
-                'minstock' =>$minstock,
+             Pr_detail::create([
+                'max_stock' =>$request->input('maxstock')[$index],
+                'min_stock' =>$minstock,
                 'uom'=>"",
 
                 'pc_id'=>$request->input('account')[$index],
                 'psubc_id'=>$request->input('subcategory')[$index],
                 'p_id'=>$request->input('product')[$index],
                 'bs_id'=>$request->input('brand')[$index],
-                'pre_id'=>$counterid
+                'pre_id'=>$id
             ]);
         }
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');

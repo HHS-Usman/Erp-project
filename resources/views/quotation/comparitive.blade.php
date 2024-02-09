@@ -161,6 +161,7 @@ Manage Quotation
                             <a class="btn btn-info" href="">Show</a>
                             <a class="btn btn-primary" href="#">Edit</a>
                             <button type="button" class="btn btn-danger">Delete</button>
+
                             @if ($item->doc_status == 2)
                             <button type="button" class="openModalBtn btn"
                                 style="background-image: linear-gradient(red, yellow); color:#fefefe;">Open
@@ -168,7 +169,6 @@ Manage Quotation
 
 
                             @endif
-
 
                             <div id="myModal" class="modal ">
                                 <div class="modal-content">

@@ -37,120 +37,121 @@ Create Quotation
             text-align: center;
         }
 
-        .tablecalculation {
-            border: 1px solid black;
-            text-align: center;
-        }
-    </style>
-    <br><br><br>
-    <form action="{{ route('quotation.insert') }}" method="POST" id="formdata" >
-        @csrf
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-3 form-group">
-                        <strong>Document Doc#</strong>
-                        <input type="text" class="form-control" value={{ $qcounter }} id="prdocnumber" name="doc_no"
-                            placeholder="PR Doc#" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 form-group">
-                        <strong>Branch</strong>
-                        <select name="branchs_id" id="branch" class="form-control">
-                            <option value="None">Select Branch</option>
-                            @foreach ($branch as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3 form-group">
-                        <strong>Department</strong>
-                        <select name="depart_id" id="department" class="form-control">
-                            <option value="None">Select Department</option>
-                            @foreach ($deaprtment as $item)
-                            <option value="{{ $item->id }}">{{ $item->department }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3 form-group">
-                        <strong>Select PRs</strong>
-                        <input type="text" class="form-control" value="" id="prs" name="PRS"
-                            placeholder="Quotation Remarks">
-                    </div>
-                    <div class="col-md-3 form-group" style="margin-top: 20px">
-                        <button type="button" class="btn btn-primary" onclick="Getprsdata()">GET PRS Data</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- calculation hidden field for entry in database by Abrar --}}
-        <input type="hidden" name="total_no_product" value="3" id="tnoproduct">
-        <input type="hidden" name="total_qty_product" value="3" id="tqtyproduct">
-        <input type="hidden" name="total_tax_amount" value="3" id="ttaxamount">
-        <input type="hidden" name="total_discount_amount" value="3" id="tdamount">
-        <input type="hidden" name="gross_amount" value="3" id="grossamount">
-        <input type="hidden" name="invoice_discount" value="3" id="invoicediscount">
-        <input type="hidden" name="net_amount" value="3" id="invoicediscount">
-        {{-- Contetn for Grid Here --}}
-        <div style="border: 1px solid rgb(20, 19, 19); margin-top:14px;margin-bottom:10px;padding:0px 10px 0px 10px">
-            <div class="row justify-content-center" style="padding-top:30px">
-                <div class="col-md-8">
+            .tablecalculation {
+                border: 1px solid black;
+                text-align: center;
+            }
+        </style>
+        <br><br><br>
+        <form action="{{ route('quotation.store') }}" method="POST" id="formdata" enctype="multipart/form-data">
+            @csrf
+            <div class="row justify-content-center">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-6 form-group">
-                            <strong>Select Supplier</strong>
-                            <select name="supplier_id" id="supplier" class="form-control">
-                                <option value="None">Select Supplier</option>
-                                @foreach ($suplier as $item)
-                                <option value={{ $item->suplier_id }}>{{ $item->companyname }}</option>
+                        <div class="col-md-3 form-group">
+                            <strong>Document Doc#</strong>
+                            <input type="text" class="form-control" value={{ $qcounter }} id="prdocnumber"
+                                name="doc_no" placeholder="PR Doc#" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <strong>Branch</strong>
+                            <select name="branchs_id" id="branch" class="form-control">
+                                <option value="None">Select Branch</option>
+                                @foreach ($branch as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <strong>Quotation Remarks</strong>
-                            <input type="text" class="form-control" value="" id="quotationremarks" name="qremarks"
+                        <div class="col-md-3 form-group">
+                            <strong>Department</strong>
+                            <select name="depart_id" id="department" class="form-control">
+                                <option value="None">Select Department</option>
+                                @foreach ($deaprtment as $item)
+                                    <option value="{{ $item->id }}">{{ $item->department }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <strong>Select PRs</strong>
+                            <input type="text" class="form-control" value="" id="prs" name="PRS"
                                 placeholder="Quotation Remarks">
+                        </div>
+                        <div class="col-md-3 form-group" style="margin-top: 20px">
+                            <button type="button" class="btn btn-primary" onclick="Getprsdata()">GET PRS Data</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table mt-3 border" id="tabledate">
-                <thead>
-                    <tr>
-                    <tr>
-                        <th>S.No</th>
-                        <th>PR_No</th>
-                        <th>Product</th>
-                        <th>product Wise Description</th>
-                        <th>UOM</th>
-                        <th>Quality</th>
-                        <th>Last Received Date</th>
-                        <th>Last Received Rate</th>
-                        <th>Rate</th>
-                        <th>Tax%</th>
-                        <th>Tax Amount</th>
-                        <th>Amount</th>
-                        <th>Discount%</th>
-                        <th>Discount Amount</th>
-                        <th>Net Amount</th>
-                        <th>Remove</th>
-                    </tr>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
+            {{-- calculation hidden field for entry in database by Abrar --}}
+            <input type="hidden" name="total_no_product" value="3" id="tnoproduct">
+            <input type="hidden" name="total_qty_product" value="3" id="tqtyproduct">
+            <input type="hidden" name="total_tax_amount" value="3" id="ttaxamount">
+            <input type="hidden" name="total_discount_amount" value="3" id="tdamount">
+            <input type="hidden" name="gross_amount" value="3" id="grossamount">
+            <input type="hidden" name="invoice_discount" value="3" id="invoicediscount">
+            <input type="hidden" name="net_amount" value="3" id="invoicediscount">
+            {{-- Contetn for Grid Here --}}
+            <div style="border: 1px solid rgb(20, 19, 19); margin-top:14px;margin-bottom:10px;padding:0px 10px 0px 10px">
+                <div class="row justify-content-center" style="padding-top:30px">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <strong>Select Supplier</strong>
+                                <select name="supplier_id" id="supplier" class="form-control">
+                                    <option value="None">Select Supplier</option>
+                                    @foreach ($suplier as $item)
+                                        <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <strong>Quotation Remarks</strong>
+                                <input type="text" class="form-control" value="" id="quotationremarks"
+                                    name="qremarks" placeholder="Quotation Remarks">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table mt-3 border" id="tabledate">
+                    <thead>
+                        <tr>
+                        <tr>
+                            <th>S.No</th>
+                            <th>PR_No</th>
+                            <th>Product</th>
+                            <th>product Wise Description</th>
+                            <th>UOM</th>
+                            <th>Quality</th>
+                            <th>Last Received Date</th>
+                            <th>Last Received Rate</th>
+                            <th>Rate</th>
+                            <th>Tax%</th>
+                            <th>Tax Amount</th>
+                            <th>Amount</th>
+                            <th>Discount%</th>
+                            <th>Discount Amount</th>
+                            <th>Net Amount</th>
+                            <th>Remove</th>
+                        </tr>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
-    </div>
-    <br><br><br>
-
-
-    <script>
-        // Define the Getprsdata function
+        <br><br><br>
+        <br>
+        <br>
+        <div><br> </div>
+        <script>
+            // Define the Getprsdata function
             function Getprsdata() {
                 var inputValue = document.getElementById('prs').value;
                 fetch('/fetch-data?prs=' + inputValue)
@@ -297,28 +298,30 @@ Create Quotation
                     alert("Row does not exist.");
                 }
             }
-            $(document).ready(function() {
-                $('#formdata').submit(function(event) {
-                    event.preventDefault(); // Prevent the default form submission
+            document.getElementById('formdata').addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+                // Create FormData object from the form element
+                var formData = new FormData(this);
+                console.log(formData);
 
-                    // Serialize the form data
-                    var formData = $(this).serialize();
-               
-
-                    // Send an AJAX request
-                    $.ajax({
-                        url: $(this).attr('action'),
-                        type: 'POST',
-                        data: formData + '&_token={{ csrf_token() }}',
-                        success: function(response) {
-                            console.log('Data saved successfully:', response);
-                            // Optionally, perform further actions here
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error saving data:', error);
-                            // Optionally, provide user feedback here
-                        }
-                    });
+                // Send an AJAX request
+                $.ajax({
+                    url: $(this).attr('action'), // URL specified in the form action attribute
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Handle success response
+                        console.log('Data saved successfully:', response);
+                        // Optionally, you can perform further actions here
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error('Error saving data:', error);
+                        // Optionally, you can provide user feedback here
+                    }
                 });
             });
     </script>

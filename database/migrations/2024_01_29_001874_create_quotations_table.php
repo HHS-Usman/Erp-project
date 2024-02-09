@@ -14,7 +14,6 @@ class CreateQuotationsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('quotations');
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->string("remarks");
@@ -40,8 +39,9 @@ class CreateQuotationsTable extends Migration
             $table->unsignedBigInteger('depart_id');
             $table->foreign('depart_id')->references('id')->on('departments');
             // supplier foreign key by Abrar
-            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedInteger('supplier_id');
             $table->foreign('supplier_id')->references('suplier_id')->on('suppliers')->onDelete('cascade');
+            // doc status foreign key
             $table->unsignedBigInteger('doc_status')->default('1');
             $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->timestamps();
