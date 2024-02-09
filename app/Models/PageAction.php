@@ -15,4 +15,15 @@ class PageAction extends Model
     {
         return $this->hasMany(Permissions::class);
     }
+    public static function createpurchaserequisition($emp_id){
+        return Purchaserequisition::create([
+            'create_emp_id'=>$emp_id
+        ]);
+    }
+    public function editdata(){
+        
+    }
+    public function deletedata(){
+        
+    }
 }

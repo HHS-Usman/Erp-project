@@ -166,6 +166,10 @@
                                                 href="{{ route('subdepartment.index') }}">Manage Sub Department
                                                 Level</a></li>
                                         @endcan
+                                        <li class="p-0"><a class="dropdown-item"
+                                            href="{{ route('location.create') }}">Create Location</a></li>
+                                            <li class="p-0"><a class="dropdown-item"
+                                                href="{{ route('location.index') }}">Mange Location</a></li>
                                         @can('add-function')
                                         <li class="p-0"><a class="dropdown-item"
                                                 href="{{ route('function.create') }}">Create Function</a></li>

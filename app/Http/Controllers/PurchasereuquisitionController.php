@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use App\Models\Brand_Selection;
 use App\Models\BuyerCategory;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Location;
 use App\Models\Modetype;
+use App\Models\PageAction;
 use App\Models\Pr_detail;
 use App\Models\Product;
 use App\Models\Product_category;
@@ -18,6 +21,7 @@ use App\Models\Unit_selection;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Psy\Readline\Hoa\Console;
 
 class PurchasereuquisitionController extends Controller
@@ -95,6 +99,8 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
+         // Get the IP address of the user
+        
         $deaprtment = Department::all();
         $employee = Employee::all();
         $pcategory = Product_category::all();
@@ -105,7 +111,9 @@ class PurchasereuquisitionController extends Controller
         $subcategory = Product_sub_category::all();
         $counterid = Purchaserequisition::count("pr_id");
         $pr = $counterid + 1;
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory'));
+        $location = Location::all();
+        $branch = Branch::all();
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory','location','branch'));
     }
 
     /**
@@ -124,18 +132,30 @@ class PurchasereuquisitionController extends Controller
         $filepath = "PR_" . $id . "_" . $file;
         Log::info('Purchase Requisition created successfully');
         Purchaserequisition::create([
+            'pr_doc_no'=>request()->get('prdoc_no'),    
             'doc_ref_no' => request()->get('doc_ref_no'),
-            'date_picker' => request()->get('date_picker'),
-            'pr_detail' => request()->get('pr_remarks'),
-            'file' => $filepath,
+            'depart_id' => request()->get('depart_id'),
+            'modet_id' =>1,
+            'required_date' => request()->get('required_date'),
+            'doc_create_date' => request()->get('doc_create_date'),
+            'pr_remarks' => request()->get('pr_remarks'),
+            't_no_product' => request()->get('totalnoproduct'),
+            't_qty_product' => request()->get('qtyproduct'),
+            'attachement' => $filepath,
             't_no_product' => $totalnoproduct,
             't_qty_product' => $qtyproduct,
-            'modet_id' => request()->get('mt_id'),
-            'depart_id' => request()->get('depart_id'),
             'emp_id' => request()->get('emp_id'),
-            'doc_status'=> 1
-
+            'branch_id' => request()->get('branch_id'),
+            'location_id'=>request()->get('location_id'),
+            'doc_status'=>1,
+            'active'=> request()->get('is_active',1),
+            'action'=>1,
+            'quotation_required'=>request()->get('quotationrequired', 1),
+            'po'=>request()->get('directpocreation', 0),
         ]);
+        // getting id of user which is login with application
+        $employeeId = Auth::id();
+        PageAction::createpurchaserequisition($employeeId);
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
              Pr_detail::create([
@@ -203,7 +223,7 @@ class PurchasereuquisitionController extends Controller
         return view('purchaserequisition.approval',['Prdatas' => $Prdatas]);
     }
     public function updateApproval(Request $request)
-    {
+    { 
         $ids = $request->input('ids', []);
         $approvalValue = $request->input('approval', 0);
 

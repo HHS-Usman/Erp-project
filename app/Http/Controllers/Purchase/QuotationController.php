@@ -31,7 +31,6 @@ class QuotationController extends Controller
      */
     public function index()
     {
-
         $quotationDetails = QuotationDetail::with('quotation')->get();
         return view('quotation.index', ['quotationDetails' => $quotationDetails]);
     }
@@ -57,8 +56,7 @@ class QuotationController extends Controller
             // Merge the data for current ID into the main data array
             $data = array_merge($data, $prDetails->toArray());
         }
-
-        return response()->json($data);
+        return response()->json($data); 
     }
     /**
      * Show the form for creating a new resource.
@@ -92,8 +90,7 @@ class QuotationController extends Controller
 
             // Validate the incoming request data
             $validatedData = $request->validate([
-                'prnumber.*' => 'required', // Example validation rule
-                // Add more validation rules as needed
+                'prnumber.*' => 'required', 
             ]);
 
             // Extract validated data

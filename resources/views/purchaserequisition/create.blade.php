@@ -23,11 +23,6 @@
                 </ol>
             </nav>
         </div>
-
-
-
-
-
         <style>
             .wrapper {
                 margin: 0px 100px 0px 100px
@@ -47,10 +42,19 @@
             @csrf
             <div class="wrapper">
                 <div class="row">
+                    <div class="col-md-2 form-group">
+                        <input class="form-check-input" type="checkbox" value="1" name="quotationrequired" id="quotation_required" checked>
+                        <label class="form-check-label" for="quotation_required">Quotation Required</label>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input class="form-check-input" type="checkbox" value="1" name="directpocreation" id="direct_po_creation" >
+                        <label class="form-check-label" for="direct_po_creation">Direct Po Creation</label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" value={{ $pr }} id="prdocnumber"
-                            name="prdoc_no" placeholder="PR Doc#" readonly>
+                        <input type="text" class="form-control" value="PR-<?php echo $pr; ?>" id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -61,8 +65,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="journalDate">Document Creation Date</label>
-                        <input type="text" class="form-control" disabled id="documentdate" name="documentdate"
-                            value="" readonly>
+                        <input type="date" class="form-control" id="doc_creation" name="doc_create_date" placeholder="Date">
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
@@ -76,6 +79,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
+                        <strong>Branch</strong>
+                        <select name="branch_id" id="branch_type" class="form-control">
+                            <option value="branch">Select branch</option>
+                            @foreach ($branch as $branch)
+                                <option value={{ $branch->id }}>{{ $branch->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <strong>Location</strong>
+                        <select name="location_id" id="mode_type" class="form-control">
+                            <option value="location">Select Location</option>
+                            @foreach ($location as $location)
+                                <option value={{ $location->location_id }}>{{ $location->Location}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
                         <strong>Department</strong>
                         <select name="depart_id" id="mode_type" class="form-control">
                             <option value="department">Select Department</option>
@@ -86,7 +107,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Required Date</strong>
-                        <input type="date" class="form-control" id="date_picker" name="date_picker" placeholder="Date">
+                        <input type="date" class="form-control" id="date_picker" name="required_date" placeholder="Date">
                     </div>
                 </div>
                 <div class="row">
@@ -101,7 +122,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Attachment</strong>
-                        <input type="file" class="form-control" id="required_date" name="filename" placeholder="Date">
+                        <input type="file" class="form-control" id="filename" name="filename" placeholder="Date">
                     </div>
                 </div>
 
@@ -116,6 +137,11 @@
                     <div class="innercontainer" class="col-md-12">
                         <strong>PR Detail</strong>
                     </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
+                    Active
+                    </label>
                 </div>
                 {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
                 <input type="hidden" id="qtyproductInput" name="qtyproduct" value="0">

@@ -69,6 +69,7 @@ use App\Http\Controllers\BuyertypeController;
 use App\Http\Controllers\BuyeruploadController;
 use App\Http\Controllers\FinancialyearController;
 use App\Http\Controllers\JournalvoucherController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\SupplierCategoryController;
 use App\Http\Controllers\SupplierController;
@@ -502,7 +503,7 @@ Route::resource('supplierpayment',SupplyController::class);
 Route::resource('supplierupload',SupplieruploaderController::class);
 
 
-
+Route::resource('location',LocationController::class);
 Route::resource('purchaserequisition',PurchasereuquisitionController::class);
 Route::get('Pr/approval', [PurchasereuquisitionController::class, 'approval']);
 

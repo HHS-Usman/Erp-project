@@ -148,7 +148,7 @@ Quotation Approval List
     });
     $(document).ready(function() {
         $.ajax({
-            url: "{{ route('get.quotations') }}",
+            url: "/approval",
             type: 'GET',
             success: function(data) {
                 // Clear existing table rows

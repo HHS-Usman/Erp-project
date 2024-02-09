@@ -175,36 +175,36 @@
                     // PR_No
                     var prNoCell = row.insertCell();
                     prNoCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.pre_id}" placeholder="PR Number" id="prnumber_${index}" name="prnumber" readonly>`;
+                        `<input type="text" class="form-control" value="${item.pre_id}" placeholder="PR Number" id="prnumber_${index}" name="prnumber[]" readonly>`;
 
                     // Product
                     var prNoCell = row.insertCell();
                     prNoCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.product.name}" placeholder="Product" id="product_${index}" name="product" readonly>`;
+                        `<input type="text" class="form-control" value="${item.product.name}" placeholder="Product" id="product_${index}" name="product[]" readonly>`;
 
                     // Product Wise Description
                     var descCell = row.insertCell();
                     descCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.product_description}" placeholder="Product Description" id="productdescription_${index}" name="product_description">`;
+                        `<input type="text" class="form-control" value="${item.product_description}" placeholder="Product Description" id="productdescription_${index}" name="product_description[]">`;
 
                     // UOM
                     var uomCell = row.insertCell();
                     uomCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.uom}" id="uom_${index}" placeholder="uom" name="uom">`;
+                        `<input type="text" class="form-control" value="${item.uom}" id="uom_${index}" placeholder="uom" name="uom[]">`;
 
                     // Quality
                     var qualityCell = row.insertCell();
                     qualityCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Quality" id="quantity_${index}" name="qty_required" />`;
+                        `<input type="text" class="form-control" value="" placeholder="Quality" id="quantity_${index}" name="qty_required[]" />`;
                     // Last Received Date
                     var lastReceivedDateCell = row.insertCell();
                     lastReceivedDateCell.innerHTML =
                         lastReceivedDateCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.last_received_date}" placeholder="last received date" id="lastrecevied_date_${index}"  name="last_received_date" readonly>`;
+                        `<input type="text" class="form-control" value="${item.last_received_date}" placeholder="last received date" id="lastrecevied_date_${index}"  name="last_received_date[]" readonly>`;
                     // Last Received Rate
                     var lastReceivedRateCell = row.insertCell();
                     lastReceivedRateCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.last_received_rate}" placeholder="last received rate" id="lastreceivedrate_${index}" name="last_received_rate" readonly>`;
+                        `<input type="text" class="form-control" value="${item.last_received_rate}" placeholder="last received rate" id="lastreceivedrate_${index}" name="last_received_rate[]" readonly>`;
                     // Rate
                     var rateCell = row.insertCell();
                     var rateInput = document.createElement('input');
@@ -221,31 +221,31 @@
                     // Tax%
                     var taxPercentCell = row.insertCell();
                     taxPercentCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.product.direct_tax}" placeholder="Tax Percentage" id="tax_percentage_${index}" name="tax_percentage" readonly>`;
+                        `<input type="text" class="form-control" value="${item.product.direct_tax}" placeholder="Tax Percentage" id="tax_percentage_${index}" name="tax_percentage[]" readonly>`;
                     // Tax Amount
                     var taxAmountCell = row.insertCell();
                     taxAmountCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Tax Amount" id="taxamount_${index}" name="tax_amount" readonly>`;
+                        `<input type="text" class="form-control" value="" placeholder="Tax Amount" id="taxamount_${index}" name="tax_amount[]" readonly>`;
 
                     // Amount
                     var amountCell = row.insertCell();
                     amountCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Amount" id="amount_${index}"  name="amount" readonly>`;
+                        `<input type="text" class="form-control" value="" placeholder="Amount" id="amount_${index}"  name="amount[]" readonly>`;
 
                     // Discount%
                     var discountPercentCell = row.insertCell();
                     discountPercentCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Discount%" id="discountpercentage_${index}" name="discountpercentage">`;
+                        `<input type="text" class="form-control" value="" placeholder="Discount%" id="discountpercentage_${index}" name="discountpercentage[]">`;
 
                     // Discount Amount
                     var discountAmountCell = row.insertCell();
                     discountAmountCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Discount Amount" id="discountamount_${index}" name="discountamount">`;
+                        `<input type="text" class="form-control" value="" placeholder="Discount Amount" id="discountamount_${index}" name="discountamount[]">`;
 
                     // Net Amount
                     var netAmountCell = row.insertCell();
                     netAmountCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="Net Amount" id="netamount_${index}" name="netamount" readonly>`;
+                        `<input type="text" class="form-control" value="" placeholder="Net Amount" id="netamount_${index}" name="netamount[]" readonly>`;
 
                     let removebtn = row.insertCell();
                     removebtn.innerHTML =
@@ -298,42 +298,7 @@
                     alert("Row does not exist.");
                 }
             }
-            document.getElementById('formdata').addEventListener('submit', function(event) {                // Prevent the default form submission
-                event.preventDefault();
-                // Disable the submit button to prevent multiple submissions
-                // document.getElementById("submitBtn").disabled = true;
-                // Create FormData object from the form element
-                var formData = new FormData(this);
-                console.log(formData);
-
-                // Send an AJAX request
-                $.ajax({
-                    url: $(this).attr('action'), // URL specified in the form action attribute
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        // Handle success response
-                        console.log('Data saved successfully:', response);
-                        // Optionally, you can provide user feedback here
-                        alert('Data saved successfully');
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                        console.error('Internal Server Error 500:', error);
-                        // Optionally, you can provide user feedback here
-                        alert('Internal Server Error 500');
-                    },
-                    complete: function() {
-                        // Re-enable the submit button after request is complete
-                        document.getElementById("submitBtn").disabled = false;
-                    }
-                });
-            });
+         
         </script>
 
     </section>
