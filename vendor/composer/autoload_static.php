@@ -767,6 +767,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Qualification' => __DIR__ . '/../..' . '/app/Models/Qualification.php',
         'App\\Models\\Qualificationlevel' => __DIR__ . '/../..' . '/app/Models/Qualificationlevel.php',
         'App\\Models\\Quotation' => __DIR__ . '/../..' . '/app/Models/Quotation.php',
+        'App\\Models\\QuotationComparitive' => __DIR__ . '/../..' . '/app/Models/QuotationComparitive.php',
         'App\\Models\\QuotationDetail' => __DIR__ . '/../..' . '/app/Models/QuotationDetail.php',
         'App\\Models\\Religion' => __DIR__ . '/../..' . '/app/Models/Religion.php',
         'App\\Models\\Saleperson' => __DIR__ . '/../..' . '/app/Models/Saleperson.php',

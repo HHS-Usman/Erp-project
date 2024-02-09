@@ -1,41 +1,41 @@
 @extends('layout.master')
 @section('page-tab')
-    Create Quotation
+Create Quotation
 @endsection
 @section('content')
-    <section id="main" class="main" style="padding-top: 0vh;">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="pagetitle" style="margin-left: 20px;">
-            <h1>Create Quotation</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active"><a> Create Quotation</a></li>
-                </ol>
-            </nav>
-        </div>
-        <style>
-            .wrapper {
-                margin: 0px 100px 0px 100px
-            }
+<section id="main" class="main" style="padding-top: 0vh;">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="pagetitle" style="margin-left: 20px;">
+        <h1>Create Quotation</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item active"><a> Create Quotation</a></li>
+            </ol>
+        </nav>
+    </div>
+    <style>
+        .wrapper {
+            margin: 0px 100px 0px 100px
+        }
 
-            #prdetail {
-                border: 1px solid black;
-                padding: 1%;
-            }
+        #prdetail {
+            border: 1px solid black;
+            padding: 1%;
+        }
 
-            .innercontainer {
-                text-align: center;
-            }
+        .innercontainer {
+            text-align: center;
+        }
 
             .tablecalculation {
                 border: 1px solid black;
@@ -102,7 +102,7 @@
                                 <select name="supplier_id" id="supplier" class="form-control">
                                     <option value="None">Select Supplier</option>
                                     @foreach ($suplier as $item)
-                                        <option value={{ $item->suplier_id }}>{{ $item->companyname }}</option>
+                                        <option value={{ $item->suplier_id }}>{{ $item->contactperson }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -142,7 +142,7 @@
                 </table>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
         </div>
@@ -298,9 +298,44 @@
                     alert("Row does not exist.");
                 }
             }
-         
+            document.getElementById('formdata').addEventListener('submit', function(event) {                // Prevent the default form submission
+                event.preventDefault();
+                // Disable the submit button to prevent multiple submissions
+                // document.getElementById("submitBtn").disabled = true;
+                // Create FormData object from the form element
+                var formData = new FormData(this);
+                console.log(formData);
+
+                // Send an AJAX request
+                $.ajax({
+                    url: $(this).attr('action'), // URL specified in the form action attribute
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        // Handle success response
+                        console.log('Data saved successfully:', response);
+                        // Optionally, you can provide user feedback here
+                        alert('Data saved successfully');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error('Internal Server Error 500:', error);
+                        // Optionally, you can provide user feedback here
+                        alert('Internal Server Error 500');
+                    },
+                    complete: function() {
+                        // Re-enable the submit button after request is complete
+                        document.getElementById("submitBtn").disabled = false;
+                    }
+                });
+            });
         </script>
 
-    </section>
+</section>
 
 @endsection

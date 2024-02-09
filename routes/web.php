@@ -614,7 +614,7 @@ Route::get('/getproductdata/{product_id}',[PurchasereuquisitionController::class
 // route to handle the AJAX request for prs data
 Route::get('/fetch-data',[QuotationController::class,'fetchData']);
 
-Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
+Route::post('/quotationpost', [QuotationController::class, 'insert'])->name('quotation.insert');
 
 
 });

@@ -217,6 +217,7 @@ return array(
     'App\\Models\\Qualification' => $baseDir . '/app/Models/Qualification.php',
     'App\\Models\\Qualificationlevel' => $baseDir . '/app/Models/Qualificationlevel.php',
     'App\\Models\\Quotation' => $baseDir . '/app/Models/Quotation.php',
+    'App\\Models\\QuotationComparitive' => $baseDir . '/app/Models/QuotationComparitive.php',
     'App\\Models\\QuotationDetail' => $baseDir . '/app/Models/QuotationDetail.php',
     'App\\Models\\Religion' => $baseDir . '/app/Models/Religion.php',
     'App\\Models\\Saleperson' => $baseDir . '/app/Models/Saleperson.php',

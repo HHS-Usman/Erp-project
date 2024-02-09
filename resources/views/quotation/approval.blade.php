@@ -88,7 +88,7 @@ Quotation Approval List
                                 <td>{{ $quotationDetail->amount }}</td> <!-- data from quotation_detail table -->
                                 <td>{{ $quotationDetail->quotation->remarks }}</td>
                                 <!-- data from quotation table -->
-                                <td><p class="btn btn-outline-warning">{{ $quotationDetail->documentstatus->doc_status}}</p>
+                                <td><p class="btn btn-outline-warning">{{ $quotationDetail->quotation->documentstatus->doc_status}}</p>
                                 </td> <!-- data from quotation_detail table -->
                                 <td>
                                     <form action="" method="POST">
@@ -148,7 +148,7 @@ Quotation Approval List
     });
     $(document).ready(function() {
         $.ajax({
-            url: "/approval",
+            url: "{{ route('get.quotations') }}",
             type: 'GET',
             success: function(data) {
                 // Clear existing table rows
