@@ -81,14 +81,28 @@ class QuotationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insert(Request $request)
-{
-    try {
-        // Start a database transaction
-        DB::beginTransaction();
 
-        // Extract data from the request
-        $data = $request->all();
+    public function store(Request $request)
+    {
+
+
+        $maxidquotation = Quotation::count('id');
+        try {
+            // Start a database transaction
+            DB::beginTransaction();
+
+            // Validate the incoming request data
+            $validatedData = $request->validate([
+                'prnumber.*' => 'required', // Example validation rule
+                // Add more validation rules as needed
+            ]);
+
+            // Extract validated data
+            $data = $validatedData;
+
+            // Extract data from the request
+            // $data = $request->all();
+
 
         // Assuming prnumber is always an array, but you may need additional validation here
         $prNumbers = $data['prnumber'];
@@ -97,6 +111,7 @@ class QuotationController extends Controller
         foreach ($prNumbers as $index => $prNumber) {
             // Get the max ID of the Quotation
             $maxIdQuotation = Quotation::max('id');
+
 
             // Create a new QuotationDetail record
             QuotationDetail::create([
@@ -116,6 +131,20 @@ class QuotationController extends Controller
                 'netamount' => $data['netamount'][$index],
                 'quo_id' =>  $maxIdQuotation, // Use the max quotation ID
             ]);
+
+            // Return a success response
+            return response()->json(['message' => 'Quotation details saved successfully']);
+        }
+        catch (\Exception $e) {
+            // If an error occurs, rollback the transaction
+            DB::rollBack();
+
+            // Log the error for further investigation
+            Log::error('Internal Server Error 500: ' . $e->getMessage());
+
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+
         }
 
         // Commit the transaction
@@ -181,7 +210,7 @@ class QuotationController extends Controller
     public function approval(Request $request)
     {
         $quotationDetails = QuotationDetail::with('quotation')->get();
-        return view('quotation.approval' , ['quotationDetails' => $quotationDetails]);
+        return view('quotation.approval', ['quotationDetails' => $quotationDetails]);
     }
     public function updateApproval(Request $request)
     {
@@ -198,12 +227,14 @@ class QuotationController extends Controller
     {
 
         $quotationDetails = QuotationDetail::with('quotation')->get();
+
         $quotations = Quotation::with('quotationDetails.quotation','department')->get();
          return view('quotation.comparitive',compact('quotations','quotationDetails'));
+
     }
     public function getquotations()
     {
-        $quotation= Quotation::all();
+        $quotation = Quotation::all();
         return response()->json($quotation);
     }
 }
