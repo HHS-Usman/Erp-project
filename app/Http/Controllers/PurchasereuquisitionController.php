@@ -22,7 +22,9 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Psy\Readline\Hoa\Console;
+use Symfony\Component\Console\Input\Input;
 
 class PurchasereuquisitionController extends Controller
 {
@@ -124,10 +126,25 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
+        $quotationrequired = request()->get('quotationrequired');
+        $podirectcreation = request()->get('directpocreations');
+        if($quotationrequired == "1"){
+            $podirectcreation = 0;
+        }
+        elseif ($podirectcreation == "0") {
+            $podirectcreation = "1";
+            $quotationrequired = "0";
+        }
+
+        // this employee id is for created user id
+         // getting id of user which is login with application
+        $employeeId = Auth::id();
+        // PageAction::createpurchaserequisition($employeeId);
         $qtyproduct = $request->input('qtyproduct');
         $totalnoproduct = $request->input('totalnoproduct');
         // $names = request()->input('names');
         $id = Purchaserequisition::count("pr_id");
+        $maxid =  $id+1;
         $file = $request->file('filename')->getClientOriginalName();
         $filepath = "PR_" . $id . "_" . $file;
         Log::info('Purchase Requisition created successfully');
@@ -135,39 +152,37 @@ class PurchasereuquisitionController extends Controller
             'pr_doc_no'=>request()->get('prdoc_no'),    
             'doc_ref_no' => request()->get('doc_ref_no'),
             'depart_id' => request()->get('depart_id'),
-            'modet_id' =>1,
+            'modetype_id' =>request()->get('mt_id'),
             'required_date' => request()->get('required_date'),
             'doc_create_date' => request()->get('doc_create_date'),
             'pr_remarks' => request()->get('pr_remarks'),
             't_no_product' => request()->get('totalnoproduct'),
             't_qty_product' => request()->get('qtyproduct'),
-            'attachement' => $filepath,
+            'attachment' => $filepath,
             't_no_product' => $totalnoproduct,
             't_qty_product' => $qtyproduct,
             'emp_id' => request()->get('emp_id'),
-            'branch_id' => request()->get('branch_id'),
+            'branch_id' => request()->get('branches_id'),
             'location_id'=>request()->get('location_id'),
-            'doc_status'=>1,
-            'active'=> request()->get('is_active',1),
+            'doc_status'=>2,
+            'active'=> 1,
             'action'=>1,
-            'quotation_required'=>request()->get('quotationrequired', 1),
-            'po'=>request()->get('directpocreation', 0),
+            'quotation_required'=>$quotationrequired,
+            'po'=>$podirectcreation,
+            'create_emp_id'=> $employeeId,
         ]);
-        // getting id of user which is login with application
-        $employeeId = Auth::id();
-        PageAction::createpurchaserequisition($employeeId);
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
              Pr_detail::create([
                 'max_stock' =>$request->input('maxstock')[$index],
                 'min_stock' =>$minstock,
                 'uom'=>"",
-
                 'pc_id'=>$request->input('account')[$index],
                 'psubc_id'=>$request->input('subcategory')[$index],
                 'p_id'=>$request->input('product')[$index],
                 'bs_id'=>$request->input('brand')[$index],
-                'pre_id'=>$id
+                'pre_id'=>$maxid,
+                'quantity'=>$request->input('qty_required')[$index]
             ]);
         }
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');

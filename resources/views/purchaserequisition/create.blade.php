@@ -47,14 +47,15 @@
                         <label class="form-check-label" for="quotation_required">Quotation Required</label>
                     </div>
                     <div class="col-md-2 form-group">
-                        <input class="form-check-input" type="checkbox" value="1" name="directpocreation" id="direct_po_creation" >
+                        <input class="form-check-input" type="checkbox" value="0" name="directpocreations" id="direct_po_creation">
                         <label class="form-check-label" for="direct_po_creation">Direct Po Creation</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>PR Doc#</strong>
-                        <input type="text" class="form-control" value="PR-<?php echo $pr; ?>" id="prdocnumber" name="prdoc_no" placeholder="PR Doc#" readonly>
+                        <input type="text" class="form-control" value="PR-<?php echo $pr; ?>" id="prdocnumber"
+                            name="prdoc_no" placeholder="PR Doc#" readonly>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -64,8 +65,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="journalDate">Document Creation Date</label>
-                        <input type="date" class="form-control" id="doc_creation" name="doc_create_date" placeholder="Date">
+                        <label for="journalDate">Pr Document</label>
+                        <input type="date" class="form-control" id="doc_creation" name="doc_create_date"
+                            placeholder="Date">
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Mode Type</strong>
@@ -80,7 +82,7 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Branch</strong>
-                        <select name="branch_id" id="branch_type" class="form-control">
+                        <select name="branches_id" id="branch_type" class="form-control">
                             <option value="branch">Select branch</option>
                             @foreach ($branch as $branch)
                                 <option value={{ $branch->id }}>{{ $branch->name }}</option>
@@ -89,16 +91,16 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Location</strong>
-                        <select name="location_id" id="mode_type" class="form-control">
+                        <select name="location_id" id="location" class="form-control">
                             <option value="location">Select Location</option>
                             @foreach ($location as $location)
-                                <option value={{ $location->location_id }}>{{ $location->Location}}</option>
+                                <option value={{ $location->location_id }}>{{ $location->Location }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 form-group">
                         <strong>Department</strong>
-                        <select name="depart_id" id="mode_type" class="form-control">
+                        <select name="depart_id" id="department" class="form-control">
                             <option value="department">Select Department</option>
                             @foreach ($deaprtment as $depart)
                                 <option value={{ $depart->id }}>{{ $depart->department }}</option>
@@ -137,11 +139,6 @@
                     <div class="innercontainer" class="col-md-12">
                         <strong>PR Detail</strong>
                     </div>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1"name="is_active" id="is_active" checked>
-                    Active
-                    </label>
                 </div>
                 {{-- this is input hidden field for get data  of qtyproduct in laravel --}}
                 <input type="hidden" id="qtyproductInput" name="qtyproduct" value="0">
@@ -285,6 +282,27 @@
                 </div>
             </div>
             <script>
+                   // -----------------------Start-------------------------------
+                // this code is for direct po  and quotation required check at a time both should not be check at a time.
+                // Get references to the checkboxes
+                const quotationCheckbox = document.getElementById('quotation_required');
+                const directPOCheckbox = document.getElementById('direct_po_creation');
+
+                // Add event listeners to each checkbox
+                quotationCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // If the quotation checkbox is checked, uncheck the direct PO checkbox
+                        directPOCheckbox.checked = false;
+                    }
+                });
+
+                directPOCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // If the direct PO checkbox is checked, uncheck the quotation checkbox
+                        quotationCheckbox.checked = false;
+                    }
+                });
+                // -----------------------End-------------------------------
                 var gettvalueok = 0;
                 var totalproduct = document.getElementById("noproduct");
                 var totalproductInput = document.getElementById("totalnoproductInput");
@@ -368,7 +386,7 @@
                     defaultOption.text = "Select";
                     subcategory.add(defaultOption);
                     // Add options from PHP array for category
-                    
+
                     // End
                     // Start Product
                     // create element select Product
@@ -383,7 +401,7 @@
                     defaultOption1.text = "Select";
                     selectproduct.add(defaultOption1);
                     // Data fetch from product 
-                   
+
                     // END
                     // Start brand
                     // create element select Brand
@@ -398,7 +416,7 @@
                     defaultOption1.text = "Select";
                     selectbrand.add(defaultOption1);
                     // data fetch from json and print in drop down selection
-                   
+
                     // END
                     // Append the select element to the cell
                     cell1.innerHTML = counter;
@@ -420,7 +438,7 @@
                     input.type = "text";
                     input.className = "form-control debit";
                     input.placeholder = "Quality Required";
-                    input.name = "qty_required" + counter;
+                    input.name = "qty_required[]" + counter;
                     input.addEventListener("input", function() {
                         // Update total quantity
                         updateTotalQuantity();
