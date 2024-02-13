@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\A_Transaction;
+use App\Models\Activity_Transaction;
 use App\Models\Branch;
 use App\Models\Brand_Selection;
 use App\Models\BuyerCategory;
@@ -19,6 +21,7 @@ use App\Models\PurchaseDetail;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
 use Dflydev\DotAccessData\Data;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +39,7 @@ class PurchasereuquisitionController extends Controller
     public function index()
     {
         $Prdatas = Pr_detail::with('purchaserequisition')->get();
-        return view('purchaserequisition.index',['Prdatas' => $Prdatas]);
+        return view('purchaserequisition.index', ['Prdatas' => $Prdatas]);
     }
     // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
     public function getbrandselection($psubc_id)
@@ -51,10 +54,10 @@ class PurchasereuquisitionController extends Controller
         return response()->json($subcategory);
     }
     // Declare function getproduct for fetching data on basis on brand selection for product by Abrar
-    public function getproduct($brand_id){
-        $productgetdata = Product::where('product_brand_id',$brand_id)->get();
+    public function getproduct($brand_id)
+    {
+        $productgetdata = Product::where('product_brand_id', $brand_id)->get();
         return response()->json($productgetdata);
-
     }
     public function purchasedata($id)
     {
@@ -101,8 +104,8 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
-         // Get the IP address of the user
-        
+        // Get the IP address of the user
+
         $deaprtment = Department::all();
         $employee = Employee::all();
         $pcategory = Product_category::all();
@@ -115,7 +118,7 @@ class PurchasereuquisitionController extends Controller
         $pr = $counterid + 1;
         $location = Location::all();
         $branch = Branch::all();
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory','location','branch'));
+        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory', 'location', 'branch'));
     }
 
     /**
@@ -126,65 +129,94 @@ class PurchasereuquisitionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'doc_create_date' => 'required',
+            'required_date'=>'required',
+            'depart_id'=>'required'
+        ]);
+        // this function implement for user 3 check field
         $quotationrequired = request()->get('quotationrequired');
         $podirectcreation = request()->get('directpocreations');
-        if($quotationrequired == "1"){
+        $directpurchaserequired = request()->get('directpurchase');
+        if ($quotationrequired == "1") {
             $podirectcreation = 0;
-        }
+            $directpurchaserequired = 0;
+        } 
         elseif ($podirectcreation == "0") {
             $podirectcreation = "1";
             $quotationrequired = "0";
+            $directpurchaserequired = "0";
         }
-
+        elseif($directpurchaserequired == "0") {
+            $podirectcreation = "0";
+            $quotationrequired = "0";
+            $directpurchaserequired = "1";
+        }
         // this employee id is for created user id
-         // getting id of user which is login with application
+        // getting id of user which is login with application
         $employeeId = Auth::id();
-        // PageAction::createpurchaserequisition($employeeId);
-        $qtyproduct = $request->input('qtyproduct');
-        $totalnoproduct = $request->input('totalnoproduct');
-        // $names = request()->input('names');
         $id = Purchaserequisition::count("pr_id");
-        $maxid =  $id+1;
+        $maxid =  $id + 1;
         $file = $request->file('filename')->getClientOriginalName();
         $filepath = "PR_" . $id . "_" . $file;
         Log::info('Purchase Requisition created successfully');
         Purchaserequisition::create([
-            'pr_doc_no'=>request()->get('prdoc_no'),    
+            'pr_doc_no' => request()->get('prdoc_no'),
             'doc_ref_no' => request()->get('doc_ref_no'),
-            'depart_id' => request()->get('depart_id'),
-            'modetype_id' =>request()->get('mt_id'),
-            'required_date' => request()->get('required_date'),
-            'doc_create_date' => request()->get('doc_create_date'),
-            'pr_remarks' => request()->get('pr_remarks'),
+            'mode_type_id' => request()->get('mt_id'),
+            'pr_req_date' => request()->get('required_date'),
+            'pr_doc_date' => request()->get('doc_create_date'),
+            'remarks' => request()->get('pr_remarks'),
             't_no_product' => request()->get('totalnoproduct'),
             't_qty_product' => request()->get('qtyproduct'),
             'attachment' => $filepath,
-            't_no_product' => $totalnoproduct,
-            't_qty_product' => $qtyproduct,
-            'emp_id' => request()->get('emp_id'),
-            'branch_id' => request()->get('branches_id'),
-            'location_id'=>request()->get('location_id'),
-            'doc_status'=>2,
-            'active'=> 1,
-            'action'=>1,
-            'quotation_required'=>$quotationrequired,
-            'po'=>$podirectcreation,
-            'create_emp_id'=> $employeeId,
+            'req_by_br_id' => request()->get('branches_id'),
+            'req_by_location_id' => request()->get('location_id'),
+            'req_by_depart_id' => request()->get('depart_id'),
+            'req_by_emp_id' => request()->get('emp_id'),
+            'doc_status' => 2,
+            'active' => 1,
+            'approve_by'=>null,
+            'quotation_required' => $quotationrequired,
+            'direct_po_required' => $podirectcreation,
+            'direct_purchase_required' => $directpurchaserequired,
+            'create_emp_id' => $employeeId,
+            'update_emp_id'=>null,
+            'delete_emp_id'=>null,
+            'approve_at'=>null,
+            'delete_at'=>null,
         ]);
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
-             Pr_detail::create([
-                'max_stock' =>$request->input('maxstock')[$index],
-                'min_stock' =>$minstock,
-                'uom'=>"",
-                'pc_id'=>$request->input('account')[$index],
-                'psubc_id'=>$request->input('subcategory')[$index],
-                'p_id'=>$request->input('product')[$index],
-                'bs_id'=>$request->input('brand')[$index],
-                'pre_id'=>$maxid,
-                'quantity'=>$request->input('qty_required')[$index]
+            Pr_detail::create([
+                'pr_id' => $maxid,
+                'p_id' => $request->input('product')[$index],
+                'p_description' => null,
+                'order_qty' => $request->input('qty_required')[$index],
+                'approve_qty' => null,
+                'received_qty' => null,
+                'pending_qty' => null,
+                'min_stock' => $minstock,
+                'max_stock' => $request->input('maxstock')[$index],
+                'uom' => null,
+                'p_subc_id' => $request->input('subcategory')[$index],
+                'brand_id' => $request->input('brand')[$index],
+                // 'pc_id' => $request->input('account')[$index],
+                'last_received_rate' => null,
+                'last_received_date' => null,
             ]);
         }
+        // transaction activity table PR Creation
+        Activity_Transaction::create([
+            'p_action_id' => 1,
+            'doc_status_id' => 2,
+            'doc_type_id' => 1,
+            'emp_id' => $employeeId,
+            'pr_id' => $maxid,
+            'ip' => '12',
+            'mac' => '10'
+        ]);
+        return redirect()->back()->with('success', 'Data stored successfully.'); 
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
 
@@ -235,10 +267,10 @@ class PurchasereuquisitionController extends Controller
     public function approval()
     {
         $Prdatas = Pr_detail::with('purchaserequisition')->get();
-        return view('purchaserequisition.approval',['Prdatas' => $Prdatas]);
+        return view('purchaserequisition.approval', ['Prdatas' => $Prdatas]);
     }
     public function updateApproval(Request $request)
-    { 
+    {
         $ids = $request->input('ids', []);
         $approvalValue = $request->input('approval', 0);
 

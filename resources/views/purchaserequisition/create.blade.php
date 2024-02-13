@@ -4,16 +4,6 @@
 @endsection
 @section('content')
     <section id="main" class="main" style="padding-top: 0vh;">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="pagetitle" style="margin-left: 20px;">
             <h1>Create Purchase Requisition</h1>
             <nav>
@@ -37,25 +27,34 @@
                 text-align: center;
             }
         </style>
+
         <br><br><br>
         <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form" enctype="multipart/form-data">
             @csrf
             <div class="wrapper">
                 <div class="row">
                     <div class="col-md-2 form-group">
-                        <input class="form-check-input" type="checkbox" value="1" name="quotationrequired" id="quotation_required" checked>
+                        <input class="form-check-input" type="checkbox" value="1" name="quotationrequired"
+                            id="quotation_required" checked>
                         <label class="form-check-label" for="quotation_required">Quotation Required</label>
                     </div>
                     <div class="col-md-2 form-group">
-                        <input class="form-check-input" type="checkbox" value="0" name="directpocreations" id="direct_po_creation">
+                        <input class="form-check-input" type="checkbox" value="0" name="directpocreations"
+                            id="direct_po_creation">
                         <label class="form-check-label" for="direct_po_creation">Direct Po Creation</label>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input class="form-check-input" type="checkbox" value="0" name="directpurchase"
+                            id="direct_purchase_required">
+                        <label class="form-check-label" for="direct_purchase_required">Direct Purchase Required</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <strong>PR Doc#</strong>
+                        <strong>PR Doc#<span style="color:#DC3545">*</span></strong>
                         <input type="text" class="form-control" value="PR-<?php echo $pr; ?>" id="prdocnumber"
                             name="prdoc_no" placeholder="PR Doc#" readonly>
+                        
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -65,20 +64,25 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="journalDate">Pr Document</label>
+                        <strong>PR Document<span style="color:#DC3545">*</span></strong>
                         <input type="date" class="form-control" id="doc_creation" name="doc_create_date"
                             placeholder="Date">
+                            @if ($errors->has('doc_create_date'))
+                            <div class="alert alert-danger" class="timererror" style="margin-top:10px">
+                                {{ $errors->first('doc_create_date') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="col-md-6 form-group">
-                        <strong>Mode Type</strong>
+                        <strong>Select Mode Type<span style="color:#DC3545">*</span></strong>
                         <select name="mt_id" id="mode_type" class="form-control">
-                            <option value="None">Select Mode Type</option>
                             @foreach ($modetype as $item)
-                                <option value={{ $item->mt_id }}>{{ $item->modetype_name }}</option>
+                                <option value="{{ $item->mt_id }}">{{ $item->modetype_name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <strong>Branch</strong>
@@ -101,15 +105,23 @@
                     <div class="col-md-6 form-group">
                         <strong>Department</strong>
                         <select name="depart_id" id="department" class="form-control">
-                            <option value="department">Select Department</option>
+                            <option value="none">Select Department</option>
                             @foreach ($deaprtment as $depart)
-                                <option value={{ $depart->id }}>{{ $depart->department }}</option>
+                                <option value="{{ $depart->id }}">{{ $depart->department }}</option>
                             @endforeach
                         </select>
+                        <div id="department-error" class="alert alert-danger" style="margin-top:10px; display:none;">
+                            Please select a department.
+                        </div>
                     </div>
                     <div class="col-md-6 form-group">
-                        <strong>Required Date</strong>
+                        <strong>Required Date<span style="color:#DC3545">*</span></strong>
                         <input type="date" class="form-control" id="date_picker" name="required_date" placeholder="Date">
+                        @if ($errors->has('required_date'))
+                        <div class="alert alert-danger" class="timererror" style="margin-top:10px">
+                            {{ $errors->first('required_date') }}
+                        </div>
+                    @endif
                     </div>
                 </div>
                 <div class="row">
@@ -282,17 +294,24 @@
                 </div>
             </div>
             <script>
-                   // -----------------------Start-------------------------------
+                // function is implement for validation timer
+                const error = document.className("timererror");
+                setTimeout(() => {
+                    error.style.display = "none"
+                }, 4000);
+                // -----------------------Start-------------------------------
                 // this code is for direct po  and quotation required check at a time both should not be check at a time.
                 // Get references to the checkboxes
                 const quotationCheckbox = document.getElementById('quotation_required');
                 const directPOCheckbox = document.getElementById('direct_po_creation');
+                const directpurchasebox = document.getElementById('direct_purchase_required');
 
                 // Add event listeners to each checkbox
                 quotationCheckbox.addEventListener('change', function() {
                     if (this.checked) {
                         // If the quotation checkbox is checked, uncheck the direct PO checkbox
                         directPOCheckbox.checked = false;
+                        directpurchasebox.checked = false
                     }
                 });
 
@@ -300,8 +319,17 @@
                     if (this.checked) {
                         // If the direct PO checkbox is checked, uncheck the quotation checkbox
                         quotationCheckbox.checked = false;
+                        directpurchasebox.checked = false;
                     }
                 });
+
+                directpurchasebox.addEventListener('change', function() {
+                    if (this.checked) {
+                        quotationCheckbox.checked = false;
+                        directPOCheckbox.checked = false;
+                    }
+                })
+
                 // -----------------------End-------------------------------
                 var gettvalueok = 0;
                 var totalproduct = document.getElementById("noproduct");
@@ -743,5 +771,4 @@
         <div><br>
         </div>
     </section>
-
 @endsection

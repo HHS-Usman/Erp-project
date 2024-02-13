@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use League\CommonMark\Reference\Reference;
 
-class CreateATransactionsTable extends Migration
+class CreateActivityTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,9 @@ class CreateATransactionsTable extends Migration
      */
     public function up()
     {
-        // this is activity Transaction
-        Schema::create('a__transactions', function (Blueprint $table) {
-            $table->integerIncrements('a_transaction_id');
-            $table->unsignedInteger('p_action_id')->nullable();
+        Schema::create('activity__transactions', function (Blueprint $table) {
+            $table->bigIncrements('a_transaction_id');
+            $table->unsignedBigInteger('p_action_id')->nullable();
             $table->foreign('p_action_id')->references('id')->on('page_actions')->onDelete('cascade');
             $table->unsignedBigInteger('doc_status_id');
             $table->foreign('doc_status_id')->references('id')->on('documentstatuses')->onDelete('cascade');
@@ -40,6 +38,6 @@ class CreateATransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('a__transactions');
+        Schema::dropIfExists('activity__transactions');
     }
 }
