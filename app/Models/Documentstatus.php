@@ -13,9 +13,9 @@ class Documentstatus extends Model
     {
        return $this->hasmany(Pr_detail::class);
     }
-    public function documentstatus()
+    public function purchaserequisition()
     {
-        return $this->hasmany(Documentstatus::class);
+        return $this->hasMany(Purchaserequisition::class);
     }
     public function quotation()
     {

@@ -41,7 +41,7 @@ class Pr_detail extends Model
     public function purchaserequisition()
 
     {
-        return $this->belongsTo(Purchaserequisition::class, 'pre_id');
+        return $this->belongsTo(Purchaserequisition::class, 'pr_id');
     }
 
 }

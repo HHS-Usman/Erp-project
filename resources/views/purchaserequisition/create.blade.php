@@ -294,11 +294,11 @@
                 </div>
             </div>
             <script>
-                // function is implement for validation timer
-                const error = document.className("timererror");
-                setTimeout(() => {
-                    error.style.display = "none"
-                }, 4000);
+                // // function is implement for validation timer
+                // const error = document.className("timererror");
+                // setTimeout(() => {
+                //     error.style.display = "none"
+                // }, 4000);
                 // -----------------------Start-------------------------------
                 // this code is for direct po  and quotation required check at a time both should not be check at a time.
                 // Get references to the checkboxes

@@ -16,13 +16,17 @@ class Purchaserequisition extends Model
     {
         return $this->belongsTo(Modetype::class,'modet_id');
     }
+    public function documentstatus()
+    {
+        return $this->belongsTo(Documentstatus::class,'doc_status');
+    }
     public function department()
     {
-        return $this->belongsTo(Department::class,'depart_id');
+        return $this->belongsTo(Department::class, 'req_by_depart_id');
     }
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'emp_id');
+        return $this->belongsTo(Employee::class, 'req_by_emp_id');
     }
     public function Pr_detail()
     {

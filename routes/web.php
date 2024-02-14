@@ -615,6 +615,8 @@ Route::get('/getproductdata/{product_id}',[PurchasereuquisitionController::class
 Route::get('/fetch-data',[QuotationController::class,'fetchData']);
 
 Route::post('/quotationpost', [QuotationController::class, 'insert'])->name('quotation.insert');
+// this is route define for fetch data from purchase requisition base on document satatus drop down selection
+Route::get('/getpurchaserequisitiondata', [PurchasereuquisitionController::class, 'getpurchaserequisitiondata']);
 
 
 });

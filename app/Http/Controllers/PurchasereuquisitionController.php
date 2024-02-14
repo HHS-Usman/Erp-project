@@ -9,6 +9,7 @@ use App\Models\Branch;
 use App\Models\Brand_Selection;
 use App\Models\BuyerCategory;
 use App\Models\Department;
+use App\Models\Documentstatus;
 use App\Models\Employee;
 use App\Models\Location;
 use App\Models\Modetype;
@@ -38,9 +39,39 @@ class PurchasereuquisitionController extends Controller
      */
     public function index()
     {
-        $Prdatas = Pr_detail::with('purchaserequisition')->get();
-        return view('purchaserequisition.index', ['Prdatas' => $Prdatas]);
+        $prdata = Purchaserequisition::all();
+        $documentstatus = Documentstatus::all();
+        return view('purchaserequisition.index', compact('documentstatus','prdata'));
     }
+    // this is function in web route for fetching data of purchase requisition base on document selection 
+    public function getpurchaserequisitiondata(Request $request)
+    {
+        $selectedIds = $request->input('doucmentstatus_id');
+        $data = [];
+        if ($selectedIds == "-1") {
+            $prdata = Purchaserequisition::all();
+          
+        } else {
+            $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        }
+        // Fetch data for each ID
+        // $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        // Iterate through each Pr_detail and append product name
+        $prdata->each(function ($item) {
+            // Access the department using the relationship defined in Purchaserequisition model
+            $department = $item->department;
+            $employee = $item->employee;
+            $documentstatus = $item->documentstatus;
+            // If the relationship is defined correctly, $department will hold the department related to the requisition
+            $item->required_by_depart_id = $department->department;
+            $item->req_by_emp_id = $employee->employee;
+            $item->doc_status = $documentstatus->documentstatus;
+        });
+        // Merge the data for current ID into the main data array
+        $data = array_merge($data, $prdata->toArray());
+        return response()->json($data);
+    }
+
     // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
     public function getbrandselection($psubc_id)
     {
@@ -104,6 +135,7 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
+
         // Get the IP address of the user
 
         $deaprtment = Department::all();
@@ -131,8 +163,8 @@ class PurchasereuquisitionController extends Controller
     {
         $request->validate([
             'doc_create_date' => 'required',
-            'required_date'=>'required',
-            'depart_id'=>'required'
+            'required_date' => 'required',
+            'depart_id' => 'required'
         ]);
         // this function implement for user 3 check field
         $quotationrequired = request()->get('quotationrequired');
@@ -141,13 +173,11 @@ class PurchasereuquisitionController extends Controller
         if ($quotationrequired == "1") {
             $podirectcreation = 0;
             $directpurchaserequired = 0;
-        } 
-        elseif ($podirectcreation == "0") {
+        } elseif ($podirectcreation == "0") {
             $podirectcreation = "1";
             $quotationrequired = "0";
             $directpurchaserequired = "0";
-        }
-        elseif($directpurchaserequired == "0") {
+        } elseif ($directpurchaserequired == "0") {
             $podirectcreation = "0";
             $quotationrequired = "0";
             $directpurchaserequired = "1";
@@ -176,15 +206,15 @@ class PurchasereuquisitionController extends Controller
             'req_by_emp_id' => request()->get('emp_id'),
             'doc_status' => 2,
             'active' => 1,
-            'approve_by'=>null,
+            'approve_by' => null,
             'quotation_required' => $quotationrequired,
             'direct_po_required' => $podirectcreation,
             'direct_purchase_required' => $directpurchaserequired,
             'create_emp_id' => $employeeId,
-            'update_emp_id'=>null,
-            'delete_emp_id'=>null,
-            'approve_at'=>null,
-            'delete_at'=>null,
+            'update_emp_id' => null,
+            'delete_emp_id' => null,
+            'approve_at' => null,
+            'delete_at' => null,
         ]);
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
@@ -216,7 +246,7 @@ class PurchasereuquisitionController extends Controller
             'ip' => '12',
             'mac' => '10'
         ]);
-        return redirect()->back()->with('success', 'Data stored successfully.'); 
+        return redirect()->back()->with('success', 'Data stored successfully.');
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
 
