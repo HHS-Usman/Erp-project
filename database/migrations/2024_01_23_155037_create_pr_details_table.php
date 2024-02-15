@@ -13,31 +13,36 @@ class CreatePrDetailsTable extends Migration
      */
     public function up()
     {
+        // Abrar ul Hassan Puchase Requisition Schema
         Schema::create('pr_details', function (Blueprint $table) {
             $table->bigIncrements('pr_d_id');
-            $table->unsignedBigInteger('pr_id')->nullable();
+            $table->unsignedBigInteger('pr_id');
             $table->foreign('pr_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
-            $table->unsignedBigInteger('p_id')->nullable();
+            $table->unsignedBigInteger('p_id');
             $table->foreign('p_id')->references('id')->on('products')->onDelete('cascade');
             $table->text('p_description')->nullable();
-            $table->integer('order_qty')->nullable();
-            $table->string('approve_qty')->nullable();
-            $table->string('received_qty')->nullable();
-            $table->string('pending_qty')->nullable();
-            $table->integer('min_stock')->nullable();
-            $table->integer('max_stock')->nullable();
-            $table->string('uom')->nullable();
-            // $table->unsignedBigInteger('p_main_cat_id')->nullable();
-            // $table->foreign('p_main_cat_id')->references('id')->on('product_categories')->onDelete('cascade');   
-            $table->unsignedBigInteger('p_subc_id')->nullable();
-            $table->foreign('p_subc_id')->references('id')->on('product_sub_categories')->onDelete('cascade');   
-            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->float('req_qty');
+            $table->float('approve_qty_for_quotation');
+            $table->float('receive_qty_for_quotation');
+            $table->float('pending_qty_for_quotation');
+            $table->float('approve_qty_for_po');
+            $table->float('receive_qty_for_po');
+            $table->float('pending_qty_for_po');
+            $table->float('approved_qty_for_direct_inv');
+            $table->float('receive_qty_for_direct_inv');
+            $table->float('pending_qty_for_direct_inv');
+            $table->float('req_min_stock');
+            $table->float('req_max_stock');
+            $table->string('uom');
+            $table->unsignedBigInteger('p_main_cat');
+            $table->foreign('p_main_cat')->references('id')->on('product_categories')->onDelete('cascade');  
+            $table->unsignedBigInteger('p_subc_cat');
+            $table->foreign('p_subc_cat')->references('id')->on('product_sub_categories')->onDelete('cascade');   
+            $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brand_selections')->onDelete('cascade');
-            $table->decimal('last_received_rate')->nullable();
+            $table->float('last_received_rate')->nullable();
             $table->date('last_received_date')->nullable();
             $table->timestamps();
-             // $table->unsignedBigInteger('branch_id')->nullable();
-            // $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

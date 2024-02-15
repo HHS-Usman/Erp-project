@@ -506,6 +506,7 @@ Route::resource('supplierupload',SupplieruploaderController::class);
 Route::resource('location',LocationController::class);
 Route::resource('purchaserequisition',PurchasereuquisitionController::class);
 Route::get('Pr/approval', [PurchasereuquisitionController::class, 'approval']);
+Route::get('Pr/approvaldatapurchaserequsition', [PurchasereuquisitionController::class, 'getapprovalpurchaserequisition']);
 
 Route::resource('quotation',QuotationController::class);
 Route::get('/approval', [QuotationController::class, 'approval']);

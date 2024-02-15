@@ -62,21 +62,19 @@
                         @foreach ($prdata as $pr =>$item )
                         <tr>
                           <th>{{ $pr + 1 }}</th>
-                          <th >{{ $item->pr_doc_no}}</th>
-                          <td>{{ $item->province }}</td>
-                          <td>{{ $item->province_code }}</td>
-                          <td>{{ $item ->detail }}</td>
-                          <td>@if($item->is_active)
-                                  <p>Active</p>
-                              @else
-                                  <p>InActive</p>
-                              @endif
+                          <td >{{ $item->pr_doc_no}}</td>
+                          <td>{{ $item->department->department}}</td>
+                          <td>{{ $item->employee->employee_name }}</td>
+                          <td>{{ $item->pr_req_date}}</td>
+                          <td>{{ $item->documentstatus->doc_status}}</td>
+                          <td>
+                            {{$item->created_at}}
                           </td>
-                          <td><form action="" method="POST">
+                          <td>
                             <a class="btn btn-info" href="">Show</a>
                             <a class="btn btn-primary" href="">Edit</a>
-                            <button  class="btn btn-danger">Delete</button>
-                        </form></td>
+                            <a class="btn btn-danger">Delete</a>
+                        </td>
                         </tr>
                         @endforeach 
                     </tbody>
@@ -114,7 +112,7 @@
                         url: "getpurchaserequisitiondata",
                         type: "GET",
                         data: {
-                            doucmentstatus_id: selectedId // Correct parameter name
+                            doucmentstatus_id: selectedId 
                         },
                         success: function(response) {
                             console.log(response); // Check the response data

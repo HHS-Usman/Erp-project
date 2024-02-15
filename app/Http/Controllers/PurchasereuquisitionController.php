@@ -21,12 +21,14 @@ use App\Models\Product_sub_category;
 use App\Models\PurchaseDetail;
 use App\Models\Purchaserequisition;
 use App\Models\Unit_selection;
+use Carbon\Carbon;
 use Dflydev\DotAccessData\Data;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Psy\Readline\Hoa\Console;
 use Symfony\Component\Console\Input\Input;
 
@@ -37,11 +39,12 @@ class PurchasereuquisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $prdata = Purchaserequisition::all();
         $documentstatus = Documentstatus::all();
-        return view('purchaserequisition.index', compact('documentstatus','prdata'));
+        return view('purchaserequisition.index', compact('documentstatus', 'prdata'));
     }
     // this is function in web route for fetching data of purchase requisition base on document selection 
     public function getpurchaserequisitiondata(Request $request)
@@ -50,7 +53,6 @@ class PurchasereuquisitionController extends Controller
         $data = [];
         if ($selectedIds == "-1") {
             $prdata = Purchaserequisition::all();
-          
         } else {
             $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
         }
@@ -126,8 +128,6 @@ class PurchasereuquisitionController extends Controller
             ]
         );
     }
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -135,9 +135,7 @@ class PurchasereuquisitionController extends Controller
      */
     public function create()
     {
-
         // Get the IP address of the user
-
         $deaprtment = Department::all();
         $employee = Employee::all();
         $pcategory = Product_category::all();
@@ -221,15 +219,22 @@ class PurchasereuquisitionController extends Controller
             Pr_detail::create([
                 'pr_id' => $maxid,
                 'p_id' => $request->input('product')[$index],
-                'p_description' => null,
-                'order_qty' => $request->input('qty_required')[$index],
-                'approve_qty' => null,
-                'received_qty' => null,
-                'pending_qty' => null,
-                'min_stock' => $minstock,
-                'max_stock' => $request->input('maxstock')[$index],
+                'p_description' => $request->input('p_description')[$index],
+                'req_qty' => $request->input('qty_required')[$index],
+                'approve_qty_for_quotation' => 0.0,
+                'receive_qty_for_quotation' => 0.0,
+                'pending_qty_for_quotation' => 0.0,
+                'approve_qty_for_po' => 0.0,
+                'receive_qty_for_po' => 0.0,
+                'pending_qty_for_po' => 0.0,
+                'approved_qty_for_direct_inv' => 0.0,
+                'receive_qty_for_direct_inv' => 0.0,
+                'pending_qty_for_direct_inv' => 0.0,
+                'req_min_stock' => $minstock,
+                'req_max_stock' => $request->input('maxstock')[$index],
                 'uom' => null,
-                'p_subc_id' => $request->input('subcategory')[$index],
+                'p_main_cat' => 1,
+                'p_subc_cat' => $request->input('subcategory')[$index],
                 'brand_id' => $request->input('brand')[$index],
                 // 'pc_id' => $request->input('account')[$index],
                 'last_received_rate' => null,
@@ -243,8 +248,8 @@ class PurchasereuquisitionController extends Controller
             'doc_type_id' => 1,
             'emp_id' => $employeeId,
             'pr_id' => $maxid,
-            'ip' => '12',
-            'mac' => '10'
+            'ip' => '00',
+            'mac' => '00'
         ]);
         return redirect()->back()->with('success', 'Data stored successfully.');
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
@@ -294,20 +299,63 @@ class PurchasereuquisitionController extends Controller
     {
         //
     }
+    // getting data from purchase requisition main but using approval form
+    public function getapprovalpurchaserequisition(Request $request)
+    {
+        $selectedIds = $request->input('doucmentstatus_id');
+        $data = [];
+        $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        // Fetch data for each ID
+        // $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        // Iterate through each Pr_detail and append product name
+        $prdata->each(function ($item) {
+            // Access the department using the relationship defined in Purchaserequisition model
+            $department = $item->department;
+            $employee = $item->employee;
+            $documentstatus = $item->documentstatus;
+            // If the relationship is defined correctly, $department will hold the department related to the requisition
+            $item->required_by_depart_id = $department->department;
+            $item->req_by_emp_id = $employee->employee;
+            $item->doc_status = $documentstatus->documentstatus;
+        });
+        // Merge the data for current ID into the main data array
+        $data = array_merge($data, $prdata->toArray());
+        return response()->json($data);
+    }
     public function approval()
     {
-        $Prdatas = Pr_detail::with('purchaserequisition')->get();
-        return view('purchaserequisition.approval', ['Prdatas' => $Prdatas]);
+        // this data is for modal same as purchase requisition
+        $deaprtment = Department::all();
+        $employee = Employee::all();
+        $pcategory = Product_category::all();
+        $product = Product::all();
+        $brand = Brand_Selection::all();
+        $uom = Unit_selection::all();
+        $modetype = Modetype::all();
+        $subcategory = Product_sub_category::all();
+        $counterid = Purchaserequisition::count("pr_id");
+        $pr = $counterid + 1;
+        $location = Location::all();
+        $branch = Branch::all();
+        $prdata = Purchaserequisition::where('doc_status',2);
+        return view('purchaserequisition.approval', compact('prdata', 'deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory', 'location', 'branch'));
     }
     public function updateApproval(Request $request)
     {
+        // Carbon Library to get current date time formate like( 2024-02-14 09:54:57)
+        $currentDateTime = Carbon::now();
+        // seesion id user login with application id
+        $employeeId = Auth::id();
         $ids = $request->input('ids', []);
-        $approvalValue = $request->input('approval', 0);
-
         // Validate or sanitize $ids as needed
-
-        Purchaserequisition::whereIn('id', $ids)->update(['doc_status' => $approvalValue]);
-
+        Purchaserequisition::whereIn('pr_id', $ids)->update([
+            'doc_status' => 4,
+            'approve_by' => $employeeId,
+            'approve_at' => $currentDateTime,
+        ]);
+        Pr_detail::whereIn('pr_id', $ids)->update([
+            'approve_qty_for_quotation' => DB::raw('req_qty')
+        ]);
         return response()->json(['message' => 'Approval status updated successfully']);
     }
 }

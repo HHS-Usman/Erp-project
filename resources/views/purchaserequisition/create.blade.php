@@ -454,7 +454,7 @@
                     cell4.appendChild(selectbrand);
                     cell5.appendChild(selectproduct);
                     cell6.innerHTML =
-                        '<input type="text" class="form-control debit" placeholder="Product description" name="Remarks' +
+                        '<input type="text" class="form-control debit" placeholder="Product description" name="p_description[]' +
                         table.rows
                         .length + '">';
                     cell7.innerHTML = '<input type="text" class="form-control debit" placeholder="UOM" name="UOM[]' + table.rows
