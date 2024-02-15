@@ -101,17 +101,7 @@
                     </table>
                     <div id="myModal" class="modal">
                         <div class=""
-                            style="
-                    position: relative;
-               
-                    padding: 30px;
-                    width: 100%;
-                    margin:10px 50px 10px 50px;
-                    background-color: #f8f9fa;
-                    border-radius: 10px;
-                    box-shadow: 
-                ">
-
+                            style="position: relative;padding: 30px;width: 100%; margin:10px 50px 10px 50px;background-color: #f8f9fa;border-radius: 10px;box-shadow">
                             <span class="close">&times;</span>
                             <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form"
                                 enctype="multipart/form-data">
@@ -971,7 +961,8 @@
                             // Populate table with fetched data
                             $.each(response, function(index, item) {
                                 $('#tableBody').append('<tr>' +
-                                    '<td><input type="checkbox" class="check" name="ids[]" value="'+ item.pr_id+'"></td>'+
+                                    '<td><input type="checkbox" class="check" name="ids[]" value="' +
+                                    item.pr_id + '"></td>' +
                                     '<td>' + (index + 1) + '</td>' +
                                     '<td>' + item.pr_doc_no + '</td>' +
                                     '<td>' + item.department.department + '</td>' +
@@ -979,7 +970,7 @@
                                     '<td>' + item.pr_req_date + '</td>' +
                                     '<td>' + item.documentstatus.doc_status + '</td>' +
                                     '<td>' + item.created_at + '</td>' +
-                                    '<td><a style="margin: 1px" class="btn btn-info" href="">Show</a><a style="margin: 1px" class="btn btn-primary" href="#">Edit</a><button style="margin: 1px" type="button" class="btn btn-danger">Delete</button><a style="margin:1px" class="btn btn-primary" href="">Print</a><a style="margin:1px" class="btn btn-primary" href="">Close</a></td>' +
+                                    '<td><a style="margin: 1px" class="btn btn-info" href="">Show</a><a style="margin: 1px" class="btn btn-primary" href="#">Edit</a><button style="margin: 1px" type="button" class="btn btn-danger">Delete</button><a style="margin:1px" class="btn btn-primary" href="">Print</a><a style="margin:1px" class="btn btn-primary" href="">Close</a><button type="button" class="openModalBtn btn"class="btn btn-primary">Approval</button></td>' +
                                     '</tr>');
                             });
                         },

@@ -133,22 +133,32 @@ class PurchasereuquisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Common method to fetch data
+    private function getCommonData()
+    {
+        $data = [
+            'deaprtment' => Department::all(),
+            'employee' => Employee::all(),
+            'pcategory' => Product_category::all(),
+            'product' => Product::all(),
+            'brand' => Brand_Selection::all(),
+            'uom' => Unit_selection::all(),
+            'modetype' => Modetype::all(),
+            'subcategory' => Product_sub_category::all(),
+            'counterid' => Purchaserequisition::count("pr_id"),
+            'location' => Location::all(),
+            'branch' => Branch::all(),
+        ];
+
+        $data['pr'] = $data['counterid'] + 1;
+
+        return $data;
+    }
     public function create()
     {
-        // Get the IP address of the user
-        $deaprtment = Department::all();
-        $employee = Employee::all();
-        $pcategory = Product_category::all();
-        $product = Product::all();
-        $brand = Brand_Selection::all();
-        $uom = Unit_selection::all();
-        $modetype = Modetype::all();
-        $subcategory = Product_sub_category::all();
-        $counterid = Purchaserequisition::count("pr_id");
-        $pr = $counterid + 1;
-        $location = Location::all();
-        $branch = Branch::all();
-        return view('purchaserequisition.create', compact('deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory', 'location', 'branch'));
+        $data = $this->getCommonData();
+        return view('purchaserequisition.create', $data);
     }
 
     /**
@@ -322,23 +332,12 @@ class PurchasereuquisitionController extends Controller
         $data = array_merge($data, $prdata->toArray());
         return response()->json($data);
     }
+    // Method for approval
     public function approval()
     {
-        // this data is for modal same as purchase requisition
-        $deaprtment = Department::all();
-        $employee = Employee::all();
-        $pcategory = Product_category::all();
-        $product = Product::all();
-        $brand = Brand_Selection::all();
-        $uom = Unit_selection::all();
-        $modetype = Modetype::all();
-        $subcategory = Product_sub_category::all();
-        $counterid = Purchaserequisition::count("pr_id");
-        $pr = $counterid + 1;
-        $location = Location::all();
-        $branch = Branch::all();
-        $prdata = Purchaserequisition::where('doc_status',2);
-        return view('purchaserequisition.approval', compact('prdata', 'deaprtment', 'employee', 'pcategory', 'product', 'uom', 'pr', 'brand', 'modetype', 'subcategory', 'location', 'branch'));
+        $prdata = Purchaserequisition::where('doc_status', 2)->get();
+        $data = $this->getCommonData();
+        return view('purchaserequisition.approval', array_merge(compact('prdata'), $data));
     }
     public function updateApproval(Request $request)
     {
