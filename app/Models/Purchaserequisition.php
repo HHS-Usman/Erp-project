@@ -16,6 +16,9 @@ class Purchaserequisition extends Model
     {
         return $this->belongsTo(Modetype::class,'modet_id');
     }
+    public function doc_status_value(){
+        return $this->belongsTo(Documentstatus::class,'doc_status');
+    }
     public function documentstatus()
     {
         return $this->belongsTo(Documentstatus::class,'doc_status');

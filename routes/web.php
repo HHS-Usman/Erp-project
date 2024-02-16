@@ -360,7 +360,6 @@ permissionRoutes('delete-persontype', SalepersontypeController::class, 'salepers
     // Route::get('division/create', [DivisionController::class, 'create'])->middleware('checkPermission:add-division');
     // Route::resource('division',DivisionController::class);
 // ->except(['create','edit','index'])
-
 permissionRoutes('add-accountcategory', AccountcategoryController::class, 'accountcategory');
 permissionRoutes('view-accountcategory', AccountcategoryController::class, 'accountcategory');
 permissionRoutes('edit-accountcategory', AccountcategoryController::class, 'accountcategory');
@@ -413,40 +412,32 @@ permissionRoutes('add-supplier', SupplierController::class, 'supplier');
 permissionRoutes('view-supplier', SupplierController::class, 'supplier');
 permissionRoutes('edit-supplier', SupplierController::class, 'supplier');
 permissionRoutes('delete-supplier', SupplierController::class, 'supplier');
-
 permissionRoutes('add-s-category',  SupplierCategoryController::class , 'scategory');
 permissionRoutes('view-s-category',  SupplierCategoryController::class , 'scategory');
 permissionRoutes('edit-s-category',  SupplierCategoryController::class , 'scategory');
 permissionRoutes('delete-s-category',  SupplierCategoryController::class , 'scategory');
-
 permissionRoutes('add-s-type', SuppliertypeController::class, 'suppliertype');
 permissionRoutes('view-s-type', SuppliertypeController::class, 'suppliertype');
 permissionRoutes('edit-s-type', SuppliertypeController::class, 'suppliertype');
 permissionRoutes('delete-s-type', SuppliertypeController::class, 'suppliertype');
-
 permissionRoutes('add-buyer', BuyerController::class, 'buyer');
 permissionRoutes('view-buyer', BuyerController::class, 'buyer');
 permissionRoutes('edit-buyer', BuyerController::class, 'buyer');
 permissionRoutes('delete-buyer', BuyerController::class, 'buyer');
-
 permissionRoutes('add-b-category', BuyercategoryController::class, 'buyercategory');
 permissionRoutes('view-add-b-category', BuyercategoryController::class, 'buyercategory');
 permissionRoutes('edit-add-b-category', BuyercategoryController::class, 'buyercategory');
 permissionRoutes('delete-add-b-category', BuyercategoryController::class, 'buyercategory');
-
 permissionRoutes('add-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('view-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('edit-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('delete-b-type', BuyertypeController::class, 'buyertype');
-
 permissionRoutes('add-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('view-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('edit-b-type', BuyertypeController::class, 'buyertype');
 permissionRoutes('delete-b-type', BuyertypeController::class, 'buyertype');
-
 permissionRoutes('view-b-uploader', BuyeruploadController::class, 'buyerupload');
 permissionRoutes('view-s-uploader', SupplieruploaderController::class, 'supplierupload');
-
 Route::resource('userrole',User_role_controller::class);
 Route::resource('users',Usercontroller::class);
 Route::resource('productuploader',UploaderController::class);
@@ -460,7 +451,6 @@ Route::resource('accesspermit',AccessPermitController::class);
 // Route::resource('company_info',Emp_Company_Info_Controller::class);
 // Route::resource('emp_payroll',Emp_Payroll_Controller::class);
 // Route::resource('emp_document',Emp_Document_Controller::class);
-
 
 Route::resource('costcenter',CostcenterController::class);
 Route::resource('language',LanguageController::class);
@@ -489,7 +479,6 @@ Route::resource('province',ProvinceController::class);
 Route::resource('state',StateController::class);
 Route::resource('event',EventController::class);
 Route::resource('product',ProductController::class);
-
 Route::get('/fetch-employee-data/{role_id}', [AccessPermitController::class, 'getPermissionId']);
 Route::resource('supplier',SupplierController::class);
 Route::resource('buyer',BuyerController::class);
@@ -499,27 +488,8 @@ Route::resource('scategory',SupplierCategoryController::class);
 Route::resource('suppliertype',SuppliertypeController::class);
 Route::resource('buyerpayment',BuyerpaymentController::class);
 Route::resource('supplierpayment',SupplyController::class);
-
 Route::resource('supplierupload',SupplieruploaderController::class);
-
-
-Route::resource('location',LocationController::class);
-Route::resource('purchaserequisition',PurchasereuquisitionController::class);
-Route::get('Pr/approval', [PurchasereuquisitionController::class, 'approval']);
-Route::get('Pr/approvaldatapurchaserequsition', [PurchasereuquisitionController::class, 'getapprovalpurchaserequisition']);
-
-Route::resource('quotation',QuotationController::class);
-Route::get('/approval', [QuotationController::class, 'approval']);
-Route::post('Pr/update-approval', [PurchasereuquisitionController::class ,'updateApproval'])->name('update.Prapproval');
-//for approval By Badar
-Route::post('/update-approval', [QuotationController::class ,'updateApproval'])->name('update.approval');
-Route::get('quotationcomparitive',[QuotationController::class, 'comparitive' ]);
-Route::get('/get-quotation',[QuotationController::class, 'getquotations']);
-
-
 Route::resource('monthlydaywise',MonthlydaywiseController::class);
-
-
 // for fetch record of DB in JS file
 Route::get('/get-countries', [MonthlydaywiseController::class, 'getCountries']);
 Route::get('/get-religion', [MonthlydaywiseController::class, 'getReligion']);
@@ -527,81 +497,68 @@ Route::get('/get-group', [MonthlydaywiseController::class, 'getGroup']);
 Route::get('/get-state', [MonthlydaywiseController::class, 'getState']);
 // rollacces temporary
 // Route::resource('uplaoder',DivisionuploadController::class);
-
 // Suplier Uploader CSV
 Route::get('suplieruploadcsv',[SupplieruploaderController::class ,'suplieruploadercsv'])->name('suplieruploadcsv');
-
 // Buyer Uploader CSV
 Route::get('buyeruploadcsv',[BuyeruploadController::class ,'buyeruploadercsv'])->name('buyeruploadcsv');
-
-
 // Route::get('uploader',  [DivisionuploadController::class, 'uploader']);
 Route::get('/monthly-calendar', [CalendarController::class, 'monthlyCalendar'])->name('departmentupload');
-
 // for excel download file
 Route::get('deparmentuploader',[DivuploadController::class ,'departmentupload'])->name('deparmentuploader');
 // for csv download router
 Route::get('deparmentuploadercsv',[DivuploadController::class ,'departmentuploadcsv'])->name('deparmentuploadercsv');
-
 // for excel download file
 Route::get('functionupload',[DivuploadController::class ,'functionuploader'])->name('functionupload');
 // for csv download file
 Route::get('functionuploadcsv',[DivuploadController::class ,'functionuploadercsv'])->name('functionuploadcsv');
-
 // for excel download file
 Route::get('divisionupload',[DivuploadController::class ,'divisionuploader'])->name('divisionupload');
 // for csv download file
 Route::get('divisionuploadcsv',[DivuploadController::class ,'divisionuploadercsv'])->name('divisionuploadcsv');
-
 // for excel download file
 Route::get('managelevelupload',[DivuploadController::class ,'manageleveluploader'])->name('managelevelupload');
 // for csv download file
 Route::get('manageleveluploadcsv',[DivuploadController::class ,'manageleveluploadercsv'])->name('manageleveluploadcsv');
-
 // for excel download file
 Route::get('designateupload',[DivuploadController::class ,'designationuploader'])->name('designateupload');
 // for csv download file
 Route::get('designateuploadcsv',[DivuploadController::class ,'designationuploadercsv'])->name('designateuploadcsv');
-
 // for excel download file
 Route::get('gradpload',[DivuploadController::class ,'gradpuploader'])->name('gradpload');
 // for csv download file
 Route::get('gradploadcsv',[DivuploadController::class ,'gradpuploadercsv'])->name('gradploadcsv');
-
 // for excel download file
 Route::get('groupupload',[DivuploadController::class ,'groupuploader'])->name('groupupload');
 // for csv download file
 Route::get('groupuploadcsv',[DivuploadController::class ,'groupuploadercsv'])->name('groupuploadcsv');
-
 // for excel download file
 Route::get('leavingreasonuoload',[DivuploadController::class ,'leavingreasonuoloader'])->name('leavingreasonuoload');
 // for csv download file
 Route::get('leavingreasonuoloadcsv',[DivuploadController::class ,'leavingreasonuoloadercsv'])->name('leavingreasonuoloadcsv');
-
 // for excel download file
 Route::get('languageupoload',[DivuploadController::class ,'languageupoloader'])->name('languageupoload');
 // for csv download file
 Route::get('languageupoloadcsv',[DivuploadController::class ,'languageupoloadercsv'])->name('languageupoloadcsv');
-
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
 Route::get('religionupoloadcsv',[DivuploadController::class ,'religionupoloadercsv'])->name('religionupoloadcsv');
-
-
-
 Route::get('/download', 'DivuploadController@DivuploadController')->name('download');
 Route::get('religionupoload',[DivuploadController::class ,'religionupoloader'])->name('religionupoload');
 Route::post('/fileuploade',[DivuploadController::class ,'store'])->name('fileuploade');
 // for supplier Route
 Route::post('/productupload',[UploaderController::class ,'store'])->name('productupload');
 Route::post('/supplierupload',[SupplieruploaderController::class ,'store'])->name('supplierupload');
-
-
 Route::resource('buyerupload',BuyeruploadController::class);
 Route::post('/buyerupload',[BuyeruploadController::class ,'store'])->name('buyerupload');
 Route::get('downloadcsv', [UploaderController::class ,'downloadCsv'])->name('downloadcsv');
 Route::get('downloadexcel', [UploaderController::class ,'downloadExcel'])->name('downloadexcel');
 // Create a route in your web.php file to handle the AJAX request.
-
+// --------------------- Purchaserequisition Routes--------------
+Route::resource('location',LocationController::class);
+Route::resource('purchaserequisition',PurchasereuquisitionController::class);
+Route::get('Pr/approval', [PurchasereuquisitionController::class, 'approval']);
+Route::post('prmainapproval', [PurchasereuquisitionController::class, 'postprmainapproval'])->name('prmainapproval.postprmainapproval');
+Route::get('Pr/approvaldatapurchaserequsition', [PurchasereuquisitionController::class, 'render_pr_approval_data']);
+Route::post('Pr/update-approval', [PurchasereuquisitionController::class ,'PR_List_Approval'])->name('update.Prapproval');
 Route::get('/get-uom/{id}', [PurchasereuquisitionController::class, 'purchasedata']);
 Route::get('/get-category/{id}', [PurchasereuquisitionController::class, 'categorydata']);
 Route::post('/save-data', [PurchasereuquisitionController::class, 'store']);
@@ -611,13 +568,20 @@ Route::get('/getsubcategory/{pc_id}',[PurchasereuquisitionController::class,'get
 Route::get('/getbrand/{psubc_id}',[PurchasereuquisitionController::class,'getbrandselection']);
 // this route declare beacuse i am fetching data from product base on brand selection (Ajax) by Abrar ul Hassan
 Route::get('/getproductdata/{product_id}',[PurchasereuquisitionController::class,'getproduct']);
+// this is route define for fetch data from purchase requisition base on document satatus drop down selection
+Route::get('/getpurchaserequisitiondata', [PurchasereuquisitionController::class, 'Render_PR_Approval_data']);
+//---------------------- Purchase Requisition Routes End---------------------------
 
+
+//---------------------- Quotation Routes---------------------------
+Route::resource('quotation',QuotationController::class);
+Route::get('/approval', [QuotationController::class, 'approval']);
+//for approval By Badar
+Route::post('/update-approval', [QuotationController::class ,'updateApproval'])->name('update.approval');
+Route::get('quotationcomparitive',[QuotationController::class, 'comparitive' ]);
+Route::get('/get-quotation',[QuotationController::class, 'getquotations']);
 // route to handle the AJAX request for prs data
 Route::get('/fetch-data',[QuotationController::class,'fetchData']);
-
 Route::post('/quotationpost', [QuotationController::class, 'insert'])->name('quotation.insert');
-// this is route define for fetch data from purchase requisition base on document satatus drop down selection
-Route::get('/getpurchaserequisitiondata', [PurchasereuquisitionController::class, 'getpurchaserequisitiondata']);
-
-
+//---------------------- Quotation Routes End---------------------------
 });

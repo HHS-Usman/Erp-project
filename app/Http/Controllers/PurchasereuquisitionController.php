@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Psy\Readline\Hoa\Console;
 use Symfony\Component\Console\Input\Input;
 
@@ -45,88 +46,6 @@ class PurchasereuquisitionController extends Controller
         $prdata = Purchaserequisition::all();
         $documentstatus = Documentstatus::all();
         return view('purchaserequisition.index', compact('documentstatus', 'prdata'));
-    }
-    // this is function in web route for fetching data of purchase requisition base on document selection 
-    public function getpurchaserequisitiondata(Request $request)
-    {
-        $selectedIds = $request->input('doucmentstatus_id');
-        $data = [];
-        if ($selectedIds == "-1") {
-            $prdata = Purchaserequisition::all();
-        } else {
-            $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
-        }
-        // Fetch data for each ID
-        // $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
-        // Iterate through each Pr_detail and append product name
-        $prdata->each(function ($item) {
-            // Access the department using the relationship defined in Purchaserequisition model
-            $department = $item->department;
-            $employee = $item->employee;
-            $documentstatus = $item->documentstatus;
-            // If the relationship is defined correctly, $department will hold the department related to the requisition
-            $item->required_by_depart_id = $department->department;
-            $item->req_by_emp_id = $employee->employee;
-            $item->doc_status = $documentstatus->documentstatus;
-        });
-        // Merge the data for current ID into the main data array
-        $data = array_merge($data, $prdata->toArray());
-        return response()->json($data);
-    }
-
-    // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
-    public function getbrandselection($psubc_id)
-    {
-        $brandselection = Brand_Selection::where('psubc_id', $psubc_id)->get();
-        return response()->json($brandselection);
-    }
-    // Declare function getfirstCategory for fetching data on basis on product category for first category by Abrar
-    public function getfirstCategory($pc_id)
-    {
-        $subcategory = Product_sub_category::where('pc_id', $pc_id)->get();
-        return response()->json($subcategory);
-    }
-    // Declare function getproduct for fetching data on basis on brand selection for product by Abrar
-    public function getproduct($brand_id)
-    {
-        $productgetdata = Product::where('product_brand_id', $brand_id)->get();
-        return response()->json($productgetdata);
-    }
-    public function purchasedata($id)
-    {
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(['error' => 'Product Not found'], 404);
-        }
-        $uom = Unit_selection::find($product->product_uom_id);
-        $minqty = $product->min_qty;
-        $maxqty = $product->max_qty;
-        if (!$uom) {
-            return response()->json(['error' => 'UOM not found'], 404);
-        }
-        return response()->json(
-            [
-                'uom' => $uom->uom,
-                'minqty' => $minqty,
-                'maxqty' => $maxqty,
-            ]
-        );
-    }
-    public function categorydata($id)
-    {
-        $pcategory = Product_category::find($id);
-        if (!$pcategory) {
-            return response()->json(['error' => 'Product Category Not found'], 404);
-        }
-        $firstcategory = Product_sub_category::find($pcategory->product_sub_category_id);
-        if (!$firstcategory) {
-            return response()->json(['error' => 'Product Category not found'], 404);
-        }
-        return response()->json(
-            [
-                'firstcategory' =>  $firstcategory->product1stsbctgry,
-            ]
-        );
     }
     /**
      * Show the form for creating a new resource.
@@ -167,7 +86,8 @@ class PurchasereuquisitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // this function declare for both store pr_main and and define prmain in approval
+    public function pr_pr_detaildatacommon(Request $request)
     {
         $request->validate([
             'doc_create_date' => 'required',
@@ -261,9 +181,13 @@ class PurchasereuquisitionController extends Controller
             'ip' => '00',
             'mac' => '00'
         ]);
-        return redirect()->back()->with('success', 'Data stored successfully.');
+    }
+    public function store(Request $request)
+    {
+        $this->pr_pr_detaildatacommon($request);
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -310,13 +234,18 @@ class PurchasereuquisitionController extends Controller
         //
     }
     // getting data from purchase requisition main but using approval form
-    public function getapprovalpurchaserequisition(Request $request)
+
+    // -----------------------------------All Ajax Request here----------------------------
+    // this is function in web route for fetching data of purchase requisition base on document selection 
+    public function getpurchaserequisitiondata(Request $request)
     {
         $selectedIds = $request->input('doucmentstatus_id');
         $data = [];
-        $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
-        // Fetch data for each ID
-        // $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        if ($selectedIds == "-1") {
+            $prdata = Purchaserequisition::all();
+        } else {
+            $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        }
         // Iterate through each Pr_detail and append product name
         $prdata->each(function ($item) {
             // Access the department using the relationship defined in Purchaserequisition model
@@ -332,14 +261,95 @@ class PurchasereuquisitionController extends Controller
         $data = array_merge($data, $prdata->toArray());
         return response()->json($data);
     }
-    // Method for approval
-    public function approval()
+    // Declare function getfirstCategory for fetching data on basis on brand selection for first category by Abrar
+    public function getbrandselection($psubc_id)
     {
+        $brandselection = Brand_Selection::where('psubc_id', $psubc_id)->get();
+        return response()->json($brandselection);
+    }
+    // Declare function getfirstCategory for fetching data on basis on product category for first category by Abrar
+    public function getfirstCategory($pc_id)
+    {
+        $subcategory = Product_sub_category::where('pc_id', $pc_id)->get();
+        return response()->json($subcategory);
+    }
+    // Declare function getproduct for fetching data on basis on brand selection for product by Abrar
+    public function getproduct($brand_id)
+    {
+        $productgetdata = Product::where('product_brand_id', $brand_id)->get();
+        return response()->json($productgetdata);
+    }
+    public function purchasedata($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product Not found'], 404);
+        }
+        $uom = Unit_selection::find($product->product_uom_id);
+        $minqty = $product->min_qty;
+        $maxqty = $product->max_qty;
+        if (!$uom) {
+            return response()->json(['error' => 'UOM not found'], 404);
+        }
+        return response()->json(
+            [
+                'uom' => $uom->uom,
+                'minqty' => $minqty,
+                'maxqty' => $maxqty,
+            ]
+        );
+    }
+    public function categorydata($id)
+    {
+        $pcategory = Product_category::find($id);
+        if (!$pcategory) {
+            return response()->json(['error' => 'Product Category Not found'], 404);
+        }
+        $firstcategory = Product_sub_category::find($pcategory->product_sub_category_id);
+        if (!$firstcategory) {
+            return response()->json(['error' => 'Product Category not found'], 404);
+        }
+        return response()->json(
+            [
+                'firstcategory' =>  $firstcategory->product1stsbctgry,
+            ]
+        );
+    }
+    public function postprmainapproval(Request $request)
+    {
+        $this->pr_pr_detaildatacommon($request);
+        return response()->json(['success' => 'Create successfully']);
+    }
+    public function render_pr_approval_data(Request $request)
+    {
+        $selectedIds = $request->input('doucmentstatus_id');
+        $data = [];
+        $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
+        // Iterate through each Pr_detail and append product name
+        $prdata->each(function ($item) {
+            // Access the department using the relationship defined in Purchaserequisition model
+            $department = $item->department;
+            $employee = $item->employee;
+            // $documentstatus = $item->documentstatus;
+            $doc_value =  $item->doc_status_value;
+            // If the relationship is defined correctly, $department will hold the department related to the requisition
+            $item->required_by_depart_id = $department->department;
+            $item->req_by_emp_id = $employee->employee;
+            // $item->doc_status = $documentstatus->documentstatus;
+        });
+        // Merge the data for current ID into the main data array
+        $data = array_merge($data, $prdata->toArray());
+        return response()->json($data);
+    }
+    // Method for approval
+    public function approval(Request $request)
+    {
+        // $this->pr_pr_detaildata($request);
         $prdata = Purchaserequisition::where('doc_status', 2)->get();
         $data = $this->getCommonData();
         return view('purchaserequisition.approval', array_merge(compact('prdata'), $data));
     }
-    public function updateApproval(Request $request)
+    public function PR_List_Approval(Request $request)
     {
         // Carbon Library to get current date time formate like( 2024-02-14 09:54:57)
         $currentDateTime = Carbon::now();
