@@ -138,11 +138,12 @@ class PurchasereuquisitionController extends Controller
             'quotation_required' => $quotationrequired,
             'direct_po_required' => $podirectcreation,
             'direct_purchase_required' => $directpurchaserequired,
-            'create_emp_id' => $employeeId,
-            'update_emp_id' => null,
-            'delete_emp_id' => null,
+            'create_by' => $employeeId,
+            'update_by' => null,
+            'delete_by' => null,
             'approve_at' => null,
             'delete_at' => null,
+            'draft_by' => null
         ]);
         // Store pr_details data
         foreach ($request->input('minstock') as $index => $minstock) {
@@ -162,7 +163,7 @@ class PurchasereuquisitionController extends Controller
                 'pending_qty_for_direct_inv' => 0.0,
                 'req_min_stock' => $minstock,
                 'req_max_stock' => $request->input('maxstock')[$index],
-                'uom' => null,
+                'uom' => 'uom-1',
                 'p_main_cat' => 1,
                 'p_subc_cat' => $request->input('subcategory')[$index],
                 'brand_id' => $request->input('brand')[$index],
@@ -184,7 +185,27 @@ class PurchasereuquisitionController extends Controller
     }
     public function store(Request $request)
     {
-        $this->pr_pr_detaildatacommon($request);
+        // Retrieve the value of the button's ID from the submitted form data
+        $buttonId = $request->input('button_id');
+        // Check if the value is received
+        if ($buttonId == "submit") {
+            $this->pr_pr_detaildatacommon($request);
+        } 
+        elseif ($buttonId ==  "draft") {
+            $employeeId = Auth::id();
+            $currentDateTime = Date::now();
+            $this->pr_pr_detaildatacommon($request);
+            $lastInsertedId = Purchaserequisition::latest('pr_id')->pluck('pr_id')->first();
+            Purchaserequisition::where('pr_id', $lastInsertedId)->update([
+                'draft_by' => $employeeId,
+                'doc_status'=> 1,
+                'draft_at'=>$currentDateTime
+            ]);
+        }
+        else {
+            dd("Button ID not found in request.");
+        }
+     
         return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
     }
 
@@ -351,6 +372,12 @@ class PurchasereuquisitionController extends Controller
     }
     public function PR_List_Approval(Request $request)
     {
+        $documentstatus_id = $request->input('doucmentstatus_id');
+        if ($documentstatus_id == "2") {
+        } elseif ($documentstatus_id == "3") {
+        } elseif ($documentstatus_id == "4") {
+        } else {
+        }
         // Carbon Library to get current date time formate like( 2024-02-14 09:54:57)
         $currentDateTime = Carbon::now();
         // seesion id user login with application id
@@ -364,6 +391,7 @@ class PurchasereuquisitionController extends Controller
         ]);
         Pr_detail::whereIn('pr_id', $ids)->update([
             'approve_qty_for_quotation' => DB::raw('req_qty')
+            // update here column pending_qty_for_qoutation get value from req_qty
         ]);
         return response()->json(['message' => 'Approval status updated successfully']);
     }

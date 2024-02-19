@@ -37,23 +37,43 @@ class CreatePurchaserequisitionsTable extends Migration
             $table->unsignedBigInteger('doc_status'); 
             $table->foreign('doc_status')->references('id')->on('documentstatuses')->onDelete('cascade');
             $table->boolean('active')->default(true);
-            $table->unsignedBigInteger('approve_by')->nullable();
-            $table->foreign('approve_by')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('quotation_required');
             $table->boolean('direct_po_required');
             $table->boolean('direct_purchase_required');
 
             $table->string('useless_create')->nullable();
             $table->timestamp('useless_update')->nullable();
-           
-            $table->unsignedBigInteger('create_emp_id');
-            $table->foreign('create_emp_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('update_emp_id')->nullable();
-            $table->foreign('update_emp_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->unsignedBigInteger('delete_emp_id')->nullable();
-            $table->foreign('delete_emp_id')->references('id')->on('employees')->onDelete('cascade');
+
+            $table->unsignedBigInteger('draft_by')->nullable();
+            $table->foreign('draft_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('create_by');
+            $table->foreign('create_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('update_by')->nullable();
+            $table->foreign('update_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('approve_by')->nullable();
+            $table->foreign('approve_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('delete_by')->nullable();
+            $table->foreign('delete_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('return_by')->nullable();
+            $table->foreign('return_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('complete_by')->nullable();
+            $table->foreign('complete_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('close_by')->nullable();
+            $table->foreign('close_by')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->date('draft_at')->nullable();
             $table->date('approve_at')->nullable();
             $table->date('delete_at')->nullable();
+            $table->date('return_at')->nullable();
+            $table->date('complete_at')->nullable();
+            $table->date('close_at')->nullable();
             $table->timestamps();
         });
     }

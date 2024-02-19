@@ -760,8 +760,17 @@
                 //     });
                 // }
             </script>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-2 mb-2">
+                    <strong>
+                        <button type="submit" class="btn btn-primary btn-block" name="button_id" value="submit">Submit</button>
+                    </strong>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <strong>
+                        <button type="submit" class="btn btn-primary btn-block" name="button_id" value="draft">Draft</button>
+                    </strong>
+                </div>
             </div>
         </form>
         </div>

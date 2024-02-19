@@ -933,20 +933,24 @@
                 
                 // Event handler for submit button click
                 $('#submitButton').on('click', function(event) {
+                    function ajaxrequest(){
+                        
+                    }
                     event.preventDefault();
                     var ids = $('input[name="ids[]"]:checked').map(function() {
                         return $(this).val();
                     }).get();
 
                     if (ids.length === 0) {
-                        alert("No ids selected. Please select at least one id.");
+                        alert("No selected Row. Please select at least one Row.");
                         return;
                     }
-                    else if(documentstatus_id == "2"){
+                    else if(documentstatus_id == "2" || documentstatus_id == "3"){
                         $.ajax({
                             type: 'POST',
                             url: '/Pr/update-approval',
                             data: {
+                                doucmentstatus_id: documentstatus_id, 
                                 ids: ids,
                                 _token: '{{ csrf_token() }}'
                             },
