@@ -98,7 +98,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Template Main JS File -->
-        <script src="/asset/js/main.js"></script>
         <script>
             jQuery(document).ready(function() {
                 jQuery('#doucmentstatus_id').change(function() {
@@ -127,7 +126,7 @@
                                     '<td>' + item.department.department + '</td>' +
                                     '<td>' + item.employee.employee_name + '</td>' +
                                     '<td>' + item.pr_req_date + '</td>' +
-                                    '<td>' + item.documentstatus.doc_status + '</td>' +
+                                    '<td>' + item.doc_status_value.doc_status+ '</td>' +
                                     '<td>' + item.created_at + '</td>' +
                                     '<td><a style="margin: 1px" class="btn btn-info" href="">Show</a><a style="margin: 1px" class="btn btn-primary" href="#">Edit</a><button style="margin: 1px" type="button" class="btn btn-danger">Delete</button><a style="margin:1px" class="btn btn-primary" href="">Print</a><a style="margin:1px" class="btn btn-primary" href="">Close</a></td>' +
                                     '</tr>');

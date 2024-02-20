@@ -27,7 +27,11 @@
                 text-align: center;
             }
         </style>
-
+        @if(session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <br><br><br>
         <form action="{{ route('purchaserequisition.store') }}" method="POST" id="form" enctype="multipart/form-data">
             @csrf
@@ -40,12 +44,12 @@
                     </div>
                     <div class="col-md-2 form-group">
                         <input class="form-check-input" type="checkbox" value="0" name="directpocreations"
-                            id="direct_po_creation">
+                            id="direct_po_creation" >
                         <label class="form-check-label" for="direct_po_creation">Direct Po Creation</label>
                     </div>
                     <div class="col-md-2 form-group">
                         <input class="form-check-input" type="checkbox" value="0" name="directpurchase"
-                            id="direct_purchase_required">
+                            id="direct_purchase_required" >
                         <label class="form-check-label" for="direct_purchase_required">Direct Purchase Required</label>
                     </div>
                 </div>
@@ -54,7 +58,7 @@
                         <strong>PR Doc#<span style="color:#DC3545">*</span></strong>
                         <input type="text" class="form-control" value="PR-<?php echo $pr; ?>" id="prdocnumber"
                             name="prdoc_no" placeholder="PR Doc#" readonly>
-                        
+
                     </div>
                     <div class="col-md-6 form-group">
                         <strong for="attachment">Doc Ref No</strong>
@@ -67,7 +71,7 @@
                         <strong>PR Document<span style="color:#DC3545">*</span></strong>
                         <input type="date" class="form-control" id="doc_creation" name="doc_create_date"
                             placeholder="Date">
-                            @if ($errors->has('doc_create_date'))
+                        @if ($errors->has('doc_create_date'))
                             <div class="alert alert-danger" class="timererror" style="margin-top:10px">
                                 {{ $errors->first('doc_create_date') }}
                             </div>
@@ -118,10 +122,10 @@
                         <strong>Required Date<span style="color:#DC3545">*</span></strong>
                         <input type="date" class="form-control" id="date_picker" name="required_date" placeholder="Date">
                         @if ($errors->has('required_date'))
-                        <div class="alert alert-danger" class="timererror" style="margin-top:10px">
-                            {{ $errors->first('required_date') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-danger" class="timererror" style="margin-top:10px">
+                                {{ $errors->first('required_date') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="row">
@@ -763,12 +767,14 @@
             <div class="row justify-content-center mt-3">
                 <div class="col-md-2 mb-2">
                     <strong>
-                        <button type="submit" class="btn btn-primary btn-block" name="button_id" value="submit">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="button_id"
+                            value="submit">Submit</button>
                     </strong>
                 </div>
                 <div class="col-md-2 mb-2">
                     <strong>
-                        <button type="submit" class="btn btn-primary btn-block" name="button_id" value="draft">Draft</button>
+                        <button type="submit" class="btn btn-primary btn-block" name="button_id"
+                            value="draft">Draft</button>
                     </strong>
                 </div>
             </div>

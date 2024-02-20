@@ -190,8 +190,11 @@ class PurchasereuquisitionController extends Controller
         // Check if the value is received
         if ($buttonId == "submit") {
             $this->pr_pr_detaildatacommon($request);
+            $message =  "Purchase-Requestion Created Sucessfully";
+            return redirect()->route('purchaserequisition.create')->with('message', $message);
         } 
         elseif ($buttonId ==  "draft") {
+            $message =  "Purchase-Requestion Drafted Sucessfully";
             $employeeId = Auth::id();
             $currentDateTime = Date::now();
             $this->pr_pr_detaildatacommon($request);
@@ -201,12 +204,17 @@ class PurchasereuquisitionController extends Controller
                 'doc_status'=> 1,
                 'draft_at'=>$currentDateTime
             ]);
+            $lasttransactionId = Activity_Transaction::latest('a_transaction_id')->pluck('a_transaction_id')->first();
+            Activity_Transaction::where('a_transaction_id',$lasttransactionId)->update([
+                'doc_status_id'=>1
+            ]);
+            return redirect()->route('purchaserequisition.create')->with('message', $message);
         }
         else {
             dd("Button ID not found in request.");
         }
      
-        return redirect()->route('purchaserequisition.create')->with('success', 'Create successfully');
+       
     }
 
 
