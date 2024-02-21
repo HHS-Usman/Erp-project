@@ -930,12 +930,8 @@
                 $('#doucmentstatus_id').change(function() {
                     documentstatus_id = $(this).val();
                 });
-                
                 // Event handler for submit button click
                 $('#submitButton').on('click', function(event) {
-                    function ajaxrequest(){
-                        
-                    }
                     event.preventDefault();
                     var ids = $('input[name="ids[]"]:checked').map(function() {
                         return $(this).val();
@@ -945,12 +941,11 @@
                         alert("No selected Row. Please select at least one Row.");
                         return;
                     }
-                    else if(documentstatus_id == "2" || documentstatus_id == "3"){
+                    if(documentstatus_id == "2" || documentstatus_id == "3" ){
                         $.ajax({
                             type: 'POST',
                             url: '/Pr/update-approval',
                             data: {
-                                doucmentstatus_id: documentstatus_id, 
                                 ids: ids,
                                 _token: '{{ csrf_token() }}'
                             },
@@ -975,17 +970,16 @@
                 });
                 $(document).on('click', '.openModalBtn', function() {
                     modelactioncommon()
-                })
+                });
                 jQuery('#doucmentstatus_id').change(function() {
                     var selectedId = $(this).val();
                     jQuery.ajax({
                         url: '/Pr/approvaldatapurchaserequsition',
                         type: "GET",
                         data: {
-                            doucmentstatus_id: selectedId // Correct parameter name
+                            doucmentstatus_id: selectedId 
                         },
                         success: function(response) {
-                            console.log(response); // Check the response data
                             // Clear existing table rows
                             $('#tableBody').empty();
 

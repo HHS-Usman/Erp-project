@@ -33,6 +33,6 @@ class Purchaserequisition extends Model
     }
     public function Pr_detail()
     {
-        return $this->hasMany(Pr_detail::class);
+        return $this->hasMany(Pr_detail::class,'pr_id');
     }
 }

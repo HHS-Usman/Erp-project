@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pr_detail extends Model
 {
     use HasFactory;
-    protected $guarded = [
-        'id',
-    ];
+    protected $primaryKey = 'pr_d_id';
+    protected $guarded = ['pr_d_id'];
     //
     public function productcategory()
     {

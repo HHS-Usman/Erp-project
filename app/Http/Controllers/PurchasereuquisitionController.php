@@ -16,6 +16,7 @@ use App\Models\Modetype;
 use App\Models\PageAction;
 use App\Models\Pr_detail;
 use App\Models\Product;
+use App\Http\Controllers\findOrFail;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
 use App\Models\PurchaseDetail;
@@ -115,6 +116,7 @@ class PurchasereuquisitionController extends Controller
         $employeeId = Auth::id();
         $id = Purchaserequisition::count("pr_id");
         $maxid =  $id + 1;
+        $prno = Purchaserequisition::where('pr_id', $maxid)->value('pr_doc_no');
         $file = $request->file('filename')->getClientOriginalName();
         $filepath = "PR_" . $id . "_" . $file;
         Log::info('Purchase Requisition created successfully');
@@ -178,13 +180,14 @@ class PurchasereuquisitionController extends Controller
             'doc_status_id' => 2,
             'doc_type_id' => 1,
             'emp_id' => $employeeId,
-            'pr_id' => $maxid,
+            'doc_no' => $prno,
             'ip' => '00',
             'mac' => '00'
         ]);
     }
     public function store(Request $request)
     {
+
         // Retrieve the value of the button's ID from the submitted form data
         $buttonId = $request->input('button_id');
         // Check if the value is received
@@ -192,8 +195,7 @@ class PurchasereuquisitionController extends Controller
             $this->pr_pr_detaildatacommon($request);
             $message =  "Purchase-Requestion Created Sucessfully";
             return redirect()->route('purchaserequisition.create')->with('message', $message);
-        } 
-        elseif ($buttonId ==  "draft") {
+        } elseif ($buttonId ==  "draft") {
             $message =  "Purchase-Requestion Drafted Sucessfully";
             $employeeId = Auth::id();
             $currentDateTime = Date::now();
@@ -201,20 +203,17 @@ class PurchasereuquisitionController extends Controller
             $lastInsertedId = Purchaserequisition::latest('pr_id')->pluck('pr_id')->first();
             Purchaserequisition::where('pr_id', $lastInsertedId)->update([
                 'draft_by' => $employeeId,
-                'doc_status'=> 1,
-                'draft_at'=>$currentDateTime
+                'doc_status' => 1,
+                'draft_at' => $currentDateTime
             ]);
             $lasttransactionId = Activity_Transaction::latest('a_transaction_id')->pluck('a_transaction_id')->first();
-            Activity_Transaction::where('a_transaction_id',$lasttransactionId)->update([
-                'doc_status_id'=>1
+            Activity_Transaction::where('a_transaction_id', $lasttransactionId)->update([
+                'doc_status_id' => 1
             ]);
             return redirect()->route('purchaserequisition.create')->with('message', $message);
-        }
-        else {
+        } else {
             dd("Button ID not found in request.");
         }
-     
-       
     }
 
 
@@ -258,9 +257,78 @@ class PurchasereuquisitionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+
+        $deleteValue = $request->input('delete');
+        $closeValue = $request->input('closeval');
+        if ($deleteValue == "0") {
+
+            // user connected with application 
+            $employeeId = Auth::id();
+            $currentDateTime = Date::now();
+            $message = "";
+            $record = Purchaserequisition::findOrFail($id);
+            if ($record->doc_status == 1 || $record->doc_status == 2 || $record->doc_status == 8) {
+                // $record->delete();
+                Purchaserequisition::where('pr_id', $id)->update([
+                    'delete_by' => $employeeId,
+                    'delete_at' => $currentDateTime,
+                    'active' => 0,
+                    'doc_status' => 9
+                ]);
+                // transaction activity table PR Creation
+                $id = Purchaserequisition::count("pr_id");
+                $maxid =  $id + 1;
+                $prno = Purchaserequisition::where('pr_id', $maxid)->value('pr_doc_no');
+                Activity_Transaction::create([
+                    'p_action_id' => 4,
+                    'doc_status_id' => 9,
+                    'doc_type_id' => 5,
+                    'emp_id' => $employeeId,
+                    'doc_no' => $prno,
+                    'ip' => '0.0',
+                    'mac' => '0.0'
+                ]);
+                $message = "Deleted Record Successfully";
+                return redirect()->route('purchaserequisition.index')->with('message', $message);
+            } else {
+                $message = "Can not Deleted Record";
+                return redirect()->route('purchaserequisition.index')->with('message', $message);
+            }
+        } elseif ($closeValue == "1") {
+            // user connected with application 
+            $employeeId = Auth::id();
+            $currentDateTime = Date::now();
+            $message = "";
+            $record = Purchaserequisition::findOrFail($id);
+            if ($record->doc_status == 4 || $record->doc_status == 6 || $record->doc_status == 9) {
+                $message = "Can not Closed Record";
+                return redirect()->route('purchaserequisition.index')->with('message', $message);
+            } else {
+                // $record->delete();
+                Purchaserequisition::where('pr_id', $id)->update([
+                    'close_by' => $employeeId,
+                    'close_at' => $currentDateTime,
+                    'doc_status' => 7
+                ]);
+                // transaction activity table PR Creation
+                $id = Purchaserequisition::count("pr_id");
+                $maxid =  $id + 1;
+                $prno = Purchaserequisition::where('pr_id', $maxid)->value('pr_doc_no');
+                Activity_Transaction::create([
+                    'p_action_id' => 2,
+                    'doc_status_id' => 7,
+                    'doc_type_id' => 7,
+                    'emp_id' => $employeeId,
+                    'doc_no' => $prno,
+                    'ip' => '00',
+                    'mac' => '00'
+                ]);
+                $message = "Closed Record Successfully";
+                return redirect()->route('purchaserequisition.index')->with('message', $message);
+            }
+        }
     }
     // getting data from purchase requisition main but using approval form
 
@@ -352,7 +420,10 @@ class PurchasereuquisitionController extends Controller
     public function render_pr_approval_data(Request $request)
     {
         $selectedIds = $request->input('doucmentstatus_id');
+        // $actionId = $request->input('action_id');
+
         $data = [];
+        // getting data from purchase requisition base on two column (Note: use get() methodt o retrieve the data as a collection and then convert it to an array, you should call get()
         $prdata = Purchaserequisition::where('doc_status', $selectedIds)->get();
         // Iterate through each Pr_detail and append product name
         $prdata->each(function ($item) {
@@ -380,16 +451,54 @@ class PurchasereuquisitionController extends Controller
     }
     public function PR_List_Approval(Request $request)
     {
-        $documentstatus_id = $request->input('doucmentstatus_id');
+        // Carbon Library to get current date time formate like( 2024-02-14 09:54:57)
+        $currentDateTime = Carbon::now();
+        $id = Purchaserequisition::count("pr_id");
+        $maxid =  $id + 1;
+        $prno = Purchaserequisition::where('pr_id', $maxid)->value('pr_doc_no');
+        // seesion id user login with application id
+        $employeeId = Auth::id();
+        $documentstatus_id  = $request->input('doucmentstatus_id');
         if ($documentstatus_id == "2") {
         } elseif ($documentstatus_id == "3") {
+            $purchaseRequisitions = PurchaseRequisition::where('doc_status', 3)->get();
+            // Iterate over each purchase requisition
+            foreach ($purchaseRequisitions as $purchaseRequisition) {
+                // to update each prDetail associated with the purchase requisition:
+                foreach ($purchaseRequisition->Pr_detail as $prDetail) {
+                    $req_qty = $prDetail->req_qty;
+                    $approved_qty_for_quotation = $prDetail->approve_qty_for_quotation;
+                    $pending_qty_for_quotation = $prDetail->pending_qty_for_quotation;
+                    $approved_qty_for_po = $prDetail->approve_qty_for_po;
+                    $approved_qty_for_direct_inv = $prDetail->approved_qty_for_direct_inv;
+                    $new_approved_qty_for_quotation = $req_qty - ($approved_qty_for_quotation + $approved_qty_for_po + $approved_qty_for_direct_inv);
+                    $approved_qty_for_quotation = $new_approved_qty_for_quotation + $approved_qty_for_quotation;
+                    $new_pending_qty_for_quotation = $pending_qty_for_quotation + $new_approved_qty_for_quotation;
+                    // Update the prDetail or do whatever you need to do
+                    $prDetail->update([
+                        'approve_qty_for_quotation' => $new_pending_qty_for_quotation,
+                        'pending_qty_for_quotation' =>  $new_approved_qty_for_quotation
+                    ]);
+                    Purchaserequisition::whereIn('pr_id', 3)->update([
+                        'doc_status' => 4,
+                        'approve_by' => $employeeId,
+                        'approve_at' => $currentDateTime,
+                    ]);
+                    Activity_Transaction::create([
+                        'p_action_id' => 5,
+                        'doc_status_id' => 4,
+                        'doc_type_id' => 2,
+                        'emp_id' => $employeeId,
+                        'doc_no' => $prno,
+                        'ip' => '0.0',
+                        'mac' => '0.0'
+                    ]);
+                }
+            }
         } elseif ($documentstatus_id == "4") {
         } else {
         }
-        // Carbon Library to get current date time formate like( 2024-02-14 09:54:57)
-        $currentDateTime = Carbon::now();
-        // seesion id user login with application id
-        $employeeId = Auth::id();
+
         $ids = $request->input('ids', []);
         // Validate or sanitize $ids as needed
         Purchaserequisition::whereIn('pr_id', $ids)->update([
@@ -399,7 +508,6 @@ class PurchasereuquisitionController extends Controller
         ]);
         Pr_detail::whereIn('pr_id', $ids)->update([
             'approve_qty_for_quotation' => DB::raw('req_qty')
-            // update here column pending_qty_for_qoutation get value from req_qty
         ]);
         return response()->json(['message' => 'Approval status updated successfully']);
     }

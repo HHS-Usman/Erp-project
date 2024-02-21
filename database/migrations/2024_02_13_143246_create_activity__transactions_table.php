@@ -24,8 +24,7 @@ class CreateActivityTransactionsTable extends Migration
             $table->unsignedBigInteger('emp_id');
             $table->foreign('emp_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            $table->unsignedBigInteger('pr_id');
-            $table->foreign('pr_id')->references('pr_id')->on('purchaserequisitions')->onDelete('cascade');
+            $table->string('doc_no');
             $table->string('ip');
             $table->string('mac');
         });
