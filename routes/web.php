@@ -582,6 +582,8 @@ Route::get('quotationcomparitive',[QuotationController::class, 'comparitive' ]);
 Route::get('/get-quotation',[QuotationController::class, 'getquotations']);
 // route to handle the AJAX request for prs data
 Route::get('/fetch-data',[QuotationController::class,'fetchData']);
+// route define for approval open modal purchase requisition same data fetch from purchase requisition 
+Route::get('/fetchapproval', [PurchasereuquisitionController::class, 'fetch_approval_purchase']);
 Route::post('/quotationpost', [QuotationController::class, 'insert'])->name('quotation.insert');
 //---------------------- Quotation Routes End---------------------------
 });

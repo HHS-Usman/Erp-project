@@ -41,7 +41,20 @@ class PurchasereuquisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function fetch_approval_purchase(Request $request)
+    {
+        $prId = $request->input('pr_id');
+        $quotations = Purchaserequisition::where('pr_id', $prId)->get();
+        // Fetch data for each ID
+        $data = [$quotations];
+        foreach ($quotations as $pr) {
+            // Retrieve Pr_detail for the current Purchaserequisition
+            $prDetails = Pr_detail::where('pr_id', $pr->pr_id)->get();
+            // Merge the data for current Purchaserequisition into the main data array
+            $data = array_merge($data, $prDetails->toArray());
+        }
+        return response()->json($data);
+    }
     public function index()
     {
         $prdata = Purchaserequisition::all();
