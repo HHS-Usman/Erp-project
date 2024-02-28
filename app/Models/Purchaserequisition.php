@@ -12,9 +12,16 @@ class Purchaserequisition extends Model
     protected $guarded = [
         'pr_id',
     ];
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'req_by_br_id');
+    }
+    public function location(){
+        return $this->belongsTo(Location::class, 'req_by_location_id');
+    }
     public function modeltype()
     {
-        return $this->belongsTo(Modetype::class,'modet_id');
+        return $this->belongsTo(Modetype::class,'mode_type_id');
     }
     public function doc_status_value(){
         return $this->belongsTo(Documentstatus::class,'doc_status');

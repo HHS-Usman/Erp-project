@@ -15,7 +15,10 @@ class Branch extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
-
+    public function purchaserequisition()
+    {
+        return $this->hasMany(Purchaserequisition::class);     
+    }
     public function vouchertypes()
     {
         return $this->hasMany(Vouchertype::class, 'branch_id');     

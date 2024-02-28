@@ -13,7 +13,7 @@ class Pr_detail extends Model
     //
     public function productcategory()
     {
-        return $this->belongsTo(Product_category::class, 'pc_id');
+        return $this->belongsTo(Product_category::class, 'p_main_cat');
     }
     public function documentstatus()
     {
@@ -21,14 +21,12 @@ class Pr_detail extends Model
     }
     public function productsubcategory()
     {
-        return $this->belongsTo(Product_sub_category::class, 'psubc_id');
+        return $this->belongsTo(Product_sub_category::class, 'p_subc_cat');
     }
-
     public function brandselection()
     {
-        return $this->belongsTo(Brand_Selection::class, 'bs_id');
+        return $this->belongsTo(Brand_Selection::class, 'brand_id');
     }
-
     public function product()
     {
         return $this->belongsTo(Product::class, 'p_id');

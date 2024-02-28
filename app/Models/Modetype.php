@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Modetype extends Model
 {
     use HasFactory;
-    protected $guarded =  [
-        'id',
-    ];
+    protected $guarded = ['mt_id'];
     public function purchaseRequisition(){
-        return $this->hasMany(Purchaserequisition::class,'pr_id');
+        return $this->hasMany(Purchaserequisition::class);
     }
 }

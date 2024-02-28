@@ -92,7 +92,6 @@
                                     <a class="btn btn-danger">Delete</a>
                                     <button type="button" class="openModalBtn btn"
                                         onclick="addRow('{{ $item->pr_id }}')">Approval</button>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -117,24 +116,26 @@
                                     <div class="col-md-6 form-group">
                                         <strong for="attachment">Doc Ref No</strong>
                                         <input type="text" class="form-control" id="doc_ref_no" name="doc_ref_no"
-                                            placeholder="Doc Ref No" value="">
+                                            placeholder="Doc Ref No" value="" disabled>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <strong>PR Document<span style="color:#DC3545">*</span></strong>
                                         <input type="date" class="form-control" id="doc_creation"
-                                            name="doc_create_date" placeholder="Date">
+                                            name="doc_create_date" placeholder="Date" disabled>
                                         @if ($errors->has('doc_create_date'))
                                             <div class="alert alert-danger" class="timererror" style="margin-top:10px">
                                                 {{ $errors->first('doc_create_date') }}
                                             </div>
                                         @endif
                                     </div>
+
                                     <div class="col-md-6 form-group">
                                         <strong>Select Mode Type<span style="color:#DC3545">*</span></strong>
                                         <input type="text" class="form-control" id="modetype" name="modetype"
-                                            placeholder="Date">
+                                            placeholder="Mode Type">
                                     </div>
                                 </div>
 
@@ -142,17 +143,17 @@
                                     <div class="col-md-6 form-group">
                                         <strong>Branch</strong>
                                         <input type="text" class="form-control" id="branchid" name="branchid"
-                                            placeholder="Branch">
+                                            placeholder="Branch" disabled>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Location</strong>
                                         <input type="text" class="form-control" id="location_id" name="location_id"
-                                            placeholder="Location">
+                                            placeholder="Location" disabled>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Department</strong>
                                         <input type="text" class="form-control" id="department_id"
-                                            name="department_id" placeholder="Department">
+                                            name="department_id" placeholder="Department" disabled>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Required Date<span style="color:#DC3545">*</span></strong>
@@ -169,12 +170,12 @@
                                     <div class="col-md-6 form-group">
                                         <strong>Employe</strong>
                                         <input type="text" class="form-control" id="empployee_id" name="empployee_id"
-                                            placeholder="">
+                                            placeholder="" disabled>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <strong>Attachment</strong>
                                         <input type="text" class="form-control" id="filename" name="filename"
-                                            placeholder="Date">
+                                            placeholder="Date" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -197,7 +198,7 @@
 
                             <div class="row" style="margin: 20px 0px 10px 40px">
                                 <div class="col-md-2 form-group">
-                                    <input class="form-check-input" type="checkbox" value="0"
+                                    <input class="form-check-input" type="checkbox" value="4"
                                         name="allpartialmethod" id="all_partial_qty_method">
                                     <label class="form-check-label" for="all_partial_qty_method">All Partial Qty
                                         Method</label>
@@ -209,13 +210,13 @@
                                         Required</label>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <input class="form-check-input" type="checkbox" value="0"
+                                    <input class="form-check-input" type="checkbox" value="2"
                                         name="directpocreations" id="direct_po_creation">
                                     <label class="form-check-label" for="direct_po_creation">Direct Po
                                         Creation</label>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <input class="form-check-input" type="checkbox" value="0" name="directpurchase"
+                                    <input class="form-check-input" type="checkbox" value="3" name="directpurchase"
                                         id="direct_purchase_required">
                                     <label class="form-check-label" for="direct_purchase_required">Direct Purchase
                                         Required</label>
@@ -395,7 +396,7 @@
                     var Doc_req_quot_qty = item.approve_qty_for_quotation;
                     var Doc_req_po_qty = item.approve_qty_for_po;
                     var Doc_req_inv_qty = item.approved_qty_for_direct_inv;
-                    Total_req_Qty = Doc_req_qty - (Doc_req_quot_qty + Doc_req_po_qty + Doc_req_inv_qty);
+                    Actual_Req_Qty = Doc_req_qty - (Doc_req_quot_qty + Doc_req_po_qty + Doc_req_inv_qty);
                     quotationCheckbox.addEventListener('change', function() {
                         if (this.checked) {
                             // If the quotation checkbox is checked, uncheck the direct PO checkbox
@@ -457,80 +458,79 @@
                     var snoCell = row.insertCell();
                     snoCell.textContent = index + 1;
 
-                    // PR_No
-                    var prNoCell = row.insertCell();
-                    prNoCell.innerHTML =
+                    // productMain
+                    var productMain = row.insertCell();
+                    productMain.innerHTML =
                         `<input type="text" class="form-control"value = "${item.p_main_cat}" placeholder="product category" id="product_c_${index}" name="productcategory" readonly>`;
 
-                    // Product
-                    var prNoCell = row.insertCell();
-                    prNoCell.innerHTML =
+                    // productSubCategory
+                    var productSubCategory = row.insertCell();
+                    productSubCategory.innerHTML =
                         `<input type="text" class="form-control" value="${item.p_subc_cat}"  placeholder="Sub Category" id="subcategory_${index}" name="sub category" readonly>`;
 
-                    // Product Wise Description
-                    var descCell = row.insertCell();
-                    descCell.innerHTML =
-                        `<input type="text" class="form-control" value = "${item.brand_id}"  placeholder="Brand" id="brand_${index}" name="brand">`;
+                    // brandSelection
+                    var brandSelection = row.insertCell();
+                    brandSelection.innerHTML =
+                        `<input type="text" class="form-control" value = "${item.brand_id}"  placeholder="Brand" id="brand_${index}" name="brand" disabled>`;
 
-                    // UOM
-                    var uomCell = row.insertCell();
-                    uomCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.p_id}" id="product_${index}" placeholder="product" name="product">`;
+                    // productName
+                    var productName = row.insertCell();
+                    productName.innerHTML =
+                        `<input type="text" class="form-control" value="${item.p_id}" id="product_${index}" placeholder="product" name="product" disabled>`;
 
-                    // Quality
-                    var qualityCell = row.insertCell();
-                    qualityCell.innerHTML =
-                        `<input type="text" class="form-control" value="${item.p_id}" placeholder="product remarks" id="premarks_${index}" name="productremarks" />`;
-                    // Last Received Date
-                    var lastReceivedDateCell = row.insertCell();
-                    lastReceivedDateCell.innerHTML =
-                        lastReceivedDateCell.innerHTML =
+                    // productRemarks
+                    var productRemarks = row.insertCell();
+                    productRemarks.innerHTML =
+                        `<input type="text" class="form-control" value="" placeholder="product remarks" id="premarks_${index}" name="productremarks" />`;
+                    //uom
+                    var uom = row.insertCell();
+                    uom.innerHTML =
                         `<input type="text" class="form-control"  placeholder="uom" value ="${item.uom}" id="uom_${index}"  name="uom" readonly>`;
-                    // Last Received Rate
-                    var lastReceivedRateCell = row.insertCell();
-                    lastReceivedRateCell.innerHTML =
+                    // currentStock
+                    var currentStock = row.insertCell();
+                    currentStock.innerHTML =
                         `<input type="text" class="form-control"  value = "static stock" placeholder="currentstaock" id="currentstaock_${index}" name="currentstaock" readonly>`;
-                    // Rate
-                    var rateCell = row.insertCell();
-                    rateCell.innerHTML =
-                        `<input type="text" class="form-control"  placeholder="Qty Required" value="${Total_req_Qty}" id="qtyrequiredInput${index}" name="currentrequired" readonly></br>
+                    // qtyReuqired
+                    var qtyReuqired = row.insertCell();
+                    qtyReuqired.innerHTML =
+                        `<input type="text" class="form-control"  placeholder="Qty Required" value="${Actual_Req_Qty}" id="qtyrequiredInput${index}" name="currentrequired" readonly></br>
      <input type="text" class="form-control" placeholder="Qty Required" value="${item.req_qty}" id="qtyrequired_lower_${index}" name="currentrequired" readonly>`;
-                    // Tax%
-                    var taxPercentCell = row.insertCell();
-                    taxPercentCell.innerHTML =
-                        `<input type="text" class="form-control"   placeholder="Quotation qty" id="quotationqty_${index}" name="quotationqty" ></br>
-     <input type="text" class="form-control" placeholder="Qty Required" value="${item.approve_qty_for_quotation}" id="quotationinput_${index}" name="quotationinput" readonly>`;
-                    // Tax%
-                    var taxPercentCell = row.insertCell();
-                    taxPercentCell.innerHTML =
-                        `<input type="text" class="form-control"  placeholder="po quantity" id="poquantity_${index}" name="poquantity" readonly></br>
-     <input type="text" class="form-control" placeholder="Qty Required" value="${item.approve_qty_for_po}" id="qtyrequired_lower_${index}" name="currentrequired" readonly>`;
-                    // Tax Amount
-                    var taxAmountCell = row.insertCell();
-                    taxAmountCell.innerHTML =
-                        `<input type="text" class="form-control"  placeholder="directpurchase_qty" id="directpurchase_qty_${index}" name="directpurchase_qty" readonly> </br>
+                    //quotationQty
+                    var quotationQty = row.insertCell();
+                    quotationQty.innerHTML =
+                        `<input type="text" class="form-control"   placeholder="Quotation qty" id="quotationqty_${index}" name="quotationqty[]" required></br>
+     <input type="text" class="form-control" placeholder="Qty Required" value="${item.approve_qty_for_quotation}" id="quotationinput_${index}" name="quotationinput" readonly required>`;
+                    // poQuantity
+                    var poQuantity = row.insertCell();
+                    poQuantity.innerHTML =
+                        `<input type="text" class="form-control"  placeholder="po quantity" id="poquantity_${index}" name="poquantity[]" readonly required></br>
+     <input type="text" class="form-control" placeholder="Qty Required" value="${item.approve_qty_for_po}" id="qtyrequired_lower_${index}" name="currentrequired" readonly required>`;
+                    // directPurchaseQty
+                    var directPurchaseQty = row.insertCell();
+                    directPurchaseQty.innerHTML =
+                        `<input type="text" class="form-control"  placeholder="directpurchase_qty" id="directpurchase_qty_${index}" name="directpurchase_qty[]" readonly required> </br>
      <input type="text" class="form-control" placeholder="Qty Required" value="${item.approved_qty_for_direct_inv}" id="qtyrequired_lower_${index}" name="currentrequired" readonly>`;
 
-                    // Discount%
-                    var discountPercentCell = row.insertCell();
-                    discountPercentCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="last purchase qty" id="lastpurchaseqty_${index}" name="lastpurchaseqty">`;
+                    // lastpurchaseQty
+                    var lastpurchaseQty = row.insertCell();
+                    lastpurchaseQty.innerHTML =
+                        `--`;
 
-                    // Discount Amount
-                    var discountAmountCell = row.insertCell();
-                    discountAmountCell.innerHTML =
-                        `<input type="text" class="form-control" value="" placeholder="last purchase rate" id="lastpurchaserate_${index}" name="lastpurchaserate">`;
+                    // lastPurchaseRate
+                    var lastPurchaseRate = row.insertCell();
+                    lastPurchaseRate.innerHTML =
+                        `--`;
 
-                    // Net Amount
-                    var netAmountCell = row.insertCell();
-                    netAmountCell.innerHTML =
+                    // minStock
+                    var minStock = row.insertCell();
+                    minStock.innerHTML =
                         `<input type="text" class="form-control" value="${item.req_min_stock}" placeholder="Min Stock" id="minstock_${index}" name="minstock" readonly>`;
 
-                    // Net Amount
-                    var netAmountCell = row.insertCell();
-                    netAmountCell.innerHTML =
+                    // maxStock
+                    var maxStock = row.insertCell();
+                    maxStock.innerHTML =
                         `<input type="text" class="form-control" value="${item.req_max_stock}" placeholder="Max Stock" id="maxnstock_${index}" name="manstock" readonly>`;
-
+                    //removebtn
                     let removebtn = row.insertCell();
                     removebtn.innerHTML =
                         `<button type="button" class="btn btn-danger" onclick="removeRow(${index})">-</button>`;

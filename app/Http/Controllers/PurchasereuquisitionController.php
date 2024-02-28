@@ -41,20 +41,7 @@ class PurchasereuquisitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fetch_approval_purchase(Request $request)
-    {
-        $prId = $request->input('pr_id');
-        $quotations = Purchaserequisition::where('pr_id', $prId)->get();
-        // Fetch data for each ID
-        $data = [$quotations];
-        foreach ($quotations as $pr) {
-            // Retrieve Pr_detail for the current Purchaserequisition
-            $prDetails = Pr_detail::where('pr_id', $pr->pr_id)->get();
-            // Merge the data for current Purchaserequisition into the main data array
-            $data = array_merge($data, $prDetails->toArray());
-        }
-        return response()->json($data);
-    }
+
     public function index()
     {
         $prdata = Purchaserequisition::all();
@@ -200,7 +187,6 @@ class PurchasereuquisitionController extends Controller
     }
     public function store(Request $request)
     {
-
         // Retrieve the value of the button's ID from the submitted form data
         $buttonId = $request->input('button_id');
         // Check if the value is received
@@ -272,11 +258,9 @@ class PurchasereuquisitionController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
         $deleteValue = $request->input('delete');
         $closeValue = $request->input('closeval');
         if ($deleteValue == "0") {
-
             // user connected with application 
             $employeeId = Auth::id();
             $currentDateTime = Date::now();
@@ -425,10 +409,167 @@ class PurchasereuquisitionController extends Controller
             ]
         );
     }
+    public function fetch_approval_purchase(Request $request)
+    {
+        $prId = $request->input('pr_id');
+        $purchaserequisitions = Purchaserequisition::where('pr_id', $prId)->get();
+        foreach ($purchaserequisitions as $item) {
+            // getting value from reference relation table data;
+            $department = $item->department;
+            $employe = $item->employee;
+            $branch = $item->branch;
+            // $location = $item->location;
+
+            //  replacing value base id reference id
+            $item->req_by_br_id = $branch->name;
+            $item->req_by_emp_id = $employe->employee_name;
+            $item->req_by_depart_id = $department->department;
+            // $item->req_by_location_id = $location->Location;
+        }
+        // Fetch data for each ID
+        $data = [$purchaserequisitions];
+        foreach ($purchaserequisitions as $pr) {
+            // Retrieve Pr_detail for the current Purchaserequisition
+            $prDetails = Pr_detail::where('pr_id', $pr->pr_id)->get();
+            foreach ($prDetails as $item) {
+                $pcategory = $item->productcategory;
+                $bselection = $item->productsubcategory;
+                $brand = $item->brandselection;
+                $product = $item->product;
+
+                $item->brand_id = $brand->brand_selection;
+                $item->p_main_cat = $pcategory->product_category;
+                $item->p_subc_cat = $bselection->product1stsbctgry;
+                $item->p_id = $product->name;
+            }
+
+            // Merge the data for current Purchaserequisition into the main data array
+            $data = array_merge($data, $prDetails->toArray());
+        }
+        return response()->json($data);
+    }
+    // purchase requisition in Approval page 
     public function postprmainapproval(Request $request)
     {
-        $this->pr_pr_detaildatacommon($request);
-        return response()->json(['success' => 'Create successfully']);
+        $directpocreationInput = $request->input('poquantity', []);
+        $directpurchaseInput = $request->input('directpurchase_qty', []);
+        $quotationQty = $request->input('quotationqty', []);
+        $qoutationrequired = $request->input('quotationrequired');
+
+        $prDocno = $request->input('prdoc_no');
+        $requiredDate = $request->input('required_date');
+        $pr_remarks = $request->input('pr_remarks');
+        $directpocreations = $request->input('directpocreations');
+        $directpurchase = $request->input('directpurchase');
+        $allpartialmethod = $request->input('allpartialmethod');
+
+        $currentRecord = Purchaserequisition::where('pr_doc_no', $prDocno)->first();
+        $prId = $currentRecord->pr_id;
+        $requiredDateChangeda = $requiredDate != $currentRecord->pr_req_date;
+        $remarksChanged = $pr_remarks != $currentRecord->remarks;
+        $updateData = [];
+        // Conditions
+        // reuireddata update by Abrar
+        if ($requiredDateChangeda) {
+            $updateData['pr_req_date'] = $requiredDate;
+        }
+        // Remarks update by Abrar
+        if ($remarksChanged) {
+            $updateData['remarks'] = $pr_remarks;
+        }
+        if ($qoutationrequired == "1") {
+            // Update database by Abrar 
+            Purchaserequisition::where('pr_doc_no', $prDocno)->update($updateData);
+            foreach ($quotationQty as $index => $qQty) {
+                // Assuming each $qQty corresponds to a specific pr_detail row
+                $prDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($prDetail) {
+                    $prDetail->update([
+                        'approve_qty_for_quotation' => $qQty
+                    ]);
+                }
+            }
+        }
+        // direct po creation update by Abrar
+        if ($directpocreations == "2") {
+            $updateData['direct_po_required'] = '1';
+            // Update database by Abrar 
+            Purchaserequisition::where('pr_doc_no', $prDocno)->update($updateData);
+            foreach ($directpocreationInput as $index => $directpo) {
+                // Assuming each $directPurchase corresponds to a specific pr_detail row
+                $directpoDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($directpoDetail) {
+                    $directpoDetail->update([
+                        'approve_qty_for_po' => $directpo
+                    ]);
+                }
+            }
+        }
+        //Direct Purchase creation update by Abrar
+        if ($directpurchase == "3") {
+            $updateData['direct_purchase_required'] = '1';
+            // Update database by Abrar 
+            Purchaserequisition::where('pr_doc_no', $prDocno)->update($updateData);
+            foreach ($directpurchaseInput as $index => $directPurchase) {
+                // Assuming each $directPurchase corresponds to a specific pr_detail row
+                $directPurchaseDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($directPurchaseDetail) {
+                    $directPurchaseDetail->update([
+                        'approved_qty_for_direct_inv' => $directPurchase
+                    ]);
+                }
+            }
+        }
+        //all partial method creation update by Abrar
+        if ($allpartialmethod == "4") {
+            $updateData['direct_purchase_required'] = '1';
+            $updateData['direct_po_required'] = '1';
+            $updateData['quotation_required'] = '1';
+            // Update database by Abrar 
+            Purchaserequisition::where('pr_doc_no', $prDocno)->update($updateData);
+            foreach ($directpocreationInput as $index => $directpo) {
+                // Assuming each $directPurchase corresponds to a specific pr_detail row
+                $directpoDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($directpoDetail) {
+                    $directpoDetail->update([
+                        'approve_qty_for_po' => $directpo,
+                    ]);
+                }
+            }
+            foreach ($directpurchaseInput as $index => $directPurchase) {
+                // Assuming each $directPurchase corresponds to a specific pr_detail row
+                $directPurchaseDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($directPurchaseDetail) {
+                    $directPurchaseDetail->update([
+                        'approved_qty_for_direct_inv' => $directPurchase
+                    ]);
+                }
+            }
+            Purchaserequisition::where('pr_doc_no', $prDocno)->update($updateData);
+            foreach ($quotationQty as $index => $qQty) {
+                // Assuming each $qQty corresponds to a specific pr_detail row
+                $prDetail = Pr_detail::where('pr_id', $prId)->skip($index)->first();
+                if ($prDetail) {
+                    $prDetail->update([
+                        'approve_qty_for_quotation' => $qQty
+                    ]); 
+                }
+            }
+        }
+         $id = Purchaserequisition::count("pr_id");
+         $maxid =  $id + 1;
+         $prno = Purchaserequisition::where('pr_id', $maxid)->value('pr_doc_no');
+         // seesion id user login with application id
+         $employeeId = Auth::id();
+        Activity_Transaction::create([
+            'p_action_id' => 2,
+            'doc_status_id' => 4,
+            'doc_type_id' => 4,
+            'emp_id' => $employeeId,
+            'doc_no' => $prno,
+            'ip' => '0.0',
+            'mac' => '0.0'
+        ]);
     }
     public function render_pr_approval_data(Request $request)
     {
