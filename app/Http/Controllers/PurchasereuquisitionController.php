@@ -80,7 +80,6 @@ class PurchasereuquisitionController extends Controller
         $data = $this->getCommonData();
         return view('purchaserequisition.create', $data);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -486,6 +485,9 @@ class PurchasereuquisitionController extends Controller
                 if ($prDetail) {
                     $prDetail->update([
                         'approve_qty_for_quotation' => $qQty
+                    ]);
+                    $prDetail->update([
+                        'approve_qty_for_quotation' => DB::raw('pending_qty_for_quotation')
                     ]);
                 }
             }
